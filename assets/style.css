@@ -33,3 +33,17 @@ a{color:inherit}
 .logo-row img{height:42px;max-width:132px;object-fit:contain;display:block}.logo-row img[alt="FALA"]{max-width:116px}.logo-row img[alt="FLO"]{max-width:116px}.toya-wordmark{font-size:26px;letter-spacing:.04em;color:#07549a;margin-right:8px;white-space:nowrap}.toya-wordmark:after{content:"";border-left:1px solid rgba(0,0,0,.25);margin-left:18px}
 .drawing-stage.has-embed{background:#0f1715;color:var(--text);display:block;padding:0}.drawing-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.045)}.drawing-toolbar strong{font-size:14px}.drawing-toolbar .links{display:flex;gap:8px;flex-wrap:wrap}.drawing-embed,.drawing-image{width:100%;height:520px;border:0;display:block;background:#fff}.drawing-image{object-fit:contain;padding:12px}.fallback-note{padding:18px;color:var(--muted)}
 @media (max-width:760px){.brandmark-logo{height:40px}.logo-row{gap:12px}.logo-row img{height:34px;max-width:104px}.toya-wordmark{font-size:20px}.drawing-embed,.drawing-image{height:430px}}
+
+
+/* Logo hotfix 2026-06-04 */
+.brandmark{align-items:center}
+.brandmark-logo{height:46px; width:auto; display:block; background:#fff; border-radius:10px; padding:7px 10px; box-shadow:0 10px 26px rgba(0,0,0,.25)}
+.logo-row{display:flex; flex-wrap:wrap; gap:14px 18px; align-items:center}
+.logo-row img{height:38px; max-width:165px; width:auto; object-fit:contain; display:block; filter:drop-shadow(0 6px 10px rgba(0,0,0,.2))}
+.logo-row .toya-logo{height:48px; max-width:190px}
+@media (max-width:720px){
+  .brandmark-logo{height:40px}
+  .logo-row{gap:12px; justify-content:flex-start}
+  .logo-row img{height:30px; max-width:125px}
+  .logo-row .toya-logo{height:38px; max-width:150px}
+}

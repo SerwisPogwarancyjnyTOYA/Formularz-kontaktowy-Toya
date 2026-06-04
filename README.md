@@ -50,3 +50,7 @@ Na razie foldery mają pliki `.gitkeep`, żeby struktura istniała w repo.
 ## Dane klientów
 
 Aplikacja nie zapisuje danych klientów na serwerze. Przycisk „Generuj maila” otwiera domyślną pocztę klienta przez `mailto:`.
+
+
+## Aktualizacja logo 2026-06-04
+Logotypy marek są w `assets/logos/` i są używane bezpośrednio na stronie. POWER UP nie jest używany.
