@@ -54,3 +54,7 @@ Aplikacja nie zapisuje danych klientów na serwerze. Przycisk „Generuj maila�
 
 ## Aktualizacja logo 2026-06-04
 Logotypy marek są w `assets/logos/` i są używane bezpośrednio na stronie. POWER UP nie jest używany.
+
+## Hotfix 2026-06-04 — logo w nagłówku
+
+Nagłówek strony używa teraz właściwego logotypu YATO z pliku `assets/logos/yato-official.png`, zamiast tymczasowego czerwonego badge'a tekstowego.

@@ -47,3 +47,45 @@ a{color:inherit}
   .logo-row img{height:30px; max-width:125px}
   .logo-row .toya-logo{height:38px; max-width:150px}
 }
+
+/* Header logo fix 2026-06-04 — official YATO wordmark instead of red placeholder badge */
+.brandmark-official{
+  align-items:center;
+  gap:16px;
+}
+.brandmark-official .official-yato-logo{
+  height:52px;
+  max-width:210px;
+  width:auto;
+  object-fit:contain;
+  display:block;
+  background:transparent;
+  border-radius:0;
+  padding:0;
+  box-shadow:none;
+}
+.brandmark-copy{
+  display:grid;
+  gap:1px;
+  line-height:1.05;
+}
+.brandmark-copy strong{
+  color:var(--text);
+  font-size:20px;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+  font-weight:900;
+}
+.brandmark-copy small{
+  color:var(--muted);
+  font-size:11px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  font-weight:800;
+}
+@media (max-width:720px){
+  .brandmark-official{gap:12px;}
+  .brandmark-official .official-yato-logo{height:44px;max-width:175px;}
+  .brandmark-copy strong{font-size:16px;}
+  .brandmark-copy small{font-size:10px;}
+}
