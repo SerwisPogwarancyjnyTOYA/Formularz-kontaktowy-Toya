@@ -1,6 +1,78 @@
 [
-  {"id":"yt-84920","deviceIndex":"YT-84920","title":"Piła łańcuchowa YATO — rysunek demonstracyjny","type":"svg-demo"},
-  {"id":"yt-82560","deviceIndex":"YT-82560","title":"Agregat malarski — rysunek do podpięcia","type":"placeholder"},
-  {"id":"yg-03395","deviceIndex":"YG-03395","title":"Pompa membranowa — rysunek do podpięcia","type":"placeholder"},
-  {"id":"yt-81811","deviceIndex":"YT-81811","title":"YT-81811 — rysunek do podpięcia","type":"placeholder"}
+  {
+    "id": "yt-84920",
+    "deviceIndex": "YT-84920",
+    "brand": "YATO",
+    "title": "Piła łańcuchowa YATO — rysunek demonstracyjny",
+    "type": "svg-demo",
+    "status": "demo"
+  },
+  {
+    "id": "yt-82560",
+    "deviceIndex": "YT-82560",
+    "brand": "YATO",
+    "title": "Agregat malarski — rysunek do podpięcia",
+    "type": "placeholder",
+    "status": "todo"
+  },
+  {
+    "id": "yg-03395",
+    "deviceIndex": "YG-03395",
+    "brand": "YATO",
+    "title": "Pompa membranowa — rysunek do podpięcia",
+    "type": "placeholder",
+    "status": "todo"
+  },
+  {
+    "id": "yt-81811",
+    "deviceIndex": "YT-81811",
+    "brand": "YATO",
+    "title": "YT-81811 — rysunek do podpięcia",
+    "type": "placeholder",
+    "status": "todo"
+  },
+  {
+    "id": "yt-828390",
+    "deviceIndex": "YT-828390",
+    "brand": "YATO",
+    "title": "Czesci_zamienne_YT-828390.pdf",
+    "type": "drive-pdf",
+    "status": "indexed_from_drive",
+    "localPath": "drawings/YATO/YT/YT-828390.pdf",
+    "driveViewUrl": "https://drive.google.com/file/d/17GsCcU4c0uZipY5uvgGnB7YLFBuwzabb/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/17GsCcU4c0uZipY5uvgGnB7YLFBuwzabb/preview"
+  },
+  {
+    "id": "yt-8277905",
+    "deviceIndex": "YT-8277905",
+    "brand": "YATO",
+    "title": "Czesci_zamienne_YT-8277905.pdf",
+    "type": "drive-pdf",
+    "status": "indexed_from_drive",
+    "localPath": "drawings/YATO/YT/YT-8277905.pdf",
+    "driveViewUrl": "https://drive.google.com/file/d/1GHHmBftW1jSgxZF6OVydFL3R0yS5YpRg/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1GHHmBftW1jSgxZF6OVydFL3R0yS5YpRg/preview"
+  },
+  {
+    "id": "yt-852371",
+    "deviceIndex": "YT-852371",
+    "brand": "YATO",
+    "title": "Czesci_zamienne_YT-852371.pdf",
+    "type": "drive-pdf",
+    "status": "indexed_from_drive",
+    "localPath": "drawings/YATO/YT/YT-852371.pdf",
+    "driveViewUrl": "https://drive.google.com/file/d/1-Ys1osnXhyg2sWG1wcPREu9ophIfdLfZ/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1-Ys1osnXhyg2sWG1wcPREu9ophIfdLfZ/preview"
+  },
+  {
+    "id": "yt-829021",
+    "deviceIndex": "YT-829021",
+    "brand": "YATO",
+    "title": "Czesci_zamienne_YT-829021.pdf",
+    "type": "drive-pdf",
+    "status": "indexed_from_drive",
+    "localPath": "drawings/YATO/YT/YT-829021.pdf",
+    "driveViewUrl": "https://drive.google.com/file/d/1kwpgyZQttlvXyWghWYYoijzKzZHbKZg1/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1kwpgyZQttlvXyWghWYYoijzKzZHbKZg1/preview"
+  }
 ]

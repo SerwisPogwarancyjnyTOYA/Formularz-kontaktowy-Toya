@@ -1,0 +1,44 @@
+[
+  {
+    "brand": "YATO",
+    "file": "assets/logos/yato.jpg",
+    "status": "ready",
+    "sourceFile": "1308137290_1.jpg"
+  },
+  {
+    "brand": "VOREL",
+    "file": "assets/logos/vorel.png",
+    "status": "ready",
+    "sourceFile": "1308137276_1.png"
+  },
+  {
+    "brand": "STHOR",
+    "file": "assets/logos/sthor.jpg",
+    "status": "ready",
+    "sourceFile": "1308137278_1.jpg"
+  },
+  {
+    "brand": "LUND",
+    "file": "assets/logos/lund.jpg",
+    "status": "ready",
+    "sourceFile": "1308137283_1.jpg"
+  },
+  {
+    "brand": "FLO",
+    "file": "assets/logos/flo.jpg",
+    "status": "ready",
+    "sourceFile": "1308137277_1.jpg"
+  },
+  {
+    "brand": "FALA",
+    "file": "assets/logos/fala.jpg",
+    "status": "ready",
+    "sourceFile": "1308137286_1.jpg"
+  },
+  {
+    "brand": "TOYA",
+    "file": null,
+    "status": "missing_official_logo",
+    "note": "W paczce nie było osobnego oficjalnego logo TOYA; zostawiono tekstowy znak TOYA S.A."
+  }
+]

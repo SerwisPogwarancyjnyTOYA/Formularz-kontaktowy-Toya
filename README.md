@@ -1,53 +1,52 @@
 # YATO Service Hub — kreator zapytania o części pogwarancyjne
 
-Repozytorium zawiera statyczną aplikację HTML/CSS/JS, którą można odpalić lokalnie albo opublikować na GitHub Pages.
+Statyczna aplikacja HTML/CSS/JS do GitHub Pages. Klient wyszukuje urządzenie lub część, widzi rysunek złożeniowy, dodaje części do zapytania i generuje gotowego maila do serwisu.
 
-## Co robi aplikacja
+## Co jest w tej aktualizacji
 
-- wyszukuje urządzenia i części po modelu, indeksie i nazwie,
-- pokazuje przykładowy rysunek złożeniowy z klikalnymi pozycjami,
-- dodaje części do koszyka zapytania,
-- zbiera dane klienta, dane do faktury i adres wysyłki,
-- generuje gotowego maila do `service@yato.pl`,
-- pozwala skopiować treść zgłoszenia lub pobrać JSON.
+- podmienione logotypy marek z paczki Drive: YATO, VOREL, STHOR, LUND, FLO, FALA,
+- usunięty POWER UP z widoku marek,
+- dodana docelowa struktura folderów `drawings/`,
+- dodany plik `data/logos.json`,
+- rozbudowany `data/drawings.json` o pola `localPath`, `driveViewUrl`, `drivePreviewUrl`,
+- formularz potrafi wyświetlać rysunek PDF/obraz w środku strony,
+- Drive zostaje jako fallback: przycisk „Otwórz z Drive”.
 
-## Jak odpalić lokalnie
+## Publikacja na GitHub Pages
 
-Najprościej: otwórz plik `index.html` w Chrome/Edge.
+1. Skopiuj zawartość tej paczki do repozytorium.
+2. Zrób commit, np. `foundation: logos and drawings structure`.
+3. Wypchnij na GitHuba.
+4. GitHub Pages powinien przebudować stronę automatycznie.
 
-Aplikacja nie wymaga serwera, konta ani bazy danych. Działa też jako prototyp offline. Funkcja `mailto:` otworzy domyślną pocztę klienta z gotowym mailem.
+## Testy wyszukiwarki
 
-## Jak wrzucić na GitHub Pages
+Wpisz w formularzu:
 
-1. Utwórz nowe repozytorium na GitHubie, np. `yato-service-hub`.
-2. Wrzuć wszystkie pliki z tego folderu.
-3. Wejdź w **Settings → Pages**.
-4. Wybierz publikację z gałęzi `main` i folder `/root`.
-5. Po chwili aplikacja będzie działać pod adresem GitHub Pages.
+- `YT-84920` — demo klikalnego rysunku,
+- `YT-828390` — test rysunku z indeksu Drive,
+- `YT-8277905`,
+- `YT-852371`,
+- `YG-03395`,
+- `ZG03395-13`.
 
-## Dane części
+## Rysunki lokalne
 
-Aktualnie dane są wpisane w dwóch miejscach:
+Docelowo rysunki wrzucamy do:
 
-- `assets/app.js` — wbudowane dane, żeby aplikacja działała po otwarciu z pliku lokalnego,
-- `data/parts.json` — docelowy format bazy do automatycznego generowania z Excela.
+```text
+drawings/YATO/YT/YT-828390.pdf
+drawings/YATO/YG/YG-03395.pdf
+drawings/VOREL/...
+drawings/STHOR/...
+drawings/LUND/...
+drawings/FLO/...
+drawings/FALA/...
+drawings/unmapped/...
+```
 
-W późniejszej wersji można przełączyć aplikację na pobieranie JSON z `data/parts.json`, jeśli będzie publikowana online.
+Na razie foldery mają pliki `.gitkeep`, żeby struktura istniała w repo.
 
-## Ważne ograniczenia wersji MVP
+## Dane klientów
 
-- `mailto:` nie wysyła maila automatycznie; klient musi kliknąć **Wyślij** w swojej poczcie.
-- `mailto:` nie dodaje załączników.
-- Długie zgłoszenia mogą przekroczyć limit linku w niektórych klientach pocztowych — dlatego jest przycisk **Kopiuj treść**.
-- Dane klienta nie są zapisywane w bazie ani na GitHubie.
-
-## Następny poziom
-
-Kiedy prototyp przejdzie testy, można dodać:
-
-- generator JSON z aktualnego Excela,
-- prawdziwe rysunki złożeniowe PNG/PDF,
-- wysyłkę maili przez API,
-- panel zgłoszeń,
-- statusy spraw,
-- historię zapytań.
+Aplikacja nie zapisuje danych klientów na serwerze. Przycisk „Generuj maila” otwiera domyślną pocztę klienta przez `mailto:`.

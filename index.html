@@ -11,7 +11,10 @@
 <body>
   <header class="hero">
     <nav class="topbar">
-      <div class="brandmark"><span>YATO</span><small>Service Hub</small></div>
+      <div class="brandmark">
+        <img class="brandmark-logo" src="assets/logos/yato.jpg" alt="YATO" />
+        <small>Service Hub</small>
+      </div>
       <div class="pill">Serwis pogwarancyjny · TOYA S.A.</div>
     </nav>
     <section class="hero-grid">
@@ -38,6 +41,25 @@
   </header>
 
   <main class="layout">
+    <section class="brand-strip panel compact-panel" aria-label="Marki TOYA S.A.">
+      <div class="section-head inline-head">
+        <div>
+          <p class="eyebrow">Marki TOYA S.A.</p>
+          <h2>Aktualne logotypy w projekcie</h2>
+        </div>
+        <span class="soft-note">POWER UP usunięty z projektu.</span>
+      </div>
+      <div class="logo-row">
+        <strong class="toya-wordmark">TOYA S.A.</strong>
+        <img src="assets/logos/yato.jpg" alt="YATO" />
+        <img src="assets/logos/vorel.png" alt="VOREL" />
+        <img src="assets/logos/sthor.jpg" alt="STHOR" />
+        <img src="assets/logos/lund.jpg" alt="LUND" />
+        <img src="assets/logos/flo.jpg" alt="FLO" />
+        <img src="assets/logos/fala.jpg" alt="FALA" />
+      </div>
+    </section>
+
     <section class="panel" id="search">
       <div class="section-head">
         <p class="eyebrow">Krok 1</p>
@@ -45,7 +67,7 @@
         <p>Wpisz model, indeks części, nazwę urządzenia albo potoczną nazwę elementu.</p>
       </div>
       <div class="searchbar">
-        <input id="searchInput" type="search" placeholder="np. YT-84920, łańcuch, pompa, ZG03395-13" autocomplete="off" />
+        <input id="searchInput" type="search" placeholder="np. YT-84920, YT-828390, łańcuch, pompa, ZG03395-13" autocomplete="off" />
         <button class="button primary" id="searchBtn" type="button">Szukaj</button>
       </div>
       <div id="results" class="results" aria-live="polite"></div>
@@ -107,7 +129,7 @@
   <footer class="footer">
     <strong>YATO Service Hub</strong>
     <span>YATO • VOREL • STHOR • LUND • FLO • FALA</span>
-    <span>Demo lokalne: dane klientów nie są zapisywane na serwerze.</span>
+    <span>Demo: dane klientów nie są zapisywane na serwerze; mail generuje się w poczcie klienta.</span>
   </footer>
 
   <script src="assets/app.js"></script>

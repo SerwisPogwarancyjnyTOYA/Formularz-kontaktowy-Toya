@@ -13,8 +13,39 @@ const PARTS = [
   {id:'yt-82560-main',deviceIndex:'YT-82560',deviceName:'Agregat malarski',brand:'YATO',category:'Agregaty malarskie',partIndex:'YT-82560',partName:'Części do agregatu malarskiego',position:'—',drawingId:'yt-82560',availability:'Do sprawdzenia',notes:'Pozycja z bazy startowej PGW'},
   {id:'yg-03395-main',deviceIndex:'YG-03395',deviceName:'Pompa membranowa',brand:'YATO/G',category:'Gastronomia / pompy',partIndex:'YG-03395',partName:'Pompa membranowa / część do ustalenia',position:'—',drawingId:'yg-03395',availability:'Do sprawdzenia',notes:'Pozycja z bazy startowej PGW'},
   {id:'zg03395-13',deviceIndex:'YG-03395',deviceName:'Pompa membranowa',brand:'YATO/G',category:'Gastronomia / pompy',partIndex:'ZG03395-13',partName:'Część nr 13 do YG-03395',position:'13',drawingId:'yg-03395',availability:'Do sprawdzenia',notes:'Pozycja z bazy startowej PGW'},
-  {id:'yt-81811-main',deviceIndex:'YT-81811',deviceName:'Model YT-81811',brand:'YATO',category:'Do uzupełnienia',partIndex:'YT-81811',partName:'Do uzupełnienia',position:'—',drawingId:'yt-81811',availability:'Do sprawdzenia',notes:'Pozycja z bazy startowej PGW'}
+  {id:'yt-81811-main',deviceIndex:'YT-81811',deviceName:'Model YT-81811',brand:'YATO',category:'Do uzupełnienia',partIndex:'YT-81811',partName:'Do uzupełnienia',position:'—',drawingId:'yt-81811',availability:'Do sprawdzenia',notes:'Pozycja z bazy startowej PGW'},
+  {id:'yt-828390-drawing',deviceIndex:'YT-828390',deviceName:'Urządzenie YATO YT-828390',brand:'YATO',category:'Rysunki złożeniowe',partIndex:'YT-828390',partName:'Rysunek złożeniowy / części do wskazania z listy',position:'—',drawingId:'yt-828390',availability:'Do sprawdzenia',notes:'Wpis techniczny do testu podglądu PDF z indeksu rysunków'},
+  {id:'yt-8277905-drawing',deviceIndex:'YT-8277905',deviceName:'Urządzenie YATO YT-8277905',brand:'YATO',category:'Rysunki złożeniowe',partIndex:'YT-8277905',partName:'Rysunek złożeniowy / części do wskazania z listy',position:'—',drawingId:'yt-8277905',availability:'Do sprawdzenia',notes:'Wpis techniczny do testu podglądu PDF z indeksu rysunków'},
+  {id:'yt-852371-drawing',deviceIndex:'YT-852371',deviceName:'Urządzenie YATO YT-852371',brand:'YATO',category:'Rysunki złożeniowe',partIndex:'YT-852371',partName:'Rysunek złożeniowy / części do wskazania z listy',position:'—',drawingId:'yt-852371',availability:'Do sprawdzenia',notes:'Wpis techniczny do testu podglądu PDF z indeksu rysunków'},
+  {id:'yt-829021-drawing',deviceIndex:'YT-829021',deviceName:'Urządzenie YATO YT-829021',brand:'YATO',category:'Rysunki złożeniowe',partIndex:'YT-829021',partName:'Rysunek złożeniowy / części do wskazania z listy',position:'—',drawingId:'yt-829021',availability:'Do sprawdzenia',notes:'Wpis techniczny do testu podglądu PDF z indeksu rysunków'}
 ];
+
+
+let DRAWINGS = [
+  {id:'yt-84920',deviceIndex:'YT-84920',brand:'YATO',title:'Piła łańcuchowa YATO — rysunek demonstracyjny',type:'svg-demo',status:'demo'},
+  {id:'yt-82560',deviceIndex:'YT-82560',brand:'YATO',title:'Agregat malarski — rysunek do podpięcia',type:'placeholder',status:'todo'},
+  {id:'yg-03395',deviceIndex:'YG-03395',brand:'YATO',title:'Pompa membranowa — rysunek do podpięcia',type:'placeholder',status:'todo'},
+  {id:'yt-81811',deviceIndex:'YT-81811',brand:'YATO',title:'YT-81811 — rysunek do podpięcia',type:'placeholder',status:'todo'}
+];
+
+async function loadOptionalJson(path, fallback){
+  try{
+    if(location.protocol === 'file:') return fallback;
+    const res = await fetch(path, {cache:'no-store'});
+    if(!res.ok) throw new Error(res.statusText);
+    return await res.json();
+  }catch(err){
+    console.warn(`Nie udało się załadować ${path}. Używam danych wbudowanych.`, err);
+    return fallback;
+  }
+}
+function findDrawing(deviceIndex){
+  const n = norm(deviceIndex);
+  return DRAWINGS.find(d => norm(d.deviceIndex) === n || norm(d.id) === n);
+}
+function isImagePath(path){return /\.(png|jpe?g|webp|gif|svg)$/i.test(String(path||''));}
+function isPdfPath(path){return /\.pdf($|\?)/i.test(String(path||''));}
+function normalizeLocalPath(path){return String(path||'').replace(/^\.\//,'');}
 
 let selectedDevice = null;
 let cart = [];
@@ -70,31 +101,56 @@ function selectDevice(deviceIndex){
   document.querySelector('.drawing-panel').scrollIntoView({behavior:'smooth',block:'start'});
 }
 
+function renderDemoSaw(stage){
+  stage.innerHTML = `<svg class="machine-svg" viewBox="0 0 900 520" role="img" aria-label="Rysunek złożeniowy piły łańcuchowej">
+    <defs><linearGradient id="g" x1="0" x2="1"><stop stop-color="#e7e1d6"/><stop offset="1" stop-color="#fffaf0"/></linearGradient></defs>
+    <rect width="900" height="520" fill="url(#g)"/>
+    <text x="38" y="48" font-size="24" font-weight="800" fill="#111">YT-84920 · rysunek demonstracyjny</text>
+    <text x="38" y="78" font-size="14" fill="#555">Kliknij numer pozycji albo wybierz część z listy.</text>
+    <path d="M142 300 C145 240 190 198 260 190 L382 182 C448 178 500 212 520 265 L565 265 C600 265 625 287 625 318 C625 350 600 372 565 372 L245 372 C185 372 142 348 142 300Z" fill="#282d30" stroke="#111" stroke-width="5"/>
+    <circle cx="266" cy="306" r="58" fill="#444" stroke="#111" stroke-width="8"/><circle cx="266" cy="306" r="25" fill="#bbb" stroke="#222" stroke-width="5"/>
+    <rect x="510" y="215" width="270" height="58" rx="29" fill="#bbb" stroke="#222" stroke-width="5"/>
+    <rect x="760" y="232" width="78" height="24" rx="12" fill="#888" stroke="#222" stroke-width="4"/>
+    <path d="M520 295 L820 295" stroke="#d62518" stroke-width="18" stroke-linecap="round"/>
+    <path d="M520 333 L820 333" stroke="#d62518" stroke-width="18" stroke-linecap="round"/>
+    <path d="M520 295 C608 275 730 275 820 295" stroke="#111" stroke-width="5" fill="none"/>
+    <path d="M520 333 C608 353 730 353 820 333" stroke="#111" stroke-width="5" fill="none"/>
+    <rect x="360" y="120" width="120" height="70" rx="26" fill="#d62518" stroke="#111" stroke-width="5"/>
+    <path d="M360 162 C300 120 225 132 208 190" fill="none" stroke="#111" stroke-width="22" stroke-linecap="round"/>
+    <g class="hotspot" onclick="addToCart('yt-84920-chain-demo')"><circle cx="690" cy="314" r="24"/><text x="690" y="315">12</text></g>
+    <g class="hotspot" onclick="addToCart('yt-84920-guide-demo')"><circle cx="610" cy="239" r="24"/><text x="610" y="240">13</text></g>
+    <g class="hotspot" onclick="addToCart('yt-84920-sprocket-demo')"><circle cx="267" cy="306" r="24"/><text x="267" y="307">18</text></g>
+  </svg>`;
+}
+
 function renderDrawing(deviceIndex, parts){
-  const stage = $('drawingStage'); stage.classList.remove('empty');
-  if(deviceIndex === 'YT-84920'){
-    stage.innerHTML = `<svg class="machine-svg" viewBox="0 0 900 520" role="img" aria-label="Rysunek złożeniowy piły łańcuchowej">
-      <defs><linearGradient id="g" x1="0" x2="1"><stop stop-color="#e7e1d6"/><stop offset="1" stop-color="#fffaf0"/></linearGradient></defs>
-      <rect width="900" height="520" fill="url(#g)"/>
-      <text x="38" y="48" font-size="24" font-weight="800" fill="#111">YT-84920 · rysunek demonstracyjny</text>
-      <text x="38" y="78" font-size="14" fill="#555">Kliknij numer pozycji albo wybierz część z listy.</text>
-      <path d="M142 300 C145 240 190 198 260 190 L382 182 C448 178 500 212 520 265 L565 265 C600 265 625 287 625 318 C625 350 600 372 565 372 L245 372 C185 372 142 348 142 300Z" fill="#282d30" stroke="#111" stroke-width="5"/>
-      <circle cx="266" cy="306" r="58" fill="#444" stroke="#111" stroke-width="8"/><circle cx="266" cy="306" r="25" fill="#bbb" stroke="#222" stroke-width="5"/>
-      <rect x="510" y="215" width="270" height="58" rx="29" fill="#bbb" stroke="#222" stroke-width="5"/>
-      <rect x="760" y="232" width="78" height="24" rx="12" fill="#888" stroke="#222" stroke-width="4"/>
-      <path d="M520 295 L820 295" stroke="#d62518" stroke-width="18" stroke-linecap="round"/>
-      <path d="M520 333 L820 333" stroke="#d62518" stroke-width="18" stroke-linecap="round"/>
-      <path d="M520 295 C608 275 730 275 820 295" stroke="#111" stroke-width="5" fill="none"/>
-      <path d="M520 333 C608 353 730 353 820 333" stroke="#111" stroke-width="5" fill="none"/>
-      <rect x="360" y="120" width="120" height="70" rx="26" fill="#d62518" stroke="#111" stroke-width="5"/>
-      <path d="M360 162 C300 120 225 132 208 190" fill="none" stroke="#111" stroke-width="22" stroke-linecap="round"/>
-      <g class="hotspot" onclick="addToCart('yt-84920-chain-demo')"><circle cx="690" cy="314" r="24"/><text x="690" y="315">12</text></g>
-      <g class="hotspot" onclick="addToCart('yt-84920-guide-demo')"><circle cx="610" cy="239" r="24"/><text x="610" y="240">13</text></g>
-      <g class="hotspot" onclick="addToCart('yt-84920-sprocket-demo')"><circle cx="267" cy="306" r="24"/><text x="267" y="307">18</text></g>
-    </svg>`;
-  } else {
-    stage.innerHTML = `<div class="empty-state"><h3>${escapeHtml(deviceIndex)}</h3><p>Rysunek do podpięcia. Lista części działa już teraz, a plik PNG/PDF można dodać w folderze <code>drawings/</code>.</p></div>`;
+  const stage = $('drawingStage');
+  stage.classList.remove('empty','has-embed');
+  const drawing = findDrawing(deviceIndex);
+  if(drawing?.type === 'svg-demo' || deviceIndex === 'YT-84920'){
+    renderDemoSaw(stage);
+    return;
   }
+  const localPath = normalizeLocalPath(drawing?.localPath);
+  const drivePreview = drawing?.drivePreviewUrl;
+  const driveView = drawing?.driveViewUrl;
+  const title = drawing?.title || `Rysunek ${deviceIndex}`;
+
+  if(localPath || drivePreview){
+    stage.classList.add('has-embed');
+    const localOpen = localPath ? `<a class="button ghost small" href="${escapeHtml(localPath)}" target="_blank" rel="noopener">Otwórz lokalnie</a>` : '';
+    const driveOpen = driveView ? `<a class="button ghost small" href="${escapeHtml(driveView)}" target="_blank" rel="noopener">Otwórz z Drive</a>` : '';
+    const source = localPath || drivePreview;
+    let viewer = '';
+    if(localPath && isImagePath(localPath)) viewer = `<img class="drawing-image" src="${escapeHtml(localPath)}" alt="${escapeHtml(title)}" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'fallback-note',innerHTML:'Nie znaleziono lokalnego obrazu. Użyj linku Drive albo dodaj plik do repo.'}))">`;
+    else if(localPath && isPdfPath(localPath)) viewer = `<object class="drawing-embed" data="${escapeHtml(localPath)}" type="application/pdf"><div class="fallback-note">Nie znaleziono lokalnego PDF albo przeglądarka go nie wyświetla. Użyj linku Drive.</div></object>`;
+    else viewer = `<iframe class="drawing-embed" src="${escapeHtml(drivePreview)}" loading="lazy" title="${escapeHtml(title)}"></iframe>`;
+    stage.innerHTML = `<div class="drawing-toolbar"><strong>${escapeHtml(title)}</strong><div class="links">${localOpen}${driveOpen}</div></div>${viewer}`;
+    return;
+  }
+
+  stage.classList.add('empty');
+  stage.innerHTML = `<div class="empty-state"><h3>${escapeHtml(deviceIndex)}</h3><p>Rysunek do podpięcia. Wrzuć PDF/PNG do <code>drawings/</code> i dodaj wpis w <code>data/drawings.json</code>.</p></div>`;
 }
 
 function renderDrawingParts(parts){
@@ -173,12 +229,16 @@ function fillDemo(){
   const form=$('clientForm'); form.name.value='Jan Kowalski'; form.email.value='jan.kowalski@example.com'; form.phone.value='500 600 700'; form.nip.value=''; form.invoice.value='Jan Kowalski\nul. Przykładowa 1\n50-000 Wrocław'; form.shipping.value='Paczkomat WRO123M\nul. Testowa 5\n50-001 Wrocław'; form.notes.value='Proszę o potwierdzenie ceny i dostępności.'; updateMailPreview();
 }
 
-$('searchBtn').addEventListener('click', search);
-$('searchInput').addEventListener('input', search);
-$('generateMailBtn').addEventListener('click', openMail);
-$('copyMailBtn').addEventListener('click', copyMail);
-$('downloadJsonBtn').addEventListener('click', downloadJson);
-$('fillDemoBtn').addEventListener('click', fillDemo);
-$('clientForm').addEventListener('input', updateMailPreview);
-renderResults(PARTS); renderCart(); updateMailPreview();
-if('serviceWorker' in navigator && location.protocol !== 'file:') navigator.serviceWorker.register('./sw.js').catch(()=>{});
+async function init(){
+  DRAWINGS = await loadOptionalJson('data/drawings.json', DRAWINGS);
+  $('searchBtn').addEventListener('click', search);
+  $('searchInput').addEventListener('input', search);
+  $('generateMailBtn').addEventListener('click', openMail);
+  $('copyMailBtn').addEventListener('click', copyMail);
+  $('downloadJsonBtn').addEventListener('click', downloadJson);
+  $('fillDemoBtn').addEventListener('click', fillDemo);
+  $('clientForm').addEventListener('input', updateMailPreview);
+  renderResults(PARTS); renderCart(); updateMailPreview();
+  if('serviceWorker' in navigator && location.protocol !== 'file:') navigator.serviceWorker.register('./sw.js').catch(()=>{});
+}
+init();
