@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>YATO Service Hub — kreator części pogwarancyjnych</title>
+  <meta name="description" content="Kreator zapytania o części pogwarancyjne TOYA S.A." />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <header class="hero">
+    <nav class="topbar">
+      <div class="brandmark"><span>YATO</span><small>Service Hub</small></div>
+      <div class="pill">Serwis pogwarancyjny · TOYA S.A.</div>
+    </nav>
+    <section class="hero-grid">
+      <div>
+        <p class="eyebrow">Kreator zapytania o części</p>
+        <h1>Nie zgaduj części. Wybierz ją z rysunku i wygeneruj gotowego maila.</h1>
+        <p class="lead">Klient wyszukuje urządzenie, dodaje części do zapytania, uzupełnia dane i otwiera gotową wiadomość w swojej poczcie.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#search">Szukaj części</a>
+          <button class="button ghost" id="fillDemoBtn" type="button">Wypełnij przykład: łańcuch do piły</button>
+        </div>
+      </div>
+      <aside class="hero-card">
+        <strong>Efekt dla serwisu</strong>
+        <ul>
+          <li>model urządzenia</li>
+          <li>indeks części</li>
+          <li>pozycja z rysunku</li>
+          <li>dane do faktury i wysyłki</li>
+          <li>mail gotowy do obsługi</li>
+        </ul>
+      </aside>
+    </section>
+  </header>
+
+  <main class="layout">
+    <section class="panel" id="search">
+      <div class="section-head">
+        <p class="eyebrow">Krok 1</p>
+        <h2>Wyszukaj urządzenie albo część</h2>
+        <p>Wpisz model, indeks części, nazwę urządzenia albo potoczną nazwę elementu.</p>
+      </div>
+      <div class="searchbar">
+        <input id="searchInput" type="search" placeholder="np. YT-84920, łańcuch, pompa, ZG03395-13" autocomplete="off" />
+        <button class="button primary" id="searchBtn" type="button">Szukaj</button>
+      </div>
+      <div id="results" class="results" aria-live="polite"></div>
+    </section>
+
+    <section class="panel drawing-panel">
+      <div class="section-head">
+        <p class="eyebrow">Krok 2</p>
+        <h2>Rysunek złożeniowy</h2>
+        <p id="drawingHint">Wybierz wynik wyszukiwania, aby zobaczyć rysunek i powiązane części.</p>
+      </div>
+      <div class="drawing-wrap">
+        <div id="drawingStage" class="drawing-stage empty">
+          <div class="empty-state">Rysunek pojawi się tutaj po wyborze urządzenia.</div>
+        </div>
+        <div>
+          <h3>Części na rysunku</h3>
+          <div id="drawingParts" class="part-list muted-box">Brak wybranego urządzenia.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel cart-panel">
+      <div class="section-head">
+        <p class="eyebrow">Krok 3</p>
+        <h2>Koszyk zapytania</h2>
+        <p>To nie jest sklep. To kompletne zapytanie do serwisu pogwarancyjnego.</p>
+      </div>
+      <div id="cart" class="cart muted-box">Koszyk jest pusty.</div>
+    </section>
+
+    <section class="panel">
+      <div class="section-head">
+        <p class="eyebrow">Krok 4</p>
+        <h2>Dane klienta</h2>
+        <p>Po uzupełnieniu formularza aplikacja wygeneruje treść maila.</p>
+      </div>
+      <form id="clientForm" class="form-grid">
+        <label>Imię i nazwisko / firma<input name="name" placeholder="Jan Kowalski / Firma ABC" /></label>
+        <label>E-mail<input name="email" type="email" placeholder="klient@email.pl" /></label>
+        <label>Telefon<input name="phone" placeholder="500 600 700" /></label>
+        <label>NIP<input name="nip" placeholder="opcjonalnie" /></label>
+        <label class="wide">Dane do faktury<textarea name="invoice" rows="3" placeholder="Nazwa, adres, NIP"></textarea></label>
+        <label class="wide">Adres wysyłki<textarea name="shipping" rows="3" placeholder="Ulica, kod, miasto, paczkomat/kurier"></textarea></label>
+        <label class="wide">Uwagi<textarea name="notes" rows="3" placeholder="np. proszę o potwierdzenie ceny i dostępności"></textarea></label>
+      </form>
+      <div class="mail-actions">
+        <button class="button primary" id="generateMailBtn" type="button">Generuj maila</button>
+        <button class="button ghost" id="copyMailBtn" type="button">Kopiuj treść</button>
+        <button class="button ghost" id="downloadJsonBtn" type="button">Pobierz JSON</button>
+      </div>
+      <div class="mail-preview">
+        <h3>Podgląd wiadomości</h3>
+        <pre id="mailPreview">Dodaj część i uzupełnij dane, a tutaj pojawi się gotowy mail.</pre>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <strong>YATO Service Hub</strong>
+    <span>YATO • VOREL • STHOR • LUND • FLO • FALA</span>
+    <span>Demo lokalne: dane klientów nie są zapisywane na serwerze.</span>
+  </footer>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>

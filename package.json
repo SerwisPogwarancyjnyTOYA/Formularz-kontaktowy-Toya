@@ -1,0 +1,13 @@
+{
+  "name": "yato-service-hub",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Statyczny kreator zapytań o części pogwarancyjne",
+  "scripts": {
+    "serve": "python3 -m http.server 8080",
+    "convert:xlsx": "node scripts/excel-to-json.mjs"
+  },
+  "devDependencies": {
+    "xlsx": "^0.18.5"
+  }
+}

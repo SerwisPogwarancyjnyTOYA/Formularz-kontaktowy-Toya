@@ -1,0 +1,93 @@
+[
+  {
+    "id": "yt-84920-chain-demo",
+    "deviceIndex": "YT-84920",
+    "deviceName": "Piła łańcuchowa YATO",
+    "brand": "YATO",
+    "category": "Pilarki i piły łańcuchowe",
+    "partIndex": "YT-84920-012",
+    "partName": "Łańcuch tnący",
+    "position": "12",
+    "drawingId": "yt-84920",
+    "availability": "Do potwierdzenia przez serwis",
+    "notes": "Pozycja demonstracyjna do testów kreatora"
+  },
+  {
+    "id": "yt-84920-guide-demo",
+    "deviceIndex": "YT-84920",
+    "deviceName": "Piła łańcuchowa YATO",
+    "brand": "YATO",
+    "category": "Pilarki i piły łańcuchowe",
+    "partIndex": "YT-84920-013",
+    "partName": "Prowadnica",
+    "position": "13",
+    "drawingId": "yt-84920",
+    "availability": "Do potwierdzenia przez serwis",
+    "notes": "Pozycja demonstracyjna do testów kreatora"
+  },
+  {
+    "id": "yt-84920-sprocket-demo",
+    "deviceIndex": "YT-84920",
+    "deviceName": "Piła łańcuchowa YATO",
+    "brand": "YATO",
+    "category": "Pilarki i piły łańcuchowe",
+    "partIndex": "YT-84920-018",
+    "partName": "Koło napędowe łańcucha",
+    "position": "18",
+    "drawingId": "yt-84920",
+    "availability": "Do potwierdzenia przez serwis",
+    "notes": "Pozycja demonstracyjna do testów kreatora"
+  },
+  {
+    "id": "yt-82560-main",
+    "deviceIndex": "YT-82560",
+    "deviceName": "Agregat malarski",
+    "brand": "YATO",
+    "category": "Agregaty malarskie",
+    "partIndex": "YT-82560",
+    "partName": "Części do agregatu malarskiego",
+    "position": "—",
+    "drawingId": "yt-82560",
+    "availability": "Do sprawdzenia",
+    "notes": "Pozycja z bazy startowej PGW"
+  },
+  {
+    "id": "yg-03395-main",
+    "deviceIndex": "YG-03395",
+    "deviceName": "Pompa membranowa",
+    "brand": "YATO/G",
+    "category": "Gastronomia / pompy",
+    "partIndex": "YG-03395",
+    "partName": "Pompa membranowa / część do ustalenia",
+    "position": "—",
+    "drawingId": "yg-03395",
+    "availability": "Do sprawdzenia",
+    "notes": "Pozycja z bazy startowej PGW"
+  },
+  {
+    "id": "zg03395-13",
+    "deviceIndex": "YG-03395",
+    "deviceName": "Pompa membranowa",
+    "brand": "YATO/G",
+    "category": "Gastronomia / pompy",
+    "partIndex": "ZG03395-13",
+    "partName": "Część nr 13 do YG-03395",
+    "position": "13",
+    "drawingId": "yg-03395",
+    "availability": "Do sprawdzenia",
+    "notes": "Pozycja z bazy startowej PGW"
+  },
+  {
+    "id": "yt-81811-main",
+    "deviceIndex": "YT-81811",
+    "deviceName": "Model YT-81811",
+    "brand": "YATO",
+    "category": "Do uzupełnienia",
+    "partIndex": "YT-81811",
+    "partName": "Do uzupełnienia",
+    "position": "—",
+    "drawingId": "yt-81811",
+    "availability": "Do sprawdzenia",
+    "notes": "Pozycja z bazy startowej PGW"
+  }
+]
