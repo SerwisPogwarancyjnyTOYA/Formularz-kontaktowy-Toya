@@ -89,3 +89,16 @@ a{color:inherit}
   .brandmark-copy strong{font-size:16px;}
   .brandmark-copy small{font-size:10px;}
 }
+
+
+/* Logo clean-up 2026-06-04 — final override */
+.brandmark-official{align-items:center;gap:18px}
+.brandmark-official .official-yato-logo{height:62px;max-width:260px;width:auto;object-fit:contain;background:transparent!important;border:0!important;border-radius:0!important;padding:0!important;box-shadow:none!important;filter:drop-shadow(0 10px 18px rgba(0,0,0,.28))}
+.brandmark-copy strong{font-size:18px;letter-spacing:.08em}
+.brandmark-copy small{font-size:10px;letter-spacing:.13em}
+.brand-rail{width:min(1220px,calc(100% - 32px));margin:24px auto 0;padding:12px 16px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.035));display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.brand-rail>span{font-size:12px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:#6ee7b7;white-space:nowrap}
+.brand-rail-logos{display:flex;align-items:center;gap:16px;flex-wrap:wrap;min-width:0}
+.brand-rail-logos img{height:28px;max-width:120px;width:auto;object-fit:contain;display:block;filter:drop-shadow(0 5px 9px rgba(0,0,0,.22))}
+.brand-rail-logos .toya-logo{height:34px;max-width:145px}
+@media(max-width:720px){.brandmark-official{gap:12px}.brandmark-official .official-yato-logo{height:46px;max-width:190px}.brandmark-copy strong{font-size:15px}.brandmark-copy small{font-size:9px}.brand-rail{margin-top:18px}.brand-rail-logos{gap:11px}.brand-rail-logos img{height:22px;max-width:94px}.brand-rail-logos .toya-logo{height:28px;max-width:118px}}
