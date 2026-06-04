@@ -6,13 +6,13 @@
   <title>YATO Service Hub — kreator części pogwarancyjnych</title>
   <meta name="description" content="Kreator zapytania o części pogwarancyjne TOYA S.A." />
   <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="stylesheet" href="assets/style.css?v=20260604-logo3" />
+  <link rel="stylesheet" href="assets/style.css?v=20260604-ai-ready1" />
 </head>
 <body>
   <header class="hero">
     <nav class="topbar">
       <div class="brandmark brandmark-official">
-        <img class="brandmark-logo official-yato-logo" src="assets/logos/yato-wordmark-clean.png?v=20260604-logo3" alt="YATO" />
+        <img class="brandmark-logo official-yato-logo" src="assets/logos/yato-wordmark-clean.png?v=20260604-ai-ready1" alt="YATO" />
         <div class="brandmark-copy">
           <strong>Service Hub</strong>
           <small>Serwis pogwarancyjny</small>
@@ -28,6 +28,7 @@
         <div class="hero-actions">
           <a class="button primary" href="#search">Szukaj części</a>
           <button class="button ghost" id="fillDemoBtn" type="button">Wypełnij przykład: łańcuch do piły</button>
+          <button class="button ghost" id="unknownBtn" type="button">Nie znam indeksu urządzenia</button>
         </div>
       </div>
       <aside class="hero-card">
@@ -47,13 +48,35 @@
     <section class="brand-rail" aria-label="Marki TOYA S.A.">
       <span>Marki TOYA S.A.</span>
       <div class="brand-rail-logos">
-        <img class="toya-logo" src="assets/logos/toya.png?v=20260604-logo3" alt="TOYA S.A." />
-        <img src="assets/logos/yato-wordmark-clean.png?v=20260604-logo3" alt="YATO" />
-        <img src="assets/logos/vorel.png?v=20260604-logo3" alt="VOREL" />
-        <img src="assets/logos/sthor.png?v=20260604-logo3" alt="STHOR" />
-        <img src="assets/logos/lund.png?v=20260604-logo3" alt="LUND" />
-        <img src="assets/logos/flo.png?v=20260604-logo3" alt="FLO" />
-        <img src="assets/logos/fala.png?v=20260604-logo3" alt="FALA" />
+        <img class="toya-logo" src="assets/logos/toya.png?v=20260604-ai-ready1" alt="TOYA S.A." />
+        <img src="assets/logos/yato-wordmark-clean.png?v=20260604-ai-ready1" alt="YATO" />
+        <img src="assets/logos/vorel.png?v=20260604-ai-ready1" alt="VOREL" />
+        <img src="assets/logos/sthor.png?v=20260604-ai-ready1" alt="STHOR" />
+        <img src="assets/logos/lund.png?v=20260604-ai-ready1" alt="LUND" />
+        <img src="assets/logos/flo.png?v=20260604-ai-ready1" alt="FLO" />
+        <img src="assets/logos/fala.png?v=20260604-ai-ready1" alt="FALA" />
+      </div>
+    </section>
+
+    <section class="panel choice-panel">
+      <div class="section-head">
+        <p class="eyebrow">Start</p>
+        <h2>Wybierz ścieżkę</h2>
+        <p>Klient najpierw wybiera urządzenie. Części pokazujemy dopiero po wejściu w konkretny model.</p>
+      </div>
+      <div class="choice-grid">
+        <button class="choice-card" type="button" onclick="document.getElementById('searchInput').focus()">
+          <strong>Znam model urządzenia</strong>
+          <span>Wpisz indeks, nazwę albo kategorię.</span>
+        </button>
+        <button class="choice-card" id="unknownBtn2" type="button" onclick="document.getElementById('unknownBtn').click()">
+          <strong>Nie znam indeksu</strong>
+          <span>Przygotuj maila z opisem i zdjęciami do identyfikacji.</span>
+        </button>
+        <button class="choice-card" type="button" onclick="document.getElementById('aiDescription').focus()">
+          <strong>Opisz część po ludzku</strong>
+          <span>Lokalny matcher podpowie kandydatów z listy części.</span>
+        </button>
       </div>
     </section>
 
@@ -70,7 +93,37 @@
       <div id="results" class="results" aria-live="polite"></div>
     </section>
 
-    <section class="panel drawing-panel">
+    <section class="panel hidden" id="unknownPanel">
+      <div class="section-head">
+        <p class="eyebrow">Tryb awaryjny</p>
+        <h2>Nie znasz indeksu? Nie zgaduj.</h2>
+        <p>Pokaż nam, co widzisz — serwis dopasuje resztę. Formularz przygotuje maila z checklistą zdjęć.</p>
+      </div>
+      <div class="form-grid">
+        <label class="wide">Opis urządzenia<textarea id="unknownDevice" rows="3" placeholder="np. czerwona piła YATO, agregat malarski, pompa membranowa..."></textarea></label>
+        <label class="wide">Opis części lub objawu<textarea id="unknownPart" rows="3" placeholder="np. pękł plastik przy spuście, potrzebuję łańcuch, koło zębate przy napędzie..."></textarea></label>
+      </div>
+      <div class="check-grid">
+        <label><input type="checkbox" name="plate" data-label="zdjęcie tabliczki znamionowej" checked /> Dołączę zdjęcie tabliczki znamionowej</label>
+        <label><input type="checkbox" name="device" data-label="zdjęcie całego urządzenia" checked /> Dołączę zdjęcie całego urządzenia</label>
+        <label><input type="checkbox" name="part" data-label="zdjęcie uszkodzonej części" checked /> Dołączę zdjęcie uszkodzonej części</label>
+      </div>
+    </section>
+
+    <section class="panel ai-panel">
+      <div class="section-head">
+        <p class="eyebrow">AI-ready</p>
+        <h2>Opisz część własnymi słowami</h2>
+        <p>Na razie działa lokalny matcher po nazwach i synonimach. Później podepniemy prawdziwe AI przez bezpieczny backend.</p>
+      </div>
+      <div class="searchbar">
+        <input id="aiDescription" type="text" placeholder="np. plastik przy spuście, zębatka przy łańcuchu, uszczelka, szczotki..." />
+        <button class="button primary" id="aiSuggestBtn" type="button">Podpowiedz części</button>
+      </div>
+      <div id="aiSuggestions" class="results"></div>
+    </section>
+
+    <section class="panel drawing-panel" id="drawing">
       <div class="section-head">
         <p class="eyebrow">Krok 2</p>
         <h2>Rysunek złożeniowy</h2>
@@ -129,6 +182,6 @@
     <span>Demo: dane klientów nie są zapisywane na serwerze; mail generuje się w poczcie klienta.</span>
   </footer>
 
-  <script src="assets/app.js?v=20260604-logo3"></script>
+  <script src="assets/app.js?v=20260604-ai-ready1"></script>
 </body>
 </html>

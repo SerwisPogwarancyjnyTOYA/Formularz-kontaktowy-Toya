@@ -1,0 +1,29 @@
+[
+  {
+    "deviceIndex": "YT-84920",
+    "deviceName": "Piła łańcuchowa YATO",
+    "brand": "YATO",
+    "category": "Pilarki i piły łańcuchowe",
+    "drawingId": "yt-84920",
+    "status": "demo_or_indexed",
+    "partsCount": 3
+  },
+  {
+    "deviceIndex": "YT-82560",
+    "deviceName": "Agregat malarski",
+    "brand": "YATO",
+    "category": "Agregaty malarskie",
+    "drawingId": "yt-82560",
+    "status": "demo_or_indexed",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YG-03395",
+    "deviceName": "Pompa membranowa",
+    "brand": "YATO/G",
+    "category": "Gastronomia / pompy",
+    "drawingId": "yg-03395",
+    "status": "demo_or_indexed",
+    "partsCount": 1
+  }
+]

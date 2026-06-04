@@ -10,7 +10,8 @@
     "position": "12",
     "drawingId": "yt-84920",
     "availability": "Do potwierdzenia przez serwis",
-    "notes": "Pozycja demonstracyjna do testów kreatora"
+    "notes": "Pozycja demonstracyjna do testów kreatora",
+    "public": true
   },
   {
     "id": "yt-84920-guide-demo",
@@ -23,7 +24,8 @@
     "position": "13",
     "drawingId": "yt-84920",
     "availability": "Do potwierdzenia przez serwis",
-    "notes": "Pozycja demonstracyjna do testów kreatora"
+    "notes": "Pozycja demonstracyjna do testów kreatora",
+    "public": true
   },
   {
     "id": "yt-84920-sprocket-demo",
@@ -36,7 +38,8 @@
     "position": "18",
     "drawingId": "yt-84920",
     "availability": "Do potwierdzenia przez serwis",
-    "notes": "Pozycja demonstracyjna do testów kreatora"
+    "notes": "Pozycja demonstracyjna do testów kreatora",
+    "public": true
   },
   {
     "id": "yt-82560-main",
@@ -49,7 +52,8 @@
     "position": "—",
     "drawingId": "yt-82560",
     "availability": "Do sprawdzenia",
-    "notes": "Pozycja z bazy startowej PGW"
+    "notes": "Pozycja z bazy startowej PGW",
+    "public": true
   },
   {
     "id": "yg-03395-main",
@@ -62,7 +66,8 @@
     "position": "—",
     "drawingId": "yg-03395",
     "availability": "Do sprawdzenia",
-    "notes": "Pozycja z bazy startowej PGW"
+    "notes": "Pozycja z bazy startowej PGW",
+    "public": false
   },
   {
     "id": "zg03395-13",
@@ -75,7 +80,8 @@
     "position": "13",
     "drawingId": "yg-03395",
     "availability": "Do sprawdzenia",
-    "notes": "Pozycja z bazy startowej PGW"
+    "notes": "Pozycja z bazy startowej PGW",
+    "public": true
   },
   {
     "id": "yt-81811-main",
@@ -88,6 +94,7 @@
     "position": "—",
     "drawingId": "yt-81811",
     "availability": "Do sprawdzenia",
-    "notes": "Pozycja z bazy startowej PGW"
+    "notes": "Pozycja z bazy startowej PGW",
+    "public": false
   }
 ]

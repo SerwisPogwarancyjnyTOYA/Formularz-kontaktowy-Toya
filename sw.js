@@ -1,9 +1,9 @@
-const CACHE = 'yato-service-hub-v20260604-logo2';
+const CACHE = 'yato-service-hub-v20260604-ai-ready1';
 const ASSETS = [
   './',
   './index.html',
-  './assets/style.css?v=20260604-logo3',
-  './assets/app.js?v=20260604-logo3',
+  './assets/style.css?v=20260604-ai-ready1',
+  './assets/app.js?v=20260604-ai-ready1',
   './manifest.webmanifest'
 ];
 
