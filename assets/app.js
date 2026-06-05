@@ -6,7 +6,7 @@ const CONFIG = {
   appName: 'YATO Service Hub'
 };
 
-const PARTS = [
+let PARTS = window.PGW_PARTS || [
   {id:'yt-84920-chain-demo', public:true, deviceIndex:'YT-84920',deviceName:'Piła łańcuchowa YATO',brand:'YATO',category:'Pilarki i piły łańcuchowe',partIndex:'YT-84920-012',partName:'Łańcuch tnący',position:'12',drawingId:'yt-84920',availability:'Do potwierdzenia przez serwis',keywords:'łańcuch lancuch piła pilarka łańcuchowa'},
   {id:'yt-84920-guide-demo', public:true, deviceIndex:'YT-84920',deviceName:'Piła łańcuchowa YATO',brand:'YATO',category:'Pilarki i piły łańcuchowe',partIndex:'YT-84920-013',partName:'Prowadnica',position:'13',drawingId:'yt-84920',availability:'Do potwierdzenia przez serwis',keywords:'prowadnica miecz piła pilarka łańcuch'},
   {id:'yt-84920-sprocket-demo', public:true, deviceIndex:'YT-84920',deviceName:'Piła łańcuchowa YATO',brand:'YATO',category:'Pilarki i piły łańcuchowe',partIndex:'YT-84920-018',partName:'Koło napędowe łańcucha',position:'18',drawingId:'yt-84920',availability:'Do potwierdzenia przez serwis',keywords:'koło napęd zębatka zebatka łańcuch'},
@@ -20,7 +20,7 @@ const PARTS = [
   {id:'yt-829021-drawing', public:true, deviceIndex:'YT-829021',deviceName:'Urządzenie YATO YT-829021',brand:'YATO',category:'Rysunki złożeniowe',partIndex:'YT-829021',partName:'Rysunek złożeniowy / części do wskazania z listy',position:'—',drawingId:'yt-829021',availability:'Do sprawdzenia',keywords:'rysunek złożeniowy urządzenie'}
 ];
 
-const DRAWINGS = [
+let DRAWINGS = window.PGW_DRAWINGS || [
   {id:'yt-84920',deviceIndex:'YT-84920',brand:'YATO',title:'Piła łańcuchowa YATO — rysunek demonstracyjny',type:'svg-demo',status:'demo'},
   {id:'yt-82560',deviceIndex:'YT-82560',brand:'YATO',title:'Agregat malarski — rysunek do podpięcia',type:'placeholder',status:'todo'},
   {id:'yg-03395',deviceIndex:'YG-03395',brand:'YATO',title:'Pompa membranowa — rysunek do podpięcia',type:'placeholder',status:'todo'},
@@ -45,10 +45,44 @@ const SYNONYMS = {
 let selectedDevice = null;
 let cart = [];
 let unknownMode = false;
+let currentStep = 1;
+let drawingZoom = { scale: 1, x: 0, y: 0, dragging: false, lastX: 0, lastY: 0 };
+let activeDrawingPosition = null;
 
 const $ = (id) => document.getElementById(id);
 const norm = (v='') => String(v).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9\-\s]/g,' ').replace(/\s+/g,' ').trim();
 const esc = (v='') => String(v).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+
+function goToStep(step) {
+  currentStep = Math.max(1, Math.min(5, Number(step) || 1));
+  document.querySelectorAll('.wizard-step').forEach(section => {
+    const s = Number(section.dataset.step || 1);
+    section.classList.toggle('step-visible', s === currentStep);
+  });
+  document.querySelectorAll('.wizard-mail-step').forEach(section => {
+    const s = Number(section.dataset.step || 5);
+    section.classList.toggle('step-visible', s === currentStep);
+  });
+  document.querySelectorAll('.step-pill').forEach(btn => {
+    const s = Number(btn.dataset.jumpStep || 1);
+    btn.classList.toggle('active', s === currentStep);
+    btn.classList.toggle('done', s < currentStep);
+  });
+  const visible = document.querySelector('.wizard-step.step-visible, .wizard-mail-step.step-visible');
+  if (visible) visible.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function needsAttachmentsWarning() {
+  if (!unknownMode) return false;
+  return ['plate','device','part'].some(name => document.querySelector(`[name="${name}"]`)?.checked);
+}
+
+function updateAttachmentWarning() {
+  const box = $('attachmentWarning');
+  if (!box) return;
+  box.classList.toggle('hidden', !needsAttachmentsWarning());
+}
+
 
 function groupDevices(parts = PARTS.filter(p => p.public !== false)) {
   const map = new Map();
@@ -61,23 +95,58 @@ function groupDevices(parts = PARTS.filter(p => p.public !== false)) {
   return [...map.values()].sort((a,b)=>a.deviceIndex.localeCompare(b.deviceIndex,'pl'));
 }
 
+function looksLikeIndex(query) {
+  const q = norm(query).replace(/\s/g, '');
+  return /^[a-z]{1,4}-?\d{3,}/i.test(q) || /^zg\d{3,}/i.test(q);
+}
+
+function compactIndex(v='') {
+  return norm(v).replace(/[^a-z0-9]/g, '');
+}
+
 function scoreDevice(device, query) {
   const q = norm(query);
   if (!q) return 0;
-  const hay = norm([device.deviceIndex, device.deviceName, device.brand, device.category, ...device.parts.flatMap(p => [p.partIndex, p.partName, p.position, p.keywords])].join(' '));
+
+  const cq = compactIndex(query);
+  const indexMode = looksLikeIndex(query);
+  const deviceIndex = compactIndex(device.deviceIndex);
+  const partIndexes = device.parts.map(p => compactIndex(p.partIndex));
+
+  // Gdy klient wpisuje indeks, nie pokazujemy luźnych trafień.
+  // Albo indeks się zgadza, albo mówimy uczciwie, że brak dopasowania.
+  if (indexMode) {
+    if (deviceIndex === cq) return 200;
+    if (deviceIndex.includes(cq) || cq.includes(deviceIndex)) return 120;
+    if (partIndexes.some(pi => pi === cq)) return 110;
+    if (partIndexes.some(pi => pi.includes(cq) || cq.includes(pi))) return 80;
+    return 0;
+  }
+
+  const deviceHay = norm([device.deviceIndex, device.deviceName, device.brand, device.category].join(' '));
+  const partsHay = norm(device.parts.flatMap(p => [p.partIndex, p.partName, p.position, p.keywords]).join(' '));
   let score = 0;
-  if (norm(device.deviceIndex) === q) score += 120;
-  if (norm(device.deviceIndex).includes(q)) score += 60;
-  if (norm(device.deviceName).includes(q)) score += 45;
-  if (hay.includes(q)) score += 25;
-  q.split(' ').forEach(token => { if (token.length > 1 && hay.includes(token)) score += 8; });
+
+  if (deviceHay.includes(q)) score += 80;
+  if (partsHay.includes(q)) score += 35;
+
+  const tokens = q.split(' ').filter(t => t.length > 1);
+  tokens.forEach(token => {
+    if (deviceHay.includes(token)) score += 16;
+    if (partsHay.includes(token)) score += 8;
+  });
+
   return score;
 }
 
 function searchDevices(query) {
   const q = norm(query);
-  if (!q) return [];
-  return groupDevices().map(d => ({...d, score: scoreDevice(d, q)})).filter(d => d.score > 0).sort((a,b)=>b.score-a.score).slice(0,8);
+  if (!q || q.length < 2) return [];
+  return groupDevices()
+    .map(d => ({...d, score: scoreDevice(d, q)}))
+    .filter(d => d.score > 0)
+    .sort((a,b)=>b.score-a.score || a.deviceIndex.localeCompare(b.deviceIndex,'pl'))
+    .slice(0,8);
 }
 
 function renderResults(devices) {
@@ -88,7 +157,7 @@ function renderResults(devices) {
     return;
   }
   if (!devices.length) {
-    el.innerHTML = `<div class="muted-box"><strong>Brak pewnego dopasowania.</strong><br>Użyj trybu „Nie znam indeksu” — system przygotuje maila z opisem i zdjęciami do identyfikacji.</div>`;
+    el.innerHTML = `<div class="muted-box"><strong>Brak pewnego dopasowania w częściowej bazie PGW.</strong><br>Nie pokazuję losowych części. Użyj trybu „Nie znam indeksu” albo wpisz opis części — system przygotuje maila z opisem i zdjęciami do identyfikacji.</div>`;
     return;
   }
   el.innerHTML = devices.map(d => `
@@ -114,37 +183,149 @@ function selectDevice(deviceIndex) {
   $('drawingHint').textContent = `${selectedDevice.deviceIndex} — ${selectedDevice.deviceName}`;
   renderDrawing(selectedDevice);
   renderDrawingParts(selectedDevice.parts);
-  $('drawing').scrollIntoView({behavior:'smooth', block:'start'});
+  goToStep(2);
   updateMailPreview();
 }
 
 function renderDrawing(device) {
   const stage = $('drawingStage');
   const drawing = DRAWINGS.find(d => d.id === device.drawingId || d.deviceIndex === device.deviceIndex);
+  activeDrawingPosition = null;
+  resetDrawingZoom(false);
   if (!drawing) {
     stage.className = 'drawing-stage empty';
     stage.innerHTML = `<div class="empty-state">Rysunek dla ${esc(device.deviceIndex)} jest jeszcze do podpięcia.</div>`;
     return;
   }
+
+  stage.className = 'drawing-stage has-embed interactive-drawing-stage';
+
   if (drawing.type === 'svg-demo') {
-    stage.className = 'drawing-stage has-embed';
-    stage.innerHTML = demoSvg();
-    stage.querySelectorAll('[data-position]').forEach(h => h.addEventListener('click', () => {
-      const part = device.parts.find(p => p.position === h.dataset.position);
-      if (part) addToCart(part.id);
-    }));
+    stage.innerHTML = interactiveDrawingShell(drawing, demoSvg(), true);
+    initInteractiveDrawing(stage, device);
     return;
   }
+
   if (drawing.drivePreviewUrl || drawing.localPath) {
     const src = drawing.localPath || drawing.drivePreviewUrl;
-    stage.className = 'drawing-stage has-embed';
-    stage.innerHTML = `
-      <div class="drawing-toolbar"><strong>${esc(drawing.title)}</strong><div class="links">${drawing.driveViewUrl ? `<a class="button ghost small" href="${drawing.driveViewUrl}" target="_blank" rel="noopener">Otwórz w Drive</a>` : ''}</div></div>
-      <iframe class="drawing-embed" src="${src}" title="${esc(drawing.title)}"></iframe>`;
+    const embed = `
+      <iframe class="drawing-embed drawing-zoom-item" src="${src}" title="${esc(drawing.title)}"></iframe>
+      <div class="drawing-overlay-note">PDF z Google Drive: użyj zoomu przeglądarki lub przycisków + / −. Pełną czytelność daje przycisk „Otwórz rysunek”.</div>`;
+    stage.innerHTML = interactiveDrawingShell(drawing, embed, false);
+    initInteractiveDrawing(stage, device);
     return;
   }
+
   stage.className = 'drawing-stage empty';
   stage.innerHTML = `<div class="empty-state"><strong>${esc(drawing.title)}</strong><br>Rysunek jest w indeksie, ale plik lokalny/Drive będzie podpięty po segregacji paczek.</div>`;
+}
+
+function interactiveDrawingShell(drawing, content, isHotspotReady) {
+  const viewUrl = drawing.driveViewUrl || drawing.localPath || '';
+  return `
+    <div class="drawing-pro-header">
+      <div>
+        <strong>${esc(drawing.title || 'Rysunek techniczny')}</strong>
+        <span>Powiększ kółkiem myszy, przeciągnij rysunek albo użyj przycisków. Na telefonie: przybliż palcami.</span>
+      </div>
+      <div class="drawing-actions">
+        <button class="button ghost small" type="button" data-zoom-out>−</button>
+        <button class="button ghost small" type="button" data-zoom-reset>Reset</button>
+        <button class="button ghost small" type="button" data-zoom-in>+</button>
+        ${viewUrl ? `<a class="button ghost small" href="${viewUrl}" target="_blank" rel="noopener">Otwórz rysunek</a>` : ''}
+      </div>
+    </div>
+    <div class="drawing-viewport" data-drawing-viewport>
+      <div class="drawing-canvas" data-drawing-canvas>
+        ${content}
+      </div>
+    </div>
+    <div class="drawing-help-row">
+      <span>Scroll = zoom</span><span>Przeciągnij = przesuwanie</span><span>${isHotspotReady ? 'Kliknij numer na rysunku = dodaj część' : 'Kliknij część z listy = fokus na rysunek'}</span>
+    </div>`;
+}
+
+function initInteractiveDrawing(stage, device) {
+  const viewport = stage.querySelector('[data-drawing-viewport]');
+  const canvas = stage.querySelector('[data-drawing-canvas]');
+  if (!viewport || !canvas) return;
+  updateDrawingTransform(canvas);
+
+  stage.querySelector('[data-zoom-in]')?.addEventListener('click', () => zoomDrawing(1.18, canvas));
+  stage.querySelector('[data-zoom-out]')?.addEventListener('click', () => zoomDrawing(1 / 1.18, canvas));
+  stage.querySelector('[data-zoom-reset]')?.addEventListener('click', () => resetDrawingZoom(true));
+
+  viewport.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    const direction = e.deltaY < 0 ? 1.12 : 1 / 1.12;
+    zoomDrawing(direction, canvas, e.offsetX, e.offsetY);
+  }, { passive: false });
+
+  viewport.addEventListener('pointerdown', (e) => {
+    drawingZoom.dragging = true;
+    drawingZoom.lastX = e.clientX;
+    drawingZoom.lastY = e.clientY;
+    viewport.setPointerCapture(e.pointerId);
+    viewport.classList.add('is-dragging');
+  });
+  viewport.addEventListener('pointermove', (e) => {
+    if (!drawingZoom.dragging) return;
+    drawingZoom.x += e.clientX - drawingZoom.lastX;
+    drawingZoom.y += e.clientY - drawingZoom.lastY;
+    drawingZoom.lastX = e.clientX;
+    drawingZoom.lastY = e.clientY;
+    updateDrawingTransform(canvas);
+  });
+  viewport.addEventListener('pointerup', (e) => {
+    drawingZoom.dragging = false;
+    viewport.classList.remove('is-dragging');
+    try { viewport.releasePointerCapture(e.pointerId); } catch {}
+  });
+  viewport.addEventListener('pointercancel', () => {
+    drawingZoom.dragging = false;
+    viewport.classList.remove('is-dragging');
+  });
+
+  stage.querySelectorAll('[data-position]').forEach(h => h.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const part = device.parts.find(p => p.position === h.dataset.position);
+    focusDrawingPosition(h.dataset.position);
+    if (part) addToCart(part.id);
+  }));
+}
+
+function zoomDrawing(multiplier, canvas, originX, originY) {
+  drawingZoom.scale = Math.max(0.65, Math.min(4.2, drawingZoom.scale * multiplier));
+  updateDrawingTransform(canvas || document.querySelector('[data-drawing-canvas]'));
+}
+
+function resetDrawingZoom(animate = false) {
+  drawingZoom = { scale: 1, x: 0, y: 0, dragging: false, lastX: 0, lastY: 0 };
+  const canvas = document.querySelector('[data-drawing-canvas]');
+  if (canvas) {
+    canvas.classList.toggle('smooth-transform', animate);
+    updateDrawingTransform(canvas);
+    setTimeout(() => canvas.classList.remove('smooth-transform'), 260);
+  }
+}
+
+function updateDrawingTransform(canvas) {
+  if (!canvas) return;
+  canvas.style.transform = `translate(${drawingZoom.x}px, ${drawingZoom.y}px) scale(${drawingZoom.scale})`;
+}
+
+function focusDrawingPosition(position) {
+  activeDrawingPosition = position;
+  document.querySelectorAll('.hotspot, .part-card').forEach(el => el.classList.remove('active-match'));
+  document.querySelectorAll(`[data-position="${CSS.escape(String(position))}"], [data-part-position="${CSS.escape(String(position))}"]`).forEach(el => el.classList.add('active-match'));
+  const stage = $('drawingStage');
+  stage?.classList.add('focus-pulse');
+  setTimeout(() => stage?.classList.remove('focus-pulse'), 800);
+  const canvas = document.querySelector('[data-drawing-canvas]');
+  if (canvas && position && position !== '—') {
+    drawingZoom.scale = Math.max(drawingZoom.scale, 1.55);
+    updateDrawingTransform(canvas);
+  }
 }
 
 function renderDrawingParts(parts) {
@@ -152,18 +333,22 @@ function renderDrawingParts(parts) {
   if (!parts?.length) { box.innerHTML = 'Brak pozycji dla wybranego urządzenia.'; return; }
   box.className = 'part-list';
   box.innerHTML = parts.map(p => `
-    <article class="part-card">
+    <article class="part-card" data-part-position="${esc(p.position)}">
       <div>
         <h4>${esc(p.partName)}</h4>
         <div class="meta"><span class="tag">poz. ${esc(p.position)}</span><span class="tag">${esc(p.partIndex)}</span><span class="tag">${esc(p.availability)}</span></div>
       </div>
-      <button class="button primary small" data-add="${esc(p.id)}">Dodaj</button>
+      <div class="part-actions">
+        <button class="button ghost small" data-focus-position="${esc(p.position)}">Pokaż na rysunku</button>
+        <button class="button primary small" data-add="${esc(p.id)}">Dodaj</button>
+      </div>
     </article>`).join('');
   box.querySelectorAll('[data-add]').forEach(btn => btn.addEventListener('click', () => addToCart(btn.dataset.add)));
+  box.querySelectorAll('[data-focus-position]').forEach(btn => btn.addEventListener('click', () => focusDrawingPosition(btn.dataset.focusPosition)));
 }
 
 function demoSvg() {
-  return `<svg class="machine-svg" viewBox="0 0 900 520" role="img" aria-label="Demo rysunku złożeniowego piły łańcuchowej">
+  return `<svg class="machine-svg drawing-zoom-item" viewBox="0 0 900 520" role="img" aria-label="Demo rysunku złożeniowego piły łańcuchowej">
     <rect width="900" height="520" fill="#f5f1e9"/>
     <text x="44" y="62" fill="#1d1d1d" font-size="28" font-weight="800">YT-84920 — rysunek demonstracyjny</text>
     <g opacity=".18" stroke="#111" stroke-width="3" fill="none"><path d="M160 270 C210 150 410 120 560 185 C650 225 700 300 660 365 C620 430 455 420 345 380 C235 340 120 330 160 270Z"/><path d="M555 245 L815 210 L825 250 L570 302Z"/><circle cx="335" cy="285" r="70"/><path d="M210 385 L530 385"/></g>
@@ -179,7 +364,7 @@ function addToCart(partId) {
   if (!part) return;
   const existing = cart.find(i => i.id === partId);
   if (existing) existing.qty += 1; else cart.push({...part, qty:1});
-  renderCart(); updateMailPreview(); toast('Dodano do zapytania');
+  renderCart(); updateMailPreview(); goToStep(3); toast('Dodano do zapytania');
 }
 
 function renderCart() {
@@ -247,13 +432,20 @@ function buildMail() {
   lines.push('');
   lines.push(`Uwagi:\n${data.notes || '—'}`);
   lines.push('');
+  if (needsAttachmentsWarning()) {
+    lines.push('');
+    lines.push('⚠️ UWAGA: PAMIĘTAJ, ABY TERAZ DOŁĄCZYĆ ZDJĘCIA DO TEGO MAILA W SWOIM PROGRAMIE POCZTOWYM!');
+  }
+  lines.push('');
+  lines.push('Jeżeli przycisk generowania maila nie otworzył poczty, skopiuj tę treść i wyślij ją ręcznie na service@yato.pl.');
   lines.push('Wiadomość wygenerowana przez YATO Service Hub.');
   return {id, subject: `Zapytanie o części pogwarancyjne — ${selectedDevice?.deviceIndex || 'identyfikacja'} — ${id}`, body: lines.join('\n')};
 }
 
-function updateMailPreview() { const mail = buildMail(); $('mailPreview').textContent = mail.body; }
+function updateMailPreview() { const mail = buildMail(); $('mailPreview').textContent = mail.body; updateAttachmentWarning(); }
 
 function openMail() {
+  goToStep(5);
   const mail = buildMail();
   const url = `mailto:${encodeURIComponent(CONFIG.serviceEmail)}?subject=${encodeURIComponent(mail.subject)}&body=${encodeURIComponent(mail.body)}`;
   window.location.href = url;
@@ -265,7 +457,7 @@ function downloadJson() {
   const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `zapytanie-pgw-${Date.now()}.json`; a.click(); URL.revokeObjectURL(a.href);
 }
 
-function copyMail() { navigator.clipboard.writeText(buildMail().body).then(() => toast('Treść skopiowana')); }
+function copyMail() { goToStep(5); navigator.clipboard.writeText(buildMail().body).then(() => toast('Treść skopiowana — wklej ją ręcznie do maila na service@yato.pl')); }
 function toast(msg) { const t=document.createElement('div'); t.className='toast'; t.textContent=msg; document.body.appendChild(t); setTimeout(()=>t.remove(),2200); }
 
 function setUnknownMode() {
@@ -276,25 +468,77 @@ function setUnknownMode() {
   $('drawingParts').className = 'part-list muted-box';
   $('drawingParts').textContent = 'Po identyfikacji urządzenia serwis dobierze właściwy rysunek.';
   $('unknownPanel').classList.remove('hidden');
+  goToStep(1);
+  $('unknownPanel').classList.add('step-visible');
   $('unknownPanel').scrollIntoView({behavior:'smooth', block:'center'});
   updateMailPreview();
 }
 
+function expandTokens(query) {
+  const tokens = new Set(norm(query).split(' ').filter(Boolean));
+  Object.entries(SYNONYMS).forEach(([main, words]) => {
+    if (tokens.has(norm(main)) || words.some(w => tokens.has(norm(w)))) {
+      tokens.add(norm(main));
+      words.forEach(w => tokens.add(norm(w)));
+    }
+  });
+  return tokens;
+}
+
+function scorePartByDescription(part, tokens) {
+  const hay = norm([part.partName, part.partIndex, part.position, part.keywords].join(' '));
+  let score = 0;
+  tokens.forEach(t => { if (t.length > 1 && hay.includes(t)) score += 1; });
+  return score;
+}
+
 function localSuggest() {
-  if (!selectedDevice) { toast('Najpierw wybierz urządzenie'); return; }
   const query = norm($('aiDescription').value);
   if (!query) { toast('Opisz część własnymi słowami'); return; }
-  const tokens = new Set(query.split(' ').filter(Boolean));
-  Object.entries(SYNONYMS).forEach(([main, words]) => { if (tokens.has(norm(main)) || words.some(w => tokens.has(norm(w)))) { tokens.add(norm(main)); words.forEach(w=>tokens.add(norm(w))); } });
-  const scored = selectedDevice.parts.map(p => {
-    const hay = norm([p.partName,p.partIndex,p.position,p.keywords].join(' '));
-    let score = 0; tokens.forEach(t => { if (t.length > 1 && hay.includes(t)) score += 1; });
-    return {...p, score};
-  }).filter(p => p.score > 0).sort((a,b)=>b.score-a.score);
+  const tokens = expandTokens(query);
   const box = $('aiSuggestions');
-  if (!scored.length) { box.innerHTML = '<div class="muted-box">Nie mam pewnego dopasowania. Dodaj opis do maila i poproś klienta o zdjęcie tabliczki oraz części.</div>'; return; }
-  box.innerHTML = scored.slice(0,4).map(p => `<article class="suggest-card"><div><strong>${esc(p.partName)}</strong><div class="meta"><span class="tag">poz. ${esc(p.position)}</span><span class="tag">${esc(p.partIndex)}</span><span class="tag">dopasowanie lokalne</span></div></div><button class="button primary small" data-add="${esc(p.id)}">Dodaj</button></article>`).join('');
-  box.querySelectorAll('[data-add]').forEach(btn => btn.addEventListener('click', () => addToCart(btn.dataset.add)));
+
+  if (selectedDevice) {
+    const scored = selectedDevice.parts
+      .map(p => ({...p, score: scorePartByDescription(p, tokens)}))
+      .filter(p => p.score > 0)
+      .sort((a,b)=>b.score-a.score);
+
+    if (!scored.length) {
+      box.innerHTML = '<div class="muted-box">Nie mam pewnego dopasowania dla wybranego urządzenia. Dodaj opis do maila i poproś klienta o zdjęcie tabliczki oraz części.</div>';
+      return;
+    }
+
+    box.innerHTML = scored.slice(0,4).map(p => `<article class="suggest-card"><div><strong>${esc(p.partName)}</strong><div class="meta"><span class="tag">poz. ${esc(p.position)}</span><span class="tag">${esc(p.partIndex)}</span><span class="tag">dopasowanie lokalne</span></div></div><button class="button primary small" data-add="${esc(p.id)}">Dodaj</button></article>`).join('');
+    box.querySelectorAll('[data-add]').forEach(btn => btn.addEventListener('click', () => addToCart(btn.dataset.add)));
+    return;
+  }
+
+  // Bez wybranego urządzenia nie dodajemy części do koszyka.
+  // Pokazujemy tylko urządzenia, w których opis może występować.
+  const candidates = groupDevices().map(device => {
+    const matchingParts = device.parts
+      .map(p => ({...p, score: scorePartByDescription(p, tokens)}))
+      .filter(p => p.score > 0)
+      .sort((a,b)=>b.score-a.score);
+    return {...device, matchingParts, score: matchingParts.reduce((sum,p)=>sum+p.score,0)};
+  }).filter(d => d.score > 0).sort((a,b)=>b.score-a.score).slice(0,6);
+
+  if (!candidates.length) {
+    box.innerHTML = '<div class="muted-box">Nie widzę podobnej części w częściowej bazie PGW. Użyj trybu „Nie znam indeksu” — mail poprosi klienta o zdjęcia.</div>';
+    return;
+  }
+
+  box.innerHTML = `<div class="muted-box"><strong>Najpierw wybierz urządzenie.</strong><br>Znalazłem podobne nazwy części w tych modelach:</div>` + candidates.map(d => `
+    <article class="device-card">
+      <div>
+        <div class="device-kicker">${esc(d.brand)} • możliwe dopasowanie po opisie</div>
+        <h3>${esc(d.deviceIndex)} — ${esc(d.deviceName)}</h3>
+        <p>${d.matchingParts.slice(0,3).map(p => esc(p.partName)).join(', ')}</p>
+      </div>
+      <div class="device-actions"><button class="button primary small" data-pick-device="${esc(d.deviceIndex)}">Wybierz urządzenie</button></div>
+    </article>`).join('');
+  box.querySelectorAll('[data-pick-device]').forEach(btn => btn.addEventListener('click', () => selectDevice(btn.dataset.pickDevice)));
 }
 
 function fillDemo() {
@@ -313,16 +557,17 @@ function init() {
   $('results').innerHTML = '<div class="muted-box">Wpisz indeks lub nazwę urządzenia. Wyniki pokażą się dopiero po wyszukaniu.</div>';
   $('searchBtn').addEventListener('click', () => renderResults(searchDevices($('searchInput').value)));
   $('searchInput').addEventListener('keydown', e => { if (e.key === 'Enter') renderResults(searchDevices($('searchInput').value)); });
-  $('searchInput').addEventListener('input', () => { if (norm($('searchInput').value).length >= 2) renderResults(searchDevices($('searchInput').value)); else renderResults([]); });
+  $('searchInput').addEventListener('input', () => { if (norm($('searchInput').value).length >= 2) renderResults(searchDevices($('searchInput').value)); else { $('results').innerHTML = '<div class="muted-box">Wpisz indeks lub nazwę urządzenia. Wyniki pokażą się dopiero po wyszukaniu.</div>'; } });
   $('fillDemoBtn').addEventListener('click', fillDemo);
   $('unknownBtn').addEventListener('click', setUnknownMode);
   $('aiSuggestBtn').addEventListener('click', localSuggest);
   $('generateMailBtn').addEventListener('click', openMail);
   $('copyMailBtn').addEventListener('click', copyMail);
   $('downloadJsonBtn').addEventListener('click', downloadJson);
-  $('clientForm').addEventListener('input', updateMailPreview);
+  document.querySelectorAll('[data-jump-step]').forEach(btn => btn.addEventListener('click', () => goToStep(btn.dataset.jumpStep)));
+  $('clientForm').addEventListener('input', () => { updateMailPreview(); if (currentStep < 4) goToStep(4); });
   document.querySelectorAll('#unknownPanel input, #unknownPanel textarea').forEach(el => el.addEventListener('input', updateMailPreview));
-  renderCart(); updateMailPreview();
+  renderCart(); updateMailPreview(); goToStep(1);
 }
 
 document.addEventListener('DOMContentLoaded', init);
