@@ -1,15 +1,15 @@
-const CACHE = 'yato-service-hub-v20260605-drawing-viewer2';
+const CACHE = 'yato-service-hub-v20260605-compact-warning1';
 const ASSETS = [
   './',
   './index.html',
-  './assets/style.css?v=20260605-drawing-viewer2',
-  './assets/app.js?v=20260605-drawing-viewer2',
-  './assets/database.js?v=20260605-drawing-viewer2',
+  './assets/style.css?v=20260605-compact-warning1',
+  './assets/app.js?v=20260605-compact-warning1',
+  './assets/database.js?v=20260605-compact-warning1',
   './data/parts.json',
   './data/drawings.json',
   './data/devices.json',
   './data/config.json',
-  './assets/logos/yato-wordmark-clean.png',
+  './assets/logos/yato-service-clean.svg',
   './assets/logos/brands-strip-clean.png',
   './manifest.webmanifest'
 ];

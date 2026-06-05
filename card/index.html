@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Maciej Kórnicki | YATO Service Hub</title>
   <meta name="description" content="Cyfrowa wizytówka - Maciej Kórnicki, serwis pogwarancyjny TOYA S.A." />
-  <link rel="icon" href="../assets/logos/clean/yato.png" />
+  <link rel="icon" href="../assets/logos/yato-service-clean.svg" />
   <style>
     :root { --bg:#081b16; --panel:#132820; --text:#eef7f2; --muted:#b7c9c0; --green:#75e0bd; --red:#ef3124; --line:rgba(255,255,255,.14); }
     *{box-sizing:border-box} body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:radial-gradient(circle at 15% 0%,#173b31 0%,#081b16 42%,#050908 100%);color:var(--text);min-height:100vh;}
     .wrap{width:min(980px,92vw);margin:auto;padding:34px 0 42px;}
     .top{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:28px;}
-    .logo{height:64px;object-fit:contain;filter:drop-shadow(0 10px 22px rgba(0,0,0,.25));}
+    .logo{height:78px;max-width:340px;object-fit:contain;filter:drop-shadow(0 12px 24px rgba(0,0,0,.25));}
     .pill{border:1px solid var(--line);border-radius:99px;padding:10px 16px;color:var(--muted);background:rgba(255,255,255,.04)}
     .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:stretch;}
     .card,.box{background:linear-gradient(160deg,rgba(255,255,255,.09),rgba(255,255,255,.035));border:1px solid var(--line);border-radius:28px;box-shadow:0 28px 80px rgba(0,0,0,.25);}
@@ -24,14 +24,14 @@
     a.btn.primary{background:var(--red);border-color:var(--red);box-shadow:0 14px 36px rgba(239,49,36,.25)}
     .box{padding:24px;text-align:center} .qr{background:#fff;padding:14px;border-radius:20px;width:min(280px,80%);margin:10px auto 18px;display:block}
     .small{color:var(--muted);font-size:14px;line-height:1.5} .brands{display:flex;flex-wrap:wrap;gap:16px;align-items:center;margin-top:26px;border-top:1px solid var(--line);padding-top:22px}
-    .brands img{max-height:28px;max-width:112px;object-fit:contain} .fine{margin-top:24px;color:#8da399;font-size:12px;line-height:1.5}
-    @media(max-width:760px){.hero{grid-template-columns:1fr}.buttons{grid-template-columns:1fr}.top{align-items:flex-start;flex-direction:column}.logo{height:52px}}
+    .brands img{object-fit:contain}.brands .brand-strip{width:min(620px,100%);max-width:100%;height:auto;display:block} .fine{margin-top:24px;color:#8da399;font-size:12px;line-height:1.5}
+    @media(max-width:760px){.hero{grid-template-columns:1fr}.buttons{grid-template-columns:1fr}.top{align-items:flex-start;flex-direction:column}.logo{height:58px;max-width:260px}}
   </style>
 </head>
 <body>
   <main class="wrap">
     <div class="top">
-      <img class="logo" src="../assets/logos/clean/yato.png" alt="YATO" />
+      <img class="logo" src="../assets/logos/yato-service-clean.svg" alt="YATO" />
       <div class="pill">Serwis pogwarancyjny · TOYA S.A.</div>
     </div>
     <section class="hero">
@@ -46,13 +46,7 @@
           <a class="btn" href="maciej-kornicki.vcf">➕ Zapisz kontakt</a>
         </div>
         <div class="brands">
-          <img src="../assets/logos/clean/toya.png" alt="TOYA" />
-          <img src="../assets/logos/clean/yato.png" alt="YATO" />
-          <img src="../assets/logos/clean/vorel.png" alt="VOREL" />
-          <img src="../assets/logos/clean/sthor.png" alt="STHOR" />
-          <img src="../assets/logos/clean/lund.png" alt="LUND" />
-          <img src="../assets/logos/clean/flo.png" alt="FLO" />
-          <img src="../assets/logos/clean/fala.png" alt="FALA" />
+          <img class="brand-strip" src="../assets/logos/brands-strip-clean.png?v=20260605-compact-warning1" alt="TOYA, YATO, VOREL, STHOR, LUND, FLO, FALA" />
         </div>
         <p class="fine">TOYA S.A., ul. Sołtysowicka 13-15, 51-168 Wrocław. Ten link prowadzi do kontaktu serwisowego oraz kreatora zapytania o części pogwarancyjne.</p>
       </div>
