@@ -1,0 +1,11 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Kórnicki;Maciej;;;
+FN:Maciej Kórnicki
+ORG:TOYA S.A.
+TITLE:Młodszy specjalista ds. serwisu pogwarancyjnego
+TEL;TYPE=WORK,VOICE:+48787098656
+EMAIL;TYPE=WORK:service@yato.pl
+URL:https://serwispogwarancyjnytoya.github.io/Formularz-kontaktowy-Toya/card/
+ADR;TYPE=WORK:;;ul. Sołtysowicka 13-15;Wrocław;;51-168;Polska
+END:VCARD
