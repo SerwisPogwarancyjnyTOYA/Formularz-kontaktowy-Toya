@@ -1,9 +1,9 @@
-const CACHE = 'yato-service-hub-v20260604-ai-ready2';
+const CACHE = 'yato-service-hub-v20260604-partial-db1';
 const ASSETS = [
   './',
   './index.html',
-  './assets/style.css?v=20260604-ai-ready2',
-  './assets/app.js?v=20260604-ai-ready2',
+  './assets/style.css?v=20260604-partial-db1',
+  './assets/app.js?v=20260604-partial-db1',
   './manifest.webmanifest'
 ];
 

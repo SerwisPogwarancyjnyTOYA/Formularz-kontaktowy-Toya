@@ -1,6 +1,6 @@
 {
   "name": "yato-service-hub",
-  "version": "0.3.0-partial-db",
+  "version": "0.1.0",
   "private": true,
   "description": "Statyczny kreator zapytań o części pogwarancyjne",
   "scripts": {

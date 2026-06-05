@@ -6,13 +6,13 @@
   <title>YATO Service Hub — kreator części pogwarancyjnych</title>
   <meta name="description" content="Kreator zapytania o części pogwarancyjne TOYA S.A." />
   <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="stylesheet" href="assets/style.css?v=20260605-phone-killer1" />
+  <link rel="stylesheet" href="assets/style.css?v=20260604-partial-db1" />
 </head>
 <body>
   <header class="hero">
     <nav class="topbar">
       <div class="brandmark brandmark-official">
-        <img class="brandmark-logo official-yato-logo" src="assets/logos/yato-wordmark-clean.png?v=20260605-phone-killer1" alt="YATO" />
+        <img class="brandmark-logo official-yato-logo" src="assets/logos/yato-wordmark-clean.png?v=20260604-partial-db1" alt="YATO" />
         <div class="brandmark-copy">
           <strong>Service Hub</strong>
           <small>Serwis pogwarancyjny</small>
@@ -20,22 +20,15 @@
       </div>
       <div class="pill">Serwis pogwarancyjny · TOYA S.A.</div>
     </nav>
-    <section class="phone-warning" aria-label="Informacja o doborze części">
-      <div class="warning-icon">⏱️</div>
-      <div>
-        <strong>Przez telefon nie dobieramy części.</strong>
-        <span>Konsultant nie widzi Twojego urządzenia ani rysunku złożeniowego. Najszybsza ścieżka to kreator poniżej — wyślij kompletne zapytanie w kilka minut, a wycenę pogwarancyjną otrzymasz bezpośrednio na maila.</span>
-      </div>
-    </section>
     <section class="hero-grid">
       <div>
         <p class="eyebrow">Kreator zapytania o części</p>
-        <h1>Telefon nie przyspieszy doboru części. Kreator tak.</h1>
-        <p class="lead">Wybierz urządzenie, sprawdź rysunek złożeniowy i wyślij kompletne zapytanie. Odpowiedź na zapytania z kreatora wysyłamy zwykle w ciągu 2–4 godzin roboczych.</p>
+        <h1>Nie zgaduj części. Wybierz ją z rysunku i wygeneruj gotowego maila.</h1>
+        <p class="lead">Klient wyszukuje urządzenie, dodaje części do zapytania, uzupełnia dane i otwiera gotową wiadomość w swojej poczcie.</p>
         <div class="hero-actions">
-          <a class="button primary" href="#search">Szukaj urządzenia</a>
+          <a class="button primary" href="#search">Szukaj części</a>
           <button class="button ghost" id="fillDemoBtn" type="button">Wypełnij przykład: łańcuch do piły</button>
-          <button class="button ghost" id="unknownBtn" type="button">Nie znam modelu</button>
+          <button class="button ghost" id="unknownBtn" type="button">Nie znam indeksu urządzenia</button>
         </div>
       </div>
       <aside class="hero-card">
@@ -51,23 +44,21 @@
     </section>
   </header>
 
-
-  <div class="wizard-progress" aria-label="Postęp kreatora">
-    <button class="step-pill active" type="button" data-jump-step="1"><span>1</span> Urządzenie</button>
-    <button class="step-pill" type="button" data-jump-step="2"><span>2</span> Rysunek</button>
-    <button class="step-pill" type="button" data-jump-step="3"><span>3</span> Zapytanie</button>
-    <button class="step-pill" type="button" data-jump-step="4"><span>4</span> Dane</button>
-    <button class="step-pill" type="button" data-jump-step="5"><span>5</span> Mail</button>
-  </div>
-  <main class="layout wizard-layout">
+  <main class="layout">
     <section class="brand-rail" aria-label="Marki TOYA S.A.">
       <span>Marki TOYA S.A.</span>
       <div class="brand-rail-logos">
-        <img src="assets/logos/brands-strip-clean.png?v=20260605-phone-killer1" alt="Marki TOYA S.A.: TOYA, YATO, VOREL, STHOR, LUND, FLO, FALA" class="brand-strip" />
+        <img class="toya-logo" src="assets/logos/toya.png?v=20260604-partial-db1" alt="TOYA S.A." />
+        <img src="assets/logos/yato-wordmark-clean.png?v=20260604-partial-db1" alt="YATO" />
+        <img src="assets/logos/vorel.png?v=20260604-partial-db1" alt="VOREL" />
+        <img src="assets/logos/sthor.png?v=20260604-partial-db1" alt="STHOR" />
+        <img src="assets/logos/lund.png?v=20260604-partial-db1" alt="LUND" />
+        <img src="assets/logos/flo.png?v=20260604-partial-db1" alt="FLO" />
+        <img src="assets/logos/fala.png?v=20260604-partial-db1" alt="FALA" />
       </div>
     </section>
 
-    <section class="panel choice-panel wizard-step" data-step="1">
+    <section class="panel choice-panel">
       <div class="section-head">
         <p class="eyebrow">Start</p>
         <h2>Wybierz ścieżkę</h2>
@@ -89,7 +80,7 @@
       </div>
     </section>
 
-    <section class="panel wizard-step" id="search" data-step="1">
+    <section class="panel" id="search">
       <div class="section-head">
         <p class="eyebrow">Krok 1</p>
         <h2>Wyszukaj urządzenie albo część</h2>
@@ -102,7 +93,7 @@
       <div id="results" class="results" aria-live="polite"></div>
     </section>
 
-    <section class="panel hidden wizard-step" id="unknownPanel" data-step="1">
+    <section class="panel hidden" id="unknownPanel">
       <div class="section-head">
         <p class="eyebrow">Tryb awaryjny</p>
         <h2>Nie znasz indeksu? Nie zgaduj.</h2>
@@ -119,7 +110,7 @@
       </div>
     </section>
 
-    <section class="panel ai-panel wizard-step" data-step="1">
+    <section class="panel ai-panel">
       <div class="section-head">
         <p class="eyebrow">AI-ready</p>
         <h2>Opisz część własnymi słowami</h2>
@@ -132,12 +123,11 @@
       <div id="aiSuggestions" class="results"></div>
     </section>
 
-    <section class="panel drawing-panel wizard-step" id="drawing" data-step="2">
+    <section class="panel drawing-panel" id="drawing">
       <div class="section-head">
         <p class="eyebrow">Krok 2</p>
         <h2>Rysunek złożeniowy</h2>
         <p id="drawingHint">Wybierz wynik wyszukiwania, aby zobaczyć rysunek i powiązane części.</p>
-        <p class="touch-hint">Na telefonie rozszerz palcami, aby przybliżyć rysunek. Pozycję wybierz z listy obok albo kliknij numer na rysunku, jeśli jest aktywny.</p>
       </div>
       <div class="drawing-wrap">
         <div id="drawingStage" class="drawing-stage empty">
@@ -150,7 +140,7 @@
       </div>
     </section>
 
-    <section class="panel cart-panel wizard-step" data-step="3">
+    <section class="panel cart-panel">
       <div class="section-head">
         <p class="eyebrow">Krok 3</p>
         <h2>Koszyk zapytania</h2>
@@ -159,65 +149,39 @@
       <div id="cart" class="cart muted-box">Koszyk jest pusty.</div>
     </section>
 
-    <section class="panel wizard-step" data-step="4">
+    <section class="panel">
       <div class="section-head">
         <p class="eyebrow">Krok 4</p>
         <h2>Dane klienta</h2>
-        <p>Po uzupełnieniu formularza aplikacja wygeneruje treść maila. Firmy mogą wpisać NIP — w kolejnej wersji podepniemy automatyczne pobieranie danych z GUS.</p>
+        <p>Po uzupełnieniu formularza aplikacja wygeneruje treść maila.</p>
       </div>
       <form id="clientForm" class="form-grid">
         <label>Imię i nazwisko / firma<input name="name" placeholder="Jan Kowalski / Firma ABC" /></label>
         <label>E-mail<input name="email" type="email" placeholder="klient@email.pl" /></label>
         <label>Telefon<input name="phone" placeholder="500 600 700" /></label>
-        <label>NIP<input name="nip" placeholder="opcjonalnie" /><small class="field-hint">Docelowo: automatyczne pobieranie danych firmy z GUS po NIP.</small></label>
+        <label>NIP<input name="nip" placeholder="opcjonalnie" /></label>
         <label class="wide">Dane do faktury<textarea name="invoice" rows="3" placeholder="Nazwa, adres, NIP"></textarea></label>
         <label class="wide">Adres wysyłki<textarea name="shipping" rows="3" placeholder="Ulica, kod, miasto, paczkomat/kurier"></textarea></label>
         <label class="wide">Uwagi<textarea name="notes" rows="3" placeholder="np. proszę o potwierdzenie ceny i dostępności"></textarea></label>
       </form>
       <div class="mail-actions">
-        <button class="button primary" id="generateMailBtn" type="button">Otwórz gotowego maila</button>
+        <button class="button primary" id="generateMailBtn" type="button">Generuj maila</button>
         <button class="button ghost" id="copyMailBtn" type="button">Kopiuj treść</button>
         <button class="button ghost" id="downloadJsonBtn" type="button">Pobierz JSON</button>
       </div>
-      <div class="mail-preview wizard-mail-step" data-step="5">
-        <h3>Krok 5 — Gotowa wiadomość</h3>
+      <div class="mail-preview">
+        <h3>Podgląd wiadomości</h3>
         <pre id="mailPreview">Dodaj część i uzupełnij dane, a tutaj pojawi się gotowy mail.</pre>
-        <div id="attachmentWarning" class="attachment-warning hidden">⚠️ UWAGA: PAMIĘTAJ, ABY TERAZ DOŁĄCZYĆ ZDJĘCIA DO TEGO MAILA W SWOIM PROGRAMIE POCZTOWYM.</div>
-        <div class="mailto-fallback"><strong>Nie otwiera się poczta?</strong> Kliknij <b>Kopiuj treść</b> i wklej wiadomość ręcznie do maila na adres <a href="mailto:service@yato.pl">service@yato.pl</a>.</div>
       </div>
-      <section class="promo-zone" aria-label="Polecane od TOYA S.A.">
-        <div class="promo-glow"></div>
-        <div class="promo-header">
-          <span class="promo-label">Polecane od TOYA S.A.</span>
-          <h3>Potrzebujesz czegoś więcej niż jednej części?</h3>
-          <p>Sprawdź aktualną ofertę TOYA24 albo zapisz kontakt do serwisu, żeby wrócić do kreatora jednym kliknięciem.</p>
-        </div>
-        <div class="promo-cards">
-          <a class="promo-card promo-card-shop" href="https://toya24.pl/pl-PL" target="_blank" rel="noopener">
-            <span class="promo-kicker">TOYA24</span>
-            <strong>Narzędzia, akcesoria i wyposażenie</strong>
-            <em>Aktualna oferta online dla klientów, którzy szukają gotowego rozwiązania — nie tylko części.</em>
-            <span class="promo-cta">Przejdź do Toya24</span>
-          </a>
-          <a class="promo-card promo-card-hub" href="card/">
-            <span class="promo-kicker">YATO Service Hub</span>
-            <strong>Kontakt, wizytówka i kreator części</strong>
-            <em>Zapisz kontakt, wróć do zapytania i wybierz właściwy kanał kontaktu bez błądzenia po skrzynkach.</em>
-            <span class="promo-cta">Otwórz cyfrową wizytówkę</span>
-          </a>
-        </div>
-      </section>
-
     </section>
   </main>
 
   <footer class="footer">
     <strong>YATO Service Hub</strong>
-    <span>TOYA • YATO • VOREL • STHOR • LUND • FLO • FALA</span>
+    <span>YATO • VOREL • STHOR • LUND • FLO • FALA</span>
     <span>Demo: dane klientów nie są zapisywane na serwerze; mail generuje się w poczcie klienta.</span>
   </footer>
 
-  <script src="assets/database.js?v=20260605-phone-killer1"></script>
-  <script src="assets/app.js?v=20260605-phone-killer1"></script>
+  <script src="assets/app.js?v=20260604-partial-db1"></script>
 </body>
 </html>

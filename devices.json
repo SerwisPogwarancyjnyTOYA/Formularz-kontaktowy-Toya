@@ -1,0 +1,5330 @@
+[
+  {
+    "deviceIndex": "YG-03006",
+    "deviceName": "YATO YG-03006 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-03006",
+    "status": "partial_from_inventory",
+    "partsCount": 6
+  },
+  {
+    "deviceIndex": "YG-03012",
+    "deviceName": "YATO YG-03012 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-03012",
+    "status": "partial_from_inventory",
+    "partsCount": 20
+  },
+  {
+    "deviceIndex": "YG-03020",
+    "deviceName": "YATO YG-03020 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-03020",
+    "status": "partial_from_inventory",
+    "partsCount": 21
+  },
+  {
+    "deviceIndex": "YG-03021",
+    "deviceName": "YATO YG-03021 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-03021",
+    "status": "partial_from_inventory",
+    "partsCount": 22
+  },
+  {
+    "deviceIndex": "YG-03022",
+    "deviceName": "YATO YG-03022 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-03022",
+    "status": "partial_from_inventory",
+    "partsCount": 13
+  },
+  {
+    "deviceIndex": "YG-03023",
+    "deviceName": "YATO YG-03023 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-03023",
+    "status": "partial_from_inventory",
+    "partsCount": 9
+  },
+  {
+    "deviceIndex": "YG-03025",
+    "deviceName": "YATO YG-03025 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-03025",
+    "status": "partial_from_inventory",
+    "partsCount": 15
+  },
+  {
+    "deviceIndex": "YG-03027",
+    "deviceName": "YATO YG-03027 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-03027",
+    "status": "partial_from_inventory",
+    "partsCount": 4
+  },
+  {
+    "deviceIndex": "YG-03028",
+    "deviceName": "YATO YG-03028 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-03028",
+    "status": "partial_from_inventory",
+    "partsCount": 10
+  },
+  {
+    "deviceIndex": "YG-03029",
+    "deviceName": "YATO YG-03029 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-03029",
+    "status": "partial_from_inventory",
+    "partsCount": 11
+  },
+  {
+    "deviceIndex": "YG-03059",
+    "deviceName": "YATO YG-03059 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-03059",
+    "status": "partial_from_inventory",
+    "partsCount": 7
+  },
+  {
+    "deviceIndex": "YG-03060",
+    "deviceName": "YATO YG-03060 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-03060",
+    "status": "partial_from_inventory",
+    "partsCount": 14
+  },
+  {
+    "deviceIndex": "YG-03062",
+    "deviceName": "YATO YG-03062 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-03062",
+    "status": "partial_from_inventory",
+    "partsCount": 7
+  },
+  {
+    "deviceIndex": "YG-03063",
+    "deviceName": "YATO YG-03063 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-03063",
+    "status": "partial_from_inventory",
+    "partsCount": 10
+  },
+  {
+    "deviceIndex": "YG-03065",
+    "deviceName": "YATO YG-03065 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-03065",
+    "status": "partial_from_inventory",
+    "partsCount": 14
+  },
+  {
+    "deviceIndex": "YG-03068",
+    "deviceName": "YATO YG-03068 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-03068",
+    "status": "partial_from_inventory",
+    "partsCount": 20
+  },
+  {
+    "deviceIndex": "YG-03087",
+    "deviceName": "YATO YG-03087 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-03087",
+    "status": "partial_from_inventory",
+    "partsCount": 24
+  },
+  {
+    "deviceIndex": "YG-03090",
+    "deviceName": "YATO YG-03090 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-03090",
+    "status": "partial_from_inventory",
+    "partsCount": 3
+  },
+  {
+    "deviceIndex": "YG-03100",
+    "deviceName": "YATO YG-03100 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-03100",
+    "status": "partial_from_inventory",
+    "partsCount": 33
+  },
+  {
+    "deviceIndex": "YG-03101",
+    "deviceName": "YATO YG-03101 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-03101",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YG-03110",
+    "deviceName": "YATO YG-03110 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-03110",
+    "status": "partial_from_inventory",
+    "partsCount": 24
+  },
+  {
+    "deviceIndex": "YG-03118",
+    "deviceName": "YATO YG-03118 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-03118",
+    "status": "partial_from_inventory",
+    "partsCount": 32
+  },
+  {
+    "deviceIndex": "YG-03120",
+    "deviceName": "YATO YG-03120 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-03120",
+    "status": "partial_from_inventory",
+    "partsCount": 9
+  },
+  {
+    "deviceIndex": "YG-03130",
+    "deviceName": "YATO YG-03130 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-03130",
+    "status": "partial_from_inventory",
+    "partsCount": 10
+  },
+  {
+    "deviceIndex": "YG-03200",
+    "deviceName": "YATO YG-03200 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-03200",
+    "status": "partial_from_inventory",
+    "partsCount": 11
+  },
+  {
+    "deviceIndex": "YG-03211",
+    "deviceName": "YATO YG-03211 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-03211",
+    "status": "partial_from_inventory",
+    "partsCount": 20
+  },
+  {
+    "deviceIndex": "YG-03215",
+    "deviceName": "YATO YG-03215 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-03215",
+    "status": "partial_from_inventory",
+    "partsCount": 14
+  },
+  {
+    "deviceIndex": "YG-03232",
+    "deviceName": "YATO YG-03232 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-03232",
+    "status": "partial_from_inventory",
+    "partsCount": 27
+  },
+  {
+    "deviceIndex": "YG-03275",
+    "deviceName": "YATO YG-03275 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-03275",
+    "status": "partial_from_inventory",
+    "partsCount": 24
+  },
+  {
+    "deviceIndex": "YG-03300",
+    "deviceName": "YATO YG-03300 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-03300",
+    "status": "partial_from_inventory",
+    "partsCount": 14
+  },
+  {
+    "deviceIndex": "YG-03350",
+    "deviceName": "YATO YG-03350 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-03350",
+    "status": "partial_from_inventory",
+    "partsCount": 5
+  },
+  {
+    "deviceIndex": "YG-03360",
+    "deviceName": "YATO YG-03360 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-03360",
+    "status": "partial_from_inventory",
+    "partsCount": 3
+  },
+  {
+    "deviceIndex": "YG-03370",
+    "deviceName": "YATO YG-03370 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-03370",
+    "status": "partial_from_inventory",
+    "partsCount": 3
+  },
+  {
+    "deviceIndex": "YG-03371",
+    "deviceName": "YATO YG-03371 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-03371",
+    "status": "partial_from_inventory",
+    "partsCount": 10
+  },
+  {
+    "deviceIndex": "YG-03379",
+    "deviceName": "YATO YG-03379 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-03379",
+    "status": "partial_from_inventory",
+    "partsCount": 28
+  },
+  {
+    "deviceIndex": "YG-03380",
+    "deviceName": "YATO YG-03380 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-03380",
+    "status": "partial_from_inventory",
+    "partsCount": 4
+  },
+  {
+    "deviceIndex": "YG-03382",
+    "deviceName": "YATO YG-03382 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-03382",
+    "status": "partial_from_inventory",
+    "partsCount": 20
+  },
+  {
+    "deviceIndex": "YG-03392",
+    "deviceName": "YATO YG-03392 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-03392",
+    "status": "partial_from_inventory",
+    "partsCount": 9
+  },
+  {
+    "deviceIndex": "YG-03395",
+    "deviceName": "Pompa membranowa",
+    "brand": "YATO",
+    "category": "Gastronomia / pompy",
+    "drawingId": "yg-03395",
+    "status": "confirmed_or_demo",
+    "partsCount": 11
+  },
+  {
+    "deviceIndex": "YG-04316",
+    "deviceName": "YATO YG-04316 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-04316",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YG-04555",
+    "deviceName": "YATO YG-04555 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-04555",
+    "status": "partial_from_inventory",
+    "partsCount": 6
+  },
+  {
+    "deviceIndex": "YG-04557",
+    "deviceName": "YATO YG-04557 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-04557",
+    "status": "partial_from_inventory",
+    "partsCount": 8
+  },
+  {
+    "deviceIndex": "YG-04558",
+    "deviceName": "YATO YG-04558 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-04558",
+    "status": "partial_from_inventory",
+    "partsCount": 2
+  },
+  {
+    "deviceIndex": "YG-04560",
+    "deviceName": "YATO YG-04560 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-04560",
+    "status": "partial_from_inventory",
+    "partsCount": 6
+  },
+  {
+    "deviceIndex": "YG-04563",
+    "deviceName": "YATO YG-04563 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-04563",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YG-04584",
+    "deviceName": "YATO YG-04584 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-04584",
+    "status": "partial_from_inventory",
+    "partsCount": 7
+  },
+  {
+    "deviceIndex": "YG-04585",
+    "deviceName": "YATO YG-04585 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-04585",
+    "status": "partial_from_inventory",
+    "partsCount": 4
+  },
+  {
+    "deviceIndex": "YG-04586",
+    "deviceName": "YATO YG-04586 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-04586",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YG-04587",
+    "deviceName": "YATO YG-04587 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-04587",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YG-04588",
+    "deviceName": "YATO YG-04588 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-04588",
+    "status": "partial_from_inventory",
+    "partsCount": 3
+  },
+  {
+    "deviceIndex": "YG-04608",
+    "deviceName": "YATO YG-04608 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-04608",
+    "status": "partial_from_inventory",
+    "partsCount": 8
+  },
+  {
+    "deviceIndex": "YG-04609",
+    "deviceName": "YATO YG-04609 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-04609",
+    "status": "partial_from_inventory",
+    "partsCount": 7
+  },
+  {
+    "deviceIndex": "YG-04610",
+    "deviceName": "YATO YG-04610 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-04610",
+    "status": "partial_from_inventory",
+    "partsCount": 7
+  },
+  {
+    "deviceIndex": "YG-04616",
+    "deviceName": "YATO YG-04616 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-04616",
+    "status": "partial_from_inventory",
+    "partsCount": 7
+  },
+  {
+    "deviceIndex": "YG-04617",
+    "deviceName": "YATO YG-04617 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-04617",
+    "status": "partial_from_inventory",
+    "partsCount": 6
+  },
+  {
+    "deviceIndex": "YG-04630",
+    "deviceName": "YATO YG-04630 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-04630",
+    "status": "partial_from_inventory",
+    "partsCount": 10
+  },
+  {
+    "deviceIndex": "YG-04636",
+    "deviceName": "YATO YG-04636 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-04636",
+    "status": "partial_from_inventory",
+    "partsCount": 11
+  },
+  {
+    "deviceIndex": "YG-04640",
+    "deviceName": "YATO YG-04640 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-04640",
+    "status": "partial_from_inventory",
+    "partsCount": 10
+  },
+  {
+    "deviceIndex": "YG-04641",
+    "deviceName": "YATO YG-04641 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-04641",
+    "status": "partial_from_inventory",
+    "partsCount": 8
+  },
+  {
+    "deviceIndex": "YG-04680",
+    "deviceName": "YATO YG-04680 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-04680",
+    "status": "partial_from_inventory",
+    "partsCount": 5
+  },
+  {
+    "deviceIndex": "YG-04695",
+    "deviceName": "YATO YG-04695 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-04695",
+    "status": "partial_from_inventory",
+    "partsCount": 44
+  },
+  {
+    "deviceIndex": "YG-04696",
+    "deviceName": "YATO YG-04696 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-04696",
+    "status": "partial_from_inventory",
+    "partsCount": 45
+  },
+  {
+    "deviceIndex": "YG-05171",
+    "deviceName": "YATO YG-05171 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05171",
+    "status": "partial_from_inventory",
+    "partsCount": 8
+  },
+  {
+    "deviceIndex": "YG-05174",
+    "deviceName": "YATO YG-05174 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05174",
+    "status": "partial_from_inventory",
+    "partsCount": 8
+  },
+  {
+    "deviceIndex": "YG-05177",
+    "deviceName": "YATO YG-05177 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05177",
+    "status": "partial_from_inventory",
+    "partsCount": 9
+  },
+  {
+    "deviceIndex": "YG-05179",
+    "deviceName": "YATO YG-05179 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05179",
+    "status": "partial_from_inventory",
+    "partsCount": 9
+  },
+  {
+    "deviceIndex": "YG-05180",
+    "deviceName": "YATO YG-05180 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05180",
+    "status": "partial_from_inventory",
+    "partsCount": 9
+  },
+  {
+    "deviceIndex": "YG-05200",
+    "deviceName": "YATO YG-05200 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05200",
+    "status": "partial_from_inventory",
+    "partsCount": 23
+  },
+  {
+    "deviceIndex": "YG-05201",
+    "deviceName": "YATO YG-05201 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05201",
+    "status": "partial_from_inventory",
+    "partsCount": 25
+  },
+  {
+    "deviceIndex": "YG-05210",
+    "deviceName": "YATO YG-05210 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05210",
+    "status": "partial_from_inventory",
+    "partsCount": 29
+  },
+  {
+    "deviceIndex": "YG-05211",
+    "deviceName": "YATO YG-05211 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05211",
+    "status": "partial_from_inventory",
+    "partsCount": 31
+  },
+  {
+    "deviceIndex": "YG-05215",
+    "deviceName": "YATO YG-05215 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05215",
+    "status": "partial_from_inventory",
+    "partsCount": 23
+  },
+  {
+    "deviceIndex": "YG-05216",
+    "deviceName": "YATO YG-05216 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05216",
+    "status": "partial_from_inventory",
+    "partsCount": 24
+  },
+  {
+    "deviceIndex": "YG-05220",
+    "deviceName": "YATO YG-05220 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05220",
+    "status": "partial_from_inventory",
+    "partsCount": 23
+  },
+  {
+    "deviceIndex": "YG-05221",
+    "deviceName": "YATO YG-05221 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05221",
+    "status": "partial_from_inventory",
+    "partsCount": 24
+  },
+  {
+    "deviceIndex": "YG-05225",
+    "deviceName": "YATO YG-05225 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05225",
+    "status": "partial_from_inventory",
+    "partsCount": 13
+  },
+  {
+    "deviceIndex": "YG-05226",
+    "deviceName": "YATO YG-05226 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05226",
+    "status": "partial_from_inventory",
+    "partsCount": 10
+  },
+  {
+    "deviceIndex": "YG-05227",
+    "deviceName": "YATO YG-05227 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05227",
+    "status": "partial_from_inventory",
+    "partsCount": 13
+  },
+  {
+    "deviceIndex": "YG-05230",
+    "deviceName": "YATO YG-05230 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05230",
+    "status": "partial_from_inventory",
+    "partsCount": 17
+  },
+  {
+    "deviceIndex": "YG-05231",
+    "deviceName": "YATO YG-05231 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05231",
+    "status": "partial_from_inventory",
+    "partsCount": 2
+  },
+  {
+    "deviceIndex": "YG-05233",
+    "deviceName": "YATO YG-05233 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05233",
+    "status": "partial_from_inventory",
+    "partsCount": 9
+  },
+  {
+    "deviceIndex": "YG-05234",
+    "deviceName": "YATO YG-05234 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05234",
+    "status": "partial_from_inventory",
+    "partsCount": 6
+  },
+  {
+    "deviceIndex": "YG-05235",
+    "deviceName": "YATO YG-05235 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05235",
+    "status": "partial_from_inventory",
+    "partsCount": 9
+  },
+  {
+    "deviceIndex": "YG-05236",
+    "deviceName": "YATO YG-05236 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05236",
+    "status": "partial_from_inventory",
+    "partsCount": 6
+  },
+  {
+    "deviceIndex": "YG-05250",
+    "deviceName": "YATO YG-05250 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05250",
+    "status": "partial_from_inventory",
+    "partsCount": 26
+  },
+  {
+    "deviceIndex": "YG-05251",
+    "deviceName": "YATO YG-05251 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05251",
+    "status": "partial_from_inventory",
+    "partsCount": 17
+  },
+  {
+    "deviceIndex": "YG-05252",
+    "deviceName": "YATO YG-05252 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05252",
+    "status": "partial_from_inventory",
+    "partsCount": 8
+  },
+  {
+    "deviceIndex": "YG-05253",
+    "deviceName": "YATO YG-05253 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05253",
+    "status": "partial_from_inventory",
+    "partsCount": 8
+  },
+  {
+    "deviceIndex": "YG-05254",
+    "deviceName": "YATO YG-05254 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05254",
+    "status": "partial_from_inventory",
+    "partsCount": 7
+  },
+  {
+    "deviceIndex": "YG-05255",
+    "deviceName": "YATO YG-05255 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05255",
+    "status": "partial_from_inventory",
+    "partsCount": 15
+  },
+  {
+    "deviceIndex": "YG-05256",
+    "deviceName": "YATO YG-05256 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05256",
+    "status": "partial_from_inventory",
+    "partsCount": 20
+  },
+  {
+    "deviceIndex": "YG-05257",
+    "deviceName": "YATO YG-05257 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05257",
+    "status": "partial_from_inventory",
+    "partsCount": 12
+  },
+  {
+    "deviceIndex": "YG-05258",
+    "deviceName": "YATO YG-05258 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05258",
+    "status": "partial_from_inventory",
+    "partsCount": 9
+  },
+  {
+    "deviceIndex": "YG-05259",
+    "deviceName": "YATO YG-05259 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05259",
+    "status": "partial_from_inventory",
+    "partsCount": 7
+  },
+  {
+    "deviceIndex": "YG-05260",
+    "deviceName": "YATO YG-05260 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05260",
+    "status": "partial_from_inventory",
+    "partsCount": 31
+  },
+  {
+    "deviceIndex": "YG-05262",
+    "deviceName": "YATO YG-05262 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05262",
+    "status": "partial_from_inventory",
+    "partsCount": 23
+  },
+  {
+    "deviceIndex": "YG-05270",
+    "deviceName": "YATO YG-05270 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05270",
+    "status": "partial_from_inventory",
+    "partsCount": 15
+  },
+  {
+    "deviceIndex": "YG-05275",
+    "deviceName": "YATO YG-05275 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05275",
+    "status": "partial_from_inventory",
+    "partsCount": 22
+  },
+  {
+    "deviceIndex": "YG-05280",
+    "deviceName": "YATO YG-05280 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05280",
+    "status": "partial_from_inventory",
+    "partsCount": 21
+  },
+  {
+    "deviceIndex": "YG-05281",
+    "deviceName": "YATO YG-05281 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05281",
+    "status": "partial_from_inventory",
+    "partsCount": 12
+  },
+  {
+    "deviceIndex": "YG-05290",
+    "deviceName": "YATO YG-05290 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05290",
+    "status": "partial_from_inventory",
+    "partsCount": 18
+  },
+  {
+    "deviceIndex": "YG-05300",
+    "deviceName": "YATO YG-05300 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05300",
+    "status": "partial_from_inventory",
+    "partsCount": 19
+  },
+  {
+    "deviceIndex": "YG-05305",
+    "deviceName": "YATO YG-05305 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05305",
+    "status": "partial_from_inventory",
+    "partsCount": 15
+  },
+  {
+    "deviceIndex": "YG-05310",
+    "deviceName": "YATO YG-05310 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05310",
+    "status": "partial_from_inventory",
+    "partsCount": 21
+  },
+  {
+    "deviceIndex": "YG-05320",
+    "deviceName": "YATO YG-05320 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05320",
+    "status": "partial_from_inventory",
+    "partsCount": 15
+  },
+  {
+    "deviceIndex": "YG-05321",
+    "deviceName": "YATO YG-05321 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05321",
+    "status": "partial_from_inventory",
+    "partsCount": 15
+  },
+  {
+    "deviceIndex": "YG-05322",
+    "deviceName": "YATO YG-05322 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05322",
+    "status": "partial_from_inventory",
+    "partsCount": 15
+  },
+  {
+    "deviceIndex": "YG-05323",
+    "deviceName": "YATO YG-05323 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05323",
+    "status": "partial_from_inventory",
+    "partsCount": 15
+  },
+  {
+    "deviceIndex": "YG-05330",
+    "deviceName": "YATO YG-05330 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05330",
+    "status": "partial_from_inventory",
+    "partsCount": 15
+  },
+  {
+    "deviceIndex": "YG-05331",
+    "deviceName": "YATO YG-05331 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05331",
+    "status": "partial_from_inventory",
+    "partsCount": 15
+  },
+  {
+    "deviceIndex": "YG-05332",
+    "deviceName": "YATO YG-05332 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05332",
+    "status": "partial_from_inventory",
+    "partsCount": 15
+  },
+  {
+    "deviceIndex": "YG-05350",
+    "deviceName": "YATO YG-05350 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05350",
+    "status": "partial_from_inventory",
+    "partsCount": 22
+  },
+  {
+    "deviceIndex": "YG-05355",
+    "deviceName": "YATO YG-05355 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05355",
+    "status": "partial_from_inventory",
+    "partsCount": 23
+  },
+  {
+    "deviceIndex": "YG-05356",
+    "deviceName": "YATO YG-05356 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05356",
+    "status": "partial_from_inventory",
+    "partsCount": 20
+  },
+  {
+    "deviceIndex": "YG-05360",
+    "deviceName": "YATO YG-05360 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-05360",
+    "status": "partial_from_inventory",
+    "partsCount": 25
+  },
+  {
+    "deviceIndex": "YG-09091",
+    "deviceName": "YATO YG-09091 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-09091",
+    "status": "partial_from_inventory",
+    "partsCount": 2
+  },
+  {
+    "deviceIndex": "YG-09100",
+    "deviceName": "YATO YG-09100 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-09100",
+    "status": "partial_from_inventory",
+    "partsCount": 2
+  },
+  {
+    "deviceIndex": "YG-09230",
+    "deviceName": "YATO YG-09230 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-09230",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YG-09231",
+    "deviceName": "YATO YG-09231 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-09231",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YG-09233",
+    "deviceName": "YATO YG-09233 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-09233",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YG-09303",
+    "deviceName": "YATO YG-09303 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-09303",
+    "status": "partial_from_inventory",
+    "partsCount": 18
+  },
+  {
+    "deviceIndex": "YG-09304",
+    "deviceName": "YATO YG-09304 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-09304",
+    "status": "partial_from_inventory",
+    "partsCount": 17
+  },
+  {
+    "deviceIndex": "YG-09305",
+    "deviceName": "YATO YG-09305 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-09305",
+    "status": "partial_from_inventory",
+    "partsCount": 16
+  },
+  {
+    "deviceIndex": "YG-09307",
+    "deviceName": "YATO YG-09307 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-09307",
+    "status": "partial_from_inventory",
+    "partsCount": 16
+  },
+  {
+    "deviceIndex": "YG-09310",
+    "deviceName": "YATO YG-09310 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-09310",
+    "status": "partial_from_inventory",
+    "partsCount": 9
+  },
+  {
+    "deviceIndex": "YG-09311",
+    "deviceName": "YATO YG-09311 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-09311",
+    "status": "partial_from_inventory",
+    "partsCount": 17
+  },
+  {
+    "deviceIndex": "YG-09312",
+    "deviceName": "YATO YG-09312 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-09312",
+    "status": "partial_from_inventory",
+    "partsCount": 14
+  },
+  {
+    "deviceIndex": "YG-09550",
+    "deviceName": "YATO YG-09550 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-09550",
+    "status": "partial_from_inventory",
+    "partsCount": 14
+  },
+  {
+    "deviceIndex": "YG-09551",
+    "deviceName": "YATO YG-09551 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-09551",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YG-09552",
+    "deviceName": "YATO YG-09552 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-09552",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YG-20001",
+    "deviceName": "YATO YG-20001 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-20001",
+    "status": "partial_from_inventory",
+    "partsCount": 11
+  },
+  {
+    "deviceIndex": "YG-20002",
+    "deviceName": "YATO YG-20002 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-20002",
+    "status": "partial_from_inventory",
+    "partsCount": 15
+  },
+  {
+    "deviceIndex": "YG-20003",
+    "deviceName": "YATO YG-20003 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-20003",
+    "status": "partial_from_inventory",
+    "partsCount": 11
+  },
+  {
+    "deviceIndex": "YG-20004",
+    "deviceName": "YATO YG-20004 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-20004",
+    "status": "partial_from_inventory",
+    "partsCount": 10
+  },
+  {
+    "deviceIndex": "YG-20011",
+    "deviceName": "YATO YG-20011 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-20011",
+    "status": "partial_from_inventory",
+    "partsCount": 16
+  },
+  {
+    "deviceIndex": "YG-20012",
+    "deviceName": "YATO YG-20012 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-20012",
+    "status": "partial_from_inventory",
+    "partsCount": 11
+  },
+  {
+    "deviceIndex": "YG-20013",
+    "deviceName": "YATO YG-20013 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-20013",
+    "status": "partial_from_inventory",
+    "partsCount": 13
+  },
+  {
+    "deviceIndex": "YG-20015",
+    "deviceName": "YATO YG-20015 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-20015",
+    "status": "partial_from_inventory",
+    "partsCount": 8
+  },
+  {
+    "deviceIndex": "YG-20016",
+    "deviceName": "YATO YG-20016 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yg-20016",
+    "status": "partial_from_inventory",
+    "partsCount": 10
+  },
+  {
+    "deviceIndex": "YT-06845",
+    "deviceName": "YATO YT-06845 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-06845",
+    "status": "partial_from_inventory",
+    "partsCount": 4
+  },
+  {
+    "deviceIndex": "YT-07020",
+    "deviceName": "YATO YT-07020 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-07020",
+    "status": "partial_from_inventory",
+    "partsCount": 4
+  },
+  {
+    "deviceIndex": "YT-07057",
+    "deviceName": "YATO YT-07057 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-07057",
+    "status": "partial_from_inventory",
+    "partsCount": 19
+  },
+  {
+    "deviceIndex": "YT-07068",
+    "deviceName": "YATO YT-07068 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-07068",
+    "status": "partial_from_inventory",
+    "partsCount": 46
+  },
+  {
+    "deviceIndex": "YT-07069",
+    "deviceName": "YATO YT-07069 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-07069",
+    "status": "partial_from_inventory",
+    "partsCount": 43
+  },
+  {
+    "deviceIndex": "YT-07190",
+    "deviceName": "YATO YT-07190 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-07190",
+    "status": "partial_from_inventory",
+    "partsCount": 20
+  },
+  {
+    "deviceIndex": "YT-07195",
+    "deviceName": "YATO YT-07195 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-07195",
+    "status": "partial_from_inventory",
+    "partsCount": 7
+  },
+  {
+    "deviceIndex": "YT-07511",
+    "deviceName": "YATO YT-07511 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-07511",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YT-07601",
+    "deviceName": "YATO YT-07601 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-07601",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YT-07605",
+    "deviceName": "YATO YT-07605 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-07605",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YT-07611",
+    "deviceName": "YATO YT-07611 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-07611",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YT-07612",
+    "deviceName": "YATO YT-07612 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-07612",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YT-07712",
+    "deviceName": "YATO YT-07712 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-07712",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YT-07720",
+    "deviceName": "YATO YT-07720 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-07720",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YT-07721",
+    "deviceName": "YATO YT-07721 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-07721",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YT-07722",
+    "deviceName": "YATO YT-07722 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-07722",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YT-07723",
+    "deviceName": "YATO YT-07723 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-07723",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YT-07730",
+    "deviceName": "YATO YT-07730 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-07730",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YT-07731",
+    "deviceName": "YATO YT-07731 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-07731",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YT-07732",
+    "deviceName": "YATO YT-07732 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-07732",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YT-07733",
+    "deviceName": "YATO YT-07733 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-07733",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YT-07740",
+    "deviceName": "YATO YT-07740 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-07740",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YT-07741",
+    "deviceName": "YATO YT-07741 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-07741",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YT-07742",
+    "deviceName": "YATO YT-07742 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-07742",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YT-07743",
+    "deviceName": "YATO YT-07743 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-07743",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YT-07744",
+    "deviceName": "YATO YT-07744 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-07744",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YT-07750",
+    "deviceName": "YATO YT-07750 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-07750",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YT-07752",
+    "deviceName": "YATO YT-07752 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-07752",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YT-07753",
+    "deviceName": "YATO YT-07753 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-07753",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YT-07760",
+    "deviceName": "YATO YT-07760 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-07760",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YT-07761",
+    "deviceName": "YATO YT-07761 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-07761",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YT-07762",
+    "deviceName": "YATO YT-07762 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-07762",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YT-08510",
+    "deviceName": "YATO YT-08510 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-08510",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YT-08518",
+    "deviceName": "YATO YT-08518 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-08518",
+    "status": "partial_from_inventory",
+    "partsCount": 5
+  },
+  {
+    "deviceIndex": "YT-08519",
+    "deviceName": "YATO YT-08519 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-08519",
+    "status": "partial_from_inventory",
+    "partsCount": 4
+  },
+  {
+    "deviceIndex": "YT-08523",
+    "deviceName": "YATO YT-08523 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-08523",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YT-08530",
+    "deviceName": "YATO YT-08530 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-08530",
+    "status": "partial_from_inventory",
+    "partsCount": 6
+  },
+  {
+    "deviceIndex": "YT-08563",
+    "deviceName": "YATO YT-08563 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-08563",
+    "status": "partial_from_inventory",
+    "partsCount": 2
+  },
+  {
+    "deviceIndex": "YT-08935",
+    "deviceName": "YATO YT-08935 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-08935",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YT-09201",
+    "deviceName": "YATO YT-09201 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-09201",
+    "status": "partial_from_inventory",
+    "partsCount": 32
+  },
+  {
+    "deviceIndex": "YT-09202",
+    "deviceName": "YATO YT-09202 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-09202",
+    "status": "partial_from_inventory",
+    "partsCount": 45
+  },
+  {
+    "deviceIndex": "YT-09203",
+    "deviceName": "YATO YT-09203 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-09203",
+    "status": "partial_from_inventory",
+    "partsCount": 48
+  },
+  {
+    "deviceIndex": "YT-09211",
+    "deviceName": "YATO YT-09211 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-09211",
+    "status": "partial_from_inventory",
+    "partsCount": 67
+  },
+  {
+    "deviceIndex": "YT-09212",
+    "deviceName": "YATO YT-09212 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-09212",
+    "status": "partial_from_inventory",
+    "partsCount": 70
+  },
+  {
+    "deviceIndex": "YT-09213",
+    "deviceName": "YATO YT-09213 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-09213",
+    "status": "partial_from_inventory",
+    "partsCount": 63
+  },
+  {
+    "deviceIndex": "YT-09214",
+    "deviceName": "YATO YT-09214 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-09214",
+    "status": "partial_from_inventory",
+    "partsCount": 66
+  },
+  {
+    "deviceIndex": "YT-09506",
+    "deviceName": "YATO YT-09506 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-09506",
+    "status": "partial_from_inventory",
+    "partsCount": 19
+  },
+  {
+    "deviceIndex": "YT-09510",
+    "deviceName": "YATO YT-09510 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-09510",
+    "status": "partial_from_inventory",
+    "partsCount": 30
+  },
+  {
+    "deviceIndex": "YT-09514",
+    "deviceName": "YATO YT-09514 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-09514",
+    "status": "partial_from_inventory",
+    "partsCount": 20
+  },
+  {
+    "deviceIndex": "YT-09515",
+    "deviceName": "YATO YT-09515 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-09515",
+    "status": "partial_from_inventory",
+    "partsCount": 28
+  },
+  {
+    "deviceIndex": "YT-09528",
+    "deviceName": "YATO YT-09528 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-09528",
+    "status": "partial_from_inventory",
+    "partsCount": 13
+  },
+  {
+    "deviceIndex": "YT-09531",
+    "deviceName": "YATO YT-09531 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-09531",
+    "status": "partial_from_inventory",
+    "partsCount": 26
+  },
+  {
+    "deviceIndex": "YT-09544",
+    "deviceName": "YATO YT-09544 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-09544",
+    "status": "partial_from_inventory",
+    "partsCount": 29
+  },
+  {
+    "deviceIndex": "YT-09545",
+    "deviceName": "YATO YT-09545 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-09545",
+    "status": "partial_from_inventory",
+    "partsCount": 25
+  },
+  {
+    "deviceIndex": "YT-09546",
+    "deviceName": "YATO YT-09546 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-09546",
+    "status": "partial_from_inventory",
+    "partsCount": 23
+  },
+  {
+    "deviceIndex": "YT-09575",
+    "deviceName": "YATO YT-09575 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-09575",
+    "status": "partial_from_inventory",
+    "partsCount": 22
+  },
+  {
+    "deviceIndex": "YT-09618",
+    "deviceName": "YATO YT-09618 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-09618",
+    "status": "partial_from_inventory",
+    "partsCount": 20
+  },
+  {
+    "deviceIndex": "YT-09620",
+    "deviceName": "YATO YT-09620 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-09620",
+    "status": "partial_from_inventory",
+    "partsCount": 25
+  },
+  {
+    "deviceIndex": "YT-09633",
+    "deviceName": "YATO YT-09633 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-09633",
+    "status": "partial_from_inventory",
+    "partsCount": 22
+  },
+  {
+    "deviceIndex": "YT-09676",
+    "deviceName": "YATO YT-09676 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-09676",
+    "status": "partial_from_inventory",
+    "partsCount": 31
+  },
+  {
+    "deviceIndex": "YT-09695",
+    "deviceName": "YATO YT-09695 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-09695",
+    "status": "partial_from_inventory",
+    "partsCount": 25
+  },
+  {
+    "deviceIndex": "YT-09703",
+    "deviceName": "YATO YT-09703 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-09703",
+    "status": "partial_from_inventory",
+    "partsCount": 29
+  },
+  {
+    "deviceIndex": "YT-09716",
+    "deviceName": "YATO YT-09716 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-09716",
+    "status": "partial_from_inventory",
+    "partsCount": 29
+  },
+  {
+    "deviceIndex": "YT-09717",
+    "deviceName": "YATO YT-09717 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-09717",
+    "status": "partial_from_inventory",
+    "partsCount": 24
+  },
+  {
+    "deviceIndex": "YT-09730",
+    "deviceName": "YATO YT-09730 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-09730",
+    "status": "partial_from_inventory",
+    "partsCount": 28
+  },
+  {
+    "deviceIndex": "YT-09738",
+    "deviceName": "YATO YT-09738 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-09738",
+    "status": "partial_from_inventory",
+    "partsCount": 18
+  },
+  {
+    "deviceIndex": "YT-09739",
+    "deviceName": "YATO YT-09739 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-09739",
+    "status": "partial_from_inventory",
+    "partsCount": 30
+  },
+  {
+    "deviceIndex": "YT-09795",
+    "deviceName": "YATO YT-09795 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-09795",
+    "status": "partial_from_inventory",
+    "partsCount": 24
+  },
+  {
+    "deviceIndex": "YT-09802",
+    "deviceName": "YATO YT-09802 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-09802",
+    "status": "partial_from_inventory",
+    "partsCount": 31
+  },
+  {
+    "deviceIndex": "YT-09803",
+    "deviceName": "YATO YT-09803 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-09803",
+    "status": "partial_from_inventory",
+    "partsCount": 23
+  },
+  {
+    "deviceIndex": "YT-09903",
+    "deviceName": "YATO YT-09903 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-09903",
+    "status": "partial_from_inventory",
+    "partsCount": 18
+  },
+  {
+    "deviceIndex": "YT-09904",
+    "deviceName": "YATO YT-09904 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-09904",
+    "status": "partial_from_inventory",
+    "partsCount": 18
+  },
+  {
+    "deviceIndex": "YT-09910",
+    "deviceName": "YATO YT-09910 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-09910",
+    "status": "partial_from_inventory",
+    "partsCount": 15
+  },
+  {
+    "deviceIndex": "YT-09912",
+    "deviceName": "YATO YT-09912 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-09912",
+    "status": "partial_from_inventory",
+    "partsCount": 21
+  },
+  {
+    "deviceIndex": "YT-09913",
+    "deviceName": "YATO YT-09913 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-09913",
+    "status": "partial_from_inventory",
+    "partsCount": 10
+  },
+  {
+    "deviceIndex": "YT-17205",
+    "deviceName": "YATO YT-17205 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-17205",
+    "status": "partial_from_inventory",
+    "partsCount": 8
+  },
+  {
+    "deviceIndex": "YT-17207",
+    "deviceName": "YATO YT-17207 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-17207",
+    "status": "partial_from_inventory",
+    "partsCount": 5
+  },
+  {
+    "deviceIndex": "YT-17213",
+    "deviceName": "YATO YT-17213 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-17213",
+    "status": "partial_from_inventory",
+    "partsCount": 9
+  },
+  {
+    "deviceIndex": "YT-17214",
+    "deviceName": "YATO YT-17214 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-17214",
+    "status": "partial_from_inventory",
+    "partsCount": 7
+  },
+  {
+    "deviceIndex": "YT-17410",
+    "deviceName": "YATO YT-17410 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-17410",
+    "status": "partial_from_inventory",
+    "partsCount": 10
+  },
+  {
+    "deviceIndex": "YT-17412",
+    "deviceName": "YATO YT-17412 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-17412",
+    "status": "partial_from_inventory",
+    "partsCount": 11
+  },
+  {
+    "deviceIndex": "YT-18900",
+    "deviceName": "YATO YT-18900 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-18900",
+    "status": "partial_from_inventory",
+    "partsCount": 22
+  },
+  {
+    "deviceIndex": "YT-18907",
+    "deviceName": "YATO YT-18907 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-18907",
+    "status": "partial_from_inventory",
+    "partsCount": 24
+  },
+  {
+    "deviceIndex": "YT-21758",
+    "deviceName": "YATO YT-21758 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-21758",
+    "status": "partial_from_inventory",
+    "partsCount": 18
+  },
+  {
+    "deviceIndex": "YT-23241",
+    "deviceName": "YATO YT-23241 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-23241",
+    "status": "partial_from_inventory",
+    "partsCount": 5
+  },
+  {
+    "deviceIndex": "YT-23300",
+    "deviceName": "YATO YT-23300 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-23300",
+    "status": "partial_from_inventory",
+    "partsCount": 36
+  },
+  {
+    "deviceIndex": "YT-23306",
+    "deviceName": "YATO YT-23306 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-23306",
+    "status": "partial_from_inventory",
+    "partsCount": 33
+  },
+  {
+    "deviceIndex": "YT-23310",
+    "deviceName": "YATO YT-23310 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-23310",
+    "status": "partial_from_inventory",
+    "partsCount": 38
+  },
+  {
+    "deviceIndex": "YT-23321",
+    "deviceName": "YATO YT-23321 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-23321",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YT-23702",
+    "deviceName": "YATO YT-23702 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-23702",
+    "status": "partial_from_inventory",
+    "partsCount": 15
+  },
+  {
+    "deviceIndex": "YT-30436",
+    "deviceName": "YATO YT-30436 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-30436",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YT-30477",
+    "deviceName": "YATO YT-30477 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-30477",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YT-36091",
+    "deviceName": "YATO YT-36091 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-36091",
+    "status": "partial_from_inventory",
+    "partsCount": 35
+  },
+  {
+    "deviceIndex": "YT-36112",
+    "deviceName": "YATO YT-36112 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-36112",
+    "status": "partial_from_inventory",
+    "partsCount": 21
+  },
+  {
+    "deviceIndex": "YT-36125",
+    "deviceName": "YATO YT-36125 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-36125",
+    "status": "partial_from_inventory",
+    "partsCount": 29
+  },
+  {
+    "deviceIndex": "YT-36127",
+    "deviceName": "YATO YT-36127 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-36127",
+    "status": "partial_from_inventory",
+    "partsCount": 30
+  },
+  {
+    "deviceIndex": "YT-36128",
+    "deviceName": "YATO YT-36128 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-36128",
+    "status": "partial_from_inventory",
+    "partsCount": 27
+  },
+  {
+    "deviceIndex": "YT-36140",
+    "deviceName": "YATO YT-36140 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-36140",
+    "status": "partial_from_inventory",
+    "partsCount": 21
+  },
+  {
+    "deviceIndex": "YT-36177",
+    "deviceName": "YATO YT-36177 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-36177",
+    "status": "partial_from_inventory",
+    "partsCount": 43
+  },
+  {
+    "deviceIndex": "YT-44250",
+    "deviceName": "YATO YT-44250 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-44250",
+    "status": "partial_from_inventory",
+    "partsCount": 2
+  },
+  {
+    "deviceIndex": "YT-54400",
+    "deviceName": "YATO YT-54400 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-54400",
+    "status": "partial_from_inventory",
+    "partsCount": 4
+  },
+  {
+    "deviceIndex": "YT-55580",
+    "deviceName": "YATO YT-55580 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-55580",
+    "status": "partial_from_inventory",
+    "partsCount": 2
+  },
+  {
+    "deviceIndex": "YT-55581",
+    "deviceName": "YATO YT-55581 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-55581",
+    "status": "partial_from_inventory",
+    "partsCount": 6
+  },
+  {
+    "deviceIndex": "YT-55582",
+    "deviceName": "YATO YT-55582 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-55582",
+    "status": "partial_from_inventory",
+    "partsCount": 3
+  },
+  {
+    "deviceIndex": "YT-55600",
+    "deviceName": "YATO YT-55600 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-55600",
+    "status": "partial_from_inventory",
+    "partsCount": 22
+  },
+  {
+    "deviceIndex": "YT-55801",
+    "deviceName": "YATO YT-55801 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-55801",
+    "status": "partial_from_inventory",
+    "partsCount": 4
+  },
+  {
+    "deviceIndex": "YT-55803",
+    "deviceName": "YATO YT-55803 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-55803",
+    "status": "partial_from_inventory",
+    "partsCount": 4
+  },
+  {
+    "deviceIndex": "YT-55808",
+    "deviceName": "YATO YT-55808 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-55808",
+    "status": "partial_from_inventory",
+    "partsCount": 5
+  },
+  {
+    "deviceIndex": "YT-55840",
+    "deviceName": "YATO YT-55840 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-55840",
+    "status": "partial_from_inventory",
+    "partsCount": 2
+  },
+  {
+    "deviceIndex": "YT-72920",
+    "deviceName": "YATO YT-72920 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-72920",
+    "status": "partial_from_inventory",
+    "partsCount": 5
+  },
+  {
+    "deviceIndex": "YT-73012",
+    "deviceName": "YATO YT-73012 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-73012",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YT-73350",
+    "deviceName": "YATO YT-73350 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-73350",
+    "status": "partial_from_inventory",
+    "partsCount": 5
+  },
+  {
+    "deviceIndex": "YT-81355",
+    "deviceName": "YATO YT-81355 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-81355",
+    "status": "partial_from_inventory",
+    "partsCount": 3
+  },
+  {
+    "deviceIndex": "YT-81357",
+    "deviceName": "YATO YT-81357 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-81357",
+    "status": "partial_from_inventory",
+    "partsCount": 3
+  },
+  {
+    "deviceIndex": "YT-81358",
+    "deviceName": "YATO YT-81358 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-81358",
+    "status": "partial_from_inventory",
+    "partsCount": 4
+  },
+  {
+    "deviceIndex": "YT-81799",
+    "deviceName": "YATO YT-81799 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-81799",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YT-81810",
+    "deviceName": "YATO YT-81810 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-81810",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YT-81811",
+    "deviceName": "YATO YT-81811 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-81811",
+    "status": "partial_from_inventory",
+    "partsCount": 5
+  },
+  {
+    "deviceIndex": "YT-81820",
+    "deviceName": "YATO YT-81820 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-81820",
+    "status": "partial_from_inventory",
+    "partsCount": 2
+  },
+  {
+    "deviceIndex": "YT-81953",
+    "deviceName": "YATO YT-81953 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-81953",
+    "status": "partial_from_inventory",
+    "partsCount": 35
+  },
+  {
+    "deviceIndex": "YT-81956",
+    "deviceName": "YATO YT-81956 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-81956",
+    "status": "partial_from_inventory",
+    "partsCount": 28
+  },
+  {
+    "deviceIndex": "YT-81980",
+    "deviceName": "YATO YT-81980 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-81980",
+    "status": "partial_from_inventory",
+    "partsCount": 50
+  },
+  {
+    "deviceIndex": "YT-81983",
+    "deviceName": "YATO YT-81983 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-81983",
+    "status": "partial_from_inventory",
+    "partsCount": 40
+  },
+  {
+    "deviceIndex": "YT-82001",
+    "deviceName": "YATO YT-82001 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82001",
+    "status": "partial_from_inventory",
+    "partsCount": 60
+  },
+  {
+    "deviceIndex": "YT-82002",
+    "deviceName": "YATO YT-82002 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82002",
+    "status": "partial_from_inventory",
+    "partsCount": 55
+  },
+  {
+    "deviceIndex": "YT-82003",
+    "deviceName": "YATO YT-82003 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82003",
+    "status": "partial_from_inventory",
+    "partsCount": 71
+  },
+  {
+    "deviceIndex": "YT-82004",
+    "deviceName": "YATO YT-82004 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82004",
+    "status": "partial_from_inventory",
+    "partsCount": 50
+  },
+  {
+    "deviceIndex": "YT-82005",
+    "deviceName": "YATO YT-82005 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82005",
+    "status": "partial_from_inventory",
+    "partsCount": 53
+  },
+  {
+    "deviceIndex": "YT-82007",
+    "deviceName": "YATO YT-82007 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82007",
+    "status": "partial_from_inventory",
+    "partsCount": 75
+  },
+  {
+    "deviceIndex": "YT-82015",
+    "deviceName": "YATO YT-82015 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82015",
+    "status": "partial_from_inventory",
+    "partsCount": 36
+  },
+  {
+    "deviceIndex": "YT-82016",
+    "deviceName": "YATO YT-82016 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82016",
+    "status": "partial_from_inventory",
+    "partsCount": 33
+  },
+  {
+    "deviceIndex": "YT-82020",
+    "deviceName": "YATO YT-82020 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82020",
+    "status": "partial_from_inventory",
+    "partsCount": 19
+  },
+  {
+    "deviceIndex": "YT-82021",
+    "deviceName": "YATO YT-82021 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82021",
+    "status": "partial_from_inventory",
+    "partsCount": 21
+  },
+  {
+    "deviceIndex": "YT-82025",
+    "deviceName": "YATO YT-82025 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82025",
+    "status": "partial_from_inventory",
+    "partsCount": 24
+  },
+  {
+    "deviceIndex": "YT-82034",
+    "deviceName": "YATO YT-82034 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82034",
+    "status": "partial_from_inventory",
+    "partsCount": 25
+  },
+  {
+    "deviceIndex": "YT-82038",
+    "deviceName": "YATO YT-82038 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82038",
+    "status": "partial_from_inventory",
+    "partsCount": 18
+  },
+  {
+    "deviceIndex": "YT-82045",
+    "deviceName": "YATO YT-82045 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82045",
+    "status": "partial_from_inventory",
+    "partsCount": 34
+  },
+  {
+    "deviceIndex": "YT-82048",
+    "deviceName": "YATO YT-82048 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82048",
+    "status": "partial_from_inventory",
+    "partsCount": 24
+  },
+  {
+    "deviceIndex": "YT-82055",
+    "deviceName": "YATO YT-82055 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82055",
+    "status": "partial_from_inventory",
+    "partsCount": 25
+  },
+  {
+    "deviceIndex": "YT-82060",
+    "deviceName": "YATO YT-82060 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82060",
+    "status": "partial_from_inventory",
+    "partsCount": 15
+  },
+  {
+    "deviceIndex": "YT-82063",
+    "deviceName": "YATO YT-82063 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82063",
+    "status": "partial_from_inventory",
+    "partsCount": 8
+  },
+  {
+    "deviceIndex": "YT-82071",
+    "deviceName": "YATO YT-82071 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82071",
+    "status": "partial_from_inventory",
+    "partsCount": 42
+  },
+  {
+    "deviceIndex": "YT-82075",
+    "deviceName": "YATO YT-82075 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82075",
+    "status": "partial_from_inventory",
+    "partsCount": 43
+  },
+  {
+    "deviceIndex": "YT-82077",
+    "deviceName": "YATO YT-82077 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82077",
+    "status": "partial_from_inventory",
+    "partsCount": 12
+  },
+  {
+    "deviceIndex": "YT-82080",
+    "deviceName": "YATO YT-82080 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82080",
+    "status": "partial_from_inventory",
+    "partsCount": 25
+  },
+  {
+    "deviceIndex": "YT-820833",
+    "deviceName": "YATO YT-820833 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-820833",
+    "status": "partial_from_inventory",
+    "partsCount": 24
+  },
+  {
+    "deviceIndex": "YT-82089",
+    "deviceName": "YATO YT-82089 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82089",
+    "status": "partial_from_inventory",
+    "partsCount": 29
+  },
+  {
+    "deviceIndex": "YT-82096",
+    "deviceName": "YATO YT-82096 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82096",
+    "status": "partial_from_inventory",
+    "partsCount": 28
+  },
+  {
+    "deviceIndex": "YT-82097",
+    "deviceName": "YATO YT-82097 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82097",
+    "status": "partial_from_inventory",
+    "partsCount": 35
+  },
+  {
+    "deviceIndex": "YT-82098",
+    "deviceName": "YATO YT-82098 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82098",
+    "status": "partial_from_inventory",
+    "partsCount": 29
+  },
+  {
+    "deviceIndex": "YT-82099",
+    "deviceName": "YATO YT-82099 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82099",
+    "status": "partial_from_inventory",
+    "partsCount": 26
+  },
+  {
+    "deviceIndex": "YT-82101",
+    "deviceName": "YATO YT-82101 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82101",
+    "status": "partial_from_inventory",
+    "partsCount": 35
+  },
+  {
+    "deviceIndex": "YT-821023",
+    "deviceName": "YATO YT-821023 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-821023",
+    "status": "partial_from_inventory",
+    "partsCount": 27
+  },
+  {
+    "deviceIndex": "YT-821024",
+    "deviceName": "YATO YT-821024 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-821024",
+    "status": "partial_from_inventory",
+    "partsCount": 30
+  },
+  {
+    "deviceIndex": "YT-82104",
+    "deviceName": "YATO YT-82104 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82104",
+    "status": "partial_from_inventory",
+    "partsCount": 29
+  },
+  {
+    "deviceIndex": "YT-82105",
+    "deviceName": "YATO YT-82105 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82105",
+    "status": "partial_from_inventory",
+    "partsCount": 28
+  },
+  {
+    "deviceIndex": "YT-82106",
+    "deviceName": "YATO YT-82106 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82106",
+    "status": "partial_from_inventory",
+    "partsCount": 29
+  },
+  {
+    "deviceIndex": "YT-82110",
+    "deviceName": "YATO YT-82110 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82110",
+    "status": "partial_from_inventory",
+    "partsCount": 36
+  },
+  {
+    "deviceIndex": "YT-82116",
+    "deviceName": "YATO YT-82116 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82116",
+    "status": "partial_from_inventory",
+    "partsCount": 70
+  },
+  {
+    "deviceIndex": "YT-82117",
+    "deviceName": "YATO YT-82117 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82117",
+    "status": "partial_from_inventory",
+    "partsCount": 69
+  },
+  {
+    "deviceIndex": "YT-82118",
+    "deviceName": "YATO YT-82118 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82118",
+    "status": "partial_from_inventory",
+    "partsCount": 60
+  },
+  {
+    "deviceIndex": "YT-821210",
+    "deviceName": "YATO YT-821210 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-821210",
+    "status": "partial_from_inventory",
+    "partsCount": 55
+  },
+  {
+    "deviceIndex": "YT-82123",
+    "deviceName": "YATO YT-82123 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82123",
+    "status": "partial_from_inventory",
+    "partsCount": 56
+  },
+  {
+    "deviceIndex": "YT-82131",
+    "deviceName": "YATO YT-82131 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82131",
+    "status": "partial_from_inventory",
+    "partsCount": 80
+  },
+  {
+    "deviceIndex": "YT-82132",
+    "deviceName": "YATO YT-82132 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82132",
+    "status": "partial_from_inventory",
+    "partsCount": 72
+  },
+  {
+    "deviceIndex": "YT-82133",
+    "deviceName": "YATO YT-82133 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82133",
+    "status": "partial_from_inventory",
+    "partsCount": 54
+  },
+  {
+    "deviceIndex": "YT-82134",
+    "deviceName": "YATO YT-82134 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82134",
+    "status": "partial_from_inventory",
+    "partsCount": 58
+  },
+  {
+    "deviceIndex": "YT-82138",
+    "deviceName": "YATO YT-82138 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82138",
+    "status": "partial_from_inventory",
+    "partsCount": 90
+  },
+  {
+    "deviceIndex": "YT-82144",
+    "deviceName": "YATO YT-82144 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82144",
+    "status": "partial_from_inventory",
+    "partsCount": 17
+  },
+  {
+    "deviceIndex": "YT-82147",
+    "deviceName": "YATO YT-82147 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82147",
+    "status": "partial_from_inventory",
+    "partsCount": 36
+  },
+  {
+    "deviceIndex": "YT-82148",
+    "deviceName": "YATO YT-82148 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82148",
+    "status": "partial_from_inventory",
+    "partsCount": 43
+  },
+  {
+    "deviceIndex": "YT-82152",
+    "deviceName": "YATO YT-82152 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82152",
+    "status": "partial_from_inventory",
+    "partsCount": 24
+  },
+  {
+    "deviceIndex": "YT-821533",
+    "deviceName": "YATO YT-821533 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-821533",
+    "status": "partial_from_inventory",
+    "partsCount": 26
+  },
+  {
+    "deviceIndex": "YT-82154",
+    "deviceName": "YATO YT-82154 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82154",
+    "status": "partial_from_inventory",
+    "partsCount": 22
+  },
+  {
+    "deviceIndex": "YT-82155",
+    "deviceName": "YATO YT-82155 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82155",
+    "status": "partial_from_inventory",
+    "partsCount": 24
+  },
+  {
+    "deviceIndex": "YT-82157",
+    "deviceName": "YATO YT-82157 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82157",
+    "status": "partial_from_inventory",
+    "partsCount": 32
+  },
+  {
+    "deviceIndex": "YT-82158",
+    "deviceName": "YATO YT-82158 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82158",
+    "status": "partial_from_inventory",
+    "partsCount": 34
+  },
+  {
+    "deviceIndex": "YT-82159",
+    "deviceName": "YATO YT-82159 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82159",
+    "status": "partial_from_inventory",
+    "partsCount": 25
+  },
+  {
+    "deviceIndex": "YT-821591",
+    "deviceName": "YATO YT-821591 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-821591",
+    "status": "partial_from_inventory",
+    "partsCount": 32
+  },
+  {
+    "deviceIndex": "YT-821597",
+    "deviceName": "YATO YT-821597 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-821597",
+    "status": "partial_from_inventory",
+    "partsCount": 23
+  },
+  {
+    "deviceIndex": "YT-82161",
+    "deviceName": "YATO YT-82161 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82161",
+    "status": "partial_from_inventory",
+    "partsCount": 34
+  },
+  {
+    "deviceIndex": "YT-82163",
+    "deviceName": "YATO YT-82163 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82163",
+    "status": "partial_from_inventory",
+    "partsCount": 30
+  },
+  {
+    "deviceIndex": "YT-82164",
+    "deviceName": "YATO YT-82164 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82164",
+    "status": "partial_from_inventory",
+    "partsCount": 31
+  },
+  {
+    "deviceIndex": "YT-82165",
+    "deviceName": "YATO YT-82165 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82165",
+    "status": "partial_from_inventory",
+    "partsCount": 17
+  },
+  {
+    "deviceIndex": "YT-82168",
+    "deviceName": "YATO YT-82168 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82168",
+    "status": "partial_from_inventory",
+    "partsCount": 29
+  },
+  {
+    "deviceIndex": "YT-82181",
+    "deviceName": "YATO YT-82181 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82181",
+    "status": "partial_from_inventory",
+    "partsCount": 36
+  },
+  {
+    "deviceIndex": "YT-82185",
+    "deviceName": "YATO YT-82185 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82185",
+    "status": "partial_from_inventory",
+    "partsCount": 60
+  },
+  {
+    "deviceIndex": "YT-82187",
+    "deviceName": "YATO YT-82187 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82187",
+    "status": "partial_from_inventory",
+    "partsCount": 29
+  },
+  {
+    "deviceIndex": "YT-82191",
+    "deviceName": "YATO YT-82191 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82191",
+    "status": "partial_from_inventory",
+    "partsCount": 2
+  },
+  {
+    "deviceIndex": "YT-82192",
+    "deviceName": "YATO YT-82192 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82192",
+    "status": "partial_from_inventory",
+    "partsCount": 22
+  },
+  {
+    "deviceIndex": "YT-82194",
+    "deviceName": "YATO YT-82194 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82194",
+    "status": "partial_from_inventory",
+    "partsCount": 17
+  },
+  {
+    "deviceIndex": "YT-82196",
+    "deviceName": "YATO YT-82196 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82196",
+    "status": "partial_from_inventory",
+    "partsCount": 38
+  },
+  {
+    "deviceIndex": "YT-82198",
+    "deviceName": "YATO YT-82198 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82198",
+    "status": "partial_from_inventory",
+    "partsCount": 26
+  },
+  {
+    "deviceIndex": "YT-82206",
+    "deviceName": "YATO YT-82206 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82206",
+    "status": "partial_from_inventory",
+    "partsCount": 17
+  },
+  {
+    "deviceIndex": "YT-82207",
+    "deviceName": "YATO YT-82207 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82207",
+    "status": "partial_from_inventory",
+    "partsCount": 15
+  },
+  {
+    "deviceIndex": "YT-82208",
+    "deviceName": "YATO YT-82208 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82208",
+    "status": "partial_from_inventory",
+    "partsCount": 18
+  },
+  {
+    "deviceIndex": "YT-822100",
+    "deviceName": "YATO YT-822100 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-822100",
+    "status": "partial_from_inventory",
+    "partsCount": 14
+  },
+  {
+    "deviceIndex": "YT-822103",
+    "deviceName": "YATO YT-822103 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-822103",
+    "status": "partial_from_inventory",
+    "partsCount": 14
+  },
+  {
+    "deviceIndex": "YT-822107",
+    "deviceName": "YATO YT-822107 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-822107",
+    "status": "partial_from_inventory",
+    "partsCount": 19
+  },
+  {
+    "deviceIndex": "YT-822110",
+    "deviceName": "YATO YT-822110 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-822110",
+    "status": "partial_from_inventory",
+    "partsCount": 21
+  },
+  {
+    "deviceIndex": "YT-822112",
+    "deviceName": "YATO YT-822112 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-822112",
+    "status": "partial_from_inventory",
+    "partsCount": 22
+  },
+  {
+    "deviceIndex": "YT-82234",
+    "deviceName": "YATO YT-82234 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82234",
+    "status": "partial_from_inventory",
+    "partsCount": 21
+  },
+  {
+    "deviceIndex": "YT-82240",
+    "deviceName": "YATO YT-82240 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82240",
+    "status": "partial_from_inventory",
+    "partsCount": 31
+  },
+  {
+    "deviceIndex": "YT-82242",
+    "deviceName": "YATO YT-82242 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82242",
+    "status": "partial_from_inventory",
+    "partsCount": 30
+  },
+  {
+    "deviceIndex": "YT-82251",
+    "deviceName": "YATO YT-82251 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82251",
+    "status": "partial_from_inventory",
+    "partsCount": 6
+  },
+  {
+    "deviceIndex": "YT-82265",
+    "deviceName": "YATO YT-82265 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82265",
+    "status": "partial_from_inventory",
+    "partsCount": 19
+  },
+  {
+    "deviceIndex": "YT-82267",
+    "deviceName": "YATO YT-82267 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82267",
+    "status": "partial_from_inventory",
+    "partsCount": 27
+  },
+  {
+    "deviceIndex": "YT-82273",
+    "deviceName": "YATO YT-82273 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82273",
+    "status": "partial_from_inventory",
+    "partsCount": 45
+  },
+  {
+    "deviceIndex": "YT-82274",
+    "deviceName": "YATO YT-82274 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82274",
+    "status": "partial_from_inventory",
+    "partsCount": 28
+  },
+  {
+    "deviceIndex": "YT-82281",
+    "deviceName": "YATO YT-82281 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82281",
+    "status": "partial_from_inventory",
+    "partsCount": 43
+  },
+  {
+    "deviceIndex": "YT-82282",
+    "deviceName": "YATO YT-82282 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82282",
+    "status": "partial_from_inventory",
+    "partsCount": 17
+  },
+  {
+    "deviceIndex": "YT-82285",
+    "deviceName": "YATO YT-82285 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82285",
+    "status": "partial_from_inventory",
+    "partsCount": 15
+  },
+  {
+    "deviceIndex": "YT-82294",
+    "deviceName": "YATO YT-82294 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82294",
+    "status": "partial_from_inventory",
+    "partsCount": 12
+  },
+  {
+    "deviceIndex": "YT-82295",
+    "deviceName": "YATO YT-82295 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82295",
+    "status": "partial_from_inventory",
+    "partsCount": 12
+  },
+  {
+    "deviceIndex": "YT-82296",
+    "deviceName": "YATO YT-82296 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82296",
+    "status": "partial_from_inventory",
+    "partsCount": 12
+  },
+  {
+    "deviceIndex": "YT-82320",
+    "deviceName": "YATO YT-82320 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82320",
+    "status": "partial_from_inventory",
+    "partsCount": 7
+  },
+  {
+    "deviceIndex": "YT-82330",
+    "deviceName": "YATO YT-82330 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82330",
+    "status": "partial_from_inventory",
+    "partsCount": 23
+  },
+  {
+    "deviceIndex": "YT-82341",
+    "deviceName": "YATO YT-82341 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82341",
+    "status": "partial_from_inventory",
+    "partsCount": 30
+  },
+  {
+    "deviceIndex": "YT-82342",
+    "deviceName": "YATO YT-82342 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82342",
+    "status": "partial_from_inventory",
+    "partsCount": 25
+  },
+  {
+    "deviceIndex": "YT-82350",
+    "deviceName": "YATO YT-82350 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82350",
+    "status": "partial_from_inventory",
+    "partsCount": 107
+  },
+  {
+    "deviceIndex": "YT-82355",
+    "deviceName": "YATO YT-82355 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82355",
+    "status": "partial_from_inventory",
+    "partsCount": 39
+  },
+  {
+    "deviceIndex": "YT-82360",
+    "deviceName": "YATO YT-82360 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82360",
+    "status": "partial_from_inventory",
+    "partsCount": 24
+  },
+  {
+    "deviceIndex": "YT-82375",
+    "deviceName": "YATO YT-82375 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82375",
+    "status": "partial_from_inventory",
+    "partsCount": 29
+  },
+  {
+    "deviceIndex": "YT-82380",
+    "deviceName": "YATO YT-82380 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82380",
+    "status": "partial_from_inventory",
+    "partsCount": 23
+  },
+  {
+    "deviceIndex": "YT-82385",
+    "deviceName": "YATO YT-82385 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82385",
+    "status": "partial_from_inventory",
+    "partsCount": 25
+  },
+  {
+    "deviceIndex": "YT-82389",
+    "deviceName": "YATO YT-82389 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82389",
+    "status": "partial_from_inventory",
+    "partsCount": 21
+  },
+  {
+    "deviceIndex": "YT-82390",
+    "deviceName": "YATO YT-82390 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82390",
+    "status": "partial_from_inventory",
+    "partsCount": 19
+  },
+  {
+    "deviceIndex": "YT-82395",
+    "deviceName": "YATO YT-82395 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82395",
+    "status": "partial_from_inventory",
+    "partsCount": 29
+  },
+  {
+    "deviceIndex": "YT-82398",
+    "deviceName": "YATO YT-82398 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82398",
+    "status": "partial_from_inventory",
+    "partsCount": 36
+  },
+  {
+    "deviceIndex": "YT-82403",
+    "deviceName": "YATO YT-82403 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82403",
+    "status": "partial_from_inventory",
+    "partsCount": 9
+  },
+  {
+    "deviceIndex": "YT-824480",
+    "deviceName": "YATO YT-824480 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-824480",
+    "status": "partial_from_inventory",
+    "partsCount": 3
+  },
+  {
+    "deviceIndex": "YT-824482",
+    "deviceName": "YATO YT-824482 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-824482",
+    "status": "partial_from_inventory",
+    "partsCount": 6
+  },
+  {
+    "deviceIndex": "YT-824485",
+    "deviceName": "YATO YT-824485 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-824485",
+    "status": "partial_from_inventory",
+    "partsCount": 3
+  },
+  {
+    "deviceIndex": "YT-82451",
+    "deviceName": "YATO YT-82451 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82451",
+    "status": "partial_from_inventory",
+    "partsCount": 7
+  },
+  {
+    "deviceIndex": "YT-82456",
+    "deviceName": "YATO YT-82456 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82456",
+    "status": "partial_from_inventory",
+    "partsCount": 9
+  },
+  {
+    "deviceIndex": "YT-82457",
+    "deviceName": "YATO YT-82457 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82457",
+    "status": "partial_from_inventory",
+    "partsCount": 7
+  },
+  {
+    "deviceIndex": "YT-82458",
+    "deviceName": "YATO YT-82458 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82458",
+    "status": "partial_from_inventory",
+    "partsCount": 17
+  },
+  {
+    "deviceIndex": "YT-82459",
+    "deviceName": "YATO YT-82459 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82459",
+    "status": "partial_from_inventory",
+    "partsCount": 8
+  },
+  {
+    "deviceIndex": "YT-82460",
+    "deviceName": "YATO YT-82460 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82460",
+    "status": "partial_from_inventory",
+    "partsCount": 8
+  },
+  {
+    "deviceIndex": "YT-82461",
+    "deviceName": "YATO YT-82461 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82461",
+    "status": "partial_from_inventory",
+    "partsCount": 3
+  },
+  {
+    "deviceIndex": "YT-82462",
+    "deviceName": "YATO YT-82462 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82462",
+    "status": "partial_from_inventory",
+    "partsCount": 4
+  },
+  {
+    "deviceIndex": "YT-82550",
+    "deviceName": "YATO YT-82550 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82550",
+    "status": "partial_from_inventory",
+    "partsCount": 21
+  },
+  {
+    "deviceIndex": "YT-82553",
+    "deviceName": "YATO YT-82553 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82553",
+    "status": "partial_from_inventory",
+    "partsCount": 25
+  },
+  {
+    "deviceIndex": "YT-82555",
+    "deviceName": "YATO YT-82555 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82555",
+    "status": "partial_from_inventory",
+    "partsCount": 9
+  },
+  {
+    "deviceIndex": "YT-82560",
+    "deviceName": "Agregat malarski",
+    "brand": "YATO",
+    "category": "Agregaty malarskie",
+    "drawingId": "yt-82560",
+    "status": "confirmed_or_demo",
+    "partsCount": 83
+  },
+  {
+    "deviceIndex": "YT-82562",
+    "deviceName": "YATO YT-82562 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82562",
+    "status": "partial_from_inventory",
+    "partsCount": 47
+  },
+  {
+    "deviceIndex": "YT-82600",
+    "deviceName": "YATO YT-82600 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82600",
+    "status": "partial_from_inventory",
+    "partsCount": 20
+  },
+  {
+    "deviceIndex": "YT-82601",
+    "deviceName": "YATO YT-82601 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82601",
+    "status": "partial_from_inventory",
+    "partsCount": 27
+  },
+  {
+    "deviceIndex": "YT-82604",
+    "deviceName": "YATO YT-82604 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82604",
+    "status": "partial_from_inventory",
+    "partsCount": 12
+  },
+  {
+    "deviceIndex": "YT-82605",
+    "deviceName": "YATO YT-82605 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82605",
+    "status": "partial_from_inventory",
+    "partsCount": 34
+  },
+  {
+    "deviceIndex": "YT-82606",
+    "deviceName": "YATO YT-82606 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82606",
+    "status": "partial_from_inventory",
+    "partsCount": 34
+  },
+  {
+    "deviceIndex": "YT-82607",
+    "deviceName": "YATO YT-82607 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82607",
+    "status": "partial_from_inventory",
+    "partsCount": 38
+  },
+  {
+    "deviceIndex": "YT-82608",
+    "deviceName": "YATO YT-82608 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82608",
+    "status": "partial_from_inventory",
+    "partsCount": 38
+  },
+  {
+    "deviceIndex": "YT-82609",
+    "deviceName": "YATO YT-82609 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82609",
+    "status": "partial_from_inventory",
+    "partsCount": 43
+  },
+  {
+    "deviceIndex": "YT-82611",
+    "deviceName": "YATO YT-82611 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82611",
+    "status": "partial_from_inventory",
+    "partsCount": 12
+  },
+  {
+    "deviceIndex": "YT-82751",
+    "deviceName": "YATO YT-82751 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82751",
+    "status": "partial_from_inventory",
+    "partsCount": 17
+  },
+  {
+    "deviceIndex": "YT-82753",
+    "deviceName": "YATO YT-82753 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82753",
+    "status": "partial_from_inventory",
+    "partsCount": 19
+  },
+  {
+    "deviceIndex": "YT-82755",
+    "deviceName": "YATO YT-82755 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82755",
+    "status": "partial_from_inventory",
+    "partsCount": 18
+  },
+  {
+    "deviceIndex": "YT-82763",
+    "deviceName": "YATO YT-82763 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82763",
+    "status": "partial_from_inventory",
+    "partsCount": 8
+  },
+  {
+    "deviceIndex": "YT-82765",
+    "deviceName": "YATO YT-82765 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82765",
+    "status": "partial_from_inventory",
+    "partsCount": 20
+  },
+  {
+    "deviceIndex": "YT-82770",
+    "deviceName": "YATO YT-82770 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82770",
+    "status": "partial_from_inventory",
+    "partsCount": 58
+  },
+  {
+    "deviceIndex": "YT-82772",
+    "deviceName": "YATO YT-82772 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82772",
+    "status": "partial_from_inventory",
+    "partsCount": 53
+  },
+  {
+    "deviceIndex": "YT-827721",
+    "deviceName": "YATO YT-827721 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-827721",
+    "status": "partial_from_inventory",
+    "partsCount": 50
+  },
+  {
+    "deviceIndex": "YT-827788",
+    "deviceName": "YATO YT-827788 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-827788",
+    "status": "partial_from_inventory",
+    "partsCount": 11
+  },
+  {
+    "deviceIndex": "YT-827791",
+    "deviceName": "YATO YT-827791 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-827791",
+    "status": "partial_from_inventory",
+    "partsCount": 14
+  },
+  {
+    "deviceIndex": "YT-827792",
+    "deviceName": "YATO YT-827792 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-827792",
+    "status": "partial_from_inventory",
+    "partsCount": 18
+  },
+  {
+    "deviceIndex": "YT-827793",
+    "deviceName": "YATO YT-827793 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-827793",
+    "status": "partial_from_inventory",
+    "partsCount": 14
+  },
+  {
+    "deviceIndex": "YT-82790",
+    "deviceName": "YATO YT-82790 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82790",
+    "status": "partial_from_inventory",
+    "partsCount": 17
+  },
+  {
+    "deviceIndex": "YT-82798",
+    "deviceName": "YATO YT-82798 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82798",
+    "status": "partial_from_inventory",
+    "partsCount": 13
+  },
+  {
+    "deviceIndex": "YT-82802",
+    "deviceName": "YATO YT-82802 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82802",
+    "status": "partial_from_inventory",
+    "partsCount": 14
+  },
+  {
+    "deviceIndex": "YT-82806",
+    "deviceName": "YATO YT-82806 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82806",
+    "status": "partial_from_inventory",
+    "partsCount": 19
+  },
+  {
+    "deviceIndex": "YT-828071",
+    "deviceName": "YATO YT-828071 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-828071",
+    "status": "partial_from_inventory",
+    "partsCount": 13
+  },
+  {
+    "deviceIndex": "YT-828073",
+    "deviceName": "YATO YT-828073 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-828073",
+    "status": "partial_from_inventory",
+    "partsCount": 13
+  },
+  {
+    "deviceIndex": "YT-828075",
+    "deviceName": "YATO YT-828075 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-828075",
+    "status": "partial_from_inventory",
+    "partsCount": 18
+  },
+  {
+    "deviceIndex": "YT-82808",
+    "deviceName": "YATO YT-82808 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82808",
+    "status": "partial_from_inventory",
+    "partsCount": 15
+  },
+  {
+    "deviceIndex": "YT-828118",
+    "deviceName": "YATO YT-828118 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-828118",
+    "status": "partial_from_inventory",
+    "partsCount": 18
+  },
+  {
+    "deviceIndex": "YT-82812",
+    "deviceName": "YATO YT-82812 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82812",
+    "status": "partial_from_inventory",
+    "partsCount": 29
+  },
+  {
+    "deviceIndex": "YT-828131",
+    "deviceName": "YATO YT-828131 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-828131",
+    "status": "partial_from_inventory",
+    "partsCount": 18
+  },
+  {
+    "deviceIndex": "YT-828133",
+    "deviceName": "YATO YT-828133 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-828133",
+    "status": "partial_from_inventory",
+    "partsCount": 22
+  },
+  {
+    "deviceIndex": "YT-828135",
+    "deviceName": "YATO YT-828135 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-828135",
+    "status": "partial_from_inventory",
+    "partsCount": 16
+  },
+  {
+    "deviceIndex": "YT-828137",
+    "deviceName": "YATO YT-828137 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-828137",
+    "status": "partial_from_inventory",
+    "partsCount": 24
+  },
+  {
+    "deviceIndex": "YT-82816",
+    "deviceName": "YATO YT-82816 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82816",
+    "status": "partial_from_inventory",
+    "partsCount": 22
+  },
+  {
+    "deviceIndex": "YT-82824",
+    "deviceName": "YATO YT-82824 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82824",
+    "status": "partial_from_inventory",
+    "partsCount": 20
+  },
+  {
+    "deviceIndex": "YT-82829",
+    "deviceName": "YATO YT-82829 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82829",
+    "status": "partial_from_inventory",
+    "partsCount": 23
+  },
+  {
+    "deviceIndex": "YT-828294",
+    "deviceName": "YATO YT-828294 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-828294",
+    "status": "partial_from_inventory",
+    "partsCount": 28
+  },
+  {
+    "deviceIndex": "YT-828331",
+    "deviceName": "YATO YT-828331 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-828331",
+    "status": "partial_from_inventory",
+    "partsCount": 14
+  },
+  {
+    "deviceIndex": "YT-828333",
+    "deviceName": "YATO YT-828333 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-828333",
+    "status": "partial_from_inventory",
+    "partsCount": 14
+  },
+  {
+    "deviceIndex": "YT-828353",
+    "deviceName": "YATO YT-828353 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-828353",
+    "status": "partial_from_inventory",
+    "partsCount": 12
+  },
+  {
+    "deviceIndex": "YT-828355",
+    "deviceName": "YATO YT-828355 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-828355",
+    "status": "partial_from_inventory",
+    "partsCount": 8
+  },
+  {
+    "deviceIndex": "YT-828357",
+    "deviceName": "YATO YT-828357 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-828357",
+    "status": "partial_from_inventory",
+    "partsCount": 5
+  },
+  {
+    "deviceIndex": "YT-828377",
+    "deviceName": "YATO YT-828377 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-828377",
+    "status": "partial_from_inventory",
+    "partsCount": 18
+  },
+  {
+    "deviceIndex": "YT-828380",
+    "deviceName": "YATO YT-828380 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-828380",
+    "status": "partial_from_inventory",
+    "partsCount": 19
+  },
+  {
+    "deviceIndex": "YT-828382",
+    "deviceName": "YATO YT-828382 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-828382",
+    "status": "partial_from_inventory",
+    "partsCount": 18
+  },
+  {
+    "deviceIndex": "YT-828390",
+    "deviceName": "YATO YT-828390 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-828390",
+    "status": "partial_from_inventory",
+    "partsCount": 36
+  },
+  {
+    "deviceIndex": "YT-82854",
+    "deviceName": "YATO YT-82854 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82854",
+    "status": "partial_from_inventory",
+    "partsCount": 15
+  },
+  {
+    "deviceIndex": "YT-82880",
+    "deviceName": "YATO YT-82880 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82880",
+    "status": "partial_from_inventory",
+    "partsCount": 20
+  },
+  {
+    "deviceIndex": "YT-82888",
+    "deviceName": "YATO YT-82888 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82888",
+    "status": "partial_from_inventory",
+    "partsCount": 6
+  },
+  {
+    "deviceIndex": "YT-82894",
+    "deviceName": "YATO YT-82894 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82894",
+    "status": "partial_from_inventory",
+    "partsCount": 34
+  },
+  {
+    "deviceIndex": "YT-82901",
+    "deviceName": "YATO YT-82901 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82901",
+    "status": "partial_from_inventory",
+    "partsCount": 9
+  },
+  {
+    "deviceIndex": "YT-82902",
+    "deviceName": "YATO YT-82902 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82902",
+    "status": "partial_from_inventory",
+    "partsCount": 10
+  },
+  {
+    "deviceIndex": "YT-829021",
+    "deviceName": "YATO YT-829021 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-829021",
+    "status": "partial_from_inventory",
+    "partsCount": 4
+  },
+  {
+    "deviceIndex": "YT-82903",
+    "deviceName": "YATO YT-82903 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82903",
+    "status": "partial_from_inventory",
+    "partsCount": 5
+  },
+  {
+    "deviceIndex": "YT-82904",
+    "deviceName": "YATO YT-82904 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82904",
+    "status": "partial_from_inventory",
+    "partsCount": 18
+  },
+  {
+    "deviceIndex": "YT-82905",
+    "deviceName": "YATO YT-82905 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82905",
+    "status": "partial_from_inventory",
+    "partsCount": 12
+  },
+  {
+    "deviceIndex": "YT-82920",
+    "deviceName": "YATO YT-82920 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82920",
+    "status": "partial_from_inventory",
+    "partsCount": 31
+  },
+  {
+    "deviceIndex": "YT-82922",
+    "deviceName": "YATO YT-82922 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82922",
+    "status": "partial_from_inventory",
+    "partsCount": 19
+  },
+  {
+    "deviceIndex": "YT-82924",
+    "deviceName": "YATO YT-82924 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82924",
+    "status": "partial_from_inventory",
+    "partsCount": 20
+  },
+  {
+    "deviceIndex": "YT-82933",
+    "deviceName": "YATO YT-82933 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82933",
+    "status": "partial_from_inventory",
+    "partsCount": 2
+  },
+  {
+    "deviceIndex": "YT-82955",
+    "deviceName": "YATO YT-82955 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-82955",
+    "status": "partial_from_inventory",
+    "partsCount": 41
+  },
+  {
+    "deviceIndex": "YT-83000",
+    "deviceName": "YATO YT-83000 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-83000",
+    "status": "partial_from_inventory",
+    "partsCount": 2
+  },
+  {
+    "deviceIndex": "YT-83001",
+    "deviceName": "YATO YT-83001 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-83001",
+    "status": "partial_from_inventory",
+    "partsCount": 2
+  },
+  {
+    "deviceIndex": "YT-83002",
+    "deviceName": "YATO YT-83002 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-83002",
+    "status": "partial_from_inventory",
+    "partsCount": 2
+  },
+  {
+    "deviceIndex": "YT-83003",
+    "deviceName": "YATO YT-83003 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-83003",
+    "status": "partial_from_inventory",
+    "partsCount": 3
+  },
+  {
+    "deviceIndex": "YT-83033",
+    "deviceName": "YATO YT-83033 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-83033",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YT-83037",
+    "deviceName": "YATO YT-83037 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-83037",
+    "status": "partial_from_inventory",
+    "partsCount": 2
+  },
+  {
+    "deviceIndex": "YT-83090",
+    "deviceName": "YATO YT-83090 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-83090",
+    "status": "partial_from_inventory",
+    "partsCount": 6
+  },
+  {
+    "deviceIndex": "YT-83091",
+    "deviceName": "YATO YT-83091 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-83091",
+    "status": "partial_from_inventory",
+    "partsCount": 6
+  },
+  {
+    "deviceIndex": "YT-83092",
+    "deviceName": "YATO YT-83092 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-83092",
+    "status": "partial_from_inventory",
+    "partsCount": 7
+  },
+  {
+    "deviceIndex": "YT-84660",
+    "deviceName": "YATO YT-84660 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-84660",
+    "status": "partial_from_inventory",
+    "partsCount": 45
+  },
+  {
+    "deviceIndex": "YT-84770",
+    "deviceName": "YATO YT-84770 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-84770",
+    "status": "partial_from_inventory",
+    "partsCount": 9
+  },
+  {
+    "deviceIndex": "YT-84790",
+    "deviceName": "YATO YT-84790 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-84790",
+    "status": "partial_from_inventory",
+    "partsCount": 12
+  },
+  {
+    "deviceIndex": "YT-84800",
+    "deviceName": "YATO YT-84800 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-84800",
+    "status": "partial_from_inventory",
+    "partsCount": 25
+  },
+  {
+    "deviceIndex": "YT-84820",
+    "deviceName": "YATO YT-84820 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-84820",
+    "status": "partial_from_inventory",
+    "partsCount": 69
+  },
+  {
+    "deviceIndex": "YT-84840",
+    "deviceName": "YATO YT-84840 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-84840",
+    "status": "partial_from_inventory",
+    "partsCount": 32
+  },
+  {
+    "deviceIndex": "YT-84850",
+    "deviceName": "YATO YT-84850 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-84850",
+    "status": "partial_from_inventory",
+    "partsCount": 26
+  },
+  {
+    "deviceIndex": "YT-84860",
+    "deviceName": "YATO YT-84860 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-84860",
+    "status": "partial_from_inventory",
+    "partsCount": 46
+  },
+  {
+    "deviceIndex": "YT-84868",
+    "deviceName": "YATO YT-84868 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-84868",
+    "status": "partial_from_inventory",
+    "partsCount": 16
+  },
+  {
+    "deviceIndex": "YT-84870",
+    "deviceName": "YATO YT-84870 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-84870",
+    "status": "partial_from_inventory",
+    "partsCount": 31
+  },
+  {
+    "deviceIndex": "YT-84871",
+    "deviceName": "YATO YT-84871 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-84871",
+    "status": "partial_from_inventory",
+    "partsCount": 22
+  },
+  {
+    "deviceIndex": "YT-84872",
+    "deviceName": "YATO YT-84872 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-84872",
+    "status": "partial_from_inventory",
+    "partsCount": 22
+  },
+  {
+    "deviceIndex": "YT-84877",
+    "deviceName": "YATO YT-84877 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-84877",
+    "status": "partial_from_inventory",
+    "partsCount": 21
+  },
+  {
+    "deviceIndex": "YT-84893",
+    "deviceName": "YATO YT-84893 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-84893",
+    "status": "partial_from_inventory",
+    "partsCount": 55
+  },
+  {
+    "deviceIndex": "YT-84895",
+    "deviceName": "YATO YT-84895 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-84895",
+    "status": "partial_from_inventory",
+    "partsCount": 54
+  },
+  {
+    "deviceIndex": "YT-84901",
+    "deviceName": "YATO YT-84901 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-84901",
+    "status": "partial_from_inventory",
+    "partsCount": 45
+  },
+  {
+    "deviceIndex": "YT-84910",
+    "deviceName": "YATO YT-84910 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-84910",
+    "status": "partial_from_inventory",
+    "partsCount": 46
+  },
+  {
+    "deviceIndex": "YT-84920",
+    "deviceName": "Piła łańcuchowa YATO",
+    "brand": "YATO",
+    "category": "Pilarki i piły łańcuchowe",
+    "drawingId": "yt-84920",
+    "status": "confirmed_or_demo",
+    "partsCount": 3
+  },
+  {
+    "deviceIndex": "YT-84990",
+    "deviceName": "YATO YT-84990 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-84990",
+    "status": "partial_from_inventory",
+    "partsCount": 7
+  },
+  {
+    "deviceIndex": "YT-85001",
+    "deviceName": "YATO YT-85001 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85001",
+    "status": "partial_from_inventory",
+    "partsCount": 43
+  },
+  {
+    "deviceIndex": "YT-85003",
+    "deviceName": "YATO YT-85003 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85003",
+    "status": "partial_from_inventory",
+    "partsCount": 49
+  },
+  {
+    "deviceIndex": "YT-85010",
+    "deviceName": "YATO YT-85010 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85010",
+    "status": "partial_from_inventory",
+    "partsCount": 11
+  },
+  {
+    "deviceIndex": "YT-85015",
+    "deviceName": "YATO YT-85015 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85015",
+    "status": "partial_from_inventory",
+    "partsCount": 9
+  },
+  {
+    "deviceIndex": "YT-85017",
+    "deviceName": "YATO YT-85017 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85017",
+    "status": "partial_from_inventory",
+    "partsCount": 6
+  },
+  {
+    "deviceIndex": "YT-85019",
+    "deviceName": "YATO YT-85019 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85019",
+    "status": "partial_from_inventory",
+    "partsCount": 6
+  },
+  {
+    "deviceIndex": "YT-85170",
+    "deviceName": "YATO YT-85170 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85170",
+    "status": "partial_from_inventory",
+    "partsCount": 9
+  },
+  {
+    "deviceIndex": "YT-85173",
+    "deviceName": "YATO YT-85173 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85173",
+    "status": "partial_from_inventory",
+    "partsCount": 6
+  },
+  {
+    "deviceIndex": "YT-85175",
+    "deviceName": "YATO YT-85175 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85175",
+    "status": "partial_from_inventory",
+    "partsCount": 8
+  },
+  {
+    "deviceIndex": "YT-85176",
+    "deviceName": "YATO YT-85176 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85176",
+    "status": "partial_from_inventory",
+    "partsCount": 6
+  },
+  {
+    "deviceIndex": "YT-85179",
+    "deviceName": "YATO YT-85179 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85179",
+    "status": "partial_from_inventory",
+    "partsCount": 4
+  },
+  {
+    "deviceIndex": "YT-85180",
+    "deviceName": "YATO YT-85180 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85180",
+    "status": "partial_from_inventory",
+    "partsCount": 5
+  },
+  {
+    "deviceIndex": "YT-85182",
+    "deviceName": "YATO YT-85182 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85182",
+    "status": "partial_from_inventory",
+    "partsCount": 5
+  },
+  {
+    "deviceIndex": "YT-85200",
+    "deviceName": "YATO YT-85200 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85200",
+    "status": "partial_from_inventory",
+    "partsCount": 33
+  },
+  {
+    "deviceIndex": "YT-85205",
+    "deviceName": "YATO YT-85205 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85205",
+    "status": "partial_from_inventory",
+    "partsCount": 51
+  },
+  {
+    "deviceIndex": "YT-85208",
+    "deviceName": "YATO YT-85208 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85208",
+    "status": "partial_from_inventory",
+    "partsCount": 53
+  },
+  {
+    "deviceIndex": "YT-85220",
+    "deviceName": "YATO YT-85220 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85220",
+    "status": "partial_from_inventory",
+    "partsCount": 29
+  },
+  {
+    "deviceIndex": "YT-85222",
+    "deviceName": "YATO YT-85222 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85222",
+    "status": "partial_from_inventory",
+    "partsCount": 19
+  },
+  {
+    "deviceIndex": "YT-85224",
+    "deviceName": "YATO YT-85224 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85224",
+    "status": "partial_from_inventory",
+    "partsCount": 12
+  },
+  {
+    "deviceIndex": "YT-85230",
+    "deviceName": "YATO YT-85230 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85230",
+    "status": "partial_from_inventory",
+    "partsCount": 5
+  },
+  {
+    "deviceIndex": "YT-85234",
+    "deviceName": "YATO YT-85234 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85234",
+    "status": "partial_from_inventory",
+    "partsCount": 8
+  },
+  {
+    "deviceIndex": "YT-85271",
+    "deviceName": "YATO YT-85271 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85271",
+    "status": "partial_from_inventory",
+    "partsCount": 19
+  },
+  {
+    "deviceIndex": "YT-85281",
+    "deviceName": "YATO YT-85281 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85281",
+    "status": "partial_from_inventory",
+    "partsCount": 15
+  },
+  {
+    "deviceIndex": "YT-85283",
+    "deviceName": "YATO YT-85283 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85283",
+    "status": "partial_from_inventory",
+    "partsCount": 14
+  },
+  {
+    "deviceIndex": "YT-85286",
+    "deviceName": "YATO YT-85286 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85286",
+    "status": "partial_from_inventory",
+    "partsCount": 31
+  },
+  {
+    "deviceIndex": "YT-85287",
+    "deviceName": "YATO YT-85287 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85287",
+    "status": "partial_from_inventory",
+    "partsCount": 35
+  },
+  {
+    "deviceIndex": "YT-85300",
+    "deviceName": "YATO YT-85300 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85300",
+    "status": "partial_from_inventory",
+    "partsCount": 29
+  },
+  {
+    "deviceIndex": "YT-85301",
+    "deviceName": "YATO YT-85301 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85301",
+    "status": "partial_from_inventory",
+    "partsCount": 30
+  },
+  {
+    "deviceIndex": "YT-85330",
+    "deviceName": "YATO YT-85330 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85330",
+    "status": "partial_from_inventory",
+    "partsCount": 20
+  },
+  {
+    "deviceIndex": "YT-85333",
+    "deviceName": "YATO YT-85333 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85333",
+    "status": "partial_from_inventory",
+    "partsCount": 20
+  },
+  {
+    "deviceIndex": "YT-85341",
+    "deviceName": "YATO YT-85341 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85341",
+    "status": "partial_from_inventory",
+    "partsCount": 14
+  },
+  {
+    "deviceIndex": "YT-85343",
+    "deviceName": "YATO YT-85343 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85343",
+    "status": "partial_from_inventory",
+    "partsCount": 16
+  },
+  {
+    "deviceIndex": "YT-85349",
+    "deviceName": "YATO YT-85349 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85349",
+    "status": "partial_from_inventory",
+    "partsCount": 15
+  },
+  {
+    "deviceIndex": "YT-85360",
+    "deviceName": "YATO YT-85360 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85360",
+    "status": "partial_from_inventory",
+    "partsCount": 12
+  },
+  {
+    "deviceIndex": "YT-85363",
+    "deviceName": "YATO YT-85363 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85363",
+    "status": "partial_from_inventory",
+    "partsCount": 38
+  },
+  {
+    "deviceIndex": "YT-85364",
+    "deviceName": "YATO YT-85364 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85364",
+    "status": "partial_from_inventory",
+    "partsCount": 40
+  },
+  {
+    "deviceIndex": "YT-85370",
+    "deviceName": "YATO YT-85370 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85370",
+    "status": "partial_from_inventory",
+    "partsCount": 15
+  },
+  {
+    "deviceIndex": "YT-85371",
+    "deviceName": "YATO YT-85371 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85371",
+    "status": "partial_from_inventory",
+    "partsCount": 41
+  },
+  {
+    "deviceIndex": "YT-85372",
+    "deviceName": "YATO YT-85372 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85372",
+    "status": "partial_from_inventory",
+    "partsCount": 46
+  },
+  {
+    "deviceIndex": "YT-85451",
+    "deviceName": "YATO YT-85451 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85451",
+    "status": "partial_from_inventory",
+    "partsCount": 9
+  },
+  {
+    "deviceIndex": "YT-85453",
+    "deviceName": "YATO YT-85453 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85453",
+    "status": "partial_from_inventory",
+    "partsCount": 30
+  },
+  {
+    "deviceIndex": "YT-85460",
+    "deviceName": "YATO YT-85460 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85460",
+    "status": "partial_from_inventory",
+    "partsCount": 46
+  },
+  {
+    "deviceIndex": "YT-85481",
+    "deviceName": "YATO YT-85481 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85481",
+    "status": "partial_from_inventory",
+    "partsCount": 27
+  },
+  {
+    "deviceIndex": "YT-85482",
+    "deviceName": "YATO YT-85482 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85482",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YT-85483",
+    "deviceName": "YATO YT-85483 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85483",
+    "status": "partial_from_inventory",
+    "partsCount": 61
+  },
+  {
+    "deviceIndex": "YT-854837",
+    "deviceName": "YATO YT-854837 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-854837",
+    "status": "partial_from_inventory",
+    "partsCount": 28
+  },
+  {
+    "deviceIndex": "YT-85485",
+    "deviceName": "YATO YT-85485 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85485",
+    "status": "partial_from_inventory",
+    "partsCount": 56
+  },
+  {
+    "deviceIndex": "YT-85486",
+    "deviceName": "YATO YT-85486 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85486",
+    "status": "partial_from_inventory",
+    "partsCount": 45
+  },
+  {
+    "deviceIndex": "YT-85550",
+    "deviceName": "YATO YT-85550 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85550",
+    "status": "partial_from_inventory",
+    "partsCount": 48
+  },
+  {
+    "deviceIndex": "YT-85551",
+    "deviceName": "YATO YT-85551 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85551",
+    "status": "partial_from_inventory",
+    "partsCount": 95
+  },
+  {
+    "deviceIndex": "YT-85552",
+    "deviceName": "YATO YT-85552 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85552",
+    "status": "partial_from_inventory",
+    "partsCount": 16
+  },
+  {
+    "deviceIndex": "YT-85553",
+    "deviceName": "YATO YT-85553 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85553",
+    "status": "partial_from_inventory",
+    "partsCount": 37
+  },
+  {
+    "deviceIndex": "YT-85554",
+    "deviceName": "YATO YT-85554 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85554",
+    "status": "partial_from_inventory",
+    "partsCount": 2
+  },
+  {
+    "deviceIndex": "YT-85570",
+    "deviceName": "YATO YT-85570 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85570",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YT-85580",
+    "deviceName": "YATO YT-85580 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85580",
+    "status": "partial_from_inventory",
+    "partsCount": 12
+  },
+  {
+    "deviceIndex": "YT-85591",
+    "deviceName": "YATO YT-85591 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85591",
+    "status": "partial_from_inventory",
+    "partsCount": 3
+  },
+  {
+    "deviceIndex": "YT-85592",
+    "deviceName": "YATO YT-85592 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85592",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YT-85600",
+    "deviceName": "YATO YT-85600 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85600",
+    "status": "partial_from_inventory",
+    "partsCount": 19
+  },
+  {
+    "deviceIndex": "YT-85680",
+    "deviceName": "YATO YT-85680 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85680",
+    "status": "partial_from_inventory",
+    "partsCount": 10
+  },
+  {
+    "deviceIndex": "YT-85700",
+    "deviceName": "YATO YT-85700 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85700",
+    "status": "partial_from_inventory",
+    "partsCount": 32
+  },
+  {
+    "deviceIndex": "YT-85701",
+    "deviceName": "YATO YT-85701 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85701",
+    "status": "partial_from_inventory",
+    "partsCount": 27
+  },
+  {
+    "deviceIndex": "YT-85710",
+    "deviceName": "YATO YT-85710 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85710",
+    "status": "partial_from_inventory",
+    "partsCount": 31
+  },
+  {
+    "deviceIndex": "YT-85715",
+    "deviceName": "YATO YT-85715 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85715",
+    "status": "partial_from_inventory",
+    "partsCount": 50
+  },
+  {
+    "deviceIndex": "YT-85716",
+    "deviceName": "YATO YT-85716 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85716",
+    "status": "partial_from_inventory",
+    "partsCount": 29
+  },
+  {
+    "deviceIndex": "YT-85720",
+    "deviceName": "YATO YT-85720 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85720",
+    "status": "partial_from_inventory",
+    "partsCount": 17
+  },
+  {
+    "deviceIndex": "YT-85800",
+    "deviceName": "YATO YT-85800 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85800",
+    "status": "partial_from_inventory",
+    "partsCount": 8
+  },
+  {
+    "deviceIndex": "YT-85803",
+    "deviceName": "YATO YT-85803 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85803",
+    "status": "partial_from_inventory",
+    "partsCount": 7
+  },
+  {
+    "deviceIndex": "YT-85850",
+    "deviceName": "YATO YT-85850 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85850",
+    "status": "partial_from_inventory",
+    "partsCount": 38
+  },
+  {
+    "deviceIndex": "YT-85851",
+    "deviceName": "YATO YT-85851 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85851",
+    "status": "partial_from_inventory",
+    "partsCount": 42
+  },
+  {
+    "deviceIndex": "YT-85860",
+    "deviceName": "YATO YT-85860 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85860",
+    "status": "partial_from_inventory",
+    "partsCount": 17
+  },
+  {
+    "deviceIndex": "YT-85861",
+    "deviceName": "YATO YT-85861 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85861",
+    "status": "partial_from_inventory",
+    "partsCount": 7
+  },
+  {
+    "deviceIndex": "YT-85862",
+    "deviceName": "YATO YT-85862 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85862",
+    "status": "partial_from_inventory",
+    "partsCount": 21
+  },
+  {
+    "deviceIndex": "YT-85863",
+    "deviceName": "YATO YT-85863 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85863",
+    "status": "partial_from_inventory",
+    "partsCount": 19
+  },
+  {
+    "deviceIndex": "YT-85864",
+    "deviceName": "YATO YT-85864 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85864",
+    "status": "partial_from_inventory",
+    "partsCount": 29
+  },
+  {
+    "deviceIndex": "YT-85910",
+    "deviceName": "YATO YT-85910 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85910",
+    "status": "partial_from_inventory",
+    "partsCount": 6
+  },
+  {
+    "deviceIndex": "YT-85915",
+    "deviceName": "YATO YT-85915 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85915",
+    "status": "partial_from_inventory",
+    "partsCount": 12
+  },
+  {
+    "deviceIndex": "YT-85930",
+    "deviceName": "YATO YT-85930 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-85930",
+    "status": "partial_from_inventory",
+    "partsCount": 5
+  },
+  {
+    "deviceIndex": "YT-86097",
+    "deviceName": "YATO YT-86097 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-86097",
+    "status": "partial_from_inventory",
+    "partsCount": 8
+  },
+  {
+    "deviceIndex": "YT-86106",
+    "deviceName": "YATO YT-86106 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-86106",
+    "status": "partial_from_inventory",
+    "partsCount": 26
+  },
+  {
+    "deviceIndex": "YT-86115",
+    "deviceName": "YATO YT-86115 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-86115",
+    "status": "partial_from_inventory",
+    "partsCount": 30
+  },
+  {
+    "deviceIndex": "YT-86120",
+    "deviceName": "YATO YT-86120 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-86120",
+    "status": "partial_from_inventory",
+    "partsCount": 18
+  },
+  {
+    "deviceIndex": "YT-86125",
+    "deviceName": "YATO YT-86125 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-86125",
+    "status": "partial_from_inventory",
+    "partsCount": 16
+  },
+  {
+    "deviceIndex": "YT-86139",
+    "deviceName": "YATO YT-86139 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-86139",
+    "status": "partial_from_inventory",
+    "partsCount": 31
+  },
+  {
+    "deviceIndex": "YT-86140",
+    "deviceName": "YATO YT-86140 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-86140",
+    "status": "partial_from_inventory",
+    "partsCount": 38
+  },
+  {
+    "deviceIndex": "YT-86150",
+    "deviceName": "YATO YT-86150 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-86150",
+    "status": "partial_from_inventory",
+    "partsCount": 8
+  },
+  {
+    "deviceIndex": "YT-86155",
+    "deviceName": "YATO YT-86155 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-86155",
+    "status": "partial_from_inventory",
+    "partsCount": 18
+  },
+  {
+    "deviceIndex": "YT-86158",
+    "deviceName": "YATO YT-86158 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-86158",
+    "status": "partial_from_inventory",
+    "partsCount": 30
+  },
+  {
+    "deviceIndex": "YT-86160",
+    "deviceName": "YATO YT-86160 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-86160",
+    "status": "partial_from_inventory",
+    "partsCount": 15
+  },
+  {
+    "deviceIndex": "YT-86161",
+    "deviceName": "YATO YT-86161 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-86161",
+    "status": "partial_from_inventory",
+    "partsCount": 22
+  },
+  {
+    "deviceIndex": "YT-86200",
+    "deviceName": "YATO YT-86200 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-86200",
+    "status": "partial_from_inventory",
+    "partsCount": 13
+  },
+  {
+    "deviceIndex": "YT-86211",
+    "deviceName": "YATO YT-86211 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-86211",
+    "status": "partial_from_inventory",
+    "partsCount": 12
+  },
+  {
+    "deviceIndex": "YT-86220",
+    "deviceName": "YATO YT-86220 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-86220",
+    "status": "partial_from_inventory",
+    "partsCount": 9
+  },
+  {
+    "deviceIndex": "YT-86240",
+    "deviceName": "YATO YT-86240 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-86240",
+    "status": "partial_from_inventory",
+    "partsCount": 42
+  },
+  {
+    "deviceIndex": "YT-87080",
+    "deviceName": "YATO YT-87080 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-87080",
+    "status": "partial_from_inventory",
+    "partsCount": 1
+  },
+  {
+    "deviceIndex": "YT-99500",
+    "deviceName": "YATO YT-99500 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-99500",
+    "status": "partial_from_inventory",
+    "partsCount": 2
+  },
+  {
+    "deviceIndex": "YT-99501",
+    "deviceName": "YATO YT-99501 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-99501",
+    "status": "partial_from_inventory",
+    "partsCount": 5
+  },
+  {
+    "deviceIndex": "YT-99520",
+    "deviceName": "YATO YT-99520 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-99520",
+    "status": "partial_from_inventory",
+    "partsCount": 3
+  },
+  {
+    "deviceIndex": "YT-99530",
+    "deviceName": "YATO YT-99530 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-99530",
+    "status": "partial_from_inventory",
+    "partsCount": 2
+  },
+  {
+    "deviceIndex": "YT-99531",
+    "deviceName": "YATO YT-99531 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-99531",
+    "status": "partial_from_inventory",
+    "partsCount": 2
+  },
+  {
+    "deviceIndex": "YT-99532",
+    "deviceName": "YATO YT-99532 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-99532",
+    "status": "partial_from_inventory",
+    "partsCount": 5
+  },
+  {
+    "deviceIndex": "YT-99536",
+    "deviceName": "YATO YT-99536 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-99536",
+    "status": "partial_from_inventory",
+    "partsCount": 2
+  },
+  {
+    "deviceIndex": "YT-99650",
+    "deviceName": "YATO YT-99650 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-99650",
+    "status": "partial_from_inventory",
+    "partsCount": 14
+  },
+  {
+    "deviceIndex": "YT-99651",
+    "deviceName": "YATO YT-99651 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-99651",
+    "status": "partial_from_inventory",
+    "partsCount": 14
+  },
+  {
+    "deviceIndex": "YT-99690",
+    "deviceName": "YATO YT-99690 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-99690",
+    "status": "partial_from_inventory",
+    "partsCount": 6
+  },
+  {
+    "deviceIndex": "YT-99693",
+    "deviceName": "YATO YT-99693 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-99693",
+    "status": "partial_from_inventory",
+    "partsCount": 7
+  },
+  {
+    "deviceIndex": "YT-99695",
+    "deviceName": "YATO YT-99695 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-99695",
+    "status": "partial_from_inventory",
+    "partsCount": 10
+  },
+  {
+    "deviceIndex": "YT-99700",
+    "deviceName": "YATO YT-99700 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-99700",
+    "status": "partial_from_inventory",
+    "partsCount": 7
+  },
+  {
+    "deviceIndex": "YT-99705",
+    "deviceName": "YATO YT-99705 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-99705",
+    "status": "partial_from_inventory",
+    "partsCount": 7
+  },
+  {
+    "deviceIndex": "YT-99710",
+    "deviceName": "YATO YT-99710 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-99710",
+    "status": "partial_from_inventory",
+    "partsCount": 8
+  },
+  {
+    "deviceIndex": "YT-99720",
+    "deviceName": "YATO YT-99720 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-99720",
+    "status": "partial_from_inventory",
+    "partsCount": 8
+  },
+  {
+    "deviceIndex": "YT-99730",
+    "deviceName": "YATO YT-99730 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-99730",
+    "status": "partial_from_inventory",
+    "partsCount": 9
+  },
+  {
+    "deviceIndex": "YT-99733",
+    "deviceName": "YATO YT-99733 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-99733",
+    "status": "partial_from_inventory",
+    "partsCount": 8
+  },
+  {
+    "deviceIndex": "YT-99738",
+    "deviceName": "YATO YT-99738 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-99738",
+    "status": "partial_from_inventory",
+    "partsCount": 17
+  },
+  {
+    "deviceIndex": "YT-99739",
+    "deviceName": "YATO YT-99739 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-99739",
+    "status": "partial_from_inventory",
+    "partsCount": 15
+  },
+  {
+    "deviceIndex": "YT-99740",
+    "deviceName": "YATO YT-99740 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-99740",
+    "status": "partial_from_inventory",
+    "partsCount": 12
+  },
+  {
+    "deviceIndex": "YT-99743",
+    "deviceName": "YATO YT-99743 — nazwa urządzenia do uzupełnienia",
+    "brand": "YATO",
+    "category": "Baza części PGW — dane częściowe",
+    "drawingId": "yt-99743",
+    "status": "partial_from_inventory",
+    "partsCount": 16
+  }
+]

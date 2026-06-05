@@ -1,0 +1,5 @@
+{
+  "mode": "local-matcher-now",
+  "futureBackend": "Cloudflare Worker / Supabase Edge Function",
+  "rule": "AI may suggest only parts that already exist in device parts list; never invent part indexes."
+}

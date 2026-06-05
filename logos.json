@@ -1,0 +1,44 @@
+[
+  {
+    "brand": "TOYA",
+    "file": "assets/logos/toya.png",
+    "status": "ready",
+    "sourceFile": "crop_from_business_card__replace_with_official_logo_when_available"
+  },
+  {
+    "brand": "YATO",
+    "file": "assets/logos/yato-wordmark-clean.png",
+    "status": "ready",
+    "sourceFile": "1308137290_1.jpg"
+  },
+  {
+    "brand": "VOREL",
+    "file": "assets/logos/vorel.png",
+    "status": "ready",
+    "sourceFile": "1308137276_1.png"
+  },
+  {
+    "brand": "STHOR",
+    "file": "assets/logos/sthor.png",
+    "status": "ready",
+    "sourceFile": "1308137278_1.jpg"
+  },
+  {
+    "brand": "LUND",
+    "file": "assets/logos/lund.png",
+    "status": "ready",
+    "sourceFile": "1308137283_1.jpg"
+  },
+  {
+    "brand": "FLO",
+    "file": "assets/logos/flo.png",
+    "status": "ready",
+    "sourceFile": "1308137277_1.jpg"
+  },
+  {
+    "brand": "FALA",
+    "file": "assets/logos/fala.png",
+    "status": "ready",
+    "sourceFile": "1308137286_1.jpg"
+  }
+]
