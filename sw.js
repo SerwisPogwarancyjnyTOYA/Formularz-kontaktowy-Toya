@@ -1,10 +1,10 @@
-const CACHE = 'yato-service-hub-v20260605-compact-warning1';
+const CACHE = 'yato-service-hub-v20260605-polish2';
 const ASSETS = [
   './',
   './index.html',
-  './assets/style.css?v=20260605-compact-warning1',
-  './assets/app.js?v=20260605-compact-warning1',
-  './assets/database.js?v=20260605-compact-warning1',
+  './assets/style.css?v=20260605-polish2',
+  './assets/app.js?v=20260605-polish2',
+  './assets/database.js?v=20260605-polish2',
   './data/parts.json',
   './data/drawings.json',
   './data/devices.json',

@@ -1,60 +1,20 @@
-# YATO Service Hub — kreator zapytania o części pogwarancyjne
+# YATO Service Hub
 
-Statyczna aplikacja HTML/CSS/JS do GitHub Pages. Klient wyszukuje urządzenie lub część, widzi rysunek złożeniowy, dodaje części do zapytania i generuje gotowego maila do serwisu.
+Kreator zapytań o części pogwarancyjne TOYA S.A.
 
-## Co jest w tej aktualizacji
+Aplikacja pomaga klientowi wybrać urządzenie, sprawdzić rysunek złożeniowy, dodać potrzebne części do zapytania i przygotować gotową wiadomość e-mail do serwisu.
 
-- podmienione logotypy marek z paczki Drive: YATO, VOREL, STHOR, LUND, FLO, FALA,
-- usunięty POWER UP z widoku marek,
-- dodana docelowa struktura folderów `drawings/`,
-- dodany plik `data/logos.json`,
-- rozbudowany `data/drawings.json` o pola `localPath`, `driveViewUrl`, `drivePreviewUrl`,
-- formularz potrafi wyświetlać rysunek PDF/obraz w środku strony,
-- Drive zostaje jako fallback: przycisk „Otwórz z Drive”.
+## Jak działa
 
-## Publikacja na GitHub Pages
-
-1. Skopiuj zawartość tej paczki do repozytorium.
-2. Zrób commit, np. `foundation: logos and drawings structure`.
-3. Wypchnij na GitHuba.
-4. GitHub Pages powinien przebudować stronę automatycznie.
-
-## Testy wyszukiwarki
-
-Wpisz w formularzu:
-
-- `YT-84920` — demo klikalnego rysunku,
-- `YT-828390` — test rysunku z indeksu Drive,
-- `YT-8277905`,
-- `YT-852371`,
-- `YG-03395`,
-- `ZG03395-13`.
-
-## Rysunki lokalne
-
-Docelowo rysunki wrzucamy do:
-
-```text
-drawings/YATO/YT/YT-828390.pdf
-drawings/YATO/YG/YG-03395.pdf
-drawings/VOREL/...
-drawings/STHOR/...
-drawings/LUND/...
-drawings/FLO/...
-drawings/FALA/...
-drawings/unmapped/...
-```
-
-Na razie foldery mają pliki `.gitkeep`, żeby struktura istniała w repo.
+1. Klient wyszukuje urządzenie lub opisuje potrzebną część.
+2. Kreator pokazuje rysunek złożeniowy oraz dostępne informacje o częściach.
+3. Klient dodaje wybrane elementy do zapytania.
+4. Po uzupełnieniu danych aplikacja generuje gotową treść wiadomości e-mail.
 
 ## Dane klientów
 
-Aplikacja nie zapisuje danych klientów na serwerze. Przycisk „Generuj maila” otwiera domyślną pocztę klienta przez `mailto:`.
+Aplikacja działa statycznie w przeglądarce. Dane wpisane w formularzu nie są zapisywane na serwerze. Wiadomość jest przygotowywana lokalnie i otwierana w programie pocztowym użytkownika.
 
+## Strona
 
-## Aktualizacja logo 2026-06-04
-Logotypy marek są w `assets/logos/` i są używane bezpośrednio na stronie. POWER UP nie jest używany.
-
-## Hotfix 2026-06-04 — logo w nagłówku
-
-Nagłówek strony używa teraz właściwego logotypu YATO z pliku `assets/logos/yato-official.png`, zamiast tymczasowego czerwonego badge'a tekstowego.
+https://serwispogwarancyjnytoya.github.io/Formularz-kontaktowy-Toya/

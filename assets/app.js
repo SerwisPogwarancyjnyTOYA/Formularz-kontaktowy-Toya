@@ -157,7 +157,7 @@ function renderResults(devices) {
     return;
   }
   if (!devices.length) {
-    el.innerHTML = `<div class="muted-box"><strong>Brak pewnego dopasowania w częściowej bazie PGW.</strong><br>Nie pokazuję losowych części. Użyj trybu „Nie znam indeksu” albo wpisz opis części — system przygotuje maila z opisem i zdjęciami do identyfikacji.</div>`;
+    el.innerHTML = `<div class="muted-box"><strong>Brak pewnego dopasowania w aktualnej bazie.</strong><br>Nie pokazuję przypadkowych części. Użyj trybu „Nie znam modelu” albo opisz element — kreator przygotuje maila z prośbą o identyfikację.</div>`;
     return;
   }
   el.innerHTML = devices.map(d => `
@@ -525,7 +525,7 @@ function localSuggest() {
   }).filter(d => d.score > 0).sort((a,b)=>b.score-a.score).slice(0,6);
 
   if (!candidates.length) {
-    box.innerHTML = '<div class="muted-box">Nie widzę podobnej części w częściowej bazie PGW. Użyj trybu „Nie znam indeksu” — mail poprosi klienta o zdjęcia.</div>';
+    box.innerHTML = '<div class="muted-box">Nie widzę podobnej części w aktualnej bazie. Użyj trybu „Nie znam modelu” — wiadomość poprosi o zdjęcia.</div>';
     return;
   }
 

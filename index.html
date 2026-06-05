@@ -6,13 +6,13 @@
   <title>YATO Service Hub — kreator części pogwarancyjnych</title>
   <meta name="description" content="Kreator zapytania o części pogwarancyjne TOYA S.A." />
   <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="stylesheet" href="assets/style.css?v=20260605-compact-warning1" />
+  <link rel="stylesheet" href="assets/style.css?v=20260605-polish2" />
 </head>
 <body>
   <header class="hero">
     <nav class="topbar">
       <div class="brandmark brandmark-official">
-        <img class="brandmark-logo official-yato-logo" src="assets/logos/yato-service-clean.svg?v=20260605-compact-warning1" alt="YATO" />
+        <img class="brandmark-logo official-yato-logo" src="assets/logos/yato-wordmark-clean.png?v=20260605-polish2" alt="YATO" />
         <div class="brandmark-copy">
           <strong>Service Hub</strong>
           <small>Serwis pogwarancyjny</small>
@@ -20,22 +20,27 @@
       </div>
       <div class="pill">Serwis pogwarancyjny · TOYA S.A.</div>
     </nav>
-    <section class="phone-warning" aria-label="Informacja o doborze części">
+    <section class="phone-warning slim-warning" aria-label="Informacja o doborze części">
       <div class="warning-icon">⏱️</div>
       <div>
-        <strong>Przez telefon nie dobieramy części.</strong>
-        <span>Konsultant nie widzi urządzenia ani rysunku złożeniowego. Najszybciej: wybierz model, wskaż część i wyślij kompletne zapytanie mailem.</span>
+        <strong>Telefon nie przyspieszy doboru części.</strong>
+        <span>Konsultant nie widzi urządzenia ani rysunku. Najszybciej: wybierz model w kreatorze i wyślij kompletne zapytanie mailem.</span>
       </div>
     </section>
     <section class="hero-grid">
       <div>
         <p class="eyebrow">Kreator zapytania o części</p>
-        <h1>Telefon nie przyspieszy doboru części. Kreator tak.</h1>
-        <p class="lead">Wybierz urządzenie, sprawdź rysunek złożeniowy i wyślij kompletne zapytanie. Odpowiedź na zapytania z kreatora wysyłamy zwykle w ciągu 2–4 godzin roboczych.</p>
+        <h1>Dobierz część z rysunku. Wyślij gotowe zapytanie.</h1>
+        <p class="lead">Wyszukaj urządzenie, sprawdź rysunek złożeniowy i przygotuj wiadomość do serwisu. Zapytania z kreatora obsługujemy zwykle w ciągu 2–4 godzin roboczych.</p>
         <div class="hero-actions">
           <a class="button primary" href="#search">Szukaj urządzenia</a>
           <button class="button ghost" id="fillDemoBtn" type="button">Wypełnij przykład: łańcuch do piły</button>
           <button class="button ghost" id="unknownBtn" type="button">Nie znam modelu</button>
+        </div>
+        <div class="hero-mini-stats" aria-label="Najważniejsze informacje">
+          <span><b>2–4 h</b> zwykle na odpowiedź</span>
+          <span><b>0</b> zapisanych danych na serwerze</span>
+          <span><b>1 mail</b> z kompletem informacji</span>
         </div>
       </div>
       <aside class="hero-card">
@@ -63,15 +68,15 @@
     <section class="brand-rail" aria-label="Marki TOYA S.A.">
       <span>Marki TOYA S.A.</span>
       <div class="brand-rail-logos">
-        <img src="assets/logos/brands-strip-clean.png?v=20260605-compact-warning1" alt="Marki TOYA S.A.: TOYA, YATO, VOREL, STHOR, LUND, FLO, FALA" class="brand-strip" />
+        <img src="assets/logos/brands-strip-clean.png?v=20260605-polish2" alt="Marki TOYA S.A.: TOYA, YATO, VOREL, STHOR, LUND, FLO, FALA" class="brand-strip" />
       </div>
     </section>
 
     <section class="panel choice-panel wizard-step" data-step="1">
       <div class="section-head">
         <p class="eyebrow">Start</p>
-        <h2>Wybierz ścieżkę</h2>
-        <p>Klient najpierw wybiera urządzenie. Części pokazujemy dopiero po wejściu w konkretny model.</p>
+        <h2>Jak chcesz zacząć?</h2>
+        <p>Najpierw ustalamy model urządzenia. Dopiero potem pokazujemy rysunek i części.</p>
       </div>
       <div class="choice-grid">
         <button class="choice-card" type="button" onclick="document.getElementById('searchInput').focus()">
@@ -84,7 +89,7 @@
         </button>
         <button class="choice-card" type="button" onclick="document.getElementById('aiDescription').focus()">
           <strong>Opisz część po ludzku</strong>
-          <span>Lokalny matcher podpowie kandydatów z listy części.</span>
+          <span>Kreator podpowie pasujące elementy z listy części.</span>
         </button>
       </div>
     </section>
@@ -121,13 +126,13 @@
 
     <section class="panel ai-panel wizard-step" data-step="1">
       <div class="section-head">
-        <p class="eyebrow">AI-ready</p>
+        <p class="eyebrow">Pomoc w doborze</p>
         <h2>Opisz część własnymi słowami</h2>
-        <p>Na razie działa lokalny matcher po nazwach i synonimach. Później podepniemy prawdziwe AI przez bezpieczny backend.</p>
+        <p>Nie znasz fachowej nazwy? Opisz element potocznie — kreator spróbuje zawęzić listę pasujących części.</p>
       </div>
       <div class="searchbar">
         <input id="aiDescription" type="text" placeholder="np. plastik przy spuście, zębatka przy łańcuchu, uszczelka, szczotki..." />
-        <button class="button primary" id="aiSuggestBtn" type="button">Podpowiedz części</button>
+        <button class="button primary" id="aiSuggestBtn" type="button">Szukaj w opisie</button>
       </div>
       <div id="aiSuggestions" class="results"></div>
     </section>
@@ -177,11 +182,11 @@
       <div class="mail-actions">
         <button class="button primary" id="generateMailBtn" type="button">Otwórz gotowego maila</button>
         <button class="button ghost" id="copyMailBtn" type="button">Kopiuj treść</button>
-        <button class="button ghost" id="downloadJsonBtn" type="button">Pobierz JSON</button>
+        <button class="button ghost" id="downloadJsonBtn" type="button">Pobierz zgłoszenie</button>
       </div>
       <div class="mail-preview wizard-mail-step" data-step="5">
         <h3>Krok 5 — Gotowa wiadomość</h3>
-        <pre id="mailPreview">Dodaj część i uzupełnij dane, a tutaj pojawi się gotowy mail.</pre>
+        <pre id="mailPreview">Po wyborze części i uzupełnieniu danych tutaj pojawi się gotowa wiadomość.</pre>
         <div id="attachmentWarning" class="attachment-warning hidden">⚠️ UWAGA: PAMIĘTAJ, ABY TERAZ DOŁĄCZYĆ ZDJĘCIA DO TEGO MAILA W SWOIM PROGRAMIE POCZTOWYM.</div>
         <div class="mailto-fallback"><strong>Nie otwiera się poczta?</strong> Kliknij <b>Kopiuj treść</b> i wklej wiadomość ręcznie do maila na adres <a href="mailto:service@yato.pl">service@yato.pl</a>.</div>
       </div>
@@ -214,10 +219,10 @@
   <footer class="footer">
     <strong>YATO Service Hub</strong>
     <span>TOYA • YATO • VOREL • STHOR • LUND • FLO • FALA</span>
-    <span>Demo: dane klientów nie są zapisywane na serwerze; mail generuje się w poczcie klienta.</span>
+    <span>Dane klienta nie są zapisywane na serwerze. Wiadomość generuje się lokalnie w poczcie użytkownika.</span>
   </footer>
 
-  <script src="assets/database.js?v=20260605-compact-warning1"></script>
-  <script src="assets/app.js?v=20260605-compact-warning1"></script>
+  <script src="assets/database.js?v=20260605-polish2"></script>
+  <script src="assets/app.js?v=20260605-polish2"></script>
 </body>
 </html>
