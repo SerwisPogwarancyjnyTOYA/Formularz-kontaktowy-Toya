@@ -1,9 +1,13 @@
+
 # YATO Service Hub
 
-Statyczna aplikacja do obsługi zapytań o części pogwarancyjne TOYA S.A.
+Kreator zapytań o części pogwarancyjne TOYA S.A.
 
-Klient wyszukuje urządzenie lub część, sprawdza rysunek złożeniowy, dodaje pozycje do zapytania i generuje gotową wiadomość e-mail do serwisu.
+Aplikacja pomaga klientowi znaleźć urządzenie lub część, sprawdzić rysunek/załącznik z TOYA24 i wygenerować gotową wiadomość e-mail do serwisu.
 
-Dane klienta nie są zapisywane na serwerze. Wiadomość generuje się lokalnie w przeglądarce użytkownika.
+## Założenie techniczne
 
-Strona: https://serwispogwarancyjnytoya.github.io/Formularz-kontaktowy-Toya/
+- GitHub Pages przechowuje aplikację, wyszukiwarkę i lekką bazę indeksów.
+- TOYA24 jest głównym źródłem PDF-ów i załączników produktowych.
+- Google Drive zostaje jako zapasowe archiwum rysunków.
+- Dane klienta nie są zapisywane na serwerze — wiadomość generuje się lokalnie w poczcie użytkownika.

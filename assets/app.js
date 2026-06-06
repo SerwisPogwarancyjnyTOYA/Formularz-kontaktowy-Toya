@@ -687,4 +687,210 @@ function init() {
   renderCart(); updateMailPreview(); goToStep(1);
 }
 
+
+
+/* TOYA24 primary PDF/source integration */
+function toya24Entries() {
+  const raw = window.PGW_TOYA24_INDEX?.entries || [];
+  return Array.isArray(raw) ? raw : [];
+}
+
+function findToya24Entry(deviceIndex) {
+  const key = compactIndex(deviceIndex || '');
+  if (!key) return null;
+  return toya24Entries().find(e => {
+    const indexes = [e.deviceIndex, ...(e.aliases || [])].map(compactIndex);
+    return indexes.includes(key);
+  }) || null;
+}
+
+function toya24SearchUrl(deviceIndex) {
+  const q = encodeURIComponent(deviceIndex || '');
+  return `https://toya24.pl/pl-PL/search?text=${q}`;
+}
+
+function drawingSourceFor(device) {
+  const toya = findToya24Entry(device.deviceIndex);
+  const drive = DRAWINGS.find(d => d.id === device.drawingId || d.deviceIndex === device.deviceIndex);
+  return { toya, drive };
+}
+
+function getCatalogMetaText() {
+  const meta = window.PGW_DATABASE_META;
+  const parts = meta?.partsCount || PARTS.filter(p => p.public !== false).length;
+  const devices = meta?.devicesCount || groupDevices().length;
+  const toyaCount = toya24Entries().length;
+  return `${parts} pozycji / ${devices} indeksów; TOYA24: ${toyaCount} zweryfikowanych linków PDF`;
+}
+
+function sourceRibbonHtml(deviceOrIndex) {
+  const deviceIndex = typeof deviceOrIndex === 'string' ? deviceOrIndex : deviceOrIndex?.deviceIndex;
+  const {toya, drive} = drawingSourceFor({deviceIndex, drawingId: deviceOrIndex?.drawingId});
+  const chips = [];
+  if (toya?.partsPdfUrl) chips.push('<span class="source-chip toya24">✓ PDF części z TOYA24</span>');
+  else if (toya?.productUrl) chips.push('<span class="source-chip toya24">✓ karta produktu TOYA24</span>');
+  if (drive?.driveViewUrl || drive?.drivePreviewUrl) chips.push('<span class="source-chip">backup: Google Drive</span>');
+  if (!chips.length) chips.push('<span class="source-chip">PDF: do zmapowania</span>');
+  return `<div class="source-ribbon">${chips.join('')}</div>`;
+}
+
+renderDrawing = function(device) {
+  const stage = $('drawingStage');
+  const {toya, drive} = drawingSourceFor(device);
+  activeDrawingPosition = null;
+  resetDrawingZoom(false);
+
+  if (toya?.partsPdfUrl) {
+    stage.className = 'drawing-stage has-pdf-direct';
+    const openOriginal = toya.partsPdfUrl;
+    const productUrl = toya.productUrl || toya24SearchUrl(device.deviceIndex);
+    const backupUrl = drive?.driveViewUrl || drive?.localPath || '';
+    stage.innerHTML = `
+      <div class="drawing-pro-header">
+        <div>
+          <strong>${esc(toya.partsTitle || `Części zamienne ${device.deviceIndex}`)}</strong>
+          <span>Źródło główne: TOYA24. PDF zostaje poza repo, a my trzymamy tylko lekką bazę części i link do załącznika.</span>
+          ${sourceRibbonHtml(device)}
+        </div>
+        <div class="drawing-actions">
+          <a class="button primary small" href="${esc(openOriginal)}" target="_blank" rel="noopener">Otwórz PDF z TOYA24</a>
+          <a class="button ghost small" href="${esc(productUrl)}" target="_blank" rel="noopener">Karta produktu</a>
+          ${backupUrl ? `<a class="button ghost small" href="${esc(backupUrl)}" target="_blank" rel="noopener">Backup Drive</a>` : ''}
+        </div>
+      </div>
+      <div class="pdf-source-layout">
+        <div class="pdf-frame-wrap">
+          <iframe class="pdf-frame" src="${esc(openOriginal)}" title="${esc(toya.partsTitle || 'Części zamienne TOYA24')}"></iframe>
+        </div>
+        <aside class="pdf-side-panel" id="selectedPartGuide">
+          <h4>Wybierz część z listy</h4>
+          <p>Po kliknięciu części pokażemy tutaj numer pozycji, indeks i nazwę. PDF przewijasz normalnie w przeglądarce — bez udawania automatycznego trafiania w numer.</p>
+          <div class="pdf-note">Najpewniejszy tryb produkcyjny: TOYA24 jako główne źródło PDF, Google Drive jako zapas, baza części po naszej stronie.</div>
+        </aside>
+      </div>`;
+    return;
+  }
+
+  if (drive?.type === 'svg-demo') {
+    stage.className = 'drawing-stage has-embed interactive-drawing-stage';
+    stage.innerHTML = interactiveDrawingShell(drive, demoSvg(), true);
+    initInteractiveDrawing(stage, device);
+    return;
+  }
+
+  if (drive?.drivePreviewUrl || drive?.localPath) {
+    const src = drive.localPath || drive.drivePreviewUrl;
+    const viewUrl = drive.driveViewUrl || drive.localPath || '';
+    stage.className = 'drawing-stage has-pdf-direct';
+    stage.innerHTML = `
+      <div class="drawing-pro-header">
+        <div>
+          <strong>${esc(drive.title || `Rysunek ${device.deviceIndex}`)}</strong>
+          <span>Źródło zapasowe: Google Drive. TOYA24 nie jest jeszcze zmapowane dla tego modelu.</span>
+          ${sourceRibbonHtml(device)}
+        </div>
+        <div class="drawing-actions">
+          ${viewUrl ? `<a class="button primary small" href="${esc(viewUrl)}" target="_blank" rel="noopener">Otwórz backup Drive</a>` : ''}
+          <a class="button ghost small" href="${esc(toya24SearchUrl(device.deviceIndex))}" target="_blank" rel="noopener">Szukaj na TOYA24</a>
+        </div>
+      </div>
+      <div class="pdf-source-layout">
+        <div class="pdf-frame-wrap"><iframe class="pdf-frame" src="${esc(src)}" title="${esc(drive.title || 'Rysunek z Drive')}"></iframe></div>
+        <aside class="pdf-side-panel" id="selectedPartGuide"><h4>Pozycja z listy części</h4><p>Wybierz część z listy. Pokażemy numer pozycji i indeks, a rysunek otworzysz w PDF.</p><div class="pdf-note">Ten model czeka na link TOYA24. Backup działa z Drive.</div></aside>
+      </div>`;
+    return;
+  }
+
+  stage.className = 'drawing-stage empty';
+  stage.innerHTML = `
+    <div class="toya24-missing-box">
+      <strong>Brak podpiętego PDF-u dla ${esc(device.deviceIndex)}</strong>
+      <p>Nie zapychamy repo PDF-ami. Kliknij poniżej, aby znaleźć kartę produktu na TOYA24, a po zmapowaniu link trafi do lekkiej bazy.</p>
+      <div class="drawing-actions">
+        <a class="button primary small" href="${esc(toya24SearchUrl(device.deviceIndex))}" target="_blank" rel="noopener">Szukaj produktu na TOYA24</a>
+        ${drive?.driveViewUrl ? `<a class="button ghost small" href="${esc(drive.driveViewUrl)}" target="_blank" rel="noopener">Backup Drive</a>` : ''}
+      </div>
+    </div>`;
+};
+
+function renderSelectedPartGuide(part) {
+  const box = $('selectedPartGuide');
+  if (!box || !part) return;
+  const {toya, drive} = drawingSourceFor(part);
+  const original = toya?.partsPdfUrl || drive?.driveViewUrl || drive?.localPath || '';
+  const product = toya?.productUrl || toya24SearchUrl(part.deviceIndex);
+  box.innerHTML = `
+    <h4>Wybrana część</h4>
+    <div class="selected-part-box">
+      <strong>${esc(part.partName)}</strong>
+      <div class="position-big">poz. ${esc(part.position || '—')}</div>
+      <small>Indeks: <b>${esc(part.partIndex)}</b><br>Urządzenie: ${esc(part.deviceIndex)}</small>
+    </div>
+    <p>Otwórz PDF i znajdź wskazaną pozycję. Dopóki nie mamy hotspotów, nie udajemy automatycznego zaznaczania numeru na rysunku.</p>
+    <div class="pdf-action-stack">
+      ${original ? `<a class="button primary small" href="${esc(original)}" target="_blank" rel="noopener">Otwórz rysunek</a>` : ''}
+      <a class="button ghost small" href="${esc(product)}" target="_blank" rel="noopener">Karta / wyszukiwanie TOYA24</a>
+    </div>
+    <div class="pdf-note">Hotspoty można dodać później tylko dla topowych modeli. Teraz priorytetem jest stabilny katalog i lekkie repo.</div>`;
+}
+
+focusDrawingPosition = function(position) {
+  activeDrawingPosition = position;
+  document.querySelectorAll('.hotspot, .part-card').forEach(el => el.classList.remove('active-match'));
+  try {
+    document.querySelectorAll(`[data-position="${CSS.escape(String(position))}"], [data-part-position="${CSS.escape(String(position))}"]`).forEach(el => el.classList.add('active-match'));
+  } catch {}
+  const part = selectedDevice?.parts?.find(p => String(p.position) === String(position));
+  if (part) renderSelectedPartGuide(part);
+  const stage = $('drawingStage');
+  stage?.classList.add('focus-pulse');
+  setTimeout(() => stage?.classList.remove('focus-pulse'), 700);
+};
+
+renderDrawingParts = function(parts) {
+  const box = $('drawingParts');
+  if (!parts?.length) { box.innerHTML = 'Brak pozycji dla wybranego urządzenia.'; return; }
+  box.className = 'part-list';
+  box.innerHTML = parts.map(p => `
+    <article class="part-card" data-part-position="${esc(p.position)}">
+      <div>
+        <h4>${esc(p.partName)}</h4>
+        <div class="meta"><span class="tag">poz. ${esc(p.position)}</span><span class="tag">${esc(p.partIndex)}</span><span class="tag">${esc(p.availability)}</span></div>
+      </div>
+      <div class="part-actions">
+        <button class="button ghost small" data-focus-position="${esc(p.position)}">Wskaż pozycję</button>
+        <button class="button primary small" data-add="${esc(p.id)}">Dodaj</button>
+      </div>
+    </article>`).join('');
+  box.querySelectorAll('[data-add]').forEach(btn => btn.addEventListener('click', () => addToCart(btn.dataset.add)));
+  box.querySelectorAll('[data-focus-position]').forEach(btn => btn.addEventListener('click', () => focusDrawingPosition(btn.dataset.focusPosition)));
+};
+
+const _oldSelectDevice = selectDevice;
+selectDevice = function(deviceIndex) {
+  selectedDevice = groupDevices().find(d => d.deviceIndex === deviceIndex);
+  unknownMode = false;
+  if (!selectedDevice) return;
+  const {toya} = drawingSourceFor(selectedDevice);
+  $('drawingHint').innerHTML = `${esc(selectedDevice.deviceIndex)} — ${esc(selectedDevice.deviceName)} ${toya?.partsPdfUrl ? '<br><span class="source-chip toya24">rysunek z TOYA24</span>' : ''}`;
+  renderDrawing(selectedDevice);
+  renderDrawingParts(selectedDevice.parts);
+  goToStep(2);
+  updateMailPreview();
+};
+
+const _oldRenderResults = renderResults;
+renderResults = function(devices) {
+  _oldRenderResults(devices);
+  document.querySelectorAll('.device-card').forEach(card => {
+    const title = card.querySelector('h3')?.textContent || '';
+    const model = (title.match(/[A-Z]{1,4}-?\d{3,}|\b\d{5,}\b/) || [''])[0];
+    if (model && !card.querySelector('.source-ribbon')) {
+      const d = groupDevices().find(x => x.deviceIndex === model || compactIndex(x.deviceIndex) === compactIndex(model));
+      if (d) card.querySelector('.meta')?.insertAdjacentHTML('afterend', sourceRibbonHtml(d));
+    }
+  });
+};
+
 document.addEventListener('DOMContentLoaded', init);
+
