@@ -685,6 +685,30 @@ function init() {
   $('clientForm').addEventListener('input', () => { updateMailPreview(); if (currentStep < 4) goToStep(4); });
   document.querySelectorAll('#unknownPanel input, #unknownPanel textarea').forEach(el => el.addEventListener('input', updateMailPreview));
   renderCart(); updateMailPreview(); goToStep(1);
+
+  if (window.PGWLiveSheet?.start) {
+    window.PGWLiveSheet.start({
+      getParts: () => PARTS,
+      setParts: (nextParts) => { PARTS = Array.isArray(nextParts) ? nextParts : PARTS; },
+      getDrawings: () => DRAWINGS,
+      setDrawings: (nextDrawings) => { DRAWINGS = Array.isArray(nextDrawings) ? nextDrawings : DRAWINGS; },
+      refresh: () => {
+        try {
+          const q = $('searchInput')?.value || '';
+          if (q && norm(q).length >= 2) renderResults(searchDevices(q));
+          if (selectedDevice) {
+            const current = selectedDevice.deviceIndex;
+            const fresh = groupDevices().find(d => d.deviceIndex === current);
+            if (fresh) {
+              selectedDevice = fresh;
+              renderDrawing(selectedDevice);
+              renderDrawingParts(selectedDevice.parts);
+            }
+          }
+        } catch (err) { console.warn('Live catalog refresh failed', err); }
+      }
+    });
+  }
 }
 
 

@@ -1,35 +1,25 @@
 # YATO Service Hub
 
-Statyczna aplikacja HTML/CSS/JS do obsługi zapytań o części pogwarancyjne.
+Kreator zapytań o części pogwarancyjne TOYA S.A. dla GitHub Pages.
 
-Klient wyszukuje urządzenie lub część, sprawdza rysunek/załącznik, dodaje pozycje do zapytania i generuje gotową wiadomość do serwisu.
+Klient wyszukuje urządzenie albo indeks części, otwiera rysunek/plik części z TOYA24 lub backupu Drive, dodaje pozycje do zapytania i generuje gotową wiadomość e-mail do serwisu.
 
 ## Źródła danych
 
-- **Baza części**: główny arkusz PGW na Google Drive.
-- **TOYA24 integracja**: zakładka w tym samym arkuszu, mapująca model urządzenia do karty produktu TOYA24 i PDF-a części zamiennych.
-- **TOYA24**: główne źródło PDF-ów / załączników.
-- **Google Drive**: backup rysunków, gdy TOYA24 nie jest jeszcze zmapowane.
+Aplikacja działa w lekkim modelu:
 
-Repo nie przechowuje ciężkich PDF-ów. Zawiera aplikację, indeks części i lekką mapę linków.
+- **GitHub Pages** — aplikacja, wygląd i fallback katalogu,
+- **Google Sheet PGW** — główna baza części i integracja TOYA24,
+- **TOYA24** — główne źródło kart produktów i PDF-ów części zamiennych,
+- **Google Drive** — backup rysunków/PDF-ów.
 
-## Aktualizacja mapy TOYA24
+Strona próbuje pobrać publiczny eksport CSV z arkusza:
 
-1. Uzupełnij zakładkę `TOYA24 integracja` w arkuszu Google.
-2. Wyeksportuj ją do CSV jako `data/toya24-integracja.csv`.
-3. Uruchom:
+- `Baza części`,
+- `TOYA24 integracja`.
 
-```bash
-node scripts/sheet-to-toya24-index.mjs data/toya24-integracja.csv assets/toya24-index.js
-```
+Jeżeli CSV arkusza nie jest publicznie dostępny, aplikacja przechodzi na katalog wbudowany w repo.
 
-4. Zrób commit i push do GitHub Pages.
+## Ważne
 
-## Dane klientów
-
-Aplikacja nie zapisuje danych klientów na serwerze. Wiadomość jest generowana lokalnie w przeglądarce użytkownika.
-
-
-## Aktualizacja danych
-
-Wersja `20260606-yt82200-family1` rozszerza rodzinę części `ZY82200xx` dla modelu `YT-82200`, dzięki czemu indeksy takie jak `ZY8220011` są wyszukiwalne w katalogu.
+Aby katalog live działał u klientów, arkusz musi umożliwiać odczyt CSV przez link lub być opublikowany do internetu. Dane klientów nie są zapisywane na serwerze — mail generuje się lokalnie w poczcie użytkownika.
