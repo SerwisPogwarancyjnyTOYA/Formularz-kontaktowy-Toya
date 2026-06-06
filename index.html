@@ -6,13 +6,13 @@
   <title>YATO Service Hub — kreator części pogwarancyjnych</title>
   <meta name="description" content="Kreator zapytania o części pogwarancyjne TOYA S.A." />
   <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="stylesheet" href="assets/style.css?v=20260605-polish2" />
+  <link rel="stylesheet" href="assets/style.css?v=20260606-prod-catalog1" />
 </head>
 <body>
   <header class="hero">
     <nav class="topbar">
       <div class="brandmark brandmark-official">
-        <img class="brandmark-logo official-yato-logo" src="assets/logos/yato-wordmark-clean.png?v=20260605-polish2" alt="YATO" />
+        <img class="brandmark-logo official-yato-logo" src="assets/logos/yato-service-clean.svg?v=20260606-prod-catalog1" alt="YATO" />
         <div class="brandmark-copy">
           <strong>Service Hub</strong>
           <small>Serwis pogwarancyjny</small>
@@ -30,11 +30,11 @@
     <section class="hero-grid">
       <div>
         <p class="eyebrow">Kreator zapytania o części</p>
-        <h1>Dobierz część z rysunku. Wyślij gotowe zapytanie.</h1>
-        <p class="lead">Wyszukaj urządzenie, sprawdź rysunek złożeniowy i przygotuj wiadomość do serwisu. Zapytania z kreatora obsługujemy zwykle w ciągu 2–4 godzin roboczych.</p>
+        <h1>Wybierz urządzenie. Kliknij część na rysunku. Wyślij gotowe zapytanie.</h1>
+        <p class="lead">Wyszukaj model albo nazwę części. Kreator pokaże rysunek złożeniowy, zawęzi listę pozycji i przygotuje kompletnego maila do serwisu.</p>
         <div class="hero-actions">
           <a class="button primary" href="#search">Szukaj urządzenia</a>
-          <button class="button ghost" id="fillDemoBtn" type="button">Wypełnij przykład: łańcuch do piły</button>
+          <button class="button ghost" id="fillDemoBtn" type="button">Przykład: tarcza polerska 82200</button>
           <button class="button ghost" id="unknownBtn" type="button">Nie znam modelu</button>
         </div>
         <div class="hero-mini-stats" aria-label="Najważniejsze informacje">
@@ -68,7 +68,7 @@
     <section class="brand-rail" aria-label="Marki TOYA S.A.">
       <span>Marki TOYA S.A.</span>
       <div class="brand-rail-logos">
-        <img src="assets/logos/brands-strip-clean.png?v=20260605-polish2" alt="Marki TOYA S.A.: TOYA, YATO, VOREL, STHOR, LUND, FLO, FALA" class="brand-strip" />
+        <img src="assets/logos/brands-strip-clean.png?v=20260606-prod-catalog1" alt="Marki TOYA S.A.: TOYA, YATO, VOREL, STHOR, LUND, FLO, FALA" class="brand-strip" />
       </div>
     </section>
 
@@ -98,10 +98,10 @@
       <div class="section-head">
         <p class="eyebrow">Krok 1</p>
         <h2>Wyszukaj urządzenie albo część</h2>
-        <p>Wpisz model, indeks części, nazwę urządzenia albo potoczną nazwę elementu.</p>
+        <p>Wpisz model, indeks części, nazwę urządzenia albo potoczną nazwę elementu.</p><div class="catalog-live-note"><strong>Katalog części:</strong> wyszukiwarka sprawdza nazwy części, indeksy SAP, pozycje z rysunków i modele urządzeń.</div>
       </div>
       <div class="searchbar">
-        <input id="searchInput" type="search" placeholder="np. YT-84920, YT-828390, łańcuch, pompa, ZG03395-13" autocomplete="off" />
+        <input id="searchInput" type="search" placeholder="np. 82200 tarcza polerska, YT-84920 łańcuch, ZG03395-13" autocomplete="off" />
         <button class="button primary" id="searchBtn" type="button">Szukaj</button>
       </div>
       <div id="results" class="results" aria-live="polite"></div>
@@ -222,7 +222,7 @@
     <span>Dane klienta nie są zapisywane na serwerze. Wiadomość generuje się lokalnie w poczcie użytkownika.</span>
   </footer>
 
-  <script src="assets/database.js?v=20260605-polish2"></script>
-  <script src="assets/app.js?v=20260605-polish2"></script>
+  <script src="assets/database.js?v=20260606-prod-catalog1"></script>
+  <script src="assets/app.js?v=20260606-prod-catalog1"></script>
 </body>
 </html>

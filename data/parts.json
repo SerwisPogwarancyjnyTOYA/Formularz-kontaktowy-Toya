@@ -1,5 +1,35 @@
 [
   {
+    "id": "yt-82200-zy8220067-67",
+    "public": true,
+    "deviceIndex": "YT-82200",
+    "deviceName": "Polerka YATO",
+    "brand": "YATO",
+    "category": "Polerki",
+    "partIndex": "ZY8220067",
+    "partName": "Tarcza polerska 150 mm",
+    "position": "67",
+    "drawingId": "yt-82200",
+    "availability": "Do potwierdzenia przez serwis",
+    "keywords": "tarcza polerska pad polishing 150 polerka krążek krazek dysk",
+    "source": "drawing-pdf"
+  },
+  {
+    "id": "yt-82200-zy8220004-4",
+    "public": true,
+    "deviceIndex": "YT-82200",
+    "deviceName": "Polerka YATO",
+    "brand": "YATO",
+    "category": "Polerki",
+    "partIndex": "ZY8220004",
+    "partName": "Tarcza polerska 150 mm",
+    "position": "4",
+    "drawingId": "yt-82200",
+    "availability": "Do potwierdzenia przez serwis",
+    "keywords": "tarcza polerska pad polishing 150 polerka krążek krazek dysk",
+    "source": "drawing-pdf"
+  },
+  {
     "id": "yt-84920-yt-84920-012-12",
     "public": true,
     "deviceIndex": "YT-84920",

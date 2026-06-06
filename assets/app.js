@@ -541,11 +541,128 @@ function localSuggest() {
   box.querySelectorAll('[data-pick-device]').forEach(btn => btn.addEventListener('click', () => selectDevice(btn.dataset.pickDevice)));
 }
 
+
+// Produkcyjny katalog części — wyszukiwanie po każdej załadowanej pozycji, nie tylko po modelu.
+function getCatalogMetaText() {
+  const meta = window.PGW_DATABASE_META || {};
+  const p = meta.partsCount || PARTS.length;
+  const d = meta.devicesCount || groupDevices().length;
+  return `${p} pozycji / ${d} indeksów w załadowanej bazie`;
+}
+
+function scorePart(part, query) {
+  const q = norm(query);
+  if (!q) return 0;
+  const compactQ = compactIndex(query);
+  const indexMode = looksLikeIndex(query);
+  const hay = norm([part.deviceIndex, part.deviceName, part.brand, part.category, part.partIndex, part.partName, part.position, part.keywords].join(' '));
+  const compactDevice = compactIndex(part.deviceIndex);
+  const compactPart = compactIndex(part.partIndex);
+  let score = 0;
+  if (compactPart === compactQ) score += 260;
+  if (compactDevice === compactQ) score += 180;
+  if (compactPart.includes(compactQ) || compactQ.includes(compactPart)) score += indexMode ? 120 : 30;
+  if (compactDevice.includes(compactQ) || compactQ.includes(compactDevice)) score += indexMode ? 100 : 25;
+  if (hay.includes(q)) score += 80;
+  const tokens = q.split(' ').filter(t => t.length > 1);
+  tokens.forEach(token => {
+    if (norm(part.partName).includes(token)) score += 30;
+    if (norm(part.deviceIndex).includes(token)) score += 25;
+    if (norm(part.deviceName).includes(token)) score += 18;
+    if (norm(part.partIndex).includes(token)) score += 20;
+    if (norm(part.keywords || '').includes(token)) score += 12;
+  });
+  return score;
+}
+
+function searchParts(query, limit = 12) {
+  if (!norm(query) || norm(query).length < 2) return [];
+  return PARTS.filter(p => p.public !== false)
+    .map(p => ({...p, score: scorePart(p, query)}))
+    .filter(p => p.score > 0)
+    .sort((a,b) => b.score - a.score || String(a.deviceIndex).localeCompare(String(b.deviceIndex), 'pl'))
+    .slice(0, limit);
+}
+
+function searchDevices(query) {
+  const q = norm(query);
+  if (!q || q.length < 2) return [];
+  const partHits = searchParts(query, 80);
+  const boost = new Map();
+  partHits.forEach(p => boost.set(p.deviceIndex, (boost.get(p.deviceIndex) || 0) + p.score));
+  return groupDevices()
+    .map(d => ({...d, score: scoreDevice(d, q) + (boost.get(d.deviceIndex) || 0), matchingParts: partHits.filter(p => p.deviceIndex === d.deviceIndex).slice(0,4)}))
+    .filter(d => d.score > 0)
+    .sort((a,b)=>b.score-a.score || a.deviceIndex.localeCompare(b.deviceIndex,'pl'))
+    .slice(0,8);
+}
+
+function renderResults(devices) {
+  const el = $('results');
+  if (!el) return;
+  const raw = $('searchInput').value;
+  const q = norm(raw);
+  if (!q) {
+    el.innerHTML = `<div class="muted-box"><strong>Katalog gotowy do wyszukiwania.</strong><br>${esc(getCatalogMetaText())}. Wpisz model, nazwę części albo indeks SAP — nie pokazujemy całej listy na start.</div>`;
+    return;
+  }
+  const partHits = searchParts(raw, 10);
+  const deviceHits = devices && devices.length ? devices : searchDevices(raw);
+  if (!partHits.length && !deviceHits.length) {
+    el.innerHTML = `<div class="muted-box"><strong>Brak pewnego dopasowania.</strong><br>Nie pokażę losowych części. Wpisz więcej danych, wybierz tryb „Nie znam modelu” albo opisz element — kreator przygotuje maila z prośbą o identyfikację.</div>`;
+    return;
+  }
+  const partSection = partHits.length ? `
+    <div class="catalog-section-title"><span>Najlepsze trafienia części</span><small>${partHits.length} z ${esc(getCatalogMetaText())}</small></div>
+    ${partHits.map(p => `
+      <article class="part-result-card catalog-result" data-part-result="${esc(p.id)}">
+        <div>
+          <div class="device-kicker">${esc(p.brand || 'TOYA')} • ${esc(p.deviceIndex)} • poz. ${esc(p.position || '—')}</div>
+          <h3>${esc(p.partName)}</h3>
+          <p>${esc(p.deviceName || 'Urządzenie do potwierdzenia')} · indeks części: <strong>${esc(p.partIndex)}</strong></p>
+          <div class="meta"><span class="tag">${esc(p.deviceIndex)}</span><span class="tag">${esc(p.partIndex)}</span><span class="tag">poz. ${esc(p.position || '—')}</span></div>
+        </div>
+        <div class="device-actions">
+          <button class="button ghost small" data-open-part="${esc(p.id)}">Pokaż rysunek</button>
+          <button class="button primary small" data-add="${esc(p.id)}">Dodaj do zapytania</button>
+        </div>
+      </article>`).join('')}` : '';
+  const deviceSection = deviceHits.length ? `
+    <div class="catalog-section-title"><span>Urządzenia i rysunki</span><small>wybierz model, aby zobaczyć rysunek</small></div>
+    ${deviceHits.map(d => `
+      <article class="device-card">
+        <div>
+          <div class="device-kicker">${esc(d.brand)} • ${esc(d.category || 'kategoria do uzupełnienia')}</div>
+          <h3>${esc(d.deviceIndex)} — ${esc(d.deviceName)}</h3>
+          <p>${d.matchingParts?.length ? 'Pasujące pozycje: ' + d.matchingParts.map(p => esc(p.partName)).join(', ') : d.parts.length + ' pozycji w bazie.'}</p>
+          <div class="meta"><span class="tag">${esc(d.deviceIndex)}</span><span class="tag">${esc(d.brand)}</span><span class="tag">części: ${d.parts.length}</span></div>
+        </div>
+        <div class="device-actions">
+          <button class="button ghost small" data-show-device="${esc(d.deviceIndex)}">Pokaż rysunek</button>
+          <button class="button primary small" data-pick-device="${esc(d.deviceIndex)}">Wybierz urządzenie</button>
+        </div>
+      </article>`).join('')}` : '';
+  el.innerHTML = partSection + deviceSection;
+  el.querySelectorAll('[data-pick-device],[data-show-device]').forEach(btn => btn.addEventListener('click', () => selectDevice(btn.dataset.pickDevice || btn.dataset.showDevice)));
+  el.querySelectorAll('[data-open-part]').forEach(btn => btn.addEventListener('click', () => openPartFromSearch(btn.dataset.openPart, false)));
+  el.querySelectorAll('[data-add]').forEach(btn => btn.addEventListener('click', () => openPartFromSearch(btn.dataset.add, true)));
+}
+
+function openPartFromSearch(partId, addAfterOpen = false) {
+  const part = PARTS.find(p => p.id === partId);
+  if (!part) return;
+  selectDevice(part.deviceIndex);
+  setTimeout(() => {
+    if (part.position && part.position !== '—') focusDrawingPosition(part.position);
+    if (addAfterOpen) addToCart(part.id);
+  }, 140);
+}
+
 function fillDemo() {
-  $('searchInput').value = 'YT-84920';
-  renderResults(searchDevices('YT-84920'));
-  selectDevice('YT-84920');
-  addToCart('yt-84920-chain-demo');
+  $('searchInput').value = '82200 tarcza polerska';
+  renderResults(searchDevices('82200 tarcza polerska'));
+  selectDevice('YT-82200');
+  addToCart('yt-82200-zy8220004-4');
   $('clientForm').elements.name.value = 'Jan Kowalski';
   $('clientForm').elements.email.value = 'jan.kowalski@email.pl';
   $('clientForm').elements.phone.value = '500 600 700';

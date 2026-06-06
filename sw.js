@@ -1,10 +1,10 @@
-const CACHE = 'yato-service-hub-v20260605-polish2';
+const CACHE = 'yato-service-hub-v20260606-prod-catalog1';
 const ASSETS = [
   './',
   './index.html',
-  './assets/style.css?v=20260605-polish2',
-  './assets/app.js?v=20260605-polish2',
-  './assets/database.js?v=20260605-polish2',
+  './assets/style.css?v=20260606-prod-catalog1',
+  './assets/app.js?v=20260606-prod-catalog1',
+  './assets/database.js?v=20260606-prod-catalog1',
   './data/parts.json',
   './data/drawings.json',
   './data/devices.json',
