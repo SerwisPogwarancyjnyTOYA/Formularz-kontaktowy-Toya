@@ -1,0 +1,21 @@
+.DS_Store
+node_modules/
+*.log
+.env
+
+# Duże paczki rysunków — NIE wrzucać do GitHuba
+*.z01
+*.z02
+*.z03
+*.z04
+*.z05
+*.z06
+*.z07
+*.z08
+*.z09
+*.z10
+*.z11
+Rysunki Zlozeniowe/
+Rysunki wybuchowe*.zip
+PGW - Rysunki*.zip
+ezyZip*.zip

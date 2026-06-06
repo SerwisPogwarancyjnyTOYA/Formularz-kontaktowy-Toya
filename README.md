@@ -23,3 +23,14 @@ Jeżeli CSV arkusza nie jest publicznie dostępny, aplikacja przechodzi na katal
 ## Ważne
 
 Aby katalog live działał u klientów, arkusz musi umożliwiać odczyt CSV przez link lub być opublikowany do internetu. Dane klientów nie są zapisywane na serwerze — mail generuje się lokalnie w poczcie użytkownika.
+
+
+## Aktualizacja 2026-06-07 — safety net TOYA24
+
+Ta wersja nie blokuje klienta, gdy modelu nie ma jeszcze w katalogu PGW. Dla każdego wpisanego indeksu/modelu tworzy panel źródeł:
+- szukanie w TOYA24,
+- Google zawężone do TOYA24,
+- Drive jako backup,
+- możliwość przygotowania zapytania bez udawania, że rysunek jest już zmapowany.
+
+Docelowo pełny katalog nadal generujemy z arkusza + importera TOYA24, ale strona nie może wyglądać jak martwa, gdy klient wpisze model spoza zaimportowanej bazy.
