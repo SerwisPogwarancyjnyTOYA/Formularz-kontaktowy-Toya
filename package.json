@@ -5,7 +5,8 @@
   "description": "Statyczny kreator zapytań o części pogwarancyjne",
   "scripts": {
     "serve": "python3 -m http.server 8080",
-    "convert:xlsx": "node scripts/excel-to-json.mjs"
+    "convert:xlsx": "node scripts/excel-to-json.mjs",
+    "build:toya24-index": "node scripts/sheet-to-toya24-index.mjs data/toya24-integracja.csv assets/toya24-index.js"
   },
   "devDependencies": {
     "xlsx": "^0.18.5"

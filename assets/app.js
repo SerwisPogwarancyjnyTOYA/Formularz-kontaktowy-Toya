@@ -711,7 +711,7 @@ function toya24SearchUrl(deviceIndex) {
 
 function drawingSourceFor(device) {
   const toya = findToya24Entry(device.deviceIndex);
-  const drive = DRAWINGS.find(d => d.id === device.drawingId || d.deviceIndex === device.deviceIndex);
+  const drive = DRAWINGS.find(d => d.id === device.drawingId || d.deviceIndex === device.deviceIndex) || (toya?.driveBackupUrl ? { deviceIndex: device.deviceIndex, title: `Backup Drive ${device.deviceIndex}`, driveViewUrl: toya.driveBackupUrl, drivePreviewUrl: toya.driveBackupUrl, type: 'drive-backup-from-sheet' } : null);
   return { toya, drive };
 }
 
@@ -720,7 +720,8 @@ function getCatalogMetaText() {
   const parts = meta?.partsCount || PARTS.filter(p => p.public !== false).length;
   const devices = meta?.devicesCount || groupDevices().length;
   const toyaCount = toya24Entries().length;
-  return `${parts} pozycji / ${devices} indeksów; TOYA24: ${toyaCount} zweryfikowanych linków PDF`;
+  const sheet = window.PGW_TOYA24_INDEX?.sheetName ? `; źródło linków: ${window.PGW_TOYA24_INDEX.sheetName}` : '';
+  return `${parts} pozycji / ${devices} indeksów; TOYA24: ${toyaCount} rekordów${sheet}`;
 }
 
 function sourceRibbonHtml(deviceOrIndex) {
@@ -744,12 +745,12 @@ renderDrawing = function(device) {
     stage.className = 'drawing-stage has-pdf-direct';
     const openOriginal = toya.partsPdfUrl;
     const productUrl = toya.productUrl || toya24SearchUrl(device.deviceIndex);
-    const backupUrl = drive?.driveViewUrl || drive?.localPath || '';
+    const backupUrl = toya?.driveBackupUrl || drive?.driveViewUrl || drive?.localPath || '';
     stage.innerHTML = `
       <div class="drawing-pro-header">
         <div>
           <strong>${esc(toya.partsTitle || `Części zamienne ${device.deviceIndex}`)}</strong>
-          <span>Źródło główne: TOYA24. PDF zostaje poza repo, a my trzymamy tylko lekką bazę części i link do załącznika.</span>
+          <span>Źródło główne: TOYA24. Link pochodzi z arkusza „TOYA24 integracja”; PDF zostaje poza repo.</span>
           ${sourceRibbonHtml(device)}
         </div>
         <div class="drawing-actions">
@@ -765,7 +766,7 @@ renderDrawing = function(device) {
         <aside class="pdf-side-panel" id="selectedPartGuide">
           <h4>Wybierz część z listy</h4>
           <p>Po kliknięciu części pokażemy tutaj numer pozycji, indeks i nazwę. PDF przewijasz normalnie w przeglądarce — bez udawania automatycznego trafiania w numer.</p>
-          <div class="pdf-note">Najpewniejszy tryb produkcyjny: TOYA24 jako główne źródło PDF, Google Drive jako zapas, baza części po naszej stronie.</div>
+          <div class="pdf-note">Tryb produkcyjny: TOYA24 jako główne źródło PDF, Google Drive jako zapas, baza części po naszej stronie. Aktualizacja linków: arkusz „TOYA24 integracja”.</div>
         </aside>
       </div>`;
     return;
@@ -805,7 +806,7 @@ renderDrawing = function(device) {
   stage.innerHTML = `
     <div class="toya24-missing-box">
       <strong>Brak podpiętego PDF-u dla ${esc(device.deviceIndex)}</strong>
-      <p>Nie zapychamy repo PDF-ami. Kliknij poniżej, aby znaleźć kartę produktu na TOYA24, a po zmapowaniu link trafi do lekkiej bazy.</p>
+      <p>Nie zapychamy repo PDF-ami. Linki uzupełniamy w arkuszu „TOYA24 integracja”, a strona korzysta z wygenerowanej lekkiej mapy.</p>
       <div class="drawing-actions">
         <a class="button primary small" href="${esc(toya24SearchUrl(device.deviceIndex))}" target="_blank" rel="noopener">Szukaj produktu na TOYA24</a>
         ${drive?.driveViewUrl ? `<a class="button ghost small" href="${esc(drive.driveViewUrl)}" target="_blank" rel="noopener">Backup Drive</a>` : ''}

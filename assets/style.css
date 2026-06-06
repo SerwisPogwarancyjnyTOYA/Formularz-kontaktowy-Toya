@@ -347,3 +347,5 @@ a{color:inherit}
 .part-card.active-match{box-shadow:0 0 0 1px rgba(247,48,39,.55),0 20px 35px rgba(247,48,39,.10)}
 .drawing-stage.has-pdf-direct{padding:0;background:transparent;border:0;min-height:unset}
 @media(max-width:980px){.pdf-source-layout{grid-template-columns:1fr}.pdf-frame,.pdf-frame-wrap{min-height:520px;height:68vh}.pdf-side-panel{order:-1}}
+
+.section-source-note{margin:6px 0 0;color:#668078;font-size:13px;line-height:1.45}.section-source-note b{color:#0c4a3c}.source-chip.toya24{background:rgba(205,34,28,.10);border-color:rgba(205,34,28,.30);color:#b7201c}.drawing-pro-header .source-ribbon{margin-top:8px}
