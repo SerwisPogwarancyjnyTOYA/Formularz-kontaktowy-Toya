@@ -1,6 +1,6 @@
 window.PGW_TOYA24_INDEX = {
   "generatedAt": "2026-06-06",
-  "version": "20260606-sheet-source1",
+  "version": "20260606-yt82200-family1",
   "source": "Google Sheet: Baza_czesci_PGW_AKTUALIZACJA_2026-06-03 / zakładka TOYA24 integracja",
   "sheetUrl": "https://docs.google.com/spreadsheets/d/1bHcHt8Z8BwfJNAG5w-HHEz3f2Rh1NZ-nZsJ0xc3tPnQ/edit",
   "sheetName": "TOYA24 integracja",

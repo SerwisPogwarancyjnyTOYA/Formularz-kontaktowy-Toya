@@ -28,3 +28,8 @@ node scripts/sheet-to-toya24-index.mjs data/toya24-integracja.csv assets/toya24-
 ## Dane klientów
 
 Aplikacja nie zapisuje danych klientów na serwerze. Wiadomość jest generowana lokalnie w przeglądarce użytkownika.
+
+
+## Aktualizacja danych
+
+Wersja `20260606-yt82200-family1` rozszerza rodzinę części `ZY82200xx` dla modelu `YT-82200`, dzięki czemu indeksy takie jak `ZY8220011` są wyszukiwalne w katalogu.
