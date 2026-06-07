@@ -917,5 +917,148 @@ renderResults = function(devices) {
   });
 };
 
+
+
+/* FULL PRODUCT SAFETY NET — no more dead searches.
+   If a model/part is not yet in PGW sheet, the UI still creates a working TOYA24/Drive fallback card. */
+function normalizeModel(raw='') {
+  const txt = String(raw || '').toUpperCase().trim();
+  const m = txt.match(/\b(YT|YG|YTG|S|V|FLO|LUND|STHOR|VOREL)?[-\s]?(\d{4,7})\b/);
+  if (!m) return '';
+  const prefix = m[1] || (txt.includes('GASTRO') ? 'YG' : 'YT');
+  return `${prefix}-${m[2]}`.replace('YT-0','YT-0');
+}
+function toya24SearchUrlAny(q='') {
+  const text = encodeURIComponent(String(q || '').trim());
+  return `https://toya24.pl/pl-PL/search?text=${text}`;
+}
+function googleToya24SearchUrl(q='') {
+  return `https://www.google.com/search?q=${encodeURIComponent('site:toya24.pl '+String(q||'').trim())}`;
+}
+function driveFallbackSearchUrl(q='') {
+  return `https://drive.google.com/drive/search?q=${encodeURIComponent(String(q||'').trim())}`;
+}
+function makeFallbackPart(rawQuery) {
+  const model = normalizeModel(rawQuery) || String(rawQuery || '').toUpperCase().trim();
+  const clean = compactIndex(model || rawQuery || 'fallback');
+  return {
+    id: `fallback-${clean}`,
+    public: true,
+    deviceIndex: model || String(rawQuery || '').toUpperCase(),
+    deviceName: `Model do wyszukania w TOYA24`,
+    brand: model.startsWith('YG') ? 'YATO GASTRO' : 'YATO',
+    category: 'Do pobrania z TOYA24 / Drive backup',
+    partIndex: model || String(rawQuery || '').toUpperCase(),
+    partName: `Zapytanie o ${model || rawQuery}`,
+    position: '—',
+    drawingId: `fallback-${clean}`,
+    availability: 'Do potwierdzenia przez serwis',
+    keywords: `${rawQuery} ${model} toya24 rysunek części zamienne instrukcja`,
+    fallbackOnly: true
+  };
+}
+function ensureFallbackPart(rawQuery) {
+  const part = makeFallbackPart(rawQuery);
+  const exists = PARTS.find(p => p.id === part.id || compactIndex(p.deviceIndex) === compactIndex(part.deviceIndex));
+  if (exists) return exists;
+  PARTS.push(part);
+  DRAWINGS.push({
+    id: part.drawingId,
+    deviceIndex: part.deviceIndex,
+    brand: part.brand,
+    title: `TOYA24 / Drive — ${part.deviceIndex}`,
+    type: 'toya24-search-fallback',
+    status: 'fallback_search',
+    toya24ProductUrl: toya24SearchUrlAny(part.deviceIndex),
+    toya24PartsPdfUrl: '',
+    driveViewUrl: driveFallbackSearchUrl(part.deviceIndex)
+  });
+  return part;
+}
+function fallbackResultHtml(rawQuery) {
+  const part = makeFallbackPart(rawQuery);
+  const model = esc(part.deviceIndex || rawQuery);
+  const q = esc(String(rawQuery || '').trim());
+  return `
+    <div class="catalog-section-title"><span>Nie ma jeszcze tego w bazie PGW</span><small>ale klient nie zostaje ze ścianą</small></div>
+    <article class="device-card fallback-card">
+      <div>
+        <div class="device-kicker">TOYA24 safety net • wyszukiwanie po modelu/indeksie</div>
+        <h3>${model} — wyszukaj w TOYA24 / Drive</h3>
+        <p>Ten model nie jest jeszcze w eksporcie katalogu. Kreator może mimo tego przygotować zapytanie i otworzyć źródła, gdzie zwykle jest karta produktu oraz sekcja „Do pobrania”.</p>
+        <div class="meta"><span class="tag">${model}</span><span class="tag">TOYA24</span><span class="tag">Drive backup</span></div>
+        <div class="source-ribbon"><span class="source-chip warn">do importu</span><span class="source-chip">nie blokuj klienta</span></div>
+      </div>
+      <div class="device-actions">
+        <button class="button ghost small" data-fallback-device="${esc(part.deviceIndex)}" data-raw-query="${q}">Pokaż panel źródeł</button>
+        <a class="button primary small" href="${esc(toya24SearchUrlAny(rawQuery))}" target="_blank" rel="noopener">Szukaj w TOYA24</a>
+        <a class="button ghost small" href="${esc(googleToya24SearchUrl(rawQuery))}" target="_blank" rel="noopener">Google → TOYA24</a>
+      </div>
+    </article>`;
+}
+function selectFallbackDevice(rawQuery) {
+  const p = ensureFallbackPart(rawQuery);
+  selectedDevice = {
+    deviceIndex: p.deviceIndex,
+    deviceName: p.deviceName,
+    brand: p.brand,
+    category: p.category,
+    drawingId: p.drawingId,
+    parts: [p],
+    fallbackOnly: true
+  };
+  unknownMode = false;
+  $('drawingHint').innerHTML = `${esc(selectedDevice.deviceIndex)} — źródła zewnętrzne <br><span class="source-chip warn">TOYA24 / Drive fallback</span>`;
+  renderFallbackDrawingPanel(selectedDevice, rawQuery);
+  renderDrawingParts(selectedDevice.parts);
+  goToStep(2);
+  updateMailPreview();
+}
+function renderFallbackDrawingPanel(device, rawQuery) {
+  const q = rawQuery || device.deviceIndex;
+  const stage = $('drawingStage');
+  stage.className = 'drawing-stage has-pdf-direct fallback-drawing';
+  stage.innerHTML = `
+    <div class="drawing-pro-header">
+      <div>
+        <strong>${esc(device.deviceIndex)} — brak lokalnego rysunku w katalogu</strong>
+        <span>To nie jest koniec procesu. Otwórz TOYA24/Drive, a klient nadal może wysłać kompletne zapytanie z modelem.</span>
+      </div>
+      <div class="drawing-actions">
+        <a class="button primary small" href="${esc(toya24SearchUrlAny(q))}" target="_blank" rel="noopener">Szukaj w TOYA24</a>
+        <a class="button ghost small" href="${esc(googleToya24SearchUrl(q))}" target="_blank" rel="noopener">Google → TOYA24</a>
+        <a class="button ghost small" href="${esc(driveFallbackSearchUrl(q))}" target="_blank" rel="noopener">Drive backup</a>
+      </div>
+    </div>
+    <div class="fallback-source-board">
+      <div class="fallback-step"><b>1</b><strong>Karta produktu TOYA24</strong><span>Otwórz wynik i sprawdź sekcję „Do pobrania”.</span></div>
+      <div class="fallback-step"><b>2</b><strong>Części zamienne / PDF</strong><span>Jeżeli PDF istnieje, kopiujemy link do arkusza „TOYA24 integracja”.</span></div>
+      <div class="fallback-step"><b>3</b><strong>Backup Drive</strong><span>Gdy TOYA24 nie ma załącznika, rysunek podpinamy z Dysku.</span></div>
+    </div>
+    <div class="empty-state strong">Ten model jest do importu. Strona nie udaje rysunku, którego nie ma — daje ścieżkę do źródeł i pozwala wysłać zapytanie.</div>`;
+}
+
+const _pgwOldRenderResults2 = renderResults;
+renderResults = function(devices) {
+  const raw = $('searchInput')?.value || '';
+  _pgwOldRenderResults2(devices);
+  const hasResults = $('results')?.querySelector('.device-card, .part-result-card');
+  if (!hasResults && norm(raw).length >= 2) {
+    $('results').innerHTML = fallbackResultHtml(raw);
+  } else if (hasResults && looksLikeIndex(raw) && !PARTS.some(p => compactIndex(p.partIndex) === compactIndex(raw) || compactIndex(p.deviceIndex) === compactIndex(raw))) {
+    $('results').insertAdjacentHTML('beforeend', fallbackResultHtml(raw));
+  }
+  $('results')?.querySelectorAll('[data-fallback-device]').forEach(btn => btn.addEventListener('click', () => selectFallbackDevice(btn.dataset.rawQuery || btn.dataset.fallbackDevice)));
+};
+
+const _pgwOldRenderDrawing2 = renderDrawing;
+renderDrawing = function(device) {
+  if (device?.fallbackOnly || DRAWINGS.find(d => d.id === device?.drawingId)?.type === 'toya24-search-fallback') {
+    renderFallbackDrawingPanel(device, device.deviceIndex);
+    return;
+  }
+  _pgwOldRenderDrawing2(device);
+};
+
 document.addEventListener('DOMContentLoaded', init);
 

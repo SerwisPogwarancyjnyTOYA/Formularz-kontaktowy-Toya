@@ -356,3 +356,14 @@ a{color:inherit}
 .live-catalog-status.ok{border-color:rgba(96,255,196,.35);background:linear-gradient(135deg,rgba(8,65,51,.78),rgba(12,42,35,.72))}
 .live-catalog-status.warn{border-color:rgba(255,184,82,.40);background:rgba(95,61,20,.35);color:#ffe9c0}
 .live-catalog-status small{display:block;margin-top:3px;opacity:.82;font-weight:600}
+
+
+/* safety net fallback for every TOYA24 index/model */
+.fallback-card{border-color:rgba(255,190,70,.45)!important;background:linear-gradient(135deg,rgba(255,180,50,.10),rgba(255,255,255,.03))!important}
+.source-chip.warn{background:rgba(255,185,70,.14);border-color:rgba(255,185,70,.45);color:#ffd891}
+.fallback-source-board{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;padding:18px;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.10);border-radius:22px;margin:14px 0}
+.fallback-step{display:grid;gap:8px;padding:16px;border-radius:18px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.10)}
+.fallback-step b{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:999px;background:#ee2b22;color:white}
+.fallback-step strong{font-size:1.05rem}.fallback-step span{color:var(--muted)}
+.empty-state.strong{font-weight:800;border-color:rgba(255,185,70,.35);background:rgba(255,185,70,.08)}
+@media(max-width:850px){.fallback-source-board{grid-template-columns:1fr}}
