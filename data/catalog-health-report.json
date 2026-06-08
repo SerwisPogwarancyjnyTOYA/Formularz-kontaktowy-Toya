@@ -1,0 +1,26 @@
+{
+  "generatedAt": "2026-06-07T02:28:57Z",
+  "build": "full-catalog-v4-drive-pdf-import",
+  "partsCount": 36390,
+  "drawingsCount": 22035,
+  "importedModels": [
+    "YT-85177",
+    "YT-85176"
+  ],
+  "importedParts": 66,
+  "tests": {
+    "ZY8220011": true,
+    "YT-82200": true,
+    "YT-85177": true,
+    "ZY85176-31": true
+  },
+  "pdfSource": {
+    "driveViewUrl": "https://drive.google.com/file/d/1Cfxs0W_ag9wBnhdkNHzLOs51R6nYfc-H/view?usp=drivesdk",
+    "localPath": "drawings/YATO/YT/Czesci_zamienne_YT-85177.pdf"
+  },
+  "notes": [
+    "YT-85177 przestaje być fallbackiem - ma prawdziwy PDF z Drive i lokalną kopię w paczce.",
+    "Części z PDF zostały wyciągnięte tekstowo i dodane do katalogu.",
+    "TOYA24 nadal jest primary dla modeli z linkiem, Drive/lokalny PDF jako backup."
+  ]
+}
