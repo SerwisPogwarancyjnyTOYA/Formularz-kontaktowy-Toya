@@ -1,9 +1,0 @@
-{
-  "name":"YATO Service Hub",
-  "short_name":"YATO Hub",
-  "start_url":"./index.html",
-  "display":"standalone",
-  "background_color":"#0b1110",
-  "theme_color":"#d62518",
-  "description":"Kreator zapytań o części pogwarancyjne TOYA S.A."
-}
