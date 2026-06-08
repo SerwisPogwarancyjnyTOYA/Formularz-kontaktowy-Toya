@@ -132,12 +132,21 @@ function selectDevice(deviceIndex) {
   updateMailPreview();
 }
 
+function drawingKey(v='') {
+  return compactIndex(String(v).replace(/^czesci[_\s-]*zamienne[_\s-]*/i,'').replace(/\.(pdf|docx?|png|jpe?g)$/i,''));
+}
+
+function findDrawingForDevice(device) {
+  const wanted = [device.drawingId, device.deviceIndex, ...(device.parts || []).map(p => p.drawingId)].filter(Boolean).map(drawingKey);
+  return DRAWINGS.find(d => wanted.includes(drawingKey(d.id)) || wanted.includes(drawingKey(d.deviceIndex)) || wanted.includes(drawingKey(d.title)));
+}
+
 function renderDrawing(device) {
   const stage = $('drawingStage');
-  const drawing = DRAWINGS.find(d => d.id === device.drawingId || d.deviceIndex === device.deviceIndex);
+  const drawing = findDrawingForDevice(device);
   if (!drawing) {
     stage.className = 'drawing-stage empty';
-    stage.innerHTML = `<div class="empty-state">Rysunek dla ${esc(device.deviceIndex)} jest jeszcze do podpięcia.</div>`;
+    stage.innerHTML = `<div class="empty-state"><strong>Rysunek złożeniowy jest w trakcie podpinania.</strong><br>Możesz wybrać części z listy i wysłać zapytanie — serwis potwierdzi dobór.</div>`;
     return;
   }
   if (drawing.type === 'svg-demo') {
@@ -149,16 +158,21 @@ function renderDrawing(device) {
     }));
     return;
   }
-  if (drawing.drivePreviewUrl || drawing.localPath) {
-    const src = drawing.localPath || drawing.drivePreviewUrl;
+  const previewSrc = drawing.drivePreviewUrl || drawing.previewUrl || drawing.localPath || drawing.driveViewUrl || drawing.url;
+  const openUrl = drawing.driveViewUrl || drawing.viewUrl || drawing.drivePreviewUrl || drawing.localPath || drawing.url;
+  if (previewSrc) {
     stage.className = 'drawing-stage has-embed';
     stage.innerHTML = `
-      <div class="drawing-toolbar"><strong>${esc(drawing.title)}</strong><div class="links">${drawing.driveViewUrl ? `<a class="button ghost small" href="${drawing.driveViewUrl}" target="_blank" rel="noopener">Otwórz w Drive</a>` : ''}</div></div>
-      <iframe class="drawing-embed" src="${src}" title="${esc(drawing.title)}"></iframe>`;
+      <div class="drawing-toolbar">
+        <strong>${esc(drawing.title || `Rysunek ${device.deviceIndex}`)}</strong>
+        <div class="links">${openUrl ? `<a class="button ghost small" href="${openUrl}" target="_blank" rel="noopener">Otwórz rysunek</a>` : ''}</div>
+      </div>
+      <iframe class="drawing-embed" src="${previewSrc}" title="${esc(drawing.title || device.deviceIndex)}"></iframe>
+      <div class="drawing-note">Jeżeli podgląd PDF nie załaduje się w przeglądarce, użyj przycisku „Otwórz rysunek”.</div>`;
     return;
   }
   stage.className = 'drawing-stage empty';
-  stage.innerHTML = `<div class="empty-state"><strong>${esc(drawing.title)}</strong><br>Rysunek jest w indeksie, ale plik lokalny/Drive będzie podpięty po segregacji paczek.</div>`;
+  stage.innerHTML = `<div class="empty-state"><strong>Rysunek złożeniowy jest w trakcie podpinania.</strong><br>Lista części jest dostępna — możesz dodać pozycje do zapytania, a serwis potwierdzi dobór.</div>`;
 }
 
 function renderDrawingParts(parts) {
