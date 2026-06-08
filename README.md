@@ -1,59 +1,65 @@
-# YATO Service Hub — katalog źródłowy bootstrap
+# YATO Service Hub — kreator zapytania o części pogwarancyjne
 
-Ta paczka jest krokiem od demo do pełnej bazy.
+Statyczna aplikacja HTML/CSS/JS do GitHub Pages. Klient wyszukuje urządzenie lub część, widzi rysunek złożeniowy, dodaje części do zapytania i generuje gotowego maila do serwisu.
 
-## Co jest w środku
+## Co jest w tej aktualizacji
 
-- `assets/database.js` — wygenerowany katalog bootstrap: **36324 pozycji** i **21733 urządzeń/rodzin** z dostępnych źródeł.
-- `data/catalog.generated.json` — ten sam katalog jako JSON.
-- TOYA24 pozostaje źródłem głównym PDF/kart produktów.
-- Drive pozostaje backupiem.
-- Jeśli modelu nie ma w katalogu, strona pokazuje panel TOYA24/Drive, zamiast ściany.
+- podmienione logotypy marek z paczki Drive: YATO, VOREL, STHOR, LUND, FLO, FALA,
+- usunięty POWER UP z widoku marek,
+- dodana docelowa struktura folderów `drawings/`,
+- dodany plik `data/logos.json`,
+- rozbudowany `data/drawings.json` o pola `localPath`, `driveViewUrl`, `drivePreviewUrl`,
+- formularz potrafi wyświetlać rysunek PDF/obraz w środku strony,
+- Drive zostaje jako fallback: przycisk „Otwórz z Drive”.
 
-## Testy
+## Publikacja na GitHub Pages
 
-- `ZY8220011` — powinno znaleźć Kulka stalowa dla YT-82200.
-- `ZY85716-52` — powinno znaleźć FILTR HEPA z listy SAP i wywnioskować model YT-85716.
-- `YT-85177` — jeśli nadal nie ma w SAP/Baza części, pokaże safety-net TOYA24/Drive, nie martwy brak wyniku.
+1. Skopiuj zawartość tej paczki do repozytorium.
+2. Zrób commit, np. `foundation: logos and drawings structure`.
+3. Wypchnij na GitHuba.
+4. GitHub Pages powinien przebudować stronę automatycznie.
 
-## Następny etap
+## Testy wyszukiwarki
 
-Crawler TOYA24 ma uzupełnić `toya24ProductUrl` i `partsPdfUrl` dla modeli. Nie robimy tego live w GitHub Pages.
+Wpisz w formularzu:
 
-# YATO Service Hub
+- `YT-84920` — demo klikalnego rysunku,
+- `YT-828390` — test rysunku z indeksu Drive,
+- `YT-8277905`,
+- `YT-852371`,
+- `YG-03395`,
+- `ZG03395-13`.
 
-Kreator zapytań o części pogwarancyjne TOYA S.A. dla GitHub Pages.
+## Rysunki lokalne
 
-Klient wyszukuje urządzenie albo indeks części, otwiera rysunek/plik części z TOYA24 lub backupu Drive, dodaje pozycje do zapytania i generuje gotową wiadomość e-mail do serwisu.
+Docelowo rysunki wrzucamy do:
 
-## Źródła danych
+```text
+drawings/YATO/YT/YT-828390.pdf
+drawings/YATO/YG/YG-03395.pdf
+drawings/VOREL/...
+drawings/STHOR/...
+drawings/LUND/...
+drawings/FLO/...
+drawings/FALA/...
+drawings/unmapped/...
+```
 
-Aplikacja działa w lekkim modelu:
+Na razie foldery mają pliki `.gitkeep`, żeby struktura istniała w repo.
 
-- **GitHub Pages** — aplikacja, wygląd i fallback katalogu,
-- **Google Sheet PGW** — główna baza części i integracja TOYA24,
-- **TOYA24** — główne źródło kart produktów i PDF-ów części zamiennych,
-- **Google Drive** — backup rysunków/PDF-ów.
+## Dane klientów
 
-Strona próbuje pobrać publiczny eksport CSV z arkusza:
-
-- `Baza części`,
-- `TOYA24 integracja`.
-
-Jeżeli CSV arkusza nie jest publicznie dostępny, aplikacja przechodzi na katalog wbudowany w repo.
-
-## Ważne
-
-Aby katalog live działał u klientów, arkusz musi umożliwiać odczyt CSV przez link lub być opublikowany do internetu. Dane klientów nie są zapisywane na serwerze — mail generuje się lokalnie w poczcie użytkownika.
+Aplikacja nie zapisuje danych klientów na serwerze. Przycisk „Generuj maila” otwiera domyślną pocztę klienta przez `mailto:`.
 
 
-## Aktualizacja 2026-06-07 — safety net TOYA24
+## Aktualizacja logo 2026-06-04
+Logotypy marek są w `assets/logos/` i są używane bezpośrednio na stronie. POWER UP nie jest używany.
 
-Ta wersja nie blokuje klienta, gdy modelu nie ma jeszcze w katalogu PGW. Dla każdego wpisanego indeksu/modelu tworzy panel źródeł:
-- szukanie w TOYA24,
-- Google zawężone do TOYA24,
-- Drive jako backup,
-- możliwość przygotowania zapytania bez udawania, że rysunek jest już zmapowany.
+## Hotfix 2026-06-04 — logo w nagłówku
 
-Docelowo pełny katalog nadal generujemy z arkusza + importera TOYA24, ale strona nie może wyglądać jak martwa, gdy klient wpisze model spoza zaimportowanej bazy.
+Nagłówek strony używa teraz właściwego logotypu YATO z pliku `assets/logos/yato-official.png`, zamiast tymczasowego czerwonego badge'a tekstowego.
 
+
+## Snapshot bazy
+
+Wersja `20260608-full-db1`: 36329 rekordów części, 8530 grup urządzeń/indeksów.

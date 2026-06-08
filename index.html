@@ -6,13 +6,13 @@
   <title>YATO Service Hub — kreator części pogwarancyjnych</title>
   <meta name="description" content="Kreator zapytania o części pogwarancyjne TOYA S.A." />
   <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="stylesheet" href="assets/style.css?v=20260606-yt82200-family1" />
+  <link rel="stylesheet" href="assets/style.css?v=20260604-partial-db1" />
 </head>
 <body>
   <header class="hero">
     <nav class="topbar">
       <div class="brandmark brandmark-official">
-        <img class="brandmark-logo official-yato-logo" src="assets/logos/yato-service-clean.svg?v=20260606-yt82200-family1" alt="YATO" />
+        <img class="brandmark-logo official-yato-logo" src="assets/logos/yato-wordmark-clean.png?v=20260604-partial-db1" alt="YATO" />
         <div class="brandmark-copy">
           <strong>Service Hub</strong>
           <small>Serwis pogwarancyjny</small>
@@ -20,27 +20,15 @@
       </div>
       <div class="pill">Serwis pogwarancyjny · TOYA S.A.</div>
     </nav>
-    <section class="phone-warning slim-warning" aria-label="Informacja o doborze części">
-      <div class="warning-icon">⏱️</div>
-      <div>
-        <strong>Telefon nie przyspieszy doboru części.</strong>
-        <span>Konsultant nie widzi urządzenia ani rysunku. Najszybciej: wybierz model w kreatorze i wyślij kompletne zapytanie mailem.</span>
-      </div>
-    </section>
     <section class="hero-grid">
       <div>
         <p class="eyebrow">Kreator zapytania o części</p>
-        <h1>Wybierz urządzenie. Kliknij część na rysunku. Wyślij gotowe zapytanie.</h1>
-        <p class="lead">Wyszukaj model albo nazwę części. Kreator pokaże rysunek złożeniowy, zawęzi listę pozycji i przygotuje kompletnego maila do serwisu.</p>
+        <h1>Nie zgaduj części. Wybierz ją z rysunku i wygeneruj gotowego maila.</h1>
+        <p class="lead">Klient wyszukuje urządzenie, dodaje części do zapytania, uzupełnia dane i otwiera gotową wiadomość w swojej poczcie.</p>
         <div class="hero-actions">
-          <a class="button primary" href="#search">Szukaj urządzenia</a>
-          <button class="button ghost" id="fillDemoBtn" type="button">Przykład: tarcza polerska 82200</button>
-          <button class="button ghost" id="unknownBtn" type="button">Nie znam modelu</button>
-        </div>
-        <div class="hero-mini-stats" aria-label="Najważniejsze informacje">
-          <span><b>2–4 h</b> zwykle na odpowiedź</span>
-          <span><b>0</b> zapisanych danych na serwerze</span>
-          <span><b>1 mail</b> z kompletem informacji</span>
+          <a class="button primary" href="#search">Szukaj części</a>
+          <button class="button ghost" id="fillDemoBtn" type="button">Wypełnij przykład: łańcuch do piły</button>
+          <button class="button ghost" id="unknownBtn" type="button">Nie znam indeksu urządzenia</button>
         </div>
       </div>
       <aside class="hero-card">
@@ -56,27 +44,25 @@
     </section>
   </header>
 
-
-  <div class="wizard-progress" aria-label="Postęp kreatora">
-    <button class="step-pill active" type="button" data-jump-step="1"><span>1</span> Urządzenie</button>
-    <button class="step-pill" type="button" data-jump-step="2"><span>2</span> Rysunek</button>
-    <button class="step-pill" type="button" data-jump-step="3"><span>3</span> Zapytanie</button>
-    <button class="step-pill" type="button" data-jump-step="4"><span>4</span> Dane</button>
-    <button class="step-pill" type="button" data-jump-step="5"><span>5</span> Mail</button>
-  </div>
-  <main class="layout wizard-layout">
+  <main class="layout">
     <section class="brand-rail" aria-label="Marki TOYA S.A.">
       <span>Marki TOYA S.A.</span>
       <div class="brand-rail-logos">
-        <img src="assets/logos/brands-strip-clean.png?v=20260606-yt82200-family1" alt="Marki TOYA S.A.: TOYA, YATO, VOREL, STHOR, LUND, FLO, FALA" class="brand-strip" />
+        <img class="toya-logo" src="assets/logos/toya.png?v=20260604-partial-db1" alt="TOYA S.A." />
+        <img src="assets/logos/yato-wordmark-clean.png?v=20260604-partial-db1" alt="YATO" />
+        <img src="assets/logos/vorel.png?v=20260604-partial-db1" alt="VOREL" />
+        <img src="assets/logos/sthor.png?v=20260604-partial-db1" alt="STHOR" />
+        <img src="assets/logos/lund.png?v=20260604-partial-db1" alt="LUND" />
+        <img src="assets/logos/flo.png?v=20260604-partial-db1" alt="FLO" />
+        <img src="assets/logos/fala.png?v=20260604-partial-db1" alt="FALA" />
       </div>
     </section>
 
-    <section class="panel choice-panel wizard-step" data-step="1">
+    <section class="panel choice-panel">
       <div class="section-head">
         <p class="eyebrow">Start</p>
-        <h2>Jak chcesz zacząć?</h2>
-        <p>Najpierw ustalamy model urządzenia. Dopiero potem pokazujemy rysunek i części.</p>
+        <h2>Wybierz ścieżkę</h2>
+        <p>Klient najpierw wybiera urządzenie. Części pokazujemy dopiero po wejściu w konkretny model.</p>
       </div>
       <div class="choice-grid">
         <button class="choice-card" type="button" onclick="document.getElementById('searchInput').focus()">
@@ -89,25 +75,25 @@
         </button>
         <button class="choice-card" type="button" onclick="document.getElementById('aiDescription').focus()">
           <strong>Opisz część po ludzku</strong>
-          <span>Kreator podpowie pasujące elementy z listy części.</span>
+          <span>Lokalny matcher podpowie kandydatów z listy części.</span>
         </button>
       </div>
     </section>
 
-    <section class="panel wizard-step" id="search" data-step="1">
+    <section class="panel" id="search">
       <div class="section-head">
         <p class="eyebrow">Krok 1</p>
         <h2>Wyszukaj urządzenie albo część</h2>
-        <p>Wpisz model, indeks części, nazwę urządzenia albo potoczną nazwę elementu.</p><div class="catalog-live-note"><strong>Katalog części:</strong> wyszukiwarka sprawdza nazwy części, indeksy SAP, pozycje z rysunków i modele urządzeń.</div>
+        <p>Wpisz model, indeks części, nazwę urządzenia albo potoczną nazwę elementu.</p>
       </div>
       <div class="searchbar">
-        <input id="searchInput" type="search" placeholder="np. 82200 tarcza polerska, YT-84920 łańcuch, ZG03395-13" autocomplete="off" />
+        <input id="searchInput" type="search" placeholder="np. YT-84920, YT-828390, łańcuch, pompa, ZG03395-13" autocomplete="off" />
         <button class="button primary" id="searchBtn" type="button">Szukaj</button>
       </div>
       <div id="results" class="results" aria-live="polite"></div>
     </section>
 
-    <section class="panel hidden wizard-step" id="unknownPanel" data-step="1">
+    <section class="panel hidden" id="unknownPanel">
       <div class="section-head">
         <p class="eyebrow">Tryb awaryjny</p>
         <h2>Nie znasz indeksu? Nie zgaduj.</h2>
@@ -124,26 +110,24 @@
       </div>
     </section>
 
-    <section class="panel ai-panel wizard-step" data-step="1">
+    <section class="panel ai-panel">
       <div class="section-head">
-        <p class="eyebrow">Pomoc w doborze</p>
+        <p class="eyebrow">AI-ready</p>
         <h2>Opisz część własnymi słowami</h2>
-        <p>Nie znasz fachowej nazwy? Opisz element potocznie — kreator spróbuje zawęzić listę pasujących części.</p>
+        <p>Na razie działa lokalny matcher po nazwach i synonimach. Później podepniemy prawdziwe AI przez bezpieczny backend.</p>
       </div>
       <div class="searchbar">
         <input id="aiDescription" type="text" placeholder="np. plastik przy spuście, zębatka przy łańcuchu, uszczelka, szczotki..." />
-        <button class="button primary" id="aiSuggestBtn" type="button">Szukaj w opisie</button>
+        <button class="button primary" id="aiSuggestBtn" type="button">Podpowiedz części</button>
       </div>
       <div id="aiSuggestions" class="results"></div>
     </section>
 
-    <section class="panel drawing-panel wizard-step" id="drawing" data-step="2">
+    <section class="panel drawing-panel" id="drawing">
       <div class="section-head">
         <p class="eyebrow">Krok 2</p>
-        <h2>Rysunek / załącznik TOYA24</h2>
-        <p class="section-source-note">Źródła linków: zakładka <b>TOYA24 integracja</b> w głównym arkuszu PGW. Drive działa jako backup.</p>
+        <h2>Rysunek złożeniowy</h2>
         <p id="drawingHint">Wybierz wynik wyszukiwania, aby zobaczyć rysunek i powiązane części.</p>
-        <p class="touch-hint">Na telefonie rozszerz palcami, aby przybliżyć rysunek. Pozycję wybierz z listy obok albo kliknij numer na rysunku, jeśli jest aktywny.</p>
       </div>
       <div class="drawing-wrap">
         <div id="drawingStage" class="drawing-stage empty">
@@ -156,7 +140,7 @@
       </div>
     </section>
 
-    <section class="panel cart-panel wizard-step" data-step="3">
+    <section class="panel cart-panel">
       <div class="section-head">
         <p class="eyebrow">Krok 3</p>
         <h2>Koszyk zapytania</h2>
@@ -165,67 +149,39 @@
       <div id="cart" class="cart muted-box">Koszyk jest pusty.</div>
     </section>
 
-    <section class="panel wizard-step" data-step="4">
+    <section class="panel">
       <div class="section-head">
         <p class="eyebrow">Krok 4</p>
         <h2>Dane klienta</h2>
-        <p>Po uzupełnieniu formularza aplikacja wygeneruje treść maila. Firmy mogą wpisać NIP — w kolejnej wersji podepniemy automatyczne pobieranie danych z GUS.</p>
+        <p>Po uzupełnieniu formularza aplikacja wygeneruje treść maila.</p>
       </div>
       <form id="clientForm" class="form-grid">
         <label>Imię i nazwisko / firma<input name="name" placeholder="Jan Kowalski / Firma ABC" /></label>
         <label>E-mail<input name="email" type="email" placeholder="klient@email.pl" /></label>
         <label>Telefon<input name="phone" placeholder="500 600 700" /></label>
-        <label>NIP<input name="nip" placeholder="opcjonalnie" /><small class="field-hint">Docelowo: automatyczne pobieranie danych firmy z GUS po NIP.</small></label>
+        <label>NIP<input name="nip" placeholder="opcjonalnie" /></label>
         <label class="wide">Dane do faktury<textarea name="invoice" rows="3" placeholder="Nazwa, adres, NIP"></textarea></label>
         <label class="wide">Adres wysyłki<textarea name="shipping" rows="3" placeholder="Ulica, kod, miasto, paczkomat/kurier"></textarea></label>
         <label class="wide">Uwagi<textarea name="notes" rows="3" placeholder="np. proszę o potwierdzenie ceny i dostępności"></textarea></label>
       </form>
       <div class="mail-actions">
-        <button class="button primary" id="generateMailBtn" type="button">Otwórz gotowego maila</button>
+        <button class="button primary" id="generateMailBtn" type="button">Generuj maila</button>
         <button class="button ghost" id="copyMailBtn" type="button">Kopiuj treść</button>
-        <button class="button ghost" id="downloadJsonBtn" type="button">Pobierz zgłoszenie</button>
+        <button class="button ghost" id="downloadJsonBtn" type="button">Pobierz JSON</button>
       </div>
-      <div class="mail-preview wizard-mail-step" data-step="5">
-        <h3>Krok 5 — Gotowa wiadomość</h3>
-        <pre id="mailPreview">Po wyborze części i uzupełnieniu danych tutaj pojawi się gotowa wiadomość.</pre>
-        <div id="attachmentWarning" class="attachment-warning hidden">⚠️ UWAGA: PAMIĘTAJ, ABY TERAZ DOŁĄCZYĆ ZDJĘCIA DO TEGO MAILA W SWOIM PROGRAMIE POCZTOWYM.</div>
-        <div class="mailto-fallback"><strong>Nie otwiera się poczta?</strong> Kliknij <b>Kopiuj treść</b> i wklej wiadomość ręcznie do maila na adres <a href="mailto:service@yato.pl">service@yato.pl</a>.</div>
+      <div class="mail-preview">
+        <h3>Podgląd wiadomości</h3>
+        <pre id="mailPreview">Dodaj część i uzupełnij dane, a tutaj pojawi się gotowy mail.</pre>
       </div>
-      <section class="promo-zone" aria-label="Polecane od TOYA S.A.">
-        <div class="promo-glow"></div>
-        <div class="promo-header">
-          <span class="promo-label">Polecane od TOYA S.A.</span>
-          <h3>Potrzebujesz czegoś więcej niż jednej części?</h3>
-          <p>Sprawdź aktualną ofertę TOYA24 albo zapisz kontakt do serwisu, żeby wrócić do kreatora jednym kliknięciem.</p>
-        </div>
-        <div class="promo-cards">
-          <a class="promo-card promo-card-shop" href="https://toya24.pl/pl-PL" target="_blank" rel="noopener">
-            <span class="promo-kicker">TOYA24</span>
-            <strong>Narzędzia, akcesoria i wyposażenie</strong>
-            <em>Aktualna oferta online dla klientów, którzy szukają gotowego rozwiązania — nie tylko części.</em>
-            <span class="promo-cta">Przejdź do Toya24</span>
-          </a>
-          <a class="promo-card promo-card-hub" href="card/">
-            <span class="promo-kicker">YATO Service Hub</span>
-            <strong>Kontakt, wizytówka i kreator części</strong>
-            <em>Zapisz kontakt, wróć do zapytania i wybierz właściwy kanał kontaktu bez błądzenia po skrzynkach.</em>
-            <span class="promo-cta">Otwórz cyfrową wizytówkę</span>
-          </a>
-        </div>
-      </section>
-
     </section>
   </main>
 
   <footer class="footer">
     <strong>YATO Service Hub</strong>
-    <span>TOYA • YATO • VOREL • STHOR • LUND • FLO • FALA</span>
-    <span>Dane klienta nie są zapisywane na serwerze. Wiadomość generuje się lokalnie w poczcie użytkownika.</span>
+    <span>YATO • VOREL • STHOR • LUND • FLO • FALA</span>
+    <span>Demo: dane klientów nie są zapisywane na serwerze; mail generuje się w poczcie klienta.</span>
   </footer>
 
-  <script src="assets/database.js?v=20260607-safety-net1"></script>
-  <script src="assets/toya24-index.js?v=20260607-safety-net1"></script>
-  <script src="assets/live-sheet-loader.js?v=20260607-safety-net1"></script>
-  <script src="assets/app.js?v=20260607-safety-net1"></script>
+  <script src="assets/app.js?v=20260604-partial-db1"></script>
 </body>
 </html>

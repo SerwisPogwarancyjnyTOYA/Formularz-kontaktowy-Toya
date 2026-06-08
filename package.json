@@ -1,12 +1,11 @@
 {
   "name": "yato-service-hub",
-  "version": "0.3.0-partial-db",
+  "version": "0.1.0",
   "private": true,
   "description": "Statyczny kreator zapytań o części pogwarancyjne",
   "scripts": {
     "serve": "python3 -m http.server 8080",
-    "convert:xlsx": "node scripts/excel-to-json.mjs",
-    "build:toya24-index": "node scripts/sheet-to-toya24-index.mjs data/toya24-integracja.csv assets/toya24-index.js"
+    "convert:xlsx": "node scripts/excel-to-json.mjs"
   },
   "devDependencies": {
     "xlsx": "^0.18.5"

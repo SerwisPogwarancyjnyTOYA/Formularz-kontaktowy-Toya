@@ -1,0 +1,11 @@
+{
+  "version": "20260608-full-db1",
+  "generatedAt": "2026-06-08 18:04:39",
+  "partsCount": 36329,
+  "devicesCount": 8530,
+  "sourceFiles": [
+    "stan na 2026.05.29.xlsm",
+    "Baza_czesci_PGW_GOOGLE_SHEETS_START_2026-06-03.xlsx"
+  ],
+  "notes": "Pełniejszy snapshot bazy PGW. Wyszukiwanie obejmuje indeks części, model, ZUN/alias oraz nazwę materiału."
+}
