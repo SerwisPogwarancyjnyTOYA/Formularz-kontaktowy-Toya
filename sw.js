@@ -1,4 +1,4 @@
-const CACHE = 'yato-service-hub-20260608-drawing-fix1';
+const CACHE = 'yato-service-hub-20260608-full-db2';
 const ASSETS = [
   './',
   './index.html',

@@ -110,7 +110,7 @@ function renderResults(devices) {
       <div>
         <div class="device-kicker">${esc(d.brand)} • ${esc(d.category || 'kategoria do uzupełnienia')}</div>
         <h3>${esc(d.deviceIndex)} — ${esc(d.deviceName)}</h3>
-        <p>${d.parts.length} pozycji w bazie PGW. Rysunek: ${DRAWINGS.find(x => x.id === d.drawingId)?.status || 'do podpięcia'}.</p>
+        <p>${d.parts.length} pozycji w bazie PGW. Po wyborze urządzenia pokażę dostępny rysunek albo czystą informację o braku podglądu.</p>
         <div class="meta"><span class="tag">${esc(d.deviceIndex)}</span><span class="tag">${esc(d.brand)}</span><span class="tag">części: ${d.parts.length}</span></div>
       </div>
       <div class="device-actions">
@@ -146,7 +146,7 @@ function renderDrawing(device) {
   const drawing = findDrawingForDevice(device);
   if (!drawing) {
     stage.className = 'drawing-stage empty';
-    stage.innerHTML = `<div class="empty-state"><strong>Rysunek złożeniowy jest w trakcie podpinania.</strong><br>Możesz wybrać części z listy i wysłać zapytanie — serwis potwierdzi dobór.</div>`;
+    stage.innerHTML = `<div class="empty-state"><strong>Brak aktywnego podglądu rysunku dla tego modelu.</strong><br>Możesz wybrać części z listy i wysłać zapytanie — serwis potwierdzi dobór.</div>`;
     return;
   }
   if (drawing.type === 'svg-demo') {
@@ -172,7 +172,12 @@ function renderDrawing(device) {
     return;
   }
   stage.className = 'drawing-stage empty';
-  stage.innerHTML = `<div class="empty-state"><strong>Rysunek złożeniowy jest w trakcie podpinania.</strong><br>Lista części jest dostępna — możesz dodać pozycje do zapytania, a serwis potwierdzi dobór.</div>`;
+  stage.innerHTML = `<div class="empty-state"><strong>Brak aktywnego podglądu rysunku dla tego modelu.</strong><br>Lista części jest dostępna — możesz dodać pozycje do zapytania, a serwis potwierdzi dobór.</div>`;
+}
+
+
+function partPriceLabel(part) {
+  return part.priceLabel || part.priceGross || part.price || 'Cena do potwierdzenia';
 }
 
 function renderDrawingParts(parts) {
@@ -183,7 +188,7 @@ function renderDrawingParts(parts) {
     <article class="part-card">
       <div>
         <h4>${esc(p.partName)}</h4>
-        <div class="meta"><span class="tag">poz. ${esc(p.position)}</span><span class="tag">${esc(p.partIndex)}</span><span class="tag">${esc(p.availability)}</span></div>
+        <div class="meta"><span class="tag">poz. ${esc(p.position)}</span><span class="tag">${esc(p.partIndex)}</span><span class="tag price-tag">${esc(partPriceLabel(p))}</span></div>
       </div>
       <button class="button primary small" data-add="${esc(p.id)}">Dodaj</button>
     </article>`).join('');
@@ -255,7 +260,7 @@ function buildMail() {
     lines.push('');
     if (cart.length) {
       lines.push('Wybrane części:');
-      cart.forEach((item, idx) => lines.push(`${idx+1}. ${item.partName} | indeks: ${item.partIndex} | poz.: ${item.position} | ilość: ${item.qty}`));
+      cart.forEach((item, idx) => lines.push(`${idx+1}. ${item.partName} | indeks: ${item.partIndex} | poz.: ${item.position} | cena: ${partPriceLabel(item)} | ilość: ${item.qty}`));
     } else {
       lines.push('Wybrane części: brak — proszę o pomoc w identyfikacji po opisie/rysunku.');
     }
@@ -343,7 +348,7 @@ function localSuggest() {
       return;
     }
 
-    box.innerHTML = scored.slice(0,4).map(p => `<article class="suggest-card"><div><strong>${esc(p.partName)}</strong><div class="meta"><span class="tag">poz. ${esc(p.position)}</span><span class="tag">${esc(p.partIndex)}</span><span class="tag">dopasowanie lokalne</span></div></div><button class="button primary small" data-add="${esc(p.id)}">Dodaj</button></article>`).join('');
+    box.innerHTML = scored.slice(0,4).map(p => `<article class="suggest-card"><div><strong>${esc(p.partName)}</strong><div class="meta"><span class="tag">poz. ${esc(p.position)}</span><span class="tag">${esc(p.partIndex)}</span><span class="tag price-tag">${esc(partPriceLabel(p))}</span></div></div><button class="button primary small" data-add="${esc(p.id)}">Dodaj</button></article>`).join('');
     box.querySelectorAll('[data-add]').forEach(btn => btn.addEventListener('click', () => addToCart(btn.dataset.add)));
     return;
   }
