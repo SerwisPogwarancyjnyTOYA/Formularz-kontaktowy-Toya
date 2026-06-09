@@ -112,3 +112,12 @@ a{color:inherit}
 @media(max-width:850px){.choice-grid,.check-grid{grid-template-columns:1fr}.device-card,.suggest-card{grid-template-columns:1fr}.device-actions{justify-content:flex-start}.brandmark-official .official-yato-logo{height:46px;max-width:190px}}
 
 .price-tag{border-color:rgba(255,255,255,.22);background:rgba(50,160,100,.13);color:#d9ffe8;font-weight:800}
+
+
+/* Manager preview cleanup 20260609-manager-preview1 */
+.demo-notice{margin-top:16px;display:inline-flex;max-width:760px;border:1px solid rgba(110,231,183,.30);background:rgba(110,231,183,.08);border-radius:16px;padding:12px 14px;color:#d7f8ea;font-weight:700;line-height:1.35}
+.drawing-stage.empty{background:linear-gradient(135deg,rgba(255,255,255,.045),rgba(255,255,255,.02));border:1px dashed rgba(110,231,183,.28)}
+.empty-state strong{color:#e9fff5;font-size:20px}
+.empty-state{color:#b7c8c0;line-height:1.45}
+.drawing-note{display:none!important}
+.meta .tag.price-tag{color:#e7fff1;border-color:rgba(110,231,183,.35);background:rgba(110,231,183,.10)}

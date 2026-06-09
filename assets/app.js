@@ -110,7 +110,7 @@ function renderResults(devices) {
       <div>
         <div class="device-kicker">${esc(d.brand)} • ${esc(d.category || 'kategoria do uzupełnienia')}</div>
         <h3>${esc(d.deviceIndex)} — ${esc(d.deviceName)}</h3>
-        <p>${d.parts.length} pozycji w bazie PGW. Po wyborze urządzenia pokażę dostępny rysunek albo czystą informację o braku podglądu.</p>
+        <p>${d.parts.length} pozycji w bazie PGW. Po wyborze urządzenia pokażę listę części i dostępny podgląd rysunku.</p>
         <div class="meta"><span class="tag">${esc(d.deviceIndex)}</span><span class="tag">${esc(d.brand)}</span><span class="tag">części: ${d.parts.length}</span></div>
       </div>
       <div class="device-actions">
@@ -146,7 +146,7 @@ function renderDrawing(device) {
   const drawing = findDrawingForDevice(device);
   if (!drawing) {
     stage.className = 'drawing-stage empty';
-    stage.innerHTML = `<div class="empty-state"><strong>Brak aktywnego podglądu rysunku dla tego modelu.</strong><br>Możesz wybrać części z listy i wysłać zapytanie — serwis potwierdzi dobór.</div>`;
+    stage.innerHTML = `<div class="empty-state"><strong>Podgląd rysunku jest przygotowywany.</strong><br>Lista części jest dostępna — możesz dodać pozycje do zapytania, a serwis potwierdzi dobór.</div>`;
     return;
   }
   if (drawing.type === 'svg-demo') {
@@ -168,11 +168,11 @@ function renderDrawing(device) {
         <div class="links">${openUrl ? `<a class="button ghost small" href="${openUrl}" target="_blank" rel="noopener">Otwórz rysunek</a>` : ''}</div>
       </div>
       <iframe class="drawing-embed" src="${previewSrc}" title="${esc(drawing.title || device.deviceIndex)}"></iframe>
-      <div class="drawing-note">Jeżeli podgląd PDF nie załaduje się w przeglądarce, użyj przycisku „Otwórz rysunek”.</div>`;
+      `;
     return;
   }
   stage.className = 'drawing-stage empty';
-  stage.innerHTML = `<div class="empty-state"><strong>Brak aktywnego podglądu rysunku dla tego modelu.</strong><br>Lista części jest dostępna — możesz dodać pozycje do zapytania, a serwis potwierdzi dobór.</div>`;
+  stage.innerHTML = `<div class="empty-state"><strong>Podgląd rysunku jest przygotowywany.</strong><br>Lista części jest dostępna — możesz dodać pozycje do zapytania, a serwis potwierdzi dobór.</div>`;
 }
 
 
