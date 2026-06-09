@@ -1,9 +1,9 @@
-const CACHE = 'yato-service-hub-20260609-manager-preview1';
+const CACHE = 'yato-service-hub-20260609-manager-preview2';
 const ASSETS = [
   './',
   './index.html',
-  './assets/style.css?v=20260609-manager-preview1',
-  './assets/app.js?v=20260609-manager-preview1',
+  './assets/style.css?v=20260609-manager-preview2',
+  './assets/app.js?v=20260609-manager-preview2',
   './manifest.webmanifest'
 ];
 

@@ -6,13 +6,13 @@
   <title>YATO Service Hub — kreator części pogwarancyjnych</title>
   <meta name="description" content="Kreator zapytania o części pogwarancyjne TOYA S.A." />
   <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="stylesheet" href="assets/style.css?v=20260609-manager-preview1" />
+  <link rel="stylesheet" href="assets/style.css?v=20260609-manager-preview2" />
 </head>
 <body>
   <header class="hero">
     <nav class="topbar">
       <div class="brandmark brandmark-official">
-        <img class="brandmark-logo official-yato-logo" src="assets/logos/yato-wordmark-clean.png?v=20260609-manager-preview1" alt="YATO" />
+        <img class="brandmark-logo official-yato-logo" src="assets/logos/yato-wordmark-clean.png?v=20260609-manager-preview2" alt="YATO" />
         <div class="brandmark-copy">
           <strong>Service Hub</strong>
           <small>Serwis pogwarancyjny</small>
@@ -25,7 +25,7 @@
         <p class="eyebrow">Kreator zapytania o części</p>
         <h1>Nie zgaduj części. Wybierz ją z rysunku i wygeneruj gotowego maila.</h1>
         <p class="lead">Klient wyszukuje urządzenie, dodaje części do zapytania, uzupełnia dane i otwiera gotową wiadomość w swojej poczcie.</p>
-        <div class="demo-notice">Wersja poglądowa dla serwisu: wyszukiwarka i generowanie maila działają, a globalne mapowanie rysunków z Drive jest przygotowane do podpięcia.</div>
+        
         <div class="hero-actions">
           <a class="button primary" href="#search">Szukaj części</a>
           <button class="button ghost" id="fillDemoBtn" type="button">Wypełnij przykład: łańcuch do piły</button>
@@ -49,13 +49,13 @@
     <section class="brand-rail" aria-label="Marki TOYA S.A.">
       <span>Marki TOYA S.A.</span>
       <div class="brand-rail-logos">
-        <img class="toya-logo" src="assets/logos/toya.png?v=20260609-manager-preview1" alt="TOYA S.A." />
-        <img src="assets/logos/yato-wordmark-clean.png?v=20260609-manager-preview1" alt="YATO" />
-        <img src="assets/logos/vorel.png?v=20260609-manager-preview1" alt="VOREL" />
-        <img src="assets/logos/sthor.png?v=20260609-manager-preview1" alt="STHOR" />
-        <img src="assets/logos/lund.png?v=20260609-manager-preview1" alt="LUND" />
-        <img src="assets/logos/flo.png?v=20260609-manager-preview1" alt="FLO" />
-        <img src="assets/logos/fala.png?v=20260609-manager-preview1" alt="FALA" />
+        <img class="toya-logo" src="assets/logos/toya.png?v=20260609-manager-preview2" alt="TOYA S.A." />
+        <img src="assets/logos/yato-wordmark-clean.png?v=20260609-manager-preview2" alt="YATO" />
+        <img src="assets/logos/vorel.png?v=20260609-manager-preview2" alt="VOREL" />
+        <img src="assets/logos/sthor.png?v=20260609-manager-preview2" alt="STHOR" />
+        <img src="assets/logos/lund.png?v=20260609-manager-preview2" alt="LUND" />
+        <img src="assets/logos/flo.png?v=20260609-manager-preview2" alt="FLO" />
+        <img src="assets/logos/fala.png?v=20260609-manager-preview2" alt="FALA" />
       </div>
     </section>
 
@@ -127,10 +127,10 @@
     <section class="panel drawing-panel" id="drawing">
       <div class="section-head">
         <p class="eyebrow">Krok 2</p>
-        <h2>Rysunek złożeniowy</h2>
+        <h2 id="drawingTitle">Rysunek i części</h2>
         <p id="drawingHint">Wybierz wynik wyszukiwania, aby zobaczyć rysunek i powiązane części.</p>
       </div>
-      <div class="drawing-wrap">
+      <div class="drawing-wrap" id="drawingWrap">
         <div id="drawingStage" class="drawing-stage empty">
           <div class="empty-state">Rysunek pojawi się tutaj po wyborze urządzenia.</div>
         </div>
@@ -183,6 +183,6 @@
     <span>Demo: dane klientów nie są zapisywane na serwerze; mail generuje się w poczcie klienta.</span>
   </footer>
 
-  <script src="assets/app.js?v=20260609-manager-preview1"></script>
+  <script src="assets/app.js?v=20260609-manager-preview2"></script>
 </body>
 </html>

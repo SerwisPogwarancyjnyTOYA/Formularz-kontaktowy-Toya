@@ -109,12 +109,12 @@ function renderResults(devices) {
     <article class="device-card">
       <div>
         <div class="device-kicker">${esc(d.brand)} • ${esc(d.category || 'kategoria do uzupełnienia')}</div>
-        <h3>${esc(d.deviceIndex)} — ${esc(d.deviceName)}</h3>
-        <p>${d.parts.length} pozycji w bazie PGW. Po wyborze urządzenia pokażę listę części i dostępny podgląd rysunku.</p>
+        <h3>${esc(d.deviceIndex)} — ${esc(clientDeviceName(d))}</h3>
+        <p>${d.parts.length} pozycji w bazie PGW. Po wyborze pokażę części, ceny i rysunek, jeśli jest już aktywnie podpięty.</p>
         <div class="meta"><span class="tag">${esc(d.deviceIndex)}</span><span class="tag">${esc(d.brand)}</span><span class="tag">części: ${d.parts.length}</span></div>
       </div>
       <div class="device-actions">
-        <button class="button ghost small" data-show-device="${esc(d.deviceIndex)}">Pokaż rysunek</button>
+        <button class="button ghost small" data-show-device="${esc(d.deviceIndex)}">Pokaż części</button>
         <button class="button primary small" data-pick-device="${esc(d.deviceIndex)}">Wybierz urządzenie</button>
       </div>
     </article>`).join('');
@@ -125,7 +125,7 @@ function selectDevice(deviceIndex) {
   selectedDevice = groupDevices().find(d => d.deviceIndex === deviceIndex);
   unknownMode = false;
   if (!selectedDevice) return;
-  $('drawingHint').textContent = `${selectedDevice.deviceIndex} — ${selectedDevice.deviceName}`;
+  $('drawingHint').textContent = `${selectedDevice.deviceIndex} — ${clientDeviceName(selectedDevice)}`;
   renderDrawing(selectedDevice);
   renderDrawingParts(selectedDevice.parts);
   $('drawing').scrollIntoView({behavior:'smooth', block:'start'});
@@ -144,11 +144,15 @@ function findDrawingForDevice(device) {
 function renderDrawing(device) {
   const stage = $('drawingStage');
   const drawing = findDrawingForDevice(device);
-  if (!drawing) {
-    stage.className = 'drawing-stage empty';
-    stage.innerHTML = `<div class="empty-state"><strong>Podgląd rysunku jest przygotowywany.</strong><br>Lista części jest dostępna — możesz dodać pozycje do zapytania, a serwis potwierdzi dobór.</div>`;
+  const hasUsablePreview = drawing && (drawing.type === 'svg-demo' || drawing.drivePreviewUrl || drawing.previewUrl || drawing.localPath || drawing.driveViewUrl || drawing.url);
+  setDrawingMode(!!hasUsablePreview);
+
+  if (!hasUsablePreview) {
+    stage.className = 'drawing-stage empty clean-empty';
+    stage.innerHTML = `<div class="empty-state"><strong>Rysunek nie jest jeszcze aktywnie podpięty.</strong><br>Lista części jest dostępna — zapytanie można przygotować bez pokazywania zaplecza technicznego.</div>`;
     return;
   }
+
   if (drawing.type === 'svg-demo') {
     stage.className = 'drawing-stage has-embed';
     stage.innerHTML = demoSvg();
@@ -158,23 +162,18 @@ function renderDrawing(device) {
     }));
     return;
   }
+
   const previewSrc = drawing.drivePreviewUrl || drawing.previewUrl || drawing.localPath || drawing.driveViewUrl || drawing.url;
   const openUrl = drawing.driveViewUrl || drawing.viewUrl || drawing.drivePreviewUrl || drawing.localPath || drawing.url;
-  if (previewSrc) {
-    stage.className = 'drawing-stage has-embed';
-    stage.innerHTML = `
-      <div class="drawing-toolbar">
-        <strong>${esc(drawing.title || `Rysunek ${device.deviceIndex}`)}</strong>
-        <div class="links">${openUrl ? `<a class="button ghost small" href="${openUrl}" target="_blank" rel="noopener">Otwórz rysunek</a>` : ''}</div>
-      </div>
-      <iframe class="drawing-embed" src="${previewSrc}" title="${esc(drawing.title || device.deviceIndex)}"></iframe>
-      `;
-    return;
-  }
-  stage.className = 'drawing-stage empty';
-  stage.innerHTML = `<div class="empty-state"><strong>Podgląd rysunku jest przygotowywany.</strong><br>Lista części jest dostępna — możesz dodać pozycje do zapytania, a serwis potwierdzi dobór.</div>`;
+  stage.className = 'drawing-stage has-embed';
+  stage.innerHTML = `
+    <div class="drawing-toolbar">
+      <strong>${esc(drawing.title || `Rysunek ${device.deviceIndex}`)}</strong>
+      <div class="links">${openUrl ? `<a class="button ghost small" href="${openUrl}" target="_blank" rel="noopener">Otwórz rysunek</a>` : ''}</div>
+    </div>
+    <iframe class="drawing-embed" src="${previewSrc}" title="${esc(drawing.title || device.deviceIndex)}"></iframe>
+  `;
 }
-
 
 function partPriceLabel(part) {
   return part.priceLabel || part.priceGross || part.price || 'Cena do potwierdzenia';
@@ -188,7 +187,7 @@ function renderDrawingParts(parts) {
     <article class="part-card">
       <div>
         <h4>${esc(p.partName)}</h4>
-        <div class="meta"><span class="tag">poz. ${esc(p.position)}</span><span class="tag">${esc(p.partIndex)}</span><span class="tag price-tag">${esc(partPriceLabel(p))}</span></div>
+        <div class="meta"><span class="tag">${esc(cleanPartPosition(p.position))}</span><span class="tag">${esc(p.partIndex)}</span><span class="tag price-tag">${esc(partPriceLabel(p))}</span></div>
       </div>
       <button class="button primary small" data-add="${esc(p.id)}">Dodaj</button>
     </article>`).join('');
@@ -255,7 +254,7 @@ function buildMail() {
     ['plate','device','part'].forEach(name => { const el = document.querySelector(`[name="${name}"]`); if (el?.checked) lines.push(`- ${el.dataset.label}`); });
   } else if (selectedDevice) {
     lines.push('Urządzenie:');
-    lines.push(`${selectedDevice.deviceIndex} — ${selectedDevice.deviceName}`);
+    lines.push(`${selectedDevice.deviceIndex} — ${clientDeviceName(selectedDevice)}`);
     lines.push(`Marka: ${selectedDevice.brand}`);
     lines.push('');
     if (cart.length) {
@@ -304,6 +303,7 @@ function toast(msg) { const t=document.createElement('div'); t.className='toast'
 function setUnknownMode() {
   unknownMode = true; selectedDevice = null; cart = []; renderCart();
   $('drawingHint').textContent = 'Tryb identyfikacji — rysunek nie został jeszcze wybrany.';
+  setDrawingMode(false);
   $('drawingStage').className = 'drawing-stage empty';
   $('drawingStage').innerHTML = '<div class="empty-state"><strong>Nie znasz indeksu?</strong><br>Opisz urządzenie i część. Mail przypomni klientowi o dołączeniu zdjęć.</div>';
   $('drawingParts').className = 'part-list muted-box';
@@ -348,7 +348,7 @@ function localSuggest() {
       return;
     }
 
-    box.innerHTML = scored.slice(0,4).map(p => `<article class="suggest-card"><div><strong>${esc(p.partName)}</strong><div class="meta"><span class="tag">poz. ${esc(p.position)}</span><span class="tag">${esc(p.partIndex)}</span><span class="tag price-tag">${esc(partPriceLabel(p))}</span></div></div><button class="button primary small" data-add="${esc(p.id)}">Dodaj</button></article>`).join('');
+    box.innerHTML = scored.slice(0,4).map(p => `<article class="suggest-card"><div><strong>${esc(p.partName)}</strong><div class="meta"><span class="tag">${esc(cleanPartPosition(p.position))}</span><span class="tag">${esc(p.partIndex)}</span><span class="tag price-tag">${esc(partPriceLabel(p))}</span></div></div><button class="button primary small" data-add="${esc(p.id)}">Dodaj</button></article>`).join('');
     box.querySelectorAll('[data-add]').forEach(btn => btn.addEventListener('click', () => addToCart(btn.dataset.add)));
     return;
   }
@@ -372,7 +372,7 @@ function localSuggest() {
     <article class="device-card">
       <div>
         <div class="device-kicker">${esc(d.brand)} • możliwe dopasowanie po opisie</div>
-        <h3>${esc(d.deviceIndex)} — ${esc(d.deviceName)}</h3>
+        <h3>${esc(d.deviceIndex)} — ${esc(clientDeviceName(d))}</h3>
         <p>${d.matchingParts.slice(0,3).map(p => esc(p.partName)).join(', ')}</p>
       </div>
       <div class="device-actions"><button class="button primary small" data-pick-device="${esc(d.deviceIndex)}">Wybierz urządzenie</button></div>
