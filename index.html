@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#b00020">
   <title>PGW Service Hub — TOYA S.A.</title>
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="stylesheet" href="app.css?v=20260610-director">
+  <link rel="stylesheet" href="app.css?v=20260610-client-mail">
 </head>
 <body>
   <noscript>Ta strona wymaga włączonego JavaScriptu.</noscript>
@@ -81,11 +81,50 @@
           <div class="panel-head mini">
             <div>
               <p class="eyebrow">Treść do skopiowania</p>
-              <h2 id="mailTitle">Odpowiedź dla klienta</h2>
+              <h2 id="mailTitle">Zapytanie od klienta</h2>
             </div>
             <button id="copyMail" type="button" class="primary">Kopiuj</button>
           </div>
-          <textarea id="mailText" spellcheck="true" rows="12" aria-label="Treść maila do skopiowania"></textarea>
+          <form class="customer-form" id="customerForm" aria-label="Formularz danych klienta">
+            <details open>
+              <summary>Dane urządzenia</summary>
+              <div class="form-grid">
+                <label>Marka / model / indeks urządzenia<input id="cfDevice" type="text" placeholder="np. YATO YT-85177"></label>
+                <label>Numer seryjny / dodatkowy opis<input id="cfSerial" type="text" placeholder="opcjonalnie"></label>
+              </div>
+            </details>
+
+            <details open>
+              <summary>Dane do faktury</summary>
+              <div class="form-grid">
+                <label>Firma / imię i nazwisko<input id="cfInvoiceName" type="text"></label>
+                <label>NIP<input id="cfNip" type="text"></label>
+                <label>Ulica i numer<input id="cfInvoiceStreet" type="text"></label>
+                <label>Kod pocztowy i miejscowość<input id="cfInvoiceCity" type="text"></label>
+              </div>
+            </details>
+
+            <details>
+              <summary>Dane do wysyłki, jeśli inne niż do faktury</summary>
+              <div class="form-grid">
+                <label>Odbiorca<input id="cfShipName" type="text"></label>
+                <label>Telefon dla kuriera<input id="cfShipPhone" type="text"></label>
+                <label>Ulica i numer<input id="cfShipStreet" type="text"></label>
+                <label>Kod pocztowy i miejscowość<input id="cfShipCity" type="text"></label>
+              </div>
+            </details>
+
+            <details open>
+              <summary>Dane kontaktowe</summary>
+              <div class="form-grid">
+                <label>Osoba kontaktowa<input id="cfContactName" type="text"></label>
+                <label>Telefon<input id="cfPhone" type="tel"></label>
+                <label>E-mail<input id="cfEmail" type="email"></label>
+                <label>Uwagi<textarea id="cfNotes" rows="3" placeholder="np. preferowana forma dostawy, dodatkowy opis usterki"></textarea></label>
+              </div>
+            </details>
+          </form>
+          <textarea id="mailText" spellcheck="true" rows="18" aria-label="Treść maila do skopiowania"></textarea>
         </section>
       </aside>
     </section>
@@ -103,6 +142,6 @@
     <p>TOYA S.A. — Serwis Pogwarancyjny. Baza rysunków i części wyłącznie jako wsparcie identyfikacji części.</p>
   </footer>
 
-  <script src="app.js?v=20260610-director" defer></script>
+  <script src="app.js?v=20260610-client-mail" defer></script>
 </body>
 </html>

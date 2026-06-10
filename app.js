@@ -1,6 +1,6 @@
 (() => {
   'use strict';
-  const VERSION = '20260610-director';
+  const VERSION = '20260610-client-mail';
   const DATA_URLS = {
     meta: ['data/build-meta.json', 'build-meta.json'],
     drawings: ['data/drawings.generated.json', 'drawings.generated.json', 'drawings.json', 'data/drawings.json'],
@@ -18,7 +18,7 @@
   const els = {
     loadStatus: $('loadStatus'), statParts: $('statParts'), statDrawings: $('statDrawings'), statDevices: $('statDevices'),
     searchInput: $('searchInput'), clearSearch: $('clearSearch'), showAllBtn: $('showAllBtn'), results: $('results'), resultsTitle: $('resultsTitle'), resultsMeta: $('resultsMeta'),
-    viewer: $('viewer'), viewerTitle: $('viewerTitle'), viewerOpen: $('viewerOpen'), mailText: $('mailText'), copyMail: $('copyMail')
+    viewer: $('viewer'), viewerTitle: $('viewerTitle'), viewerOpen: $('viewerOpen'), mailText: $('mailText'), copyMail: $('copyMail'), customerForm: $('customerForm'), cfDevice: $('cfDevice')
   };
 
   init();
@@ -80,6 +80,10 @@
       await navigator.clipboard.writeText(els.mailText.value);
       toast('Skopiowano treść maila');
     });
+    if (els.customerForm) {
+      els.customerForm.addEventListener('input', debounce(updateMail, 80));
+      els.customerForm.addEventListener('change', updateMail);
+    }
     els.results.addEventListener('click', (event) => {
       const toggle = event.target.closest('[data-toggle]');
       if (toggle) toggle.closest('.result-card')?.classList.toggle('open');
@@ -210,7 +214,7 @@
         </div>
         <div class="card-actions">
           ${drawing.id ? `<button class="primary" data-view-drawing="${escapeAttr(drawing.id)}">Pokaż rysunek</button>` : ''}
-          <button class="secondary" data-add-part="${escapeAttr(part.id)}">Do treści maila</button>
+          <button class="secondary" data-add-part="${escapeAttr(part.id)}">Do zapytania</button>
           <button class="ghost" data-toggle>Więcej</button>
         </div>
       </div>
@@ -279,22 +283,93 @@
     const part = state.parts.find(p => String(p.id) === String(id));
     if (!part) return;
     if (!state.selectedParts.some(p => p.id === part.id)) state.selectedParts.push(part);
+    autofillDeviceFromSelection();
     updateMail();
-    toast('Dodano do treści maila');
+    toast('Dodano do zapytania');
   }
 
   function updateMail() {
-    if (!state.selectedParts.length) {
-      els.mailText.value = `Dzień dobry,\n\nDziękujemy za kontakt z Serwisem Pogwarancyjnym TOYA S.A.\n\nProsimy o przesłanie indeksu urządzenia oraz wskazanie potrzebnej części z rysunku wybuchowego. Po otrzymaniu danych sprawdzimy dostępność oraz cenę.\n\nPozdrawiam\nSerwis Pogwarancyjny TOYA S.A.`;
-      return;
-    }
-    const lines = state.selectedParts.map((p, i) => {
-      const drawing = state.drawingById.get(String(p.drawingId)) || {};
-      const price = p.priceNet ? `, cena netto: ${num(p.priceNet)} PLN` : ', cena: do potwierdzenia';
-      const stock = p.stockTotal !== undefined ? `, stan: ${p.stockTotal}` : '';
-      return `${i+1}. ${p.partIndex}${p.position ? ` — pozycja ${p.position}` : ''}${p.namePl ? ` — ${p.namePl}` : ''}${price}${stock}${drawing.title ? `\n   Rysunek: ${drawing.title}` : ''}`;
-    });
-    els.mailText.value = `Dzień dobry,\n\nPoniżej przesyłam wskazane części zamienne:\n\n${lines.join('\n')}\n\nProsimy o potwierdzenie, które pozycje mają zostać przygotowane do dalszej realizacji.\n\nPozdrawiam\nSerwis Pogwarancyjny TOYA S.A.`;
+    const form = readCustomerForm();
+    const deviceFromParts = unique(state.selectedParts.map(p => p.deviceIndex).filter(Boolean)).join(', ');
+    const device = form.device || deviceFromParts || '[marka / model / indeks urządzenia]';
+    const serial = form.serial ? `
+Numer seryjny / dodatkowy opis: ${form.serial}` : '';
+
+    const partLines = state.selectedParts.length
+      ? state.selectedParts.map((p, i) => {
+          const drawing = state.drawingById.get(String(p.drawingId)) || {};
+          const bits = [
+            `${i+1}. Indeks części: ${p.partIndex || 'do uzupełnienia'}`,
+            p.position ? `pozycja na rysunku: ${p.position}` : '',
+            (p.namePl || p.nameEn) ? `opis: ${p.namePl || p.nameEn}` : '',
+            drawing.title ? `rysunek: ${drawing.title}` : (p.drawingTitle ? `rysunek: ${p.drawingTitle}` : '')
+          ].filter(Boolean);
+          return bits.join(' | ');
+        }).join('\n')
+      : '1. [indeks części / pozycja z rysunku / opis części]';
+
+    const invoiceLines = [
+      `Firma / imię i nazwisko: ${form.invoiceName || '[do uzupełnienia]'}`,
+      `NIP: ${form.nip || '[do uzupełnienia / nie dotyczy]'}`,
+      `Adres: ${form.invoiceStreet || '[ulica i numer]'}`,
+      `Kod pocztowy i miejscowość: ${form.invoiceCity || '[kod i miejscowość]'}`
+    ].join('\n');
+
+    const shippingHasAny = form.shipName || form.shipPhone || form.shipStreet || form.shipCity;
+    const shippingLines = shippingHasAny
+      ? [
+          `Odbiorca: ${form.shipName || '[do uzupełnienia]'}`,
+          `Telefon dla kuriera: ${form.shipPhone || '[do uzupełnienia]'}`,
+          `Adres dostawy: ${form.shipStreet || '[ulica i numer]'}`,
+          `Kod pocztowy i miejscowość: ${form.shipCity || '[kod i miejscowość]'}`
+        ].join('\n')
+      : 'Takie same jak dane do faktury.';
+
+    const contactLines = [
+      `Osoba kontaktowa: ${form.contactName || form.invoiceName || '[do uzupełnienia]'}`,
+      `Telefon: ${form.phone || '[do uzupełnienia]'}`,
+      `E-mail: ${form.email || '[do uzupełnienia]'}`
+    ].join('\n');
+
+    els.mailText.value = `Dzień dobry,
+
+Mam urządzenie: ${device}.${serial}
+
+Potrzebuję do niego części z rysunku wybuchowego:
+${partLines}
+
+Proszę o wycenę oraz informację o dostępności powyższych części.
+
+Dane do faktury:
+${invoiceLines}
+
+Dane do wysyłki:
+${shippingLines}
+
+Dane kontaktowe:
+${contactLines}${form.notes ? `
+
+Uwagi:
+${form.notes}` : ''}
+
+Pozdrawiam${form.contactName ? `,
+${form.contactName}` : ''}`;
+  }
+
+  function readCustomerForm() {
+    const val = (id) => ($(id)?.value || '').trim();
+    return {
+      device: val('cfDevice'), serial: val('cfSerial'), invoiceName: val('cfInvoiceName'), nip: val('cfNip'),
+      invoiceStreet: val('cfInvoiceStreet'), invoiceCity: val('cfInvoiceCity'), shipName: val('cfShipName'),
+      shipPhone: val('cfShipPhone'), shipStreet: val('cfShipStreet'), shipCity: val('cfShipCity'),
+      contactName: val('cfContactName'), phone: val('cfPhone'), email: val('cfEmail'), notes: val('cfNotes')
+    };
+  }
+
+  function autofillDeviceFromSelection() {
+    if (!els.cfDevice || els.cfDevice.value.trim()) return;
+    const devices = unique(state.selectedParts.map(p => p.deviceIndex).filter(Boolean));
+    if (devices.length) els.cfDevice.value = devices.join(', ');
   }
 
   function encodePath(path) {
