@@ -6,14 +6,14 @@
   <meta name="theme-color" content="#b00020">
   <title>Formularz zapytania o części — TOYA S.A.</title>
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="stylesheet" href="app.css?v=20260610-v21-formularz">
+  <link rel="stylesheet" href="assets/style.css?v=20260610-v22-formularz-old">
 </head>
 <body>
   <noscript>Ta strona wymaga włączonego JavaScriptu.</noscript>
   <header class="hero">
     <nav class="topbar" aria-label="Nagłówek">
       <div class="brand-lockup">
-        <div class="brand-lettermark" aria-label="TOYA S.A.">TOYA S.A.</div>
+        <img class="brand-main" src="assets/logos/yato-wordmark-clean.png?v=20260610-v22" alt="YATO" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'brand-lettermark',textContent:'TOYA S.A.'}))">
         <div>
           <strong>Serwis Pogwarancyjny TOYA S.A.</strong>
           <span>Wyszukiwarka rysunków i części zamiennych</span>
@@ -80,49 +80,21 @@
         <section class="mail-box" aria-labelledby="mailTitle">
           <div class="panel-head mini">
             <div>
-              <p class="eyebrow">Treść zapytania do skopiowania</p>
-              <h2 id="mailTitle">Zapytanie od klienta do serwisu</h2>
+              <p class="eyebrow">Formularz kontaktowy</p>
+              <h2 id="mailTitle">Gotowe zapytanie od klienta</h2>
             </div>
             <button id="copyMail" type="button" class="primary">Kopiuj</button>
           </div>
-          <form class="customer-form" id="customerForm" aria-label="Formularz danych klienta">
-            <details open>
-              <summary>Dane urządzenia</summary>
-              <div class="form-grid">
-                <label>Marka / model / indeks urządzenia<input id="cfDevice" type="text" placeholder="np. YATO YT-85177"></label>
-                <label>Numer seryjny / dodatkowy opis<input id="cfSerial" type="text" placeholder="opcjonalnie"></label>
-              </div>
-            </details>
-
-            <details open>
-              <summary>Dane do faktury</summary>
-              <div class="form-grid">
-                <label>Firma / imię i nazwisko<input id="cfInvoiceName" type="text"></label>
-                <label>NIP<input id="cfNip" type="text"></label>
-                <label>Ulica i numer<input id="cfInvoiceStreet" type="text"></label>
-                <label>Kod pocztowy i miejscowość<input id="cfInvoiceCity" type="text"></label>
-              </div>
-            </details>
-
-            <details>
-              <summary>Dane do wysyłki, jeśli inne niż do faktury</summary>
-              <div class="form-grid">
-                <label>Odbiorca<input id="cfShipName" type="text"></label>
-                <label>Telefon dla kuriera<input id="cfShipPhone" type="text"></label>
-                <label>Ulica i numer<input id="cfShipStreet" type="text"></label>
-                <label>Kod pocztowy i miejscowość<input id="cfShipCity" type="text"></label>
-              </div>
-            </details>
-
-            <details open>
-              <summary>Dane kontaktowe</summary>
-              <div class="form-grid">
-                <label>Osoba kontaktowa<input id="cfContactName" type="text"></label>
-                <label>Telefon<input id="cfPhone" type="tel"></label>
-                <label>E-mail<input id="cfEmail" type="email"></label>
-                <label>Uwagi<textarea id="cfNotes" rows="3" placeholder="np. preferowana forma dostawy, dodatkowy opis usterki"></textarea></label>
-              </div>
-            </details>
+          <form id="customerForm" class="customer-form old-form" aria-label="Formularz danych klienta">
+            <div class="form-grid old-client-grid">
+              <label>Imię i nazwisko / firma<input id="cfName" name="name" type="text" placeholder="Jan Kowalski / Firma ABC"></label>
+              <label>E-mail<input id="cfEmail" name="email" type="email" placeholder="klient@email.pl"></label>
+              <label>Telefon<input id="cfPhone" name="phone" type="tel" placeholder="500 600 700"></label>
+              <label>NIP<input id="cfNip" name="nip" type="text" placeholder="opcjonalnie"></label>
+              <label class="wide">Dane do faktury<textarea id="cfInvoice" name="invoice" rows="3" placeholder="Nazwa, adres, NIP"></textarea></label>
+              <label class="wide">Adres wysyłki<textarea id="cfShipping" name="shipping" rows="3" placeholder="Ulica, kod, miasto, paczkomat/kurier"></textarea></label>
+              <label class="wide">Uwagi<textarea id="cfNotes" name="notes" rows="3" placeholder="np. proszę o potwierdzenie ceny i dostępności"></textarea></label>
+            </div>
           </form>
           <textarea id="mailText" spellcheck="true" rows="18" aria-label="Treść maila do skopiowania"></textarea>
         </section>
@@ -132,16 +104,16 @@
 
   <footer class="footer">
     <div class="brand-strip" aria-label="Marki TOYA">
-      <img src="assets/logos/yato.jpg" alt="YATO">
-      <img src="assets/logos/vorel.png" alt="VOREL">
-      <img src="assets/logos/sthor.jpg" alt="STHOR">
-      <img src="assets/logos/lund.jpg" alt="LUND">
-      <img src="assets/logos/flo.jpg" alt="FLO">
-      <img src="assets/logos/fala.jpg" alt="FALA">
+      <img src="assets/logos/yato-clean.png?v=20260610-v22" alt="YATO" onerror="this.outerHTML='<span class=&quot;brand-chip&quot;>YATO</span>'">
+      <img src="assets/logos/vorel-clean.png?v=20260610-v22" alt="VOREL" onerror="this.outerHTML='<span class=&quot;brand-chip&quot;>VOREL</span>'">
+      <img src="assets/logos/sthor-clean.png?v=20260610-v22" alt="STHOR" onerror="this.outerHTML='<span class=&quot;brand-chip&quot;>STHOR</span>'">
+      <img src="assets/logos/lund-clean.png?v=20260610-v22" alt="LUND" onerror="this.outerHTML='<span class=&quot;brand-chip&quot;>LUND</span>'">
+      <img src="assets/logos/flo-clean.png?v=20260610-v22" alt="FLO" onerror="this.outerHTML='<span class=&quot;brand-chip&quot;>FLO</span>'">
+      <img src="assets/logos/fala-clean.png?v=20260610-v22" alt="FALA" onerror="this.outerHTML='<span class=&quot;brand-chip&quot;>FALA</span>'">
     </div>
     <p>TOYA S.A. — Serwis Pogwarancyjny. Baza rysunków i części wyłącznie jako wsparcie identyfikacji części.</p>
   </footer>
 
-  <script src="app.js?v=20260610-v21-formularz" defer></script>
+  <script src="assets/app.js?v=20260610-v22-formularz-old" defer></script>
 </body>
 </html>
