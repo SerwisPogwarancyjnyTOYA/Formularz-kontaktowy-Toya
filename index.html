@@ -4,18 +4,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#b00020">
-  <title>PGW Service Hub — TOYA S.A.</title>
+  <title>Formularz zapytania o części — TOYA S.A.</title>
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="stylesheet" href="app.css?v=20260610-client-mail">
+  <link rel="stylesheet" href="app.css?v=20260610-v21-formularz">
 </head>
 <body>
   <noscript>Ta strona wymaga włączonego JavaScriptu.</noscript>
   <header class="hero">
     <nav class="topbar" aria-label="Nagłówek">
       <div class="brand-lockup">
-        <img src="assets/logos/toya.png" onerror="this.src='toya.png';this.onerror=null" alt="TOYA S.A." class="brand-main">
+        <div class="brand-lettermark" aria-label="TOYA S.A.">TOYA S.A.</div>
         <div>
-          <strong>Serwis Pogwarancyjny</strong>
+          <strong>Serwis Pogwarancyjny TOYA S.A.</strong>
           <span>Wyszukiwarka rysunków i części zamiennych</span>
         </div>
       </div>
@@ -24,8 +24,8 @@
     <section class="hero-grid">
       <div>
         <p class="eyebrow">Wersja do publikacji / akceptacji</p>
-        <h1>Jedno miejsce do znalezienia części, rysunku i gotowej odpowiedzi dla klienta.</h1>
-        <p class="lead">Wpisz indeks urządzenia, indeks części, nazwę albo fragment opisu. Strona pokazuje powiązany rysunek wybuchowy, pozycję z tabeli i dane handlowe, jeżeli są w bazie.</p>
+        <h1>Jedno miejsce do znalezienia części, rysunku i przygotowania zapytania do serwisu.</h1>
+        <p class="lead">Wpisz indeks urządzenia, indeks części, nazwę albo fragment opisu. Strona pokazuje powiązany rysunek wybuchowy, pozycję z tabeli, powiązane części oraz cenę i dostępność, jeżeli są w bazie.</p>
       </div>
       <aside class="stats-card" aria-label="Statystyki bazy">
         <div><strong id="statParts">—</strong><span>części</span></div>
@@ -61,7 +61,7 @@
         </div>
         <div id="results" class="results empty-state">
           <div class="empty-icon">⌕</div>
-          <p>Najlepszy start: indeks części albo indeks urządzenia. Klient widzi rysunek, a Ty szybko widzisz, gdzie część siedzi.</p>
+          <p>Najlepszy start: indeks części albo indeks urządzenia. Klient widzi rysunek, pozycję części i listę elementów powiązanych z danym urządzeniem.</p>
         </div>
       </section>
 
@@ -80,8 +80,8 @@
         <section class="mail-box" aria-labelledby="mailTitle">
           <div class="panel-head mini">
             <div>
-              <p class="eyebrow">Treść do skopiowania</p>
-              <h2 id="mailTitle">Zapytanie od klienta</h2>
+              <p class="eyebrow">Treść zapytania do skopiowania</p>
+              <h2 id="mailTitle">Zapytanie od klienta do serwisu</h2>
             </div>
             <button id="copyMail" type="button" class="primary">Kopiuj</button>
           </div>
@@ -132,16 +132,16 @@
 
   <footer class="footer">
     <div class="brand-strip" aria-label="Marki TOYA">
-      <img src="assets/logos/yato.png" onerror="this.src='yato.png';this.onerror=null" alt="YATO">
-      <img src="assets/logos/vorel.png" onerror="this.src='vorel.png';this.onerror=null" alt="VOREL">
-      <img src="assets/logos/sthor.png" onerror="this.src='sthor.png';this.onerror=null" alt="STHOR">
-      <img src="assets/logos/lund.png" onerror="this.src='lund.png';this.onerror=null" alt="LUND">
-      <img src="assets/logos/flo.png" onerror="this.src='flo.png';this.onerror=null" alt="FLO">
-      <img src="assets/logos/fala.png" onerror="this.src='fala.png';this.onerror=null" alt="FALA">
+      <img src="assets/logos/yato.jpg" alt="YATO">
+      <img src="assets/logos/vorel.png" alt="VOREL">
+      <img src="assets/logos/sthor.jpg" alt="STHOR">
+      <img src="assets/logos/lund.jpg" alt="LUND">
+      <img src="assets/logos/flo.jpg" alt="FLO">
+      <img src="assets/logos/fala.jpg" alt="FALA">
     </div>
     <p>TOYA S.A. — Serwis Pogwarancyjny. Baza rysunków i części wyłącznie jako wsparcie identyfikacji części.</p>
   </footer>
 
-  <script src="app.js?v=20260610-client-mail" defer></script>
+  <script src="app.js?v=20260610-v21-formularz" defer></script>
 </body>
 </html>

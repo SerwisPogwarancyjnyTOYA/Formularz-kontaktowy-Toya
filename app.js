@@ -1,6 +1,6 @@
 (() => {
   'use strict';
-  const VERSION = '20260610-client-mail';
+  const VERSION = '20260610-v21-formularz';
   const DATA_URLS = {
     meta: ['data/build-meta.json', 'build-meta.json'],
     drawings: ['data/drawings.generated.json', 'drawings.generated.json', 'drawings.json', 'data/drawings.json'],
@@ -251,10 +251,10 @@
   }
 
   function renderPartsTable(parts) {
-    return `<table class="parts-table"><thead><tr><th>Poz.</th><th>Indeks</th><th>Nazwa</th><th>Cena</th><th></th></tr></thead><tbody>${parts.map(p => `<tr><td>${escapeHtml(p.position || '—')}</td><td class="part-index">${escapeHtml(p.partIndex)}</td><td>${escapeHtml(p.namePl || p.nameEn || '—')}</td><td>${p.priceNet ? `<span class="price">${escapeHtml(num(p.priceNet))} PLN</span>` : '—'}</td><td><button class="secondary" data-add-part="${escapeAttr(p.id)}">Dodaj</button></td></tr>`).join('')}</tbody></table>`;
+    return `<table class="parts-table"><thead><tr><th>Poz.</th><th>Indeks</th><th>Nazwa</th><th>Cena</th><th></th></tr></thead><tbody>${parts.map(p => `<tr><td>${escapeHtml(p.position || '—')}</td><td class="part-index">${escapeHtml(p.partIndex)}</td><td>${escapeHtml(p.namePl || p.nameEn || '—')}</td><td>${p.priceNet ? `<span class="price">${escapeHtml(num(p.priceNet))} PLN</span>` : '—'}</td><td><button class="secondary" data-add-part="${escapeAttr(p.id)}">Do zapytania</button></td></tr>`).join('')}</tbody></table>`;
   }
 
-  function showDrawing(id) {
+  async function showDrawing(id) {
     const drawing = state.drawingById.get(String(id));
     if (!drawing) return;
     const url = encodePath(drawing.path || drawing.localPath || drawing.url || drawing.originalPath || '');
@@ -265,17 +265,48 @@
     } else {
       els.viewerOpen.classList.add('hidden');
     }
+
+    els.viewer.className = 'viewer empty-viewer';
+    els.viewer.innerHTML = '<div class="viewer-note">Sprawdzam plik rysunku…</div>';
+
+    if (!url) {
+      els.viewer.innerHTML = '<div class="viewer-note"><strong>Brak ścieżki pliku.</strong><br>Ten rekord ma dane części, ale nie ma przypisanego pliku rysunku.</div>';
+      return;
+    }
+
+    const exists = await fileLooksAvailable(url);
+    if (!exists) {
+      els.viewer.className = 'viewer empty-viewer';
+      els.viewer.innerHTML = `<div class="missing-file"><strong>Rysunek nie jest jeszcze opublikowany w repozytorium.</strong><p>Baza zna ten rysunek i części, ale fizyczny plik PDF/JPG/DOCX nie został jeszcze wrzucony pod tę ścieżkę. Po uruchomieniu importu rysunków podgląd pojawi się automatycznie.</p><code>${escapeHtml(url)}</code></div>`;
+      return;
+    }
+
     const type = (drawing.type || '').toLowerCase();
     const low = String(url).toLowerCase();
     if (type === 'image' || /\.(png|jpe?g|webp|gif|svg|bmp)$/i.test(low)) {
       els.viewer.className = 'viewer';
-      els.viewer.innerHTML = `<img src="${escapeAttr(url)}" alt="${escapeAttr(drawing.title || 'Rysunek')}">`;
+      els.viewer.innerHTML = `<img src="${escapeAttr(url)}" alt="${escapeAttr(drawing.title || 'Rysunek')}" onerror="this.closest('.viewer').className='viewer empty-viewer';this.closest('.viewer').innerHTML='<div class=&quot;viewer-note&quot;><strong>Nie udało się wyświetlić obrazu.</strong><br>Sprawdź, czy plik został opublikowany w repozytorium.</div>'">`;
     } else if (type === 'pdf' || low.endsWith('.pdf')) {
       els.viewer.className = 'viewer';
       els.viewer.innerHTML = `<iframe src="${escapeAttr(url)}#toolbar=1&navpanes=0" title="${escapeAttr(drawing.title || 'Rysunek PDF')}"></iframe>`;
     } else {
       els.viewer.className = 'viewer empty-viewer';
-      els.viewer.innerHTML = `<div class="viewer-note"><strong>Ten plik nie ma podglądu inline.</strong><br>Najlepiej przekonwertować DOC/DOCX do PDF albo JPG, żeby klient widział rysunek bez pobierania pliku.<br><br>${url ? `<a class="primary" href="${escapeAttr(url)}" target="_blank" rel="noreferrer">Otwórz plik</a>` : ''}</div>`;
+      els.viewer.innerHTML = `<div class="viewer-note"><strong>Ten plik nie ma podglądu inline.</strong><br>DOC/DOCX najlepiej przekonwertować do PDF albo JPG, żeby klient widział rysunek bez pobierania pliku.<br><br><a class="primary" href="${escapeAttr(url)}" target="_blank" rel="noreferrer">Otwórz plik</a></div>`;
+    }
+  }
+
+  async function fileLooksAvailable(url) {
+    if (/^https?:\/\//i.test(url) && !url.includes(location.host)) return true;
+    try {
+      const r = await fetch(url, { method: 'HEAD', cache: 'no-store' });
+      return r.ok;
+    } catch (error) {
+      try {
+        const r = await fetch(url, { method: 'GET', cache: 'no-store' });
+        return r.ok;
+      } catch (_) {
+        return false;
+      }
     }
   }
 
@@ -335,10 +366,10 @@ Numer seryjny / dodatkowy opis: ${form.serial}` : '';
 
 Mam urządzenie: ${device}.${serial}
 
-Potrzebuję do niego części z rysunku wybuchowego:
+Potrzebuję do niego poniższych części z rysunku wybuchowego:
 ${partLines}
 
-Proszę o wycenę oraz informację o dostępności powyższych części.
+Proszę o ich wycenę oraz informację o dostępności.
 
 Dane do faktury:
 ${invoiceLines}
