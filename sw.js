@@ -1,16 +1,9 @@
-// Wersja naprawcza: nie trzymamy starego cache, żeby GitHub Pages zawsze podał aktualne pliki.
-self.addEventListener('install', (event) => {
-  self.skipWaiting();
-});
-
-self.addEventListener('activate', (event) => {
+// Intentionally minimal. Old cache-heavy service workers caused stale data on GitHub Pages.
+self.addEventListener('install', event => self.skipWaiting());
+self.addEventListener('activate', event => {
   event.waitUntil((async () => {
     const keys = await caches.keys();
-    await Promise.all(keys.map((key) => caches.delete(key)));
+    await Promise.all(keys.map(k => caches.delete(k)));
     await self.clients.claim();
   })());
-});
-
-self.addEventListener('fetch', () => {
-  // Celowo brak przechwytywania requestów.
 });

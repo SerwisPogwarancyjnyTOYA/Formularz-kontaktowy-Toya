@@ -1,0 +1,16 @@
+{
+  "generatedAt": "2026-06-10 19:55:37",
+  "archives": [
+    "PGW - Rysunki-20260604T095309Z-3-001.zip",
+    "PGW - Rysunki-20260604T095309Z-3-002.zip",
+    "Rysunki wybuchowe-Robocze-20260604T094743Z-3-001.zip"
+  ],
+  "drawingCount": 4756,
+  "partCount": 78306,
+  "deviceCount": 1550,
+  "priceRecords": 4,
+  "stockRecords": 36330,
+  "note": "Generated from uploaded Github/ezyZip source archives. PDF text extraction with pdftotext; DOC/DOCX entries are indexed as drawings only unless converted.",
+  "filteredFalsePositiveParts": 2866,
+  "partsWithStock": 15860
+}

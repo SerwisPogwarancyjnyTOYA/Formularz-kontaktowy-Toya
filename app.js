@@ -1,635 +1,327 @@
 (() => {
   'use strict';
-
-  const VERSION = '20260610-fixed';
-  const DATA_CANDIDATES = {
-    parts: ['parts.json', 'data/parts.json'],
-    devices: ['devices.json', 'data/devices.json'],
-    drawings: ['drawings.json', 'data/drawings.json'],
-    logos: ['logos.json', 'data/logos.json', 'db-manifest.json', 'assets/logos.json']
+  const VERSION = '20260610-director';
+  const DATA_URLS = {
+    meta: ['data/build-meta.json', 'build-meta.json'],
+    drawings: ['data/drawings.generated.json', 'drawings.generated.json', 'drawings.json', 'data/drawings.json'],
+    parts: ['data/parts.generated.json', 'parts.generated.json', 'parts.json', 'data/parts.json'],
+    devices: ['data/devices.generated.json', 'devices.generated.json', 'devices.json', 'data/devices.json']
   };
-
-  const BRAND_LOGOS = [
-    ['TOYA', ['assets/logos/toya.png', 'toya.png']],
-    ['YATO', ['assets/logos/yato-wordmark-clean.png', 'assets/logos/yato.png', 'yato-wordmark-clean.png', 'yato-official.png', 'yato.png']],
-    ['VOREL', ['assets/logos/vorel.png', 'vorel.png']],
-    ['STHOR', ['assets/logos/sthor.png', 'sthor.png']],
-    ['LUND', ['assets/logos/lund.png', 'lund.png']],
-    ['FLO', ['assets/logos/flo.png', 'flo.png']],
-    ['FALA', ['assets/logos/fala.png', 'fala.png']]
-  ];
 
   const state = {
-    loadedFiles: [],
-    failedFiles: [],
-    raw: {},
-    devices: [],
-    drawings: [],
-    allTextIndex: [],
-    query: '',
-    showAll: false
+    meta: {}, drawings: [], parts: [], devices: [],
+    drawingById: new Map(), partsByDrawing: new Map(), devicesByIndex: new Map(),
+    selectedParts: [], query: '', initialized: false
   };
 
-  const el = (id) => document.getElementById(id);
+  const $ = (id) => document.getElementById(id);
   const els = {
-    notice: el('notice'),
-    searchInput: el('searchInput'),
-    clearBtn: el('clearBtn'),
-    showAllBtn: el('showAllBtn'),
-    results: el('results'),
-    resultsTitle: el('resultsTitle'),
-    resultsCount: el('resultsCount'),
-    chips: el('chips'),
-    dataStatus: el('dataStatus'),
-    statDevices: el('statDevices'),
-    statParts: el('statParts'),
-    statDrawings: el('statDrawings'),
-    statFiles: el('statFiles'),
-    brandLogos: el('brandLogos')
+    loadStatus: $('loadStatus'), statParts: $('statParts'), statDrawings: $('statDrawings'), statDevices: $('statDevices'),
+    searchInput: $('searchInput'), clearSearch: $('clearSearch'), showAllBtn: $('showAllBtn'), results: $('results'), resultsTitle: $('resultsTitle'), resultsMeta: $('resultsMeta'),
+    viewer: $('viewer'), viewerTitle: $('viewerTitle'), viewerOpen: $('viewerOpen'), mailText: $('mailText'), copyMail: $('copyMail')
   };
 
   init();
 
   async function init() {
-    await clearOldServiceWorkers();
-    renderLogos();
+    await cleanOldCaches();
     wireEvents();
-    await loadAllData();
-    buildIndex();
-    renderStats();
-    renderStatus();
-    renderChips();
-    renderResults();
+    setStatus('Ładowanie bazy…');
+    try {
+      state.meta = await loadFirst(DATA_URLS.meta, {});
+      state.drawings = normalizeArray(await loadFirst(DATA_URLS.drawings, []));
+      state.parts = normalizeArray(await loadFirst(DATA_URLS.parts, []));
+      state.devices = normalizeArray(await loadFirst(DATA_URLS.devices, []));
+      buildIndexes();
+      renderStats();
+      setStatus(`Gotowe: ${fmt(state.parts.length)} części, ${fmt(state.drawings.length)} rysunków`);
+      state.initialized = true;
+      renderExamples();
+      updateMail();
+    } catch (error) {
+      console.error(error);
+      setStatus('Błąd ładowania danych');
+      els.results.className = 'results empty-state';
+      els.results.innerHTML = `<p><strong>Nie udało się odczytać bazy.</strong><br>${escapeHtml(error.message || error)}</p>`;
+    }
   }
 
-  async function clearOldServiceWorkers() {
-    if (!('serviceWorker' in navigator)) return;
+  async function cleanOldCaches() {
     try {
-      const registrations = await navigator.serviceWorker.getRegistrations();
-      await Promise.all(registrations.map((reg) => reg.unregister()));
+      if ('serviceWorker' in navigator) {
+        const regs = await navigator.serviceWorker.getRegistrations();
+        await Promise.all(regs.map((r) => r.unregister()));
+      }
       if (window.caches) {
         const keys = await caches.keys();
         await Promise.all(keys.map((key) => caches.delete(key)));
       }
-    } catch (error) {
-      console.warn('Nie udało się wyczyścić starego cache/service workera:', error);
-    }
+    } catch (error) { console.warn('Cache cleanup skipped:', error); }
   }
 
   function wireEvents() {
-    els.searchInput.addEventListener('input', () => {
+    els.searchInput.addEventListener('input', debounce(() => {
       state.query = els.searchInput.value.trim();
-      state.showAll = false;
       renderResults();
-    });
-
-    els.clearBtn.addEventListener('click', () => {
+    }, 120));
+    els.clearSearch.addEventListener('click', () => {
       els.searchInput.value = '';
       state.query = '';
-      state.showAll = false;
-      renderResults();
+      renderExamples();
       els.searchInput.focus();
     });
-
-    els.showAllBtn.addEventListener('click', () => {
-      state.showAll = true;
-      state.query = '';
-      els.searchInput.value = '';
+    els.showAllBtn.addEventListener('click', renderExamples);
+    document.querySelectorAll('[data-example]').forEach((btn) => btn.addEventListener('click', () => {
+      els.searchInput.value = btn.dataset.example;
+      state.query = btn.dataset.example;
       renderResults();
+    }));
+    els.copyMail.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(els.mailText.value);
+      toast('Skopiowano treść maila');
+    });
+    els.results.addEventListener('click', (event) => {
+      const toggle = event.target.closest('[data-toggle]');
+      if (toggle) toggle.closest('.result-card')?.classList.toggle('open');
+      const drawing = event.target.closest('[data-view-drawing]');
+      if (drawing) showDrawing(drawing.dataset.viewDrawing);
+      const add = event.target.closest('[data-add-part]');
+      if (add) addPart(add.dataset.addPart);
+      const related = event.target.closest('[data-search]');
+      if (related) {
+        els.searchInput.value = related.dataset.search;
+        state.query = related.dataset.search;
+        renderResults();
+      }
     });
   }
 
-  async function loadAllData() {
-    setNotice('Ładuję pliki danych z repozytorium…', 'ok');
-    const groups = Object.entries(DATA_CANDIDATES).map(async ([key, urls]) => {
-      const loaded = await loadFirstWorkingJson(key, urls);
-      if (loaded) state.raw[key] = loaded.data;
-    });
-    await Promise.all(groups);
-
-    if (!state.loadedFiles.length) {
-      setNotice('Nie udało się odczytać żadnego pliku JSON. Sprawdź, czy parts.json, devices.json i drawings.json leżą w tym samym źródle publikacji co index.html.', 'danger');
-    } else {
-      setNotice(`Gotowe. Odczytano ${state.loadedFiles.length} plik/i danych.`, 'ok', 2600);
-    }
-  }
-
-  async function loadFirstWorkingJson(group, urls) {
+  async function loadFirst(urls, fallback) {
+    let lastError;
     for (const url of urls) {
       try {
-        const response = await fetch(withBust(url), { cache: 'no-store' });
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        const text = await response.text();
-        const data = safeJsonParse(text);
-        state.loadedFiles.push({ group, url, size: text.length, count: countRecords(data) });
-        return { url, data };
-      } catch (error) {
-        state.failedFiles.push({ group, url, error: String(error.message || error) });
-      }
+        const response = await fetch(`${url}?v=${VERSION}`, {cache:'no-store'});
+        if (!response.ok) throw new Error(`${url}: HTTP ${response.status}`);
+        return await response.json();
+      } catch (error) { lastError = error; }
     }
-    return null;
+    if (fallback !== undefined) return fallback;
+    throw lastError || new Error('Brak danych');
   }
 
-  function withBust(url) {
-    const joiner = url.includes('?') ? '&' : '?';
-    return `${url}${joiner}v=${VERSION}-${Date.now()}`;
+  function normalizeArray(value) {
+    if (Array.isArray(value)) return value;
+    if (!value || typeof value !== 'object') return [];
+    for (const key of ['items','data','rows','parts','drawings','devices','records']) if (Array.isArray(value[key])) return value[key];
+    return Object.values(value).filter(Boolean);
   }
 
-  function safeJsonParse(text) {
-    let clean = text.trim().replace(/^\uFEFF/, '');
-    try { return JSON.parse(clean); } catch (_) {}
-
-    // Czasem plik bywa zapisany jako JS: const DATA = [...];
-    const firstArray = clean.indexOf('[');
-    const firstObj = clean.indexOf('{');
-    const start = [firstArray, firstObj].filter((n) => n >= 0).sort((a,b) => a-b)[0];
-    if (start >= 0) {
-      clean = clean.slice(start);
-      const lastArray = clean.lastIndexOf(']');
-      const lastObj = clean.lastIndexOf('}');
-      const end = Math.max(lastArray, lastObj);
-      if (end >= 0) return JSON.parse(clean.slice(0, end + 1));
+  function buildIndexes() {
+    state.drawingById = new Map(state.drawings.map((d) => [String(d.id), d]));
+    state.partsByDrawing = new Map();
+    state.devicesByIndex = new Map();
+    for (const part of state.parts) {
+      const did = String(part.drawingId || '');
+      if (!state.partsByDrawing.has(did)) state.partsByDrawing.set(did, []);
+      state.partsByDrawing.get(did).push(part);
     }
-    throw new Error('Niepoprawny JSON');
-  }
-
-  function buildIndex() {
-    const deviceMap = new Map();
-
-    const mergeDevice = (device) => {
-      const idx = normalizeDeviceIndex(device.deviceIndex || device.index || device.sku || device.model || device.title || '');
-      const key = idx || `device-${deviceMap.size + 1}`;
-      const current = deviceMap.get(key) || {
-        id: key,
-        deviceIndex: idx || String(device.deviceIndex || device.index || device.title || key),
-        brand: '',
-        title: '',
-        description: '',
-        parts: [],
-        drawings: [],
-        source: new Set(),
-        raw: []
-      };
-
-      current.brand = current.brand || cleanText(device.brand || detectBrandFromText(JSON.stringify(device)) || '');
-      current.title = current.title || cleanText(device.title || device.name || device.modelName || device.description || '');
-      current.description = current.description || cleanText(device.description || device.nazwa || device.name || '');
-      if (Array.isArray(device.parts)) current.parts.push(...device.parts.map(normalizePart));
-      if (device.partIndex || device.partNo || device.part || device.indexPart || device['Indeks części'] || device.indeks_czesci) current.parts.push(normalizePart(device));
-      if (device.source) current.source.add(device.source);
-      current.raw.push(device.raw || device);
-      deviceMap.set(key, current);
-    };
-
-    for (const item of toRecords(state.raw.devices, 'devices')) mergeDevice(normalizeDevice(item, 'devices.json'));
-    for (const item of toRecords(state.raw.parts, 'parts')) {
-      const normalized = normalizeDevice(item, 'parts.json');
-      if (normalized.parts.length || normalized.deviceIndex || normalized.title) mergeDevice(normalized);
+    for (const device of state.devices) state.devicesByIndex.set(norm(device.deviceIndex), device);
+    for (const part of state.parts) {
+      part.__search = norm([part.partIndex, part.namePl, part.nameEn, part.position, part.deviceIndex, part.drawingTitle, part.zun].join(' '));
     }
-
-    const drawings = toRecords(state.raw.drawings, 'drawings').map(normalizeDrawing).filter(Boolean);
-    state.drawings = drawings;
-
-    for (const drawing of drawings) {
-      const key = normalizeDeviceIndex(drawing.deviceIndex || drawing.title || drawing.localPath || '');
-      if (!key) continue;
-      const current = deviceMap.get(key) || {
-        id: key,
-        deviceIndex: key,
-        brand: drawing.brand || detectBrandFromText(JSON.stringify(drawing)) || '',
-        title: drawing.title || '',
-        description: '',
-        parts: [],
-        drawings: [],
-        source: new Set(['drawings.json']),
-        raw: []
-      };
-      current.drawings.push(drawing);
-      deviceMap.set(key, current);
+    for (const drawing of state.drawings) {
+      drawing.__search = norm([drawing.deviceIndex, drawing.brand, drawing.title, drawing.fileName, drawing.originalPath, drawing.searchText].join(' '));
     }
-
-    // Dopasowanie rysunków po tokenach, gdy indeks jest zapisany w innej postaci.
-    const devices = Array.from(deviceMap.values());
-    for (const device of devices) {
-      if (device.drawings.length) continue;
-      const deviceTokens = makeTokens(device.deviceIndex + ' ' + device.title);
-      const match = drawings.find((drawing) => {
-        const dt = makeTokens(`${drawing.deviceIndex} ${drawing.title} ${drawing.localPath}`);
-        return intersectsStrong(deviceTokens, dt);
-      });
-      if (match) device.drawings.push(match);
-    }
-
-    for (const device of devices) {
-      device.parts = uniqueParts(device.parts);
-      device.searchText = normalizeSearch([
-        device.deviceIndex, device.brand, device.title, device.description,
-        ...device.parts.flatMap((p) => [p.index, p.name, p.number, p.note]),
-        ...device.drawings.flatMap((d) => [d.title, d.localPath, d.driveViewUrl])
-      ].join(' '));
-      device.source = Array.from(device.source || []);
-    }
-
-    devices.sort((a, b) => naturalCompare(a.deviceIndex, b.deviceIndex));
-    state.devices = devices;
-  }
-
-  function toRecords(data, source) {
-    if (!data) return [];
-    if (Array.isArray(data)) return data.map((value, i) => ({ value, key: String(i), source }));
-    if (typeof data === 'object') {
-      const preferred = ['items', 'data', 'devices', 'products', 'parts', 'records', 'rows', 'drawings'];
-      for (const key of preferred) {
-        if (Array.isArray(data[key])) return data[key].map((value, i) => ({ value, key: String(i), source }));
-      }
-      return Object.entries(data).map(([key, value]) => ({ key, value, source }));
-    }
-    return [];
-  }
-
-  function normalizeDevice(entry, source) {
-    const obj = unwrap(entry.value);
-    const key = entry.key;
-    const deviceIndex = firstNonEmpty(obj,
-      'deviceIndex', 'device_index', 'device', 'productIndex', 'product_index', 'toolIndex', 'tool_index',
-      'model', 'modelIndex', 'sku', 'symbol', 'kod', 'index', 'indeks', 'Indeks', 'Indeks urządzenia', 'Urządzenie'
-    ) || (looksLikeDeviceIndex(key) ? key : extractDeviceIndex(JSON.stringify(obj)));
-
-    const partsSource = firstNonEmpty(obj, 'parts', 'czesci', 'części', 'spareParts', 'items', 'pozycje');
-    const parts = Array.isArray(partsSource)
-      ? partsSource.map(normalizePart)
-      : nestedParts(obj).map(normalizePart);
-
-    return {
-      source,
-      raw: obj,
-      deviceIndex: normalizeDeviceIndex(deviceIndex || ''),
-      brand: firstNonEmpty(obj, 'brand', 'marka', 'Brand', 'MARKA') || detectBrandFromText(JSON.stringify(obj)),
-      title: firstNonEmpty(obj, 'title', 'name', 'nazwa', 'Nazwa', 'modelName', 'description', 'opis') || '',
-      description: firstNonEmpty(obj, 'description', 'opis', 'Opis') || '',
-      parts
-    };
-  }
-
-  function nestedParts(obj) {
-    const results = [];
-    if (!obj || typeof obj !== 'object') return results;
-
-    for (const [key, value] of Object.entries(obj)) {
-      if (Array.isArray(value) && /part|cz[eę]s|spare|pozyc/i.test(key)) {
-        results.push(...value);
-      }
-      if (value && typeof value === 'object' && !Array.isArray(value)) {
-        const maybePartIndex = firstNonEmpty(value, 'partIndex', 'index', 'indeks', 'code', 'kod', 'symbol');
-        if (maybePartIndex) results.push(value);
-      }
-    }
-    return results;
-  }
-
-  function normalizePart(value) {
-    const obj = unwrap(value);
-    const scalar = (value && typeof value !== 'object') ? String(value) : '';
-    return {
-      index: cleanText(firstNonEmpty(obj, 'partIndex', 'part_index', 'partNo', 'partNumber', 'part', 'index', 'indeks', 'Indeks', 'Indeks części', 'kod', 'code', 'sku', 'symbol', 'nr', 'number') || scalar || ''),
-      number: cleanText(firstNonEmpty(obj, 'position', 'pos', 'lp', 'LP', 'nrRysunku', 'drawingNo', 'numer') || ''),
-      name: cleanText(firstNonEmpty(obj, 'name', 'nazwa', 'Nazwa', 'title', 'description', 'opis', 'Opis') || ''),
-      qty: cleanText(firstNonEmpty(obj, 'qty', 'quantity', 'ilosc', 'ilość', 'Ilość', 'amount') || ''),
-      note: cleanText(firstNonEmpty(obj, 'note', 'uwagi', 'Uwagi', 'status', 'availability', 'available') || '')
-    };
-  }
-
-  function normalizeDrawing(entry) {
-    const scalar = (entry.value && typeof entry.value !== 'object') ? String(entry.value) : '';
-    const obj = unwrap(entry.value);
-    if (!obj || typeof obj !== 'object') return null;
-    const title = cleanText(firstNonEmpty(obj, 'title', 'name', 'filename', 'fileName', 'plik', 'file') || entry.key || scalar.split('/').pop() || 'Rysunek');
-    const localPath = cleanText(firstNonEmpty(obj, 'localPath', 'path', 'file', 'url', 'href', 'src') || (scalar.match(/\.(pdf|png|jpe?g|webp|gif|svg)(\?|$)/i) ? scalar : '') || '');
-    const driveViewUrl = cleanText(firstNonEmpty(obj, 'driveViewUrl', 'viewUrl', 'googleDriveUrl', 'driveUrl') || '');
-    const drivePreviewUrl = cleanText(firstNonEmpty(obj, 'drivePreviewUrl', 'previewUrl') || toDrivePreview(driveViewUrl));
-    const deviceIndex = normalizeDeviceIndex(firstNonEmpty(obj, 'deviceIndex', 'device_index', 'productIndex', 'model', 'index', 'indeks') || extractDeviceIndex(`${title} ${localPath}`));
-
-    return {
-      id: firstNonEmpty(obj, 'id') || normalizeSearch(title).slice(0, 80),
-      deviceIndex,
-      brand: cleanText(firstNonEmpty(obj, 'brand', 'marka') || detectBrandFromText(`${title} ${localPath}`) || ''),
-      title,
-      type: cleanText(firstNonEmpty(obj, 'type', 'mime', 'mimeType') || inferType(localPath || driveViewUrl || title)),
-      localPath,
-      driveViewUrl,
-      drivePreviewUrl,
-      raw: obj
-    };
-  }
-
-  function unwrap(value) {
-    if (!value || typeof value !== 'object') return { value };
-    return value;
-  }
-
-  function firstNonEmpty(obj, ...keys) {
-    if (!obj || typeof obj !== 'object') return '';
-    for (const key of keys) {
-      if (Object.prototype.hasOwnProperty.call(obj, key)) {
-        const value = obj[key];
-        if (value === 0) return '0';
-        if (Array.isArray(value) || (value && typeof value === 'object')) return value;
-        if (String(value || '').trim()) return String(value).trim();
-      }
-    }
-    return '';
-  }
-
-  function cleanText(value) {
-    if (value === null || value === undefined) return '';
-    if (typeof value === 'object') return '';
-    return String(value).replace(/\s+/g, ' ').trim();
-  }
-
-  function normalizeDeviceIndex(value) {
-    const text = cleanText(value).toUpperCase();
-    if (!text) return '';
-    const direct = text.match(/\b(?:YT|YG|TOYA|VOREL|STHOR|LUND|FLO|FALA)[-_\s]?[A-Z0-9]{2,12}\b/);
-    if (direct) return direct[0].replace(/[_\s]+/g, '-');
-    const mixed = text.match(/\b[A-Z]{1,5}[-_\s]?[0-9]{3,8}[A-Z]?\b/);
-    if (mixed) return mixed[0].replace(/[_\s]+/g, '-');
-    const numbers = text.match(/\b[0-9]{4,8}\b/);
-    return numbers ? numbers[0] : text.slice(0, 64);
-  }
-
-  function looksLikeDeviceIndex(value) {
-    return /(?:YT|YG|VOREL|STHOR|LUND|FLO|FALA|TOYA)?[-_\s]?[0-9]{3,8}/i.test(String(value || ''));
-  }
-
-  function extractDeviceIndex(text) {
-    return normalizeDeviceIndex(text || '');
-  }
-
-  function detectBrandFromText(text) {
-    const src = String(text || '').toUpperCase();
-    return ['YATO', 'VOREL', 'STHOR', 'LUND', 'FLO', 'FALA', 'TOYA', 'YATO GASTRO'].find((brand) => src.includes(brand)) || '';
-  }
-
-  function inferType(url) {
-    const low = String(url || '').toLowerCase();
-    if (low.includes('drive.google.com')) return 'drive-pdf';
-    if (low.endsWith('.pdf')) return 'pdf';
-    if (/\.(png|jpe?g|webp|gif|svg)(\?|$)/i.test(low)) return 'image';
-    return 'file';
-  }
-
-  function toDrivePreview(url) {
-    const match = String(url || '').match(/\/d\/([^/]+)/) || String(url || '').match(/[?&]id=([^&]+)/);
-    return match ? `https://drive.google.com/file/d/${match[1]}/preview` : '';
-  }
-
-  function uniqueParts(parts) {
-    const seen = new Set();
-    const out = [];
-    for (const part of parts || []) {
-      const key = normalizeSearch(`${part.index}|${part.number}|${part.name}`);
-      if (!key || seen.has(key)) continue;
-      seen.add(key);
-      out.push(part);
-    }
-    return out.sort((a, b) => naturalCompare(a.number || a.index, b.number || b.index));
-  }
-
-  function normalizeSearch(value) {
-    return String(value || '')
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, ' ')
-      .trim();
-  }
-
-  function makeTokens(value) {
-    return new Set(normalizeSearch(value).split(' ').filter((x) => x.length >= 3));
-  }
-
-  function intersectsStrong(a, b) {
-    for (const token of a) {
-      if (b.has(token)) return true;
-    }
-    return false;
-  }
-
-  function naturalCompare(a, b) {
-    return String(a || '').localeCompare(String(b || ''), 'pl', { numeric: true, sensitivity: 'base' });
-  }
-
-  function countRecords(data) {
-    if (!data) return 0;
-    if (Array.isArray(data)) return data.length;
-    if (typeof data === 'object') {
-      for (const key of ['items', 'data', 'devices', 'products', 'parts', 'records', 'rows', 'drawings']) {
-        if (Array.isArray(data[key])) return data[key].length;
-      }
-      return Object.keys(data).length;
-    }
-    return 0;
   }
 
   function renderStats() {
-    const partsCount = state.devices.reduce((sum, d) => sum + d.parts.length, 0);
-    els.statDevices.textContent = state.devices.length.toLocaleString('pl-PL');
-    els.statParts.textContent = partsCount.toLocaleString('pl-PL');
-    els.statDrawings.textContent = state.drawings.length.toLocaleString('pl-PL');
-    els.statFiles.textContent = state.loadedFiles.length.toLocaleString('pl-PL');
+    els.statParts.textContent = fmt(state.parts.length);
+    els.statDrawings.textContent = fmt(state.drawings.length);
+    els.statDevices.textContent = fmt(state.devices.length || unique(state.drawings.map(d => d.deviceIndex)).length);
   }
 
-  function renderStatus() {
-    const loaded = state.loadedFiles.map((file) => `
-      <div class="side-item">
-        <b>✅ ${escapeHtml(file.group)} — ${escapeHtml(file.url)}</b>
-        <span>${file.count.toLocaleString('pl-PL')} rekordów, ${(file.size / 1024).toFixed(1)} KB</span>
-      </div>`).join('');
-
-    const failedByGroup = Object.entries(groupBy(state.failedFiles, 'group'))
-      .filter(([group]) => !state.loadedFiles.some((file) => file.group === group))
-      .map(([group, files]) => `
-        <div class="side-item">
-          <b>⚠️ ${escapeHtml(group)}</b>
-          <span>Nie znaleziono: ${files.map((f) => escapeHtml(f.url)).join(', ')}</span>
-        </div>`).join('');
-
-    els.dataStatus.innerHTML = loaded + failedByGroup || '<div class="side-item"><b>Brak danych</b><span>Nie udało się odczytać plików JSON.</span></div>';
-  }
-
-  function groupBy(items, key) {
-    return items.reduce((acc, item) => {
-      const value = item[key];
-      (acc[value] ||= []).push(item);
-      return acc;
-    }, {});
-  }
-
-  function renderChips() {
-    const brands = Array.from(new Set(state.devices.map((d) => d.brand).filter(Boolean))).sort();
-    const chips = brands.slice(0, 14).map((brand) => `<button class="chip" type="button" data-brand="${escapeHtml(brand)}">${escapeHtml(brand)}</button>`).join('');
-    els.chips.innerHTML = chips;
-    els.chips.querySelectorAll('[data-brand]').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        state.query = btn.dataset.brand;
-        els.searchInput.value = state.query;
-        state.showAll = false;
-        renderResults();
-      });
-    });
+  function renderExamples() {
+    const sampleParts = state.parts.filter(p => p.namePl || p.nameEn).slice(0, 10);
+    const sampleDrawings = state.drawings.filter(d => d.type === 'pdf').slice(0, 5);
+    els.resultsTitle.textContent = 'Przykładowe rekordy z bazy';
+    els.resultsMeta.textContent = `Baza gotowa. Wyszukuj po indeksie urządzenia, indeksie części albo nazwie.`;
+    els.results.className = 'results';
+    els.results.innerHTML = [
+      ...sampleParts.map(renderPartResult),
+      ...sampleDrawings.map(renderDrawingResult)
+    ].join('') || '<div class="empty-state">Brak przykładowych rekordów.</div>';
   }
 
   function renderResults() {
-    const query = normalizeSearch(state.query);
-    let items = state.devices;
-
-    if (query) {
-      const tokens = query.split(' ').filter(Boolean);
-      items = state.devices
-        .map((device) => ({ device, score: scoreDevice(device, tokens) }))
-        .filter((item) => item.score > 0)
-        .sort((a, b) => b.score - a.score || naturalCompare(a.device.deviceIndex, b.device.deviceIndex))
-        .map((item) => item.device);
-    } else if (!state.showAll) {
-      items = state.devices.slice(0, 30);
-    }
-
-    const limited = items.slice(0, state.showAll ? 1000 : 120);
-    els.resultsTitle.textContent = query ? 'Wyniki wyszukiwania' : state.showAll ? 'Cała baza' : 'Ostatnio załadowane indeksy';
-    els.resultsCount.textContent = `${items.length.toLocaleString('pl-PL')} wyników${items.length > limited.length ? ` — pokazuję ${limited.length}` : ''}`;
-
-    if (!limited.length) {
-      els.results.innerHTML = `<div class="empty">Nie znaleziono pasującego indeksu. Spróbuj wpisać sam numer bez prefiksu, np. zamiast <b>YT-828390</b> wpisz <b>828390</b>.</div>`;
+    if (!state.initialized) return;
+    const query = norm(state.query);
+    if (!query) return renderExamples();
+    const tokens = query.split(' ').filter(Boolean);
+    const parts = scoreItems(state.parts, tokens, 'part').slice(0, 80);
+    const drawings = scoreItems(state.drawings, tokens, 'drawing').slice(0, 35);
+    const combined = [...parts, ...drawings].sort((a,b) => b.score - a.score).slice(0, 90);
+    els.resultsTitle.textContent = 'Wyniki wyszukiwania';
+    els.resultsMeta.textContent = `${fmt(parts.length)} pasujących części • ${fmt(drawings.length)} pasujących rysunków / plików`;
+    els.results.className = 'results';
+    if (!combined.length) {
+      els.results.className = 'results empty-state';
+      els.results.innerHTML = `<p>Brak wyniku dla <strong>${escapeHtml(state.query)}</strong>. Spróbuj bez myślnika, bez prefiksu albo wpisz sam numer.</p>`;
       return;
     }
+    els.results.innerHTML = combined.map((item) => item.kind === 'part' ? renderPartResult(item.value, item.score) : renderDrawingResult(item.value, item.score)).join('');
+  }
 
-    els.results.innerHTML = limited.map(renderResult).join('');
-    els.results.querySelectorAll('.result-head').forEach((head) => {
-      head.addEventListener('click', () => head.closest('.result').classList.toggle('open'));
+  function scoreItems(items, tokens, kind) {
+    const scored = [];
+    for (const item of items) {
+      let score = 0;
+      const search = item.__search || norm(Object.values(item).join(' '));
+      for (const token of tokens) {
+        if (!token) continue;
+        if (kind === 'part') {
+          const idx = norm(item.partIndex);
+          if (idx === token) score += 260;
+          else if (idx.includes(token)) score += 140;
+          if (norm(item.deviceIndex).includes(token)) score += 70;
+        } else {
+          const dev = norm(item.deviceIndex);
+          if (dev === token) score += 220;
+          else if (dev.includes(token)) score += 110;
+        }
+        if (search.includes(token)) score += 25;
+      }
+      if (score > 0) scored.push({kind, value:item, score});
+    }
+    return scored.sort((a,b) => b.score - a.score);
+  }
+
+  function renderPartResult(part) {
+    const drawing = state.drawingById.get(String(part.drawingId)) || {};
+    const siblings = (state.partsByDrawing.get(String(part.drawingId)) || []).filter(p => p.id !== part.id).slice(0, 8);
+    const price = part.priceNet ? `${num(part.priceNet)} PLN netto` : 'brak ceny w bazie';
+    const stock = part.stockTotal !== undefined ? `stan: ${part.stockTotal}` : 'stan nieustalony';
+    const name = part.namePl || part.nameEn || 'Część z rysunku';
+    return `<article class="result-card open">
+      <div class="result-main">
+        <div>
+          <div class="result-kicker"><span class="badge red">Część</span><span class="badge">${escapeHtml(part.deviceIndex || 'bez modelu')}</span>${part.position ? `<span class="badge ok">poz. ${escapeHtml(part.position)}</span>` : ''}</div>
+          <h3 class="result-title"><span class="part-index">${mark(part.partIndex)}</span> — ${mark(name)}</h3>
+          <p class="result-sub">${escapeHtml(drawing.title || part.drawingTitle || '')}</p>
+        </div>
+        <div class="card-actions">
+          ${drawing.id ? `<button class="primary" data-view-drawing="${escapeAttr(drawing.id)}">Pokaż rysunek</button>` : ''}
+          <button class="secondary" data-add-part="${escapeAttr(part.id)}">Do treści maila</button>
+          <button class="ghost" data-toggle>Więcej</button>
+        </div>
+      </div>
+      <div class="details">
+        <table class="parts-table"><tbody>
+          <tr><th>Indeks</th><td class="part-index">${escapeHtml(part.partIndex)}</td><th>Pozycja</th><td>${escapeHtml(part.position || '—')}</td></tr>
+          <tr><th>Nazwa PL</th><td>${escapeHtml(part.namePl || '—')}</td><th>Nazwa EN</th><td>${escapeHtml(part.nameEn || '—')}</td></tr>
+          <tr><th>Cena</th><td class="price">${escapeHtml(price)}</td><th>Dostępność</th><td>${escapeHtml(stock)}</td></tr>
+          <tr><th>Rysunek</th><td colspan="3">${escapeHtml(drawing.title || part.drawingTitle || '')}</td></tr>
+        </tbody></table>
+        ${siblings.length ? `<div class="related"><p class="related-title">Z czym się wiąże na tym rysunku:</p><div class="related-list">${siblings.map(s => `<button data-search="${escapeAttr(s.partIndex)}">${escapeHtml(s.position ? s.position + ' — ' : '')}${escapeHtml(s.partIndex)}</button>`).join('')}</div></div>` : ''}
+      </div>
+    </article>`;
+  }
+
+  function renderDrawingResult(drawing) {
+    const parts = (state.partsByDrawing.get(String(drawing.id)) || []).slice(0, 12);
+    return `<article class="result-card">
+      <div class="result-main">
+        <div>
+          <div class="result-kicker"><span class="badge red">Rysunek</span><span class="badge">${escapeHtml(drawing.type || 'plik')}</span><span class="badge">${escapeHtml(drawing.deviceIndex || 'bez indeksu')}</span></div>
+          <h3 class="result-title">${mark(drawing.title || drawing.fileName || 'Rysunek')}</h3>
+          <p class="result-sub">${escapeHtml(drawing.path || drawing.originalPath || '')}</p>
+        </div>
+        <div class="card-actions">
+          <button class="primary" data-view-drawing="${escapeAttr(drawing.id)}">Pokaż rysunek</button>
+          <button class="ghost" data-toggle>Części (${fmt((state.partsByDrawing.get(String(drawing.id)) || []).length)})</button>
+        </div>
+      </div>
+      <div class="details">
+        ${parts.length ? renderPartsTable(parts) : '<p class="result-sub">Rysunek jest widoczny, ale z tego PDF/DOCX nie udało się automatycznie odczytać tabeli części.</p>'}
+      </div>
+    </article>`;
+  }
+
+  function renderPartsTable(parts) {
+    return `<table class="parts-table"><thead><tr><th>Poz.</th><th>Indeks</th><th>Nazwa</th><th>Cena</th><th></th></tr></thead><tbody>${parts.map(p => `<tr><td>${escapeHtml(p.position || '—')}</td><td class="part-index">${escapeHtml(p.partIndex)}</td><td>${escapeHtml(p.namePl || p.nameEn || '—')}</td><td>${p.priceNet ? `<span class="price">${escapeHtml(num(p.priceNet))} PLN</span>` : '—'}</td><td><button class="secondary" data-add-part="${escapeAttr(p.id)}">Dodaj</button></td></tr>`).join('')}</tbody></table>`;
+  }
+
+  function showDrawing(id) {
+    const drawing = state.drawingById.get(String(id));
+    if (!drawing) return;
+    const url = encodePath(drawing.path || drawing.localPath || drawing.url || drawing.originalPath || '');
+    els.viewerTitle.textContent = drawing.title || drawing.fileName || 'Rysunek';
+    if (url) {
+      els.viewerOpen.href = url;
+      els.viewerOpen.classList.remove('hidden');
+    } else {
+      els.viewerOpen.classList.add('hidden');
+    }
+    const type = (drawing.type || '').toLowerCase();
+    const low = String(url).toLowerCase();
+    if (type === 'image' || /\.(png|jpe?g|webp|gif|svg|bmp)$/i.test(low)) {
+      els.viewer.className = 'viewer';
+      els.viewer.innerHTML = `<img src="${escapeAttr(url)}" alt="${escapeAttr(drawing.title || 'Rysunek')}">`;
+    } else if (type === 'pdf' || low.endsWith('.pdf')) {
+      els.viewer.className = 'viewer';
+      els.viewer.innerHTML = `<iframe src="${escapeAttr(url)}#toolbar=1&navpanes=0" title="${escapeAttr(drawing.title || 'Rysunek PDF')}"></iframe>`;
+    } else {
+      els.viewer.className = 'viewer empty-viewer';
+      els.viewer.innerHTML = `<div class="viewer-note"><strong>Ten plik nie ma podglądu inline.</strong><br>Najlepiej przekonwertować DOC/DOCX do PDF albo JPG, żeby klient widział rysunek bez pobierania pliku.<br><br>${url ? `<a class="primary" href="${escapeAttr(url)}" target="_blank" rel="noreferrer">Otwórz plik</a>` : ''}</div>`;
+    }
+  }
+
+  function addPart(id) {
+    const part = state.parts.find(p => String(p.id) === String(id));
+    if (!part) return;
+    if (!state.selectedParts.some(p => p.id === part.id)) state.selectedParts.push(part);
+    updateMail();
+    toast('Dodano do treści maila');
+  }
+
+  function updateMail() {
+    if (!state.selectedParts.length) {
+      els.mailText.value = `Dzień dobry,\n\nDziękujemy za kontakt z Serwisem Pogwarancyjnym TOYA S.A.\n\nProsimy o przesłanie indeksu urządzenia oraz wskazanie potrzebnej części z rysunku wybuchowego. Po otrzymaniu danych sprawdzimy dostępność oraz cenę.\n\nPozdrawiam\nSerwis Pogwarancyjny TOYA S.A.`;
+      return;
+    }
+    const lines = state.selectedParts.map((p, i) => {
+      const drawing = state.drawingById.get(String(p.drawingId)) || {};
+      const price = p.priceNet ? `, cena netto: ${num(p.priceNet)} PLN` : ', cena: do potwierdzenia';
+      const stock = p.stockTotal !== undefined ? `, stan: ${p.stockTotal}` : '';
+      return `${i+1}. ${p.partIndex}${p.position ? ` — pozycja ${p.position}` : ''}${p.namePl ? ` — ${p.namePl}` : ''}${price}${stock}${drawing.title ? `\n   Rysunek: ${drawing.title}` : ''}`;
     });
+    els.mailText.value = `Dzień dobry,\n\nPoniżej przesyłam wskazane części zamienne:\n\n${lines.join('\n')}\n\nProsimy o potwierdzenie, które pozycje mają zostać przygotowane do dalszej realizacji.\n\nPozdrawiam\nSerwis Pogwarancyjny TOYA S.A.`;
   }
 
-  function scoreDevice(device, tokens) {
-    let score = 0;
-    const normalizedIndex = normalizeSearch(device.deviceIndex);
-    for (const token of tokens) {
-      if (!token) continue;
-      if (normalizedIndex === token) score += 100;
-      if (normalizedIndex.includes(token)) score += 55;
-      if (device.searchText.includes(token)) score += 12;
-      for (const part of device.parts) {
-        const partText = normalizeSearch(`${part.index} ${part.name} ${part.number}`);
-        if (partText.includes(token)) score += 28;
-      }
-    }
-    return score;
+  function encodePath(path) {
+    if (!path) return '';
+    if (/^https?:\/\//i.test(path)) return path;
+    return path.split('/').map((part) => encodeURIComponent(part)).join('/').replace(/%23/g, '#');
   }
 
-  function renderResult(device, index) {
-    const drawingCount = device.drawings.length;
-    const partCount = device.parts.length;
-    const openClass = index === 0 && state.query ? ' open' : '';
-    return `
-      <article class="result${openClass}">
-        <div class="result-head" role="button" tabindex="0">
-          <div>
-            <div class="result-title">
-              <span class="index-badge">${escapeHtml(device.deviceIndex || 'bez indeksu')}</span>
-              ${device.brand ? `<span class="brand-badge">${escapeHtml(device.brand)}</span>` : ''}
-            </div>
-            <div class="result-sub">
-              ${escapeHtml(device.title || device.description || 'Urządzenie / indeks z bazy')}
-              <br>${partCount} części • ${drawingCount ? `${drawingCount} rysunek/rysunki` : 'brak przypisanego rysunku w indeksie'}
-            </div>
-          </div>
-          <button type="button" class="secondary">Szczegóły</button>
-        </div>
-        <div class="result-body">
-          ${renderParts(device.parts)}
-          ${renderDrawings(device.drawings)}
-          ${renderRawHint(device)}
-        </div>
-      </article>`;
+  function norm(value) {
+    return String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
   }
-
-  function renderParts(parts) {
-    if (!parts.length) return '<div class="empty">Dla tego indeksu nie znaleziono tabeli części w odczytanych plikach.</div>';
-    return `
-      <table class="parts-table">
-        <thead><tr><th>Pozycja</th><th>Indeks części</th><th>Nazwa / opis</th><th>Ilość</th><th>Uwagi</th></tr></thead>
-        <tbody>${parts.map((part) => `
-          <tr>
-            <td>${escapeHtml(part.number || '—')}</td>
-            <td><code>${escapeHtml(part.index || '—')}</code></td>
-            <td>${escapeHtml(part.name || '—')}</td>
-            <td>${escapeHtml(part.qty || '—')}</td>
-            <td>${escapeHtml(part.note || '')}</td>
-          </tr>`).join('')}</tbody>
-      </table>`;
+  function unique(arr) { return Array.from(new Set(arr.filter(Boolean))); }
+  function fmt(n) { return Number(n || 0).toLocaleString('pl-PL'); }
+  function num(v) { const n = Number(String(v).replace(',','.')); return Number.isFinite(n) ? n.toLocaleString('pl-PL', {minimumFractionDigits:2, maximumFractionDigits:2}) : String(v); }
+  function setStatus(text) { els.loadStatus.textContent = text; }
+  function escapeHtml(value) { return String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[ch])); }
+  function escapeAttr(value) { return escapeHtml(value); }
+  function mark(value) {
+    const text = escapeHtml(value || '');
+    const q = state.query.trim();
+    if (!q || q.length < 2) return text;
+    const safe = q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    return text.replace(new RegExp(`(${safe})`, 'ig'), '<span class="mark">$1</span>');
   }
-
-  function renderDrawings(drawings) {
-    if (!drawings.length) return '';
-    return `<div class="drawing-box">${drawings.map(renderDrawing).join('')}</div>`;
+  function debounce(fn, wait) { let t; return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), wait); }; }
+  function toast(text) {
+    const node = document.createElement('div'); node.className = 'toast'; node.textContent = text; document.body.appendChild(node);
+    setTimeout(() => node.remove(), 2200);
   }
-
-  function renderDrawing(drawing) {
-    const src = drawing.drivePreviewUrl || drawing.localPath || drawing.driveViewUrl;
-    const openUrl = drawing.localPath || drawing.driveViewUrl || drawing.drivePreviewUrl;
-    const low = String(src || '').toLowerCase();
-    const isImage = /\.(png|jpe?g|webp|gif|svg)(\?|$)/i.test(low);
-    const title = escapeHtml(drawing.title || 'Rysunek');
-    let preview = '';
-
-    if (src) {
-      preview = isImage
-        ? `<img class="drawing-img" loading="lazy" src="${escapeAttr(src)}" alt="${title}">`
-        : `<iframe class="drawing-frame" src="${escapeAttr(src)}" title="${title}" loading="lazy"></iframe>`;
-    }
-
-    return `
-      <section>
-        <div class="toolbar">
-          <strong>${title}</strong>
-          ${openUrl ? `<a class="button secondary" target="_blank" rel="noopener" href="${escapeAttr(openUrl)}">Otwórz rysunek</a>` : ''}
-        </div>
-        ${preview || '<div class="empty">Rysunek jest w indeksie, ale nie ma ścieżki podglądu.</div>'}
-      </section>`;
-  }
-
-  function renderRawHint(device) {
-    if (device.parts.length || device.drawings.length) return '';
-    return `<p class="small">Ten rekord został znaleziony, ale aplikacja nie rozpoznała automatycznie pól części. Dane źródłowe są w JSON — sprawdź format pól w pliku i ewentualnie dopisz aliasy w funkcjach normalizeDevice/normalizePart.</p>`;
-  }
-
-  function renderLogos() {
-    els.brandLogos.innerHTML = BRAND_LOGOS.map(([brand, paths]) => {
-      const first = paths[0];
-      const list = paths.slice(1).map((p) => `'${escapeJs(p)}'`).join(',');
-      return `<img src="${escapeAttr(first)}" alt="${escapeAttr(brand)}" onerror="window.__nextLogo(this, [${list}])">`;
-    }).join('');
-
-    window.__nextLogo = (img, paths) => {
-      const next = paths.shift();
-      if (next) {
-        img.onerror = () => window.__nextLogo(img, paths);
-        img.src = next;
-      } else {
-        img.remove();
-      }
-    };
-  }
-
-  function setNotice(message, kind = '', timeout = 0) {
-    els.notice.className = `notice show ${kind}`.trim();
-    els.notice.textContent = message;
-    if (timeout) setTimeout(() => els.notice.className = 'notice', timeout);
-  }
-
-  function escapeHtml(value) {
-    return String(value ?? '').replace(/[&<>"]/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]));
-  }
-
-  function escapeAttr(value) { return escapeHtml(value).replace(/'/g, '&#039;'); }
-  function escapeJs(value) { return String(value || '').replace(/\\/g, '\\\\').replace(/'/g, "\\'"); }
 })();
