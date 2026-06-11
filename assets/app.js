@@ -1,21 +1,25 @@
 (() => {
   'use strict';
-  const VERSION = '20260611-v25-storage';
+  const VERSION = '20260611-v26-drive-pilot';
   const CONFIG = Object.assign({
-    storageMode: 'auto',
+    storageMode: 'drive',
     drawingsBaseUrl: '',
     preferExternalDrawings: true,
-    storageLabel: ''
+    storageLabel: 'Google Drive',
+    driveSearchFallback: true,
+    driveSearchBaseUrl: 'https://drive.google.com/drive/search?q=',
+    driveMapUrls: ['data/drive-drawings-map.json', 'drive-drawings-map.json']
   }, window.PGW_CONFIG || {});
   const DATA_URLS = {
     meta: ['data/build-meta.json', 'build-meta.json'],
     drawings: ['data/drawings.generated.json', 'drawings.generated.json', 'drawings.json', 'data/drawings.json'],
     parts: ['data/parts.generated.json', 'parts.generated.json', 'parts.json', 'data/parts.json'],
-    devices: ['data/devices.generated.json', 'devices.generated.json', 'devices.json', 'data/devices.json']
+    devices: ['data/devices.generated.json', 'devices.generated.json', 'devices.json', 'data/devices.json'],
+    driveMap: (window.PGW_CONFIG && window.PGW_CONFIG.driveMapUrls) || ['data/drive-drawings-map.json', 'drive-drawings-map.json']
   };
 
   const state = {
-    meta: {}, drawings: [], parts: [], devices: [],
+    meta: {}, drawings: [], parts: [], devices: [], driveMap: {},
     drawingById: new Map(), partsByDrawing: new Map(), devicesByIndex: new Map(),
     selectedParts: [], query: '', initialized: false
   };
@@ -38,6 +42,7 @@
       state.drawings = normalizeArray(await loadFirst(DATA_URLS.drawings, []));
       state.parts = normalizeArray(await loadFirst(DATA_URLS.parts, []));
       state.devices = normalizeArray(await loadFirst(DATA_URLS.devices, []));
+      state.driveMap = await loadFirst(DATA_URLS.driveMap, {});
       buildIndexes();
       renderStats();
       setStatus(`Gotowe: ${fmt(state.parts.length)} części, ${fmt(state.drawings.length)} rysunków`);
@@ -137,12 +142,63 @@
       state.partsByDrawing.get(did).push(part);
     }
     for (const device of state.devices) state.devicesByIndex.set(norm(device.deviceIndex), device);
+    applyDriveManifest();
     for (const part of state.parts) {
       part.__search = norm([part.partIndex, part.namePl, part.nameEn, part.position, part.deviceIndex, part.drawingTitle, part.zun].join(' '));
     }
     for (const drawing of state.drawings) {
       drawing.__search = norm([drawing.deviceIndex, drawing.brand, drawing.title, drawing.fileName, drawing.originalPath, drawing.searchText].join(' '));
     }
+  }
+
+
+  function applyDriveManifest() {
+    const maps = normalizeDriveMap(state.driveMap);
+    if (!maps.length) return;
+    for (const drawing of state.drawings) {
+      const keys = drawingKeys(drawing);
+      for (const key of keys) {
+        const hit = maps.find(m => m.key === key);
+        if (!hit) continue;
+        if (hit.fileId && !drawing.driveFileId) drawing.driveFileId = hit.fileId;
+        if (hit.url && !drawing.url) drawing.url = hit.url;
+        if (hit.viewerUrl && !drawing.viewerUrl) drawing.viewerUrl = hit.viewerUrl;
+        if (hit.openUrl && !drawing.openUrl) drawing.openUrl = hit.openUrl;
+        break;
+      }
+    }
+  }
+
+  function normalizeDriveMap(value) {
+    const rows = Array.isArray(value) ? value : normalizeArray(value);
+    const out = [];
+    for (const row of rows) {
+      if (!row || typeof row !== 'object') continue;
+      const fileId = row.fileId || row.driveFileId || row.id || '';
+      const url = row.url || row.webViewLink || '';
+      const viewerUrl = row.viewerUrl || '';
+      const openUrl = row.openUrl || url || (fileId ? `https://drive.google.com/file/d/${fileId}/view` : '');
+      for (const raw of [row.path, row.originalPath, row.localPath, row.fileName, row.title, row.deviceIndex, row.model, row.key]) {
+        const key = normKey(raw);
+        if (key) out.push({key, fileId, url, viewerUrl, openUrl});
+      }
+    }
+    return out;
+  }
+
+  function drawingKeys(drawing) {
+    return unique([
+      normKey(drawing.path),
+      normKey(drawing.originalPath),
+      normKey(drawing.localPath),
+      normKey(drawing.fileName),
+      normKey(drawing.title),
+      normKey(drawing.deviceIndex)
+    ]);
+  }
+
+  function normKey(value) {
+    return String(value || '').trim().toLowerCase().replace(/\\/g, '/').replace(/^.*\//, '').replace(/\s+/g, ' ');
   }
 
   function renderStats() {
@@ -285,7 +341,9 @@
     els.viewer.innerHTML = '<div class="viewer-note">Sprawdzam plik rysunku…</div>';
 
     if (!url) {
-      els.viewer.innerHTML = '<div class="viewer-note"><strong>Brak adresu pliku.</strong><br>Ten rekord ma dane części, ale nie ma przypisanego hostingu rysunku. Trzeba uzupełnić CDN URL albo Google Drive file ID w manifeście.</div>';
+      const search = driveSearchUrl(drawing);
+      els.viewer.innerHTML = `<div class="viewer-note"><strong>Rysunek jest w bazie, ale nie ma jeszcze przypiętego linku Google Drive.</strong><br>To nie blokuje wyszukiwania części. W pilotażu trzeba uzupełnić manifest Drive ID dla tego pliku.<br><br>${search ? `<a class="primary" href="${escapeAttr(search)}" target="_blank" rel="noreferrer">Znajdź w Google Drive</a>` : ''}</div>`;
+      if (search) { els.viewerOpen.href = search; els.viewerOpen.classList.remove('hidden'); }
       return;
     }
 
@@ -323,9 +381,11 @@
     const local = encodePath(drawing.path || drawing.localPath || drawing.originalPath || '');
     const direct = drawing.viewerUrl || drawing.cdnUrl || drawing.url || '';
     const driveId = drawing.driveFileId || drawing.googleDriveId || drawing.gdriveId || '';
+    const search = driveSearchUrl(drawing);
     const cdn = buildCdnUrl(drawing);
 
     if (mode === 'drive' && driveId) return driveSource(driveId);
+    if (mode === 'drive' && search) return {kind:'drive-search', url:'', viewerUrl:'', openUrl:search, external:true};
     if (mode === 'cdn' && cdn) return {kind:'cdn', url: cdn, viewerUrl: cdn, openUrl: cdn, external:true};
     if (mode === 'local') return {kind:'local', url: local, viewerUrl: local, openUrl: local, external:false};
 
@@ -338,7 +398,16 @@
     if (local) return {kind:'local', url: local, viewerUrl: local, openUrl: local, external:false};
     if (direct) return {kind:'external', url: direct, viewerUrl: direct, openUrl: drawing.openUrl || direct, external:true};
     if (driveId) return driveSource(driveId);
+    if (search) return {kind:'drive-search', url:'', viewerUrl:'', openUrl:search, external:true};
     return {kind:'missing', url:'', viewerUrl:'', openUrl:'', external:false};
+  }
+
+  function driveSearchUrl(drawing) {
+    if (CONFIG.driveSearchFallback === false) return '';
+    const base = String(CONFIG.driveSearchBaseUrl || 'https://drive.google.com/drive/search?q=');
+    const query = drawing.fileName || drawing.deviceIndex || drawing.title || '';
+    if (!query) return '';
+    return base + encodeURIComponent(query);
   }
 
   function driveSource(fileId) {
