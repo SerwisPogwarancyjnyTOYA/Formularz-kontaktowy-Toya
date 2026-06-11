@@ -1,6 +1,6 @@
 (() => {
   'use strict';
-  const VERSION = '20260610-v22-formularz-old';
+  const VERSION = '20260611-v24-stabilna';
   const DATA_URLS = {
     meta: ['data/build-meta.json', 'build-meta.json'],
     drawings: ['data/drawings.generated.json', 'drawings.generated.json', 'drawings.json', 'data/drawings.json'],
@@ -36,7 +36,8 @@
       renderStats();
       setStatus(`Gotowe: ${fmt(state.parts.length)} części, ${fmt(state.drawings.length)} rysunków`);
       state.initialized = true;
-      renderExamples();
+      state.query = els.searchInput.value.trim();
+      if (state.query) renderResults(); else renderExamples();
       updateMail();
     } catch (error) {
       console.error(error);
@@ -157,7 +158,13 @@
   }
 
   function renderResults() {
-    if (!state.initialized) return;
+    if (!state.initialized) {
+      els.resultsTitle.textContent = 'Ładowanie danych';
+      els.resultsMeta.textContent = 'Wczytuję bazę części i rysunków. Po zakończeniu wyszukiwanie ruszy automatycznie.';
+      els.results.className = 'results empty-state';
+      els.results.innerHTML = '<p>Jeszcze chwilę — baza jest duża, więc pierwsze uruchomienie może potrwać.</p>';
+      return;
+    }
     const query = norm(state.query);
     if (!query) return renderExamples();
     const tokens = query.split(' ').filter(Boolean);
@@ -322,7 +329,7 @@
   function updateMail() {
     const form = readCustomerForm();
     const now = new Date().toLocaleString('pl-PL');
-    const firstDevice = state.selectedParts.find(p => p.deviceIndex)?.deviceIndex || '';
+    const firstDevice = state.selectedParts.find(p => p.deviceIndex)?.deviceIndex || inferDeviceFromQuery() || form.device || '';
     const subject = state.selectedParts.length ? `Zapytanie o części — ${firstDevice || state.selectedParts[0].partIndex}` : 'Zapytanie o części pogwarancyjne';
 
     const lines = [];
@@ -330,7 +337,8 @@
     lines.push('');
     lines.push('Mam urządzenie: ' + (firstDevice || '[marka / model / indeks urządzenia]') + '.');
     lines.push('');
-    lines.push('Proszę o potwierdzenie dostępności oraz wycenę poniższych części pogwarancyjnych.');
+    lines.push('Potrzebuję do niego części z rysunku wybuchowego wskazane poniżej.');
+    lines.push('Proszę o ich wycenę oraz informację o dostępności.');
     lines.push('');
     lines.push('WYBRANE CZĘŚCI:');
     if (state.selectedParts.length) {
@@ -346,7 +354,12 @@
         lines.push('');
       });
     } else {
-      lines.push('Brak wybranych części.');
+      const manual = (state.query || els.searchInput.value || '').trim();
+      if (manual) {
+        lines.push(`1. Indeks / opis wpisany w formularzu: ${manual}`);
+      } else {
+        lines.push('1. [wpisz indeksy części / pozycje z rysunku]');
+      }
       lines.push('');
     }
     lines.push('DANE KONTAKTOWE:');
@@ -366,24 +379,35 @@
     lines.push('');
     lines.push(`Wygenerowano w: PGW Service Hub, ${now}`);
 
-    els.mailText.value = lines.join('
-');
+    els.mailText.value = lines.join('\n');
   }
 
   function readCustomerForm() {
     const val = (id) => ($(id)?.value || '').trim();
     return {
-      device: val('cfDevice'), serial: val('cfSerial'), invoiceName: val('cfInvoiceName'), nip: val('cfNip'),
-      invoiceStreet: val('cfInvoiceStreet'), invoiceCity: val('cfInvoiceCity'), shipName: val('cfShipName'),
-      shipPhone: val('cfShipPhone'), shipStreet: val('cfShipStreet'), shipCity: val('cfShipCity'),
-      contactName: val('cfContactName'), phone: val('cfPhone'), email: val('cfEmail'), notes: val('cfNotes')
+      name: val('cfName') || val('cfContactName') || val('cfInvoiceName'),
+      email: val('cfEmail'),
+      phone: val('cfPhone'),
+      nip: val('cfNip'),
+      invoice: val('cfInvoice') || [val('cfInvoiceName'), val('cfInvoiceStreet'), val('cfInvoiceCity')].filter(Boolean).join('\n'),
+      shipping: val('cfShipping') || [val('cfShipName'), val('cfShipPhone'), val('cfShipStreet'), val('cfShipCity')].filter(Boolean).join('\n'),
+      notes: val('cfNotes'),
+      device: val('cfDevice'),
+      serial: val('cfSerial')
     };
   }
 
+  function inferDeviceFromQuery() {
+    const q = (els.searchInput?.value || state.query || '').toUpperCase();
+    const m = q.match(/\b[A-Z]{1,3}-?\d{3,6}\b/);
+    return m ? m[0].replace(/([A-Z]+)(\d)/, '$1-$2') : '';
+  }
+
   function autofillDeviceFromSelection() {
-    if (!els.cfDevice || els.cfDevice.value.trim()) return;
+    const deviceInput = $('cfDevice');
+    if (!deviceInput || deviceInput.value.trim()) return;
     const devices = unique(state.selectedParts.map(p => p.deviceIndex).filter(Boolean));
-    if (devices.length) els.cfDevice.value = devices.join(', ');
+    if (devices.length) deviceInput.value = devices.join(', ');
   }
 
   function encodePath(path) {
