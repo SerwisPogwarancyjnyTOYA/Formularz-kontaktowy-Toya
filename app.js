@@ -1,6 +1,12 @@
 (() => {
   'use strict';
-  const VERSION = '20260611-v24-stabilna';
+  const VERSION = '20260611-v25-storage';
+  const CONFIG = Object.assign({
+    storageMode: 'auto',
+    drawingsBaseUrl: '',
+    preferExternalDrawings: true,
+    storageLabel: ''
+  }, window.PGW_CONFIG || {});
   const DATA_URLS = {
     meta: ['data/build-meta.json', 'build-meta.json'],
     drawings: ['data/drawings.generated.json', 'drawings.generated.json', 'drawings.json', 'data/drawings.json'],
@@ -264,10 +270,12 @@
   async function showDrawing(id) {
     const drawing = state.drawingById.get(String(id));
     if (!drawing) return;
-    const url = encodePath(drawing.path || drawing.localPath || drawing.url || drawing.originalPath || '');
+    const source = resolveDrawingSource(drawing);
+    const url = source.viewerUrl || source.url || '';
+
     els.viewerTitle.textContent = drawing.title || drawing.fileName || 'Rysunek';
-    if (url) {
-      els.viewerOpen.href = url;
+    if (source.openUrl || url) {
+      els.viewerOpen.href = source.openUrl || url;
       els.viewerOpen.classList.remove('hidden');
     } else {
       els.viewerOpen.classList.add('hidden');
@@ -277,33 +285,86 @@
     els.viewer.innerHTML = '<div class="viewer-note">Sprawdzam plik rysunku…</div>';
 
     if (!url) {
-      els.viewer.innerHTML = '<div class="viewer-note"><strong>Brak ścieżki pliku.</strong><br>Ten rekord ma dane części, ale nie ma przypisanego pliku rysunku.</div>';
+      els.viewer.innerHTML = '<div class="viewer-note"><strong>Brak adresu pliku.</strong><br>Ten rekord ma dane części, ale nie ma przypisanego hostingu rysunku. Trzeba uzupełnić CDN URL albo Google Drive file ID w manifeście.</div>';
       return;
     }
 
-    const exists = await fileLooksAvailable(url);
+    const exists = await fileLooksAvailable(source);
     if (!exists) {
       els.viewer.className = 'viewer empty-viewer';
-      els.viewer.innerHTML = `<div class="missing-file"><strong>Rysunek nie jest jeszcze opublikowany w repozytorium.</strong><p>Baza zna ten rysunek i części, ale fizyczny plik PDF/JPG/DOCX nie został jeszcze wrzucony pod tę ścieżkę. Po uruchomieniu importu rysunków podgląd pojawi się automatycznie.</p><code>${escapeHtml(url)}</code></div>`;
+      els.viewer.innerHTML = `<div class="missing-file"><strong>Rysunek nie jest dostępny pod wskazanym adresem.</strong><p>Baza zna części i rysunek, ale plik nie został jeszcze opublikowany albo adres jest niepoprawny. Dla produkcji najlepiej trzymać rysunki poza repo: CDN/R2/TOYA24.</p><code>${escapeHtml(url)}</code></div>`;
       return;
     }
 
-    const type = (drawing.type || '').toLowerCase();
     const low = String(url).toLowerCase();
-    if (type === 'image' || /\.(png|jpe?g|webp|gif|svg|bmp)$/i.test(low)) {
+    const type = (drawing.type || source.kind || '').toLowerCase();
+
+    if (source.kind === 'drive-preview') {
       els.viewer.className = 'viewer';
-      els.viewer.innerHTML = `<img src="${escapeAttr(url)}" alt="${escapeAttr(drawing.title || 'Rysunek')}" onerror="this.closest('.viewer').className='viewer empty-viewer';this.closest('.viewer').innerHTML='<div class=&quot;viewer-note&quot;><strong>Nie udało się wyświetlić obrazu.</strong><br>Sprawdź, czy plik został opublikowany w repozytorium.</div>'">`;
-    } else if (type === 'pdf' || low.endsWith('.pdf')) {
+      els.viewer.innerHTML = `<iframe src="${escapeAttr(url)}" title="${escapeAttr(drawing.title || 'Podgląd Google Drive')}"></iframe>`;
+      return;
+    }
+
+    if (type === 'image' || /\.(png|jpe?g|webp|gif|svg|bmp)(\?|#|$)/i.test(low)) {
       els.viewer.className = 'viewer';
-      els.viewer.innerHTML = `<iframe src="${escapeAttr(url)}#toolbar=1&navpanes=0" title="${escapeAttr(drawing.title || 'Rysunek PDF')}"></iframe>`;
+      els.viewer.innerHTML = `<img src="${escapeAttr(url)}" alt="${escapeAttr(drawing.title || 'Rysunek')}" onerror="this.closest('.viewer').className='viewer empty-viewer';this.closest('.viewer').innerHTML='<div class=&quot;viewer-note&quot;><strong>Nie udało się wyświetlić obrazu.</strong><br>Sprawdź hosting/CDN albo uprawnienia pliku.</div>'">`;
+    } else if (type === 'pdf' || /\.pdf(\?|#|$)/i.test(low)) {
+      els.viewer.className = 'viewer';
+      const sep = url.includes('#') ? '&' : '#';
+      els.viewer.innerHTML = `<iframe src="${escapeAttr(url + sep + 'toolbar=1&navpanes=0')}" title="${escapeAttr(drawing.title || 'Rysunek PDF')}"></iframe>`;
     } else {
       els.viewer.className = 'viewer empty-viewer';
-      els.viewer.innerHTML = `<div class="viewer-note"><strong>Ten plik nie ma podglądu inline.</strong><br>DOC/DOCX najlepiej przekonwertować do PDF albo JPG, żeby klient widział rysunek bez pobierania pliku.<br><br><a class="primary" href="${escapeAttr(url)}" target="_blank" rel="noreferrer">Otwórz plik</a></div>`;
+      els.viewer.innerHTML = `<div class="viewer-note"><strong>Ten format nie ma stabilnego podglądu inline.</strong><br>DOC/DOCX najlepiej przekonwertować do PDF/JPG przy imporcie, żeby klient widział rysunek bez pobierania.<br><br><a class="primary" href="${escapeAttr(source.openUrl || url)}" target="_blank" rel="noreferrer">Otwórz plik</a></div>`;
     }
   }
 
-  async function fileLooksAvailable(url) {
-    if (/^https?:\/\//i.test(url) && !url.includes(location.host)) return true;
+  function resolveDrawingSource(drawing) {
+    const mode = String(CONFIG.storageMode || 'auto').toLowerCase();
+    const local = encodePath(drawing.path || drawing.localPath || drawing.originalPath || '');
+    const direct = drawing.viewerUrl || drawing.cdnUrl || drawing.url || '';
+    const driveId = drawing.driveFileId || drawing.googleDriveId || drawing.gdriveId || '';
+    const cdn = buildCdnUrl(drawing);
+
+    if (mode === 'drive' && driveId) return driveSource(driveId);
+    if (mode === 'cdn' && cdn) return {kind:'cdn', url: cdn, viewerUrl: cdn, openUrl: cdn, external:true};
+    if (mode === 'local') return {kind:'local', url: local, viewerUrl: local, openUrl: local, external:false};
+
+    if (CONFIG.preferExternalDrawings !== false) {
+      if (driveId) return driveSource(driveId);
+      if (direct) return {kind:'external', url: direct, viewerUrl: direct, openUrl: drawing.openUrl || direct, external:true};
+      if (cdn) return {kind:'cdn', url: cdn, viewerUrl: cdn, openUrl: cdn, external:true};
+    }
+
+    if (local) return {kind:'local', url: local, viewerUrl: local, openUrl: local, external:false};
+    if (direct) return {kind:'external', url: direct, viewerUrl: direct, openUrl: drawing.openUrl || direct, external:true};
+    if (driveId) return driveSource(driveId);
+    return {kind:'missing', url:'', viewerUrl:'', openUrl:'', external:false};
+  }
+
+  function driveSource(fileId) {
+    const clean = String(fileId).trim();
+    return {
+      kind: 'drive-preview',
+      url: `https://drive.google.com/file/d/${encodeURIComponent(clean)}/preview`,
+      viewerUrl: `https://drive.google.com/file/d/${encodeURIComponent(clean)}/preview`,
+      openUrl: `https://drive.google.com/file/d/${encodeURIComponent(clean)}/view`,
+      external: true
+    };
+  }
+
+  function buildCdnUrl(drawing) {
+    const base = String(CONFIG.drawingsBaseUrl || '').trim();
+    if (!base) return '';
+    const p = drawing.cdnPath || drawing.storagePath || drawing.path || drawing.localPath || '';
+    if (!p) return '';
+    if (/^https?:\/\//i.test(p)) return p;
+    return joinUrl(base, encodePath(p));
+  }
+
+  async function fileLooksAvailable(source) {
+    const url = source.viewerUrl || source.url || '';
+    if (!url) return false;
+    if (source.external || /^https?:\/\//i.test(url) && !url.includes(location.host)) return true;
     try {
       const r = await fetch(url, { method: 'HEAD', cache: 'no-store' });
       return r.ok;
@@ -414,6 +475,12 @@
     if (!path) return '';
     if (/^https?:\/\//i.test(path)) return path;
     return path.split('/').map((part) => encodeURIComponent(part)).join('/').replace(/%23/g, '#');
+  }
+
+  function joinUrl(base, path) {
+    const b = String(base || '').replace(/\/+$/, '');
+    const p = String(path || '').replace(/^\/+/, '');
+    return `${b}/${p}`;
   }
 
   function norm(value) {
