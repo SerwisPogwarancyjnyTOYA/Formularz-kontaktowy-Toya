@@ -1,11 +1,12 @@
 (() => {
   'use strict';
-  const VERSION = '20260611-v26-drive-pilot';
+  const VERSION = '20260611-v27-drive-demo';
   const CONFIG = Object.assign({
     storageMode: 'drive',
     drawingsBaseUrl: '',
     preferExternalDrawings: true,
     storageLabel: 'Google Drive',
+    demoDevices: ['YT-827795', 'YT-852371', 'YT-85177', '00610'],
     driveSearchFallback: true,
     driveSearchBaseUrl: 'https://drive.google.com/drive/search?q=',
     driveMapUrls: ['data/drive-drawings-map.json', 'drive-drawings-map.json']
@@ -208,15 +209,51 @@
   }
 
   function renderExamples() {
-    const sampleParts = state.parts.filter(p => p.namePl || p.nameEn).slice(0, 10);
-    const sampleDrawings = state.drawings.filter(d => d.type === 'pdf').slice(0, 5);
-    els.resultsTitle.textContent = 'Przykładowe rekordy z bazy';
-    els.resultsMeta.textContent = `Baza gotowa. Wyszukuj po indeksie urządzenia, indeksie części albo nazwie.`;
+    const demoDevices = Array.isArray(CONFIG.demoDevices) ? CONFIG.demoDevices.map(norm) : [];
+    const drawingHasPreview = (d) => Boolean(d && (d.driveFileId || d.googleDriveId || d.gdriveId || d.viewerUrl || d.openUrl || d.url));
+    const previewDrawingIds = new Set(state.drawings.filter(drawingHasPreview).map(d => String(d.id)));
+
+    const demoParts = [];
+    for (const device of demoDevices) {
+      const rows = state.parts
+        .filter(p => norm(p.deviceIndex) === device && previewDrawingIds.has(String(p.drawingId)) && p.partIndex && norm(p.partIndex) !== device)
+        .slice(0, 2);
+      demoParts.push(...rows);
+    }
+
+    const fallbackParts = state.parts
+      .filter(p => (p.namePl || p.nameEn) && previewDrawingIds.has(String(p.drawingId)))
+      .slice(0, 10);
+
+    const sampleParts = uniqueBy([...demoParts, ...fallbackParts], p => String(p.id)).slice(0, 10);
+    const sampleDrawings = state.drawings
+      .filter(d => drawingHasPreview(d) && String(d.type || '').toLowerCase() === 'pdf')
+      .sort((a, b) => {
+        const ai = demoDevices.indexOf(norm(a.deviceIndex));
+        const bi = demoDevices.indexOf(norm(b.deviceIndex));
+        return (ai < 0 ? 999 : ai) - (bi < 0 ? 999 : bi);
+      })
+      .slice(0, 6);
+
+    els.resultsTitle.textContent = 'Sprawdzone przykłady do prezentacji';
+    els.resultsMeta.textContent = `Te rekordy mają przypięty podgląd rysunku z Google Drive. Pełna baza jest dostępna przez wyszukiwarkę.`;
     els.results.className = 'results';
     els.results.innerHTML = [
       ...sampleParts.map(renderPartResult),
       ...sampleDrawings.map(renderDrawingResult)
-    ].join('') || '<div class="empty-state">Brak przykładowych rekordów.</div>';
+    ].join('') || '<div class="empty-state">Brak przykładowych rekordów z przypiętym podglądem Google Drive.</div>';
+  }
+
+  function uniqueBy(items, keyFn) {
+    const seen = new Set();
+    const out = [];
+    for (const item of items) {
+      const key = keyFn(item);
+      if (!key || seen.has(key)) continue;
+      seen.add(key);
+      out.push(item);
+    }
+    return out;
   }
 
   function renderResults() {
@@ -342,7 +379,7 @@
 
     if (!url) {
       const search = driveSearchUrl(drawing);
-      els.viewer.innerHTML = `<div class="viewer-note"><strong>Rysunek jest w bazie, ale nie ma jeszcze przypiętego linku Google Drive.</strong><br>To nie blokuje wyszukiwania części. W pilotażu trzeba uzupełnić manifest Drive ID dla tego pliku.<br><br>${search ? `<a class="primary" href="${escapeAttr(search)}" target="_blank" rel="noreferrer">Znajdź w Google Drive</a>` : ''}</div>`;
+      els.viewer.innerHTML = `<div class="viewer-note"><strong>Rysunek jest w bazie, ale nie ma jeszcze przypiętego linku Google Drive.</strong><br>To nie blokuje wyszukiwania części. W pilotażu trzeba uzupełnić manifest Drive ID dla tego pliku albo użyć przycisku wyszukania w Drive.<br><br>${search ? `<a class="primary" href="${escapeAttr(search)}" target="_blank" rel="noreferrer">Znajdź w Google Drive</a>` : ''}</div>`;
       if (search) { els.viewerOpen.href = search; els.viewerOpen.classList.remove('hidden'); }
       return;
     }

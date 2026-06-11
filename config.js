@@ -3,6 +3,7 @@ window.PGW_CONFIG = {
   // Repo GitHub zawiera tylko aplikację i indeksy JSON.
   storageMode: 'drive',
   preferExternalDrawings: true,
+  demoDevices: ['YT-827795', 'YT-852371', 'YT-85177', '00610'],
   drawingsBaseUrl: '',
   storageLabel: 'Google Drive',
   driveSearchFallback: true,
