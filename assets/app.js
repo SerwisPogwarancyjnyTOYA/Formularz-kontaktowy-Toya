@@ -1,12 +1,12 @@
 (() => {
   'use strict';
-  const VERSION = '20260611-v27-drive-demo';
+  const VERSION = '20260611-v29-drive-all-ready';
   const CONFIG = Object.assign({
     storageMode: 'drive',
     drawingsBaseUrl: '',
     preferExternalDrawings: true,
     storageLabel: 'Google Drive',
-    demoDevices: ['YT-827795', 'YT-852371', 'YT-85177', '00610'],
+    demoDevices: ['YT-827795', 'YT-852371', 'YT-85177', '00610', '00703'],
     driveSearchFallback: true,
     driveSearchBaseUrl: 'https://drive.google.com/drive/search?q=',
     driveMapUrls: ['data/drive-drawings-map.json', 'drive-drawings-map.json']
@@ -156,15 +156,23 @@
   function applyDriveManifest() {
     const maps = normalizeDriveMap(state.driveMap);
     if (!maps.length) return;
+
+    const byKey = new Map();
+    for (const item of maps) {
+      if (!item.key) continue;
+      if (!byKey.has(item.key)) byKey.set(item.key, item);
+    }
+
     for (const drawing of state.drawings) {
       const keys = drawingKeys(drawing);
       for (const key of keys) {
-        const hit = maps.find(m => m.key === key);
+        const hit = byKey.get(key);
         if (!hit) continue;
         if (hit.fileId && !drawing.driveFileId) drawing.driveFileId = hit.fileId;
         if (hit.url && !drawing.url) drawing.url = hit.url;
         if (hit.viewerUrl && !drawing.viewerUrl) drawing.viewerUrl = hit.viewerUrl;
         if (hit.openUrl && !drawing.openUrl) drawing.openUrl = hit.openUrl;
+        if (hit.mimeType && !drawing.mimeType) drawing.mimeType = hit.mimeType;
         break;
       }
     }
@@ -175,31 +183,84 @@
     const out = [];
     for (const row of rows) {
       if (!row || typeof row !== 'object') continue;
-      const fileId = row.fileId || row.driveFileId || row.id || '';
+      const fileId = row.fileId || row.driveFileId || row.googleDriveId || row.gdriveId || row.id || '';
       const url = row.url || row.webViewLink || '';
-      const viewerUrl = row.viewerUrl || '';
+      const viewerUrl = row.viewerUrl || (fileId ? `https://drive.google.com/file/d/${encodeURIComponent(fileId)}/preview` : '');
       const openUrl = row.openUrl || url || (fileId ? `https://drive.google.com/file/d/${fileId}/view` : '');
-      for (const raw of [row.path, row.originalPath, row.localPath, row.fileName, row.title, row.deviceIndex, row.model, row.key]) {
-        const key = normKey(raw);
-        if (key) out.push({key, fileId, url, viewerUrl, openUrl});
+      const mimeType = row.mimeType || '';
+
+      const rawKeys = [];
+      const push = (v) => {
+        if (Array.isArray(v)) v.forEach(push);
+        else if (v !== undefined && v !== null) rawKeys.push(v);
+      };
+      push(row.keys);
+      push(row.path);
+      push(row.originalPath);
+      push(row.localPath);
+      push(row.drivePath);
+      push(row.fileName);
+      push(row.name);
+      push(row.title);
+      push(row.deviceIndex);
+      push(row.deviceIndexes);
+      push(row.model);
+      push(row.models);
+      push(row.key);
+
+      for (const raw of rawKeys) {
+        const variants = keyVariants(raw);
+        for (const key of variants) if (key) out.push({key, fileId, url, viewerUrl, openUrl, mimeType});
       }
     }
     return out;
   }
 
   function drawingKeys(drawing) {
-    return unique([
-      normKey(drawing.path),
-      normKey(drawing.originalPath),
-      normKey(drawing.localPath),
-      normKey(drawing.fileName),
-      normKey(drawing.title),
-      normKey(drawing.deviceIndex)
-    ]);
+    const raw = [
+      drawing.path,
+      drawing.originalPath,
+      drawing.localPath,
+      drawing.fileName,
+      drawing.name,
+      drawing.title,
+      drawing.deviceIndex,
+      drawing.searchText
+    ];
+    return unique(raw.flatMap(keyVariants));
+  }
+
+  function keyVariants(value) {
+    const text = String(value || '').trim();
+    if (!text) return [];
+    const base = normKey(text);
+    const noExt = stripExt(base);
+    const fileOnly = normKey(text.replace(/\\/g, '/').split('/').pop());
+    const fileNoExt = stripExt(fileOnly);
+    const models = extractIndexes(text);
+    return unique([base, noExt, fileOnly, fileNoExt, ...models.map(normKey), ...models.map(x => stripExt(normKey(x)))]).filter(Boolean);
+  }
+
+  function extractIndexes(value) {
+    const text = String(value || '').toUpperCase();
+    const matches = text.match(/\b[A-Z]{1,4}[-_ ]?\d{2,6}\b|\b\d{5,6}\b/g) || [];
+    return matches.map(x => x.replace(/_/g, '-').replace(/\s+/g, '-').replace(/([A-Z]+)(\d)/, '$1-$2'));
+  }
+
+  function stripExt(value) {
+    return String(value || '').replace(/\.(pdf|docx?|xlsx?|jpg|jpeg|png|webp|gif|bmp)$/i, '');
   }
 
   function normKey(value) {
-    return String(value || '').trim().toLowerCase().replace(/\\/g, '/').replace(/^.*\//, '').replace(/\s+/g, ' ');
+    return String(value || '')
+      .trim()
+      .toLowerCase()
+      .replace(/\\/g, '/')
+      .replace(/^.*\//, '')
+      .replace(/[_-]+/g, '-')
+      .replace(/\s+/g, ' ')
+      .replace(/^czesci[-_ ]zamienne[-_ ]*/i, 'czesci-zamienne-')
+      .trim();
   }
 
   function renderStats() {
@@ -379,7 +440,7 @@
 
     if (!url) {
       const search = driveSearchUrl(drawing);
-      els.viewer.innerHTML = `<div class="viewer-note"><strong>Rysunek jest w bazie, ale nie ma jeszcze przypiętego linku Google Drive.</strong><br>To nie blokuje wyszukiwania części. W pilotażu trzeba uzupełnić manifest Drive ID dla tego pliku albo użyć przycisku wyszukania w Drive.<br><br>${search ? `<a class="primary" href="${escapeAttr(search)}" target="_blank" rel="noreferrer">Znajdź w Google Drive</a>` : ''}</div>`;
+      els.viewer.innerHTML = `<div class="viewer-note"><strong>Rysunek jest w bazie, ale nie ma jeszcze przypiętego podglądu Google Drive.</strong><br>To nie blokuje wyszukiwania części. Po wygenerowaniu pełnego manifestu Drive ten rysunek zacznie wyświetlać się automatycznie. Do czasu uzupełnienia możesz użyć przycisku wyszukania w Drive.<br><br>${search ? `<a class="primary" href="${escapeAttr(search)}" target="_blank" rel="noreferrer">Znajdź w Google Drive</a>` : ''}</div>`;
       if (search) { els.viewerOpen.href = search; els.viewerOpen.classList.remove('hidden'); }
       return;
     }
