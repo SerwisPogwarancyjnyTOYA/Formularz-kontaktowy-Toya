@@ -1,14 +1,14 @@
 (() => {
   'use strict';
-  const VERSION = '20260611-v29-drive-all-ready';
+  const VERSION = '20260616-v33-toya24-only';
   const CONFIG = Object.assign({
-    storageMode: 'drive',
+    storageMode: 'auto',
     drawingsBaseUrl: '',
     preferExternalDrawings: true,
-    storageLabel: 'Google Drive',
-    demoDevices: ['YT-827795', 'YT-852371', 'YT-85177', '00610', '00703'],
-    driveSearchFallback: true,
-    driveSearchBaseUrl: 'https://drive.google.com/drive/search?q=',
+    storageLabel: 'TOYA24',
+    demoDevices: ['YT-82200'],
+    driveSearchFallback: false,
+    driveSearchBaseUrl: '',
     driveMapUrls: ['data/drive-drawings-map.json', 'drive-drawings-map.json']
   }, window.PGW_CONFIG || {});
   const DATA_URLS = {
@@ -29,7 +29,7 @@
   const els = {
     loadStatus: $('loadStatus'), statParts: $('statParts'), statDrawings: $('statDrawings'), statDevices: $('statDevices'),
     searchInput: $('searchInput'), clearSearch: $('clearSearch'), showAllBtn: $('showAllBtn'), results: $('results'), resultsTitle: $('resultsTitle'), resultsMeta: $('resultsMeta'),
-    viewer: $('viewer'), viewerTitle: $('viewerTitle'), viewerOpen: $('viewerOpen'), mailText: $('mailText'), copyMail: $('copyMail'), customerForm: $('customerForm')
+    viewer: $('viewer'), viewerTitle: $('viewerTitle'), viewerOpen: $('viewerOpen'), mailText: $('mailText'), copyMail: $('copyMail'), customerForm: $('customerForm'), selectionBox: $('selectionBox')
   };
 
   init();
@@ -46,10 +46,11 @@
       state.driveMap = await loadFirst(DATA_URLS.driveMap, {});
       buildIndexes();
       renderStats();
-      setStatus(`Gotowe: ${fmt(state.parts.length)} części, ${fmt(state.drawings.length)} rysunków`);
+      setStatus(`Gotowe: ${fmt(state.parts.length)} części z oficjalnych rysunków TOYA24, ${fmt(state.drawings.length)} rysunków`);
       state.initialized = true;
       state.query = els.searchInput.value.trim();
       if (state.query) renderResults(); else renderExamples();
+      updateSelectionBox();
       updateMail();
     } catch (error) {
       console.error(error);
@@ -90,13 +91,28 @@
       renderResults();
     }));
     els.copyMail.addEventListener('click', async () => {
-      await navigator.clipboard.writeText(els.mailText.value);
-      toast('Skopiowano treść maila');
+      try {
+        await navigator.clipboard.writeText(els.mailText.value);
+        toast('Skopiowano treść maila');
+      } catch (_) {
+        els.mailText.focus();
+        els.mailText.select();
+        toast('Zaznaczono treść — skopiuj Cmd+C');
+      }
     });
     if (els.customerForm) {
-      els.customerForm.addEventListener('input', debounce(updateMail, 80));
-      els.customerForm.addEventListener('change', updateMail);
+      restoreCustomerDraft();
+      els.customerForm.addEventListener('input', debounce(() => { saveCustomerDraft(); updateMail(); }, 80));
+      els.customerForm.addEventListener('change', () => { saveCustomerDraft(); updateMail(); });
     }
+    document.addEventListener('click', (event) => {
+      const remove = event.target.closest('[data-remove-selected]');
+      if (remove) removeSelectedPart(remove.dataset.removeSelected);
+    });
+    document.addEventListener('input', (event) => {
+      const qty = event.target.closest('[data-selected-qty]');
+      if (qty) changeSelectedQty(qty.dataset.selectedQty, qty.value);
+    });
     els.results.addEventListener('click', (event) => {
       const toggle = event.target.closest('[data-toggle]');
       if (toggle) toggle.closest('.result-card')?.classList.toggle('open');
@@ -144,12 +160,34 @@
     }
     for (const device of state.devices) state.devicesByIndex.set(norm(device.deviceIndex), device);
     applyDriveManifest();
+    if (CONFIG.officialOnly) filterToOfficialToya24();
     for (const part of state.parts) {
       part.__search = norm([part.partIndex, part.namePl, part.nameEn, part.position, part.deviceIndex, part.drawingTitle, part.zun].join(' '));
     }
     for (const drawing of state.drawings) {
       drawing.__search = norm([drawing.deviceIndex, drawing.brand, drawing.title, drawing.fileName, drawing.originalPath, drawing.searchText].join(' '));
     }
+  }
+
+  function filterToOfficialToya24() {
+    const officialDrawings = new Set(
+      state.drawings
+        .filter(d => (String(d.officialSource || d.source || '').toUpperCase() === 'TOYA24' || d.official === true || d.toya24AttachmentUrl || d.toya24ProductUrl) && isPdfDrawing(d))
+        .map(d => String(d.id))
+    );
+    state.drawings = state.drawings.filter(d => officialDrawings.has(String(d.id)));
+    state.parts = state.parts.filter(p => officialDrawings.has(String(p.drawingId)));
+    const officialModels = new Set(state.drawings.map(d => norm(d.deviceIndex)).filter(Boolean));
+    state.devices = state.devices.filter(d => officialModels.has(norm(d.deviceIndex)));
+    state.drawingById = new Map(state.drawings.map((d) => [String(d.id), d]));
+    state.partsByDrawing = new Map();
+    for (const part of state.parts) {
+      const did = String(part.drawingId || '');
+      if (!state.partsByDrawing.has(did)) state.partsByDrawing.set(did, []);
+      state.partsByDrawing.get(did).push(part);
+    }
+    state.devicesByIndex = new Map();
+    for (const device of state.devices) state.devicesByIndex.set(norm(device.deviceIndex), device);
   }
 
 
@@ -263,6 +301,53 @@
       .trim();
   }
 
+  function isPdfDrawing(drawing) {
+    if (!drawing) return false;
+    const type = String(drawing.type || '').toLowerCase();
+    const mime = String(drawing.mimeType || '').toLowerCase();
+    const hay = [
+      drawing.toya24AttachmentUrl, drawing.partsPdfUrl, drawing.toya24PdfUrl, drawing.url,
+      drawing.viewerUrl, drawing.openUrl, drawing.path, drawing.localPath, drawing.originalPath,
+      drawing.fileName, drawing.title, drawing.name
+    ].filter(Boolean).join(' ').toLowerCase();
+    return type === 'pdf' || mime.includes('pdf') || /\.pdf(\?|#|$)/i.test(hay);
+  }
+
+  function drawingHasPreview(d) {
+    return Boolean(d && isPdfDrawing(d) && (d.driveFileId || d.googleDriveId || d.gdriveId || d.viewerUrl || d.openUrl || d.url || d.toya24AttachmentUrl || d.partsPdfUrl || d.toya24PdfUrl));
+  }
+
+  function countDrivePreviews() {
+    return state.drawings.filter(drawingHasPreview).length;
+  }
+
+  function autoPreviewFirst(items) {
+    const first = (items || []).map(item => {
+      if (!item) return null;
+      if (item.drawingId) return state.drawingById.get(String(item.drawingId));
+      if (item.id && state.drawingById.has(String(item.id))) return item;
+      if (item.id && state.partsByDrawing.has(String(item.id))) return item;
+      return null;
+    }).find(Boolean);
+    if (first) showDrawing(first.id);
+  }
+
+  function saveCustomerDraft() {
+    try {
+      const ids = ['cfDevice','cfSerial','cfName','cfEmail','cfPhone','cfNip','cfInvoice','cfShipping','cfNotes'];
+      const data = {};
+      ids.forEach(id => data[id] = ($(id)?.value || ''));
+      localStorage.setItem('pgwCustomerDraft', JSON.stringify(data));
+    } catch (_) {}
+  }
+
+  function restoreCustomerDraft() {
+    try {
+      const data = JSON.parse(localStorage.getItem('pgwCustomerDraft') || '{}');
+      Object.entries(data).forEach(([id, value]) => { if ($(id)) $(id).value = value || ''; });
+    } catch (_) {}
+  }
+
   function renderStats() {
     els.statParts.textContent = fmt(state.parts.length);
     els.statDrawings.textContent = fmt(state.drawings.length);
@@ -271,7 +356,6 @@
 
   function renderExamples() {
     const demoDevices = Array.isArray(CONFIG.demoDevices) ? CONFIG.demoDevices.map(norm) : [];
-    const drawingHasPreview = (d) => Boolean(d && (d.driveFileId || d.googleDriveId || d.gdriveId || d.viewerUrl || d.openUrl || d.url));
     const previewDrawingIds = new Set(state.drawings.filter(drawingHasPreview).map(d => String(d.id)));
 
     const demoParts = [];
@@ -297,12 +381,13 @@
       .slice(0, 6);
 
     els.resultsTitle.textContent = 'Sprawdzone przykłady do prezentacji';
-    els.resultsMeta.textContent = `Te rekordy mają przypięty podgląd rysunku z Google Drive. Pełna baza jest dostępna przez wyszukiwarkę.`;
+    els.resultsMeta.textContent = `Przykładowe rekordy pochodzą wyłącznie z oficjalnych rysunków technicznych TOYA24.`;
     els.results.className = 'results';
     els.results.innerHTML = [
       ...sampleParts.map(renderPartResult),
       ...sampleDrawings.map(renderDrawingResult)
-    ].join('') || '<div class="empty-state">Brak przykładowych rekordów z przypiętym podglądem Google Drive.</div>';
+    ].join('') || '<div class="empty-state">Brak przykładowych rekordów z oficjalnym rysunkiem TOYA24.</div>';
+    autoPreviewFirst([...sampleParts, ...sampleDrawings]);
   }
 
   function uniqueBy(items, keyFn) {
@@ -332,14 +417,15 @@
     const drawings = scoreItems(state.drawings, tokens, 'drawing').slice(0, 35);
     const combined = [...parts, ...drawings].sort((a,b) => b.score - a.score).slice(0, 90);
     els.resultsTitle.textContent = 'Wyniki wyszukiwania';
-    els.resultsMeta.textContent = `${fmt(parts.length)} pasujących części • ${fmt(drawings.length)} pasujących rysunków / plików`;
+    els.resultsMeta.textContent = `${fmt(parts.length)} pasujących części • ${fmt(drawings.length)} pasujących rysunków PDF`;
     els.results.className = 'results';
     if (!combined.length) {
       els.results.className = 'results empty-state';
-      els.results.innerHTML = `<p>Brak wyniku dla <strong>${escapeHtml(state.query)}</strong>. Spróbuj bez myślnika, bez prefiksu albo wpisz sam numer.</p>`;
+      els.results.innerHTML = `<p><strong>Brak wyniku dla: ${escapeHtml(state.query)}</strong></p><p>Spróbuj bez myślnika, sam numer urządzenia, sam indeks części albo fragment nazwy, np. „szczotka”, „grzałka”, „uchwyt”.</p>`;
       return;
     }
     els.results.innerHTML = combined.map((item) => item.kind === 'part' ? renderPartResult(item.value, item.score) : renderDrawingResult(item.value, item.score)).join('');
+    autoPreviewFirst(combined.map(x => x.value));
   }
 
   function scoreItems(items, tokens, kind) {
@@ -361,7 +447,15 @@
         }
         if (search.includes(token)) score += 25;
       }
-      if (score > 0) scored.push({kind, value:item, score});
+      if (score > 0) {
+        if (kind === 'part') {
+          const drawing = state.drawingById.get(String(item.drawingId));
+          if (drawingHasPreview(drawing)) score += 45;
+        } else if (drawingHasPreview(item)) {
+          score += 45;
+        }
+        scored.push({kind, value:item, score});
+      }
     }
     return scored.sort((a,b) => b.score - a.score);
   }
@@ -369,13 +463,13 @@
   function renderPartResult(part) {
     const drawing = state.drawingById.get(String(part.drawingId)) || {};
     const siblings = (state.partsByDrawing.get(String(part.drawingId)) || []).filter(p => p.id !== part.id).slice(0, 8);
-    const price = part.priceNet ? `${num(part.priceNet)} PLN netto` : 'brak ceny w bazie';
-    const stock = part.stockTotal !== undefined ? `stan: ${part.stockTotal}` : 'stan nieustalony';
+    const hasPreview = drawingHasPreview(drawing);
     const name = part.namePl || part.nameEn || 'Część z rysunku';
-    return `<article class="result-card open">
+    const previewBadge = hasPreview ? '<span class="badge ok">TOYA24</span>' : '<span class="badge warn">poza TOYA24</span>';
+    return `<article class="result-card open ${hasPreview ? 'has-preview' : 'needs-preview'}">
       <div class="result-main">
         <div>
-          <div class="result-kicker"><span class="badge red">Część</span><span class="badge">${escapeHtml(part.deviceIndex || 'bez modelu')}</span>${part.position ? `<span class="badge ok">poz. ${escapeHtml(part.position)}</span>` : ''}</div>
+          <div class="result-kicker"><span class="badge red">Część</span><span class="badge">${escapeHtml(part.deviceIndex || 'bez modelu')}</span>${part.position ? `<span class="badge ok">poz. ${escapeHtml(part.position)}</span>` : ''}${previewBadge}</div>
           <h3 class="result-title"><span class="part-index">${mark(part.partIndex)}</span> — ${mark(name)}</h3>
           <p class="result-sub">${escapeHtml(drawing.title || part.drawingTitle || '')}</p>
         </div>
@@ -389,9 +483,9 @@
         <table class="parts-table"><tbody>
           <tr><th>Indeks</th><td class="part-index">${escapeHtml(part.partIndex)}</td><th>Pozycja</th><td>${escapeHtml(part.position || '—')}</td></tr>
           <tr><th>Nazwa PL</th><td>${escapeHtml(part.namePl || '—')}</td><th>Nazwa EN</th><td>${escapeHtml(part.nameEn || '—')}</td></tr>
-          <tr><th>Cena</th><td class="price">${escapeHtml(price)}</td><th>Dostępność</th><td>${escapeHtml(stock)}</td></tr>
           <tr><th>Rysunek</th><td colspan="3">${escapeHtml(drawing.title || part.drawingTitle || '')}</td></tr>
         </tbody></table>
+        ${!hasPreview ? `<div class="inline-note">Ten rekord nie powinien być widoczny w trybie TOYA24-only. Sprawdź manifest oficjalnych rysunków.</div>` : ''}
         ${siblings.length ? `<div class="related"><p class="related-title">Z czym się wiąże na tym rysunku:</p><div class="related-list">${siblings.map(s => `<button data-search="${escapeAttr(s.partIndex)}">${escapeHtml(s.position ? s.position + ' — ' : '')}${escapeHtml(s.partIndex)}</button>`).join('')}</div></div>` : ''}
       </div>
     </article>`;
@@ -399,10 +493,11 @@
 
   function renderDrawingResult(drawing) {
     const parts = (state.partsByDrawing.get(String(drawing.id)) || []).slice(0, 12);
-    return `<article class="result-card">
+    const hasPreview = drawingHasPreview(drawing);
+    return `<article class="result-card ${hasPreview ? 'has-preview' : 'needs-preview'}">
       <div class="result-main">
         <div>
-          <div class="result-kicker"><span class="badge red">Rysunek</span><span class="badge">${escapeHtml(drawing.type || 'plik')}</span><span class="badge">${escapeHtml(drawing.deviceIndex || 'bez indeksu')}</span></div>
+          <div class="result-kicker"><span class="badge red">Rysunek</span><span class="badge">PDF</span><span class="badge">${escapeHtml(drawing.deviceIndex || 'bez indeksu')}</span>${hasPreview ? '<span class="badge ok">TOYA24</span>' : '<span class="badge warn">poza TOYA24</span>'}</div>
           <h3 class="result-title">${mark(drawing.title || drawing.fileName || 'Rysunek')}</h3>
           <p class="result-sub">${escapeHtml(drawing.path || drawing.originalPath || '')}</p>
         </div>
@@ -412,13 +507,13 @@
         </div>
       </div>
       <div class="details">
-        ${parts.length ? renderPartsTable(parts) : '<p class="result-sub">Rysunek jest widoczny, ale z tego PDF/DOCX nie udało się automatycznie odczytać tabeli części.</p>'}
+        ${parts.length ? renderPartsTable(parts) : '<p class="result-sub">Rysunek PDF jest widoczny, ale nie udało się automatycznie odczytać tabeli części.</p>'}
       </div>
     </article>`;
   }
 
   function renderPartsTable(parts) {
-    return `<table class="parts-table"><thead><tr><th>Poz.</th><th>Indeks</th><th>Nazwa</th><th>Cena</th><th></th></tr></thead><tbody>${parts.map(p => `<tr><td>${escapeHtml(p.position || '—')}</td><td class="part-index">${escapeHtml(p.partIndex)}</td><td>${escapeHtml(p.namePl || p.nameEn || '—')}</td><td>${p.priceNet ? `<span class="price">${escapeHtml(num(p.priceNet))} PLN</span>` : '—'}</td><td><button class="secondary" data-add-part="${escapeAttr(p.id)}">Do zapytania</button></td></tr>`).join('')}</tbody></table>`;
+    return `<table class="parts-table"><thead><tr><th>Poz.</th><th>Indeks</th><th>Nazwa</th><th></th></tr></thead><tbody>${parts.map(p => `<tr><td>${escapeHtml(p.position || '—')}</td><td class="part-index">${escapeHtml(p.partIndex)}</td><td>${escapeHtml(p.namePl || p.nameEn || '—')}</td><td><button class="secondary" data-add-part="${escapeAttr(p.id)}">Do zapytania</button></td></tr>`).join('')}</tbody></table>`;
   }
 
   async function showDrawing(id) {
@@ -440,7 +535,7 @@
 
     if (!url) {
       const search = driveSearchUrl(drawing);
-      els.viewer.innerHTML = `<div class="viewer-note"><strong>Rysunek jest w bazie, ale nie ma jeszcze przypiętego podglądu Google Drive.</strong><br>To nie blokuje wyszukiwania części. Po wygenerowaniu pełnego manifestu Drive ten rysunek zacznie wyświetlać się automatycznie. Do czasu uzupełnienia możesz użyć przycisku wyszukania w Drive.<br><br>${search ? `<a class="primary" href="${escapeAttr(search)}" target="_blank" rel="noreferrer">Znajdź w Google Drive</a>` : ''}</div>`;
+      els.viewer.innerHTML = `<div class="missing-file soft"><strong>Brak oficjalnego linku TOYA24 dla tego rysunku.</strong><p>W trybie publicznym pokazujemy wyłącznie pozycje z potwierdzonym rysunkiem technicznym TOYA24.</p>${search ? `<a class="primary" href="${escapeAttr(search)}" target="_blank" rel="noreferrer">Otwórz źródło</a>` : ''}</div>`;
       if (search) { els.viewerOpen.href = search; els.viewerOpen.classList.remove('hidden'); }
       return;
     }
@@ -455,9 +550,15 @@
     const low = String(url).toLowerCase();
     const type = (drawing.type || source.kind || '').toLowerCase();
 
+    if (!isPdfDrawing(drawing) && source.kind !== 'drive-preview') {
+      els.viewer.className = 'viewer empty-viewer';
+      els.viewer.innerHTML = `<div class="viewer-note"><strong>Klientowi pokazujemy wyłącznie rysunki PDF.</strong><br>Ten plik nie jest PDF-em, więc został ukryty w widoku publicznym.</div>`;
+      return;
+    }
+
     if (source.kind === 'drive-preview') {
       els.viewer.className = 'viewer';
-      els.viewer.innerHTML = `<iframe src="${escapeAttr(url)}" title="${escapeAttr(drawing.title || 'Podgląd Google Drive')}"></iframe>`;
+      els.viewer.innerHTML = `<iframe src="${escapeAttr(url)}" title="${escapeAttr(drawing.title || 'Podgląd rysunku TOYA24')}"></iframe>`;
       return;
     }
 
@@ -477,32 +578,34 @@
   function resolveDrawingSource(drawing) {
     const mode = String(CONFIG.storageMode || 'auto').toLowerCase();
     const local = encodePath(drawing.path || drawing.localPath || drawing.originalPath || '');
-    const direct = drawing.viewerUrl || drawing.cdnUrl || drawing.url || '';
+    const direct = drawing.viewerUrl || drawing.toya24AttachmentUrl || drawing.partsPdfUrl || drawing.toya24PdfUrl || drawing.cdnUrl || drawing.url || '';
     const driveId = drawing.driveFileId || drawing.googleDriveId || drawing.gdriveId || '';
     const search = driveSearchUrl(drawing);
     const cdn = buildCdnUrl(drawing);
 
-    if (mode === 'drive' && driveId) return driveSource(driveId);
+    if (drawing.toya24AttachmentUrl || drawing.partsPdfUrl || drawing.toya24PdfUrl) return {kind:'toya24-pdf', url: direct, viewerUrl: direct, openUrl: direct, external:true};
+
+    if (mode === 'drive' && driveId && isPdfDrawing(drawing)) return driveSource(driveId);
     if (mode === 'drive' && search) return {kind:'drive-search', url:'', viewerUrl:'', openUrl:search, external:true};
     if (mode === 'cdn' && cdn) return {kind:'cdn', url: cdn, viewerUrl: cdn, openUrl: cdn, external:true};
     if (mode === 'local') return {kind:'local', url: local, viewerUrl: local, openUrl: local, external:false};
 
     if (CONFIG.preferExternalDrawings !== false) {
-      if (driveId) return driveSource(driveId);
+      if (driveId && isPdfDrawing(drawing)) return driveSource(driveId);
       if (direct) return {kind:'external', url: direct, viewerUrl: direct, openUrl: drawing.openUrl || direct, external:true};
       if (cdn) return {kind:'cdn', url: cdn, viewerUrl: cdn, openUrl: cdn, external:true};
     }
 
     if (local) return {kind:'local', url: local, viewerUrl: local, openUrl: local, external:false};
     if (direct) return {kind:'external', url: direct, viewerUrl: direct, openUrl: drawing.openUrl || direct, external:true};
-    if (driveId) return driveSource(driveId);
+    if (driveId && isPdfDrawing(drawing)) return driveSource(driveId);
     if (search) return {kind:'drive-search', url:'', viewerUrl:'', openUrl:search, external:true};
     return {kind:'missing', url:'', viewerUrl:'', openUrl:'', external:false};
   }
 
   function driveSearchUrl(drawing) {
     if (CONFIG.driveSearchFallback === false) return '';
-    const base = String(CONFIG.driveSearchBaseUrl || 'https://drive.google.com/drive/search?q=');
+    const base = String(CONFIG.driveSearchBaseUrl || '');
     const query = drawing.fileName || drawing.deviceIndex || drawing.title || '';
     if (!query) return '';
     return base + encodeURIComponent(query);
@@ -548,10 +651,52 @@
   function addPart(id) {
     const part = state.parts.find(p => String(p.id) === String(id));
     if (!part) return;
-    if (!state.selectedParts.some(p => p.id === part.id)) state.selectedParts.push(part);
+    const existing = state.selectedParts.find(p => String(p.id) === String(part.id));
+    if (existing) {
+      existing.__qty = Number(existing.__qty || 1) + 1;
+      toast('Zwiększono ilość w zapytaniu');
+    } else {
+      part.__qty = 1;
+      state.selectedParts.push(part);
+      toast('Dodano do zapytania');
+    }
     autofillDeviceFromSelection();
+    updateSelectionBox();
     updateMail();
-    toast('Dodano do zapytania');
+  }
+
+  function removeSelectedPart(id) {
+    state.selectedParts = state.selectedParts.filter(p => String(p.id) !== String(id));
+    updateSelectionBox();
+    updateMail();
+    toast('Usunięto z zapytania');
+  }
+
+  function changeSelectedQty(id, value) {
+    const part = state.selectedParts.find(p => String(p.id) === String(id));
+    if (!part) return;
+    const qty = Math.max(1, Math.min(999, Number(value || 1)));
+    part.__qty = qty;
+    updateMail();
+  }
+
+  function updateSelectionBox() {
+    if (!els.selectionBox) return;
+    if (!state.selectedParts.length) {
+      els.selectionBox.className = 'selection-box empty-selection';
+      els.selectionBox.innerHTML = '<strong>Brak wybranych części.</strong><span>Użyj przycisku „Do zapytania” przy części, żeby dodać ją do formularza.</span>';
+      return;
+    }
+    els.selectionBox.className = 'selection-box';
+    els.selectionBox.innerHTML = `<div class="selection-head"><strong>Wybrane części do zapytania</strong><span>${fmt(state.selectedParts.length)} pozycji</span></div>` +
+      state.selectedParts.map((p, i) => {
+        const drawing = state.drawingById.get(String(p.drawingId)) || {};
+        return `<div class="selection-row">
+          <div><b>${escapeHtml(i + 1)}. ${escapeHtml(p.partIndex || 'bez indeksu')}</b><span>${escapeHtml(p.namePl || p.nameEn || drawing.title || '')}${p.position ? ` • poz. ${escapeHtml(p.position)}` : ''}</span></div>
+          <label>Ilość <input data-selected-qty="${escapeAttr(p.id)}" type="number" min="1" max="999" value="${escapeAttr(p.__qty || 1)}"></label>
+          <button type="button" class="ghost tiny" data-remove-selected="${escapeAttr(p.id)}">Usuń</button>
+        </div>`;
+      }).join('');
   }
 
   function updateMail() {
@@ -566,7 +711,7 @@
     lines.push('Mam urządzenie: ' + (firstDevice || '[marka / model / indeks urządzenia]') + '.');
     lines.push('');
     lines.push('Potrzebuję do niego części z rysunku wybuchowego wskazane poniżej.');
-    lines.push('Proszę o ich wycenę oraz informację o dostępności.');
+    lines.push('Proszę o przygotowanie oferty oraz informację o możliwości realizacji zamówienia.');
     lines.push('');
     lines.push('WYBRANE CZĘŚCI:');
     if (state.selectedParts.length) {
@@ -577,8 +722,7 @@
         lines.push(`   Indeks części: ${p.partIndex || ''}`);
         lines.push(`   Pozycja z rysunku: ${p.position || ''}`);
         if (drawing.title) lines.push(`   Rysunek: ${drawing.title}`);
-        if (p.priceNet) lines.push(`   Cena z bazy: ${num(p.priceNet)} PLN netto`);
-        lines.push('   Ilość: 1 szt.');
+        lines.push(`   Ilość: ${p.__qty || 1} szt.`);
         lines.push('');
       });
     } else {
@@ -588,6 +732,10 @@
       } else {
         lines.push('1. [wpisz indeksy części / pozycje z rysunku]');
       }
+      lines.push('');
+    }
+    if (form.serial) {
+      lines.push(`Nr seryjny / data zakupu: ${form.serial}`);
       lines.push('');
     }
     lines.push('DANE KONTAKTOWE:');

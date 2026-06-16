@@ -4,32 +4,32 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#b00020">
-  <title>Formularz zapytania o części — TOYA S.A.</title>
+  <title>PGW Service Hub — oficjalne rysunki TOYA24</title>
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="stylesheet" href="assets/style.css?v=20260611-v29-drive-all-ready">
+  <link rel="stylesheet" href="assets/style.css?v=20260616-v33-toya24-only">
 </head>
 <body>
   <noscript>Ta strona wymaga włączonego JavaScriptu.</noscript>
   <header class="hero">
     <nav class="topbar" aria-label="Nagłówek">
       <div class="brand-lockup">
-        <img class="brand-main" src="assets/logos/yato-clean.png?v=20260611-v29-drive-all-ready" alt="YATO" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'brand-lettermark',textContent:'TOYA S.A.'}))">
+        <img class="brand-main" src="assets/logos/yato-clean.png?v=20260616-v33-toya24-only" alt="YATO" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'brand-lettermark',textContent:'TOYA S.A.'}))">
         <div>
           <strong>Serwis Pogwarancyjny TOYA S.A.</strong>
-          <span>Wyszukiwarka rysunków i części zamiennych</span>
+          <span>Oficjalne rysunki techniczne z TOYA24</span>
         </div>
       </div>
       <div class="status-pill" id="loadStatus">Ładowanie danych…</div>
     </nav>
     <section class="hero-grid">
       <div>
-        <p class="eyebrow">Wersja do publikacji / akceptacji</p>
-        <h1>Jedno miejsce do znalezienia części, rysunku i przygotowania zapytania do serwisu.</h1>
-        <p class="lead">Wpisz indeks urządzenia, indeks części, nazwę albo fragment opisu. Strona pokazuje powiązany rysunek wybuchowy, pozycję z tabeli, powiązane części oraz cenę i dostępność, jeżeli są w bazie.</p>
+        <p class="eyebrow">Wersja publiczna — tylko rysunki TOYA24</p>
+        <h1>Znajdź część wyłącznie z oficjalnego rysunku technicznego TOYA24.</h1>
+        <p class="lead">Klient wyszukuje część po modelu, indeksie lub nazwie. Strona pokazuje tylko rekordy z potwierdzonego rysunku technicznego TOYA24 i przygotowuje zapytanie do serwisu. Ceny oraz dostępność nie są publikowane na stronie.</p>
       </div>
       <aside class="stats-card" aria-label="Statystyki bazy">
         <div><strong id="statParts">—</strong><span>części</span></div>
-        <div><strong id="statDrawings">—</strong><span>rysunków / plików</span></div>
+        <div><strong id="statDrawings">—</strong><span>rysunków PDF</span></div>
         <div><strong id="statDevices">—</strong><span>modeli</span></div>
       </aside>
     </section>
@@ -39,17 +39,23 @@
     <section class="search-panel" aria-labelledby="searchLabel">
       <label id="searchLabel" for="searchInput">Szukaj części lub urządzenia</label>
       <div class="search-row">
-        <input id="searchInput" type="search" autocomplete="off" placeholder="np. Z7901502, YT-85177, grzałka, szczotka…">
+        <input id="searchInput" type="search" autocomplete="off" placeholder="np. YT-82200, ZY8220011, kulka, szczotka…">
         <button id="clearSearch" type="button" class="ghost">Wyczyść</button>
       </div>
       <div class="hint-row">
-        <button data-example="YT-827795" type="button">YT-827795</button>
-        <button data-example="YT-852371" type="button">YT-852371</button>
-        <button data-example="YT-85177" type="button">YT-85177</button>
-        <button data-example="00610" type="button">00610</button>
-        <button data-example="grzałka" type="button">grzałka</button>
+        <button data-example="YT-82200" type="button">YT-82200</button>
+        <button data-example="ZY8220011" type="button">ZY8220011</button>
+        <button data-example="ZY8220046" type="button">ZY8220046</button>
+        <button data-example="kulka" type="button">kulka</button>
         <button data-example="szczotka" type="button">szczotka</button>
       </div>
+    </section>
+
+    <section class="value-strip" aria-label="Co robi strona">
+      <div><strong>1</strong><span>Wyszukuje tylko części z oficjalnych rysunków TOYA24.</span></div>
+      <div><strong>2</strong><span>Pokazuje pozycję na rysunku oraz elementy powiązane z urządzeniem.</span></div>
+      <div><strong>3</strong><span>Wyświetla oficjalny rysunek PDF z TOYA24 bez obciążania repozytorium.</span></div>
+      <div><strong>4</strong><span>Składa gotowe zapytanie klienta do skopiowania i wysłania.</span></div>
     </section>
 
     <section class="workspace">
@@ -63,7 +69,7 @@
         </div>
         <div id="results" class="results empty-state">
           <div class="empty-icon">⌕</div>
-          <p>Najlepszy start: indeks części albo indeks urządzenia. Klient widzi rysunek, pozycję części i listę elementów powiązanych z danym urządzeniem.</p>
+          <p>Najlepszy start: indeks urządzenia lub indeks części z oficjalnego rysunku TOYA24. Rekordy spoza TOYA24 są ukryte w trybie publicznym.</p>
         </div>
       </section>
 
@@ -76,7 +82,7 @@
           <a id="viewerOpen" href="#" target="_blank" rel="noreferrer" class="secondary hidden">Otwórz</a>
         </div>
         <div id="viewer" class="viewer empty-viewer">
-          Wybierz wynik z listy, żeby zobaczyć rysunek wybuchowy lub plik źródłowy.
+          Wybierz wynik z listy, żeby zobaczyć oficjalny rysunek techniczny TOYA24.
         </div>
 
         <section class="mail-box" aria-labelledby="mailTitle">
@@ -87,15 +93,21 @@
             </div>
             <button id="copyMail" type="button" class="primary">Kopiuj</button>
           </div>
+          <div id="selectionBox" class="selection-box empty-selection">
+            <strong>Brak wybranych części.</strong>
+            <span>Użyj przycisku „Do zapytania” przy części, żeby dodać ją do formularza.</span>
+          </div>
           <form id="customerForm" class="customer-form old-form" aria-label="Formularz danych klienta">
             <div class="form-grid old-client-grid">
+              <label>Urządzenie / model<input id="cfDevice" name="device" type="text" placeholder="np. YT-85177"></label>
+              <label>Nr seryjny / data zakupu<input id="cfSerial" name="serial" type="text" placeholder="opcjonalnie"></label>
               <label>Imię i nazwisko / firma<input id="cfName" name="name" type="text" placeholder="Jan Kowalski / Firma ABC"></label>
               <label>E-mail<input id="cfEmail" name="email" type="email" placeholder="klient@email.pl"></label>
               <label>Telefon<input id="cfPhone" name="phone" type="tel" placeholder="500 600 700"></label>
               <label>NIP<input id="cfNip" name="nip" type="text" placeholder="opcjonalnie"></label>
               <label class="wide">Dane do faktury<textarea id="cfInvoice" name="invoice" rows="3" placeholder="Nazwa, adres, NIP"></textarea></label>
               <label class="wide">Adres wysyłki<textarea id="cfShipping" name="shipping" rows="3" placeholder="Ulica, kod, miasto, paczkomat/kurier"></textarea></label>
-              <label class="wide">Uwagi<textarea id="cfNotes" name="notes" rows="3" placeholder="np. proszę o potwierdzenie ceny i dostępności"></textarea></label>
+              <label class="wide">Uwagi<textarea id="cfNotes" name="notes" rows="3" placeholder="np. dodatkowe informacje, preferowana forma kontaktu, uwagi do wysyłki"></textarea></label>
             </div>
           </form>
           <textarea id="mailText" spellcheck="true" rows="18" aria-label="Treść maila do skopiowania"></textarea>
@@ -106,17 +118,17 @@
 
   <footer class="footer">
     <div class="brand-strip" aria-label="Marki TOYA">
-      <img src="assets/logos/yato-clean.png?v=20260611-v29-drive-all-ready" alt="YATO" onerror="this.outerHTML='<span class=&quot;brand-chip&quot;>YATO</span>'">
-      <img src="assets/logos/vorel-clean.png?v=20260611-v29-drive-all-ready" alt="VOREL" onerror="this.outerHTML='<span class=&quot;brand-chip&quot;>VOREL</span>'">
-      <img src="assets/logos/sthor-clean.png?v=20260611-v29-drive-all-ready" alt="STHOR" onerror="this.outerHTML='<span class=&quot;brand-chip&quot;>STHOR</span>'">
-      <img src="assets/logos/lund-clean.png?v=20260611-v29-drive-all-ready" alt="LUND" onerror="this.outerHTML='<span class=&quot;brand-chip&quot;>LUND</span>'">
-      <img src="assets/logos/flo-clean.png?v=20260611-v29-drive-all-ready" alt="FLO" onerror="this.outerHTML='<span class=&quot;brand-chip&quot;>FLO</span>'">
-      <img src="assets/logos/fala-clean.png?v=20260611-v29-drive-all-ready" alt="FALA" onerror="this.outerHTML='<span class=&quot;brand-chip&quot;>FALA</span>'">
+      <img src="assets/logos/yato-clean.png?v=20260616-v33-toya24-only" alt="YATO" onerror="this.outerHTML='<span class=&quot;brand-chip&quot;>YATO</span>'">
+      <img src="assets/logos/vorel-clean.png?v=20260616-v33-toya24-only" alt="VOREL" onerror="this.outerHTML='<span class=&quot;brand-chip&quot;>VOREL</span>'">
+      <img src="assets/logos/sthor-clean.png?v=20260616-v33-toya24-only" alt="STHOR" onerror="this.outerHTML='<span class=&quot;brand-chip&quot;>STHOR</span>'">
+      <img src="assets/logos/lund-clean.png?v=20260616-v33-toya24-only" alt="LUND" onerror="this.outerHTML='<span class=&quot;brand-chip&quot;>LUND</span>'">
+      <img src="assets/logos/flo-clean.png?v=20260616-v33-toya24-only" alt="FLO" onerror="this.outerHTML='<span class=&quot;brand-chip&quot;>FLO</span>'">
+      <img src="assets/logos/fala-clean.png?v=20260616-v33-toya24-only" alt="FALA" onerror="this.outerHTML='<span class=&quot;brand-chip&quot;>FALA</span>'">
     </div>
-    <p>TOYA S.A. — Serwis Pogwarancyjny. Baza rysunków i części wyłącznie jako wsparcie identyfikacji części.</p>
+    <p>TOYA S.A. — Serwis Pogwarancyjny. Publiczny widok zawiera wyłącznie części z potwierdzonych rysunków technicznych TOYA24. Ceny i dostępność potwierdza serwis po otrzymaniu zapytania.</p>
   </footer>
 
-  <script src="config.js?v=20260611-v29-drive-all-ready"></script>
-  <script src="assets/app.js?v=20260611-v29-drive-all-ready" defer></script>
+  <script src="config.js?v=20260616-v33-toya24-only"></script>
+  <script src="assets/app.js?v=20260616-v33-toya24-only" defer></script>
 </body>
 </html>

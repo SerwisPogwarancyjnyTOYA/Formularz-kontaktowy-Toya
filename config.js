@@ -1,12 +1,11 @@
 window.PGW_CONFIG = {
-  // Na etap pilotażu trzymamy rysunki na Google Drive.
-  // Repo GitHub zawiera tylko aplikację i indeksy JSON.
-  storageMode: 'drive',
+  storageMode: 'auto',
+  officialOnly: true,
   preferExternalDrawings: true,
-  demoDevices: ['YT-827795', 'YT-852371', 'YT-85177', '00610', '00703'],
+  demoDevices: ['YT-82200'],
   drawingsBaseUrl: '',
-  storageLabel: 'Google Drive',
-  driveSearchFallback: true,
-  driveSearchBaseUrl: 'https://drive.google.com/drive/search?q=',
+  storageLabel: 'TOYA24',
+  driveSearchFallback: false,
+  driveSearchBaseUrl: '',
   driveMapUrls: ['data/drive-drawings-map.json', 'drive-drawings-map.json']
 };

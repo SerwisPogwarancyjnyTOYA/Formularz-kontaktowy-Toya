@@ -37,3 +37,13 @@ Skrypt utworzy czysty katalog `drawings/...` zgodny z manifestem. Bez fizycznych
 ## Uwaga o DOCX
 
 DOCX-y są zaindeksowane jako pliki, ale klientowi najlepiej pokazywać PDF/JPG/PNG. Pliki DOCX warto przekonwertować do PDF i podmienić w manifestach, jeśli mają być widoczne bez pobierania.
+
+
+## v32
+
+Wersja v32 usuwa z publicznego widoku ceny oraz stany/dostępność. Po wdrożeniu otwórz stronę z parametrem `?v=20260613-v32-bez-cen-stanow`.
+
+
+## v33 — TOYA24-only
+
+Wgrywamy całą paczkę. Po wdrożeniu test: `?v=20260616-v33-toya24-only`. Strona publiczna pokazuje tylko rekordy z oficjalnego manifestu TOYA24 i nie publikuje cen ani dostępności.
