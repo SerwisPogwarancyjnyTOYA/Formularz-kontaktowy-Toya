@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex,nofollow" />
-  <title>PGW Service Hub v46 — mobile flow</title>
+  <title>PGW Service Hub v47 — klient i walidacje</title>
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="stylesheet" href="app.css" />
 </head>
@@ -23,9 +23,9 @@
   <main class="shell">
     <section class="hero-card">
       <div>
-        <p class="eyebrow">Ścieżka klienta v46</p>
-        <h1>Prosty formularz: najpierw model i PDF, potem wygodny wybór części, dane i gotowy mail.</h1>
-        <p class="lead">Klient nie dostaje wszystkiego naraz. Najpierw wybiera urządzenie i części, potem podaje tylko te dane, które są potrzebne: kontakt obowiązkowo, faktura i wysyłka opcjonalnie. Na końcu dostaje mail do <strong>service@yato.pl</strong>.</p>
+        <p class="eyebrow">Ścieżka klienta v47</p>
+        <h1>Prosty formularz: model, PDF, części, minimum kontaktu i gotowy mail.</h1>
+        <p class="lead">Klient nie dostaje wszystkiego naraz. Najpierw wybiera urządzenie i części, potem podaje minimum kontaktu. Faktura i wysyłka są opcjonalne, a strona pokazuje checklistę przed skopiowaniem maila do <strong>service@yato.pl</strong>.</p>
         <div class="hero-guide" aria-label="Jak działa formularz">
           <span>1. Szukasz modelu</span>
           <span>2. Otwiera się PDF</span>
@@ -111,7 +111,7 @@
             <span class="stage-number">3</span>
             <div>
               <h2>Dane kontaktowe, faktura i wysyłka</h2>
-              <p>Kontakt jest wymagany, ale faktura i wysyłka są opcjonalne. Klient może dopytać o części bez uzupełniania wszystkich danych.</p>
+              <p>Wystarczy imię/nazwa oraz poprawny email albo telefon. Faktura i wysyłka są opcjonalne — możesz je dopisać, jeśli przyspieszy to obsługę.</p>
             </div>
           </div>
 
@@ -122,6 +122,7 @@
               <label>Email<input name="contactEmail" type="email" placeholder="podaj email lub telefon" /></label>
               <label>Telefon<input name="contactPhone" placeholder="podaj telefon lub email" /></label>
               <div class="lookup-status">Wystarczy email albo telefon. Im więcej danych klient poda, tym łatwiej będzie odpowiedzieć.</div>
+              <div class="quality-row" id="contactQuality" aria-live="polite"></div>
               <label>Numer seryjny urządzenia<input name="serialNumber" placeholder="opcjonalnie" /></label>
             </fieldset>
 
@@ -148,6 +149,7 @@
                   <label>Miasto<input name="invoiceCity" /></label>
                 </div>
                 <div class="lookup-status" id="zipStatus">Kod pocztowy może uzupełnić miejscowość, jeśli jest w lokalnej bazie strony.</div>
+                <div class="quality-row" id="invoiceQuality" aria-live="polite"></div>
               </div>
             </fieldset>
 
@@ -164,6 +166,7 @@
                   <label>Miasto<input name="shipCity" /></label>
                 </div>
                 <div class="lookup-status" id="shipZipStatus">Miejscowość uzupełni się automatycznie, jeśli kod jest w lokalnej bazie.</div>
+                <div class="quality-row" id="shippingQuality" aria-live="polite"></div>
                 <label>Telefon dla kuriera<input name="shipPhone" /></label>
               </div>
             </fieldset>
@@ -189,9 +192,10 @@
             <span class="stage-number">4</span>
             <div>
               <h2>Gotowy mail do skopiowania</h2>
-              <p>Skopiuj temat i treść, a następnie wyślij wiadomość na <strong>service@yato.pl</strong>.</p>
+              <p>Sprawdź krótkie podsumowanie, skopiuj temat i treść, a następnie wyślij wiadomość na <strong>service@yato.pl</strong>.</p>
             </div>
           </div>
+          <div class="final-checklist" id="finalChecklist"></div>
           <div class="mail-card">
             <label>Adresat<input id="mailTo" readonly value="service@yato.pl" /></label>
             <label>Temat<input id="mailSubject" readonly /></label>
@@ -199,6 +203,7 @@
             <div class="mail-actions">
               <button class="primary" id="copyMail" type="button">Kopiuj treść maila</button>
               <button id="copySubject" type="button">Kopiuj temat</button>
+              <button id="copyAll" type="button">Kopiuj komplet</button>
               <button id="backData" type="button">Popraw dane</button>
               <button id="startOver" type="button">Zacznij od nowa</button>
             </div>
@@ -260,7 +265,7 @@
   </div>
 
   <footer class="footer">
-    <span>PGW Service Hub v46</span>
+    <span>PGW Service Hub v47</span>
     <span>Bez cen i stanów. Podgląd rysunków przez PDF z Google Drive.</span>
   </footer>
 

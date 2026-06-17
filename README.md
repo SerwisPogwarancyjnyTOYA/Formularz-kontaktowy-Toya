@@ -1,4 +1,4 @@
-# PGW Service Hub v46 — mobile parts flow
+# PGW Service Hub v47 — mobile parts flow
 
 Lekka strona GitHub Pages do zapytania o części serwisu pogwarancyjnego TOYA.
 
@@ -10,7 +10,7 @@ Lekka strona GitHub Pages do zapytania o części serwisu pogwarancyjnego TOYA.
 - Faktura i wysyłka są opcjonalne.
 - Gdy urządzenia nie ma w bazie, działa tryb ręczny.
 
-## Co doszło w v46
+## Co doszło w v47
 
 - lepszy widok na telefonie,
 - sticky dolny pasek z liczbą wybranych części,
@@ -29,5 +29,13 @@ Lekka strona GitHub Pages do zapytania o części serwisu pogwarancyjnego TOYA.
 Test cache-busting:
 
 ```text
-?v=20260617-v46-mobile-parts
+?v=20260617-v47-mobile-parts
 ```
+
+
+## v47 — dane klienta i walidacje
+
+- dodany ekran kontroli przed skopiowaniem maila,
+- poprawiona walidacja email/telefon/kod pocztowy/NIP,
+- faktura i wysyłka nadal są opcjonalne,
+- przycisk „Kopiuj komplet” kopiuje adresata, temat i treść razem.

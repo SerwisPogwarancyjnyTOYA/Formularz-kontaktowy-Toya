@@ -1,5 +1,5 @@
 window.PGW_CONFIG = {
-  version: '20260617-v46-mobile-parts',
+  version: '20260617-v47-client-validation',
   appName: 'PGW Service Hub',
   recipientEmail: 'service@yato.pl',
   storageMode: 'drive',

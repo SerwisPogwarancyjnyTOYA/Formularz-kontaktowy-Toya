@@ -1,7 +1,7 @@
 (() => {
   'use strict';
   const CONFIG = window.PGW_CONFIG || {};
-  const DRAFT_KEY = 'pgw-v46-draft';
+  const DRAFT_KEY = 'pgw-v47-draft';
   const PART_ROW_LIMIT = Number(CONFIG.partRowLimit || 80);
   const $ = (id) => document.getElementById(id);
   const els = {
@@ -10,9 +10,9 @@
     selectedDeviceBox: $('selectedDeviceBox'), partsSearch: $('partsSearch'), partsTable: $('partsTable'), partMeta: $('partMeta'),
     viewer: $('viewer'), openPdf: $('openPdf'), basketItems: $('basketItems'), basketCount: $('basketCount'), goData: $('goData'), goDataInline: $('goDataInline'), clearBasket: $('clearBasket'),
     customerForm: $('customerForm'), sameAsInvoice: $('sameAsInvoice'), wantInvoice: $('wantInvoice'), wantShipping: $('wantShipping'), invoiceFieldset: $('invoiceFieldset'), shippingFieldset: $('shippingFieldset'), mailTo: $('mailTo'), mailSubject: $('mailSubject'), mailBody: $('mailBody'),
-    copyMail: $('copyMail'), copySubject: $('copySubject'), copyStatus: $('copyStatus'), startOver: $('startOver'),
+    copyMail: $('copyMail'), copySubject: $('copySubject'), copyAll: $('copyAll'), copyStatus: $('copyStatus'), startOver: $('startOver'),
     backDevice: $('backDevice'), backParts: $('backParts'), backData: $('backData'), goMail: $('goMail'), contextTitle: $('contextTitle'), contextBody: $('contextBody'),
-    lookupNip: $('lookupNip'), lookupStatus: $('lookupStatus'), zipStatus: $('zipStatus'), shipZipStatus: $('shipZipStatus'), formHint: $('formHint'), manualPartsBox: $('manualPartsBox'), manualPartsFieldset: $('manualPartsFieldset'), goManualData: $('goManualData'), draftMailPreview: $('draftMailPreview'), showMoreParts: $('showMoreParts'), mobileSummaryBar: $('mobileSummaryBar'), mobileSummaryText: $('mobileSummaryText'), mobileGoData: $('mobileGoData'), focusParts: $('focusParts'), focusPdf: $('focusPdf')
+    lookupNip: $('lookupNip'), lookupStatus: $('lookupStatus'), zipStatus: $('zipStatus'), shipZipStatus: $('shipZipStatus'), formHint: $('formHint'), manualPartsBox: $('manualPartsBox'), manualPartsFieldset: $('manualPartsFieldset'), goManualData: $('goManualData'), draftMailPreview: $('draftMailPreview'), showMoreParts: $('showMoreParts'), mobileSummaryBar: $('mobileSummaryBar'), mobileSummaryText: $('mobileSummaryText'), mobileGoData: $('mobileGoData'), focusParts: $('focusParts'), focusPdf: $('focusPdf'), contactQuality: $('contactQuality'), invoiceQuality: $('invoiceQuality'), shippingQuality: $('shippingQuality'), finalChecklist: $('finalChecklist')
   };
   const progressIds = ['pDevice','pDrawing','pParts','pData','pMail'];
 
@@ -162,6 +162,7 @@
     els.customerForm.addEventListener('change', () => { state.formDirty = true; saveDraft(); updateCanProceed(); });
     els.copyMail.addEventListener('click', () => copyText(els.mailBody.value, 'Skopiowano treść maila.'));
     els.copySubject.addEventListener('click', () => copyText(els.mailSubject.value, 'Skopiowano temat.'));
+    if (els.copyAll) els.copyAll.addEventListener('click', () => copyText(`Do: ${els.mailTo.value}\nTemat: ${els.mailSubject.value}\n\n${els.mailBody.value}`, 'Skopiowano komplet: adresat, temat i treść.'));
     els.startOver.addEventListener('click', resetAll);
   }
 
@@ -460,6 +461,7 @@
   }
 
   function updateCanProceed() {
+    renderValidationPanels();
     document.querySelectorAll('.step').forEach(btn => { btn.disabled = !canOpenStep(Number(btn.dataset.step)); });
     const canMail = Boolean(state.selectedDevice && hasSelectionForRequest() && formIsValid());
     if (els.goMail) {
@@ -494,8 +496,8 @@
     const contexts = {
       1: ['Wybierz urządzenie', 'Klient widzi wyszukiwarkę modeli. Gdy modelu nie ma w bazie, może przejść do zapytania ręcznego.'],
       2: ['Wybierz części z rysunku', 'PDF zostaje po prawej, a lista po lewej pokazuje części dla wybranego modelu. W trybie ręcznym klient opisuje część tekstowo.'],
-      3: ['Uzupełnij dane', 'Dane do faktury i wysyłki pojawiają się dopiero po wybraniu części. Nic nie jest wysyłane automatycznie.'],
-      4: ['Skopiuj gotowy mail', 'Na końcu klient dostaje gotowy temat i treść do wysłania na service@yato.pl.']
+      3: ['Uzupełnij minimum kontaktu', 'Wystarczy imię/nazwa oraz poprawny email albo telefon. Faktura i wysyłka są opcjonalne, ale strona podpowie, gdy coś wygląda podejrzanie.'],
+      4: ['Sprawdź i skopiuj mail', 'Na końcu klient widzi checklistę, temat i treść wiadomości do service@yato.pl.']
     };
     const [title, body] = contexts[state.step] || contexts[1];
     els.contextTitle.textContent = title;
@@ -549,21 +551,23 @@
   function getMissingFields() {
     const fields = els.customerForm.elements;
     const missing = [];
+    const email = val(fields.contactEmail);
+    const phone = val(fields.contactPhone);
     if (!val(fields.contactName)) missing.push('imię i nazwisko / firma kontaktowa');
-    if (!val(fields.contactEmail) && !val(fields.contactPhone)) missing.push('email albo telefon');
+    if (!hasUsableContact(email, phone)) missing.push('poprawny email albo telefon');
     if (state.manualMode && !val(fields.manualPartsDescription)) missing.push('opis potrzebnej części');
     if (els.wantInvoice && els.wantInvoice.checked) {
       if (!val(fields.invoiceName)) missing.push('nazwa do faktury');
       if (!val(fields.invoiceStreet)) missing.push('adres do faktury');
-      if (!val(fields.invoiceZip)) missing.push('kod pocztowy faktury');
+      if (!validZipOrEmpty(fields.invoiceZip?.value, false)) missing.push('kod pocztowy faktury');
       if (!val(fields.invoiceCity)) missing.push('miasto faktury');
     }
     if (els.wantShipping && els.wantShipping.checked) {
       if (!val(fields.shipName)) missing.push('odbiorca wysyłki');
       if (!val(fields.shipStreet)) missing.push('adres wysyłki');
-      if (!val(fields.shipZip)) missing.push('kod pocztowy wysyłki');
+      if (!validZipOrEmpty(fields.shipZip?.value, false)) missing.push('kod pocztowy wysyłki');
       if (!val(fields.shipCity)) missing.push('miasto wysyłki');
-      if (!val(fields.shipPhone)) missing.push('telefon dla kuriera');
+      if (!validPhoneOrEmpty(fields.shipPhone?.value, false)) missing.push('telefon dla kuriera');
     }
     return missing;
   }
@@ -571,6 +575,103 @@
   function formIsValid() {
     if (!els.customerForm) return false;
     return getMissingFields().length === 0;
+  }
+
+  function hasUsableContact(email, phone) {
+    return isValidEmail(email) || isValidPhone(phone);
+  }
+
+  function isValidEmail(value) {
+    const v = String(value || '').trim();
+    if (!v) return false;
+    return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+  }
+
+  function isValidPhone(value) {
+    const digits = String(value || '').replace(/\D/g,'');
+    return digits.length >= 7 && digits.length <= 15;
+  }
+
+  function validPhoneOrEmpty(value, allowEmpty=true) {
+    const v = String(value || '').trim();
+    if (!v) return allowEmpty;
+    return isValidPhone(v);
+  }
+
+  function validZipOrEmpty(value, allowEmpty=true) {
+    const v = String(value || '').trim();
+    if (!v) return allowEmpty;
+    return /^\d{2}-\d{3}$/.test(normalizeZip(v));
+  }
+
+  function isValidNip(value) {
+    const nip = cleanNip(value);
+    if (nip.length !== 10) return false;
+    const w = [6,5,7,2,3,4,5,6,7];
+    const sum = w.reduce((acc, weight, i) => acc + Number(nip[i]) * weight, 0);
+    return sum % 11 === Number(nip[9]);
+  }
+
+  function renderValidationPanels() {
+    if (!els.customerForm) return;
+    const fields = els.customerForm.elements;
+    const email = val(fields.contactEmail), phone = val(fields.contactPhone);
+    if (els.contactQuality) {
+      const items = [];
+      if (!val(fields.contactName)) items.push(['warn','Brakuje osoby / nazwy kontaktowej']);
+      else items.push(['ok','Kontakt nazwany']);
+      if (hasUsableContact(email, phone)) items.push(['ok', email && isValidEmail(email) ? 'Email wygląda poprawnie' : 'Telefon wygląda poprawnie']);
+      else items.push(['warn','Podaj poprawny email albo telefon']);
+      els.contactQuality.innerHTML = items.map(([m,t]) => `<span class="quality ${m}">${escapeHtml(t)}</span>`).join('');
+    }
+    if (els.invoiceQuality) {
+      if (!els.wantInvoice || !els.wantInvoice.checked) {
+        els.invoiceQuality.innerHTML = '<span class="quality neutral">Faktura opcjonalna — nie blokuje maila</span>';
+      } else {
+        const items = [];
+        if (val(fields.invoiceNip)) items.push([isValidNip(fields.invoiceNip.value) ? 'ok' : 'warn', isValidNip(fields.invoiceNip.value) ? 'NIP wygląda poprawnie' : 'NIP wygląda podejrzanie']);
+        if (validZipOrEmpty(fields.invoiceZip?.value, false)) items.push(['ok','Kod pocztowy faktury OK']);
+        else items.push(['warn','Uzupełnij kod faktury w formacie 00-000']);
+        els.invoiceQuality.innerHTML = items.map(([m,t]) => `<span class="quality ${m}">${escapeHtml(t)}</span>`).join('') || '<span class="quality warn">Uzupełnij dane do faktury albo odznacz tę sekcję</span>';
+      }
+    }
+    if (els.shippingQuality) {
+      if (!els.wantShipping || !els.wantShipping.checked) {
+        els.shippingQuality.innerHTML = '<span class="quality neutral">Wysyłka opcjonalna — może być do ustalenia</span>';
+      } else {
+        const items = [];
+        items.push([validZipOrEmpty(fields.shipZip?.value, false) ? 'ok' : 'warn', validZipOrEmpty(fields.shipZip?.value, false) ? 'Kod wysyłki OK' : 'Uzupełnij kod wysyłki w formacie 00-000']);
+        items.push([validPhoneOrEmpty(fields.shipPhone?.value, false) ? 'ok' : 'warn', validPhoneOrEmpty(fields.shipPhone?.value, false) ? 'Telefon dla kuriera OK' : 'Telefon dla kuriera wygląda podejrzanie']);
+        els.shippingQuality.innerHTML = items.map(([m,t]) => `<span class="quality ${m}">${escapeHtml(t)}</span>`).join('');
+      }
+    }
+  }
+
+  function renderFinalChecklist() {
+    if (!els.finalChecklist || !state.selectedDevice) return;
+    const f = Object.fromEntries(new FormData(els.customerForm).entries());
+    const partsCount = [...state.selectedParts.values()].reduce((sum, x) => sum + (Number(x.qty) || 0), 0);
+    const rows = [
+      ['Urządzenie', state.selectedDevice.deviceIndex || 'model opisany ręcznie', 'ok'],
+      ['Części', state.manualMode ? 'opis ręczny' : `${state.selectedParts.size} pozycji / ${partsCount} szt.`, hasSelectionForRequest() ? 'ok' : 'warn'],
+      ['Kontakt', hasUsableContact(f.contactEmail, f.contactPhone) ? (f.contactEmail || f.contactPhone) : 'brak poprawnego emaila lub telefonu', hasUsableContact(f.contactEmail, f.contactPhone) ? 'ok' : 'warn'],
+      ['Faktura', els.wantInvoice?.checked ? 'podano dane do faktury' : 'do ustalenia z serwisem', 'neutral'],
+      ['Wysyłka', els.wantShipping?.checked ? 'podano adres wysyłki' : 'do ustalenia z serwisem', 'neutral']
+    ];
+    const warnings = getSoftWarnings(f);
+    els.finalChecklist.innerHTML = `<div class="final-grid">${rows.map(([a,b,m]) => `<div class="final-item"><span>${escapeHtml(a)}</span><strong>${escapeHtml(b)}</strong><em class="${m}">${m === 'ok' ? 'OK' : m === 'warn' ? 'sprawdź' : 'opcjonalne'}</em></div>`).join('')}</div>${warnings.length ? `<div class="soft-warnings"><strong>Przed wysłaniem warto sprawdzić:</strong><ul>${warnings.map(w => `<li>${escapeHtml(w)}</li>`).join('')}</ul></div>` : '<div class="soft-warnings ok"><strong>Mail wygląda kompletnie.</strong> Klient może skopiować temat i treść.</div>'}`;
+  }
+
+  function getSoftWarnings(f) {
+    const out = [];
+    if (f.contactEmail && !isValidEmail(f.contactEmail)) out.push('email wygląda nietypowo');
+    if (f.contactPhone && !isValidPhone(f.contactPhone)) out.push('telefon wygląda nietypowo');
+    if (els.wantInvoice?.checked && f.invoiceNip && !isValidNip(f.invoiceNip)) out.push('NIP wygląda podejrzanie');
+    if (els.wantInvoice?.checked && f.invoiceZip && !validZipOrEmpty(f.invoiceZip, false)) out.push('kod pocztowy faktury ma zły format');
+    if (els.wantShipping?.checked && f.shipZip && !validZipOrEmpty(f.shipZip, false)) out.push('kod pocztowy wysyłki ma zły format');
+    if (!els.wantInvoice?.checked) out.push('dane do faktury nie zostały podane — serwis ustali je później');
+    if (!els.wantShipping?.checked) out.push('adres wysyłki nie został podany — serwis ustali go później');
+    return out;
   }
 
   function val(field) { return String(field?.value || '').trim(); }
@@ -617,6 +718,7 @@ Pozdrawiam`;
     els.mailSubject.value = subject;
     els.mailBody.value = body;
     if (els.draftMailPreview) els.draftMailPreview.value = body;
+    renderFinalChecklist();
   }
 
 
@@ -682,7 +784,8 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
     if (!els.lookupStatus) return;
     if (!nip) setLookupStatus('Po wpisaniu NIP możesz spróbować automatycznie pobrać nazwę i adres firmy.', '');
     else if (nip.length < 10) setLookupStatus(`NIP ma ${nip.length}/10 cyfr.`, '');
-    else setLookupStatus('NIP wygląda poprawnie — możesz pobrać dane firmy.', 'ok');
+    else if (isValidNip(nip)) setLookupStatus('NIP wygląda poprawnie — możesz pobrać dane firmy.', 'ok');
+    else setLookupStatus('NIP ma 10 cyfr, ale suma kontrolna wygląda podejrzanie. Możesz sprawdzić lub wpisać dane ręcznie.', 'warn');
   }
 
   function autofillCityFromZip(zipField, cityField, statusEl, silent=false) {

@@ -1,6 +1,6 @@
 {
-  "version": "20260617-v46-mobile-parts",
-  "description": "Client flow with manual fallback, live draft, PDF position-first selection and mapping groundwork",
+  "version": "20260617-v47-client-validation",
+  "description": "Client validation, final checklist, safer contact rules and improved copy flow",
   "counts": {
     "devices": 34,
     "drawings": 34,
@@ -12,7 +12,9 @@
     "No prices",
     "No stock",
     "Manual fallback when device is missing",
-    "Mapping-ready: positions now, hotspots later"
+    "Mapping-ready: positions now, hotspots later",
+    "Client contact validation",
+    "Final checklist before copying email"
   ],
-  "name": "PGW Service Hub v46 mobile parts flow"
+  "name": "PGW Service Hub v47 client validation"
 }

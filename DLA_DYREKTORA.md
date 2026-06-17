@@ -1,6 +1,6 @@
-# PGW Service Hub — wersja v46
+# PGW Service Hub — wersja v47
 
-Wersja v46 skupia się na użyteczności dla klienta.
+Wersja v47 skupia się na użyteczności dla klienta.
 
 Klient przechodzi przez prosty proces:
 
@@ -12,4 +12,12 @@ Klient przechodzi przez prosty proces:
 
 Strona nie pokazuje cen ani stanów magazynowych. Celem jest zebranie kompletnego i czytelnego zapytania dla serwisu, nie sprzedaż online.
 
-Najważniejsza zmiana v46: wygodniejsze użycie na telefonie i łatwiejsze wybieranie części bez zalewania klienta pełną tabelą.
+Najważniejsza zmiana v47: wygodniejsze użycie na telefonie i łatwiejsze wybieranie części bez zalewania klienta pełną tabelą.
+
+
+## v47 — dane klienta i walidacje
+
+- dodany ekran kontroli przed skopiowaniem maila,
+- poprawiona walidacja email/telefon/kod pocztowy/NIP,
+- faktura i wysyłka nadal są opcjonalne,
+- przycisk „Kopiuj komplet” kopiuje adresata, temat i treść razem.
