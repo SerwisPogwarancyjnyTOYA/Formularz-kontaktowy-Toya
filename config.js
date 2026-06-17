@@ -1,5 +1,5 @@
 window.PGW_CONFIG = {
-  version: '20260617-v53-brand-review-ready',
+  version: '20260617-v54-heavy-pdf-header',
   appName: 'PGW Service Hub',
   recipientEmail: 'service@yato.pl',
   storageMode: 'drive',
@@ -18,6 +18,7 @@ window.PGW_CONFIG = {
     drawings: ['data/drawings.json'],
     parts: ['data/parts.json'],
     driveMap: ['data/drive-drawings-map.full.json', 'data/drive-drawings-map.json'],
-    brandOverrides: ['data/brand-resolution-overrides.json']
+    brandOverrides: ['data/brand-resolution-overrides.json'],
+    pdfHeaderOverrides: ['data/pdf-header-overrides.json']
   }
 };

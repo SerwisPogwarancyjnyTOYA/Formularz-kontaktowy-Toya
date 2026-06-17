@@ -1,5 +1,5 @@
 {
-  "version": "v52-full-manifest-1405",
+  "version": "v54-heavy-pdf-header",
   "description": "Visual polish, light/dark mode, better contrast and client-facing UI refinement",
   "counts": {
     "devices": 34,
@@ -27,5 +27,6 @@
   "parts": 2179,
   "nonYatoSeedCount": 16,
   "notes": "v52 zawiera pełny manifest Drive wygenerowany przez Apps Script: 1405 PDF-ów.",
-  "generatedAt": "2026-06-17T04:40:00Z"
+  "generatedAt": "2026-06-17T04:40:00Z",
+  "label": "v54 — brand guesses + PDF header extractor"
 }

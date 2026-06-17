@@ -1,8 +1,9 @@
 {
-  "version": "v53-brand-review-ready",
+  "version": "v54-guessed-brands",
+  "generatedAt": "2026-06-17T04:57:24Z",
   "sourcePdfCount": 1405,
   "manifestItems": 1418,
-  "brandCounts": {
+  "brandCountsBefore": {
     "DO ROZPOZNANIA": 479,
     "FLO": 2,
     "LUND": 6,
@@ -11,133 +12,104 @@
     "YATO": 691,
     "YATO GASTRO": 223
   },
-  "reviewNeededCount": 479,
-  "reviewBuckets": {
-    "09xxx": 1,
-    "53xxx": 3,
-    "55xxx": 1,
-    "57xxx": 4,
-    "58xxx": 10,
-    "66xxx": 8,
-    "67xxx": 94,
-    "68xxx": 46,
-    "70xxx": 1,
-    "71xxx": 1,
-    "72xxx": 2,
-    "73xxx": 11,
-    "75xxx": 89,
-    "77xxx": 1,
-    "78xxx": 44,
-    "79xxx": 131,
-    "80xxx": 17,
-    "81xxx": 5,
-    "82xxx": 6,
-    "89xxx": 2,
-    "99xxx": 2
+  "brandCountsAfter": {
+    "FALA": 89,
+    "FLO": 24,
+    "LUND": 169,
+    "STHOR": 181,
+    "VOREL": 28,
+    "YATO": 704,
+    "YATO GASTRO": 223
   },
-  "autoFixedFromUnknown": 14,
-  "autoFixedExamples": [
-    {
-      "model": "YT-828075",
-      "title": "Czesci_zamienne_YT-828075_YT-828076.pdf",
-      "from": "NIEZNANA",
-      "to": "YATO",
-      "reason": "automatycznie po prefiksie YT"
+  "guessedFromDoRozpoznania": 479,
+  "remainingDoRozpoznania": 0,
+  "guessCountsByBrand": {
+    "FALA": 89,
+    "FLO": 22,
+    "LUND": 163,
+    "STHOR": 173,
+    "VOREL": 19,
+    "YATO": 13
+  },
+  "guessConfidenceCounts": {
+    "high": 229,
+    "low": 22,
+    "medium": 228
+  },
+  "lowConfidenceCount": 22,
+  "lowConfidenceByBrand": {
+    "LUND": 4,
+    "VOREL": 18
+  },
+  "bucketGuesses": {
+    "09xxx": {
+      "VOREL": 1
     },
-    {
-      "model": "YT-828076",
-      "title": "Czesci_zamienne_YT-828075_YT-828076.pdf",
-      "from": "NIEZNANA",
-      "to": "YATO",
-      "reason": "automatycznie po prefiksie YT"
+    "53xxx": {
+      "VOREL": 3
     },
-    {
-      "model": "YT-828118",
-      "title": "Czesci_zamienne_YT-828118_YT-8281185.pdf",
-      "from": "NIEZNANA",
-      "to": "YATO",
-      "reason": "automatycznie po prefiksie YT"
+    "55xxx": {
+      "VOREL": 1
     },
-    {
-      "model": "YT-8281185",
-      "title": "Czesci_zamienne_YT-828118_YT-8281185.pdf",
-      "from": "NIEZNANA",
-      "to": "YATO",
-      "reason": "automatycznie po prefiksie YT"
+    "57xxx": {
+      "VOREL": 4
     },
-    {
-      "model": "YT-828135",
-      "title": "Czesci_zamienne_YT-828135_YT-828136.pdf",
-      "from": "NIEZNANA",
-      "to": "YATO",
-      "reason": "automatycznie po prefiksie YT"
+    "58xxx": {
+      "VOREL": 10
     },
-    {
-      "model": "YT-828136",
-      "title": "Czesci_zamienne_YT-828135_YT-828136.pdf",
-      "from": "NIEZNANA",
-      "to": "YATO",
-      "reason": "automatycznie po prefiksie YT"
+    "66xxx": {
+      "LUND": 8
     },
-    {
-      "model": "YT-828137",
-      "title": "Czesci_zamienne_YT-828137_YT-828138.pdf",
-      "from": "NIEZNANA",
-      "to": "YATO",
-      "reason": "automatycznie po prefiksie YT"
+    "67xxx": {
+      "LUND": 94
     },
-    {
-      "model": "YT-828138",
-      "title": "Czesci_zamienne_YT-828137_YT-828138.pdf",
-      "from": "NIEZNANA",
-      "to": "YATO",
-      "reason": "automatycznie po prefiksie YT"
+    "68xxx": {
+      "LUND": 46
     },
-    {
-      "model": "YT-82824",
-      "title": "Czesci_zamienne_YT-82824_YT-828296.pdf",
-      "from": "NIEZNANA",
-      "to": "YATO",
-      "reason": "automatycznie po prefiksie YT"
+    "70xxx": {
+      "LUND": 1
     },
-    {
-      "model": "YT-828296",
-      "title": "Czesci_zamienne_YT-82824_YT-828296.pdf",
-      "from": "NIEZNANA",
-      "to": "YATO",
-      "reason": "automatycznie po prefiksie YT"
+    "71xxx": {
+      "LUND": 1
     },
-    {
-      "model": "YT-828293",
-      "title": "Czesci_zamienne_YT-828293_YT-828294_YT-828295_YT-828296.pdf",
-      "from": "NIEZNANA",
-      "to": "YATO",
-      "reason": "automatycznie po prefiksie YT"
+    "72xxx": {
+      "LUND": 2
     },
-    {
-      "model": "YT-828294",
-      "title": "Czesci_zamienne_YT-828293_YT-828294_YT-828295_YT-828296.pdf",
-      "from": "NIEZNANA",
-      "to": "YATO",
-      "reason": "automatycznie po prefiksie YT"
+    "73xxx": {
+      "LUND": 11
     },
-    {
-      "model": "YT-828295",
-      "title": "Czesci_zamienne_YT-828293_YT-828294_YT-828295_YT-828296.pdf",
-      "from": "NIEZNANA",
-      "to": "YATO",
-      "reason": "automatycznie po prefiksie YT"
+    "75xxx": {
+      "FALA": 89
     },
-    {
-      "model": "YT-828296",
-      "title": "Czesci_zamienne_YT-828293_YT-828294_YT-828295_YT-828296.pdf",
-      "from": "NIEZNANA",
-      "to": "YATO",
-      "reason": "automatycznie po prefiksie YT"
+    "77xxx": {
+      "STHOR": 1
+    },
+    "78xxx": {
+      "STHOR": 44
+    },
+    "79xxx": {
+      "STHOR": 111,
+      "FLO": 20
+    },
+    "80xxx": {
+      "STHOR": 17
+    },
+    "81xxx": {
+      "YATO": 5
+    },
+    "82xxx": {
+      "YATO": 6
+    },
+    "89xxx": {
+      "FLO": 2
+    },
+    "99xxx": {
+      "YATO": 2
     }
-  ],
+  },
   "notes": [
-    "6 plików z YT w nazwie zostało automatycznie przypisanych do YATO / rozbitych na aliasy modeli.",
-    "Pozostałe pozycje DO ROZPOZNANIA są przygotowane do ręcznej weryfikacji w brand-review.html."
+    "To nie jest twarde potwierdzenie marek. To kontrolowane zgadywanie po zakresach numeracji.",
+    "Pole brand jest ustawione na zgadywaną markę, żeby filtr strony działał wygodniej.",
+    "Pola brandConfidence, brandReason, brandRule i reviewStatus pozwalają później odróżnić pewne dane od zgadywanych."
   ]
 }

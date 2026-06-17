@@ -40,3 +40,19 @@ data/brand-resolution-overrides.json
 ```
 
 Potem strona klienta automatycznie zastosuje te nadpisania przy ładowaniu danych.
+
+
+## v54 — zgadywanie marek
+
+Wersja v54 przypisała zgadywane marki do 479 rekordów wcześniej oznaczonych jako `DO ROZPOZNANIA`. W manifestach zachowano pola jakości: `brandConfidence`, `brandReason`, `reviewStatus`. Najpierw weryfikować plik `data/brand-low-confidence-review.v54.csv`.
+
+
+## Dodatkowy etap po V54 — nagłówki PDF
+
+Po wdrożeniu strony możesz odpalić ekstraktor nagłówków PDF w Apps Script. Wynikowy JSON należy zapisać jako:
+
+```text
+data/pdf-header-overrides.json
+```
+
+Strona v54 umie już wczytać ten plik i używać nazw urządzeń wyciągniętych z PDF-ów.

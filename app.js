@@ -1,7 +1,7 @@
 (() => {
   'use strict';
   const CONFIG = window.PGW_CONFIG || {};
-  const DRAFT_KEY = 'pgw-v53-draft';
+  const DRAFT_KEY = 'pgw-v54-draft';
   const THEME_KEY = 'pgw-theme';
   const PART_ROW_LIMIT = Number(CONFIG.partRowLimit || 80);
   const $ = (id) => document.getElementById(id);
@@ -18,7 +18,7 @@
   const progressIds = ['pDevice','pDrawing','pParts','pData','pMail'];
 
   const state = {
-    devices: [], drawings: [], parts: [], driveMap: [], brandOverrides: {},
+    devices: [], drawings: [], parts: [], driveMap: [], brandOverrides: {}, pdfHeaderOverrides: {},
     drawingById: new Map(), partsByDrawing: new Map(), driveByDrawingId: new Map(), driveByKey: new Map(),
     selectedDevice: null, selectedDrawing: null, selectedParts: new Map(), manualMode: false, step: 1, formDirty: false,
     postalCodes: new Map(), partVisibleLimit: PART_ROW_LIMIT, activeBrand: 'all', brandSummary: []
@@ -44,6 +44,7 @@
       state.parts = await loadFirst(urls.parts || ['data/parts.json'], []);
       state.driveMap = await loadFirst(urls.driveMap || ['data/drive-drawings-map.json'], []);
       state.brandOverrides = await loadFirst(urls.brandOverrides || ['data/brand-resolution-overrides.json'], {});
+      state.pdfHeaderOverrides = await loadFirst(urls.pdfHeaderOverrides || ['data/pdf-header-overrides.json'], {});
       await loadPostalCodes();
       normalizeData();
       buildIndexes();
@@ -111,7 +112,8 @@
       row.deviceIndex = normalizeDeviceIndex(row.deviceIndex || row.model || row.normalizedKey || extractDeviceIndex(row.fileName || row.title || row.name || row.path));
       row.viewerUrl = row.viewerUrl || (row.fileId ? `https://drive.google.com/file/d/${encodeURIComponent(row.fileId)}/preview` : '');
       row.openUrl = row.openUrl || (row.fileId ? `https://drive.google.com/file/d/${encodeURIComponent(row.fileId)}/view` : row.url || '');
-      row.__keys = unique([row.deviceIndex, row.model, row.normalizedKey, row.fileName, row.title, row.name, ...(row.keys || [])].flat().map(normKey).filter(Boolean));
+      applyPdfHeaderOverride(row);
+      row.__keys = unique([row.deviceIndex, row.model, row.normalizedKey, row.fileName, row.title, row.name, row.deviceName, row.displayTitle, ...(row.keys || [])].flat().map(normKey).filter(Boolean));
       for (const k of row.__keys) driveKeys.add(k);
     }
 
@@ -128,7 +130,7 @@
         const drawing = {
           id,
           deviceIndex: row.deviceIndex,
-          title: row.title || row.fileName || row.deviceIndex,
+          title: row.displayTitle || row.deviceName || row.title || row.fileName || row.deviceIndex,
           fileName: row.fileName || row.title || `${row.deviceIndex}.pdf`,
           brand: canonicalBrand(row.brand || inferBrand(row)),
           type: 'pdf',
@@ -156,7 +158,7 @@
       if (key && !existingDeviceKeys.has(key)) {
         state.devices.push({
           deviceIndex: d.deviceIndex,
-          title: d.title || d.fileName || 'Rysunek PDF z Google Drive',
+          title: d.displayTitle || d.deviceName || d.title || d.fileName || 'Rysunek PDF z Google Drive',
           brand: canonicalBrand(d.brand || inferBrand(d)),
           source: 'GOOGLE_DRIVE_FULL_MANIFEST',
           hasPartsPdf: true,
@@ -170,6 +172,34 @@
     for (const d of state.drawings) if (d.brand) brandByDevice.set(norm(d.deviceIndex), d.brand);
     for (const d of state.devices) if (!d.brand || d.brand === 'INNE') d.brand = brandByDevice.get(norm(d.deviceIndex)) || canonicalBrand(inferBrand(d));
     for (const p of state.parts) if (!p.brand || p.brand === 'INNE') p.brand = brandByDevice.get(norm(p.deviceIndex)) || canonicalBrand(inferBrand(p));
+  }
+
+
+  function applyPdfHeaderOverride(row) {
+    if (!row) return;
+    const overrides = (state.pdfHeaderOverrides && state.pdfHeaderOverrides.byFileId) ? state.pdfHeaderOverrides.byFileId : (state.pdfHeaderOverrides || {});
+    const candidates = [
+      row.fileId,
+      row.driveFileId,
+      row.id,
+      row.normalizedModel,
+      row.normalizedKey,
+      row.deviceIndex,
+      row.model
+    ].map(x => String(x || '').trim()).filter(Boolean);
+    let found = null;
+    for (const key of candidates) {
+      if (overrides[key]) { found = overrides[key]; break; }
+      const nk = normKey(key);
+      if (overrides[nk]) { found = overrides[nk]; break; }
+    }
+    if (!found) return;
+    row.pdfHeader = found.headerText || found.rawHeader || row.pdfHeader || '';
+    row.deviceName = found.deviceName || found.extractedDeviceName || row.deviceName || '';
+    row.displayTitle = found.displayTitle || (row.deviceName ? `${row.deviceIndex || row.model || ''} — ${row.deviceName}`.replace(/^\s*—\s*/, '') : '') || row.displayTitle || '';
+    if (found.brand && (!row.brand || row.brand === 'NIEZNANA' || row.brand === 'DO ROZPOZNANIA')) row.brand = found.brand;
+    row.headerConfidence = found.confidence || row.headerConfidence || '';
+    row.headerSource = found.source || 'pdf-header-overrides';
   }
 
   function buildIndexes() {
@@ -189,7 +219,7 @@
       const row = resolveDrive(d);
       if (row) state.driveByDrawingId.set(String(d.id), row);
     }
-    for (const d of state.devices) d.__search = norm([d.deviceIndex, d.title, d.name, d.brand].join(' '));
+    for (const d of state.devices) d.__search = norm([d.deviceIndex, d.title, d.name, d.brand, d.deviceName, d.displayTitle].join(' '));
     for (const p of state.parts) p.__search = norm([p.position, p.partIndex, p.namePl, p.nameEn, p.drawingTitle, p.deviceIndex, p.brand].join(' '));
   }
 
