@@ -1,7 +1,7 @@
 (() => {
   'use strict';
   const CONFIG = window.PGW_CONFIG || {};
-  const DRAFT_KEY = 'pgw-v54-draft';
+  const DRAFT_KEY = 'pgw-v56-draft';
   const THEME_KEY = 'pgw-theme';
   const PART_ROW_LIMIT = Number(CONFIG.partRowLimit || 80);
   const $ = (id) => document.getElementById(id);
@@ -18,8 +18,8 @@
   const progressIds = ['pDevice','pDrawing','pParts','pData','pMail'];
 
   const state = {
-    devices: [], drawings: [], parts: [], driveMap: [], brandOverrides: {}, pdfHeaderOverrides: {},
-    drawingById: new Map(), partsByDrawing: new Map(), driveByDrawingId: new Map(), driveByKey: new Map(),
+    devices: [], drawings: [], parts: [], driveMap: [], brandOverrides: {}, pdfHeaderOverrides: {}, universalParts: [], universalPartLinks: [],
+    drawingById: new Map(), partsByDrawing: new Map(), driveByDrawingId: new Map(), driveByKey: new Map(), zunByPartKey: new Map(), zunByCode: new Map(),
     selectedDevice: null, selectedDrawing: null, selectedParts: new Map(), manualMode: false, step: 1, formDirty: false,
     postalCodes: new Map(), partVisibleLimit: PART_ROW_LIMIT, activeBrand: 'all', brandSummary: []
   };
@@ -40,6 +40,8 @@
       setStatus('Ładowanie katalogu…');
       const urls = CONFIG.dataUrls || {};
       state.devices = await loadFirst(urls.devices || ['data/devices.json'], []);
+      state.universalParts = await loadFirst(urls.universalParts || ['data/universal-parts-zun.json'], []);
+      state.universalPartLinks = await loadFirst(urls.universalPartLinks || ['data/universal-parts-zun-links.json'], []);
       state.drawings = await loadFirst(urls.drawings || ['data/drawings.json'], []);
       state.parts = await loadFirst(urls.parts || ['data/parts.json'], []);
       state.driveMap = await loadFirst(urls.driveMap || ['data/drive-drawings-map.json'], []);
@@ -57,7 +59,7 @@
       renderContext();
       restoreDraft();
       renderDeviceResults('');
-      setStatus(`Gotowe: ${fmt(state.devices.length)} urządzeń, ${fmt(state.parts.length)} części`, 'ok');
+      setStatus(`Gotowe: ${fmt(state.devices.length)} urządzeń, ${fmt(state.parts.length)} części, ${fmt(state.universalParts.length)} ZUN`, 'ok');
     } catch (error) {
       console.error(error);
       setStatus('Nie udało się załadować danych', 'warn');
@@ -98,6 +100,8 @@
     state.devices = arr(state.devices).filter(Boolean);
     state.drawings = arr(state.drawings).filter(d => isPdf(d));
     state.parts = arr(state.parts).filter(Boolean);
+    state.universalParts = normalizeUniversalParts(state.universalParts);
+    state.universalPartLinks = normalizeUniversalPartLinks(state.universalPartLinks);
     state.driveMap = arr(state.driveMap).filter(row => isPdf(row));
 
     for (const d of state.devices) d.brand = resolveBrand(d);
@@ -219,6 +223,30 @@
       const row = resolveDrive(d);
       if (row) state.driveByDrawingId.set(String(d.id), row);
     }
+    state.zunByCode = new Map((state.universalParts || []).map(z => [String(z.zun || '').toUpperCase(), z]));
+    state.zunByPartKey = new Map();
+    for (const link of state.universalPartLinks || []) {
+      const key = normalizePartKey(link.partIndex);
+      if (!key || !link.zun) continue;
+      if (!state.zunByPartKey.has(key)) state.zunByPartKey.set(key, []);
+      state.zunByPartKey.get(key).push(link);
+    }
+    // Fallback: summary ZUN file also contains linkedPartIndexes. It gives us coverage even if the row-level links file is missing.
+    for (const z of state.universalParts || []) {
+      for (const idx of z.linkedPartIndexes || []) {
+        const key = normalizePartKey(idx);
+        if (!key || state.zunByPartKey.has(key)) continue;
+        state.zunByPartKey.set(key, [{
+          partIndex: idx,
+          zun: z.zun,
+          name: z.namePl || z.name || '',
+          spec: z.spec || '',
+          dimensionsCm: z.dimensionsCm || '',
+          linkedModel: '',
+          source: 'universal-parts-zun-summary'
+        }]);
+      }
+    }
     for (const d of state.devices) d.__search = norm([d.deviceIndex, d.title, d.name, d.brand, d.deviceName, d.displayTitle].join(' '));
     for (const p of state.parts) p.__search = norm([p.position, p.partIndex, p.namePl, p.nameEn, p.drawingTitle, p.deviceIndex, p.brand].join(' '));
   }
@@ -268,7 +296,7 @@
   function renderStats() {
     els.statDevices.textContent = fmt(state.devices.length);
     els.statDrawings.textContent = fmt(state.drawings.length);
-    els.statParts.textContent = fmt(state.parts.length);
+    els.statParts.textContent = fmt(state.parts.length + (state.universalParts || []).length);
   }
 
   function renderBrandFilter() {
@@ -307,9 +335,325 @@
     }));
   }
 
+
+  function normalizeUniversalParts(source) {
+    const root = Array.isArray(source) ? source : (source && Array.isArray(source.items) ? source.items : []);
+    return root.map((p, i) => {
+      const zun = String(p.zun || p.partIndex || '').trim().toUpperCase();
+      const name = String(p.name || (p.names && p.names[0]) || '').trim();
+      const spec = String(p.spec || (p.specs && p.specs[0]) || '').trim();
+      const linkedModels = arr(p.linkedModels).map(x => String(x || '').trim()).filter(Boolean);
+      const linkedPartIndexes = arr(p.linkedPartIndexes).map(x => String(x || '').trim()).filter(Boolean);
+      const brands = arr(p.brands).map(x => canonicalBrand(x)).filter(Boolean);
+      const searchText = [
+        zun, name, spec, p.material || '', p.dimensionsCm || '',
+        linkedModels.join(' '), linkedPartIndexes.join(' '), brands.join(' ')
+      ].join(' ');
+      return {
+        ...p,
+        id: p.id || `zun-${zun || i}`,
+        zun,
+        partIndex: zun,
+        namePl: name,
+        nameEn: '',
+        spec,
+        position: 'UNI',
+        linkedModels,
+        linkedPartIndexes,
+        brands: unique(brands),
+        __search: norm(searchText)
+      };
+    }).filter(p => p.zun);
+  }
+
+  function normalizeUniversalPartLinks(source) {
+    const root = Array.isArray(source) ? source : (source && Array.isArray(source.links) ? source.links : []);
+    return root.map((link, i) => {
+      const zun = String(link.zun || '').trim().toUpperCase();
+      const partIndex = String(link.partIndex || link.index || '').trim().toUpperCase();
+      const zunSummary = (state.universalParts || []).find(z => z.zun === zun) || {};
+      return {
+        ...link,
+        id: link.id || `zun-link-${i}`,
+        zun,
+        partIndex,
+        partKey: normalizePartKey(partIndex),
+        name: String(link.name || zunSummary.namePl || zunSummary.name || '').trim(),
+        spec: String(link.spec || zunSummary.spec || '').trim(),
+        dimensionsCm: String(link.dimensionsCm || zunSummary.dimensionsCm || '').trim(),
+        linkedModel: String(link.linkedModel || '').trim(),
+        linkedModelBrand: canonicalBrand(link.linkedModelBrand || (zunSummary.brands && zunSummary.brands[0]) || ''),
+        linkedDrawingPreviewUrl: link.linkedDrawingPreviewUrl || '',
+        source: link.source || 'stan na 2026.05.29.xlsm'
+      };
+    }).filter(link => link.zun && link.partKey);
+  }
+
+  function normalizePartKey(value) {
+    return String(value || '').toUpperCase().replace(/[^A-Z0-9]/g, '').trim();
+  }
+
+  function getAutoZunMatchesForPart(part) {
+    if (!part || part.isUniversalZun) return [];
+    const keys = unique([
+      part.partIndex, part.index, part.sapIndex, part.indeks,
+      String(part.partIndex || '').replace(/^Z(Y)?/i, ''),
+      part.namePl, part.nameEn
+    ].map(normalizePartKey).filter(Boolean));
+    const out = [];
+    const seen = new Set();
+    for (const key of keys) {
+      const direct = state.zunByPartKey.get(key) || [];
+      for (const link of direct) {
+        const zun = state.zunByCode.get(link.zun) || {};
+        const dedupe = `${link.zun}|${normalizePartKey(link.partIndex)}`;
+        if (seen.has(dedupe)) continue;
+        seen.add(dedupe);
+        out.push({
+          matchType: 'exact-part-index',
+          confidence: 'wysoka',
+          zun: link.zun,
+          sourcePartIndex: link.partIndex || part.partIndex || '',
+          requestedPartIndex: part.partIndex || '',
+          name: link.name || zun.namePl || zun.name || '',
+          spec: link.spec || zun.spec || '',
+          dimensionsCm: link.dimensionsCm || zun.dimensionsCm || '',
+          linkedModel: link.linkedModel || '',
+          linkedModelBrand: link.linkedModelBrand || '',
+          source: link.source || 'stan na 2026.05.29.xlsm'
+        });
+      }
+    }
+    // Jeżeli indeks części z rysunku nie istnieje w „stan na…”, próbujemy ostrożnie po nazwie/specyfikacji.
+    // To nie jest twarde potwierdzenie — w mailu oznaczamy to jako „średnia/niska” pewność.
+    if (!out.length) {
+      for (const soft of getSoftZunMatchesForPart(part)) {
+        const dedupe = `${soft.zun}|soft`;
+        if (seen.has(dedupe)) continue;
+        seen.add(dedupe);
+        out.push(soft);
+      }
+    }
+    return out;
+  }
+
+  function getSoftZunMatchesForPart(part) {
+    const text = [part.partIndex, part.namePl, part.nameEn].join(' ');
+    const tokens = getDistinctiveZunTokens(text);
+    if (!tokens.length) return [];
+    const partNorm = norm(text);
+    const results = [];
+    for (const z of state.universalParts || []) {
+      const zText = [z.zun, z.namePl, z.name, z.spec, z.dimensionsCm, z.searchText].join(' ');
+      const zNorm = norm(zText);
+      let score = 0;
+      const matched = [];
+      for (const t of tokens) {
+        if (t && zNorm.includes(t)) { score += t.length >= 4 ? 80 : 35; matched.push(t); }
+      }
+      const isBearing = partNorm.includes('lozysk') || partNorm.includes('łożysk');
+      const isOring = partNorm.includes('oring') || partNorm.includes('o ring') || partNorm.includes('o-ring');
+      if (isBearing && (zNorm.includes('lozysk') || zNorm.includes('łożysk'))) score += 40;
+      if (isOring && (zNorm.includes('oring') || zNorm.includes('o ring') || zNorm.includes('o-ring'))) score += 40;
+      // Bez jednoznacznego tokenu typu 607 2Z / 6805 / wymiar O-ringu nie zgadujemy, bo „śruba” czy „sprężyna” zrobiłyby kaszanę.
+      if (score >= 90 && matched.length) {
+        results.push({
+          matchType: 'name-spec-heuristic',
+          confidence: score >= 130 ? 'średnia' : 'niska',
+          zun: z.zun,
+          sourcePartIndex: 'dopasowanie po nazwie/specyfikacji',
+          requestedPartIndex: part.partIndex || '',
+          name: z.namePl || z.name || '',
+          spec: z.spec || '',
+          dimensionsCm: z.dimensionsCm || '',
+          linkedModel: (z.linkedModels || [])[0] || '',
+          linkedModelBrand: (z.brands || [])[0] || '',
+          source: 'stan na 2026.05.29.xlsm / heurystyka nazwy',
+          matchedTokens: matched
+        });
+      }
+    }
+    return results.sort((a,b) => confidenceRank(b.confidence) - confidenceRank(a.confidence)).slice(0, 3);
+  }
+
+  function getDistinctiveZunTokens(text) {
+    const src = String(text || '').toUpperCase().replace(',', '.');
+    const out = [];
+    const pushMatches = (regex) => {
+      const m = src.match(regex) || [];
+      for (const x of m) {
+        const cleaned = norm(String(x).replace(/Ø/g, 'ø'));
+        if (cleaned && cleaned.length >= 3) out.push(cleaned);
+      }
+    };
+    pushMatches(/\b6\d{2,4}\s*(?:2Z|2RS|RS|ZZ)?\b/g);       // 606 2Z, 607 2RS, 6805
+    pushMatches(/\b\d{3,5}\s*(?:2Z|2RS|RS|ZZ)\b/g);         // 607 2Z bez prefixu 6xxx
+    pushMatches(/(?:Ø|ø)?\d+(?:\.\d+)?\s*[X×/]\s*\d+(?:\.\d+)?(?:\s*[X×/]\s*\d+(?:\.\d+)?)?/g); // wymiary
+    return unique(out);
+  }
+
+  function confidenceRank(value) {
+    value = String(value || '').toLowerCase();
+    if (value.includes('wysoka')) return 3;
+    if (value.includes('śred') || value.includes('sred')) return 2;
+    return 1;
+  }
+
+  function getZunHintsForSelectedParts(items) {
+    const hints = [];
+    const seen = new Set();
+    for (const item of items || []) {
+      const part = item.part || {};
+      if (part.isUniversalZun) {
+        const key = `${part.zun}|selected`;
+        if (seen.has(key)) continue;
+        seen.add(key);
+        hints.push({
+          kind: 'selected-zun',
+          part,
+          qty: item.qty,
+          matches: [{
+            zun: part.zun || part.partIndex,
+            confidence: 'bezpośrednio wybrane',
+            name: part.namePl || '',
+            spec: part.spec || '',
+            sourcePartIndex: part.partIndex || '',
+            source: 'stan na 2026.05.29.xlsm'
+          }]
+        });
+        continue;
+      }
+      const matches = getAutoZunMatchesForPart(part);
+      if (!matches.length) continue;
+      const uniqueMatches = matches.filter(m => {
+        const key = `${part.partIndex}|${m.zun}|${m.sourcePartIndex}`;
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      });
+      if (uniqueMatches.length) hints.push({kind: 'auto-zun', part, qty: item.qty, matches: uniqueMatches});
+    }
+    return hints;
+  }
+
+  function formatZunInline(matches) {
+    if (!matches || !matches.length) return '';
+    const codes = unique(matches.map(m => m.zun).filter(Boolean));
+    return codes.length ? ` — ZUN: ${codes.join(', ')}` : '';
+  }
+
+  function formatZunServiceBlock(hints) {
+    if (!hints || !hints.length) return '';
+    const lines = [];
+    lines.push('Informacja dla serwisu — ZUN-y dopasowane automatycznie ze „stan na 2026.05.29”:');
+    let n = 1;
+    for (const hint of hints) {
+      const part = hint.part || {};
+      for (const m of hint.matches || []) {
+        const details = [m.name, m.spec, m.dimensionsCm].filter(Boolean).join(' / ');
+        const modelInfo = m.linkedModel ? `; model z bazy ZUN: ${m.linkedModel}${m.linkedModelBrand ? ' / ' + m.linkedModelBrand : ''}` : '';
+        const selectedIndex = part.partIndex || part.zun || 'brak indeksu';
+        lines.push(`${n++}. ${m.zun} — dla wybranej części ${selectedIndex}${details ? ` — ${details}` : ''}; pewność: ${m.confidence || 'wysoka'}${modelInfo}`);
+      }
+    }
+    lines.push('Uwaga: ZUN jest informacją pomocniczą dla obsługi. Proszę finalnie potwierdzić zgodność w SAP/stanach przed wyceną.');
+    return lines.join('\n');
+  }
+
+  function getZunResults(tokens) {
+    if (!tokens.length || !state.universalParts || !state.universalParts.length) return [];
+    // Klient nie musi znać ZUN-ów. Wyniki ZUN pokazujemy tylko wtedy, gdy ktoś świadomie wpisze ZUN,
+    // indeks części albo techniczną nazwę typu łożysko/O-ring. Samo wpisanie modelu urządzenia nie zasypuje go ZUN-ami.
+    if (!isExplicitZunLookup(tokens)) return [];
+    return state.universalParts.map(part => {
+      let score = 0;
+      const zunNorm = norm(part.zun);
+      const zunFlat = norm(String(part.zun).replace(/[-\s]/g,''));
+      for (const t of tokens) {
+        const tf = t.replace(/[-\s]/g,'');
+        if (zunNorm === t || zunFlat === tf) score += 250;
+        else if (zunNorm.includes(t) || zunFlat.includes(tf)) score += 160;
+        if (part.__search.includes(t)) score += 55;
+        if ((part.linkedModels || []).some(m => norm(m).includes(t) || norm(String(m).replace(/-/g,'')).includes(tf))) score += 90;
+        if ((part.linkedPartIndexes || []).some(x => norm(x).includes(t) || norm(String(x).replace(/-/g,'')).includes(tf))) score += 90;
+      }
+      return {part, score};
+    }).filter(x => x.score > 0).sort((a,b) => b.score - a.score || b.part.linkedPartCount - a.part.linkedPartCount).slice(0, 12);
+  }
+
+  function isExplicitZunLookup(tokens) {
+    const text = norm((tokens || []).join(' '));
+    if (!text) return false;
+    if ((tokens || []).some(t => t.startsWith('zun') || /^z[a-z]?\d{3,}/i.test(t))) return true;
+    return /(lozysk|łożysk|oring|o ring|o-ring|szczotk|wlacznik|włącznik|uszczelniacz|o\s?ring)/.test(text);
+  }
+
+  function renderZunCards(zunResults) {
+    if (!zunResults.length) return '';
+    return `<div class="zun-results-block">
+      <div class="zun-results-head"><strong>Części uniwersalne ZUN ze „stan na…”</strong><span>${fmt(zunResults.length)} dopasowań</span></div>
+      ${zunResults.map(({part}) => {
+        const models = (part.linkedModels || []).slice(0, 6).join(', ');
+        const more = (part.linkedModels || []).length > 6 ? ` +${(part.linkedModels || []).length - 6}` : '';
+        const brands = (part.brands || []).slice(0, 4).join(', ');
+        return `<article class="device-card zun-card">
+          <div>
+            <h3>${escapeHtml(part.zun)}</h3>
+            <p>${escapeHtml(part.namePl || 'Część uniwersalna')}${part.spec ? ` • ${escapeHtml(part.spec)}` : ''}</p>
+            <div class="badges">
+              <span class="badge ok">ZUN / część uniwersalna</span>
+              <span class="badge">${fmt(part.linkedPartCount || 0)} indeksów części</span>
+              <span class="badge">${fmt((part.linkedModels || []).length)} urządzeń</span>
+              ${brands ? `<span class="badge brand">${escapeHtml(brands)}</span>` : ''}
+            </div>
+            ${models ? `<p class="small-muted">Pasuje wg „stan na…” m.in.: ${escapeHtml(models)}${escapeHtml(more)}</p>` : ''}
+          </div>
+          <button class="primary" type="button" data-zun="${escapeAttr(part.zun)}">Dodaj ZUN</button>
+        </article>`;
+      }).join('')}
+    </div>`;
+  }
+
+  function selectZunPart(zunCode) {
+    const part = (state.universalParts || []).find(p => p.zun === zunCode);
+    if (!part) return;
+    const synthetic = {
+      id: part.id || `zun-${part.zun}`,
+      partIndex: part.zun,
+      namePl: `${part.namePl || 'Część uniwersalna'}${part.spec ? ' — ' + part.spec : ''}`,
+      nameEn: '',
+      position: 'UNI',
+      zun: part.zun,
+      linkedModels: part.linkedModels || [],
+      linkedPartIndexes: part.linkedPartIndexes || [],
+      isUniversalZun: true
+    };
+    state.manualMode = true;
+    state.selectedDevice = {
+      deviceIndex: part.zun,
+      title: `część uniwersalna — ${part.namePl || ''}`,
+      brand: (part.brands && part.brands[0]) || 'DO POTWIERDZENIA',
+      source: 'STAN_NA_ZUN'
+    };
+    state.selectedDrawing = null;
+    state.selectedParts.clear();
+    state.selectedParts.set(synthetic.id, {part: synthetic, qty: 1});
+    state.partVisibleLimit = PART_ROW_LIMIT;
+    if (els.partsSearch) els.partsSearch.value = '';
+    renderDeviceResults(els.deviceSearch.value);
+    renderSelectedDevice();
+    renderParts();
+    renderBasket();
+    renderViewer(false);
+    updateOptionalSections();
+    goStep(2);
+    saveDraft();
+  }
+
   function renderDeviceResults(query) {
     const q = norm(query);
     const tokens = q.split(/\s+/).filter(Boolean);
+    const zunResults = getZunResults(tokens);
     let results = state.devices.map(device => {
       const drawings = state.drawings.filter(d => norm(d.deviceIndex) === norm(device.deviceIndex));
       const partCount = drawings.reduce((n, d) => n + (state.partsByDrawing.get(String(d.id)) || []).length, 0);
@@ -326,15 +670,17 @@
     results.sort((a,b) => b.score - a.score || b.partCount - a.partCount || String(a.device.deviceIndex).localeCompare(String(b.device.deviceIndex)));
     results = results.slice(0, tokens.length ? 30 : 12);
 
-    els.deviceMeta.textContent = tokens.length ? `Znaleziono ${fmt(results.length)} pasujących urządzeń${state.activeBrand !== 'all' ? ' dla marki ' + state.activeBrand : ''}.` : `Najpierw wybierz urządzenie. ${state.activeBrand !== 'all' ? 'Aktywny filtr: ' + state.activeBrand + '. ' : ''}Poniżej kilka przykładów z aktualnej bazy.`;
-    if (!results.length) {
+    const zunText = zunResults.length ? ` Dodatkowo znaleziono ${fmt(zunResults.length)} części ZUN.` : '';
+    els.deviceMeta.textContent = tokens.length ? `Znaleziono ${fmt(results.length)} pasujących urządzeń${state.activeBrand !== 'all' ? ' dla marki ' + state.activeBrand : ''}.${zunText}` : `Najpierw wybierz urządzenie. ${state.activeBrand !== 'all' ? 'Aktywny filtr: ' + state.activeBrand + '. ' : ''}Poniżej kilka przykładów z aktualnej bazy.`;
+    const zunHtml = renderZunCards(zunResults);
+    if (!results.length && !zunResults.length) {
       const typed = String(els.deviceSearch.value || '').trim();
-      els.deviceResults.innerHTML = `<div class="empty-state manual-empty"><strong>Brak wyniku w aktualnej bazie.</strong><p>Spróbuj wpisać sam numer modelu, bez myślnika, albo sprawdź indeks z tabliczki znamionowej.</p><p>Jeżeli modelu nadal nie ma, klient może przejść dalej i opisać część ręcznie.</p><button class="primary" type="button" id="startManualRequest">Nie znalazłem urządzenia — napisz zapytanie ręczne</button></div>`;
+      els.deviceResults.innerHTML = `<div class="empty-state manual-empty"><strong>Brak wyniku w aktualnej bazie.</strong><p>Spróbuj wpisać sam numer modelu, ZUN albo indeks części.</p><p>Jeżeli modelu nadal nie ma, klient może przejść dalej i opisać część ręcznie.</p><button class="primary" type="button" id="startManualRequest">Nie znalazłem urządzenia — napisz zapytanie ręczne</button></div>`;
       const btn = $('startManualRequest');
       if (btn) btn.addEventListener('click', () => startManualRequest(typed));
       return;
     }
-    els.deviceResults.innerHTML = results.map(({device, drawings, partCount}) => `
+    const deviceHtml = results.map(({device, drawings, partCount}) => `
       <article class="device-card ${state.selectedDevice && norm(state.selectedDevice.deviceIndex) === norm(device.deviceIndex) ? 'selected' : ''}">
         <div>
           <h3>${escapeHtml(device.deviceIndex || 'Bez indeksu')}</h3>
@@ -343,9 +689,10 @@
         </div>
         <button class="primary" type="button" data-device="${escapeAttr(device.deviceIndex)}">Wybierz</button>
       </article>`).join('');
+    els.deviceResults.innerHTML = `${zunHtml}${deviceHtml}`;
     els.deviceResults.querySelectorAll('button[data-device]').forEach(btn => btn.addEventListener('click', () => selectDevice(btn.dataset.device)));
+    els.deviceResults.querySelectorAll('button[data-zun]').forEach(btn => btn.addEventListener('click', () => selectZunPart(btn.dataset.zun)));
   }
-
   function startManualRequest(typed) {
     const clean = String(typed || '').trim();
     state.manualMode = true;
@@ -398,7 +745,7 @@
     if (els.manualPartsBox) els.manualPartsBox.classList.toggle('hidden', !state.manualMode);
     if (state.manualMode) {
       if (els.showMoreParts) els.showMoreParts.classList.add('hidden');
-      if (els.partMeta) els.partMeta.innerHTML = state.selectedDrawing ? '<strong>PDF jest, lista części do uzupełnienia.</strong> Klient może podejrzeć rysunek i opisać pozycję/część ręcznie w kolejnym kroku.' : '<strong>Tryb ręczny.</strong> Nie pokazujemy listy części, bo urządzenia nie ma jeszcze w bazie. Klient przechodzi dalej i opisuje potrzebną część tekstowo.';
+      if (els.partMeta) els.partMeta.innerHTML = state.selectedDrawing ? '<strong>PDF jest, lista części do uzupełnienia.</strong> Klient może podejrzeć rysunek i opisać pozycję/część ręcznie w kolejnym kroku.' : (state.selectedParts.size ? '<strong>Wybrano część uniwersalną ZUN.</strong> Klient powinien dopisać model urządzenia / zdjęcie tabliczki, żeby serwis potwierdził dopasowanie.' : '<strong>Tryb ręczny.</strong> Nie pokazujemy listy części, bo urządzenia nie ma jeszcze w bazie. Klient przechodzi dalej i opisuje potrzebną część tekstowo.');
       if (els.partsTable) els.partsTable.innerHTML = `<tr><td colspan="4">Brak spiętej listy części. Użyj opisu ręcznego albo wpisz pozycję z rysunku w uwagach.</td></tr>`;
       if (els.goDataInline) { els.goDataInline.disabled = false; els.goDataInline.textContent = 'Przejdź do danych i opisz część'; }
       return;
@@ -471,7 +818,7 @@
     } else {
       els.basketItems.className = '';
       els.basketItems.innerHTML = items.map(({part, qty}) => `<div class="basket-item">
-        <div><strong>poz. ${escapeHtml(part.position || '-')} • ${escapeHtml(part.partIndex || '')}</strong><span>${escapeHtml(part.namePl || part.nameEn || '')}</span></div>
+        <div><strong>poz. ${escapeHtml(part.position || '-')} • ${escapeHtml(part.partIndex || '')}</strong><span>${escapeHtml(part.namePl || part.nameEn || '')}${!part.isUniversalZun && getAutoZunMatchesForPart(part).length ? ` • ZUN w mailu: ${escapeHtml(unique(getAutoZunMatchesForPart(part).map(m => m.zun)).join(', '))}` : ''}</span></div>
         <div class="qty">
           <button type="button" data-dec="${escapeAttr(part.id)}">−</button>
           <input value="${qty}" inputmode="numeric" data-qty="${escapeAttr(part.id)}" />
@@ -812,9 +1159,15 @@
     const subject = state.manualMode
       ? `Zapytanie o części zamienne — model spoza bazy ${d.deviceIndex || ''}`.trim()
       : `Zapytanie o części zamienne — ${d.deviceIndex || ''}`.trim();
+    const zunHints = getZunHintsForSelectedParts(parts);
+    const selectedPartLines = parts.map((x, i) => {
+      const matches = x.part.isUniversalZun ? [{zun: x.part.zun || x.part.partIndex}] : getAutoZunMatchesForPart(x.part);
+      return `${i + 1}. ${x.part.partIndex || 'brak indeksu'} — poz. ${x.part.position || '-'} — ${x.part.namePl || x.part.nameEn || ''}${formatZunInline(matches)} — ilość: ${x.qty} szt.`;
+    }).join('\n');
+    const zunServiceBlock = formatZunServiceBlock(zunHints);
     const partLines = state.manualMode
-      ? `Opis części / urządzenia:\n${f.manualPartsDescription || '[klient powinien opisać potrzebną część i dołączyć zdjęcia do maila]'}`
-      : parts.map((x, i) => `${i + 1}. ${x.part.partIndex || 'brak indeksu'} — poz. ${x.part.position || '-'} — ${x.part.namePl || x.part.nameEn || ''} — ilość: ${x.qty} szt.`).join('\n');
+      ? `${selectedPartLines ? `Wybrane części uniwersalne / ZUN:\n${selectedPartLines}\n\n` : ''}Opis części / urządzenia:\n${f.manualPartsDescription || '[klient powinien opisać potrzebną część i dołączyć zdjęcia do maila]'}${zunServiceBlock ? `\n\n${zunServiceBlock}` : ''}`
+      : `${selectedPartLines}${zunServiceBlock ? `\n\n${zunServiceBlock}` : ''}`;
     const drawingBlock = state.manualMode
       ? `Rysunek techniczny PDF: nie znaleziono urządzenia w aktualnej bazie strony.\nProszę o pomoc w identyfikacji części. Klient powinien dołączyć zdjęcie tabliczki znamionowej i potrzebnej części.`
       : `Rysunek techniczny PDF:\n${drawing ? `${drawing.fileName || drawing.title || ''}` : ''}\n${drive && drive.openUrl ? `Link do rysunku: ${drive.openUrl}` : ''}`;

@@ -56,3 +56,20 @@ data/pdf-header-overrides.json
 ```
 
 Strona v54 umie już wczytać ten plik i używać nazw urządzeń wyciągniętych z PDF-ów.
+
+## Wdrożenie v55
+
+Po wrzuceniu paczki sprawdź w wyszukiwarce:
+
+- `ZUN-000003`
+- `łożysko 607 2Z`
+- `Z57091010`
+
+Powinna pojawić się sekcja „Części uniwersalne ZUN ze stan na…”.
+
+
+## V56 — automatyczne ZUN-y w mailu
+
+Formularz sam sprawdza, czy wybrana część z rysunku ma powiązanie ZUN w `stan na 2026.05.29.xlsm`. Jeśli tak, dopisuje do gotowego maila sekcję „Informacja dla serwisu — ZUN-y dopasowane automatycznie”. Klient nie musi wiedzieć, czym jest ZUN; obsługa dostaje gotową podpowiedź do SAP/stanów.
+
+Szczegóły: `ZUN_AUTO_MAIL_V56.md`.

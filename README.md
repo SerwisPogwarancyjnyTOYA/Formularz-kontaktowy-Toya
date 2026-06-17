@@ -61,3 +61,16 @@ V54 dokłada cały tor rozpoznawania nazw urządzeń z nagłówków PDF:
 - `PDF_HEADER_EXTRACTOR_V54.md`.
 
 Celem jest przejście od samego numeru pliku, np. `53575`, do nazwy widocznej dla klienta, np. `53575 — GRZECHOTKA POWLEKANA WYGIĘTA 1/4"`.
+
+## v55 — ZUN jako części uniwersalne
+
+Dodano obsługę części uniwersalnych ZUN z pliku `stan na 2026.05.29.xlsm`.
+
+ZUN nie jest numerem sprawy — to wspólna część/zamiennik powiązana z wieloma indeksami części oraz wieloma urządzeniami. Szczegóły: `ZUN_UNIVERSAL_PARTS_V55.md`.
+
+
+## V56 — automatyczne ZUN-y w mailu
+
+Formularz sam sprawdza, czy wybrana część z rysunku ma powiązanie ZUN w `stan na 2026.05.29.xlsm`. Jeśli tak, dopisuje do gotowego maila sekcję „Informacja dla serwisu — ZUN-y dopasowane automatycznie”. Klient nie musi wiedzieć, czym jest ZUN; obsługa dostaje gotową podpowiedź do SAP/stanów.
+
+Szczegóły: `ZUN_AUTO_MAIL_V56.md`.

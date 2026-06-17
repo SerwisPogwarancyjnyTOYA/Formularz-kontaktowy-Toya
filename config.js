@@ -1,5 +1,5 @@
 window.PGW_CONFIG = {
-  version: '20260617-v54-heavy-pdf-header',
+  version: '20260617-v56-auto-zun-mail',
   appName: 'PGW Service Hub',
   recipientEmail: 'service@yato.pl',
   storageMode: 'drive',
@@ -19,6 +19,8 @@ window.PGW_CONFIG = {
     parts: ['data/parts.json'],
     driveMap: ['data/drive-drawings-map.full.json', 'data/drive-drawings-map.json'],
     brandOverrides: ['data/brand-resolution-overrides.json'],
-    pdfHeaderOverrides: ['data/pdf-header-overrides.json']
+    pdfHeaderOverrides: ['data/pdf-header-overrides.json'],
+    universalParts: ['data/universal-parts-zun.json'],
+    universalPartLinks: ['data/universal-parts-zun-links.json']
   }
 };
