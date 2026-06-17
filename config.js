@@ -1,5 +1,5 @@
 window.PGW_CONFIG = {
-  version: '20260617-v56-auto-zun-mail',
+  version: '20260617-v58-clean-production',
   appName: 'PGW Service Hub',
   recipientEmail: 'service@yato.pl',
   storageMode: 'drive',
@@ -10,7 +10,7 @@ window.PGW_CONFIG = {
   partRowLimit: 80,
   enableVatLookup: true,
   enableManualFallback: true,
-  enableMappingTools: true,
+  enableMappingTools: false,
   vatLookupProvider: 'mf-wl',
   postalCodesUrl: 'data/postal-codes.json',
   dataUrls: {
@@ -21,6 +21,7 @@ window.PGW_CONFIG = {
     brandOverrides: ['data/brand-resolution-overrides.json'],
     pdfHeaderOverrides: ['data/pdf-header-overrides.json'],
     universalParts: ['data/universal-parts-zun.json'],
-    universalPartLinks: ['data/universal-parts-zun-links.json']
+    universalPartLinks: ['data/universal-parts-zun-links.json'],
+    partAssemblies: ['data/part-assemblies.v57.json']
   }
 };

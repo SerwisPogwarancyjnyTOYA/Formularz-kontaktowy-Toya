@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex,nofollow" />
-  <title>PGW Service Hub v56 — ZUN-y automatycznie w mailu</title>
+  <title>Formularz zapytania o części — Serwis Pogwarancyjny TOYA</title>
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="stylesheet" href="app.css" />
 </head>
@@ -17,24 +17,23 @@
         <span>Krokowy formularz zapytania o części</span>
       </div>
     </div>
-    <div class="top-actions"><span class="mode-pill">PDF z Drive</span><span class="mode-pill">Marki do rozpoznania</span><div class="status-pill" id="loadStatus">Ładowanie danych…</div></div>
+    <div class="top-actions"><div class="status-pill" id="loadStatus">Ładowanie formularza…</div></div>
   </header>
 
   <main class="shell">
     <section class="hero-card">
       <div>
-        <p class="eyebrow">Ścieżka klienta v56</p>
-        <h1>Prosty formularz: najpierw model i PDF, potem wygodny wybór części, dane i gotowy mail.</h1>
-        <p class="lead">Klient nie dostaje wszystkiego naraz. Najpierw wybiera urządzenie i części, potem podaje tylko te dane, które są potrzebne: kontakt obowiązkowo, faktura i wysyłka opcjonalnie. Na końcu dostaje mail do <strong>service@yato.pl</strong>.</p>
+        <p class="eyebrow">Formularz zapytania o części</p>
+        <h1>Znajdź urządzenie, wybierz część i przygotuj zapytanie do serwisu.</h1>
+        <p class="lead">Najpierw wybierz urządzenie i potrzebne części. Potem uzupełnij dane kontaktowe. Na końcu otrzymasz gotową treść maila do <strong>service@yato.pl</strong>.</p>
         <div class="hero-guide" aria-label="Jak działa formularz">
-          <span>1. Szukasz modelu</span>
-          <span>2. Otwiera się PDF</span>
-          <span>3. Wybierasz części</span>
-          <span>4. Kopiujesz mail</span>
-          <span>5. ZUN-y w mailu dla serwisu</span>
+          <span>1. Wybierz model</span>
+          <span>2. Sprawdź rysunek</span>
+          <span>3. Dodaj części</span>
+          <span>4. Skopiuj mail</span>
         </div>
       </div>
-      <div class="stats" aria-label="Statystyki bazy">
+      <div class="stats internal-only" aria-label="Statystyki bazy" hidden>
         <div><strong id="statDevices">—</strong><span>urządzeń</span></div>
         <div><strong id="statDrawings">—</strong><span>rysunków PDF</span></div>
         <div><strong id="statParts">—</strong><span>części</span></div>
@@ -66,7 +65,7 @@
           <div class="brand-filter-card">
             <div>
               <strong>Marka urządzenia</strong>
-              <span>Domyślnie szukamy we wszystkich markach. Filtr pomaga, gdy klient wie, z jakiej marki jest sprzęt.</span>
+              <span>Domyślnie szukamy we wszystkich markach. Filtr pomaga, jeśli znasz markę urządzenia.</span>
             </div>
             <div class="brand-filter" id="brandFilter" aria-label="Filtr marek"></div>
           </div>
@@ -89,12 +88,12 @@
           </div>
           <div class="selected-device" id="selectedDeviceBox"></div>
           <div class="manual-parts-box hidden" id="manualPartsBox">
-            <strong>Urządzenie spoza aktualnej bazy</strong>
-            <p>Nie mamy jeszcze listy części dla tego modelu. Klient może opisać potrzebną część ręcznie, a serwis dopasuje ją po mailu.</p>
-            <button class="primary" type="button" id="goManualData">Przejdź do danych i opisz część</button>
+            <strong>Lista części do uzupełnienia</strong>
+            <p>Rysunek PDF może być dostępny, ale lista pozycji nie jest jeszcze podpięta do formularza. Wpisz numer pozycji z rysunku albo opisz potrzebną część w następnym kroku.</p>
+            <button class="primary" type="button" id="goManualData">Przejdź dalej i opisz część</button>
           </div>
           <div class="locator-help">
-            <strong>Najprościej:</strong> znajdź numer pozycji na PDF-ie i wpisz go poniżej. Lista części jest dawkowana, żeby klient nie dostał całej tabeli naraz.
+            <strong>Najprościej:</strong> znajdź numer pozycji na PDF-ie i wpisz go poniżej. Lista części jest skrócona na start — możesz ją zawęzić wyszukiwaniem albo pokazać więcej pozycji.
           </div>
           <label class="search-box compact">
             <span>Szukaj części w tym urządzeniu</span>
@@ -119,7 +118,7 @@
             <span class="stage-number">3</span>
             <div>
               <h2>Dane kontaktowe, faktura i wysyłka</h2>
-              <p>Kontakt jest wymagany, ale faktura i wysyłka są opcjonalne. Klient może dopytać o części bez uzupełniania wszystkich danych.</p>
+              <p>Kontakt jest wymagany, ale faktura i wysyłka są opcjonalne. Możesz zapytać o części bez uzupełniania wszystkich danych.</p>
             </div>
           </div>
 
@@ -129,21 +128,21 @@
               <label>Imię i nazwisko / firma kontaktowa<input name="contactName" data-required="base" /></label>
               <label>Email<input name="contactEmail" type="email" placeholder="podaj email lub telefon" /></label>
               <label>Telefon<input name="contactPhone" placeholder="podaj telefon lub email" /></label>
-              <div class="lookup-status">Wystarczy email albo telefon. Im więcej danych klient poda, tym łatwiej będzie odpowiedzieć.</div>
+              <div class="lookup-status">Wystarczy email albo telefon. Im więcej danych podasz, tym łatwiej będzie odpowiedzieć.</div>
               <div class="quality-row" id="contactQuality" aria-live="polite"></div>
               <label>Numer seryjny urządzenia<input name="serialNumber" placeholder="opcjonalnie" /></label>
             </fieldset>
 
             <fieldset id="manualPartsFieldset" class="manual-fieldset full-span hidden">
               <legend>Opis części spoza bazy</legend>
-              <div class="optional-note">Używane wtedy, gdy klient nie znalazł urządzenia w bazie. Warto poprosić klienta, żeby do maila dołączył zdjęcie tabliczki znamionowej oraz zdjęcie potrzebnej części.</div>
-              <label>Opis potrzebnej części<textarea name="manualPartsDescription" rows="4" placeholder="np. urządzenie YT-..., potrzebuję elementu z okolicy silnika / osłony / uchwytu; jeśli znam pozycję z rysunku, wpisuję numer pozycji"></textarea></label>
+              <div class="optional-note">Użyj tego pola, gdy nie ma listy części albo nie znasz indeksu. Warto dopisać numer pozycji z rysunku lub dołączyć zdjęcie tabliczki znamionowej oraz potrzebnej części.</div>
+              <label>Opis potrzebnej części<textarea name="manualPartsDescription" rows="4" placeholder="np. pozycja 12 z rysunku, element z okolicy silnika/osłony/uchwytu, opis uszkodzonej części"></textarea></label>
             </fieldset>
 
             <fieldset id="invoiceFieldset" class="optional-section inactive">
               <legend>Faktura</legend>
               <label class="check"><input type="checkbox" id="wantInvoice" /> Chcę podać dane do faktury teraz</label>
-              <div class="optional-note">Jeżeli klient nie potrzebuje faktury albo chce ustalić to później, ta sekcja nie blokuje przejścia dalej.</div>
+              <div class="optional-note">Jeżeli nie potrzebujesz faktury albo chcesz ustalić to później, ta sekcja nie blokuje przejścia dalej.</div>
               <div class="optional-fields">
                 <label>Nazwa firmy / osoba<input name="invoiceName" /></label>
                 <div class="nip-row">
@@ -164,7 +163,7 @@
             <fieldset id="shippingFieldset" class="optional-section inactive">
               <legend>Wysyłka</legend>
               <label class="check"><input type="checkbox" id="wantShipping" /> Chcę podać adres wysyłki teraz</label>
-              <div class="optional-note">Adres wysyłki jest opcjonalny. Jeśli klient go nie poda, w mailu zostanie informacja „do ustalenia”.</div>
+              <div class="optional-note">Adres wysyłki jest opcjonalny. Jeśli go nie podasz, w mailu zostanie informacja „do ustalenia”.</div>
               <div class="optional-fields">
                 <label class="check"><input type="checkbox" id="sameAsInvoice" /> Takie same jak do faktury</label>
                 <label>Odbiorca<input name="shipName" /></label>
@@ -283,13 +282,13 @@
   </main>
 
   <div class="mobile-summary" id="mobileSummaryBar" aria-live="polite">
-    <div><strong id="mobileSummaryText">Brak wybranych części</strong><span>Wybierz część z listy, potem przejdź dalej.</span></div>
+    <div><strong id="mobileSummaryText">Brak wybranych części</strong><span>Wybierz część z listy albo opisz ją ręcznie.</span></div>
     <button class="primary" id="mobileGoData" type="button" disabled>Dalej</button>
   </div>
 
   <footer class="footer">
-    <span>PGW Service Hub v49</span>
-    <span>Bez cen i stanów. Jedna wyszukiwarka dla wielu marek, PDF-y z Google Drive.</span>
+    <span>Serwis Pogwarancyjny TOYA</span>
+    <span>Formularz zapytania o części. Bez cen i stanów magazynowych.</span>
   </footer>
 
   <script src="config.js"></script>

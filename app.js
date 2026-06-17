@@ -1,7 +1,7 @@
 (() => {
   'use strict';
   const CONFIG = window.PGW_CONFIG || {};
-  const DRAFT_KEY = 'pgw-v56-draft';
+  const DRAFT_KEY = 'pgw-v58-draft';
   const THEME_KEY = 'pgw-theme';
   const PART_ROW_LIMIT = Number(CONFIG.partRowLimit || 80);
   const $ = (id) => document.getElementById(id);
@@ -18,8 +18,8 @@
   const progressIds = ['pDevice','pDrawing','pParts','pData','pMail'];
 
   const state = {
-    devices: [], drawings: [], parts: [], driveMap: [], brandOverrides: {}, pdfHeaderOverrides: {}, universalParts: [], universalPartLinks: [],
-    drawingById: new Map(), partsByDrawing: new Map(), driveByDrawingId: new Map(), driveByKey: new Map(), zunByPartKey: new Map(), zunByCode: new Map(),
+    devices: [], drawings: [], parts: [], driveMap: [], brandOverrides: {}, pdfHeaderOverrides: {}, universalParts: [], universalPartLinks: [], partAssemblies: {},
+    drawingById: new Map(), partsByDrawing: new Map(), driveByDrawingId: new Map(), driveByKey: new Map(), zunByPartKey: new Map(), zunByCode: new Map(), partAssemblyComponents: new Map(), partAssemblyChildren: new Map(),
     selectedDevice: null, selectedDrawing: null, selectedParts: new Map(), manualMode: false, step: 1, formDirty: false,
     postalCodes: new Map(), partVisibleLimit: PART_ROW_LIMIT, activeBrand: 'all', brandSummary: []
   };
@@ -37,11 +37,12 @@
   async function init() {
     initTheme();
     try {
-      setStatus('Ładowanie katalogu…');
+      setStatus('Ładowanie formularza…');
       const urls = CONFIG.dataUrls || {};
       state.devices = await loadFirst(urls.devices || ['data/devices.json'], []);
       state.universalParts = await loadFirst(urls.universalParts || ['data/universal-parts-zun.json'], []);
       state.universalPartLinks = await loadFirst(urls.universalPartLinks || ['data/universal-parts-zun-links.json'], []);
+      state.partAssemblies = await loadFirst(urls.partAssemblies || ['data/part-assemblies.v57.json'], {});
       state.drawings = await loadFirst(urls.drawings || ['data/drawings.json'], []);
       state.parts = await loadFirst(urls.parts || ['data/parts.json'], []);
       state.driveMap = await loadFirst(urls.driveMap || ['data/drive-drawings-map.json'], []);
@@ -59,7 +60,7 @@
       renderContext();
       restoreDraft();
       renderDeviceResults('');
-      setStatus(`Gotowe: ${fmt(state.devices.length)} urządzeń, ${fmt(state.parts.length)} części, ${fmt(state.universalParts.length)} ZUN`, 'ok');
+      setStatus('Gotowe', 'ok');
     } catch (error) {
       console.error(error);
       setStatus('Nie udało się załadować danych', 'warn');
@@ -114,15 +115,15 @@
       row.fileId = row.fileId || row.driveFileId || row.googleDriveId || row.gdriveId || row.id || '';
       row.fileName = row.fileName || row.title || row.name || '';
       row.deviceIndex = normalizeDeviceIndex(row.deviceIndex || row.model || row.normalizedKey || extractDeviceIndex(row.fileName || row.title || row.name || row.path));
-      row.viewerUrl = row.viewerUrl || (row.fileId ? `https://drive.google.com/file/d/${encodeURIComponent(row.fileId)}/preview` : '');
-      row.openUrl = row.openUrl || (row.fileId ? `https://drive.google.com/file/d/${encodeURIComponent(row.fileId)}/view` : row.url || '');
+      row.openUrl = row.openUrl || row.url || row.viewerUrl || (row.fileId ? `https://drive.google.com/file/d/${encodeURIComponent(row.fileId)}/view` : '');
+      row.viewerUrl = row.previewUrl || (row.fileId ? `https://drive.google.com/file/d/${encodeURIComponent(row.fileId)}/preview` : row.viewerUrl || '');
       applyPdfHeaderOverride(row);
       row.__keys = unique([row.deviceIndex, row.model, row.normalizedKey, row.fileName, row.title, row.name, row.deviceName, row.displayTitle, ...(row.keys || [])].flat().map(normKey).filter(Boolean));
       for (const k of row.__keys) driveKeys.add(k);
     }
 
     // v51: pełny manifest Drive może zawierać tysiące PDF-ów bez wpisu w devices.json/drawings.json.
-    // Tworzymy lekkie rekordy urządzeń i rysunków z samego manifestu, żeby klient mógł wyszukać PDF
+    // Tworzymy lekkie rekordy urządzeń i rysunków z samego manifestu, żeby można było wyszukać PDF
     // i przejść trybem opisowym, nawet zanim lista części zostanie spięta.
     const existingDrawingKeys = new Set(state.drawings.flatMap(d => drawingKeys(d)));
     let syntheticId = 9000000;
@@ -142,7 +143,11 @@
           driveFileId: row.fileId,
           viewerUrl: row.viewerUrl,
           openUrl: row.openUrl,
-          path: row.path || row.folderPath || ''
+          path: row.path || row.folderPath || '',
+          brandConfidence: row.brandConfidence || '',
+          reviewStatus: row.reviewStatus || '',
+          brandReason: row.brandReason || '',
+          notes: row.notes || ''
         };
         state.drawings.push(drawing);
         drawingKeys(drawing).forEach(k => existingDrawingKeys.add(k));
@@ -166,7 +171,11 @@
           brand: canonicalBrand(d.brand || inferBrand(d)),
           source: 'GOOGLE_DRIVE_FULL_MANIFEST',
           hasPartsPdf: true,
-          hasPartsList: false
+          hasPartsList: false,
+          brandConfidence: d.brandConfidence || '',
+          reviewStatus: d.reviewStatus || '',
+          brandReason: d.brandReason || '',
+          notes: d.notes || ''
         });
         existingDeviceKeys.add(key);
       }
@@ -247,8 +256,109 @@
         }]);
       }
     }
+    buildPartAssemblyIndexes();
     for (const d of state.devices) d.__search = norm([d.deviceIndex, d.title, d.name, d.brand, d.deviceName, d.displayTitle].join(' '));
     for (const p of state.parts) p.__search = norm([p.position, p.partIndex, p.namePl, p.nameEn, p.drawingTitle, p.deviceIndex, p.brand].join(' '));
+  }
+
+  function buildPartAssemblyIndexes() {
+    state.partAssemblyComponents = new Map();
+    state.partAssemblyChildren = new Map();
+    const rel = state.partAssemblies || {};
+    const componentsByPartId = rel.componentsByPartId || {};
+    const assembliesByPartId = rel.assembliesByPartId || {};
+    Object.entries(componentsByPartId).forEach(([partId, rows]) => {
+      state.partAssemblyComponents.set(String(partId), arr(rows));
+    });
+    Object.entries(assembliesByPartId).forEach(([partId, rows]) => {
+      state.partAssemblyChildren.set(String(partId), arr(rows));
+    });
+  }
+
+  function getAssemblyParentsForPart(part) {
+    if (!part || !part.id) return [];
+    return state.partAssemblyComponents.get(String(part.id)) || [];
+  }
+
+  function getAssemblyChildrenForPart(part) {
+    if (!part || !part.id) return [];
+    return state.partAssemblyChildren.get(String(part.id)) || [];
+  }
+
+  function formatAssemblyInline(part) {
+    const parents = getAssemblyParentsForPart(part);
+    if (!parents.length) return '';
+    const labels = unique(parents.map(a => a.assemblyPartIndex).filter(Boolean));
+    return labels.length ? ` • składnik kompletu: ${labels.join(', ')}` : '';
+  }
+
+  function assemblyNoticeHtml(part) {
+    const parents = getAssemblyParentsForPart(part);
+    const children = getAssemblyChildrenForPart(part);
+    if (parents.length) {
+      const first = parents[0];
+      const labels = unique(parents.map(a => `${a.assemblyPartIndex || ''}${a.assemblyNamePl ? ` — ${a.assemblyNamePl}` : ''}`).filter(Boolean));
+      return `<div class="assembly-notice"><strong>Uwaga serwisowa:</strong> ta część jest składnikiem kompletu ${escapeHtml(labels.join(', '))}. W mailu dopiszę prośbę o sprawdzenie dostępności części pojedynczej i kompletu.</div>`;
+    }
+    if (children.length) {
+      const preview = children.slice(0, 6).map(c => `${c.position || '-'}: ${c.partIndex || ''}`).join(', ');
+      const more = children.length > 6 ? ` +${children.length - 6}` : '';
+      return `<div class="assembly-notice assembly-kit"><strong>Komplet/zestaw:</strong> zawiera pozycje ${escapeHtml(preview + more)}. W mailu dopiszę, że wybrano element zmontowany.</div>`;
+    }
+    return '';
+  }
+
+  function getAssemblyHintsForSelectedParts(items) {
+    const out = [];
+    const seen = new Set();
+    for (const item of items || []) {
+      const part = item.part || item;
+      for (const a of getAssemblyParentsForPart(part)) {
+        const key = `${part.id}|${a.assemblyId}`;
+        if (seen.has(key)) continue;
+        seen.add(key);
+        out.push({
+          type: 'component-of-assembly',
+          requestedPartIndex: part.partIndex || '',
+          requestedPosition: part.position || '',
+          requestedName: part.namePl || part.nameEn || '',
+          assemblyPartIndex: a.assemblyPartIndex || '',
+          assemblyPosition: a.assemblyPosition || '',
+          assemblyName: a.assemblyNamePl || a.assemblyNameEn || '',
+          confidence: a.confidence || 'wysoka'
+        });
+      }
+      const children = getAssemblyChildrenForPart(part);
+      if (children.length) {
+        const key = `${part.id}|assembly-selected`;
+        if (!seen.has(key)) {
+          seen.add(key);
+          out.push({
+            type: 'assembly-selected',
+            assemblyPartIndex: part.partIndex || '',
+            assemblyPosition: part.position || '',
+            assemblyName: part.namePl || part.nameEn || '',
+            components: children.map(c => `${c.position || '-'} ${c.partIndex || ''} ${c.namePl || c.nameEn || ''}`.trim()),
+            confidence: 'wysoka'
+          });
+        }
+      }
+    }
+    return out;
+  }
+
+  function formatAssemblyServiceBlock(hints) {
+    if (!hints || !hints.length) return '';
+    const lines = ['Informacja dla serwisu — zestawy/komplety z rysunku:'];
+    hints.forEach((h, i) => {
+      if (h.type === 'component-of-assembly') {
+        lines.push(`${i + 1}. Wybrana część ${h.requestedPartIndex} — poz. ${h.requestedPosition} — ${h.requestedName || '-'} jest składnikiem kompletu ${h.assemblyPartIndex} — poz. ${h.assemblyPosition} — ${h.assemblyName || '-'}. Proszę sprawdzić dostępność obu wariantów: elementu pojedynczego oraz kompletnego zestawu.`);
+      } else {
+        const comps = (h.components || []).slice(0, 10).join('; ');
+        lines.push(`${i + 1}. Wybrano komplet ${h.assemblyPartIndex} — poz. ${h.assemblyPosition} — ${h.assemblyName || '-'}. Składniki wg rysunku: ${comps}${(h.components || []).length > 10 ? '; ...' : ''}.`);
+      }
+    });
+    return lines.join('\n');
   }
 
   function bindEvents() {
@@ -294,16 +404,16 @@
   }
 
   function renderStats() {
-    els.statDevices.textContent = fmt(state.devices.length);
-    els.statDrawings.textContent = fmt(state.drawings.length);
-    els.statParts.textContent = fmt(state.parts.length + (state.universalParts || []).length);
+    if (els.statDevices) els.statDevices.textContent = fmt(state.devices.length);
+    if (els.statDrawings) els.statDrawings.textContent = fmt(state.drawings.length);
+    if (els.statParts) els.statParts.textContent = fmt(state.parts.length + (state.universalParts || []).length);
   }
 
   function renderBrandFilter() {
     if (!els.brandFilter) return;
     const counts = new Map();
     for (const d of state.devices) {
-      const brand = canonicalBrand(d.brand || inferBrand(d));
+      const brand = publicFilterBrand(d);
       counts.set(brand, (counts.get(brand) || 0) + 1);
     }
     state.brandSummary = [...counts.entries()].sort((a,b) => b[1] - a[1] || a[0].localeCompare(b[0], 'pl'));
@@ -327,7 +437,7 @@
   }
 
   function renderExamples() {
-    const examples = state.devices.filter(d => brandMatches(d.brand)).slice(0, 5).map(d => d.deviceIndex).filter(Boolean);
+    const examples = state.devices.filter(d => brandMatches(d)).slice(0, 5).map(d => d.deviceIndex).filter(Boolean);
     els.quickExamples.innerHTML = examples.map(x => `<button type="button" data-q="${escapeAttr(x)}">${escapeHtml(x)}</button>`).join('');
     els.quickExamples.querySelectorAll('button').forEach(btn => btn.addEventListener('click', () => {
       els.deviceSearch.value = btn.dataset.q;
@@ -562,7 +672,7 @@
 
   function getZunResults(tokens) {
     if (!tokens.length || !state.universalParts || !state.universalParts.length) return [];
-    // Klient nie musi znać ZUN-ów. Wyniki ZUN pokazujemy tylko wtedy, gdy ktoś świadomie wpisze ZUN,
+    // ZUN-y są ukryte w interfejsie klienta. Wyniki ZUN pokazujemy tylko w trybie technicznym,
     // indeks części albo techniczną nazwę typu łożysko/O-ring. Samo wpisanie modelu urządzenia nie zasypuje go ZUN-ami.
     if (!isExplicitZunLookup(tokens)) return [];
     return state.universalParts.map(part => {
@@ -653,7 +763,7 @@
   function renderDeviceResults(query) {
     const q = norm(query);
     const tokens = q.split(/\s+/).filter(Boolean);
-    const zunResults = getZunResults(tokens);
+    const zunResults = []; // ZUN-y są dopisywane automatycznie do maila dla serwisu; nie pokazujemy ich klientowi jako osobnej bazy.
     let results = state.devices.map(device => {
       const drawings = state.drawings.filter(d => norm(d.deviceIndex) === norm(device.deviceIndex));
       const partCount = drawings.reduce((n, d) => n + (state.partsByDrawing.get(String(d.id)) || []).length, 0);
@@ -666,16 +776,15 @@
         if (device.__search.includes(t)) score += 25;
       }
       return {device, drawings, partCount, score};
-    }).filter(x => x.drawings.length > 0 && brandMatches(x.device.brand) && (!tokens.length || x.score > 0));
+    }).filter(x => x.drawings.length > 0 && brandMatches(x.device) && (!tokens.length || x.score > 0));
     results.sort((a,b) => b.score - a.score || b.partCount - a.partCount || String(a.device.deviceIndex).localeCompare(String(b.device.deviceIndex)));
     results = results.slice(0, tokens.length ? 30 : 12);
 
-    const zunText = zunResults.length ? ` Dodatkowo znaleziono ${fmt(zunResults.length)} części ZUN.` : '';
-    els.deviceMeta.textContent = tokens.length ? `Znaleziono ${fmt(results.length)} pasujących urządzeń${state.activeBrand !== 'all' ? ' dla marki ' + state.activeBrand : ''}.${zunText}` : `Najpierw wybierz urządzenie. ${state.activeBrand !== 'all' ? 'Aktywny filtr: ' + state.activeBrand + '. ' : ''}Poniżej kilka przykładów z aktualnej bazy.`;
+    els.deviceMeta.textContent = tokens.length ? `Znaleziono ${fmt(results.length)} pasujących urządzeń${state.activeBrand !== 'all' ? ' dla wybranej marki' : ''}.` : `Wpisz model urządzenia albo fragment nazwy. Poniżej kilka przykładów.`;
     const zunHtml = renderZunCards(zunResults);
     if (!results.length && !zunResults.length) {
       const typed = String(els.deviceSearch.value || '').trim();
-      els.deviceResults.innerHTML = `<div class="empty-state manual-empty"><strong>Brak wyniku w aktualnej bazie.</strong><p>Spróbuj wpisać sam numer modelu, ZUN albo indeks części.</p><p>Jeżeli modelu nadal nie ma, klient może przejść dalej i opisać część ręcznie.</p><button class="primary" type="button" id="startManualRequest">Nie znalazłem urządzenia — napisz zapytanie ręczne</button></div>`;
+      els.deviceResults.innerHTML = `<div class="empty-state manual-empty"><strong>Nie znaleziono urządzenia.</strong><p>Spróbuj wpisać sam numer modelu albo fragment nazwy urządzenia.</p><p>Jeśli nadal go nie ma, możesz przejść dalej i opisać potrzebną część ręcznie.</p><button class="primary" type="button" id="startManualRequest">Nie znalazłem urządzenia — opiszę część ręcznie</button></div>`;
       const btn = $('startManualRequest');
       if (btn) btn.addEventListener('click', () => startManualRequest(typed));
       return;
@@ -685,7 +794,7 @@
         <div>
           <h3>${escapeHtml(device.deviceIndex || 'Bez indeksu')}</h3>
           <p>${escapeHtml(device.title || device.name || 'Urządzenie z bazą rysunku PDF')}</p>
-          <div class="badges"><span class="badge brand">${escapeHtml(canonicalBrand(device.brand || inferBrand(device)))}</span><span class="badge ok">PDF Drive</span><span class="badge">${fmt(drawings.length)} rys.</span><span class="badge ${partCount ? '' : 'warn'}">${partCount ? fmt(partCount) + ' części' : 'PDF bez listy części'}</span></div>
+          <div class="badges">${publicBrandBadge(device)}<span class="badge ok">Rysunek PDF</span><span class="badge">${fmt(drawings.length)} rys.</span><span class="badge ${partCount ? '' : 'warn'}">${partCount ? fmt(partCount) + ' części' : 'lista do uzupełnienia'}</span></div>
         </div>
         <button class="primary" type="button" data-device="${escapeAttr(device.deviceIndex)}">Wybierz</button>
       </article>`).join('');
@@ -697,7 +806,7 @@
     const clean = String(typed || '').trim();
     state.manualMode = true;
     state.partVisibleLimit = PART_ROW_LIMIT;
-    state.selectedDevice = { deviceIndex: clean || 'nie podano', title: 'urządzenie spoza aktualnej bazy' };
+    state.selectedDevice = { deviceIndex: clean || 'nie podano', title: 'opis części do sprawdzenia'  };
     state.selectedDrawing = null;
     state.selectedParts.clear();
     renderSelectedDevice();
@@ -733,21 +842,26 @@
     if (!d) { els.selectedDeviceBox.innerHTML = ''; return; }
     if (state.manualMode) {
       const linkInfo = drawing ? ` • Rysunek: ${escapeHtml(drawing.fileName || drawing.title || '')}` : '';
-      els.selectedDeviceBox.innerHTML = `<strong>${escapeHtml(d.deviceIndex || 'Urządzenie spoza bazy')} — ${escapeHtml(d.title || '')}</strong><span>Marka: ${escapeHtml(canonicalBrand(d.brand || (drawing && drawing.brand) || inferBrand(d)))}${linkInfo} • Brak listy części w aktualnej bazie — klient opisuje część ręcznie.</span>`;
+      const title = drawing ? (d.title || drawing.title || drawing.fileName || 'Rysunek z Google Drive') : (d.title || 'Zapytanie ręczne');
+      const meta = drawing
+        ? `Rysunek PDF dostępny${linkInfo} • lista części do uzupełnienia — wpisz numer pozycji z PDF albo opisz część w następnym kroku.`
+        : 'Opisz urządzenie i potrzebną część w następnym kroku.';
+      const brandText = publicBrandText(d, drawing);
+      els.selectedDeviceBox.innerHTML = `<strong>${escapeHtml(d.deviceIndex || 'Zapytanie ręczne')} — ${escapeHtml(title)}</strong><span>${brandText}${meta}</span>`;
       return;
     }
     if (!drawing) { els.selectedDeviceBox.innerHTML = ''; return; }
     const count = (state.partsByDrawing.get(String(drawing.id)) || []).length;
-    els.selectedDeviceBox.innerHTML = `<strong>${escapeHtml(d.deviceIndex)} — ${escapeHtml(d.title || drawing.title || '')}</strong><span>Marka: ${escapeHtml(canonicalBrand(d.brand || drawing.brand || inferBrand(d)))} • Rysunek: ${escapeHtml(drawing.fileName || drawing.title || '')} • ${fmt(count)} części</span>`;
+    els.selectedDeviceBox.innerHTML = `<strong>${escapeHtml(d.deviceIndex)} — ${escapeHtml(d.title || drawing.title || '')}</strong><span>${publicBrandText(d, drawing)}Rysunek: ${escapeHtml(drawing.fileName || drawing.title || '')} • ${fmt(count)} części</span>`;
   }
 
   function renderParts() {
     if (els.manualPartsBox) els.manualPartsBox.classList.toggle('hidden', !state.manualMode);
     if (state.manualMode) {
       if (els.showMoreParts) els.showMoreParts.classList.add('hidden');
-      if (els.partMeta) els.partMeta.innerHTML = state.selectedDrawing ? '<strong>PDF jest, lista części do uzupełnienia.</strong> Klient może podejrzeć rysunek i opisać pozycję/część ręcznie w kolejnym kroku.' : (state.selectedParts.size ? '<strong>Wybrano część uniwersalną ZUN.</strong> Klient powinien dopisać model urządzenia / zdjęcie tabliczki, żeby serwis potwierdził dopasowanie.' : '<strong>Tryb ręczny.</strong> Nie pokazujemy listy części, bo urządzenia nie ma jeszcze w bazie. Klient przechodzi dalej i opisuje potrzebną część tekstowo.');
-      if (els.partsTable) els.partsTable.innerHTML = `<tr><td colspan="4">Brak spiętej listy części. Użyj opisu ręcznego albo wpisz pozycję z rysunku w uwagach.</td></tr>`;
-      if (els.goDataInline) { els.goDataInline.disabled = false; els.goDataInline.textContent = 'Przejdź do danych i opisz część'; }
+      if (els.partMeta) els.partMeta.innerHTML = state.selectedDrawing ? '<strong>Rysunek PDF jest dostępny.</strong> Lista części nie jest jeszcze podpięta. Wpisz numer pozycji z rysunku albo opisz potrzebną część w kolejnym kroku.' : (state.selectedParts.size ? '<strong>Wybrano część do zapytania.</strong> Dopisz model urządzenia lub zdjęcie tabliczki, żeby serwis mógł potwierdzić dopasowanie.' : '<strong>Opis ręczny.</strong> Przejdź dalej i opisz potrzebną część tekstowo.');
+      if (els.partsTable) els.partsTable.innerHTML = `<tr><td colspan="4">Lista części nie jest jeszcze podpięta. Przejdź dalej i opisz pozycję z rysunku w uwagach.</td></tr>`;
+      if (els.goDataInline) { els.goDataInline.disabled = false; els.goDataInline.textContent = 'Przejdź dalej i opisz część'; }
       return;
     } else if (els.goDataInline) {
       els.goDataInline.textContent = 'Przejdź do danych';
@@ -767,7 +881,7 @@
       const limitNote = visible.length < filtered ? ` Pokazuję pierwsze ${fmt(visible.length)} — możesz zawęzić wyszukiwanie albo kliknąć „Pokaż więcej części”.` : '';
       els.partMeta.innerHTML = tokens.length
         ? `Znaleziono <strong>${fmt(filtered)}</strong> z ${fmt(total)} części.${limitNote}`
-        : `Ten rysunek ma <strong>${fmt(total)}</strong> części. Lista jest dawkowana, żeby klient się nie zakopał.${limitNote}`;
+        : `Ten rysunek ma <strong>${fmt(total)}</strong> części. Lista jest skrócona na start.${limitNote}`;
     }
     if (els.showMoreParts) {
       const more = visible.length < filtered;
@@ -783,7 +897,7 @@
       return `<tr class="${selected ? 'selected-row' : ''}">
         <td>${escapeHtml(p.position || '')}</td>
         <td>${escapeHtml(p.partIndex || '')}</td>
-        <td>${escapeHtml(p.namePl || p.nameEn || '')}</td>
+        <td>${escapeHtml(p.namePl || p.nameEn || '')}${assemblyNoticeHtml(p)}</td>
         <td><button type="button" class="${selected ? '' : 'primary'}" data-part="${escapeAttr(p.id)}">${selected ? 'Dodano' : 'Dodaj'}</button></td>
       </tr>`;
     }).join('');
@@ -811,14 +925,14 @@
     els.clearBasket.disabled = items.length === 0;
     if (!items.length && state.manualMode) {
       els.basketItems.className = 'basket-empty manual-basket';
-      els.basketItems.innerHTML = 'Tryb ręczny: klient opisze potrzebną część w kolejnym kroku.';
+      els.basketItems.innerHTML = 'Opisz potrzebną część w kolejnym kroku.';
     } else if (!items.length) {
       els.basketItems.className = 'basket-empty';
       els.basketItems.innerHTML = 'Brak wybranych części.';
     } else {
       els.basketItems.className = '';
       els.basketItems.innerHTML = items.map(({part, qty}) => `<div class="basket-item">
-        <div><strong>poz. ${escapeHtml(part.position || '-')} • ${escapeHtml(part.partIndex || '')}</strong><span>${escapeHtml(part.namePl || part.nameEn || '')}${!part.isUniversalZun && getAutoZunMatchesForPart(part).length ? ` • ZUN w mailu: ${escapeHtml(unique(getAutoZunMatchesForPart(part).map(m => m.zun)).join(', '))}` : ''}</span></div>
+        <div><strong>poz. ${escapeHtml(part.position || '-')} • ${escapeHtml(part.partIndex || '')}</strong><span>${escapeHtml(part.namePl || part.nameEn || '')}${!part.isUniversalZun && getAutoZunMatchesForPart(part).length ? ` • ZUN w mailu: ${escapeHtml(unique(getAutoZunMatchesForPart(part).map(m => m.zun)).join(', '))}` : ''}${escapeHtml(formatAssemblyInline(part))}</span>${assemblyNoticeHtml(part)}</div>
         <div class="qty">
           <button type="button" data-dec="${escapeAttr(part.id)}">−</button>
           <input value="${qty}" inputmode="numeric" data-qty="${escapeAttr(part.id)}" />
@@ -840,7 +954,7 @@
     if (!els.mobileSummaryBar || !els.mobileSummaryText || !els.mobileGoData) return;
     const qty = [...state.selectedParts.values()].reduce((n, x) => n + x.qty, 0);
     if (state.manualMode) {
-      els.mobileSummaryText.textContent = 'Tryb ręczny — opisz część';
+      els.mobileSummaryText.textContent = 'Opisz potrzebną część';
       els.mobileGoData.disabled = !state.selectedDevice;
       els.mobileGoData.textContent = state.step >= 3 ? 'Mail' : 'Dane';
       return;
@@ -875,11 +989,11 @@
 
   function renderViewer(withLoading=false) {
     const drawing = state.selectedDrawing;
-    if (state.manualMode) {
+    if (state.manualMode && !drawing) {
       els.openPdf.classList.add('hidden');
       els.openPdf.href = '#';
       els.viewer.className = 'viewer empty manual-viewer';
-      els.viewer.innerHTML = '<div><strong>Brak rysunku PDF w aktualnej bazie.</strong><br><span>Klient może opisać część ręcznie i dołączyć zdjęcia do maila.</span></div>';
+      els.viewer.innerHTML = '<div><strong>Brak rysunku PDF dla wybranego opisu.</strong><br><span>Opisz część ręcznie i dołącz zdjęcia do maila.</span></div>';
       return;
     }
     const row = drawing ? state.driveByDrawingId.get(String(drawing.id)) : null;
@@ -887,12 +1001,13 @@
     els.openPdf.href = '#';
     if (!drawing || !row || !row.viewerUrl) {
       els.viewer.className = 'viewer empty';
-      els.viewer.innerHTML = '<div>Brak podpiętego PDF z Drive dla tego urządzenia.</div>';
+      els.viewer.innerHTML = '<div>Nie udało się załadować podglądu PDF. Użyj przycisku „Otwórz w nowej karcie”.</div>';
+      if (drawing) { els.openPdf.href = drawing.openUrl || drawing.viewerUrl || '#'; }
       return;
     }
     if (withLoading) {
       els.viewer.className = 'viewer loading';
-      els.viewer.innerHTML = '<div><strong>Wczytuję rysunek PDF z Drive…</strong><br><span>Lista części jest już przygotowywana w tle.</span></div>';
+      els.viewer.innerHTML = '<div><strong>Wczytuję rysunek PDF…</strong><br><span>Za chwilę pojawi się podgląd rysunku.</span></div>';
       window.setTimeout(() => renderViewer(false), 450);
       return;
     }
@@ -968,10 +1083,10 @@
   function renderContext() {
     if (!els.contextTitle || !els.contextBody) return;
     const contexts = {
-      1: ['Wybierz urządzenie', 'Klient widzi wyszukiwarkę modeli. Gdy modelu nie ma w bazie, może przejść do zapytania ręcznego.'],
-      2: ['Wybierz części z rysunku', 'PDF zostaje po prawej, a lista po lewej pokazuje części dla wybranego modelu. W trybie ręcznym klient opisuje część tekstowo.'],
-      3: ['Uzupełnij dane', 'Dane do faktury i wysyłki pojawiają się dopiero po wybraniu części. Nic nie jest wysyłane automatycznie.'],
-      4: ['Skopiuj gotowy mail', 'Na końcu klient dostaje gotowy temat i treść do wysłania na service@yato.pl.']
+      1: ['Wybierz urządzenie', 'Wpisz model urządzenia albo fragment nazwy. Jeśli nie znajdziesz modelu, możesz opisać część ręcznie.'],
+      2: ['Wybierz lub opisz część', 'Sprawdź rysunek PDF. Jeśli lista części nie jest dostępna, wpisz numer pozycji z rysunku albo krótki opis.'],
+      3: ['Uzupełnij dane', 'Podaj dane kontaktowe. Faktura i wysyłka są opcjonalne. Nic nie jest wysyłane automatycznie.'],
+      4: ['Skopiuj gotowy mail', 'Na końcu otrzymasz gotowy temat i treść do wysłania na service@yato.pl.']
     };
     const [title, body] = contexts[state.step] || contexts[1];
     els.contextTitle.textContent = title;
@@ -1133,7 +1248,7 @@
       ['Wysyłka', els.wantShipping?.checked ? 'podano adres wysyłki' : 'do ustalenia z serwisem', 'neutral']
     ];
     const warnings = getSoftWarnings(f);
-    els.finalChecklist.innerHTML = `<div class="final-grid">${rows.map(([a,b,m]) => `<div class="final-item"><span>${escapeHtml(a)}</span><strong>${escapeHtml(b)}</strong><em class="${m}">${m === 'ok' ? 'OK' : m === 'warn' ? 'sprawdź' : 'opcjonalne'}</em></div>`).join('')}</div>${warnings.length ? `<div class="soft-warnings"><strong>Przed wysłaniem warto sprawdzić:</strong><ul>${warnings.map(w => `<li>${escapeHtml(w)}</li>`).join('')}</ul></div>` : '<div class="soft-warnings ok"><strong>Mail wygląda kompletnie.</strong> Klient może skopiować temat i treść.</div>'}`;
+    els.finalChecklist.innerHTML = `<div class="final-grid">${rows.map(([a,b,m]) => `<div class="final-item"><span>${escapeHtml(a)}</span><strong>${escapeHtml(b)}</strong><em class="${m}">${m === 'ok' ? 'OK' : m === 'warn' ? 'sprawdź' : 'opcjonalne'}</em></div>`).join('')}</div>${warnings.length ? `<div class="soft-warnings"><strong>Przed wysłaniem warto sprawdzić:</strong><ul>${warnings.map(w => `<li>${escapeHtml(w)}</li>`).join('')}</ul></div>` : '<div class="soft-warnings ok"><strong>Mail wygląda kompletnie.</strong> Możesz skopiować temat i treść.</div>'}`;
   }
 
   function getSoftWarnings(f) {
@@ -1156,21 +1271,26 @@
     const f = Object.fromEntries(new FormData(els.customerForm).entries());
     const parts = [...state.selectedParts.values()];
     const drive = drawing ? state.driveByDrawingId.get(String(drawing.id)) : null;
-    const subject = state.manualMode
-      ? `Zapytanie o części zamienne — model spoza bazy ${d.deviceIndex || ''}`.trim()
+    const subject = (state.manualMode && !drawing)
+      ? `Zapytanie o części zamienne — opis ręczny ${d.deviceIndex || ''}`.trim()
       : `Zapytanie o części zamienne — ${d.deviceIndex || ''}`.trim();
+
     const zunHints = getZunHintsForSelectedParts(parts);
+    const assemblyHints = getAssemblyHintsForSelectedParts(parts);
     const selectedPartLines = parts.map((x, i) => {
       const matches = x.part.isUniversalZun ? [{zun: x.part.zun || x.part.partIndex}] : getAutoZunMatchesForPart(x.part);
       return `${i + 1}. ${x.part.partIndex || 'brak indeksu'} — poz. ${x.part.position || '-'} — ${x.part.namePl || x.part.nameEn || ''}${formatZunInline(matches)} — ilość: ${x.qty} szt.`;
     }).join('\n');
-    const zunServiceBlock = formatZunServiceBlock(zunHints);
+
+    const serviceBlocks = [formatZunServiceBlock(zunHints), formatAssemblyServiceBlock(assemblyHints)].filter(Boolean).join('\n\n');
     const partLines = state.manualMode
-      ? `${selectedPartLines ? `Wybrane części uniwersalne / ZUN:\n${selectedPartLines}\n\n` : ''}Opis części / urządzenia:\n${f.manualPartsDescription || '[klient powinien opisać potrzebną część i dołączyć zdjęcia do maila]'}${zunServiceBlock ? `\n\n${zunServiceBlock}` : ''}`
-      : `${selectedPartLines}${zunServiceBlock ? `\n\n${zunServiceBlock}` : ''}`;
-    const drawingBlock = state.manualMode
-      ? `Rysunek techniczny PDF: nie znaleziono urządzenia w aktualnej bazie strony.\nProszę o pomoc w identyfikacji części. Klient powinien dołączyć zdjęcie tabliczki znamionowej i potrzebnej części.`
-      : `Rysunek techniczny PDF:\n${drawing ? `${drawing.fileName || drawing.title || ''}` : ''}\n${drive && drive.openUrl ? `Link do rysunku: ${drive.openUrl}` : ''}`;
+      ? `${selectedPartLines ? `Wybrane części / informacje techniczne dla serwisu:\n${selectedPartLines}\n\n` : ''}Opis części / urządzenia:\n${f.manualPartsDescription || '[opisz potrzebną część i dołącz zdjęcia do maila]'}${serviceBlocks ? `\n\n${serviceBlocks}` : ''}`
+      : `${selectedPartLines}${serviceBlocks ? `\n\n${serviceBlocks}` : ''}`;
+
+    const drawingBlock = drawing
+      ? `Rysunek techniczny PDF:\n${drawing.fileName || drawing.title || ''}\n${drive && drive.openUrl ? `Link do rysunku: ${drive.openUrl}` : ''}`
+      : `Rysunek techniczny PDF: nie został wybrany.\nProszę o pomoc w identyfikacji części na podstawie opisu i zdjęć.`;
+
     const body = `Dzień dobry,
 
 Mam urządzenie ${d.deviceIndex || '[brak indeksu]'}${d.title ? ` — ${d.title}` : ''}.
@@ -1200,7 +1320,6 @@ Pozdrawiam`;
     if (els.draftMailPreview) els.draftMailPreview.value = body;
     renderFinalChecklist();
   }
-
 
   function invoiceMailBlock(f) {
     if (!els.wantInvoice || !els.wantInvoice.checked) return 'Faktura: nie podano danych / do ustalenia z serwisem.';
@@ -1339,7 +1458,7 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
       state.manualMode = Boolean(draft.manualMode);
       updateOptionalSections();
       if (draft.deviceIndex) {
-        const device = state.manualMode ? {deviceIndex: draft.deviceIndex, title: 'urządzenie spoza aktualnej bazy'} : state.devices.find(d => norm(d.deviceIndex) === norm(draft.deviceIndex));
+        const device = state.manualMode ? {deviceIndex: draft.deviceIndex, title: 'opis części do sprawdzenia' } : state.devices.find(d => norm(d.deviceIndex) === norm(draft.deviceIndex));
         if (device) {
           state.selectedDevice = device;
           state.selectedDrawing = state.manualMode ? null : (state.drawings.find(d => String(d.id) === String(draft.drawingId)) || state.drawings.find(d => norm(d.deviceIndex) === norm(device.deviceIndex)));
@@ -1395,9 +1514,14 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
     }
   }
 
-  function brandMatches(brand) {
+  function brandMatches(rowOrBrand) {
     if (state.activeBrand === 'all') return true;
-    return canonicalBrand(brand) === state.activeBrand;
+    if (state.activeBrand === 'Pozostałe') return !publicBrandLabel(typeof rowOrBrand === 'object' ? rowOrBrand : {brand: rowOrBrand});
+    return publicBrandLabel(typeof rowOrBrand === 'object' ? rowOrBrand : {brand: rowOrBrand}) === state.activeBrand;
+  }
+
+  function publicFilterBrand(row) {
+    return publicBrandLabel(row) || 'Pozostałe';
   }
 
   function resolveBrand(row) {
@@ -1417,6 +1541,34 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
       if (models[up]) return models[up];
     }
     return '';
+  }
+
+
+  function brandIsConfirmed(row) {
+    row = row || {};
+    const c = String(row.brandConfidence || '').toLowerCase();
+    const r = String(row.reviewStatus || '').toLowerCase();
+    const n = String(row.notes || row.brandReason || '').toLowerCase();
+    const b = canonicalBrand(row.brand || inferBrand(row));
+    if (!b || ['INNE','NIEZNANA','DO ROZPOZNANIA','DO POTWIERDZENIA'].includes(b)) return false;
+    if (c.includes('low') || c.includes('guess')) return false;
+    if (r.includes('needs') || r.includes('review') || r.includes('guess')) return false;
+    if (n.includes('do potwierdzenia')) return false;
+    return true;
+  }
+
+  function publicBrandLabel(row) {
+    return brandIsConfirmed(row) ? canonicalBrand(row.brand || inferBrand(row)) : '';
+  }
+
+  function publicBrandText(device, drawing) {
+    const label = publicBrandLabel(device) || publicBrandLabel(drawing);
+    return label ? `Marka: ${escapeHtml(label)} • ` : '';
+  }
+
+  function publicBrandBadge(device) {
+    const label = publicBrandLabel(device);
+    return label ? `<span class="badge brand">${escapeHtml(label)}</span>` : '';
   }
 
   function canonicalBrand(value) {

@@ -1,0 +1,2395 @@
+{
+  "generatedAt": "2026-06-17T05:36:44.337957Z",
+  "source": "parts.json — grupy pozycji typu 2,3,4,5 / F1-F11",
+  "assemblyCount": 13,
+  "componentLinkCount": 71,
+  "assemblies": [
+    {
+      "id": "ZY-827793-31A|c117142a16ab8fb3|4,5,6,22,23,26-31",
+      "deviceIndex": "827793",
+      "drawingId": "c117142a16ab8fb3",
+      "position": "4,5,6,22,23,26-31",
+      "partIndex": "ZY827793-31A",
+      "namePl": "PRZEKŁADNIA Z UDAREM KOMPLETNA",
+      "nameEn": "GEAR WITH IMPACT ASSEMBLY",
+      "components": [
+        {
+          "id": "ZY-827793-22|c117142a16ab8fb3|22",
+          "position": "22",
+          "partIndex": "ZY827793-22",
+          "namePl": "OBUDOWA TYLNA",
+          "nameEn": "MOTOR BRACKET",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-827793-23|c117142a16ab8fb3|23",
+          "position": "23",
+          "partIndex": "ZY827793-23",
+          "namePl": "O-RING",
+          "nameEn": "SEALING RING (INNER DIAMETER56X2)",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-827793-26|c117142a16ab8fb3|26",
+          "position": "26",
+          "partIndex": "ZY827793-26",
+          "namePl": "PODKŁADKA",
+          "nameEn": "BEARING WASHER",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-827793-27|c117142a16ab8fb3|27",
+          "position": "27",
+          "partIndex": "ZY827793-27",
+          "namePl": "TRZPIEŃ",
+          "nameEn": "PIN",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-827793-28|c117142a16ab8fb3|28",
+          "position": "28",
+          "partIndex": "ZY827793-28",
+          "namePl": "KOŁO ZĘBATE",
+          "nameEn": "PLANETARY GEAR SHAFT",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-827793-29|c117142a16ab8fb3|29",
+          "position": "29",
+          "partIndex": "ZY827793-29",
+          "namePl": "WAŁ PRZEKŁADNI",
+          "nameEn": "GEAR SHAFT",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-827793-30|c117142a16ab8fb3|30",
+          "position": "30",
+          "partIndex": "ZY827793-30",
+          "namePl": "SPRĘŻYNA",
+          "nameEn": "STRIKE SPRING",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-827793-31|c117142a16ab8fb3|31",
+          "position": "31",
+          "partIndex": "ZY827793-31",
+          "namePl": "BLOK UDAROWY",
+          "nameEn": "STRIKE BLOCK",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        }
+      ],
+      "componentCount": 8
+    },
+    {
+      "id": "ZG-03118-07A|1fad9be73d60e853|6,7,8,9,10,11",
+      "deviceIndex": "YG-03118",
+      "drawingId": "1fad9be73d60e853",
+      "position": "6,7,8,9,10,11",
+      "partIndex": "ZG03118-07A",
+      "namePl": "ZESPÓŁ WAŁU NOŻA TNĄCEGO",
+      "nameEn": "",
+      "components": [
+        {
+          "id": "ZG-03118-06|1fad9be73d60e853|6",
+          "position": "6",
+          "partIndex": "ZG03118-06",
+          "namePl": "POKRYWA OSTRZA",
+          "nameEn": "BLADE COVER",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZG-03118-07|1fad9be73d60e853|7",
+          "position": "7",
+          "partIndex": "ZG03118-07",
+          "namePl": "WAŁ NOŻA TNĄCEGO",
+          "nameEn": "BLADE SHAFT",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        }
+      ],
+      "componentCount": 2
+    },
+    {
+      "id": "ZY-82003-099A|73a0c41f767042ad|97-102",
+      "deviceIndex": "YT-82003",
+      "drawingId": "73a0c41f767042ad",
+      "position": "97-102",
+      "partIndex": "ZY82003-099A",
+      "namePl": "UCHWYT DODATKOWY KOMPLETNY",
+      "nameEn": "AUXILARY HANDLE ASSEMBLED",
+      "components": [
+        {
+          "id": "ZY-82003-097|73a0c41f767042ad|97",
+          "position": "97",
+          "partIndex": "ZY82003-097",
+          "namePl": "ŚRUBA",
+          "nameEn": "SCREW M8",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-82003-098|73a0c41f767042ad|98",
+          "position": "98",
+          "partIndex": "ZY82003-098",
+          "namePl": "GAŁKA",
+          "nameEn": "ROTARY KNOB",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-82003-099|73a0c41f767042ad|99",
+          "position": "99",
+          "partIndex": "ZY82003-099",
+          "namePl": "UCHWYT DODATKOWY",
+          "nameEn": "AUXILARY HANDLE",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        }
+      ],
+      "componentCount": 3
+    },
+    {
+      "id": "ZY-8220055A|7809a8b3ed3f39a8|55,56",
+      "deviceIndex": "YT-82200",
+      "drawingId": "7809a8b3ed3f39a8",
+      "position": "55,56",
+      "partIndex": "ZY8220055A",
+      "namePl": "ZESPÓŁ UKŁADU REGULACJI PRĘDKOŚCI",
+      "nameEn": "CONSTANT SPEED CONTROL DEVICE WITH PCB",
+      "components": [
+        {
+          "id": "ZY-8220055|7809a8b3ed3f39a8|55",
+          "position": "55",
+          "partIndex": "ZY8220055",
+          "namePl": "UKŁAD REGULACJI PRĘDKOŚCI",
+          "nameEn": "CONSTANT SPEED CONTROL DEVICE",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        }
+      ],
+      "componentCount": 1
+    },
+    {
+      "id": "ZY-828377-34A|476d6a18215b3ddc|31,32,33,34,35,37",
+      "deviceIndex": "YT-828377",
+      "drawingId": "476d6a18215b3ddc",
+      "position": "31,32,33,34,35,37",
+      "partIndex": "ZY828377-34A",
+      "namePl": "PRZEKŁADNIA KOMPLETNA",
+      "nameEn": "GEAR BOX ASSEMBLY",
+      "components": [
+        {
+          "id": "ZY-828377-31|476d6a18215b3ddc|31",
+          "position": "31",
+          "partIndex": "ZY828377-31",
+          "namePl": "PIERŚCIEŃZABEZPIECZAJĄCY",
+          "nameEn": "CLIP RING 17",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-828377-32|476d6a18215b3ddc|32",
+          "position": "32",
+          "partIndex": "ZY828377-32",
+          "namePl": "OBUDOWA PRZEKŁADNI",
+          "nameEn": "GEAR BOX",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-828377-33|476d6a18215b3ddc|33",
+          "position": "33",
+          "partIndex": "ZY828377-33",
+          "namePl": "JAŻMO",
+          "nameEn": "PLANET GEAR",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-828377-34|476d6a18215b3ddc|34",
+          "position": "34",
+          "partIndex": "ZY828377-34",
+          "namePl": "KOŁO ZĘBATE",
+          "nameEn": "PLANET GEAR",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        }
+      ],
+      "componentCount": 4
+    },
+    {
+      "id": "ZY-828390-116A|5a79d5a3a0517813|14,15,16",
+      "deviceIndex": "YT-828390",
+      "drawingId": "5a79d5a3a0517813",
+      "position": "14,15,16",
+      "partIndex": "ZY828390-116A",
+      "namePl": "OIL CAN ASSEMBLY NAKRĘTKA ZBIORNIKA KOMPLETNA",
+      "nameEn": "",
+      "components": [
+        {
+          "id": "ZY-828390-114|5a79d5a3a0517813|14",
+          "position": "14",
+          "partIndex": "ZY828390-114",
+          "namePl": "NAKRĘTKA ZBIORNIKA OLEJU",
+          "nameEn": "OIL POT LID",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-828390-115|5a79d5a3a0517813|15",
+          "position": "15",
+          "partIndex": "ZY828390-115",
+          "namePl": "USZCZELKA ZBIORNIKA",
+          "nameEn": "FUEL TANK CAP SEAL",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-828390-116|5a79d5a3a0517813|16",
+          "position": "16",
+          "partIndex": "ZY828390-116",
+          "namePl": "HACZYK",
+          "nameEn": "ANTI-LOSS HOOK",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        }
+      ],
+      "componentCount": 3
+    },
+    {
+      "id": "ZY-828390-105A|5a79d5a3a0517813|2,3,4,5",
+      "deviceIndex": "YT-828390",
+      "drawingId": "5a79d5a3a0517813",
+      "position": "2,3,4,5",
+      "partIndex": "ZY828390-105A",
+      "namePl": "POMPKA OLEJU KOMPLETNA",
+      "nameEn": "OIL POMP ASSEMBLY",
+      "components": [
+        {
+          "id": "ZY-828390-102|5a79d5a3a0517813|2",
+          "position": "2",
+          "partIndex": "ZY828390-102",
+          "namePl": "ZĘBATKA",
+          "nameEn": "TURBINE TEETH",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-828390-103|5a79d5a3a0517813|3",
+          "position": "3",
+          "partIndex": "ZY828390-103",
+          "namePl": "KOŁO ŚLIMAKOWE",
+          "nameEn": "WORM WHEEL",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-828390-104|5a79d5a3a0517813|4",
+          "position": "4",
+          "partIndex": "ZY828390-104",
+          "namePl": "TULEJA TŁOKA",
+          "nameEn": "PISTON BUSHING",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-828390-105|5a79d5a3a0517813|5",
+          "position": "5",
+          "partIndex": "ZY828390-105",
+          "namePl": "OBUDOWA POMPKI OLEJU",
+          "nameEn": "OIL PUMP BODY",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        }
+      ],
+      "componentCount": 4
+    },
+    {
+      "id": "ZY-828390-116A|e44bc36b0b4f81a6|14,15,16",
+      "deviceIndex": "YT-828391",
+      "drawingId": "e44bc36b0b4f81a6",
+      "position": "14,15,16",
+      "partIndex": "ZY828390-116A",
+      "namePl": "OIL CAN ASSEMBLY NAKRĘTKA ZBIORNIKA KOMPLETNA",
+      "nameEn": "",
+      "components": [
+        {
+          "id": "ZY-828390-114|e44bc36b0b4f81a6|14",
+          "position": "14",
+          "partIndex": "ZY828390-114",
+          "namePl": "NAKRĘTKA ZBIORNIKA OLEJU",
+          "nameEn": "OIL POT LID",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-828390-115|e44bc36b0b4f81a6|15",
+          "position": "15",
+          "partIndex": "ZY828390-115",
+          "namePl": "USZCZELKA ZBIORNIKA",
+          "nameEn": "FUEL TANK CAP SEAL",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-828390-116|e44bc36b0b4f81a6|16",
+          "position": "16",
+          "partIndex": "ZY828390-116",
+          "namePl": "HACZYK",
+          "nameEn": "ANTI-LOSS HOOK",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        }
+      ],
+      "componentCount": 3
+    },
+    {
+      "id": "ZY-828390-105A|e44bc36b0b4f81a6|2,3,4,5",
+      "deviceIndex": "YT-828391",
+      "drawingId": "e44bc36b0b4f81a6",
+      "position": "2,3,4,5",
+      "partIndex": "ZY828390-105A",
+      "namePl": "POMPKA OLEJU KOMPLETNA",
+      "nameEn": "OIL POMP ASSEMBLY",
+      "components": [
+        {
+          "id": "ZY-828390-102|e44bc36b0b4f81a6|2",
+          "position": "2",
+          "partIndex": "ZY828390-102",
+          "namePl": "ZĘBATKA",
+          "nameEn": "TURBINE TEETH",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-828390-103|e44bc36b0b4f81a6|3",
+          "position": "3",
+          "partIndex": "ZY828390-103",
+          "namePl": "KOŁO ŚLIMAKOWE",
+          "nameEn": "WORM WHEEL",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-828390-104|e44bc36b0b4f81a6|4",
+          "position": "4",
+          "partIndex": "ZY828390-104",
+          "namePl": "TULEJA TŁOKA",
+          "nameEn": "PISTON BUSHING",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-828390-105|e44bc36b0b4f81a6|5",
+          "position": "5",
+          "partIndex": "ZY828390-105",
+          "namePl": "OBUDOWA POMPKI OLEJU",
+          "nameEn": "OIL PUMP BODY",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        }
+      ],
+      "componentCount": 4
+    },
+    {
+      "id": "ZY-85003-F-1A|a44e8e594b6a9b0b|F1-F11",
+      "deviceIndex": "YT-85003",
+      "drawingId": "a44e8e594b6a9b0b",
+      "position": "F1-F11",
+      "partIndex": "ZY85003-F1A",
+      "namePl": "ZESPÓŁ ROZRUSZNIKA",
+      "nameEn": "STARTER ASSEMBLY",
+      "components": [
+        {
+          "id": "ZY-85003-F-01|a44e8e594b6a9b0b|F1",
+          "position": "F1",
+          "partIndex": "ZY85003-F01",
+          "namePl": "RĘKOJEŚĆ ROZRUSZNIKA",
+          "nameEn": "STARTER HANDLE",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-85003-F-10|a44e8e594b6a9b0b|F10",
+          "position": "F10",
+          "partIndex": "ZY85003-F10",
+          "namePl": "KOŁO ROZRUSZNIKA",
+          "nameEn": "STARTER WHEEL",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-85003-F-11|a44e8e594b6a9b0b|F11",
+          "position": "F11",
+          "partIndex": "ZY85003-F11",
+          "namePl": "ŚRUBY ROZRUSZNIKA",
+          "nameEn": "STARTER NON-STANDARD SCREWS",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-85003-F-02|a44e8e594b6a9b0b|F2",
+          "position": "F2",
+          "partIndex": "ZY85003-F02",
+          "namePl": "LINKA ROZRUSZNIKA",
+          "nameEn": "ROPE",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-85003-F-03|a44e8e594b6a9b0b|F3",
+          "position": "F3",
+          "partIndex": "ZY85003-F03",
+          "namePl": "ŚRUBA",
+          "nameEn": "HEX. SCREW M5*30",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-85003-F-04|a44e8e594b6a9b0b|F4",
+          "position": "F4",
+          "partIndex": "ZY85003-F04",
+          "namePl": "ŚRUBA",
+          "nameEn": "HEX. SCREW M5*25",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-85003-F-05|a44e8e594b6a9b0b|F5",
+          "position": "F5",
+          "partIndex": "ZY85003-F05",
+          "namePl": "OSŁONA ROZRUSZNIKA",
+          "nameEn": "EASY STARTER COVER",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-85003-F-06|a44e8e594b6a9b0b|F6",
+          "position": "F6",
+          "partIndex": "ZY85003-F06",
+          "namePl": "NAKRĘTKA",
+          "nameEn": "SQUARE NUT M5",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-85003-F-07|a44e8e594b6a9b0b|F7",
+          "position": "F7",
+          "partIndex": "ZY85003-F07",
+          "namePl": "SPRĘŻYNA ROZRUSZNIKA",
+          "nameEn": "STARTER COIL SPRING",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-85003-F-08|a44e8e594b6a9b0b|F8",
+          "position": "F8",
+          "partIndex": "ZY85003-F08",
+          "namePl": "SZPULA",
+          "nameEn": "REEL",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-85003-F-09|a44e8e594b6a9b0b|F9",
+          "position": "F9",
+          "partIndex": "ZY85003-F09",
+          "namePl": "SPRĘŻYNA ROZRUSZNIKA",
+          "nameEn": "STARTER SPRING",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        }
+      ],
+      "componentCount": 11
+    },
+    {
+      "id": "ZY-85003-M-1A|a44e8e594b6a9b0b|M1-M18",
+      "deviceIndex": "YT-85003",
+      "drawingId": "a44e8e594b6a9b0b",
+      "position": "M1-M18",
+      "partIndex": "ZY85003-M1A",
+      "namePl": "GEAR ASSEMBLY ZESPÓŁ PRZEKŁADNI",
+      "nameEn": "ZY85001-E02",
+      "components": [
+        {
+          "id": "ZY-85003-M-01|a44e8e594b6a9b0b|M1",
+          "position": "M1",
+          "partIndex": "ZY85003-M01",
+          "namePl": "ŚRUBA",
+          "nameEn": "HEX. SCREW M10X1.25",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-85003-M-10|a44e8e594b6a9b0b|M10",
+          "position": "M10",
+          "partIndex": "ZY85003-M10",
+          "namePl": "KOŁO NAPĘDOWE DEEP GROOVE BALL BEARING GB/T 276",
+          "nameEn": "DRIVEN GEAR",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-85003-M-11|a44e8e594b6a9b0b|M11",
+          "position": "M11",
+          "partIndex": "ZY85003-M11",
+          "namePl": "ŁOŻYSKO KULKOWE 6000RS",
+          "nameEn": "",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-85003-M-12|a44e8e594b6a9b0b|M12",
+          "position": "M12",
+          "partIndex": "ZY85003-M12",
+          "namePl": "SKRZYNIA BIEGÓW",
+          "nameEn": "GEAR CASE",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-85003-M-13|a44e8e594b6a9b0b|M13",
+          "position": "M13",
+          "partIndex": "ZY85003-M13",
+          "namePl": "ŚRUBA",
+          "nameEn": "HEX. SCREW M6X10",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-85003-M-14|a44e8e594b6a9b0b|M14",
+          "position": "M14",
+          "partIndex": "ZY85003-M14",
+          "namePl": "ŚRUBA",
+          "nameEn": "HEX. SCREW M5X20",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-85003-M-15|a44e8e594b6a9b0b|M15",
+          "position": "M15",
+          "partIndex": "ZY85003-M15",
+          "namePl": "PRZEKŁADNIA DEEP GROOVE BALL BEARING GB/T 276",
+          "nameEn": "DRIVE GEAR WHEEL",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-85003-M-16|a44e8e594b6a9b0b|M16",
+          "position": "M16",
+          "partIndex": "ZY85003-M16",
+          "namePl": "ŁOŻYSKO KULKOWE 6000RS",
+          "nameEn": "",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-85003-M-17|a44e8e594b6a9b0b|M17",
+          "position": "M17",
+          "partIndex": "ZY85003-M17",
+          "namePl": "PIERŚCIEŃ USTALAJĄCY",
+          "nameEn": "CIRCLIP GB/T 894.1 10",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-85003-M-18|a44e8e594b6a9b0b|M18",
+          "position": "M18",
+          "partIndex": "ZY85003-M18",
+          "namePl": "PIERŚCIEŃ USTALAJĄCY",
+          "nameEn": "CIRCLIP GB/T 893.1 28",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-85003-M-02|a44e8e594b6a9b0b|M2",
+          "position": "M2",
+          "partIndex": "ZY85003-M02",
+          "namePl": "MISA",
+          "nameEn": "BOWL",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-85003-M-03|a44e8e594b6a9b0b|M3",
+          "position": "M3",
+          "partIndex": "ZY85003-M03",
+          "namePl": "PŁYTA OSTRZA",
+          "nameEn": "BLADE PLATEN",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-85003-M-04|a44e8e594b6a9b0b|M4",
+          "position": "M4",
+          "partIndex": "ZY85003-M04",
+          "namePl": "ŚRUBA",
+          "nameEn": "HEX. SCREW M5X12",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-85003-M-05|a44e8e594b6a9b0b|M5",
+          "position": "M5",
+          "partIndex": "ZY85003-M05",
+          "namePl": "OSŁONA SKRZYNI BIEGÓW",
+          "nameEn": "GEAR CASE SHIELD",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-85003-M-06|a44e8e594b6a9b0b|M6",
+          "position": "M6",
+          "partIndex": "ZY85003-M06",
+          "namePl": "PODSTAWA OSTRZA",
+          "nameEn": "BLADE BASE",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-85003-M-07|a44e8e594b6a9b0b|M7",
+          "position": "M7",
+          "partIndex": "ZY85003-M07",
+          "namePl": "PIERŚCIEŃ USTALAJĄCY DEEP GROOVE BALL BEARING GB/T 276",
+          "nameEn": "CIRCLIP GB/T 893.1 32",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-85003-M-08|a44e8e594b6a9b0b|M8",
+          "position": "M8",
+          "partIndex": "ZY85003-M08",
+          "namePl": "ŁOŻYSKO KULKOWE",
+          "nameEn": "",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-85003-M-09|a44e8e594b6a9b0b|M9",
+          "position": "M9",
+          "partIndex": "ZY85003-M09",
+          "namePl": "WAŁ NAPĘDOWY",
+          "nameEn": "OUTPUT SHAFT",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        }
+      ],
+      "componentCount": 18
+    },
+    {
+      "id": "ZY-85003-N-1A|a44e8e594b6a9b0b|N4-N7",
+      "deviceIndex": "YT-85003",
+      "drawingId": "a44e8e594b6a9b0b",
+      "position": "N4-N7",
+      "partIndex": "ZY85003-N1A",
+      "namePl": "OSŁONA KOMPLETNA",
+      "nameEn": "SHIELD ASSEMBLY",
+      "components": [
+        {
+          "id": "ZY-85003-N-04|a44e8e594b6a9b0b|N4",
+          "position": "N4",
+          "partIndex": "ZY85003-N04",
+          "namePl": "OSŁONA",
+          "nameEn": "SHIELD",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-85003-N-05|a44e8e594b6a9b0b|N5",
+          "position": "N5",
+          "partIndex": "ZY85003-N05",
+          "namePl": "ŚRUBA",
+          "nameEn": "HEX. SCREW M4.2X9.5",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-85003-N-06|a44e8e594b6a9b0b|N6",
+          "position": "N6",
+          "partIndex": "ZY85003-N06",
+          "namePl": "OSTRZE C",
+          "nameEn": "KNIFE C",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-85003-N-07|a44e8e594b6a9b0b|N7",
+          "position": "N7",
+          "partIndex": "ZY85003-N07",
+          "namePl": "BOCZNA OSŁONA",
+          "nameEn": "SHIELD SIDE",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        }
+      ],
+      "componentCount": 4
+    },
+    {
+      "id": "ZY-85003-O-1A|a44e8e594b6a9b0b|O1-O6",
+      "deviceIndex": "YT-85003",
+      "drawingId": "a44e8e594b6a9b0b",
+      "position": "O1-O6",
+      "partIndex": "ZY85003-O1A",
+      "namePl": "SPOOL ASSEMBLY SZPULA KOMPLETNA",
+      "nameEn": "ZY85001-E01",
+      "components": [
+        {
+          "id": "ZY-85003-O-01|a44e8e594b6a9b0b|O1",
+          "position": "O1",
+          "partIndex": "ZY85003-O01",
+          "namePl": "OBUDOWA SZPULI",
+          "nameEn": "SPOOL BOX",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-85003-O-02|a44e8e594b6a9b0b|O2",
+          "position": "O2",
+          "partIndex": "ZY85003-O02",
+          "namePl": "PODKŁADKA",
+          "nameEn": "RETURN SPRING SHIM",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-85003-O-03|a44e8e594b6a9b0b|O3",
+          "position": "O3",
+          "partIndex": "ZY85003-O03",
+          "namePl": "SPRĘŻYNA",
+          "nameEn": "RETURN SPRING",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-85003-O-04|a44e8e594b6a9b0b|O4",
+          "position": "O4",
+          "partIndex": "ZY85003-O04",
+          "namePl": "SZPULA",
+          "nameEn": "SPOOL",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-85003-O-05|a44e8e594b6a9b0b|O5",
+          "position": "O5",
+          "partIndex": "ZY85003-O05",
+          "namePl": "LINKA TNĄCA",
+          "nameEn": "GRASS CUTTING LINE",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        },
+        {
+          "id": "ZY-85003-O-06|a44e8e594b6a9b0b|O6",
+          "position": "O6",
+          "partIndex": "ZY85003-O06",
+          "namePl": "POKRYWA OBUDOWY SZPULI",
+          "nameEn": "SPOOL BOX COVER",
+          "confidence": "wysoka",
+          "reason": "pozycja + zakres indeksów"
+        }
+      ],
+      "componentCount": 6
+    }
+  ],
+  "componentsByPartId": {
+    "ZY-827793-22|c117142a16ab8fb3|22": [
+      {
+        "assemblyId": "ZY-827793-31A|c117142a16ab8fb3|4,5,6,22,23,26-31",
+        "assemblyPartIndex": "ZY827793-31A",
+        "assemblyPosition": "4,5,6,22,23,26-31",
+        "assemblyNamePl": "PRZEKŁADNIA Z UDAREM KOMPLETNA",
+        "assemblyNameEn": "GEAR WITH IMPACT ASSEMBLY",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "22",
+        "componentPartIndex": "ZY827793-22"
+      }
+    ],
+    "ZY-827793-23|c117142a16ab8fb3|23": [
+      {
+        "assemblyId": "ZY-827793-31A|c117142a16ab8fb3|4,5,6,22,23,26-31",
+        "assemblyPartIndex": "ZY827793-31A",
+        "assemblyPosition": "4,5,6,22,23,26-31",
+        "assemblyNamePl": "PRZEKŁADNIA Z UDAREM KOMPLETNA",
+        "assemblyNameEn": "GEAR WITH IMPACT ASSEMBLY",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "23",
+        "componentPartIndex": "ZY827793-23"
+      }
+    ],
+    "ZY-827793-26|c117142a16ab8fb3|26": [
+      {
+        "assemblyId": "ZY-827793-31A|c117142a16ab8fb3|4,5,6,22,23,26-31",
+        "assemblyPartIndex": "ZY827793-31A",
+        "assemblyPosition": "4,5,6,22,23,26-31",
+        "assemblyNamePl": "PRZEKŁADNIA Z UDAREM KOMPLETNA",
+        "assemblyNameEn": "GEAR WITH IMPACT ASSEMBLY",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "26",
+        "componentPartIndex": "ZY827793-26"
+      }
+    ],
+    "ZY-827793-27|c117142a16ab8fb3|27": [
+      {
+        "assemblyId": "ZY-827793-31A|c117142a16ab8fb3|4,5,6,22,23,26-31",
+        "assemblyPartIndex": "ZY827793-31A",
+        "assemblyPosition": "4,5,6,22,23,26-31",
+        "assemblyNamePl": "PRZEKŁADNIA Z UDAREM KOMPLETNA",
+        "assemblyNameEn": "GEAR WITH IMPACT ASSEMBLY",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "27",
+        "componentPartIndex": "ZY827793-27"
+      }
+    ],
+    "ZY-827793-28|c117142a16ab8fb3|28": [
+      {
+        "assemblyId": "ZY-827793-31A|c117142a16ab8fb3|4,5,6,22,23,26-31",
+        "assemblyPartIndex": "ZY827793-31A",
+        "assemblyPosition": "4,5,6,22,23,26-31",
+        "assemblyNamePl": "PRZEKŁADNIA Z UDAREM KOMPLETNA",
+        "assemblyNameEn": "GEAR WITH IMPACT ASSEMBLY",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "28",
+        "componentPartIndex": "ZY827793-28"
+      }
+    ],
+    "ZY-827793-29|c117142a16ab8fb3|29": [
+      {
+        "assemblyId": "ZY-827793-31A|c117142a16ab8fb3|4,5,6,22,23,26-31",
+        "assemblyPartIndex": "ZY827793-31A",
+        "assemblyPosition": "4,5,6,22,23,26-31",
+        "assemblyNamePl": "PRZEKŁADNIA Z UDAREM KOMPLETNA",
+        "assemblyNameEn": "GEAR WITH IMPACT ASSEMBLY",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "29",
+        "componentPartIndex": "ZY827793-29"
+      }
+    ],
+    "ZY-827793-30|c117142a16ab8fb3|30": [
+      {
+        "assemblyId": "ZY-827793-31A|c117142a16ab8fb3|4,5,6,22,23,26-31",
+        "assemblyPartIndex": "ZY827793-31A",
+        "assemblyPosition": "4,5,6,22,23,26-31",
+        "assemblyNamePl": "PRZEKŁADNIA Z UDAREM KOMPLETNA",
+        "assemblyNameEn": "GEAR WITH IMPACT ASSEMBLY",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "30",
+        "componentPartIndex": "ZY827793-30"
+      }
+    ],
+    "ZY-827793-31|c117142a16ab8fb3|31": [
+      {
+        "assemblyId": "ZY-827793-31A|c117142a16ab8fb3|4,5,6,22,23,26-31",
+        "assemblyPartIndex": "ZY827793-31A",
+        "assemblyPosition": "4,5,6,22,23,26-31",
+        "assemblyNamePl": "PRZEKŁADNIA Z UDAREM KOMPLETNA",
+        "assemblyNameEn": "GEAR WITH IMPACT ASSEMBLY",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "31",
+        "componentPartIndex": "ZY827793-31"
+      }
+    ],
+    "ZG-03118-06|1fad9be73d60e853|6": [
+      {
+        "assemblyId": "ZG-03118-07A|1fad9be73d60e853|6,7,8,9,10,11",
+        "assemblyPartIndex": "ZG03118-07A",
+        "assemblyPosition": "6,7,8,9,10,11",
+        "assemblyNamePl": "ZESPÓŁ WAŁU NOŻA TNĄCEGO",
+        "assemblyNameEn": "",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "6",
+        "componentPartIndex": "ZG03118-06"
+      }
+    ],
+    "ZG-03118-07|1fad9be73d60e853|7": [
+      {
+        "assemblyId": "ZG-03118-07A|1fad9be73d60e853|6,7,8,9,10,11",
+        "assemblyPartIndex": "ZG03118-07A",
+        "assemblyPosition": "6,7,8,9,10,11",
+        "assemblyNamePl": "ZESPÓŁ WAŁU NOŻA TNĄCEGO",
+        "assemblyNameEn": "",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "7",
+        "componentPartIndex": "ZG03118-07"
+      }
+    ],
+    "ZY-82003-097|73a0c41f767042ad|97": [
+      {
+        "assemblyId": "ZY-82003-099A|73a0c41f767042ad|97-102",
+        "assemblyPartIndex": "ZY82003-099A",
+        "assemblyPosition": "97-102",
+        "assemblyNamePl": "UCHWYT DODATKOWY KOMPLETNY",
+        "assemblyNameEn": "AUXILARY HANDLE ASSEMBLED",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "97",
+        "componentPartIndex": "ZY82003-097"
+      }
+    ],
+    "ZY-82003-098|73a0c41f767042ad|98": [
+      {
+        "assemblyId": "ZY-82003-099A|73a0c41f767042ad|97-102",
+        "assemblyPartIndex": "ZY82003-099A",
+        "assemblyPosition": "97-102",
+        "assemblyNamePl": "UCHWYT DODATKOWY KOMPLETNY",
+        "assemblyNameEn": "AUXILARY HANDLE ASSEMBLED",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "98",
+        "componentPartIndex": "ZY82003-098"
+      }
+    ],
+    "ZY-82003-099|73a0c41f767042ad|99": [
+      {
+        "assemblyId": "ZY-82003-099A|73a0c41f767042ad|97-102",
+        "assemblyPartIndex": "ZY82003-099A",
+        "assemblyPosition": "97-102",
+        "assemblyNamePl": "UCHWYT DODATKOWY KOMPLETNY",
+        "assemblyNameEn": "AUXILARY HANDLE ASSEMBLED",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "99",
+        "componentPartIndex": "ZY82003-099"
+      }
+    ],
+    "ZY-8220055|7809a8b3ed3f39a8|55": [
+      {
+        "assemblyId": "ZY-8220055A|7809a8b3ed3f39a8|55,56",
+        "assemblyPartIndex": "ZY8220055A",
+        "assemblyPosition": "55,56",
+        "assemblyNamePl": "ZESPÓŁ UKŁADU REGULACJI PRĘDKOŚCI",
+        "assemblyNameEn": "CONSTANT SPEED CONTROL DEVICE WITH PCB",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "55",
+        "componentPartIndex": "ZY8220055"
+      }
+    ],
+    "ZY-828377-31|476d6a18215b3ddc|31": [
+      {
+        "assemblyId": "ZY-828377-34A|476d6a18215b3ddc|31,32,33,34,35,37",
+        "assemblyPartIndex": "ZY828377-34A",
+        "assemblyPosition": "31,32,33,34,35,37",
+        "assemblyNamePl": "PRZEKŁADNIA KOMPLETNA",
+        "assemblyNameEn": "GEAR BOX ASSEMBLY",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "31",
+        "componentPartIndex": "ZY828377-31"
+      }
+    ],
+    "ZY-828377-32|476d6a18215b3ddc|32": [
+      {
+        "assemblyId": "ZY-828377-34A|476d6a18215b3ddc|31,32,33,34,35,37",
+        "assemblyPartIndex": "ZY828377-34A",
+        "assemblyPosition": "31,32,33,34,35,37",
+        "assemblyNamePl": "PRZEKŁADNIA KOMPLETNA",
+        "assemblyNameEn": "GEAR BOX ASSEMBLY",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "32",
+        "componentPartIndex": "ZY828377-32"
+      }
+    ],
+    "ZY-828377-33|476d6a18215b3ddc|33": [
+      {
+        "assemblyId": "ZY-828377-34A|476d6a18215b3ddc|31,32,33,34,35,37",
+        "assemblyPartIndex": "ZY828377-34A",
+        "assemblyPosition": "31,32,33,34,35,37",
+        "assemblyNamePl": "PRZEKŁADNIA KOMPLETNA",
+        "assemblyNameEn": "GEAR BOX ASSEMBLY",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "33",
+        "componentPartIndex": "ZY828377-33"
+      }
+    ],
+    "ZY-828377-34|476d6a18215b3ddc|34": [
+      {
+        "assemblyId": "ZY-828377-34A|476d6a18215b3ddc|31,32,33,34,35,37",
+        "assemblyPartIndex": "ZY828377-34A",
+        "assemblyPosition": "31,32,33,34,35,37",
+        "assemblyNamePl": "PRZEKŁADNIA KOMPLETNA",
+        "assemblyNameEn": "GEAR BOX ASSEMBLY",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "34",
+        "componentPartIndex": "ZY828377-34"
+      }
+    ],
+    "ZY-828390-114|5a79d5a3a0517813|14": [
+      {
+        "assemblyId": "ZY-828390-116A|5a79d5a3a0517813|14,15,16",
+        "assemblyPartIndex": "ZY828390-116A",
+        "assemblyPosition": "14,15,16",
+        "assemblyNamePl": "OIL CAN ASSEMBLY NAKRĘTKA ZBIORNIKA KOMPLETNA",
+        "assemblyNameEn": "",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "14",
+        "componentPartIndex": "ZY828390-114"
+      }
+    ],
+    "ZY-828390-115|5a79d5a3a0517813|15": [
+      {
+        "assemblyId": "ZY-828390-116A|5a79d5a3a0517813|14,15,16",
+        "assemblyPartIndex": "ZY828390-116A",
+        "assemblyPosition": "14,15,16",
+        "assemblyNamePl": "OIL CAN ASSEMBLY NAKRĘTKA ZBIORNIKA KOMPLETNA",
+        "assemblyNameEn": "",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "15",
+        "componentPartIndex": "ZY828390-115"
+      }
+    ],
+    "ZY-828390-116|5a79d5a3a0517813|16": [
+      {
+        "assemblyId": "ZY-828390-116A|5a79d5a3a0517813|14,15,16",
+        "assemblyPartIndex": "ZY828390-116A",
+        "assemblyPosition": "14,15,16",
+        "assemblyNamePl": "OIL CAN ASSEMBLY NAKRĘTKA ZBIORNIKA KOMPLETNA",
+        "assemblyNameEn": "",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "16",
+        "componentPartIndex": "ZY828390-116"
+      }
+    ],
+    "ZY-828390-102|5a79d5a3a0517813|2": [
+      {
+        "assemblyId": "ZY-828390-105A|5a79d5a3a0517813|2,3,4,5",
+        "assemblyPartIndex": "ZY828390-105A",
+        "assemblyPosition": "2,3,4,5",
+        "assemblyNamePl": "POMPKA OLEJU KOMPLETNA",
+        "assemblyNameEn": "OIL POMP ASSEMBLY",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "2",
+        "componentPartIndex": "ZY828390-102"
+      }
+    ],
+    "ZY-828390-103|5a79d5a3a0517813|3": [
+      {
+        "assemblyId": "ZY-828390-105A|5a79d5a3a0517813|2,3,4,5",
+        "assemblyPartIndex": "ZY828390-105A",
+        "assemblyPosition": "2,3,4,5",
+        "assemblyNamePl": "POMPKA OLEJU KOMPLETNA",
+        "assemblyNameEn": "OIL POMP ASSEMBLY",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "3",
+        "componentPartIndex": "ZY828390-103"
+      }
+    ],
+    "ZY-828390-104|5a79d5a3a0517813|4": [
+      {
+        "assemblyId": "ZY-828390-105A|5a79d5a3a0517813|2,3,4,5",
+        "assemblyPartIndex": "ZY828390-105A",
+        "assemblyPosition": "2,3,4,5",
+        "assemblyNamePl": "POMPKA OLEJU KOMPLETNA",
+        "assemblyNameEn": "OIL POMP ASSEMBLY",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "4",
+        "componentPartIndex": "ZY828390-104"
+      }
+    ],
+    "ZY-828390-105|5a79d5a3a0517813|5": [
+      {
+        "assemblyId": "ZY-828390-105A|5a79d5a3a0517813|2,3,4,5",
+        "assemblyPartIndex": "ZY828390-105A",
+        "assemblyPosition": "2,3,4,5",
+        "assemblyNamePl": "POMPKA OLEJU KOMPLETNA",
+        "assemblyNameEn": "OIL POMP ASSEMBLY",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "5",
+        "componentPartIndex": "ZY828390-105"
+      }
+    ],
+    "ZY-828390-114|e44bc36b0b4f81a6|14": [
+      {
+        "assemblyId": "ZY-828390-116A|e44bc36b0b4f81a6|14,15,16",
+        "assemblyPartIndex": "ZY828390-116A",
+        "assemblyPosition": "14,15,16",
+        "assemblyNamePl": "OIL CAN ASSEMBLY NAKRĘTKA ZBIORNIKA KOMPLETNA",
+        "assemblyNameEn": "",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "14",
+        "componentPartIndex": "ZY828390-114"
+      }
+    ],
+    "ZY-828390-115|e44bc36b0b4f81a6|15": [
+      {
+        "assemblyId": "ZY-828390-116A|e44bc36b0b4f81a6|14,15,16",
+        "assemblyPartIndex": "ZY828390-116A",
+        "assemblyPosition": "14,15,16",
+        "assemblyNamePl": "OIL CAN ASSEMBLY NAKRĘTKA ZBIORNIKA KOMPLETNA",
+        "assemblyNameEn": "",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "15",
+        "componentPartIndex": "ZY828390-115"
+      }
+    ],
+    "ZY-828390-116|e44bc36b0b4f81a6|16": [
+      {
+        "assemblyId": "ZY-828390-116A|e44bc36b0b4f81a6|14,15,16",
+        "assemblyPartIndex": "ZY828390-116A",
+        "assemblyPosition": "14,15,16",
+        "assemblyNamePl": "OIL CAN ASSEMBLY NAKRĘTKA ZBIORNIKA KOMPLETNA",
+        "assemblyNameEn": "",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "16",
+        "componentPartIndex": "ZY828390-116"
+      }
+    ],
+    "ZY-828390-102|e44bc36b0b4f81a6|2": [
+      {
+        "assemblyId": "ZY-828390-105A|e44bc36b0b4f81a6|2,3,4,5",
+        "assemblyPartIndex": "ZY828390-105A",
+        "assemblyPosition": "2,3,4,5",
+        "assemblyNamePl": "POMPKA OLEJU KOMPLETNA",
+        "assemblyNameEn": "OIL POMP ASSEMBLY",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "2",
+        "componentPartIndex": "ZY828390-102"
+      }
+    ],
+    "ZY-828390-103|e44bc36b0b4f81a6|3": [
+      {
+        "assemblyId": "ZY-828390-105A|e44bc36b0b4f81a6|2,3,4,5",
+        "assemblyPartIndex": "ZY828390-105A",
+        "assemblyPosition": "2,3,4,5",
+        "assemblyNamePl": "POMPKA OLEJU KOMPLETNA",
+        "assemblyNameEn": "OIL POMP ASSEMBLY",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "3",
+        "componentPartIndex": "ZY828390-103"
+      }
+    ],
+    "ZY-828390-104|e44bc36b0b4f81a6|4": [
+      {
+        "assemblyId": "ZY-828390-105A|e44bc36b0b4f81a6|2,3,4,5",
+        "assemblyPartIndex": "ZY828390-105A",
+        "assemblyPosition": "2,3,4,5",
+        "assemblyNamePl": "POMPKA OLEJU KOMPLETNA",
+        "assemblyNameEn": "OIL POMP ASSEMBLY",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "4",
+        "componentPartIndex": "ZY828390-104"
+      }
+    ],
+    "ZY-828390-105|e44bc36b0b4f81a6|5": [
+      {
+        "assemblyId": "ZY-828390-105A|e44bc36b0b4f81a6|2,3,4,5",
+        "assemblyPartIndex": "ZY828390-105A",
+        "assemblyPosition": "2,3,4,5",
+        "assemblyNamePl": "POMPKA OLEJU KOMPLETNA",
+        "assemblyNameEn": "OIL POMP ASSEMBLY",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "5",
+        "componentPartIndex": "ZY828390-105"
+      }
+    ],
+    "ZY-85003-F-01|a44e8e594b6a9b0b|F1": [
+      {
+        "assemblyId": "ZY-85003-F-1A|a44e8e594b6a9b0b|F1-F11",
+        "assemblyPartIndex": "ZY85003-F1A",
+        "assemblyPosition": "F1-F11",
+        "assemblyNamePl": "ZESPÓŁ ROZRUSZNIKA",
+        "assemblyNameEn": "STARTER ASSEMBLY",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "F1",
+        "componentPartIndex": "ZY85003-F01"
+      }
+    ],
+    "ZY-85003-F-10|a44e8e594b6a9b0b|F10": [
+      {
+        "assemblyId": "ZY-85003-F-1A|a44e8e594b6a9b0b|F1-F11",
+        "assemblyPartIndex": "ZY85003-F1A",
+        "assemblyPosition": "F1-F11",
+        "assemblyNamePl": "ZESPÓŁ ROZRUSZNIKA",
+        "assemblyNameEn": "STARTER ASSEMBLY",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "F10",
+        "componentPartIndex": "ZY85003-F10"
+      }
+    ],
+    "ZY-85003-F-11|a44e8e594b6a9b0b|F11": [
+      {
+        "assemblyId": "ZY-85003-F-1A|a44e8e594b6a9b0b|F1-F11",
+        "assemblyPartIndex": "ZY85003-F1A",
+        "assemblyPosition": "F1-F11",
+        "assemblyNamePl": "ZESPÓŁ ROZRUSZNIKA",
+        "assemblyNameEn": "STARTER ASSEMBLY",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "F11",
+        "componentPartIndex": "ZY85003-F11"
+      }
+    ],
+    "ZY-85003-F-02|a44e8e594b6a9b0b|F2": [
+      {
+        "assemblyId": "ZY-85003-F-1A|a44e8e594b6a9b0b|F1-F11",
+        "assemblyPartIndex": "ZY85003-F1A",
+        "assemblyPosition": "F1-F11",
+        "assemblyNamePl": "ZESPÓŁ ROZRUSZNIKA",
+        "assemblyNameEn": "STARTER ASSEMBLY",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "F2",
+        "componentPartIndex": "ZY85003-F02"
+      }
+    ],
+    "ZY-85003-F-03|a44e8e594b6a9b0b|F3": [
+      {
+        "assemblyId": "ZY-85003-F-1A|a44e8e594b6a9b0b|F1-F11",
+        "assemblyPartIndex": "ZY85003-F1A",
+        "assemblyPosition": "F1-F11",
+        "assemblyNamePl": "ZESPÓŁ ROZRUSZNIKA",
+        "assemblyNameEn": "STARTER ASSEMBLY",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "F3",
+        "componentPartIndex": "ZY85003-F03"
+      }
+    ],
+    "ZY-85003-F-04|a44e8e594b6a9b0b|F4": [
+      {
+        "assemblyId": "ZY-85003-F-1A|a44e8e594b6a9b0b|F1-F11",
+        "assemblyPartIndex": "ZY85003-F1A",
+        "assemblyPosition": "F1-F11",
+        "assemblyNamePl": "ZESPÓŁ ROZRUSZNIKA",
+        "assemblyNameEn": "STARTER ASSEMBLY",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "F4",
+        "componentPartIndex": "ZY85003-F04"
+      }
+    ],
+    "ZY-85003-F-05|a44e8e594b6a9b0b|F5": [
+      {
+        "assemblyId": "ZY-85003-F-1A|a44e8e594b6a9b0b|F1-F11",
+        "assemblyPartIndex": "ZY85003-F1A",
+        "assemblyPosition": "F1-F11",
+        "assemblyNamePl": "ZESPÓŁ ROZRUSZNIKA",
+        "assemblyNameEn": "STARTER ASSEMBLY",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "F5",
+        "componentPartIndex": "ZY85003-F05"
+      }
+    ],
+    "ZY-85003-F-06|a44e8e594b6a9b0b|F6": [
+      {
+        "assemblyId": "ZY-85003-F-1A|a44e8e594b6a9b0b|F1-F11",
+        "assemblyPartIndex": "ZY85003-F1A",
+        "assemblyPosition": "F1-F11",
+        "assemblyNamePl": "ZESPÓŁ ROZRUSZNIKA",
+        "assemblyNameEn": "STARTER ASSEMBLY",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "F6",
+        "componentPartIndex": "ZY85003-F06"
+      }
+    ],
+    "ZY-85003-F-07|a44e8e594b6a9b0b|F7": [
+      {
+        "assemblyId": "ZY-85003-F-1A|a44e8e594b6a9b0b|F1-F11",
+        "assemblyPartIndex": "ZY85003-F1A",
+        "assemblyPosition": "F1-F11",
+        "assemblyNamePl": "ZESPÓŁ ROZRUSZNIKA",
+        "assemblyNameEn": "STARTER ASSEMBLY",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "F7",
+        "componentPartIndex": "ZY85003-F07"
+      }
+    ],
+    "ZY-85003-F-08|a44e8e594b6a9b0b|F8": [
+      {
+        "assemblyId": "ZY-85003-F-1A|a44e8e594b6a9b0b|F1-F11",
+        "assemblyPartIndex": "ZY85003-F1A",
+        "assemblyPosition": "F1-F11",
+        "assemblyNamePl": "ZESPÓŁ ROZRUSZNIKA",
+        "assemblyNameEn": "STARTER ASSEMBLY",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "F8",
+        "componentPartIndex": "ZY85003-F08"
+      }
+    ],
+    "ZY-85003-F-09|a44e8e594b6a9b0b|F9": [
+      {
+        "assemblyId": "ZY-85003-F-1A|a44e8e594b6a9b0b|F1-F11",
+        "assemblyPartIndex": "ZY85003-F1A",
+        "assemblyPosition": "F1-F11",
+        "assemblyNamePl": "ZESPÓŁ ROZRUSZNIKA",
+        "assemblyNameEn": "STARTER ASSEMBLY",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "F9",
+        "componentPartIndex": "ZY85003-F09"
+      }
+    ],
+    "ZY-85003-M-01|a44e8e594b6a9b0b|M1": [
+      {
+        "assemblyId": "ZY-85003-M-1A|a44e8e594b6a9b0b|M1-M18",
+        "assemblyPartIndex": "ZY85003-M1A",
+        "assemblyPosition": "M1-M18",
+        "assemblyNamePl": "GEAR ASSEMBLY ZESPÓŁ PRZEKŁADNI",
+        "assemblyNameEn": "ZY85001-E02",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "M1",
+        "componentPartIndex": "ZY85003-M01"
+      }
+    ],
+    "ZY-85003-M-10|a44e8e594b6a9b0b|M10": [
+      {
+        "assemblyId": "ZY-85003-M-1A|a44e8e594b6a9b0b|M1-M18",
+        "assemblyPartIndex": "ZY85003-M1A",
+        "assemblyPosition": "M1-M18",
+        "assemblyNamePl": "GEAR ASSEMBLY ZESPÓŁ PRZEKŁADNI",
+        "assemblyNameEn": "ZY85001-E02",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "M10",
+        "componentPartIndex": "ZY85003-M10"
+      }
+    ],
+    "ZY-85003-M-11|a44e8e594b6a9b0b|M11": [
+      {
+        "assemblyId": "ZY-85003-M-1A|a44e8e594b6a9b0b|M1-M18",
+        "assemblyPartIndex": "ZY85003-M1A",
+        "assemblyPosition": "M1-M18",
+        "assemblyNamePl": "GEAR ASSEMBLY ZESPÓŁ PRZEKŁADNI",
+        "assemblyNameEn": "ZY85001-E02",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "M11",
+        "componentPartIndex": "ZY85003-M11"
+      }
+    ],
+    "ZY-85003-M-12|a44e8e594b6a9b0b|M12": [
+      {
+        "assemblyId": "ZY-85003-M-1A|a44e8e594b6a9b0b|M1-M18",
+        "assemblyPartIndex": "ZY85003-M1A",
+        "assemblyPosition": "M1-M18",
+        "assemblyNamePl": "GEAR ASSEMBLY ZESPÓŁ PRZEKŁADNI",
+        "assemblyNameEn": "ZY85001-E02",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "M12",
+        "componentPartIndex": "ZY85003-M12"
+      }
+    ],
+    "ZY-85003-M-13|a44e8e594b6a9b0b|M13": [
+      {
+        "assemblyId": "ZY-85003-M-1A|a44e8e594b6a9b0b|M1-M18",
+        "assemblyPartIndex": "ZY85003-M1A",
+        "assemblyPosition": "M1-M18",
+        "assemblyNamePl": "GEAR ASSEMBLY ZESPÓŁ PRZEKŁADNI",
+        "assemblyNameEn": "ZY85001-E02",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "M13",
+        "componentPartIndex": "ZY85003-M13"
+      }
+    ],
+    "ZY-85003-M-14|a44e8e594b6a9b0b|M14": [
+      {
+        "assemblyId": "ZY-85003-M-1A|a44e8e594b6a9b0b|M1-M18",
+        "assemblyPartIndex": "ZY85003-M1A",
+        "assemblyPosition": "M1-M18",
+        "assemblyNamePl": "GEAR ASSEMBLY ZESPÓŁ PRZEKŁADNI",
+        "assemblyNameEn": "ZY85001-E02",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "M14",
+        "componentPartIndex": "ZY85003-M14"
+      }
+    ],
+    "ZY-85003-M-15|a44e8e594b6a9b0b|M15": [
+      {
+        "assemblyId": "ZY-85003-M-1A|a44e8e594b6a9b0b|M1-M18",
+        "assemblyPartIndex": "ZY85003-M1A",
+        "assemblyPosition": "M1-M18",
+        "assemblyNamePl": "GEAR ASSEMBLY ZESPÓŁ PRZEKŁADNI",
+        "assemblyNameEn": "ZY85001-E02",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "M15",
+        "componentPartIndex": "ZY85003-M15"
+      }
+    ],
+    "ZY-85003-M-16|a44e8e594b6a9b0b|M16": [
+      {
+        "assemblyId": "ZY-85003-M-1A|a44e8e594b6a9b0b|M1-M18",
+        "assemblyPartIndex": "ZY85003-M1A",
+        "assemblyPosition": "M1-M18",
+        "assemblyNamePl": "GEAR ASSEMBLY ZESPÓŁ PRZEKŁADNI",
+        "assemblyNameEn": "ZY85001-E02",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "M16",
+        "componentPartIndex": "ZY85003-M16"
+      }
+    ],
+    "ZY-85003-M-17|a44e8e594b6a9b0b|M17": [
+      {
+        "assemblyId": "ZY-85003-M-1A|a44e8e594b6a9b0b|M1-M18",
+        "assemblyPartIndex": "ZY85003-M1A",
+        "assemblyPosition": "M1-M18",
+        "assemblyNamePl": "GEAR ASSEMBLY ZESPÓŁ PRZEKŁADNI",
+        "assemblyNameEn": "ZY85001-E02",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "M17",
+        "componentPartIndex": "ZY85003-M17"
+      }
+    ],
+    "ZY-85003-M-18|a44e8e594b6a9b0b|M18": [
+      {
+        "assemblyId": "ZY-85003-M-1A|a44e8e594b6a9b0b|M1-M18",
+        "assemblyPartIndex": "ZY85003-M1A",
+        "assemblyPosition": "M1-M18",
+        "assemblyNamePl": "GEAR ASSEMBLY ZESPÓŁ PRZEKŁADNI",
+        "assemblyNameEn": "ZY85001-E02",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "M18",
+        "componentPartIndex": "ZY85003-M18"
+      }
+    ],
+    "ZY-85003-M-02|a44e8e594b6a9b0b|M2": [
+      {
+        "assemblyId": "ZY-85003-M-1A|a44e8e594b6a9b0b|M1-M18",
+        "assemblyPartIndex": "ZY85003-M1A",
+        "assemblyPosition": "M1-M18",
+        "assemblyNamePl": "GEAR ASSEMBLY ZESPÓŁ PRZEKŁADNI",
+        "assemblyNameEn": "ZY85001-E02",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "M2",
+        "componentPartIndex": "ZY85003-M02"
+      }
+    ],
+    "ZY-85003-M-03|a44e8e594b6a9b0b|M3": [
+      {
+        "assemblyId": "ZY-85003-M-1A|a44e8e594b6a9b0b|M1-M18",
+        "assemblyPartIndex": "ZY85003-M1A",
+        "assemblyPosition": "M1-M18",
+        "assemblyNamePl": "GEAR ASSEMBLY ZESPÓŁ PRZEKŁADNI",
+        "assemblyNameEn": "ZY85001-E02",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "M3",
+        "componentPartIndex": "ZY85003-M03"
+      }
+    ],
+    "ZY-85003-M-04|a44e8e594b6a9b0b|M4": [
+      {
+        "assemblyId": "ZY-85003-M-1A|a44e8e594b6a9b0b|M1-M18",
+        "assemblyPartIndex": "ZY85003-M1A",
+        "assemblyPosition": "M1-M18",
+        "assemblyNamePl": "GEAR ASSEMBLY ZESPÓŁ PRZEKŁADNI",
+        "assemblyNameEn": "ZY85001-E02",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "M4",
+        "componentPartIndex": "ZY85003-M04"
+      }
+    ],
+    "ZY-85003-M-05|a44e8e594b6a9b0b|M5": [
+      {
+        "assemblyId": "ZY-85003-M-1A|a44e8e594b6a9b0b|M1-M18",
+        "assemblyPartIndex": "ZY85003-M1A",
+        "assemblyPosition": "M1-M18",
+        "assemblyNamePl": "GEAR ASSEMBLY ZESPÓŁ PRZEKŁADNI",
+        "assemblyNameEn": "ZY85001-E02",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "M5",
+        "componentPartIndex": "ZY85003-M05"
+      }
+    ],
+    "ZY-85003-M-06|a44e8e594b6a9b0b|M6": [
+      {
+        "assemblyId": "ZY-85003-M-1A|a44e8e594b6a9b0b|M1-M18",
+        "assemblyPartIndex": "ZY85003-M1A",
+        "assemblyPosition": "M1-M18",
+        "assemblyNamePl": "GEAR ASSEMBLY ZESPÓŁ PRZEKŁADNI",
+        "assemblyNameEn": "ZY85001-E02",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "M6",
+        "componentPartIndex": "ZY85003-M06"
+      }
+    ],
+    "ZY-85003-M-07|a44e8e594b6a9b0b|M7": [
+      {
+        "assemblyId": "ZY-85003-M-1A|a44e8e594b6a9b0b|M1-M18",
+        "assemblyPartIndex": "ZY85003-M1A",
+        "assemblyPosition": "M1-M18",
+        "assemblyNamePl": "GEAR ASSEMBLY ZESPÓŁ PRZEKŁADNI",
+        "assemblyNameEn": "ZY85001-E02",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "M7",
+        "componentPartIndex": "ZY85003-M07"
+      }
+    ],
+    "ZY-85003-M-08|a44e8e594b6a9b0b|M8": [
+      {
+        "assemblyId": "ZY-85003-M-1A|a44e8e594b6a9b0b|M1-M18",
+        "assemblyPartIndex": "ZY85003-M1A",
+        "assemblyPosition": "M1-M18",
+        "assemblyNamePl": "GEAR ASSEMBLY ZESPÓŁ PRZEKŁADNI",
+        "assemblyNameEn": "ZY85001-E02",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "M8",
+        "componentPartIndex": "ZY85003-M08"
+      }
+    ],
+    "ZY-85003-M-09|a44e8e594b6a9b0b|M9": [
+      {
+        "assemblyId": "ZY-85003-M-1A|a44e8e594b6a9b0b|M1-M18",
+        "assemblyPartIndex": "ZY85003-M1A",
+        "assemblyPosition": "M1-M18",
+        "assemblyNamePl": "GEAR ASSEMBLY ZESPÓŁ PRZEKŁADNI",
+        "assemblyNameEn": "ZY85001-E02",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "M9",
+        "componentPartIndex": "ZY85003-M09"
+      }
+    ],
+    "ZY-85003-N-04|a44e8e594b6a9b0b|N4": [
+      {
+        "assemblyId": "ZY-85003-N-1A|a44e8e594b6a9b0b|N4-N7",
+        "assemblyPartIndex": "ZY85003-N1A",
+        "assemblyPosition": "N4-N7",
+        "assemblyNamePl": "OSŁONA KOMPLETNA",
+        "assemblyNameEn": "SHIELD ASSEMBLY",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "N4",
+        "componentPartIndex": "ZY85003-N04"
+      }
+    ],
+    "ZY-85003-N-05|a44e8e594b6a9b0b|N5": [
+      {
+        "assemblyId": "ZY-85003-N-1A|a44e8e594b6a9b0b|N4-N7",
+        "assemblyPartIndex": "ZY85003-N1A",
+        "assemblyPosition": "N4-N7",
+        "assemblyNamePl": "OSŁONA KOMPLETNA",
+        "assemblyNameEn": "SHIELD ASSEMBLY",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "N5",
+        "componentPartIndex": "ZY85003-N05"
+      }
+    ],
+    "ZY-85003-N-06|a44e8e594b6a9b0b|N6": [
+      {
+        "assemblyId": "ZY-85003-N-1A|a44e8e594b6a9b0b|N4-N7",
+        "assemblyPartIndex": "ZY85003-N1A",
+        "assemblyPosition": "N4-N7",
+        "assemblyNamePl": "OSŁONA KOMPLETNA",
+        "assemblyNameEn": "SHIELD ASSEMBLY",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "N6",
+        "componentPartIndex": "ZY85003-N06"
+      }
+    ],
+    "ZY-85003-N-07|a44e8e594b6a9b0b|N7": [
+      {
+        "assemblyId": "ZY-85003-N-1A|a44e8e594b6a9b0b|N4-N7",
+        "assemblyPartIndex": "ZY85003-N1A",
+        "assemblyPosition": "N4-N7",
+        "assemblyNamePl": "OSŁONA KOMPLETNA",
+        "assemblyNameEn": "SHIELD ASSEMBLY",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "N7",
+        "componentPartIndex": "ZY85003-N07"
+      }
+    ],
+    "ZY-85003-O-01|a44e8e594b6a9b0b|O1": [
+      {
+        "assemblyId": "ZY-85003-O-1A|a44e8e594b6a9b0b|O1-O6",
+        "assemblyPartIndex": "ZY85003-O1A",
+        "assemblyPosition": "O1-O6",
+        "assemblyNamePl": "SPOOL ASSEMBLY SZPULA KOMPLETNA",
+        "assemblyNameEn": "ZY85001-E01",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "O1",
+        "componentPartIndex": "ZY85003-O01"
+      }
+    ],
+    "ZY-85003-O-02|a44e8e594b6a9b0b|O2": [
+      {
+        "assemblyId": "ZY-85003-O-1A|a44e8e594b6a9b0b|O1-O6",
+        "assemblyPartIndex": "ZY85003-O1A",
+        "assemblyPosition": "O1-O6",
+        "assemblyNamePl": "SPOOL ASSEMBLY SZPULA KOMPLETNA",
+        "assemblyNameEn": "ZY85001-E01",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "O2",
+        "componentPartIndex": "ZY85003-O02"
+      }
+    ],
+    "ZY-85003-O-03|a44e8e594b6a9b0b|O3": [
+      {
+        "assemblyId": "ZY-85003-O-1A|a44e8e594b6a9b0b|O1-O6",
+        "assemblyPartIndex": "ZY85003-O1A",
+        "assemblyPosition": "O1-O6",
+        "assemblyNamePl": "SPOOL ASSEMBLY SZPULA KOMPLETNA",
+        "assemblyNameEn": "ZY85001-E01",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "O3",
+        "componentPartIndex": "ZY85003-O03"
+      }
+    ],
+    "ZY-85003-O-04|a44e8e594b6a9b0b|O4": [
+      {
+        "assemblyId": "ZY-85003-O-1A|a44e8e594b6a9b0b|O1-O6",
+        "assemblyPartIndex": "ZY85003-O1A",
+        "assemblyPosition": "O1-O6",
+        "assemblyNamePl": "SPOOL ASSEMBLY SZPULA KOMPLETNA",
+        "assemblyNameEn": "ZY85001-E01",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "O4",
+        "componentPartIndex": "ZY85003-O04"
+      }
+    ],
+    "ZY-85003-O-05|a44e8e594b6a9b0b|O5": [
+      {
+        "assemblyId": "ZY-85003-O-1A|a44e8e594b6a9b0b|O1-O6",
+        "assemblyPartIndex": "ZY85003-O1A",
+        "assemblyPosition": "O1-O6",
+        "assemblyNamePl": "SPOOL ASSEMBLY SZPULA KOMPLETNA",
+        "assemblyNameEn": "ZY85001-E01",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "O5",
+        "componentPartIndex": "ZY85003-O05"
+      }
+    ],
+    "ZY-85003-O-06|a44e8e594b6a9b0b|O6": [
+      {
+        "assemblyId": "ZY-85003-O-1A|a44e8e594b6a9b0b|O1-O6",
+        "assemblyPartIndex": "ZY85003-O1A",
+        "assemblyPosition": "O1-O6",
+        "assemblyNamePl": "SPOOL ASSEMBLY SZPULA KOMPLETNA",
+        "assemblyNameEn": "ZY85001-E01",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów",
+        "componentPosition": "O6",
+        "componentPartIndex": "ZY85003-O06"
+      }
+    ]
+  },
+  "assembliesByPartId": {
+    "ZY-827793-31A|c117142a16ab8fb3|4,5,6,22,23,26-31": [
+      {
+        "id": "ZY-827793-22|c117142a16ab8fb3|22",
+        "position": "22",
+        "partIndex": "ZY827793-22",
+        "namePl": "OBUDOWA TYLNA",
+        "nameEn": "MOTOR BRACKET",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-827793-23|c117142a16ab8fb3|23",
+        "position": "23",
+        "partIndex": "ZY827793-23",
+        "namePl": "O-RING",
+        "nameEn": "SEALING RING (INNER DIAMETER56X2)",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-827793-26|c117142a16ab8fb3|26",
+        "position": "26",
+        "partIndex": "ZY827793-26",
+        "namePl": "PODKŁADKA",
+        "nameEn": "BEARING WASHER",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-827793-27|c117142a16ab8fb3|27",
+        "position": "27",
+        "partIndex": "ZY827793-27",
+        "namePl": "TRZPIEŃ",
+        "nameEn": "PIN",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-827793-28|c117142a16ab8fb3|28",
+        "position": "28",
+        "partIndex": "ZY827793-28",
+        "namePl": "KOŁO ZĘBATE",
+        "nameEn": "PLANETARY GEAR SHAFT",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-827793-29|c117142a16ab8fb3|29",
+        "position": "29",
+        "partIndex": "ZY827793-29",
+        "namePl": "WAŁ PRZEKŁADNI",
+        "nameEn": "GEAR SHAFT",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-827793-30|c117142a16ab8fb3|30",
+        "position": "30",
+        "partIndex": "ZY827793-30",
+        "namePl": "SPRĘŻYNA",
+        "nameEn": "STRIKE SPRING",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-827793-31|c117142a16ab8fb3|31",
+        "position": "31",
+        "partIndex": "ZY827793-31",
+        "namePl": "BLOK UDAROWY",
+        "nameEn": "STRIKE BLOCK",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      }
+    ],
+    "ZG-03118-07A|1fad9be73d60e853|6,7,8,9,10,11": [
+      {
+        "id": "ZG-03118-06|1fad9be73d60e853|6",
+        "position": "6",
+        "partIndex": "ZG03118-06",
+        "namePl": "POKRYWA OSTRZA",
+        "nameEn": "BLADE COVER",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZG-03118-07|1fad9be73d60e853|7",
+        "position": "7",
+        "partIndex": "ZG03118-07",
+        "namePl": "WAŁ NOŻA TNĄCEGO",
+        "nameEn": "BLADE SHAFT",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      }
+    ],
+    "ZY-82003-099A|73a0c41f767042ad|97-102": [
+      {
+        "id": "ZY-82003-097|73a0c41f767042ad|97",
+        "position": "97",
+        "partIndex": "ZY82003-097",
+        "namePl": "ŚRUBA",
+        "nameEn": "SCREW M8",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-82003-098|73a0c41f767042ad|98",
+        "position": "98",
+        "partIndex": "ZY82003-098",
+        "namePl": "GAŁKA",
+        "nameEn": "ROTARY KNOB",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-82003-099|73a0c41f767042ad|99",
+        "position": "99",
+        "partIndex": "ZY82003-099",
+        "namePl": "UCHWYT DODATKOWY",
+        "nameEn": "AUXILARY HANDLE",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      }
+    ],
+    "ZY-8220055A|7809a8b3ed3f39a8|55,56": [
+      {
+        "id": "ZY-8220055|7809a8b3ed3f39a8|55",
+        "position": "55",
+        "partIndex": "ZY8220055",
+        "namePl": "UKŁAD REGULACJI PRĘDKOŚCI",
+        "nameEn": "CONSTANT SPEED CONTROL DEVICE",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      }
+    ],
+    "ZY-828377-34A|476d6a18215b3ddc|31,32,33,34,35,37": [
+      {
+        "id": "ZY-828377-31|476d6a18215b3ddc|31",
+        "position": "31",
+        "partIndex": "ZY828377-31",
+        "namePl": "PIERŚCIEŃZABEZPIECZAJĄCY",
+        "nameEn": "CLIP RING 17",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-828377-32|476d6a18215b3ddc|32",
+        "position": "32",
+        "partIndex": "ZY828377-32",
+        "namePl": "OBUDOWA PRZEKŁADNI",
+        "nameEn": "GEAR BOX",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-828377-33|476d6a18215b3ddc|33",
+        "position": "33",
+        "partIndex": "ZY828377-33",
+        "namePl": "JAŻMO",
+        "nameEn": "PLANET GEAR",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-828377-34|476d6a18215b3ddc|34",
+        "position": "34",
+        "partIndex": "ZY828377-34",
+        "namePl": "KOŁO ZĘBATE",
+        "nameEn": "PLANET GEAR",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      }
+    ],
+    "ZY-828390-116A|5a79d5a3a0517813|14,15,16": [
+      {
+        "id": "ZY-828390-114|5a79d5a3a0517813|14",
+        "position": "14",
+        "partIndex": "ZY828390-114",
+        "namePl": "NAKRĘTKA ZBIORNIKA OLEJU",
+        "nameEn": "OIL POT LID",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-828390-115|5a79d5a3a0517813|15",
+        "position": "15",
+        "partIndex": "ZY828390-115",
+        "namePl": "USZCZELKA ZBIORNIKA",
+        "nameEn": "FUEL TANK CAP SEAL",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-828390-116|5a79d5a3a0517813|16",
+        "position": "16",
+        "partIndex": "ZY828390-116",
+        "namePl": "HACZYK",
+        "nameEn": "ANTI-LOSS HOOK",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      }
+    ],
+    "ZY-828390-105A|5a79d5a3a0517813|2,3,4,5": [
+      {
+        "id": "ZY-828390-102|5a79d5a3a0517813|2",
+        "position": "2",
+        "partIndex": "ZY828390-102",
+        "namePl": "ZĘBATKA",
+        "nameEn": "TURBINE TEETH",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-828390-103|5a79d5a3a0517813|3",
+        "position": "3",
+        "partIndex": "ZY828390-103",
+        "namePl": "KOŁO ŚLIMAKOWE",
+        "nameEn": "WORM WHEEL",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-828390-104|5a79d5a3a0517813|4",
+        "position": "4",
+        "partIndex": "ZY828390-104",
+        "namePl": "TULEJA TŁOKA",
+        "nameEn": "PISTON BUSHING",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-828390-105|5a79d5a3a0517813|5",
+        "position": "5",
+        "partIndex": "ZY828390-105",
+        "namePl": "OBUDOWA POMPKI OLEJU",
+        "nameEn": "OIL PUMP BODY",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      }
+    ],
+    "ZY-828390-116A|e44bc36b0b4f81a6|14,15,16": [
+      {
+        "id": "ZY-828390-114|e44bc36b0b4f81a6|14",
+        "position": "14",
+        "partIndex": "ZY828390-114",
+        "namePl": "NAKRĘTKA ZBIORNIKA OLEJU",
+        "nameEn": "OIL POT LID",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-828390-115|e44bc36b0b4f81a6|15",
+        "position": "15",
+        "partIndex": "ZY828390-115",
+        "namePl": "USZCZELKA ZBIORNIKA",
+        "nameEn": "FUEL TANK CAP SEAL",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-828390-116|e44bc36b0b4f81a6|16",
+        "position": "16",
+        "partIndex": "ZY828390-116",
+        "namePl": "HACZYK",
+        "nameEn": "ANTI-LOSS HOOK",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      }
+    ],
+    "ZY-828390-105A|e44bc36b0b4f81a6|2,3,4,5": [
+      {
+        "id": "ZY-828390-102|e44bc36b0b4f81a6|2",
+        "position": "2",
+        "partIndex": "ZY828390-102",
+        "namePl": "ZĘBATKA",
+        "nameEn": "TURBINE TEETH",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-828390-103|e44bc36b0b4f81a6|3",
+        "position": "3",
+        "partIndex": "ZY828390-103",
+        "namePl": "KOŁO ŚLIMAKOWE",
+        "nameEn": "WORM WHEEL",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-828390-104|e44bc36b0b4f81a6|4",
+        "position": "4",
+        "partIndex": "ZY828390-104",
+        "namePl": "TULEJA TŁOKA",
+        "nameEn": "PISTON BUSHING",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-828390-105|e44bc36b0b4f81a6|5",
+        "position": "5",
+        "partIndex": "ZY828390-105",
+        "namePl": "OBUDOWA POMPKI OLEJU",
+        "nameEn": "OIL PUMP BODY",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      }
+    ],
+    "ZY-85003-F-1A|a44e8e594b6a9b0b|F1-F11": [
+      {
+        "id": "ZY-85003-F-01|a44e8e594b6a9b0b|F1",
+        "position": "F1",
+        "partIndex": "ZY85003-F01",
+        "namePl": "RĘKOJEŚĆ ROZRUSZNIKA",
+        "nameEn": "STARTER HANDLE",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-85003-F-10|a44e8e594b6a9b0b|F10",
+        "position": "F10",
+        "partIndex": "ZY85003-F10",
+        "namePl": "KOŁO ROZRUSZNIKA",
+        "nameEn": "STARTER WHEEL",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-85003-F-11|a44e8e594b6a9b0b|F11",
+        "position": "F11",
+        "partIndex": "ZY85003-F11",
+        "namePl": "ŚRUBY ROZRUSZNIKA",
+        "nameEn": "STARTER NON-STANDARD SCREWS",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-85003-F-02|a44e8e594b6a9b0b|F2",
+        "position": "F2",
+        "partIndex": "ZY85003-F02",
+        "namePl": "LINKA ROZRUSZNIKA",
+        "nameEn": "ROPE",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-85003-F-03|a44e8e594b6a9b0b|F3",
+        "position": "F3",
+        "partIndex": "ZY85003-F03",
+        "namePl": "ŚRUBA",
+        "nameEn": "HEX. SCREW M5*30",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-85003-F-04|a44e8e594b6a9b0b|F4",
+        "position": "F4",
+        "partIndex": "ZY85003-F04",
+        "namePl": "ŚRUBA",
+        "nameEn": "HEX. SCREW M5*25",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-85003-F-05|a44e8e594b6a9b0b|F5",
+        "position": "F5",
+        "partIndex": "ZY85003-F05",
+        "namePl": "OSŁONA ROZRUSZNIKA",
+        "nameEn": "EASY STARTER COVER",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-85003-F-06|a44e8e594b6a9b0b|F6",
+        "position": "F6",
+        "partIndex": "ZY85003-F06",
+        "namePl": "NAKRĘTKA",
+        "nameEn": "SQUARE NUT M5",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-85003-F-07|a44e8e594b6a9b0b|F7",
+        "position": "F7",
+        "partIndex": "ZY85003-F07",
+        "namePl": "SPRĘŻYNA ROZRUSZNIKA",
+        "nameEn": "STARTER COIL SPRING",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-85003-F-08|a44e8e594b6a9b0b|F8",
+        "position": "F8",
+        "partIndex": "ZY85003-F08",
+        "namePl": "SZPULA",
+        "nameEn": "REEL",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-85003-F-09|a44e8e594b6a9b0b|F9",
+        "position": "F9",
+        "partIndex": "ZY85003-F09",
+        "namePl": "SPRĘŻYNA ROZRUSZNIKA",
+        "nameEn": "STARTER SPRING",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      }
+    ],
+    "ZY-85003-M-1A|a44e8e594b6a9b0b|M1-M18": [
+      {
+        "id": "ZY-85003-M-01|a44e8e594b6a9b0b|M1",
+        "position": "M1",
+        "partIndex": "ZY85003-M01",
+        "namePl": "ŚRUBA",
+        "nameEn": "HEX. SCREW M10X1.25",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-85003-M-10|a44e8e594b6a9b0b|M10",
+        "position": "M10",
+        "partIndex": "ZY85003-M10",
+        "namePl": "KOŁO NAPĘDOWE DEEP GROOVE BALL BEARING GB/T 276",
+        "nameEn": "DRIVEN GEAR",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-85003-M-11|a44e8e594b6a9b0b|M11",
+        "position": "M11",
+        "partIndex": "ZY85003-M11",
+        "namePl": "ŁOŻYSKO KULKOWE 6000RS",
+        "nameEn": "",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-85003-M-12|a44e8e594b6a9b0b|M12",
+        "position": "M12",
+        "partIndex": "ZY85003-M12",
+        "namePl": "SKRZYNIA BIEGÓW",
+        "nameEn": "GEAR CASE",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-85003-M-13|a44e8e594b6a9b0b|M13",
+        "position": "M13",
+        "partIndex": "ZY85003-M13",
+        "namePl": "ŚRUBA",
+        "nameEn": "HEX. SCREW M6X10",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-85003-M-14|a44e8e594b6a9b0b|M14",
+        "position": "M14",
+        "partIndex": "ZY85003-M14",
+        "namePl": "ŚRUBA",
+        "nameEn": "HEX. SCREW M5X20",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-85003-M-15|a44e8e594b6a9b0b|M15",
+        "position": "M15",
+        "partIndex": "ZY85003-M15",
+        "namePl": "PRZEKŁADNIA DEEP GROOVE BALL BEARING GB/T 276",
+        "nameEn": "DRIVE GEAR WHEEL",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-85003-M-16|a44e8e594b6a9b0b|M16",
+        "position": "M16",
+        "partIndex": "ZY85003-M16",
+        "namePl": "ŁOŻYSKO KULKOWE 6000RS",
+        "nameEn": "",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-85003-M-17|a44e8e594b6a9b0b|M17",
+        "position": "M17",
+        "partIndex": "ZY85003-M17",
+        "namePl": "PIERŚCIEŃ USTALAJĄCY",
+        "nameEn": "CIRCLIP GB/T 894.1 10",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-85003-M-18|a44e8e594b6a9b0b|M18",
+        "position": "M18",
+        "partIndex": "ZY85003-M18",
+        "namePl": "PIERŚCIEŃ USTALAJĄCY",
+        "nameEn": "CIRCLIP GB/T 893.1 28",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-85003-M-02|a44e8e594b6a9b0b|M2",
+        "position": "M2",
+        "partIndex": "ZY85003-M02",
+        "namePl": "MISA",
+        "nameEn": "BOWL",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-85003-M-03|a44e8e594b6a9b0b|M3",
+        "position": "M3",
+        "partIndex": "ZY85003-M03",
+        "namePl": "PŁYTA OSTRZA",
+        "nameEn": "BLADE PLATEN",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-85003-M-04|a44e8e594b6a9b0b|M4",
+        "position": "M4",
+        "partIndex": "ZY85003-M04",
+        "namePl": "ŚRUBA",
+        "nameEn": "HEX. SCREW M5X12",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-85003-M-05|a44e8e594b6a9b0b|M5",
+        "position": "M5",
+        "partIndex": "ZY85003-M05",
+        "namePl": "OSŁONA SKRZYNI BIEGÓW",
+        "nameEn": "GEAR CASE SHIELD",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-85003-M-06|a44e8e594b6a9b0b|M6",
+        "position": "M6",
+        "partIndex": "ZY85003-M06",
+        "namePl": "PODSTAWA OSTRZA",
+        "nameEn": "BLADE BASE",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-85003-M-07|a44e8e594b6a9b0b|M7",
+        "position": "M7",
+        "partIndex": "ZY85003-M07",
+        "namePl": "PIERŚCIEŃ USTALAJĄCY DEEP GROOVE BALL BEARING GB/T 276",
+        "nameEn": "CIRCLIP GB/T 893.1 32",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-85003-M-08|a44e8e594b6a9b0b|M8",
+        "position": "M8",
+        "partIndex": "ZY85003-M08",
+        "namePl": "ŁOŻYSKO KULKOWE",
+        "nameEn": "",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-85003-M-09|a44e8e594b6a9b0b|M9",
+        "position": "M9",
+        "partIndex": "ZY85003-M09",
+        "namePl": "WAŁ NAPĘDOWY",
+        "nameEn": "OUTPUT SHAFT",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      }
+    ],
+    "ZY-85003-N-1A|a44e8e594b6a9b0b|N4-N7": [
+      {
+        "id": "ZY-85003-N-04|a44e8e594b6a9b0b|N4",
+        "position": "N4",
+        "partIndex": "ZY85003-N04",
+        "namePl": "OSŁONA",
+        "nameEn": "SHIELD",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-85003-N-05|a44e8e594b6a9b0b|N5",
+        "position": "N5",
+        "partIndex": "ZY85003-N05",
+        "namePl": "ŚRUBA",
+        "nameEn": "HEX. SCREW M4.2X9.5",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-85003-N-06|a44e8e594b6a9b0b|N6",
+        "position": "N6",
+        "partIndex": "ZY85003-N06",
+        "namePl": "OSTRZE C",
+        "nameEn": "KNIFE C",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-85003-N-07|a44e8e594b6a9b0b|N7",
+        "position": "N7",
+        "partIndex": "ZY85003-N07",
+        "namePl": "BOCZNA OSŁONA",
+        "nameEn": "SHIELD SIDE",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      }
+    ],
+    "ZY-85003-O-1A|a44e8e594b6a9b0b|O1-O6": [
+      {
+        "id": "ZY-85003-O-01|a44e8e594b6a9b0b|O1",
+        "position": "O1",
+        "partIndex": "ZY85003-O01",
+        "namePl": "OBUDOWA SZPULI",
+        "nameEn": "SPOOL BOX",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-85003-O-02|a44e8e594b6a9b0b|O2",
+        "position": "O2",
+        "partIndex": "ZY85003-O02",
+        "namePl": "PODKŁADKA",
+        "nameEn": "RETURN SPRING SHIM",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-85003-O-03|a44e8e594b6a9b0b|O3",
+        "position": "O3",
+        "partIndex": "ZY85003-O03",
+        "namePl": "SPRĘŻYNA",
+        "nameEn": "RETURN SPRING",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-85003-O-04|a44e8e594b6a9b0b|O4",
+        "position": "O4",
+        "partIndex": "ZY85003-O04",
+        "namePl": "SZPULA",
+        "nameEn": "SPOOL",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-85003-O-05|a44e8e594b6a9b0b|O5",
+        "position": "O5",
+        "partIndex": "ZY85003-O05",
+        "namePl": "LINKA TNĄCA",
+        "nameEn": "GRASS CUTTING LINE",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      },
+      {
+        "id": "ZY-85003-O-06|a44e8e594b6a9b0b|O6",
+        "position": "O6",
+        "partIndex": "ZY85003-O06",
+        "namePl": "POKRYWA OBUDOWY SZPULI",
+        "nameEn": "SPOOL BOX COVER",
+        "confidence": "wysoka",
+        "reason": "pozycja + zakres indeksów"
+      }
+    ]
+  }
+}
