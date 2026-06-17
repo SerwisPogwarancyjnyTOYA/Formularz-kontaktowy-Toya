@@ -4,28 +4,28 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#b00020">
-  <title>PGW Service Hub — oficjalne rysunki TOYA24</title>
+  <title>PGW Service Hub — rysunki PDF Google Drive</title>
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="stylesheet" href="assets/style.css?v=20260616-v33-toya24-only">
+  <link rel="stylesheet" href="app.css?v=20260617-v40-drive-final">
 </head>
 <body>
   <noscript>Ta strona wymaga włączonego JavaScriptu.</noscript>
   <header class="hero">
     <nav class="topbar" aria-label="Nagłówek">
       <div class="brand-lockup">
-        <img class="brand-main" src="assets/logos/yato-clean.png?v=20260616-v33-toya24-only" alt="YATO" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'brand-lettermark',textContent:'TOYA S.A.'}))">
+        <img class="brand-main" src="assets/logos/yato-clean.png?v=20260617-v40-drive-final" alt="YATO" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'brand-lettermark',textContent:'TOYA S.A.'}))">
         <div>
           <strong>Serwis Pogwarancyjny TOYA S.A.</strong>
-          <span>Oficjalne rysunki techniczne z TOYA24</span>
+          <span>Rysunki PDF z Google Drive</span>
         </div>
       </div>
       <div class="status-pill" id="loadStatus">Ładowanie danych…</div>
     </nav>
     <section class="hero-grid">
       <div>
-        <p class="eyebrow">Wersja publiczna — tylko rysunki TOYA24</p>
-        <h1>Znajdź część wyłącznie z oficjalnego rysunku technicznego TOYA24.</h1>
-        <p class="lead">Klient wyszukuje część po modelu, indeksie lub nazwie. Strona pokazuje tylko rekordy z potwierdzonego rysunku technicznego TOYA24 i przygotowuje zapytanie do serwisu. Ceny oraz dostępność nie są publikowane na stronie.</p>
+        <p class="eyebrow">Wersja publiczna — tylko PDF z Google Drive</p>
+        <h1>Znajdź część z rysunku technicznego PDF.</h1>
+        <p class="lead">Klient wyszukuje część po modelu, indeksie lub nazwie. Strona pokazuje wyłącznie rekordy z podpiętym rysunkiem PDF w Google Drive i przygotowuje zapytanie do serwisu. Ceny oraz dostępność nie są publikowane na stronie.</p>
       </div>
       <aside class="stats-card" aria-label="Statystyki bazy">
         <div><strong id="statParts">—</strong><span>części</span></div>
@@ -52,9 +52,9 @@
     </section>
 
     <section class="value-strip" aria-label="Co robi strona">
-      <div><strong>1</strong><span>Wyszukuje tylko części z oficjalnych rysunków TOYA24.</span></div>
+      <div><strong>1</strong><span>Wyszukuje tylko części z rysunków PDF Google Drive.</span></div>
       <div><strong>2</strong><span>Pokazuje pozycję na rysunku oraz elementy powiązane z urządzeniem.</span></div>
-      <div><strong>3</strong><span>Wyświetla oficjalny rysunek PDF z TOYA24 bez obciążania repozytorium.</span></div>
+      <div><strong>3</strong><span>Wyświetla PDF z Google Drive bez obciążania repozytorium.</span></div>
       <div><strong>4</strong><span>Składa gotowe zapytanie klienta do skopiowania i wysłania.</span></div>
     </section>
 
@@ -69,7 +69,7 @@
         </div>
         <div id="results" class="results empty-state">
           <div class="empty-icon">⌕</div>
-          <p>Najlepszy start: indeks urządzenia lub indeks części z oficjalnego rysunku TOYA24. Rekordy spoza TOYA24 są ukryte w trybie publicznym.</p>
+          <p>Najlepszy start: indeks urządzenia lub indeks części z oficjalnego rysunku Google Drive. Rekordy bez podpiętego PDF Google Drive są ukryte w trybie publicznym.</p>
         </div>
       </section>
 
@@ -82,7 +82,7 @@
           <a id="viewerOpen" href="#" target="_blank" rel="noreferrer" class="secondary hidden">Otwórz</a>
         </div>
         <div id="viewer" class="viewer empty-viewer">
-          Wybierz wynik z listy, żeby zobaczyć oficjalny rysunek techniczny TOYA24.
+          Wybierz wynik z listy, żeby zobaczyć oficjalny rysunek techniczny Google Drive.
         </div>
 
         <section class="mail-box" aria-labelledby="mailTitle">
@@ -118,17 +118,17 @@
 
   <footer class="footer">
     <div class="brand-strip" aria-label="Marki TOYA">
-      <img src="assets/logos/yato-clean.png?v=20260616-v33-toya24-only" alt="YATO" onerror="this.outerHTML='<span class=&quot;brand-chip&quot;>YATO</span>'">
-      <img src="assets/logos/vorel-clean.png?v=20260616-v33-toya24-only" alt="VOREL" onerror="this.outerHTML='<span class=&quot;brand-chip&quot;>VOREL</span>'">
-      <img src="assets/logos/sthor-clean.png?v=20260616-v33-toya24-only" alt="STHOR" onerror="this.outerHTML='<span class=&quot;brand-chip&quot;>STHOR</span>'">
-      <img src="assets/logos/lund-clean.png?v=20260616-v33-toya24-only" alt="LUND" onerror="this.outerHTML='<span class=&quot;brand-chip&quot;>LUND</span>'">
-      <img src="assets/logos/flo-clean.png?v=20260616-v33-toya24-only" alt="FLO" onerror="this.outerHTML='<span class=&quot;brand-chip&quot;>FLO</span>'">
-      <img src="assets/logos/fala-clean.png?v=20260616-v33-toya24-only" alt="FALA" onerror="this.outerHTML='<span class=&quot;brand-chip&quot;>FALA</span>'">
+      <img src="assets/logos/yato-clean.png?v=20260617-v40-drive-final" alt="YATO" onerror="this.outerHTML='<span class=&quot;brand-chip&quot;>YATO</span>'">
+      <img src="assets/logos/vorel-clean.png?v=20260617-v40-drive-final" alt="VOREL" onerror="this.outerHTML='<span class=&quot;brand-chip&quot;>VOREL</span>'">
+      <img src="assets/logos/sthor-clean.png?v=20260617-v40-drive-final" alt="STHOR" onerror="this.outerHTML='<span class=&quot;brand-chip&quot;>STHOR</span>'">
+      <img src="assets/logos/lund-clean.png?v=20260617-v40-drive-final" alt="LUND" onerror="this.outerHTML='<span class=&quot;brand-chip&quot;>LUND</span>'">
+      <img src="assets/logos/flo-clean.png?v=20260617-v40-drive-final" alt="FLO" onerror="this.outerHTML='<span class=&quot;brand-chip&quot;>FLO</span>'">
+      <img src="assets/logos/fala-clean.png?v=20260617-v40-drive-final" alt="FALA" onerror="this.outerHTML='<span class=&quot;brand-chip&quot;>FALA</span>'">
     </div>
-    <p>TOYA S.A. — Serwis Pogwarancyjny. Publiczny widok zawiera wyłącznie części z potwierdzonych rysunków technicznych TOYA24. Ceny i dostępność potwierdza serwis po otrzymaniu zapytania.</p>
+    <p>TOYA S.A. — Serwis Pogwarancyjny. Publiczny widok zawiera wyłącznie części z rysunków technicznych PDF Google Drive. Ceny i dostępność potwierdza serwis po otrzymaniu zapytania.</p>
   </footer>
 
-  <script src="config.js?v=20260616-v33-toya24-only"></script>
-  <script src="assets/app.js?v=20260616-v33-toya24-only" defer></script>
+  <script src="config.js?v=20260617-v40-drive-final"></script>
+  <script src="app.js?v=20260617-v40-drive-final" defer></script>
 </body>
 </html>

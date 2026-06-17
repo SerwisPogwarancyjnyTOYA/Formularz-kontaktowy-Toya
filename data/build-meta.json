@@ -1,9 +1,21 @@
 {
-  "version": "20260616-v33-toya24-only",
-  "mode": "toya24-official-only",
-  "parts": 68,
-  "drawings": 1,
-  "devices": 1,
-  "removed": "prices, availability, non-TOYA24 technical drawings",
-  "source": "TOYA24_zalaczniki manifest"
+  "version": "v40-clean-deduped",
+  "mode": "drive-client-pdf-only",
+  "priceAndAvailability": "removed",
+  "before": {
+    "drawings": 50,
+    "parts": 2202,
+    "driveMap": 34
+  },
+  "after": {
+    "drawings": 34,
+    "parts": 2179,
+    "devices": 34,
+    "driveMap": 34
+  },
+  "removed": {
+    "drawingsWithoutDrivePdf": 0,
+    "duplicateDrawingGroups": 4,
+    "parts": 23
+  }
 }

@@ -1,49 +1,13 @@
-# PGW Service Hub — wersja do publikacji
+# Wdrożenie v40 clean deduped
 
-Ta paczka przywraca stronę jako statyczną aplikację GitHub Pages: bez backendu, bez mailto, bez generowania JSON-a dla klienta.
+1. W repo zostaw folder `.git`.
+2. Usuń całą resztę plików.
+3. Wklej zawartość tej paczki.
+4. W GitHub Desktop zrób commit i push.
+5. Otwórz stronę z parametrem cache-bust:
 
-## Co zostało zrobione
-
-- profesjonalny, lżejszy interfejs pod prezentację wewnętrzną,
-- wyszukiwanie po indeksie części, indeksie urządzenia, nazwie PL/EN i tekście z PDF,
-- podgląd PDF/JPG/PNG bezpośrednio na stronie,
-- lista części z pozycją z rysunku, nazwą, stanem i ceną, jeśli cena istnieje w danych,
-- generator odpowiedzi tylko jako pole tekstowe do skopiowania,
-- brak agresywnego cache/service workera, który wcześniej potrafił trzymać starą wersję strony,
-- indeks zbudowany z archiwów źródłowych oraz arkusza stanów.
-
-## Liczby z audytu
-
-Szczegóły są w pliku `AUDYT_DANYCH.md`.
-
-## Wdrożenie na GitHub
-
-1. W repozytorium podmień/dodaj pliki z tej paczki.
-2. Wstaw oryginalne, wysokiej jakości logotypy do `assets/logos/` albo zostaw dotychczasowe pliki w root.
-3. Upewnij się, że rysunki są w ścieżkach wskazanych w `data/drawings.generated.json`.
-4. GitHub → Settings → Pages → Source: **GitHub Actions**.
-5. Po commicie workflow `Deploy static PGW Service Hub` opublikuje stronę.
-
-## Import rysunków z archiwów
-
-Jeżeli masz trzy archiwa źródłowe z paczki `Github.zip/ezyZip`, uruchom lokalnie z katalogu repo:
-
-```bash
-python scripts/import-drawings-from-zips.py /ścieżka/do/folderu/z/archiwami
+```text
+https://serwispogwarancyjnytoya.github.io/Formularz-kontaktowy-Toya/?v=20260617-v40-clean-deduped
 ```
 
-Skrypt utworzy czysty katalog `drawings/...` zgodny z manifestem. Bez fizycznych plików PDF/JPG/PNG strona pokaże dane części, ale podgląd rysunków będzie prowadził do brakujących plików.
-
-## Uwaga o DOCX
-
-DOCX-y są zaindeksowane jako pliki, ale klientowi najlepiej pokazywać PDF/JPG/PNG. Pliki DOCX warto przekonwertować do PDF i podmienić w manifestach, jeśli mają być widoczne bez pobierania.
-
-
-## v32
-
-Wersja v32 usuwa z publicznego widoku ceny oraz stany/dostępność. Po wdrożeniu otwórz stronę z parametrem `?v=20260613-v32-bez-cen-stanow`.
-
-
-## v33 — TOYA24-only
-
-Wgrywamy całą paczkę. Po wdrożeniu test: `?v=20260616-v33-toya24-only`. Strona publiczna pokazuje tylko rekordy z oficjalnego manifestu TOYA24 i nie publikuje cen ani dostępności.
+Jeśli PDF z Drive się nie wyświetla, najpierw sprawdź uprawnienia pliku na Drive. Plik musi być dostępny do odczytu dla odbiorcy strony.

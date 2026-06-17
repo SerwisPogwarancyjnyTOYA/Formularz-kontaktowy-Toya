@@ -1,11 +1,13 @@
 window.PGW_CONFIG = {
-  storageMode: 'auto',
-  officialOnly: true,
+  storageMode: 'drive',
+  publicDriveOnly: true,
+  pdfOnly: true,
+  officialOnly: false,
   preferExternalDrawings: true,
-  demoDevices: ['YT-82200'],
+  demoDevices: ['YT-82200', 'YT-85177', 'YT-827795', 'YT-851992', 'YT-82003', 'YT-85003'],
   drawingsBaseUrl: '',
-  storageLabel: 'TOYA24',
+  storageLabel: 'Google Drive',
   driveSearchFallback: false,
   driveSearchBaseUrl: '',
-  driveMapUrls: ['data/drive-drawings-map.json', 'drive-drawings-map.json']
+  driveMapUrls: ['data/drive-drawings-map.json']
 };

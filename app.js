@@ -1,22 +1,22 @@
 (() => {
   'use strict';
-  const VERSION = '20260616-v33-toya24-only';
+  const VERSION = '20260617-v40-drive-pdf-final';
   const CONFIG = Object.assign({
     storageMode: 'auto',
     drawingsBaseUrl: '',
     preferExternalDrawings: true,
-    storageLabel: 'TOYA24',
+    storageLabel: 'Google Drive',
     demoDevices: ['YT-82200'],
     driveSearchFallback: false,
     driveSearchBaseUrl: '',
     driveMapUrls: ['data/drive-drawings-map.json', 'drive-drawings-map.json']
   }, window.PGW_CONFIG || {});
   const DATA_URLS = {
-    meta: ['data/build-meta.json', 'build-meta.json'],
-    drawings: ['data/drawings.generated.json', 'drawings.generated.json', 'drawings.json', 'data/drawings.json'],
-    parts: ['data/parts.generated.json', 'parts.generated.json', 'parts.json', 'data/parts.json'],
-    devices: ['data/devices.generated.json', 'devices.generated.json', 'devices.json', 'data/devices.json'],
-    driveMap: (window.PGW_CONFIG && window.PGW_CONFIG.driveMapUrls) || ['data/drive-drawings-map.json', 'drive-drawings-map.json']
+    meta: ['data/build-meta.json'],
+    drawings: ['data/drawings.json'],
+    parts: ['data/parts.json'],
+    devices: ['data/devices.json'],
+    driveMap: (window.PGW_CONFIG && window.PGW_CONFIG.driveMapUrls) || ['data/drive-drawings-map.json']
   };
 
   const state = {
@@ -46,7 +46,7 @@
       state.driveMap = await loadFirst(DATA_URLS.driveMap, {});
       buildIndexes();
       renderStats();
-      setStatus(`Gotowe: ${fmt(state.parts.length)} części z oficjalnych rysunków TOYA24, ${fmt(state.drawings.length)} rysunków`);
+      setStatus(`Gotowe: ${fmt(state.parts.length)} części z rysunków PDF Google Drive, ${fmt(state.drawings.length)} rysunków PDF`);
       state.initialized = true;
       state.query = els.searchInput.value.trim();
       if (state.query) renderResults(); else renderExamples();
@@ -160,7 +160,8 @@
     }
     for (const device of state.devices) state.devicesByIndex.set(norm(device.deviceIndex), device);
     applyDriveManifest();
-    if (CONFIG.officialOnly) filterToOfficialToya24();
+    if (CONFIG.publicDriveOnly) filterToPublicDrivePdf();
+    else if (CONFIG.officialOnly) filterToOfficialToya24();
     for (const part of state.parts) {
       part.__search = norm([part.partIndex, part.namePl, part.nameEn, part.position, part.deviceIndex, part.drawingTitle, part.zun].join(' '));
     }
@@ -169,12 +170,48 @@
     }
   }
 
-  function filterToOfficialToya24() {
-    const officialDrawings = new Set(
+
+  function isPdfDrawing(drawing) {
+    if (!drawing) return false;
+    const type = String(drawing.type || '').toLowerCase();
+    const mime = String(drawing.mimeType || '').toLowerCase();
+    const hay = [
+      drawing.fileName, drawing.name, drawing.title, drawing.path, drawing.localPath, drawing.originalPath,
+      drawing.viewerUrl, drawing.openUrl, drawing.url, drawing.toya24AttachmentUrl, drawing.partsPdfUrl, drawing.toya24PdfUrl
+    ].filter(Boolean).join(' ').toLowerCase();
+    return type === 'pdf' || mime.includes('pdf') || /\.pdf(\?|#|$)/i.test(hay);
+  }
+
+  function hasDrivePdfPreview(drawing) {
+    if (!drawing || !isPdfDrawing(drawing)) return false;
+    if (drawing.driveFileId || drawing.googleDriveId || drawing.gdriveId) return true;
+    const hay = [drawing.viewerUrl, drawing.openUrl, drawing.url].filter(Boolean).join(' ').toLowerCase();
+    return hay.includes('drive.google.com') && (hay.includes('/preview') || hay.includes('/file/d/'));
+  }
+
+  function filterToPublicDrivePdf() {
+    const publicDrawings = new Set(
       state.drawings
-        .filter(d => (String(d.officialSource || d.source || '').toUpperCase() === 'TOYA24' || d.official === true || d.toya24AttachmentUrl || d.toya24ProductUrl) && isPdfDrawing(d))
+        .filter(d => hasDrivePdfPreview(d))
         .map(d => String(d.id))
     );
+    state.drawings = state.drawings.filter(d => publicDrawings.has(String(d.id)));
+    state.parts = state.parts.filter(p => publicDrawings.has(String(p.drawingId)));
+    const publicModels = new Set(state.drawings.map(d => norm(d.deviceIndex)).filter(Boolean));
+    state.devices = state.devices.filter(d => publicModels.has(norm(d.deviceIndex)));
+    state.drawingById = new Map(state.drawings.map((d) => [String(d.id), d]));
+    state.partsByDrawing = new Map();
+    for (const part of state.parts) {
+      const did = String(part.drawingId || '');
+      if (!state.partsByDrawing.has(did)) state.partsByDrawing.set(did, []);
+      state.partsByDrawing.get(did).push(part);
+    }
+    state.devicesByIndex = new Map();
+    for (const device of state.devices) state.devicesByIndex.set(norm(device.deviceIndex), device);
+  }
+
+  function filterToOfficialToya24() {
+    const officialDrawings = new Set(state.drawings.filter(d => String(d.officialSource || d.source || '').toUpperCase() === 'TOYA24' || d.official === true || d.toya24AttachmentUrl || d.toya24ProductUrl).map(d => String(d.id)));
     state.drawings = state.drawings.filter(d => officialDrawings.has(String(d.id)));
     state.parts = state.parts.filter(p => officialDrawings.has(String(p.drawingId)));
     const officialModels = new Set(state.drawings.map(d => norm(d.deviceIndex)).filter(Boolean));
@@ -226,6 +263,9 @@
       const viewerUrl = row.viewerUrl || (fileId ? `https://drive.google.com/file/d/${encodeURIComponent(fileId)}/preview` : '');
       const openUrl = row.openUrl || url || (fileId ? `https://drive.google.com/file/d/${fileId}/view` : '');
       const mimeType = row.mimeType || '';
+      const fileLabel = String([row.fileName, row.name, row.title, row.path, row.localPath, row.drivePath, row.url, row.viewerUrl].filter(Boolean).join(' ')).toLowerCase();
+      if (CONFIG.pdfOnly !== false && mimeType && !String(mimeType).toLowerCase().includes('pdf') && !/\.pdf(\?|#|$)/i.test(fileLabel)) continue;
+      if (CONFIG.pdfOnly !== false && !mimeType && fileLabel && !/\.pdf(\?|#|$)/i.test(fileLabel)) continue;
 
       const rawKeys = [];
       const push = (v) => {
@@ -301,20 +341,8 @@
       .trim();
   }
 
-  function isPdfDrawing(drawing) {
-    if (!drawing) return false;
-    const type = String(drawing.type || '').toLowerCase();
-    const mime = String(drawing.mimeType || '').toLowerCase();
-    const hay = [
-      drawing.toya24AttachmentUrl, drawing.partsPdfUrl, drawing.toya24PdfUrl, drawing.url,
-      drawing.viewerUrl, drawing.openUrl, drawing.path, drawing.localPath, drawing.originalPath,
-      drawing.fileName, drawing.title, drawing.name
-    ].filter(Boolean).join(' ').toLowerCase();
-    return type === 'pdf' || mime.includes('pdf') || /\.pdf(\?|#|$)/i.test(hay);
-  }
-
   function drawingHasPreview(d) {
-    return Boolean(d && isPdfDrawing(d) && (d.driveFileId || d.googleDriveId || d.gdriveId || d.viewerUrl || d.openUrl || d.url || d.toya24AttachmentUrl || d.partsPdfUrl || d.toya24PdfUrl));
+    return hasDrivePdfPreview(d);
   }
 
   function countDrivePreviews() {
@@ -381,12 +409,12 @@
       .slice(0, 6);
 
     els.resultsTitle.textContent = 'Sprawdzone przykłady do prezentacji';
-    els.resultsMeta.textContent = `Przykładowe rekordy pochodzą wyłącznie z oficjalnych rysunków technicznych TOYA24.`;
+    els.resultsMeta.textContent = `Przykładowe rekordy pochodzą wyłącznie z rysunków PDF podpiętych z Google Drive.`;
     els.results.className = 'results';
     els.results.innerHTML = [
       ...sampleParts.map(renderPartResult),
       ...sampleDrawings.map(renderDrawingResult)
-    ].join('') || '<div class="empty-state">Brak przykładowych rekordów z oficjalnym rysunkiem TOYA24.</div>';
+    ].join('') || '<div class="empty-state">Brak przykładowych rekordów z podpiętym PDF Google Drive.</div>';
     autoPreviewFirst([...sampleParts, ...sampleDrawings]);
   }
 
@@ -465,7 +493,7 @@
     const siblings = (state.partsByDrawing.get(String(part.drawingId)) || []).filter(p => p.id !== part.id).slice(0, 8);
     const hasPreview = drawingHasPreview(drawing);
     const name = part.namePl || part.nameEn || 'Część z rysunku';
-    const previewBadge = hasPreview ? '<span class="badge ok">TOYA24</span>' : '<span class="badge warn">poza TOYA24</span>';
+    const previewBadge = hasPreview ? '<span class="badge ok">PDF Drive</span>' : '<span class="badge warn">brak PDF Drive</span>';
     return `<article class="result-card open ${hasPreview ? 'has-preview' : 'needs-preview'}">
       <div class="result-main">
         <div>
@@ -485,7 +513,7 @@
           <tr><th>Nazwa PL</th><td>${escapeHtml(part.namePl || '—')}</td><th>Nazwa EN</th><td>${escapeHtml(part.nameEn || '—')}</td></tr>
           <tr><th>Rysunek</th><td colspan="3">${escapeHtml(drawing.title || part.drawingTitle || '')}</td></tr>
         </tbody></table>
-        ${!hasPreview ? `<div class="inline-note">Ten rekord nie powinien być widoczny w trybie TOYA24-only. Sprawdź manifest oficjalnych rysunków.</div>` : ''}
+        ${!hasPreview ? `<div class="inline-note">Ten rekord nie powinien być widoczny w trybie publicznym. Sprawdź, czy ma PDF w manifeście Google Drive.</div>` : ''}
         ${siblings.length ? `<div class="related"><p class="related-title">Z czym się wiąże na tym rysunku:</p><div class="related-list">${siblings.map(s => `<button data-search="${escapeAttr(s.partIndex)}">${escapeHtml(s.position ? s.position + ' — ' : '')}${escapeHtml(s.partIndex)}</button>`).join('')}</div></div>` : ''}
       </div>
     </article>`;
@@ -497,7 +525,7 @@
     return `<article class="result-card ${hasPreview ? 'has-preview' : 'needs-preview'}">
       <div class="result-main">
         <div>
-          <div class="result-kicker"><span class="badge red">Rysunek</span><span class="badge">PDF</span><span class="badge">${escapeHtml(drawing.deviceIndex || 'bez indeksu')}</span>${hasPreview ? '<span class="badge ok">TOYA24</span>' : '<span class="badge warn">poza TOYA24</span>'}</div>
+          <div class="result-kicker"><span class="badge red">Rysunek</span><span class="badge">PDF</span><span class="badge">${escapeHtml(drawing.deviceIndex || 'bez indeksu')}</span>${hasPreview ? '<span class="badge ok">PDF Drive</span>' : '<span class="badge warn">brak PDF Drive</span>'}</div>
           <h3 class="result-title">${mark(drawing.title || drawing.fileName || 'Rysunek')}</h3>
           <p class="result-sub">${escapeHtml(drawing.path || drawing.originalPath || '')}</p>
         </div>
@@ -535,7 +563,7 @@
 
     if (!url) {
       const search = driveSearchUrl(drawing);
-      els.viewer.innerHTML = `<div class="missing-file soft"><strong>Brak oficjalnego linku TOYA24 dla tego rysunku.</strong><p>W trybie publicznym pokazujemy wyłącznie pozycje z potwierdzonym rysunkiem technicznym TOYA24.</p>${search ? `<a class="primary" href="${escapeAttr(search)}" target="_blank" rel="noreferrer">Otwórz źródło</a>` : ''}</div>`;
+      els.viewer.innerHTML = `<div class="missing-file soft"><strong>Brak podpiętego PDF w Google Drive dla tego rysunku.</strong><p>W trybie publicznym pokazujemy wyłącznie pozycje z podpiętym rysunkiem PDF w Google Drive.</p>${search ? `<a class="primary" href="${escapeAttr(search)}" target="_blank" rel="noreferrer">Otwórz źródło</a>` : ''}</div>`;
       if (search) { els.viewerOpen.href = search; els.viewerOpen.classList.remove('hidden'); }
       return;
     }
@@ -543,28 +571,22 @@
     const exists = await fileLooksAvailable(source);
     if (!exists) {
       els.viewer.className = 'viewer empty-viewer';
-      els.viewer.innerHTML = `<div class="missing-file"><strong>Rysunek nie jest dostępny pod wskazanym adresem.</strong><p>Baza zna części i rysunek, ale plik nie został jeszcze opublikowany albo adres jest niepoprawny. Dla produkcji najlepiej trzymać rysunki poza repo: CDN/R2/TOYA24.</p><code>${escapeHtml(url)}</code></div>`;
+      els.viewer.innerHTML = `<div class="missing-file"><strong>Rysunek nie jest dostępny pod wskazanym adresem.</strong><p>Baza zna części i rysunek, ale plik nie został jeszcze opublikowany albo adres jest niepoprawny. Sprawdź uprawnienia pliku Google Drive albo wpis w manifeście PDF.</p><code>${escapeHtml(url)}</code></div>`;
       return;
     }
 
     const low = String(url).toLowerCase();
     const type = (drawing.type || source.kind || '').toLowerCase();
 
-    if (!isPdfDrawing(drawing) && source.kind !== 'drive-preview') {
-      els.viewer.className = 'viewer empty-viewer';
-      els.viewer.innerHTML = `<div class="viewer-note"><strong>Klientowi pokazujemy wyłącznie rysunki PDF.</strong><br>Ten plik nie jest PDF-em, więc został ukryty w widoku publicznym.</div>`;
-      return;
-    }
-
     if (source.kind === 'drive-preview') {
       els.viewer.className = 'viewer';
-      els.viewer.innerHTML = `<iframe src="${escapeAttr(url)}" title="${escapeAttr(drawing.title || 'Podgląd rysunku TOYA24')}"></iframe>`;
+      els.viewer.innerHTML = `<iframe src="${escapeAttr(url)}" title="${escapeAttr(drawing.title || 'Podgląd rysunku PDF Google Drive')}"></iframe>`;
       return;
     }
 
-    if (type === 'image' || /\.(png|jpe?g|webp|gif|svg|bmp)(\?|#|$)/i.test(low)) {
-      els.viewer.className = 'viewer';
-      els.viewer.innerHTML = `<img src="${escapeAttr(url)}" alt="${escapeAttr(drawing.title || 'Rysunek')}" onerror="this.closest('.viewer').className='viewer empty-viewer';this.closest('.viewer').innerHTML='<div class=&quot;viewer-note&quot;><strong>Nie udało się wyświetlić obrazu.</strong><br>Sprawdź hosting/CDN albo uprawnienia pliku.</div>'">`;
+    if (!isPdfDrawing(drawing)) {
+      els.viewer.className = 'viewer empty-viewer';
+      els.viewer.innerHTML = `<div class="viewer-note"><strong>Klientowi pokazujemy wyłącznie PDF.</strong><br>Ten rekord nie powinien być widoczny w katalogu publicznym.</div>`;
     } else if (type === 'pdf' || /\.pdf(\?|#|$)/i.test(low)) {
       els.viewer.className = 'viewer';
       const sep = url.includes('#') ? '&' : '#';
@@ -585,20 +607,20 @@
 
     if (drawing.toya24AttachmentUrl || drawing.partsPdfUrl || drawing.toya24PdfUrl) return {kind:'toya24-pdf', url: direct, viewerUrl: direct, openUrl: direct, external:true};
 
-    if (mode === 'drive' && driveId && isPdfDrawing(drawing)) return driveSource(driveId);
+    if (mode === 'drive' && driveId) return driveSource(driveId);
     if (mode === 'drive' && search) return {kind:'drive-search', url:'', viewerUrl:'', openUrl:search, external:true};
     if (mode === 'cdn' && cdn) return {kind:'cdn', url: cdn, viewerUrl: cdn, openUrl: cdn, external:true};
     if (mode === 'local') return {kind:'local', url: local, viewerUrl: local, openUrl: local, external:false};
 
     if (CONFIG.preferExternalDrawings !== false) {
-      if (driveId && isPdfDrawing(drawing)) return driveSource(driveId);
+      if (driveId) return driveSource(driveId);
       if (direct) return {kind:'external', url: direct, viewerUrl: direct, openUrl: drawing.openUrl || direct, external:true};
       if (cdn) return {kind:'cdn', url: cdn, viewerUrl: cdn, openUrl: cdn, external:true};
     }
 
     if (local) return {kind:'local', url: local, viewerUrl: local, openUrl: local, external:false};
     if (direct) return {kind:'external', url: direct, viewerUrl: direct, openUrl: drawing.openUrl || direct, external:true};
-    if (driveId && isPdfDrawing(drawing)) return driveSource(driveId);
+    if (driveId) return driveSource(driveId);
     if (search) return {kind:'drive-search', url:'', viewerUrl:'', openUrl:search, external:true};
     return {kind:'missing', url:'', viewerUrl:'', openUrl:'', external:false};
   }

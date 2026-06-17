@@ -55,3 +55,8 @@ button,.secondary,.primary,.ghost{border:0;border-radius:14px;padding:11px 16px;
 .price:empty:before{content:'—'}
 @media (max-width:1100px){.value-strip{grid-template-columns:1fr 1fr}.selection-row{grid-template-columns:1fr auto}}
 @media (max-width:650px){.value-strip{grid-template-columns:1fr}.selection-row{grid-template-columns:1fr}.selection-row input{width:100%}.selection-row .tiny{justify-self:start}}
+
+/* v40 cleanup */
+.result-card.needs-preview { display: none; }
+.status-pill { white-space: nowrap; }
+.viewer iframe { background: #fff; }
