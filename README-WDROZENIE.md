@@ -1,23 +1,11 @@
-# Wdrożenie v48
+# Wdrożenie v49
 
-## Najbezpieczniejsza ścieżka
+1. Rozpakuj paczkę.
+2. Wgraj zawartość do czystego repo GitHub Pages.
+3. Nie wrzucaj PDF-ów do repo.
+4. Pełny manifest z Drive generuj skryptem `scripts/google-drive-export-full-manifest.gs`.
+5. Wynikowy `drive-drawings-map.json` wgraj do `data/drive-drawings-map.json`.
 
-1. Otwórz świeże, lekkie repo bez starej historii `.git`.
-2. Usuń starą zawartość katalogu roboczego, ale nie usuwaj `.git`.
-3. Wklej zawartość tej paczki.
-4. Zrób commit, np. `PGW Service Hub v48 dark mode`.
-5. Wypchnij przez GitHub Desktop.
+## Marki
 
-## Po wdrożeniu sprawdź
-
-- czy wyszukiwarka urządzeń działa,
-- czy PDF z Drive pokazuje się po wyborze modelu,
-- czy koszyk części działa na komputerze i telefonie,
-- czy tryb ciemny przełącza się i zostaje po odświeżeniu,
-- czy krok 4 generuje mail do `service@yato.pl`.
-
-Adres testowy:
-
-```text
-https://serwispogwarancyjnytoya.github.io/Formularz-kontaktowy-Toya/?v=20260617-v48-dark-mode
-```
+Nie tworzymy osobnych stron dla marek. Jedna aplikacja obsługuje wszystkie marki przez pole `brand` w danych. Jeżeli marka nie jest podana, strona próbuje ją wywnioskować z folderu, indeksu lub nazwy pliku.

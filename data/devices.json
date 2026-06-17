@@ -439,7 +439,7 @@
   },
   {
     "deviceIndex": "YG-03118",
-    "brand": "",
+    "brand": "YATO GASTRO",
     "title": "YG-03118",
     "drawings": [
       "1fad9be73d60e853"
@@ -2551,5 +2551,197 @@
       "ZY-854837-136|eae1dac860504f29|136"
     ],
     "public": true
+  },
+  {
+    "deviceIndex": "79106",
+    "brand": "LUND",
+    "title": "79106 — rysunek części LUND (PDF Drive)",
+    "drawings": [
+      "9b6f6e6a5e4e237f"
+    ],
+    "parts": [],
+    "public": true,
+    "pdfOnly": true,
+    "partsStatus": "no-parts-list-yet"
+  },
+  {
+    "deviceIndex": "79098",
+    "brand": "LUND",
+    "title": "79098 — rysunek części LUND (PDF Drive)",
+    "drawings": [
+      "4c899d0fa918a397"
+    ],
+    "parts": [],
+    "public": true,
+    "pdfOnly": true,
+    "partsStatus": "no-parts-list-yet"
+  },
+  {
+    "deviceIndex": "79096",
+    "brand": "LUND",
+    "title": "79096 — rysunek części LUND (PDF Drive)",
+    "drawings": [
+      "2e8b38326660225c"
+    ],
+    "parts": [],
+    "public": true,
+    "pdfOnly": true,
+    "partsStatus": "no-parts-list-yet"
+  },
+  {
+    "deviceIndex": "79024",
+    "brand": "LUND",
+    "title": "79024 — rysunek części LUND (PDF Drive)",
+    "drawings": [
+      "4d16f8234839175c"
+    ],
+    "parts": [],
+    "public": true,
+    "pdfOnly": true,
+    "partsStatus": "no-parts-list-yet"
+  },
+  {
+    "deviceIndex": "79004",
+    "brand": "LUND",
+    "title": "79004 — rysunek części LUND (PDF Drive)",
+    "drawings": [
+      "c922d1e18d0f5ccc"
+    ],
+    "parts": [],
+    "public": true,
+    "pdfOnly": true,
+    "partsStatus": "no-parts-list-yet"
+  },
+  {
+    "deviceIndex": "73060",
+    "brand": "LUND",
+    "title": "73060 — rysunek części LUND (PDF Drive)",
+    "drawings": [
+      "de325d867d027ad2"
+    ],
+    "parts": [],
+    "public": true,
+    "pdfOnly": true,
+    "partsStatus": "no-parts-list-yet"
+  },
+  {
+    "deviceIndex": "79354",
+    "brand": "STHOR",
+    "title": "79354 — rysunek części STHOR (PDF Drive)",
+    "drawings": [
+      "b73069310d955f7c"
+    ],
+    "parts": [],
+    "public": true,
+    "pdfOnly": true,
+    "partsStatus": "no-parts-list-yet"
+  },
+  {
+    "deviceIndex": "79151",
+    "brand": "STHOR",
+    "title": "79151 — rysunek części STHOR (PDF Drive)",
+    "drawings": [
+      "97af5268fc6c514e"
+    ],
+    "parts": [],
+    "public": true,
+    "pdfOnly": true,
+    "partsStatus": "no-parts-list-yet"
+  },
+  {
+    "deviceIndex": "79140",
+    "brand": "STHOR",
+    "title": "79140 — rysunek części STHOR (PDF Drive)",
+    "drawings": [
+      "c14f16f0ee7dd12d"
+    ],
+    "parts": [],
+    "public": true,
+    "pdfOnly": true,
+    "partsStatus": "no-parts-list-yet"
+  },
+  {
+    "deviceIndex": "79119",
+    "brand": "STHOR",
+    "title": "79119 — rysunek części STHOR (PDF Drive)",
+    "drawings": [
+      "31525d85c5e69e89"
+    ],
+    "parts": [],
+    "public": true,
+    "pdfOnly": true,
+    "partsStatus": "no-parts-list-yet"
+  },
+  {
+    "deviceIndex": "79108",
+    "brand": "STHOR",
+    "title": "79108 — rysunek części STHOR (PDF Drive)",
+    "drawings": [
+      "d898cd04df43fef8"
+    ],
+    "parts": [],
+    "public": true,
+    "pdfOnly": true,
+    "partsStatus": "no-parts-list-yet"
+  },
+  {
+    "deviceIndex": "79030",
+    "brand": "STHOR",
+    "title": "79030 — rysunek części STHOR (PDF Drive)",
+    "drawings": [
+      "b41a9b033255191b"
+    ],
+    "parts": [],
+    "public": true,
+    "pdfOnly": true,
+    "partsStatus": "no-parts-list-yet"
+  },
+  {
+    "deviceIndex": "79005",
+    "brand": "STHOR",
+    "title": "79005 — rysunek części STHOR (PDF Drive)",
+    "drawings": [
+      "9ff622905c0e0bf0"
+    ],
+    "parts": [],
+    "public": true,
+    "pdfOnly": true,
+    "partsStatus": "no-parts-list-yet"
+  },
+  {
+    "deviceIndex": "79095",
+    "brand": "STHOR",
+    "title": "79095 — rysunek części STHOR (PDF Drive)",
+    "drawings": [
+      "c481453521a743e6"
+    ],
+    "parts": [],
+    "public": true,
+    "pdfOnly": true,
+    "partsStatus": "no-parts-list-yet"
+  },
+  {
+    "deviceIndex": "79467",
+    "brand": "FLO",
+    "title": "79467 — rysunek części FLO (PDF Drive)",
+    "drawings": [
+      "caa34e59e7c54ed8"
+    ],
+    "parts": [],
+    "public": true,
+    "pdfOnly": true,
+    "partsStatus": "no-parts-list-yet"
+  },
+  {
+    "deviceIndex": "79444",
+    "brand": "FLO",
+    "title": "79444 — rysunek części FLO (PDF Drive)",
+    "drawings": [
+      "6b227d3893723f76"
+    ],
+    "parts": [],
+    "public": true,
+    "pdfOnly": true,
+    "partsStatus": "no-parts-list-yet"
   }
 ]

@@ -1,5 +1,5 @@
 {
-  "version": "20260617-v48-dark-mode",
+  "version": "v50-drive-seed-brands",
   "description": "Visual polish, light/dark mode, better contrast and client-facing UI refinement",
   "counts": {
     "devices": 34,
@@ -18,5 +18,11 @@
     "Light/dark theme saved locally",
     "Visual polish without heavy assets"
   ],
-  "name": "PGW Service Hub v48 dark mode"
+  "name": "PGW Service Hub v48 dark mode",
+  "note": "Seed nie-YATO + generator pełnego manifestu Drive v50",
+  "devices": 50,
+  "drawings": 50,
+  "driveMap": 50,
+  "parts": 2179,
+  "nonYatoSeedCount": 16
 }

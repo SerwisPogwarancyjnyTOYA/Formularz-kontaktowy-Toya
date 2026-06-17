@@ -1,7 +1,7 @@
 (() => {
   'use strict';
   const CONFIG = window.PGW_CONFIG || {};
-  const DRAFT_KEY = 'pgw-v48-draft';
+  const DRAFT_KEY = 'pgw-v49-draft';
   const THEME_KEY = 'pgw-theme';
   const PART_ROW_LIMIT = Number(CONFIG.partRowLimit || 80);
   const $ = (id) => document.getElementById(id);
@@ -13,7 +13,7 @@
     customerForm: $('customerForm'), sameAsInvoice: $('sameAsInvoice'), wantInvoice: $('wantInvoice'), wantShipping: $('wantShipping'), invoiceFieldset: $('invoiceFieldset'), shippingFieldset: $('shippingFieldset'), mailTo: $('mailTo'), mailSubject: $('mailSubject'), mailBody: $('mailBody'),
     copyMail: $('copyMail'), copySubject: $('copySubject'), copyAll: $('copyAll'), copyStatus: $('copyStatus'), startOver: $('startOver'),
     backDevice: $('backDevice'), backParts: $('backParts'), backData: $('backData'), goMail: $('goMail'), contextTitle: $('contextTitle'), contextBody: $('contextBody'),
-    lookupNip: $('lookupNip'), lookupStatus: $('lookupStatus'), zipStatus: $('zipStatus'), shipZipStatus: $('shipZipStatus'), formHint: $('formHint'), manualPartsBox: $('manualPartsBox'), manualPartsFieldset: $('manualPartsFieldset'), goManualData: $('goManualData'), draftMailPreview: $('draftMailPreview'), showMoreParts: $('showMoreParts'), mobileSummaryBar: $('mobileSummaryBar'), mobileSummaryText: $('mobileSummaryText'), mobileGoData: $('mobileGoData'), focusParts: $('focusParts'), focusPdf: $('focusPdf'), contactQuality: $('contactQuality'), invoiceQuality: $('invoiceQuality'), shippingQuality: $('shippingQuality'), finalChecklist: $('finalChecklist'), themeToggle: $('themeToggle'), themeIcon: $('themeIcon'), themeLabel: $('themeLabel')
+    lookupNip: $('lookupNip'), lookupStatus: $('lookupStatus'), zipStatus: $('zipStatus'), shipZipStatus: $('shipZipStatus'), formHint: $('formHint'), manualPartsBox: $('manualPartsBox'), manualPartsFieldset: $('manualPartsFieldset'), goManualData: $('goManualData'), draftMailPreview: $('draftMailPreview'), showMoreParts: $('showMoreParts'), mobileSummaryBar: $('mobileSummaryBar'), mobileSummaryText: $('mobileSummaryText'), mobileGoData: $('mobileGoData'), focusParts: $('focusParts'), focusPdf: $('focusPdf'), contactQuality: $('contactQuality'), invoiceQuality: $('invoiceQuality'), shippingQuality: $('shippingQuality'), finalChecklist: $('finalChecklist'), themeToggle: $('themeToggle'), themeIcon: $('themeIcon'), themeLabel: $('themeLabel'), brandFilter: $('brandFilter'), dataMonitor: $('dataMonitor'), monitorBrands: $('monitorBrands'), monitorDrive: $('monitorDrive'), monitorFilter: $('monitorFilter'), monitorBrandList: $('monitorBrandList')
   };
   const progressIds = ['pDevice','pDrawing','pParts','pData','pMail'];
 
@@ -21,7 +21,7 @@
     devices: [], drawings: [], parts: [], driveMap: [],
     drawingById: new Map(), partsByDrawing: new Map(), driveByDrawingId: new Map(), driveByKey: new Map(),
     selectedDevice: null, selectedDrawing: null, selectedParts: new Map(), manualMode: false, step: 1, formDirty: false,
-    postalCodes: new Map(), partVisibleLimit: PART_ROW_LIMIT
+    postalCodes: new Map(), partVisibleLimit: PART_ROW_LIMIT, activeBrand: 'all', brandSummary: []
   };
 
   const POSTAL_FALLBACK = {
@@ -49,6 +49,8 @@
       bindEvents();
       updateOptionalSections();
       renderStats();
+      renderBrandFilter();
+      renderDataMonitor();
       renderExamples();
       renderContext();
       restoreDraft();
@@ -96,6 +98,11 @@
     state.parts = arr(state.parts).filter(Boolean);
     state.driveMap = arr(state.driveMap).filter(row => isPdf(row));
 
+    for (const d of state.devices) d.brand = canonicalBrand(d.brand || inferBrand(d));
+    for (const d of state.drawings) d.brand = canonicalBrand(d.brand || inferBrand(d));
+    for (const p of state.parts) p.brand = canonicalBrand(p.brand || inferBrand(p));
+    for (const row of state.driveMap) row.brand = canonicalBrand(row.brand || inferBrand(row));
+
     const driveKeys = new Set();
     for (const row of state.driveMap) {
       row.fileId = row.fileId || row.driveFileId || row.googleDriveId || row.gdriveId || row.id || '';
@@ -113,6 +120,10 @@
     state.parts = state.parts.filter(p => drawingIds.has(String(p.drawingId)) && p.partIndex && !looksLikeHeaderPart(p));
     const deviceKeys = new Set(state.drawings.map(d => norm(d.deviceIndex)).filter(Boolean));
     state.devices = state.devices.filter(d => deviceKeys.has(norm(d.deviceIndex)));
+    const brandByDevice = new Map();
+    for (const d of state.drawings) if (d.brand) brandByDevice.set(norm(d.deviceIndex), d.brand);
+    for (const d of state.devices) if (!d.brand || d.brand === 'INNE') d.brand = brandByDevice.get(norm(d.deviceIndex)) || canonicalBrand(inferBrand(d));
+    for (const p of state.parts) if (!p.brand || p.brand === 'INNE') p.brand = brandByDevice.get(norm(p.deviceIndex)) || canonicalBrand(inferBrand(p));
   }
 
   function buildIndexes() {
@@ -133,7 +144,7 @@
       if (row) state.driveByDrawingId.set(String(d.id), row);
     }
     for (const d of state.devices) d.__search = norm([d.deviceIndex, d.title, d.name, d.brand].join(' '));
-    for (const p of state.parts) p.__search = norm([p.position, p.partIndex, p.namePl, p.nameEn, p.drawingTitle, p.deviceIndex].join(' '));
+    for (const p of state.parts) p.__search = norm([p.position, p.partIndex, p.namePl, p.nameEn, p.drawingTitle, p.deviceIndex, p.brand].join(' '));
   }
 
   function bindEvents() {
@@ -167,6 +178,15 @@
     if (els.copyAll) els.copyAll.addEventListener('click', () => copyText(`Do: ${els.mailTo.value}\nTemat: ${els.mailSubject.value}\n\n${els.mailBody.value}`, 'Skopiowano komplet: adresat, temat i treść.'));
     els.startOver.addEventListener('click', resetAll);
     if (els.themeToggle) els.themeToggle.addEventListener('click', toggleTheme);
+    if (els.brandFilter) els.brandFilter.addEventListener('click', (event) => {
+      const btn = event.target.closest('button[data-brand]');
+      if (!btn) return;
+      state.activeBrand = btn.dataset.brand || 'all';
+      renderBrandFilter();
+      renderDataMonitor();
+      renderDeviceResults(els.deviceSearch.value);
+      saveDraft();
+    });
   }
 
   function renderStats() {
@@ -175,8 +195,35 @@
     els.statParts.textContent = fmt(state.parts.length);
   }
 
+  function renderBrandFilter() {
+    if (!els.brandFilter) return;
+    const counts = new Map();
+    for (const d of state.devices) {
+      const brand = canonicalBrand(d.brand || inferBrand(d));
+      counts.set(brand, (counts.get(brand) || 0) + 1);
+    }
+    state.brandSummary = [...counts.entries()].sort((a,b) => b[1] - a[1] || a[0].localeCompare(b[0], 'pl'));
+    const buttons = [['all', 'Wszystkie', state.devices.length], ...state.brandSummary];
+    els.brandFilter.innerHTML = buttons.map(([value, label, count]) => {
+      const active = state.activeBrand === value;
+      return `<button type="button" class="brand-chip ${active ? 'active' : ''}" data-brand="${escapeAttr(value)}"><span>${escapeHtml(label)}</span><b>${fmt(count)}</b></button>`;
+    }).join('');
+  }
+
+  function renderDataMonitor() {
+    if (!els.dataMonitor) return;
+    const brandCount = new Set(state.devices.map(d => canonicalBrand(d.brand || inferBrand(d)))).size;
+    const drivePdf = state.driveMap.filter(row => row.fileId || row.viewerUrl || row.openUrl).length;
+    if (els.monitorBrands) els.monitorBrands.textContent = fmt(brandCount);
+    if (els.monitorDrive) els.monitorDrive.textContent = fmt(drivePdf);
+    if (els.monitorFilter) els.monitorFilter.textContent = state.activeBrand === 'all' ? 'Wszystkie' : state.activeBrand;
+    if (els.monitorBrandList) {
+      els.monitorBrandList.innerHTML = (state.brandSummary || []).slice(0, 8).map(([brand,count]) => `<span>${escapeHtml(brand)} <b>${fmt(count)}</b></span>`).join('') || '<span>Brak danych marek</span>';
+    }
+  }
+
   function renderExamples() {
-    const examples = state.devices.slice(0, 5).map(d => d.deviceIndex).filter(Boolean);
+    const examples = state.devices.filter(d => brandMatches(d.brand)).slice(0, 5).map(d => d.deviceIndex).filter(Boolean);
     els.quickExamples.innerHTML = examples.map(x => `<button type="button" data-q="${escapeAttr(x)}">${escapeHtml(x)}</button>`).join('');
     els.quickExamples.querySelectorAll('button').forEach(btn => btn.addEventListener('click', () => {
       els.deviceSearch.value = btn.dataset.q;
@@ -199,11 +246,11 @@
         if (device.__search.includes(t)) score += 25;
       }
       return {device, drawings, partCount, score};
-    }).filter(x => x.partCount > 0 && (!tokens.length || x.score > 0));
+    }).filter(x => x.drawings.length > 0 && brandMatches(x.device.brand) && (!tokens.length || x.score > 0));
     results.sort((a,b) => b.score - a.score || b.partCount - a.partCount || String(a.device.deviceIndex).localeCompare(String(b.device.deviceIndex)));
     results = results.slice(0, tokens.length ? 30 : 12);
 
-    els.deviceMeta.textContent = tokens.length ? `Znaleziono ${fmt(results.length)} pasujących urządzeń.` : 'Najpierw wybierz urządzenie. Poniżej kilka przykładów z aktualnej bazy.';
+    els.deviceMeta.textContent = tokens.length ? `Znaleziono ${fmt(results.length)} pasujących urządzeń${state.activeBrand !== 'all' ? ' dla marki ' + state.activeBrand : ''}.` : `Najpierw wybierz urządzenie. ${state.activeBrand !== 'all' ? 'Aktywny filtr: ' + state.activeBrand + '. ' : ''}Poniżej kilka przykładów z aktualnej bazy.`;
     if (!results.length) {
       const typed = String(els.deviceSearch.value || '').trim();
       els.deviceResults.innerHTML = `<div class="empty-state manual-empty"><strong>Brak wyniku w aktualnej bazie.</strong><p>Spróbuj wpisać sam numer modelu, bez myślnika, albo sprawdź indeks z tabliczki znamionowej.</p><p>Jeżeli modelu nadal nie ma, klient może przejść dalej i opisać część ręcznie.</p><button class="primary" type="button" id="startManualRequest">Nie znalazłem urządzenia — napisz zapytanie ręczne</button></div>`;
@@ -216,7 +263,7 @@
         <div>
           <h3>${escapeHtml(device.deviceIndex || 'Bez indeksu')}</h3>
           <p>${escapeHtml(device.title || device.name || 'Urządzenie z bazą rysunku PDF')}</p>
-          <div class="badges"><span class="badge ok">PDF Drive</span><span class="badge">${fmt(drawings.length)} rys.</span><span class="badge">${fmt(partCount)} części</span></div>
+          <div class="badges"><span class="badge brand">${escapeHtml(canonicalBrand(device.brand || inferBrand(device)))}</span><span class="badge ok">PDF Drive</span><span class="badge">${fmt(drawings.length)} rys.</span><span class="badge ${partCount ? '' : 'warn'}">${partCount ? fmt(partCount) + ' części' : 'PDF bez listy części'}</span></div>
         </div>
         <button class="primary" type="button" data-device="${escapeAttr(device.deviceIndex)}">Wybierz</button>
       </article>`).join('');
@@ -244,7 +291,8 @@
     if (!device) return;
     const drawings = state.drawings.filter(d => norm(d.deviceIndex) === norm(device.deviceIndex));
     const drawing = drawings.sort((a,b) => (state.partsByDrawing.get(String(b.id)) || []).length - (state.partsByDrawing.get(String(a.id)) || []).length)[0];
-    state.manualMode = false;
+    const candidateParts = drawing ? (state.partsByDrawing.get(String(drawing.id)) || []) : [];
+    state.manualMode = candidateParts.length === 0;
     state.partVisibleLimit = PART_ROW_LIMIT;
     if (els.partsSearch) els.partsSearch.value = '';
     state.selectedDevice = device;
@@ -261,20 +309,21 @@
     const d = state.selectedDevice, drawing = state.selectedDrawing;
     if (!d) { els.selectedDeviceBox.innerHTML = ''; return; }
     if (state.manualMode) {
-      els.selectedDeviceBox.innerHTML = `<strong>${escapeHtml(d.deviceIndex || 'Urządzenie spoza bazy')}</strong><span>Tryb ręczny: klient opisuje potrzebną część, a serwis dopasuje ją po mailu.</span>`;
+      const linkInfo = drawing ? ` • Rysunek: ${escapeHtml(drawing.fileName || drawing.title || '')}` : '';
+      els.selectedDeviceBox.innerHTML = `<strong>${escapeHtml(d.deviceIndex || 'Urządzenie spoza bazy')} — ${escapeHtml(d.title || '')}</strong><span>Marka: ${escapeHtml(canonicalBrand(d.brand || (drawing && drawing.brand) || inferBrand(d)))}${linkInfo} • Brak listy części w aktualnej bazie — klient opisuje część ręcznie.</span>`;
       return;
     }
     if (!drawing) { els.selectedDeviceBox.innerHTML = ''; return; }
     const count = (state.partsByDrawing.get(String(drawing.id)) || []).length;
-    els.selectedDeviceBox.innerHTML = `<strong>${escapeHtml(d.deviceIndex)} — ${escapeHtml(d.title || drawing.title || '')}</strong><span>Rysunek: ${escapeHtml(drawing.fileName || drawing.title || '')} • ${fmt(count)} części</span>`;
+    els.selectedDeviceBox.innerHTML = `<strong>${escapeHtml(d.deviceIndex)} — ${escapeHtml(d.title || drawing.title || '')}</strong><span>Marka: ${escapeHtml(canonicalBrand(d.brand || drawing.brand || inferBrand(d)))} • Rysunek: ${escapeHtml(drawing.fileName || drawing.title || '')} • ${fmt(count)} części</span>`;
   }
 
   function renderParts() {
     if (els.manualPartsBox) els.manualPartsBox.classList.toggle('hidden', !state.manualMode);
     if (state.manualMode) {
       if (els.showMoreParts) els.showMoreParts.classList.add('hidden');
-      if (els.partMeta) els.partMeta.innerHTML = '<strong>Tryb ręczny.</strong> Nie pokazujemy listy części, bo urządzenia nie ma jeszcze w bazie. Klient przechodzi dalej i opisuje potrzebną część tekstowo.';
-      if (els.partsTable) els.partsTable.innerHTML = `<tr><td colspan="4">Brak listy części dla urządzenia spoza aktualnej bazy.</td></tr>`;
+      if (els.partMeta) els.partMeta.innerHTML = state.selectedDrawing ? '<strong>PDF jest, lista części do uzupełnienia.</strong> Klient może podejrzeć rysunek i opisać pozycję/część ręcznie w kolejnym kroku.' : '<strong>Tryb ręczny.</strong> Nie pokazujemy listy części, bo urządzenia nie ma jeszcze w bazie. Klient przechodzi dalej i opisuje potrzebną część tekstowo.';
+      if (els.partsTable) els.partsTable.innerHTML = `<tr><td colspan="4">Brak spiętej listy części. Użyj opisu ręcznego albo wpisz pozycję z rysunku w uwagach.</td></tr>`;
       if (els.goDataInline) { els.goDataInline.disabled = false; els.goDataInline.textContent = 'Przejdź do danych i opisz część'; }
       return;
     } else if (els.goDataInline) {
@@ -842,7 +891,8 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
         sameAsInvoice: els.sameAsInvoice ? els.sameAsInvoice.checked : false,
         wantInvoice: els.wantInvoice ? els.wantInvoice.checked : false,
         wantShipping: els.wantShipping ? els.wantShipping.checked : false,
-        manualMode: state.manualMode
+        manualMode: state.manualMode,
+        activeBrand: state.activeBrand
       };
       localStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
     } catch(e) {}
@@ -856,6 +906,7 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
       if (els.wantInvoice) els.wantInvoice.checked = Boolean(draft.wantInvoice);
       if (els.wantShipping) els.wantShipping.checked = Boolean(draft.wantShipping);
       if (els.sameAsInvoice) els.sameAsInvoice.checked = Boolean(draft.sameAsInvoice);
+      if (draft.activeBrand) state.activeBrand = draft.activeBrand;
       state.manualMode = Boolean(draft.manualMode);
       updateOptionalSections();
       if (draft.deviceIndex) {
@@ -881,9 +932,9 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
   function resetAll() {
     if (!confirm('Wyczyścić formularz i zacząć od nowa?')) return;
     localStorage.removeItem(DRAFT_KEY);
-    state.selectedDevice = null; state.selectedDrawing = null; state.selectedParts.clear(); state.manualMode = false;
+    state.selectedDevice = null; state.selectedDrawing = null; state.selectedParts.clear(); state.manualMode = false; state.activeBrand = 'all';
     els.customerForm.reset(); updateOptionalSections(); els.deviceSearch.value = ''; els.partsSearch.value = '';
-    renderDeviceResults(''); renderBasket(); renderViewer(false); goStep(1); renderContext();
+    renderBrandFilter(); renderDataMonitor(); renderDeviceResults(''); renderBasket(); renderViewer(false); goStep(1); renderContext();
   }
 
 
@@ -913,6 +964,42 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
     if (persist) {
       try { localStorage.setItem(THEME_KEY, safe); } catch(e) {}
     }
+  }
+
+  function brandMatches(brand) {
+    if (state.activeBrand === 'all') return true;
+    return canonicalBrand(brand) === state.activeBrand;
+  }
+
+  function canonicalBrand(value) {
+    const v = norm(value).toUpperCase();
+    if (!v) return 'INNE';
+    if (v.includes('YATO GASTRO') || v === 'YG' || v.includes('GASTRO')) return 'YATO GASTRO';
+    if (v.includes('YATO')) return 'YATO';
+    if (v.includes('STHOR')) return 'STHOR';
+    if (v.includes('VOREL')) return 'VOREL';
+    if (v.includes('FLO')) return 'FLO';
+    if (v.includes('LUND')) return 'LUND';
+    if (v.includes('FALA')) return 'FALA';
+    return String(value || 'INNE').trim().toUpperCase();
+  }
+
+  function inferBrand(row) {
+    const text = [row.brand, row.deviceIndex, row.fileName, row.title, row.name, row.path, row.originalPath, row.drivePath, row.sourceArchive].filter(Boolean).join(' ').toUpperCase();
+    if (/YATO\s*GASTRO|\bYG[-_ ]?0|GASTRO/.test(text)) return 'YATO GASTRO';
+    if (/\bYT[-_ ]?\d|\bYATO\b/.test(text)) return 'YATO';
+    if (/\bSTHOR\b/.test(text)) return 'STHOR';
+    if (/\bVOREL\b/.test(text)) return 'VOREL';
+    if (/\bFLO\b/.test(text)) return 'FLO';
+    if (/\bLUND\b/.test(text)) return 'LUND';
+    if (/\bFALA\b/.test(text)) return 'FALA';
+    const idxMatch = text.match(/(?:CZESCI[_ -]ZAMIENNE[_ -])?(\b\d{5}\b)/);
+    const idx = idxMatch ? idxMatch[1] : '';
+    if (['73060','79004','79024','79096','79098','79106'].includes(idx)) return 'LUND';
+    if (['79005','79030','79095','79108','79119','79140','79151','79354'].includes(idx)) return 'STHOR';
+    if (['79444','79467'].includes(idx)) return 'FLO';
+    if (['00300','00320','00500','00510','00600','00610','00703','01060','09900'].includes(idx)) return 'VOREL';
+    return row.brand || 'INNE';
   }
 
   function resolveDrive(drawing) {

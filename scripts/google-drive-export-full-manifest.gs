@@ -1,143 +1,105 @@
+
 /**
- * PGW Service Hub — pełny manifest rysunków z Google Drive.
+ * PGW Service Hub — pełny manifest Drive v50
  *
- * Uruchom w Google Apps Script na koncie, które ma dostęp do folderów z rysunkami.
- * Skrypt przechodzi REKURENCYJNIE przez oba foldery i tworzy plik:
- *   drive-drawings-map.json
+ * Uruchom w Google Apps Script podpiętym do arkusza Google.
+ * Skrypt skanuje folder Drive z PDF-ami, eksportuje tylko application/pdf
+ * i zapisuje arkusze:
+ *   - drive-drawings-map: gotowy manifest dla strony
+ *   - brand-review: indeksy, gdzie marka jest niepewna i wymaga ręcznego potwierdzenia
  *
- * Ten plik wrzuć później do repozytorium jako:
- *   data/drive-drawings-map.json
- * oraz opcjonalnie:
- *   drive-drawings-map.json
+ * Domyślny folder: PGW - Rysunki / Rysunki wybuchowe
  */
+const ROOT_FOLDER_ID = '1wYvMsfwtz8jPvAaKW4W13au77lUAu3Gu';
+const OUT_SHEET = 'drive-drawings-map';
+const REVIEW_SHEET = 'brand-review';
 
-const PGW_ROOT_FOLDERS = [
-  // PGW - Rysunki → Rysunki wybuchowe
-  '1wYvMsfwtz8jPvAaKW4W13au77lUAu3Gu',
-  // PGW - Rysunki → Rysunki wybuchowe-Robocze
-  '1IqA8x36ml6N2ml2FNy4wsl94AbIHhRXp'
-];
+function exportDrivePdfManifestV50() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const out = upsertSheet_(ss, OUT_SHEET);
+  const review = upsertSheet_(ss, REVIEW_SHEET);
+  out.clearContents();
+  review.clearContents();
+  out.appendRow(['deviceIndex','brand','fileName','fileId','mimeType','viewerUrl','openUrl','keys','drivePath','brandConfidence','source']);
+  review.appendRow(['deviceIndex','guessedBrand','fileName','drivePath','reason']);
 
-// Ustaw true tylko wtedy, gdy rysunki mogą być widoczne dla osób spoza firmy.
-// Do prezentacji zewnętrznej pliki muszą mieć dostęp: "każdy z linkiem może wyświetlać".
-const PGW_MAKE_FILES_PUBLIC = false;
-
-function buildPgwFullDriveManifest() {
   const rows = [];
-  const seen = {};
+  scanFolder_(DriveApp.getFolderById(ROOT_FOLDER_ID), '', rows);
+  rows.sort((a,b) => String(a.deviceIndex).localeCompare(String(b.deviceIndex), 'pl'));
 
-  PGW_ROOT_FOLDERS.forEach(function(folderId) {
-    const root = DriveApp.getFolderById(folderId);
-    walkPgwFolder_(root, root.getName(), rows, seen);
-  });
-
-  rows.sort(function(a, b) {
-    return String(a.deviceIndex || a.fileName).localeCompare(String(b.deviceIndex || b.fileName), 'pl');
-  });
-
-  const payload = JSON.stringify({
-    generatedAt: new Date().toISOString(),
-    source: 'Google Drive / PGW Service Hub',
-    count: rows.length,
-    items: rows
-  }, null, 2);
-
-  const name = 'drive-drawings-map.json';
-  const existing = DriveApp.getFilesByName(name);
-  let out;
-  if (existing.hasNext()) {
-    out = existing.next();
-    out.setContent(payload);
-  } else {
-    out = DriveApp.createFile(name, payload, MimeType.PLAIN_TEXT);
+  for (const row of rows) {
+    out.appendRow([
+      row.deviceIndex, row.brand, row.fileName, row.fileId, row.mimeType,
+      row.viewerUrl, row.openUrl, JSON.stringify(row.keys), row.drivePath,
+      row.brandConfidence, row.source
+    ]);
+    if (row.brandConfidence !== 'strong') {
+      review.appendRow([row.deviceIndex, row.brand, row.fileName, row.drivePath, row.brandConfidence]);
+    }
   }
-
-  Logger.log('Utworzono / zaktualizowano manifest: ' + out.getUrl());
-  Logger.log('Liczba plików w manifeście: ' + rows.length);
+  SpreadsheetApp.flush();
 }
 
-function walkPgwFolder_(folder, path, rows, seen) {
+function scanFolder_(folder, path, rows) {
+  const folderName = folder.getName();
+  const currentPath = path ? `${path}/${folderName}` : folderName;
+
   const files = folder.getFiles();
   while (files.hasNext()) {
     const file = files.next();
-    const name = file.getName();
-    if (!isPgwDrawingFile_(name)) continue;
-
-    const id = file.getId();
-    if (seen[id]) continue;
-    seen[id] = true;
-
-    if (PGW_MAKE_FILES_PUBLIC) {
-      try {
-        file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
-      } catch (err) {
-        Logger.log('Nie udało się ustawić udostępniania dla: ' + name + ' / ' + err);
-      }
-    }
-
-    const fullPath = path + '/' + name;
-    const indexes = extractPgwIndexes_(fullPath);
+    if (file.getMimeType() !== MimeType.PDF && file.getMimeType() !== 'application/pdf') continue;
+    const fileName = file.getName();
+    const deviceIndex = extractDeviceIndex_(fileName);
+    const brandInfo = inferBrand_(fileName, currentPath, deviceIndex);
+    const fileId = file.getId();
     rows.push({
-      deviceIndex: indexes[0] || '',
-      deviceIndexes: indexes,
-      fileName: name,
-      title: name.replace(/\.[^.]+$/, ''),
-      drivePath: fullPath,
-      fileId: id,
-      url: file.getUrl(),
-      openUrl: 'https://drive.google.com/file/d/' + id + '/view',
-      viewerUrl: 'https://drive.google.com/file/d/' + id + '/preview',
-      mimeType: file.getMimeType(),
-      keys: buildPgwKeys_(name, fullPath, indexes)
+      deviceIndex,
+      brand: brandInfo.brand,
+      fileName,
+      fileId,
+      mimeType: 'application/pdf',
+      viewerUrl: `https://drive.google.com/file/d/${fileId}/preview`,
+      openUrl: `https://drive.google.com/file/d/${fileId}/view`,
+      keys: buildKeys_(deviceIndex, fileName, brandInfo.brand),
+      drivePath: `${currentPath}/${fileName}`,
+      brandConfidence: brandInfo.confidence,
+      source: 'Google Drive export v50'
     });
   }
 
   const folders = folder.getFolders();
-  while (folders.hasNext()) {
-    const child = folders.next();
-    walkPgwFolder_(child, path + '/' + child.getName(), rows, seen);
-  }
+  while (folders.hasNext()) scanFolder_(folders.next(), currentPath, rows);
 }
 
-function isPgwDrawingFile_(name) {
-  return /\.(pdf|jpg|jpeg|png|webp|docx?)$/i.test(String(name || ''));
+function extractDeviceIndex_(name) {
+  const base = String(name || '').replace(/\.pdf$/i, '');
+  let m = base.match(/(?:Czesci_zamienne[_\s-]*)?((?:YT|YG)[-_\s]?\d{3,6})/i);
+  if (m) return m[1].toUpperCase().replace(/\s+/g,'').replace('_','-');
+  m = base.match(/(?:Czesci_zamienne[_\s-]*)?(\d{5,6})/i);
+  if (m) return m[1];
+  return base.replace(/^Czesci_zamienne[_\s-]*/i, '').toUpperCase();
 }
 
-function extractPgwIndexes_(text) {
-  const matches = String(text || '').toUpperCase().match(/\b[A-Z]{1,4}[-_ ]?\d{2,6}\b|\b\d{5,6}\b/g) || [];
-  const normalized = matches.map(function(x) {
-    return x.replace(/_/g, '-').replace(/\s+/g, '-').replace(/([A-Z]+)(\d)/, '$1-$2');
-  });
-  return uniquePgw_(normalized);
+function inferBrand_(fileName, drivePath, idx) {
+  const text = `${fileName} ${drivePath} ${idx}`.toUpperCase();
+  if (/YATO\s*GASTRO|\bYG[-_\s]?\d|GASTRO/.test(text)) return {brand:'YATO GASTRO', confidence:'strong'};
+  if (/\bYT[-_\s]?\d|\bYATO\b/.test(text)) return {brand:'YATO', confidence:'strong'};
+  for (const b of ['STHOR','VOREL','FLO','LUND','FALA']) if (text.includes(b)) return {brand:b, confidence:'strong'};
+
+  const n = String(idx || '').replace(/\D/g,'');
+  if (['73060','79004','79024','79096','79098','79106'].includes(n)) return {brand:'LUND', confidence:'seed-from-drive-search'};
+  if (['79005','79030','79095','79108','79119','79140','79151','79354'].includes(n)) return {brand:'STHOR', confidence:'seed-from-drive-search'};
+  if (['79444','79467'].includes(n)) return {brand:'FLO', confidence:'seed-from-drive-search'};
+  if (['00300','00320','00500','00510','00600','00610','00703','01060','09900'].includes(n)) return {brand:'VOREL', confidence:'legacy-local-seed'};
+
+  return {brand:'INNE', confidence:'needs-review'};
 }
 
-function buildPgwKeys_(name, fullPath, indexes) {
-  const values = [name, stripPgwExt_(name), fullPath, stripPgwExt_(fullPath)].concat(indexes || []);
-  return uniquePgw_(values.map(normalizePgwKey_).filter(Boolean));
+function buildKeys_(deviceIndex, fileName, brand) {
+  const clean = String(fileName || '').replace(/\.pdf$/i, '');
+  return [...new Set([deviceIndex, fileName, clean, `${brand} ${deviceIndex}`, `${brand}-${deviceIndex}`, String(deviceIndex).replace('-', '')].filter(Boolean))];
 }
 
-function stripPgwExt_(value) {
-  return String(value || '').replace(/\.(pdf|docx?|xlsx?|jpg|jpeg|png|webp|gif|bmp)$/i, '');
-}
-
-function normalizePgwKey_(value) {
-  return String(value || '')
-    .trim()
-    .toLowerCase()
-    .replace(/\\/g, '/')
-    .replace(/^.*\//, '')
-    .replace(/[_-]+/g, '-')
-    .replace(/\s+/g, ' ')
-    .trim();
-}
-
-function uniquePgw_(arr) {
-  const seen = {};
-  const out = [];
-  arr.forEach(function(x) {
-    if (!x || seen[x]) return;
-    seen[x] = true;
-    out.push(x);
-  });
-  return out;
+function upsertSheet_(ss, name) {
+  return ss.getSheetByName(name) || ss.insertSheet(name);
 }

@@ -4,17 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex,nofollow" />
-  <title>PGW Service Hub v48 — visual polish + dark mode</title>
+  <title>PGW Service Hub v47 — klient i walidacje</title>
   <link rel="manifest" href="manifest.webmanifest" />
-  <script>
-    (() => {
-      try {
-        const saved = localStorage.getItem('pgw-theme');
-        const systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        document.documentElement.dataset.theme = saved || (systemDark ? 'dark' : 'light');
-      } catch (e) { document.documentElement.dataset.theme = 'light'; }
-    })();
-  </script>
   <link rel="stylesheet" href="app.css" />
 </head>
 <body>
@@ -26,24 +17,21 @@
         <span>Krokowy formularz zapytania o części</span>
       </div>
     </div>
-    <div class="top-actions">
-      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Przełącz tryb jasny lub ciemny"><span id="themeIcon">☾</span><span id="themeLabel">Tryb ciemny</span></button>
-      <span class="mode-pill">PDF z Drive</span>
-      <div class="status-pill" id="loadStatus">Ładowanie danych…</div>
-    </div>
+    <div class="top-actions"><span class="mode-pill">PDF z Drive</span><div class="status-pill" id="loadStatus">Ładowanie danych…</div></div>
   </header>
 
   <main class="shell">
     <section class="hero-card">
       <div>
-        <p class="eyebrow">Ścieżka klienta v48</p>
-        <h1>Prosty, spokojny formularz: najpierw model i PDF, potem wybór części, dane i gotowy mail.</h1>
-        <p class="lead">Klient idzie krok po kroku, bez ściany pól na start. Strona pokazuje tylko to, co jest potrzebne w danym momencie, a tryb ciemny pomaga wygodnie pracować także wieczorem lub na słabszym ekranie.</p>
+        <p class="eyebrow">Ścieżka klienta v47</p>
+        <h1>Prosty formularz: najpierw model i PDF, potem wygodny wybór części, dane i gotowy mail.</h1>
+        <p class="lead">Klient nie dostaje wszystkiego naraz. Najpierw wybiera urządzenie i części, potem podaje tylko te dane, które są potrzebne: kontakt obowiązkowo, faktura i wysyłka opcjonalnie. Na końcu dostaje mail do <strong>service@yato.pl</strong>.</p>
         <div class="hero-guide" aria-label="Jak działa formularz">
           <span>1. Szukasz modelu</span>
           <span>2. Otwiera się PDF</span>
           <span>3. Wybierasz części</span>
           <span>4. Kopiujesz mail</span>
+          <span>5. Baza rośnie z Drive</span>
         </div>
       </div>
       <div class="stats" aria-label="Statystyki bazy">
@@ -75,6 +63,13 @@
             <span>Indeks lub nazwa urządzenia</span>
             <input id="deviceSearch" type="search" placeholder="np. YT-82200, 82200, polerka" autocomplete="off" />
           </label>
+          <div class="brand-filter-card">
+            <div>
+              <strong>Marka urządzenia</strong>
+              <span>Domyślnie szukamy we wszystkich markach. Filtr pomaga, gdy klient wie, z jakiej marki jest sprzęt.</span>
+            </div>
+            <div class="brand-filter" id="brandFilter" aria-label="Filtr marek"></div>
+          </div>
           <details class="help-box">
             <summary>Gdzie znaleźć indeks urządzenia?</summary>
             <p>Najczęściej jest na tabliczce znamionowej albo na etykiecie urządzenia. Wystarczy wpisać sam numer, np. <strong>82200</strong>, bez myślnika też zadziała.</p>
@@ -232,6 +227,21 @@
           <p id="contextBody">Zacznij od indeksu modelu. Kolejne informacje pojawią się po wyborze urządzenia.</p>
         </div>
 
+        <div class="data-monitor-card" id="dataMonitor" aria-live="polite">
+          <div class="monitor-head">
+            <span class="context-kicker">Monitor bazy</span>
+            <strong>Drive + wiele marek</strong>
+          </div>
+          <div class="monitor-grid">
+            <div><span>Marki</span><b id="monitorBrands">—</b></div>
+            <div><span>PDF Drive</span><b id="monitorDrive">—</b></div>
+            <div><span>Wybrany filtr</span><b id="monitorFilter">Wszystkie</b></div>
+            <div><span>Źródło</span><b>JSON</b></div>
+          </div>
+          <div class="monitor-brands" id="monitorBrandList"></div>
+          <p>Repo trzyma tylko lekkie dane. Pełne PDF-y siedzą w Google Drive, więc dodanie kolejnej marki nie tuczy GitHuba.</p>
+        </div>
+
         <div class="progress-card" id="progressCard">
           <h3>Postęp zapytania</h3>
           <ol>
@@ -278,8 +288,8 @@
   </div>
 
   <footer class="footer">
-    <span>PGW Service Hub v48</span>
-    <span>Bez cen i stanów. PDF-y z Google Drive. Tryb jasny/ciemny zapamiętywany w przeglądarce.</span>
+    <span>PGW Service Hub v49</span>
+    <span>Bez cen i stanów. Jedna wyszukiwarka dla wielu marek, PDF-y z Google Drive.</span>
   </footer>
 
   <script src="config.js"></script>
