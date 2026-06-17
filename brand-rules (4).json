@@ -1,0 +1,138 @@
+{
+  "version": "v54-guessed-brands",
+  "note": "Reguły pomocnicze. Marka z manifestu Drive ma pierwszeństwo przed heurystyką po numerze.",
+  "canonicalBrands": [
+    "YATO",
+    "YATO GASTRO",
+    "STHOR",
+    "VOREL",
+    "FLO",
+    "LUND",
+    "FALA",
+    "INNE"
+  ],
+  "hardPrefixes": {
+    "YT-": "YATO",
+    "YG-": "YATO GASTRO"
+  },
+  "numericHints": [
+    {
+      "brand": "LUND",
+      "indexes": [
+        "73060",
+        "79004",
+        "79024",
+        "79096",
+        "79098",
+        "79106"
+      ],
+      "source": "Drive search: Czesci_zamienne LUND"
+    },
+    {
+      "brand": "STHOR",
+      "indexes": [
+        "79005",
+        "79030",
+        "79095",
+        "79108",
+        "79119",
+        "79140",
+        "79151",
+        "79354"
+      ],
+      "source": "Drive search: Czesci_zamienne STHOR"
+    },
+    {
+      "brand": "FLO",
+      "indexes": [
+        "79444",
+        "79467"
+      ],
+      "source": "Drive search: Czesci_zamienne FLO"
+    },
+    {
+      "brand": "VOREL",
+      "indexes": [
+        "00300",
+        "00320",
+        "00500",
+        "00510",
+        "00600",
+        "00610",
+        "00703",
+        "01060",
+        "09900"
+      ],
+      "source": "legacy local parsed PDF data; do potwierdzenia po pełnym eksporcie"
+    }
+  ],
+  "strategy": "v54: brand z prefiksu/folderu zostaje, DO ROZPOZNANIA dostaje markę zgadywaną po numericGuessRanges i pola confidence/review.",
+  "numericGuessRanges": [
+    {
+      "brand": "VOREL",
+      "ranges": [
+        "00xxx",
+        "01xxx",
+        "09xxx",
+        "53xxx",
+        "55xxx",
+        "57xxx",
+        "58xxx"
+      ],
+      "confidence": "high/medium/low",
+      "note": "Zakresy stare/niskie oraz 53–58xxx; 53–58 jako low."
+    },
+    {
+      "brand": "LUND",
+      "ranges": [
+        "66xxx",
+        "67xxx",
+        "68xxx",
+        "70xxx",
+        "71xxx",
+        "72xxx",
+        "73xxx"
+      ],
+      "confidence": "high/medium/low",
+      "note": "AGD/dom; 70–72 jako low."
+    },
+    {
+      "brand": "FALA",
+      "ranges": [
+        "75xxx"
+      ],
+      "confidence": "high",
+      "note": "Armatura/FALA."
+    },
+    {
+      "brand": "STHOR",
+      "ranges": [
+        "77xxx",
+        "78xxx",
+        "79xxx bez 794xx",
+        "80xxx"
+      ],
+      "confidence": "medium",
+      "note": "Narzędzia/STHOR po sąsiedztwie numeracji."
+    },
+    {
+      "brand": "FLO",
+      "ranges": [
+        "794xx",
+        "89xxx"
+      ],
+      "confidence": "medium",
+      "note": "Ogród/FLO; 794xx po seedach 79444/79467."
+    },
+    {
+      "brand": "YATO",
+      "ranges": [
+        "81xxx",
+        "82xxx",
+        "99xxx"
+      ],
+      "confidence": "medium",
+      "note": "YATO po dominacji zakresów w manifeście."
+    }
+  ]
+}

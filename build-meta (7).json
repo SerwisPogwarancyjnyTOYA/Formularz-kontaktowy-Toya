@@ -1,0 +1,38 @@
+{
+  "version": "v57-zun-assemblies-mail",
+  "description": "Visual polish, light/dark mode, better contrast and client-facing UI refinement",
+  "counts": {
+    "devices": 34,
+    "drawings": 34,
+    "parts": 2179,
+    "drive-drawings-map": 34,
+    "drive-drawings-map.full": 1405
+  },
+  "publicRules": [
+    "Drive PDF only",
+    "No prices",
+    "No stock",
+    "Manual fallback when device is missing",
+    "Mapping-ready: positions now, hotspots later",
+    "Client contact validation",
+    "Final checklist before copying email",
+    "Light/dark theme saved locally",
+    "Visual polish without heavy assets"
+  ],
+  "name": "PGW Service Hub v51 — full Drive exporter",
+  "note": "Seed nie-YATO + generator pełnego manifestu Drive v50",
+  "devices": 50,
+  "drawings": 50,
+  "driveMap": 50,
+  "parts": 2179,
+  "nonYatoSeedCount": 16,
+  "notes": "v52 zawiera pełny manifest Drive wygenerowany przez Apps Script: 1405 PDF-ów.",
+  "generatedAt": "2026-06-17T05:38:46.658527+00:00",
+  "label": "v54 — brand guesses + PDF header extractor",
+  "features": [
+    "clean UI version labels",
+    "auto ZUN in mail",
+    "assembly/component warnings in UI and mail",
+    "Drive manifest 1405 PDFs"
+  ]
+}
