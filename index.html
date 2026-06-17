@@ -1,134 +1,199 @@
 <!doctype html>
 <html lang="pl">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#b00020">
-  <title>PGW Service Hub — rysunki PDF Google Drive</title>
-  <link rel="manifest" href="manifest.webmanifest">
-  <link rel="stylesheet" href="app.css?v=20260617-v40-drive-final">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>PGW Service Hub — zapytanie o części</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="app.css" />
 </head>
 <body>
-  <noscript>Ta strona wymaga włączonego JavaScriptu.</noscript>
-  <header class="hero">
-    <nav class="topbar" aria-label="Nagłówek">
-      <div class="brand-lockup">
-        <img class="brand-main" src="assets/logos/yato-clean.png?v=20260617-v40-drive-final" alt="YATO" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'brand-lettermark',textContent:'TOYA S.A.'}))">
-        <div>
-          <strong>Serwis Pogwarancyjny TOYA S.A.</strong>
-          <span>Rysunki PDF z Google Drive</span>
-        </div>
-      </div>
-      <div class="status-pill" id="loadStatus">Ładowanie danych…</div>
-    </nav>
-    <section class="hero-grid">
+  <header class="topbar">
+    <div class="brand">
+      <img src="assets/logos/yato-wordmark-clean.png" alt="YATO" />
       <div>
-        <p class="eyebrow">Wersja publiczna — tylko PDF z Google Drive</p>
-        <h1>Znajdź część z rysunku technicznego PDF.</h1>
-        <p class="lead">Klient wyszukuje część po modelu, indeksie lub nazwie. Strona pokazuje wyłącznie rekordy z podpiętym rysunkiem PDF w Google Drive i przygotowuje zapytanie do serwisu. Ceny oraz dostępność nie są publikowane na stronie.</p>
+        <strong>Serwis Pogwarancyjny TOYA</strong>
+        <span>Wyszukiwarka rysunków PDF i generator zapytania</span>
       </div>
-      <aside class="stats-card" aria-label="Statystyki bazy">
-        <div><strong id="statParts">—</strong><span>części</span></div>
-        <div><strong id="statDrawings">—</strong><span>rysunków PDF</span></div>
-        <div><strong id="statDevices">—</strong><span>modeli</span></div>
-      </aside>
-    </section>
+    </div>
+    <div class="status-pill" id="loadStatus">Ładowanie danych…</div>
   </header>
 
   <main class="shell">
-    <section class="search-panel" aria-labelledby="searchLabel">
-      <label id="searchLabel" for="searchInput">Szukaj części lub urządzenia</label>
-      <div class="search-row">
-        <input id="searchInput" type="search" autocomplete="off" placeholder="np. YT-82200, ZY8220011, kulka, szczotka…">
-        <button id="clearSearch" type="button" class="ghost">Wyczyść</button>
+    <section class="hero-card">
+      <div>
+        <p class="eyebrow">Krokowo, bez chaosu</p>
+        <h1>Znajdź urządzenie, wybierz części z rysunku i skopiuj gotowe zapytanie.</h1>
+        <p class="lead">Najpierw wybierasz model. Dopiero potem pokazujemy rysunek PDF, listę części, dane do faktury/wysyłki i gotowy mail do <strong>service@yato.pl</strong>.</p>
       </div>
-      <div class="hint-row">
-        <button data-example="YT-82200" type="button">YT-82200</button>
-        <button data-example="ZY8220011" type="button">ZY8220011</button>
-        <button data-example="ZY8220046" type="button">ZY8220046</button>
-        <button data-example="kulka" type="button">kulka</button>
-        <button data-example="szczotka" type="button">szczotka</button>
+      <div class="stats" aria-label="Statystyki bazy">
+        <div><strong id="statDevices">—</strong><span>urządzeń</span></div>
+        <div><strong id="statDrawings">—</strong><span>rysunków PDF</span></div>
+        <div><strong id="statParts">—</strong><span>części</span></div>
       </div>
     </section>
 
-    <section class="value-strip" aria-label="Co robi strona">
-      <div><strong>1</strong><span>Wyszukuje tylko części z rysunków PDF Google Drive.</span></div>
-      <div><strong>2</strong><span>Pokazuje pozycję na rysunku oraz elementy powiązane z urządzeniem.</span></div>
-      <div><strong>3</strong><span>Wyświetla PDF z Google Drive bez obciążania repozytorium.</span></div>
-      <div><strong>4</strong><span>Składa gotowe zapytanie klienta do skopiowania i wysłania.</span></div>
-    </section>
+    <nav class="steps" aria-label="Etapy formularza">
+      <button class="step active" data-step="1"><b>1</b><span>Urządzenie</span></button>
+      <button class="step" data-step="2" disabled><b>2</b><span>Części</span></button>
+      <button class="step" data-step="3" disabled><b>3</b><span>Dane</span></button>
+      <button class="step" data-step="4" disabled><b>4</b><span>Mail</span></button>
+    </nav>
 
     <section class="workspace">
-      <section class="results-panel" aria-labelledby="resultsTitle">
-        <div class="panel-head">
-          <div>
-            <h2 id="resultsTitle">Wyniki</h2>
-            <p id="resultsMeta">Wpisz szukaną frazę, żeby rozpocząć.</p>
-          </div>
-          <button id="showAllBtn" type="button" class="secondary">Pokaż przykłady</button>
-        </div>
-        <div id="results" class="results empty-state">
-          <div class="empty-icon">⌕</div>
-          <p>Najlepszy start: indeks urządzenia lub indeks części z oficjalnego rysunku Google Drive. Rekordy bez podpiętego PDF Google Drive są ukryte w trybie publicznym.</p>
-        </div>
-      </section>
-
-      <aside class="side-panel" aria-labelledby="viewerTitle">
-        <div class="viewer-head">
-          <div>
-            <p class="eyebrow">Podgląd rysunku</p>
-            <h2 id="viewerTitle">Brak wybranego rysunku</h2>
-          </div>
-          <a id="viewerOpen" href="#" target="_blank" rel="noreferrer" class="secondary hidden">Otwórz</a>
-        </div>
-        <div id="viewer" class="viewer empty-viewer">
-          Wybierz wynik z listy, żeby zobaczyć oficjalny rysunek techniczny Google Drive.
-        </div>
-
-        <section class="mail-box" aria-labelledby="mailTitle">
-          <div class="panel-head mini">
+      <aside class="panel left-panel">
+        <section class="stage active" id="stage1">
+          <div class="stage-head">
+            <span class="stage-number">1</span>
             <div>
-              <p class="eyebrow">Formularz kontaktowy</p>
-              <h2 id="mailTitle">Gotowe zapytanie od klienta</h2>
+              <h2>Wyszukaj urządzenie</h2>
+              <p>Wpisz indeks modelu, np. <strong>YT-82200</strong>, <strong>YT85177</strong>, albo fragment nazwy.</p>
             </div>
-            <button id="copyMail" type="button" class="primary">Kopiuj</button>
           </div>
-          <div id="selectionBox" class="selection-box empty-selection">
-            <strong>Brak wybranych części.</strong>
-            <span>Użyj przycisku „Do zapytania” przy części, żeby dodać ją do formularza.</span>
-          </div>
-          <form id="customerForm" class="customer-form old-form" aria-label="Formularz danych klienta">
-            <div class="form-grid old-client-grid">
-              <label>Urządzenie / model<input id="cfDevice" name="device" type="text" placeholder="np. YT-85177"></label>
-              <label>Nr seryjny / data zakupu<input id="cfSerial" name="serial" type="text" placeholder="opcjonalnie"></label>
-              <label>Imię i nazwisko / firma<input id="cfName" name="name" type="text" placeholder="Jan Kowalski / Firma ABC"></label>
-              <label>E-mail<input id="cfEmail" name="email" type="email" placeholder="klient@email.pl"></label>
-              <label>Telefon<input id="cfPhone" name="phone" type="tel" placeholder="500 600 700"></label>
-              <label>NIP<input id="cfNip" name="nip" type="text" placeholder="opcjonalnie"></label>
-              <label class="wide">Dane do faktury<textarea id="cfInvoice" name="invoice" rows="3" placeholder="Nazwa, adres, NIP"></textarea></label>
-              <label class="wide">Adres wysyłki<textarea id="cfShipping" name="shipping" rows="3" placeholder="Ulica, kod, miasto, paczkomat/kurier"></textarea></label>
-              <label class="wide">Uwagi<textarea id="cfNotes" name="notes" rows="3" placeholder="np. dodatkowe informacje, preferowana forma kontaktu, uwagi do wysyłki"></textarea></label>
-            </div>
-          </form>
-          <textarea id="mailText" spellcheck="true" rows="18" aria-label="Treść maila do skopiowania"></textarea>
+
+          <label class="search-box">
+            <span>Indeks lub nazwa urządzenia</span>
+            <input id="deviceSearch" type="search" placeholder="np. YT-82200, 82200, polerka" autocomplete="off" />
+          </label>
+          <div class="quick-actions" id="quickExamples"></div>
+          <div class="result-meta" id="deviceMeta"></div>
+          <div class="device-results" id="deviceResults"></div>
         </section>
+
+        <section class="stage" id="stage2">
+          <div class="stage-head">
+            <span class="stage-number">2</span>
+            <div>
+              <h2>Wybierz części z listy</h2>
+              <p>Pozycje są z wybranego rysunku PDF. Dodaj potrzebne części i ustaw ilości.</p>
+            </div>
+          </div>
+          <div class="selected-device" id="selectedDeviceBox"></div>
+          <label class="search-box compact">
+            <span>Szukaj części w tym urządzeniu</span>
+            <input id="partsSearch" type="search" placeholder="pozycja, indeks, nazwa części" autocomplete="off" />
+          </label>
+          <div class="part-table-wrap">
+            <table class="parts-table">
+              <thead><tr><th>Poz.</th><th>Indeks</th><th>Nazwa</th><th></th></tr></thead>
+              <tbody id="partsTable"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="stage" id="stage3">
+          <div class="stage-head">
+            <span class="stage-number">3</span>
+            <div>
+              <h2>Dane kontaktowe, faktura i wysyłka</h2>
+              <p>Te informacje trafią do gotowego maila. Strona niczego nie wysyła sama.</p>
+            </div>
+          </div>
+
+          <form id="customerForm" class="form-grid">
+            <fieldset>
+              <legend>Kontakt</legend>
+              <label>Imię i nazwisko / firma kontaktowa<input name="contactName" required /></label>
+              <label>Email<input name="contactEmail" type="email" required /></label>
+              <label>Telefon<input name="contactPhone" required /></label>
+            </fieldset>
+
+            <fieldset>
+              <legend>Dane do faktury</legend>
+              <label>Nazwa firmy / osoba<input name="invoiceName" required /></label>
+              <label>NIP<input name="invoiceNip" placeholder="opcjonalnie" /></label>
+              <label>Ulica i nr<input name="invoiceStreet" required /></label>
+              <div class="two-col">
+                <label>Kod pocztowy<input name="invoiceZip" required /></label>
+                <label>Miasto<input name="invoiceCity" required /></label>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>Dane do wysyłki</legend>
+              <label class="check"><input type="checkbox" id="sameAsInvoice" /> Takie same jak do faktury</label>
+              <label>Odbiorca<input name="shipName" required /></label>
+              <label>Ulica i nr<input name="shipStreet" required /></label>
+              <div class="two-col">
+                <label>Kod pocztowy<input name="shipZip" required /></label>
+                <label>Miasto<input name="shipCity" required /></label>
+              </div>
+              <label>Telefon dla kuriera<input name="shipPhone" required /></label>
+            </fieldset>
+
+            <fieldset class="full-span">
+              <legend>Dodatkowa wiadomość</legend>
+              <label>Uwagi<textarea name="notes" rows="4" placeholder="np. numer seryjny urządzenia, pilne, preferowana forma kontaktu"></textarea></label>
+            </fieldset>
+          </form>
+        </section>
+
+        <section class="stage" id="stage4">
+          <div class="stage-head">
+            <span class="stage-number">4</span>
+            <div>
+              <h2>Gotowy mail do skopiowania</h2>
+              <p>Skopiuj temat i treść, a następnie wyślij wiadomość na <strong>service@yato.pl</strong>.</p>
+            </div>
+          </div>
+          <div class="mail-card">
+            <label>Adresat<input id="mailTo" readonly value="service@yato.pl" /></label>
+            <label>Temat<input id="mailSubject" readonly /></label>
+            <label>Treść<textarea id="mailBody" rows="18" readonly></textarea></label>
+            <div class="mail-actions">
+              <button class="primary" id="copyMail" type="button">Kopiuj treść maila</button>
+              <button id="copySubject" type="button">Kopiuj temat</button>
+              <button id="startOver" type="button">Zacznij od nowa</button>
+            </div>
+            <div class="copy-status" id="copyStatus"></div>
+          </div>
+        </section>
+      </aside>
+
+      <aside class="panel right-panel">
+        <div class="progress-card" id="progressCard">
+          <h3>Postęp zapytania</h3>
+          <ol>
+            <li id="pDevice">Wybierz urządzenie</li>
+            <li id="pDrawing">Rysunek PDF załaduje się automatycznie</li>
+            <li id="pParts">Dodaj części do zapytania</li>
+            <li id="pData">Uzupełnij dane</li>
+            <li id="pMail">Skopiuj mail</li>
+          </ol>
+        </div>
+
+        <div class="basket-card">
+          <div class="basket-head">
+            <h3>Wybrane części</h3>
+            <span id="basketCount">0</span>
+          </div>
+          <div id="basketItems" class="basket-empty">Brak wybranych części.</div>
+          <div class="basket-actions">
+            <button class="primary" id="goData" type="button" disabled>Przejdź do danych</button>
+            <button id="clearBasket" type="button" disabled>Wyczyść</button>
+          </div>
+        </div>
+
+        <div class="viewer-card">
+          <div class="viewer-head">
+            <h3>Rysunek PDF</h3>
+            <a id="openPdf" class="link hidden" href="#" target="_blank" rel="noreferrer">Otwórz w nowej karcie</a>
+          </div>
+          <div id="viewer" class="viewer empty">
+            <div>Wybierz urządzenie, a rysunek pojawi się tutaj.</div>
+          </div>
+        </div>
       </aside>
     </section>
   </main>
 
   <footer class="footer">
-    <div class="brand-strip" aria-label="Marki TOYA">
-      <img src="assets/logos/yato-clean.png?v=20260617-v40-drive-final" alt="YATO" onerror="this.outerHTML='<span class=&quot;brand-chip&quot;>YATO</span>'">
-      <img src="assets/logos/vorel-clean.png?v=20260617-v40-drive-final" alt="VOREL" onerror="this.outerHTML='<span class=&quot;brand-chip&quot;>VOREL</span>'">
-      <img src="assets/logos/sthor-clean.png?v=20260617-v40-drive-final" alt="STHOR" onerror="this.outerHTML='<span class=&quot;brand-chip&quot;>STHOR</span>'">
-      <img src="assets/logos/lund-clean.png?v=20260617-v40-drive-final" alt="LUND" onerror="this.outerHTML='<span class=&quot;brand-chip&quot;>LUND</span>'">
-      <img src="assets/logos/flo-clean.png?v=20260617-v40-drive-final" alt="FLO" onerror="this.outerHTML='<span class=&quot;brand-chip&quot;>FLO</span>'">
-      <img src="assets/logos/fala-clean.png?v=20260617-v40-drive-final" alt="FALA" onerror="this.outerHTML='<span class=&quot;brand-chip&quot;>FALA</span>'">
-    </div>
-    <p>TOYA S.A. — Serwis Pogwarancyjny. Publiczny widok zawiera wyłącznie części z rysunków technicznych PDF Google Drive. Ceny i dostępność potwierdza serwis po otrzymaniu zapytania.</p>
+    <span>PGW Service Hub v41</span>
+    <span>Strona nie pokazuje cen ani stanów magazynowych.</span>
   </footer>
 
-  <script src="config.js?v=20260617-v40-drive-final"></script>
-  <script src="app.js?v=20260617-v40-drive-final" defer></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>

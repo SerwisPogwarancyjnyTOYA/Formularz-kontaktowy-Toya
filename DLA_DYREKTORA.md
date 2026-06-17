@@ -1,5 +1,7 @@
-# PGW Service Hub — wersja demonstracyjna
+# PGW Service Hub — opis prosty
 
-Celem strony jest umożliwienie klientowi znalezienia części po indeksie urządzenia, pozycji z rysunku lub indeksie części oraz przygotowanie zapytania do serwisu pogwarancyjnego.
+Projekt ma prowadzić klienta krok po kroku przez przygotowanie zapytania o części zamienne.
 
-Wersja publiczna pokazuje wyłącznie rysunki PDF hostowane w Google Drive. Ceny, dostępność i stany magazynowe nie są prezentowane klientowi — są potwierdzane dopiero przez serwis po otrzymaniu zapytania.
+Klient nie dostaje od razu wszystkich informacji. Najpierw wybiera urządzenie, potem widzi rysunek PDF, wybiera części, uzupełnia dane i na końcu otrzymuje gotową wiadomość do wysłania do serwisu.
+
+Strona nie publikuje cen ani dostępności. Te informacje pozostają po stronie serwisu.

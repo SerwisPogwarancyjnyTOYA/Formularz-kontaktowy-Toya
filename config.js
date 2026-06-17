@@ -1,13 +1,16 @@
 window.PGW_CONFIG = {
+  version: '20260617-v41-functional-flow',
+  appName: 'PGW Service Hub',
+  recipientEmail: 'service@yato.pl',
   storageMode: 'drive',
-  publicDriveOnly: true,
   pdfOnly: true,
-  officialOnly: false,
-  preferExternalDrawings: true,
-  demoDevices: ['YT-82200', 'YT-85177', 'YT-827795', 'YT-851992', 'YT-82003', 'YT-85003'],
-  drawingsBaseUrl: '',
-  storageLabel: 'Google Drive',
-  driveSearchFallback: false,
-  driveSearchBaseUrl: '',
-  driveMapUrls: ['data/drive-drawings-map.json']
+  showPrices: false,
+  showStock: false,
+  autosave: true,
+  dataUrls: {
+    devices: ['data/devices.json'],
+    drawings: ['data/drawings.json'],
+    parts: ['data/parts.json'],
+    driveMap: ['data/drive-drawings-map.json']
+  }
 };

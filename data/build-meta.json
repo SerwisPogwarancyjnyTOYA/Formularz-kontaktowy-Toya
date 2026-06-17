@@ -1,21 +1,7 @@
 {
-  "version": "v40-clean-deduped",
-  "mode": "drive-client-pdf-only",
-  "priceAndAvailability": "removed",
-  "before": {
-    "drawings": 50,
-    "parts": 2202,
-    "driveMap": 34
-  },
-  "after": {
-    "drawings": 34,
-    "parts": 2179,
-    "devices": 34,
-    "driveMap": 34
-  },
-  "removed": {
-    "drawingsWithoutDrivePdf": 0,
-    "duplicateDrawingGroups": 4,
-    "parts": 23
-  }
+  "version": "20260617-v41-functional-flow",
+  "createdAt": "2026-06-17T01:50:44.074821Z",
+  "mode": "Drive PDF client flow",
+  "showPrices": false,
+  "showStock": false
 }

@@ -1,13 +1,20 @@
-# Wdrożenie v40 clean deduped
+# Wdrożenie v41
 
-1. W repo zostaw folder `.git`.
-2. Usuń całą resztę plików.
-3. Wklej zawartość tej paczki.
-4. W GitHub Desktop zrób commit i push.
-5. Otwórz stronę z parametrem cache-bust:
+1. Zrób backup obecnego katalogu repo.
+2. Utwórz świeży katalog repo albo sklonuj repo od nowa.
+3. Usuń wszystko poza `.git`.
+4. Wklej zawartość tej paczki.
+5. Wykonaj commit i push.
+
+Po wdrożeniu testuj z parametrem cache:
 
 ```text
-https://serwispogwarancyjnytoya.github.io/Formularz-kontaktowy-Toya/?v=20260617-v40-clean-deduped
+https://serwispogwarancyjnytoya.github.io/Formularz-kontaktowy-Toya/?v=20260617-v41-functional-flow
 ```
 
-Jeśli PDF z Drive się nie wyświetla, najpierw sprawdź uprawnienia pliku na Drive. Plik musi być dostępny do odczytu dla odbiorcy strony.
+## Komendy pomocnicze
+
+```bash
+bash scripts/audit-repo.sh
+bash scripts/clean-macos-junk.sh
+```

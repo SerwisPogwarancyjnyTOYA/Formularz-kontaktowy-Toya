@@ -1,31 +1,26 @@
-# PGW Service Hub v40 — clean deduped
+# PGW Service Hub v41
 
-Publiczna strona do wyszukiwania części i rysunków technicznych dla serwisu pogwarancyjnego.
+Lekka strona GitHub Pages dla klientów serwisu pogwarancyjnego TOYA.
 
-## Zasady publicznej wersji
+## Założenia
 
-- Google Drive jest źródłem podglądu dla klienta.
-- Pokazujemy tylko pliki PDF.
-- Nie pokazujemy cen, stanów ani dostępności.
-- Nie pokazujemy DOCX/JPG/PNG ani plików roboczych.
-- Dane publiczne są odfiltrowane i odduplikowane.
+- klient najpierw szuka urządzenia,
+- po wyborze urządzenia pojawia się rysunek PDF z Google Drive,
+- klient wybiera części,
+- potem uzupełnia dane kontaktowe, fakturowe i wysyłkowe,
+- na końcu dostaje gotowy mail do skopiowania i wysłania na `service@yato.pl`.
 
-## Pliki do publikacji
+Strona nie pokazuje cen, stanów magazynowych ani dostępności.
+PDF-y nie są trzymane w repozytorium. Repo zawiera tylko kod i lekkie pliki JSON.
 
-- `index.html`
-- `app.js`
-- `app.css`
-- `config.js`
-- `data/*.json`
-- `assets/logos/*`
-- `.github/workflows/deploy.yml`
+## Pliki publiczne
 
-## Czyszczenie danych
+- `index.html` — aplikacja
+- `app.css` — wygląd
+- `app.js` — logika krokowego formularza
+- `config.js` — konfiguracja
+- `data/*.json` — katalog urządzeń, rysunków, części i mapowanie Drive
 
-Skrypt:
+## Uwaga o dużym repo
 
-```bash
-python3 scripts/clean-public-data.py
-```
-
-usuwa duplikaty rysunków po `driveFileId`, scala części do zostawionego rysunku, usuwa nagłówki udające części oraz pilnuje trybu Drive + PDF-only.
+Jeżeli folder `.git` waży setki MB, to ciężkie pliki są w historii Gita. Najczystsze rozwiązanie to świeże repo / świeża historia i wklejenie tej paczki jako start.

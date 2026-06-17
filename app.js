@@ -1,844 +1,473 @@
 (() => {
   'use strict';
-  const VERSION = '20260617-v40-drive-pdf-final';
-  const CONFIG = Object.assign({
-    storageMode: 'auto',
-    drawingsBaseUrl: '',
-    preferExternalDrawings: true,
-    storageLabel: 'Google Drive',
-    demoDevices: ['YT-82200'],
-    driveSearchFallback: false,
-    driveSearchBaseUrl: '',
-    driveMapUrls: ['data/drive-drawings-map.json', 'drive-drawings-map.json']
-  }, window.PGW_CONFIG || {});
-  const DATA_URLS = {
-    meta: ['data/build-meta.json'],
-    drawings: ['data/drawings.json'],
-    parts: ['data/parts.json'],
-    devices: ['data/devices.json'],
-    driveMap: (window.PGW_CONFIG && window.PGW_CONFIG.driveMapUrls) || ['data/drive-drawings-map.json']
-  };
-
-  const state = {
-    meta: {}, drawings: [], parts: [], devices: [], driveMap: {},
-    drawingById: new Map(), partsByDrawing: new Map(), devicesByIndex: new Map(),
-    selectedParts: [], query: '', initialized: false
-  };
-
+  const CONFIG = window.PGW_CONFIG || {};
   const $ = (id) => document.getElementById(id);
   const els = {
-    loadStatus: $('loadStatus'), statParts: $('statParts'), statDrawings: $('statDrawings'), statDevices: $('statDevices'),
-    searchInput: $('searchInput'), clearSearch: $('clearSearch'), showAllBtn: $('showAllBtn'), results: $('results'), resultsTitle: $('resultsTitle'), resultsMeta: $('resultsMeta'),
-    viewer: $('viewer'), viewerTitle: $('viewerTitle'), viewerOpen: $('viewerOpen'), mailText: $('mailText'), copyMail: $('copyMail'), customerForm: $('customerForm'), selectionBox: $('selectionBox')
+    loadStatus: $('loadStatus'), statDevices: $('statDevices'), statDrawings: $('statDrawings'), statParts: $('statParts'),
+    deviceSearch: $('deviceSearch'), deviceResults: $('deviceResults'), deviceMeta: $('deviceMeta'), quickExamples: $('quickExamples'),
+    selectedDeviceBox: $('selectedDeviceBox'), partsSearch: $('partsSearch'), partsTable: $('partsTable'),
+    viewer: $('viewer'), openPdf: $('openPdf'), basketItems: $('basketItems'), basketCount: $('basketCount'), goData: $('goData'), clearBasket: $('clearBasket'),
+    customerForm: $('customerForm'), sameAsInvoice: $('sameAsInvoice'), mailTo: $('mailTo'), mailSubject: $('mailSubject'), mailBody: $('mailBody'),
+    copyMail: $('copyMail'), copySubject: $('copySubject'), copyStatus: $('copyStatus'), startOver: $('startOver')
+  };
+  const progressIds = ['pDevice','pDrawing','pParts','pData','pMail'];
+
+  const state = {
+    devices: [], drawings: [], parts: [], driveMap: [],
+    drawingById: new Map(), partsByDrawing: new Map(), driveByDrawingId: new Map(), driveByKey: new Map(),
+    selectedDevice: null, selectedDrawing: null, selectedParts: new Map(), step: 1, formDirty: false
   };
 
-  init();
+  document.addEventListener('DOMContentLoaded', init);
 
   async function init() {
-    await cleanOldCaches();
-    wireEvents();
-    setStatus('Ładowanie bazy…');
     try {
-      state.meta = await loadFirst(DATA_URLS.meta, {});
-      state.drawings = normalizeArray(await loadFirst(DATA_URLS.drawings, []));
-      state.parts = normalizeArray(await loadFirst(DATA_URLS.parts, []));
-      state.devices = normalizeArray(await loadFirst(DATA_URLS.devices, []));
-      state.driveMap = await loadFirst(DATA_URLS.driveMap, {});
+      setStatus('Ładowanie katalogu…');
+      const urls = CONFIG.dataUrls || {};
+      state.devices = await loadFirst(urls.devices || ['data/devices.json'], []);
+      state.drawings = await loadFirst(urls.drawings || ['data/drawings.json'], []);
+      state.parts = await loadFirst(urls.parts || ['data/parts.json'], []);
+      state.driveMap = await loadFirst(urls.driveMap || ['data/drive-drawings-map.json'], []);
+      normalizeData();
       buildIndexes();
+      bindEvents();
       renderStats();
-      setStatus(`Gotowe: ${fmt(state.parts.length)} części z rysunków PDF Google Drive, ${fmt(state.drawings.length)} rysunków PDF`);
-      state.initialized = true;
-      state.query = els.searchInput.value.trim();
-      if (state.query) renderResults(); else renderExamples();
-      updateSelectionBox();
-      updateMail();
+      renderExamples();
+      restoreDraft();
+      renderDeviceResults('');
+      setStatus(`Gotowe: ${fmt(state.devices.length)} urządzeń, ${fmt(state.parts.length)} części`, 'ok');
     } catch (error) {
       console.error(error);
-      setStatus('Błąd ładowania danych');
-      els.results.className = 'results empty-state';
-      els.results.innerHTML = `<p><strong>Nie udało się odczytać bazy.</strong><br>${escapeHtml(error.message || error)}</p>`;
+      setStatus('Nie udało się załadować danych', 'warn');
+      els.deviceResults.innerHTML = `<div class="device-card"><div><h3>Błąd ładowania katalogu</h3><p>${escapeHtml(error.message || error)}</p></div></div>`;
     }
-  }
-
-  async function cleanOldCaches() {
-    try {
-      if ('serviceWorker' in navigator) {
-        const regs = await navigator.serviceWorker.getRegistrations();
-        await Promise.all(regs.map((r) => r.unregister()));
-      }
-      if (window.caches) {
-        const keys = await caches.keys();
-        await Promise.all(keys.map((key) => caches.delete(key)));
-      }
-    } catch (error) { console.warn('Cache cleanup skipped:', error); }
-  }
-
-  function wireEvents() {
-    els.searchInput.addEventListener('input', debounce(() => {
-      state.query = els.searchInput.value.trim();
-      renderResults();
-    }, 120));
-    els.clearSearch.addEventListener('click', () => {
-      els.searchInput.value = '';
-      state.query = '';
-      renderExamples();
-      els.searchInput.focus();
-    });
-    els.showAllBtn.addEventListener('click', renderExamples);
-    document.querySelectorAll('[data-example]').forEach((btn) => btn.addEventListener('click', () => {
-      els.searchInput.value = btn.dataset.example;
-      state.query = btn.dataset.example;
-      renderResults();
-    }));
-    els.copyMail.addEventListener('click', async () => {
-      try {
-        await navigator.clipboard.writeText(els.mailText.value);
-        toast('Skopiowano treść maila');
-      } catch (_) {
-        els.mailText.focus();
-        els.mailText.select();
-        toast('Zaznaczono treść — skopiuj Cmd+C');
-      }
-    });
-    if (els.customerForm) {
-      restoreCustomerDraft();
-      els.customerForm.addEventListener('input', debounce(() => { saveCustomerDraft(); updateMail(); }, 80));
-      els.customerForm.addEventListener('change', () => { saveCustomerDraft(); updateMail(); });
-    }
-    document.addEventListener('click', (event) => {
-      const remove = event.target.closest('[data-remove-selected]');
-      if (remove) removeSelectedPart(remove.dataset.removeSelected);
-    });
-    document.addEventListener('input', (event) => {
-      const qty = event.target.closest('[data-selected-qty]');
-      if (qty) changeSelectedQty(qty.dataset.selectedQty, qty.value);
-    });
-    els.results.addEventListener('click', (event) => {
-      const toggle = event.target.closest('[data-toggle]');
-      if (toggle) toggle.closest('.result-card')?.classList.toggle('open');
-      const drawing = event.target.closest('[data-view-drawing]');
-      if (drawing) showDrawing(drawing.dataset.viewDrawing);
-      const add = event.target.closest('[data-add-part]');
-      if (add) addPart(add.dataset.addPart);
-      const related = event.target.closest('[data-search]');
-      if (related) {
-        els.searchInput.value = related.dataset.search;
-        state.query = related.dataset.search;
-        renderResults();
-      }
-    });
   }
 
   async function loadFirst(urls, fallback) {
     let lastError;
     for (const url of urls) {
       try {
-        const response = await fetch(`${url}?v=${VERSION}`, {cache:'no-store'});
-        if (!response.ok) throw new Error(`${url}: HTTP ${response.status}`);
-        return await response.json();
-      } catch (error) { lastError = error; }
+        const res = await fetch(url, {cache: 'no-store'});
+        if (!res.ok) throw new Error(`${url}: ${res.status}`);
+        return await res.json();
+      } catch (e) { lastError = e; }
     }
     if (fallback !== undefined) return fallback;
     throw lastError || new Error('Brak danych');
   }
 
-  function normalizeArray(value) {
-    if (Array.isArray(value)) return value;
-    if (!value || typeof value !== 'object') return [];
-    for (const key of ['items','data','rows','parts','drawings','devices','records']) if (Array.isArray(value[key])) return value[key];
-    return Object.values(value).filter(Boolean);
+  function normalizeData() {
+    state.devices = arr(state.devices).filter(Boolean);
+    state.drawings = arr(state.drawings).filter(d => isPdf(d));
+    state.parts = arr(state.parts).filter(Boolean);
+    state.driveMap = arr(state.driveMap).filter(row => isPdf(row));
+
+    const driveKeys = new Set();
+    for (const row of state.driveMap) {
+      row.fileId = row.fileId || row.driveFileId || row.googleDriveId || row.gdriveId || row.id || '';
+      row.viewerUrl = row.viewerUrl || (row.fileId ? `https://drive.google.com/file/d/${encodeURIComponent(row.fileId)}/preview` : '');
+      row.openUrl = row.openUrl || (row.fileId ? `https://drive.google.com/file/d/${encodeURIComponent(row.fileId)}/view` : row.url || '');
+      row.__keys = unique([row.deviceIndex, row.fileName, row.title, row.name, ...(row.keys || [])].flat().map(normKey).filter(Boolean));
+      for (const k of row.__keys) driveKeys.add(k);
+    }
+
+    state.drawings = state.drawings.filter(d => {
+      const keys = drawingKeys(d);
+      return keys.some(k => driveKeys.has(k));
+    });
+    const drawingIds = new Set(state.drawings.map(d => String(d.id)));
+    state.parts = state.parts.filter(p => drawingIds.has(String(p.drawingId)) && p.partIndex && !looksLikeHeaderPart(p));
+    const deviceKeys = new Set(state.drawings.map(d => norm(d.deviceIndex)).filter(Boolean));
+    state.devices = state.devices.filter(d => deviceKeys.has(norm(d.deviceIndex)));
   }
 
   function buildIndexes() {
-    state.drawingById = new Map(state.drawings.map((d) => [String(d.id), d]));
+    state.drawingById = new Map(state.drawings.map(d => [String(d.id), d]));
     state.partsByDrawing = new Map();
-    state.devicesByIndex = new Map();
-    for (const part of state.parts) {
-      const did = String(part.drawingId || '');
+    for (const p of state.parts) {
+      const did = String(p.drawingId || '');
       if (!state.partsByDrawing.has(did)) state.partsByDrawing.set(did, []);
-      state.partsByDrawing.get(did).push(part);
+      state.partsByDrawing.get(did).push(p);
     }
-    for (const device of state.devices) state.devicesByIndex.set(norm(device.deviceIndex), device);
-    applyDriveManifest();
-    if (CONFIG.publicDriveOnly) filterToPublicDrivePdf();
-    else if (CONFIG.officialOnly) filterToOfficialToya24();
-    for (const part of state.parts) {
-      part.__search = norm([part.partIndex, part.namePl, part.nameEn, part.position, part.deviceIndex, part.drawingTitle, part.zun].join(' '));
+    state.driveByKey = new Map();
+    for (const row of state.driveMap) {
+      for (const key of row.__keys || []) if (!state.driveByKey.has(key)) state.driveByKey.set(key, row);
     }
-    for (const drawing of state.drawings) {
-      drawing.__search = norm([drawing.deviceIndex, drawing.brand, drawing.title, drawing.fileName, drawing.originalPath, drawing.searchText].join(' '));
+    state.driveByDrawingId = new Map();
+    for (const d of state.drawings) {
+      const row = resolveDrive(d);
+      if (row) state.driveByDrawingId.set(String(d.id), row);
     }
+    for (const d of state.devices) d.__search = norm([d.deviceIndex, d.title, d.name, d.brand].join(' '));
+    for (const p of state.parts) p.__search = norm([p.position, p.partIndex, p.namePl, p.nameEn, p.drawingTitle, p.deviceIndex].join(' '));
   }
 
-
-  function isPdfDrawing(drawing) {
-    if (!drawing) return false;
-    const type = String(drawing.type || '').toLowerCase();
-    const mime = String(drawing.mimeType || '').toLowerCase();
-    const hay = [
-      drawing.fileName, drawing.name, drawing.title, drawing.path, drawing.localPath, drawing.originalPath,
-      drawing.viewerUrl, drawing.openUrl, drawing.url, drawing.toya24AttachmentUrl, drawing.partsPdfUrl, drawing.toya24PdfUrl
-    ].filter(Boolean).join(' ').toLowerCase();
-    return type === 'pdf' || mime.includes('pdf') || /\.pdf(\?|#|$)/i.test(hay);
-  }
-
-  function hasDrivePdfPreview(drawing) {
-    if (!drawing || !isPdfDrawing(drawing)) return false;
-    if (drawing.driveFileId || drawing.googleDriveId || drawing.gdriveId) return true;
-    const hay = [drawing.viewerUrl, drawing.openUrl, drawing.url].filter(Boolean).join(' ').toLowerCase();
-    return hay.includes('drive.google.com') && (hay.includes('/preview') || hay.includes('/file/d/'));
-  }
-
-  function filterToPublicDrivePdf() {
-    const publicDrawings = new Set(
-      state.drawings
-        .filter(d => hasDrivePdfPreview(d))
-        .map(d => String(d.id))
-    );
-    state.drawings = state.drawings.filter(d => publicDrawings.has(String(d.id)));
-    state.parts = state.parts.filter(p => publicDrawings.has(String(p.drawingId)));
-    const publicModels = new Set(state.drawings.map(d => norm(d.deviceIndex)).filter(Boolean));
-    state.devices = state.devices.filter(d => publicModels.has(norm(d.deviceIndex)));
-    state.drawingById = new Map(state.drawings.map((d) => [String(d.id), d]));
-    state.partsByDrawing = new Map();
-    for (const part of state.parts) {
-      const did = String(part.drawingId || '');
-      if (!state.partsByDrawing.has(did)) state.partsByDrawing.set(did, []);
-      state.partsByDrawing.get(did).push(part);
-    }
-    state.devicesByIndex = new Map();
-    for (const device of state.devices) state.devicesByIndex.set(norm(device.deviceIndex), device);
-  }
-
-  function filterToOfficialToya24() {
-    const officialDrawings = new Set(state.drawings.filter(d => String(d.officialSource || d.source || '').toUpperCase() === 'TOYA24' || d.official === true || d.toya24AttachmentUrl || d.toya24ProductUrl).map(d => String(d.id)));
-    state.drawings = state.drawings.filter(d => officialDrawings.has(String(d.id)));
-    state.parts = state.parts.filter(p => officialDrawings.has(String(p.drawingId)));
-    const officialModels = new Set(state.drawings.map(d => norm(d.deviceIndex)).filter(Boolean));
-    state.devices = state.devices.filter(d => officialModels.has(norm(d.deviceIndex)));
-    state.drawingById = new Map(state.drawings.map((d) => [String(d.id), d]));
-    state.partsByDrawing = new Map();
-    for (const part of state.parts) {
-      const did = String(part.drawingId || '');
-      if (!state.partsByDrawing.has(did)) state.partsByDrawing.set(did, []);
-      state.partsByDrawing.get(did).push(part);
-    }
-    state.devicesByIndex = new Map();
-    for (const device of state.devices) state.devicesByIndex.set(norm(device.deviceIndex), device);
-  }
-
-
-  function applyDriveManifest() {
-    const maps = normalizeDriveMap(state.driveMap);
-    if (!maps.length) return;
-
-    const byKey = new Map();
-    for (const item of maps) {
-      if (!item.key) continue;
-      if (!byKey.has(item.key)) byKey.set(item.key, item);
-    }
-
-    for (const drawing of state.drawings) {
-      const keys = drawingKeys(drawing);
-      for (const key of keys) {
-        const hit = byKey.get(key);
-        if (!hit) continue;
-        if (hit.fileId && !drawing.driveFileId) drawing.driveFileId = hit.fileId;
-        if (hit.url && !drawing.url) drawing.url = hit.url;
-        if (hit.viewerUrl && !drawing.viewerUrl) drawing.viewerUrl = hit.viewerUrl;
-        if (hit.openUrl && !drawing.openUrl) drawing.openUrl = hit.openUrl;
-        if (hit.mimeType && !drawing.mimeType) drawing.mimeType = hit.mimeType;
-        break;
-      }
-    }
-  }
-
-  function normalizeDriveMap(value) {
-    const rows = Array.isArray(value) ? value : normalizeArray(value);
-    const out = [];
-    for (const row of rows) {
-      if (!row || typeof row !== 'object') continue;
-      const fileId = row.fileId || row.driveFileId || row.googleDriveId || row.gdriveId || row.id || '';
-      const url = row.url || row.webViewLink || '';
-      const viewerUrl = row.viewerUrl || (fileId ? `https://drive.google.com/file/d/${encodeURIComponent(fileId)}/preview` : '');
-      const openUrl = row.openUrl || url || (fileId ? `https://drive.google.com/file/d/${fileId}/view` : '');
-      const mimeType = row.mimeType || '';
-      const fileLabel = String([row.fileName, row.name, row.title, row.path, row.localPath, row.drivePath, row.url, row.viewerUrl].filter(Boolean).join(' ')).toLowerCase();
-      if (CONFIG.pdfOnly !== false && mimeType && !String(mimeType).toLowerCase().includes('pdf') && !/\.pdf(\?|#|$)/i.test(fileLabel)) continue;
-      if (CONFIG.pdfOnly !== false && !mimeType && fileLabel && !/\.pdf(\?|#|$)/i.test(fileLabel)) continue;
-
-      const rawKeys = [];
-      const push = (v) => {
-        if (Array.isArray(v)) v.forEach(push);
-        else if (v !== undefined && v !== null) rawKeys.push(v);
-      };
-      push(row.keys);
-      push(row.path);
-      push(row.originalPath);
-      push(row.localPath);
-      push(row.drivePath);
-      push(row.fileName);
-      push(row.name);
-      push(row.title);
-      push(row.deviceIndex);
-      push(row.deviceIndexes);
-      push(row.model);
-      push(row.models);
-      push(row.key);
-
-      for (const raw of rawKeys) {
-        const variants = keyVariants(raw);
-        for (const key of variants) if (key) out.push({key, fileId, url, viewerUrl, openUrl, mimeType});
-      }
-    }
-    return out;
-  }
-
-  function drawingKeys(drawing) {
-    const raw = [
-      drawing.path,
-      drawing.originalPath,
-      drawing.localPath,
-      drawing.fileName,
-      drawing.name,
-      drawing.title,
-      drawing.deviceIndex,
-      drawing.searchText
-    ];
-    return unique(raw.flatMap(keyVariants));
-  }
-
-  function keyVariants(value) {
-    const text = String(value || '').trim();
-    if (!text) return [];
-    const base = normKey(text);
-    const noExt = stripExt(base);
-    const fileOnly = normKey(text.replace(/\\/g, '/').split('/').pop());
-    const fileNoExt = stripExt(fileOnly);
-    const models = extractIndexes(text);
-    return unique([base, noExt, fileOnly, fileNoExt, ...models.map(normKey), ...models.map(x => stripExt(normKey(x)))]).filter(Boolean);
-  }
-
-  function extractIndexes(value) {
-    const text = String(value || '').toUpperCase();
-    const matches = text.match(/\b[A-Z]{1,4}[-_ ]?\d{2,6}\b|\b\d{5,6}\b/g) || [];
-    return matches.map(x => x.replace(/_/g, '-').replace(/\s+/g, '-').replace(/([A-Z]+)(\d)/, '$1-$2'));
-  }
-
-  function stripExt(value) {
-    return String(value || '').replace(/\.(pdf|docx?|xlsx?|jpg|jpeg|png|webp|gif|bmp)$/i, '');
-  }
-
-  function normKey(value) {
-    return String(value || '')
-      .trim()
-      .toLowerCase()
-      .replace(/\\/g, '/')
-      .replace(/^.*\//, '')
-      .replace(/[_-]+/g, '-')
-      .replace(/\s+/g, ' ')
-      .replace(/^czesci[-_ ]zamienne[-_ ]*/i, 'czesci-zamienne-')
-      .trim();
-  }
-
-  function drawingHasPreview(d) {
-    return hasDrivePdfPreview(d);
-  }
-
-  function countDrivePreviews() {
-    return state.drawings.filter(drawingHasPreview).length;
-  }
-
-  function autoPreviewFirst(items) {
-    const first = (items || []).map(item => {
-      if (!item) return null;
-      if (item.drawingId) return state.drawingById.get(String(item.drawingId));
-      if (item.id && state.drawingById.has(String(item.id))) return item;
-      if (item.id && state.partsByDrawing.has(String(item.id))) return item;
-      return null;
-    }).find(Boolean);
-    if (first) showDrawing(first.id);
-  }
-
-  function saveCustomerDraft() {
-    try {
-      const ids = ['cfDevice','cfSerial','cfName','cfEmail','cfPhone','cfNip','cfInvoice','cfShipping','cfNotes'];
-      const data = {};
-      ids.forEach(id => data[id] = ($(id)?.value || ''));
-      localStorage.setItem('pgwCustomerDraft', JSON.stringify(data));
-    } catch (_) {}
-  }
-
-  function restoreCustomerDraft() {
-    try {
-      const data = JSON.parse(localStorage.getItem('pgwCustomerDraft') || '{}');
-      Object.entries(data).forEach(([id, value]) => { if ($(id)) $(id).value = value || ''; });
-    } catch (_) {}
+  function bindEvents() {
+    els.deviceSearch.addEventListener('input', debounce(() => renderDeviceResults(els.deviceSearch.value), 90));
+    els.partsSearch.addEventListener('input', debounce(renderParts, 90));
+    els.goData.addEventListener('click', () => goStep(3));
+    els.clearBasket.addEventListener('click', () => { state.selectedParts.clear(); renderBasket(); saveDraft(); });
+    document.querySelectorAll('.step').forEach(btn => btn.addEventListener('click', () => goStep(Number(btn.dataset.step))));
+    els.sameAsInvoice.addEventListener('change', applySameAsInvoice);
+    els.customerForm.addEventListener('input', () => { state.formDirty = true; saveDraft(); updateCanProceed(); });
+    els.customerForm.addEventListener('change', () => { state.formDirty = true; saveDraft(); updateCanProceed(); });
+    els.copyMail.addEventListener('click', () => copyText(els.mailBody.value, 'Skopiowano treść maila.'));
+    els.copySubject.addEventListener('click', () => copyText(els.mailSubject.value, 'Skopiowano temat.'));
+    els.startOver.addEventListener('click', resetAll);
   }
 
   function renderStats() {
-    els.statParts.textContent = fmt(state.parts.length);
+    els.statDevices.textContent = fmt(state.devices.length);
     els.statDrawings.textContent = fmt(state.drawings.length);
-    els.statDevices.textContent = fmt(state.devices.length || unique(state.drawings.map(d => d.deviceIndex)).length);
+    els.statParts.textContent = fmt(state.parts.length);
   }
 
   function renderExamples() {
-    const demoDevices = Array.isArray(CONFIG.demoDevices) ? CONFIG.demoDevices.map(norm) : [];
-    const previewDrawingIds = new Set(state.drawings.filter(drawingHasPreview).map(d => String(d.id)));
-
-    const demoParts = [];
-    for (const device of demoDevices) {
-      const rows = state.parts
-        .filter(p => norm(p.deviceIndex) === device && previewDrawingIds.has(String(p.drawingId)) && p.partIndex && norm(p.partIndex) !== device)
-        .slice(0, 2);
-      demoParts.push(...rows);
-    }
-
-    const fallbackParts = state.parts
-      .filter(p => (p.namePl || p.nameEn) && previewDrawingIds.has(String(p.drawingId)))
-      .slice(0, 10);
-
-    const sampleParts = uniqueBy([...demoParts, ...fallbackParts], p => String(p.id)).slice(0, 10);
-    const sampleDrawings = state.drawings
-      .filter(d => drawingHasPreview(d) && String(d.type || '').toLowerCase() === 'pdf')
-      .sort((a, b) => {
-        const ai = demoDevices.indexOf(norm(a.deviceIndex));
-        const bi = demoDevices.indexOf(norm(b.deviceIndex));
-        return (ai < 0 ? 999 : ai) - (bi < 0 ? 999 : bi);
-      })
-      .slice(0, 6);
-
-    els.resultsTitle.textContent = 'Sprawdzone przykłady do prezentacji';
-    els.resultsMeta.textContent = `Przykładowe rekordy pochodzą wyłącznie z rysunków PDF podpiętych z Google Drive.`;
-    els.results.className = 'results';
-    els.results.innerHTML = [
-      ...sampleParts.map(renderPartResult),
-      ...sampleDrawings.map(renderDrawingResult)
-    ].join('') || '<div class="empty-state">Brak przykładowych rekordów z podpiętym PDF Google Drive.</div>';
-    autoPreviewFirst([...sampleParts, ...sampleDrawings]);
+    const examples = state.devices.slice(0, 5).map(d => d.deviceIndex).filter(Boolean);
+    els.quickExamples.innerHTML = examples.map(x => `<button type="button" data-q="${escapeAttr(x)}">${escapeHtml(x)}</button>`).join('');
+    els.quickExamples.querySelectorAll('button').forEach(btn => btn.addEventListener('click', () => {
+      els.deviceSearch.value = btn.dataset.q;
+      renderDeviceResults(btn.dataset.q);
+    }));
   }
 
-  function uniqueBy(items, keyFn) {
-    const seen = new Set();
-    const out = [];
-    for (const item of items) {
-      const key = keyFn(item);
-      if (!key || seen.has(key)) continue;
-      seen.add(key);
-      out.push(item);
-    }
-    return out;
-  }
-
-  function renderResults() {
-    if (!state.initialized) {
-      els.resultsTitle.textContent = 'Ładowanie danych';
-      els.resultsMeta.textContent = 'Wczytuję bazę części i rysunków. Po zakończeniu wyszukiwanie ruszy automatycznie.';
-      els.results.className = 'results empty-state';
-      els.results.innerHTML = '<p>Jeszcze chwilę — baza jest duża, więc pierwsze uruchomienie może potrwać.</p>';
-      return;
-    }
-    const query = norm(state.query);
-    if (!query) return renderExamples();
-    const tokens = query.split(' ').filter(Boolean);
-    const parts = scoreItems(state.parts, tokens, 'part').slice(0, 80);
-    const drawings = scoreItems(state.drawings, tokens, 'drawing').slice(0, 35);
-    const combined = [...parts, ...drawings].sort((a,b) => b.score - a.score).slice(0, 90);
-    els.resultsTitle.textContent = 'Wyniki wyszukiwania';
-    els.resultsMeta.textContent = `${fmt(parts.length)} pasujących części • ${fmt(drawings.length)} pasujących rysunków PDF`;
-    els.results.className = 'results';
-    if (!combined.length) {
-      els.results.className = 'results empty-state';
-      els.results.innerHTML = `<p><strong>Brak wyniku dla: ${escapeHtml(state.query)}</strong></p><p>Spróbuj bez myślnika, sam numer urządzenia, sam indeks części albo fragment nazwy, np. „szczotka”, „grzałka”, „uchwyt”.</p>`;
-      return;
-    }
-    els.results.innerHTML = combined.map((item) => item.kind === 'part' ? renderPartResult(item.value, item.score) : renderDrawingResult(item.value, item.score)).join('');
-    autoPreviewFirst(combined.map(x => x.value));
-  }
-
-  function scoreItems(items, tokens, kind) {
-    const scored = [];
-    for (const item of items) {
+  function renderDeviceResults(query) {
+    const q = norm(query);
+    const tokens = q.split(/\s+/).filter(Boolean);
+    let results = state.devices.map(device => {
+      const drawings = state.drawings.filter(d => norm(d.deviceIndex) === norm(device.deviceIndex));
+      const partCount = drawings.reduce((n, d) => n + (state.partsByDrawing.get(String(d.id)) || []).length, 0);
       let score = 0;
-      const search = item.__search || norm(Object.values(item).join(' '));
-      for (const token of tokens) {
-        if (!token) continue;
-        if (kind === 'part') {
-          const idx = norm(item.partIndex);
-          if (idx === token) score += 260;
-          else if (idx.includes(token)) score += 140;
-          if (norm(item.deviceIndex).includes(token)) score += 70;
-        } else {
-          const dev = norm(item.deviceIndex);
-          if (dev === token) score += 220;
-          else if (dev.includes(token)) score += 110;
-        }
-        if (search.includes(token)) score += 25;
+      const idx = norm(device.deviceIndex);
+      if (!tokens.length) score = partCount ? 10 : 0;
+      for (const t of tokens) {
+        if (idx === t || idx.replace(/-/g,'') === t.replace(/-/g,'')) score += 120;
+        else if (idx.includes(t) || idx.replace(/-/g,'').includes(t.replace(/-/g,''))) score += 80;
+        if (device.__search.includes(t)) score += 25;
       }
-      if (score > 0) {
-        if (kind === 'part') {
-          const drawing = state.drawingById.get(String(item.drawingId));
-          if (drawingHasPreview(drawing)) score += 45;
-        } else if (drawingHasPreview(item)) {
-          score += 45;
-        }
-        scored.push({kind, value:item, score});
-      }
-    }
-    return scored.sort((a,b) => b.score - a.score);
-  }
+      return {device, drawings, partCount, score};
+    }).filter(x => x.partCount > 0 && (!tokens.length || x.score > 0));
+    results.sort((a,b) => b.score - a.score || b.partCount - a.partCount || String(a.device.deviceIndex).localeCompare(String(b.device.deviceIndex)));
+    results = results.slice(0, tokens.length ? 30 : 12);
 
-  function renderPartResult(part) {
-    const drawing = state.drawingById.get(String(part.drawingId)) || {};
-    const siblings = (state.partsByDrawing.get(String(part.drawingId)) || []).filter(p => p.id !== part.id).slice(0, 8);
-    const hasPreview = drawingHasPreview(drawing);
-    const name = part.namePl || part.nameEn || 'Część z rysunku';
-    const previewBadge = hasPreview ? '<span class="badge ok">PDF Drive</span>' : '<span class="badge warn">brak PDF Drive</span>';
-    return `<article class="result-card open ${hasPreview ? 'has-preview' : 'needs-preview'}">
-      <div class="result-main">
+    els.deviceMeta.textContent = tokens.length ? `Znaleziono ${fmt(results.length)} pasujących urządzeń.` : 'Najpierw wybierz urządzenie. Poniżej kilka przykładów z aktualnej bazy.';
+    if (!results.length) {
+      els.deviceResults.innerHTML = `<div class="device-card"><div><h3>Brak wyniku</h3><p>Spróbuj wpisać sam numer, np. bez myślnika, albo sprawdź indeks z tabliczki znamionowej.</p></div></div>`;
+      return;
+    }
+    els.deviceResults.innerHTML = results.map(({device, drawings, partCount}) => `
+      <article class="device-card ${state.selectedDevice && norm(state.selectedDevice.deviceIndex) === norm(device.deviceIndex) ? 'selected' : ''}">
         <div>
-          <div class="result-kicker"><span class="badge red">Część</span><span class="badge">${escapeHtml(part.deviceIndex || 'bez modelu')}</span>${part.position ? `<span class="badge ok">poz. ${escapeHtml(part.position)}</span>` : ''}${previewBadge}</div>
-          <h3 class="result-title"><span class="part-index">${mark(part.partIndex)}</span> — ${mark(name)}</h3>
-          <p class="result-sub">${escapeHtml(drawing.title || part.drawingTitle || '')}</p>
+          <h3>${escapeHtml(device.deviceIndex || 'Bez indeksu')}</h3>
+          <p>${escapeHtml(device.title || device.name || 'Urządzenie z bazą rysunku PDF')}</p>
+          <div class="badges"><span class="badge ok">PDF Drive</span><span class="badge">${fmt(drawings.length)} rys.</span><span class="badge">${fmt(partCount)} części</span></div>
         </div>
-        <div class="card-actions">
-          ${drawing.id ? `<button class="primary" data-view-drawing="${escapeAttr(drawing.id)}">Pokaż rysunek</button>` : ''}
-          <button class="secondary" data-add-part="${escapeAttr(part.id)}">Do zapytania</button>
-          <button class="ghost" data-toggle>Więcej</button>
-        </div>
-      </div>
-      <div class="details">
-        <table class="parts-table"><tbody>
-          <tr><th>Indeks</th><td class="part-index">${escapeHtml(part.partIndex)}</td><th>Pozycja</th><td>${escapeHtml(part.position || '—')}</td></tr>
-          <tr><th>Nazwa PL</th><td>${escapeHtml(part.namePl || '—')}</td><th>Nazwa EN</th><td>${escapeHtml(part.nameEn || '—')}</td></tr>
-          <tr><th>Rysunek</th><td colspan="3">${escapeHtml(drawing.title || part.drawingTitle || '')}</td></tr>
-        </tbody></table>
-        ${!hasPreview ? `<div class="inline-note">Ten rekord nie powinien być widoczny w trybie publicznym. Sprawdź, czy ma PDF w manifeście Google Drive.</div>` : ''}
-        ${siblings.length ? `<div class="related"><p class="related-title">Z czym się wiąże na tym rysunku:</p><div class="related-list">${siblings.map(s => `<button data-search="${escapeAttr(s.partIndex)}">${escapeHtml(s.position ? s.position + ' — ' : '')}${escapeHtml(s.partIndex)}</button>`).join('')}</div></div>` : ''}
-      </div>
-    </article>`;
+        <button class="primary" type="button" data-device="${escapeAttr(device.deviceIndex)}">Wybierz</button>
+      </article>`).join('');
+    els.deviceResults.querySelectorAll('button[data-device]').forEach(btn => btn.addEventListener('click', () => selectDevice(btn.dataset.device)));
   }
 
-  function renderDrawingResult(drawing) {
-    const parts = (state.partsByDrawing.get(String(drawing.id)) || []).slice(0, 12);
-    const hasPreview = drawingHasPreview(drawing);
-    return `<article class="result-card ${hasPreview ? 'has-preview' : 'needs-preview'}">
-      <div class="result-main">
-        <div>
-          <div class="result-kicker"><span class="badge red">Rysunek</span><span class="badge">PDF</span><span class="badge">${escapeHtml(drawing.deviceIndex || 'bez indeksu')}</span>${hasPreview ? '<span class="badge ok">PDF Drive</span>' : '<span class="badge warn">brak PDF Drive</span>'}</div>
-          <h3 class="result-title">${mark(drawing.title || drawing.fileName || 'Rysunek')}</h3>
-          <p class="result-sub">${escapeHtml(drawing.path || drawing.originalPath || '')}</p>
-        </div>
-        <div class="card-actions">
-          <button class="primary" data-view-drawing="${escapeAttr(drawing.id)}">Pokaż rysunek</button>
-          <button class="ghost" data-toggle>Części (${fmt((state.partsByDrawing.get(String(drawing.id)) || []).length)})</button>
-        </div>
-      </div>
-      <div class="details">
-        ${parts.length ? renderPartsTable(parts) : '<p class="result-sub">Rysunek PDF jest widoczny, ale nie udało się automatycznie odczytać tabeli części.</p>'}
-      </div>
-    </article>`;
+  function selectDevice(deviceIndex) {
+    const device = state.devices.find(d => norm(d.deviceIndex) === norm(deviceIndex));
+    if (!device) return;
+    const drawings = state.drawings.filter(d => norm(d.deviceIndex) === norm(device.deviceIndex));
+    const drawing = drawings.sort((a,b) => (state.partsByDrawing.get(String(b.id)) || []).length - (state.partsByDrawing.get(String(a.id)) || []).length)[0];
+    state.selectedDevice = device;
+    state.selectedDrawing = drawing;
+    renderDeviceResults(els.deviceSearch.value);
+    renderSelectedDevice();
+    renderParts();
+    renderViewer(true);
+    goStep(2);
+    saveDraft();
   }
 
-  function renderPartsTable(parts) {
-    return `<table class="parts-table"><thead><tr><th>Poz.</th><th>Indeks</th><th>Nazwa</th><th></th></tr></thead><tbody>${parts.map(p => `<tr><td>${escapeHtml(p.position || '—')}</td><td class="part-index">${escapeHtml(p.partIndex)}</td><td>${escapeHtml(p.namePl || p.nameEn || '—')}</td><td><button class="secondary" data-add-part="${escapeAttr(p.id)}">Do zapytania</button></td></tr>`).join('')}</tbody></table>`;
+  function renderSelectedDevice() {
+    const d = state.selectedDevice, drawing = state.selectedDrawing;
+    if (!d || !drawing) { els.selectedDeviceBox.innerHTML = ''; return; }
+    const count = (state.partsByDrawing.get(String(drawing.id)) || []).length;
+    els.selectedDeviceBox.innerHTML = `<strong>${escapeHtml(d.deviceIndex)} — ${escapeHtml(d.title || drawing.title || '')}</strong><span>Rysunek: ${escapeHtml(drawing.fileName || drawing.title || '')} • ${fmt(count)} części</span>`;
   }
 
-  async function showDrawing(id) {
-    const drawing = state.drawingById.get(String(id));
-    if (!drawing) return;
-    const source = resolveDrawingSource(drawing);
-    const url = source.viewerUrl || source.url || '';
+  function renderParts() {
+    const drawing = state.selectedDrawing;
+    if (!drawing) { els.partsTable.innerHTML = ''; return; }
+    const q = norm(els.partsSearch.value);
+    const tokens = q.split(/\s+/).filter(Boolean);
+    let parts = (state.partsByDrawing.get(String(drawing.id)) || []).slice();
+    if (tokens.length) parts = parts.filter(p => tokens.every(t => p.__search.includes(t) || norm(String(p.partIndex).replace(/[-\s]/g,'')).includes(t.replace(/[-\s]/g,''))));
+    parts.sort((a,b) => Number(a.position || 9999) - Number(b.position || 9999) || String(a.partIndex).localeCompare(String(b.partIndex)));
+    if (!parts.length) {
+      els.partsTable.innerHTML = `<tr><td colspan="4">Brak części dla wpisanej frazy.</td></tr>`;
+      return;
+    }
+    els.partsTable.innerHTML = parts.map(p => {
+      const selected = state.selectedParts.has(p.id);
+      return `<tr>
+        <td>${escapeHtml(p.position || '')}</td>
+        <td>${escapeHtml(p.partIndex || '')}</td>
+        <td>${escapeHtml(p.namePl || p.nameEn || '')}</td>
+        <td><button type="button" class="${selected ? '' : 'primary'}" data-part="${escapeAttr(p.id)}">${selected ? 'Dodano' : 'Dodaj'}</button></td>
+      </tr>`;
+    }).join('');
+    els.partsTable.querySelectorAll('button[data-part]').forEach(btn => btn.addEventListener('click', () => addPart(btn.dataset.part)));
+  }
 
-    els.viewerTitle.textContent = drawing.title || drawing.fileName || 'Rysunek';
-    if (source.openUrl || url) {
-      els.viewerOpen.href = source.openUrl || url;
-      els.viewerOpen.classList.remove('hidden');
+  function addPart(partId) {
+    const part = state.parts.find(p => p.id === partId);
+    if (!part) return;
+    const current = state.selectedParts.get(partId) || {part, qty: 0};
+    current.qty += 1;
+    state.selectedParts.set(partId, current);
+    renderBasket();
+    renderParts();
+    saveDraft();
+  }
+
+  function renderBasket() {
+    const items = [...state.selectedParts.values()];
+    els.basketCount.textContent = String(items.reduce((n, x) => n + x.qty, 0));
+    els.goData.disabled = items.length === 0;
+    els.clearBasket.disabled = items.length === 0;
+    if (!items.length) {
+      els.basketItems.className = 'basket-empty';
+      els.basketItems.innerHTML = 'Brak wybranych części.';
     } else {
-      els.viewerOpen.classList.add('hidden');
+      els.basketItems.className = '';
+      els.basketItems.innerHTML = items.map(({part, qty}) => `<div class="basket-item">
+        <div><strong>poz. ${escapeHtml(part.position || '-')} • ${escapeHtml(part.partIndex || '')}</strong><span>${escapeHtml(part.namePl || part.nameEn || '')}</span></div>
+        <div class="qty">
+          <button type="button" data-dec="${escapeAttr(part.id)}">−</button>
+          <input value="${qty}" inputmode="numeric" data-qty="${escapeAttr(part.id)}" />
+          <button type="button" data-inc="${escapeAttr(part.id)}">+</button>
+          <button class="remove" type="button" data-remove="${escapeAttr(part.id)}">×</button>
+        </div>
+      </div>`).join('');
+      els.basketItems.querySelectorAll('[data-inc]').forEach(b => b.addEventListener('click', () => changeQty(b.dataset.inc, 1)));
+      els.basketItems.querySelectorAll('[data-dec]').forEach(b => b.addEventListener('click', () => changeQty(b.dataset.dec, -1)));
+      els.basketItems.querySelectorAll('[data-remove]').forEach(b => b.addEventListener('click', () => removePart(b.dataset.remove)));
+      els.basketItems.querySelectorAll('[data-qty]').forEach(inp => inp.addEventListener('change', () => setQty(inp.dataset.qty, inp.value)));
     }
+    updateProgress();
+    updateCanProceed();
+  }
 
-    els.viewer.className = 'viewer empty-viewer';
-    els.viewer.innerHTML = '<div class="viewer-note">Sprawdzam plik rysunku…</div>';
+  function changeQty(id, delta) {
+    const item = state.selectedParts.get(id); if (!item) return;
+    item.qty += delta;
+    if (item.qty <= 0) state.selectedParts.delete(id);
+    renderBasket(); renderParts(); saveDraft();
+  }
+  function setQty(id, value) {
+    const item = state.selectedParts.get(id); if (!item) return;
+    const qty = Math.max(0, parseInt(value, 10) || 0);
+    if (!qty) state.selectedParts.delete(id); else item.qty = qty;
+    renderBasket(); renderParts(); saveDraft();
+  }
+  function removePart(id) { state.selectedParts.delete(id); renderBasket(); renderParts(); saveDraft(); }
 
-    if (!url) {
-      const search = driveSearchUrl(drawing);
-      els.viewer.innerHTML = `<div class="missing-file soft"><strong>Brak podpiętego PDF w Google Drive dla tego rysunku.</strong><p>W trybie publicznym pokazujemy wyłącznie pozycje z podpiętym rysunkiem PDF w Google Drive.</p>${search ? `<a class="primary" href="${escapeAttr(search)}" target="_blank" rel="noreferrer">Otwórz źródło</a>` : ''}</div>`;
-      if (search) { els.viewerOpen.href = search; els.viewerOpen.classList.remove('hidden'); }
+  function renderViewer(withLoading=false) {
+    const drawing = state.selectedDrawing;
+    const row = drawing ? state.driveByDrawingId.get(String(drawing.id)) : null;
+    els.openPdf.classList.add('hidden');
+    els.openPdf.href = '#';
+    if (!drawing || !row || !row.viewerUrl) {
+      els.viewer.className = 'viewer empty';
+      els.viewer.innerHTML = '<div>Brak podpiętego PDF z Drive dla tego urządzenia.</div>';
       return;
     }
-
-    const exists = await fileLooksAvailable(source);
-    if (!exists) {
-      els.viewer.className = 'viewer empty-viewer';
-      els.viewer.innerHTML = `<div class="missing-file"><strong>Rysunek nie jest dostępny pod wskazanym adresem.</strong><p>Baza zna części i rysunek, ale plik nie został jeszcze opublikowany albo adres jest niepoprawny. Sprawdź uprawnienia pliku Google Drive albo wpis w manifeście PDF.</p><code>${escapeHtml(url)}</code></div>`;
+    if (withLoading) {
+      els.viewer.className = 'viewer loading';
+      els.viewer.innerHTML = '<div>Wczytuję rysunek PDF z Drive…</div>';
+      window.setTimeout(() => renderViewer(false), 450);
       return;
     }
+    els.openPdf.href = row.openUrl || row.viewerUrl;
+    els.openPdf.classList.remove('hidden');
+    els.viewer.className = 'viewer';
+    els.viewer.innerHTML = `<iframe src="${escapeAttr(row.viewerUrl)}" title="${escapeAttr(drawing.title || 'Rysunek PDF')}"></iframe>`;
+  }
 
-    const low = String(url).toLowerCase();
-    const type = (drawing.type || source.kind || '').toLowerCase();
+  function goStep(step) {
+    if (step > 1 && !state.selectedDevice) return;
+    if (step > 3 && (!state.selectedParts.size || !formIsValid())) return;
+    state.step = step;
+    document.querySelectorAll('.stage').forEach(s => s.classList.remove('active'));
+    $('stage' + step).classList.add('active');
+    document.querySelectorAll('.step').forEach(btn => {
+      const n = Number(btn.dataset.step);
+      btn.classList.toggle('active', n === step);
+      btn.classList.toggle('done', n < step);
+      btn.disabled = !canOpenStep(n);
+    });
+    if (step === 4) generateMail();
+    updateProgress();
+    if (step === 2) renderViewer(false);
+    saveDraft();
+  }
 
-    if (source.kind === 'drive-preview') {
-      els.viewer.className = 'viewer';
-      els.viewer.innerHTML = `<iframe src="${escapeAttr(url)}" title="${escapeAttr(drawing.title || 'Podgląd rysunku PDF Google Drive')}"></iframe>`;
-      return;
+  function canOpenStep(n) {
+    if (n === 1) return true;
+    if (n === 2) return Boolean(state.selectedDevice);
+    if (n === 3) return Boolean(state.selectedDevice && state.selectedParts.size);
+    if (n === 4) return Boolean(state.selectedDevice && state.selectedParts.size && formIsValid());
+    return false;
+  }
+
+  function updateCanProceed() {
+    document.querySelectorAll('.step').forEach(btn => { btn.disabled = !canOpenStep(Number(btn.dataset.step)); });
+    if (state.step === 3 && formIsValid() && state.selectedParts.size) {
+      generateMail();
     }
+  }
 
-    if (!isPdfDrawing(drawing)) {
-      els.viewer.className = 'viewer empty-viewer';
-      els.viewer.innerHTML = `<div class="viewer-note"><strong>Klientowi pokazujemy wyłącznie PDF.</strong><br>Ten rekord nie powinien być widoczny w katalogu publicznym.</div>`;
-    } else if (type === 'pdf' || /\.pdf(\?|#|$)/i.test(low)) {
-      els.viewer.className = 'viewer';
-      const sep = url.includes('#') ? '&' : '#';
-      els.viewer.innerHTML = `<iframe src="${escapeAttr(url + sep + 'toolbar=1&navpanes=0')}" title="${escapeAttr(drawing.title || 'Rysunek PDF')}"></iframe>`;
-    } else {
-      els.viewer.className = 'viewer empty-viewer';
-      els.viewer.innerHTML = `<div class="viewer-note"><strong>Ten format nie ma stabilnego podglądu inline.</strong><br>DOC/DOCX najlepiej przekonwertować do PDF/JPG przy imporcie, żeby klient widział rysunek bez pobierania.<br><br><a class="primary" href="${escapeAttr(source.openUrl || url)}" target="_blank" rel="noreferrer">Otwórz plik</a></div>`;
+  function updateProgress() {
+    const flags = [
+      Boolean(state.selectedDevice), Boolean(state.selectedDrawing), Boolean(state.selectedParts.size), formIsValid(), canOpenStep(4)
+    ];
+    progressIds.forEach((id, i) => {
+      const el = $(id); if (!el) return;
+      el.classList.toggle('done', flags[i]);
+      el.classList.toggle('active', i + 1 === state.step);
+    });
+  }
+
+  function applySameAsInvoice() {
+    const f = new FormData(els.customerForm);
+    const fields = els.customerForm.elements;
+    if (els.sameAsInvoice.checked) {
+      fields.shipName.value = f.get('invoiceName') || '';
+      fields.shipStreet.value = f.get('invoiceStreet') || '';
+      fields.shipZip.value = f.get('invoiceZip') || '';
+      fields.shipCity.value = f.get('invoiceCity') || '';
+      fields.shipPhone.value = f.get('contactPhone') || '';
     }
+    saveDraft(); updateCanProceed();
   }
 
-  function resolveDrawingSource(drawing) {
-    const mode = String(CONFIG.storageMode || 'auto').toLowerCase();
-    const local = encodePath(drawing.path || drawing.localPath || drawing.originalPath || '');
-    const direct = drawing.viewerUrl || drawing.toya24AttachmentUrl || drawing.partsPdfUrl || drawing.toya24PdfUrl || drawing.cdnUrl || drawing.url || '';
-    const driveId = drawing.driveFileId || drawing.googleDriveId || drawing.gdriveId || '';
-    const search = driveSearchUrl(drawing);
-    const cdn = buildCdnUrl(drawing);
-
-    if (drawing.toya24AttachmentUrl || drawing.partsPdfUrl || drawing.toya24PdfUrl) return {kind:'toya24-pdf', url: direct, viewerUrl: direct, openUrl: direct, external:true};
-
-    if (mode === 'drive' && driveId) return driveSource(driveId);
-    if (mode === 'drive' && search) return {kind:'drive-search', url:'', viewerUrl:'', openUrl:search, external:true};
-    if (mode === 'cdn' && cdn) return {kind:'cdn', url: cdn, viewerUrl: cdn, openUrl: cdn, external:true};
-    if (mode === 'local') return {kind:'local', url: local, viewerUrl: local, openUrl: local, external:false};
-
-    if (CONFIG.preferExternalDrawings !== false) {
-      if (driveId) return driveSource(driveId);
-      if (direct) return {kind:'external', url: direct, viewerUrl: direct, openUrl: drawing.openUrl || direct, external:true};
-      if (cdn) return {kind:'cdn', url: cdn, viewerUrl: cdn, openUrl: cdn, external:true};
-    }
-
-    if (local) return {kind:'local', url: local, viewerUrl: local, openUrl: local, external:false};
-    if (direct) return {kind:'external', url: direct, viewerUrl: direct, openUrl: drawing.openUrl || direct, external:true};
-    if (driveId) return driveSource(driveId);
-    if (search) return {kind:'drive-search', url:'', viewerUrl:'', openUrl:search, external:true};
-    return {kind:'missing', url:'', viewerUrl:'', openUrl:'', external:false};
+  function formIsValid() {
+    if (!els.customerForm) return false;
+    return [...els.customerForm.querySelectorAll('[required]')].every(el => String(el.value || '').trim());
   }
 
-  function driveSearchUrl(drawing) {
-    if (CONFIG.driveSearchFallback === false) return '';
-    const base = String(CONFIG.driveSearchBaseUrl || '');
-    const query = drawing.fileName || drawing.deviceIndex || drawing.title || '';
-    if (!query) return '';
-    return base + encodeURIComponent(query);
+  function generateMail() {
+    if (!state.selectedDevice) return;
+    const d = state.selectedDevice, drawing = state.selectedDrawing;
+    const f = Object.fromEntries(new FormData(els.customerForm).entries());
+    const parts = [...state.selectedParts.values()];
+    const subject = `Zapytanie o części zamienne — ${d.deviceIndex || ''}`.trim();
+    const partLines = parts.map((x, i) => `${i + 1}. ${x.part.partIndex || 'brak indeksu'} — poz. ${x.part.position || '-'} — ${x.part.namePl || x.part.nameEn || ''} — ilość: ${x.qty} szt.`).join('\n');
+    const body = `Dzień dobry,
+
+Mam urządzenie ${d.deviceIndex || ''}${d.title ? ` — ${d.title}` : ''}.
+Potrzebuję części z rysunku technicznego PDF:
+${drawing ? `${drawing.fileName || drawing.title || ''}` : ''}
+
+Lista części:
+${partLines}
+
+Proszę o potwierdzenie możliwości zamówienia, wycenę oraz informację o dalszych krokach.
+
+Dane kontaktowe:
+${f.contactName || ''}
+Email: ${f.contactEmail || ''}
+Telefon: ${f.contactPhone || ''}
+
+Dane do faktury:
+${f.invoiceName || ''}
+NIP: ${f.invoiceNip || '-'}
+${f.invoiceStreet || ''}
+${f.invoiceZip || ''} ${f.invoiceCity || ''}
+
+Dane do wysyłki:
+${f.shipName || ''}
+${f.shipStreet || ''}
+${f.shipZip || ''} ${f.shipCity || ''}
+Telefon dla kuriera: ${f.shipPhone || ''}
+
+Uwagi:
+${f.notes || '-'}
+
+Pozdrawiam`;
+    els.mailTo.value = CONFIG.recipientEmail || 'service@yato.pl';
+    els.mailSubject.value = subject;
+    els.mailBody.value = body;
   }
 
-  function driveSource(fileId) {
-    const clean = String(fileId).trim();
-    return {
-      kind: 'drive-preview',
-      url: `https://drive.google.com/file/d/${encodeURIComponent(clean)}/preview`,
-      viewerUrl: `https://drive.google.com/file/d/${encodeURIComponent(clean)}/preview`,
-      openUrl: `https://drive.google.com/file/d/${encodeURIComponent(clean)}/view`,
-      external: true
-    };
-  }
-
-  function buildCdnUrl(drawing) {
-    const base = String(CONFIG.drawingsBaseUrl || '').trim();
-    if (!base) return '';
-    const p = drawing.cdnPath || drawing.storagePath || drawing.path || drawing.localPath || '';
-    if (!p) return '';
-    if (/^https?:\/\//i.test(p)) return p;
-    return joinUrl(base, encodePath(p));
-  }
-
-  async function fileLooksAvailable(source) {
-    const url = source.viewerUrl || source.url || '';
-    if (!url) return false;
-    if (source.external || /^https?:\/\//i.test(url) && !url.includes(location.host)) return true;
+  function saveDraft() {
+    if (!CONFIG.autosave) return;
     try {
-      const r = await fetch(url, { method: 'HEAD', cache: 'no-store' });
-      return r.ok;
-    } catch (error) {
-      try {
-        const r = await fetch(url, { method: 'GET', cache: 'no-store' });
-        return r.ok;
-      } catch (_) {
-        return false;
+      const draft = {
+        deviceIndex: state.selectedDevice && state.selectedDevice.deviceIndex,
+        drawingId: state.selectedDrawing && state.selectedDrawing.id,
+        parts: [...state.selectedParts.entries()].map(([id, item]) => [id, item.qty]),
+        step: state.step,
+        form: Object.fromEntries(new FormData(els.customerForm).entries()),
+        sameAsInvoice: els.sameAsInvoice.checked
+      };
+      localStorage.setItem('pgw-v41-draft', JSON.stringify(draft));
+    } catch(e) {}
+  }
+
+  function restoreDraft() {
+    try {
+      const raw = localStorage.getItem('pgw-v41-draft'); if (!raw) return;
+      const draft = JSON.parse(raw);
+      if (draft.form) for (const [k,v] of Object.entries(draft.form)) if (els.customerForm.elements[k]) els.customerForm.elements[k].value = v;
+      els.sameAsInvoice.checked = Boolean(draft.sameAsInvoice);
+      if (draft.deviceIndex) {
+        const device = state.devices.find(d => norm(d.deviceIndex) === norm(draft.deviceIndex));
+        if (device) {
+          state.selectedDevice = device;
+          state.selectedDrawing = state.drawings.find(d => String(d.id) === String(draft.drawingId)) || state.drawings.find(d => norm(d.deviceIndex) === norm(device.deviceIndex));
+          for (const [id, qty] of draft.parts || []) {
+            const part = state.parts.find(p => p.id === id);
+            if (part) state.selectedParts.set(id, {part, qty: Number(qty) || 1});
+          }
+          els.deviceSearch.value = device.deviceIndex || '';
+          renderSelectedDevice(); renderParts(); renderBasket(); renderViewer(false); renderDeviceResults(els.deviceSearch.value);
+          goStep(Math.min(Math.max(Number(draft.step) || 1, 1), 4));
+        }
       }
-    }
+    } catch(e) {}
   }
 
-  function addPart(id) {
-    const part = state.parts.find(p => String(p.id) === String(id));
-    if (!part) return;
-    const existing = state.selectedParts.find(p => String(p.id) === String(part.id));
-    if (existing) {
-      existing.__qty = Number(existing.__qty || 1) + 1;
-      toast('Zwiększono ilość w zapytaniu');
-    } else {
-      part.__qty = 1;
-      state.selectedParts.push(part);
-      toast('Dodano do zapytania');
-    }
-    autofillDeviceFromSelection();
-    updateSelectionBox();
-    updateMail();
+  function resetAll() {
+    if (!confirm('Wyczyścić formularz i zacząć od nowa?')) return;
+    localStorage.removeItem('pgw-v41-draft');
+    state.selectedDevice = null; state.selectedDrawing = null; state.selectedParts.clear();
+    els.customerForm.reset(); els.deviceSearch.value = ''; els.partsSearch.value = '';
+    renderDeviceResults(''); renderBasket(); renderViewer(false); goStep(1);
   }
 
-  function removeSelectedPart(id) {
-    state.selectedParts = state.selectedParts.filter(p => String(p.id) !== String(id));
-    updateSelectionBox();
-    updateMail();
-    toast('Usunięto z zapytania');
+  function resolveDrive(drawing) {
+    const keys = drawingKeys(drawing);
+    for (const key of keys) if (state.driveByKey.has(key)) return state.driveByKey.get(key);
+    return null;
   }
-
-  function changeSelectedQty(id, value) {
-    const part = state.selectedParts.find(p => String(p.id) === String(id));
-    if (!part) return;
-    const qty = Math.max(1, Math.min(999, Number(value || 1)));
-    part.__qty = qty;
-    updateMail();
+  function drawingKeys(d) { return unique([d.deviceIndex, d.fileName, d.title, d.name, d.path, d.originalPath].map(normKey).filter(Boolean).flatMap(k => [k, stripExt(k)])); }
+  function looksLikeHeaderPart(p) {
+    const pi = norm(p.partIndex || '');
+    const dev = norm(p.deviceIndex || '');
+    const name = norm(p.namePl || p.nameEn || '');
+    return pi === dev || (pi && dev && pi.replace(/-/g,'') === dev.replace(/-/g,'') && /kosiarka|pilarka|szlifierka|polerka|agregat|urzadzenie|urządzenie/.test(name));
   }
-
-  function updateSelectionBox() {
-    if (!els.selectionBox) return;
-    if (!state.selectedParts.length) {
-      els.selectionBox.className = 'selection-box empty-selection';
-      els.selectionBox.innerHTML = '<strong>Brak wybranych części.</strong><span>Użyj przycisku „Do zapytania” przy części, żeby dodać ją do formularza.</span>';
-      return;
-    }
-    els.selectionBox.className = 'selection-box';
-    els.selectionBox.innerHTML = `<div class="selection-head"><strong>Wybrane części do zapytania</strong><span>${fmt(state.selectedParts.length)} pozycji</span></div>` +
-      state.selectedParts.map((p, i) => {
-        const drawing = state.drawingById.get(String(p.drawingId)) || {};
-        return `<div class="selection-row">
-          <div><b>${escapeHtml(i + 1)}. ${escapeHtml(p.partIndex || 'bez indeksu')}</b><span>${escapeHtml(p.namePl || p.nameEn || drawing.title || '')}${p.position ? ` • poz. ${escapeHtml(p.position)}` : ''}</span></div>
-          <label>Ilość <input data-selected-qty="${escapeAttr(p.id)}" type="number" min="1" max="999" value="${escapeAttr(p.__qty || 1)}"></label>
-          <button type="button" class="ghost tiny" data-remove-selected="${escapeAttr(p.id)}">Usuń</button>
-        </div>`;
-      }).join('');
+  function isPdf(x) {
+    const text = [x.type, x.mimeType, x.fileName, x.title, x.name, x.path, x.originalPath, x.url, x.viewerUrl, x.openUrl].filter(Boolean).join(' ').toLowerCase();
+    return text.includes('application/pdf') || /\.pdf(\?|#|$|\s)/i.test(text) || String(x.type || '').toLowerCase() === 'pdf';
   }
-
-  function updateMail() {
-    const form = readCustomerForm();
-    const now = new Date().toLocaleString('pl-PL');
-    const firstDevice = state.selectedParts.find(p => p.deviceIndex)?.deviceIndex || inferDeviceFromQuery() || form.device || '';
-    const subject = state.selectedParts.length ? `Zapytanie o części — ${firstDevice || state.selectedParts[0].partIndex}` : 'Zapytanie o części pogwarancyjne';
-
-    const lines = [];
-    lines.push('Dzień dobry,');
-    lines.push('');
-    lines.push('Mam urządzenie: ' + (firstDevice || '[marka / model / indeks urządzenia]') + '.');
-    lines.push('');
-    lines.push('Potrzebuję do niego części z rysunku wybuchowego wskazane poniżej.');
-    lines.push('Proszę o przygotowanie oferty oraz informację o możliwości realizacji zamówienia.');
-    lines.push('');
-    lines.push('WYBRANE CZĘŚCI:');
-    if (state.selectedParts.length) {
-      state.selectedParts.forEach((p, n) => {
-        const drawing = state.drawingById.get(String(p.drawingId)) || {};
-        lines.push(`${n + 1}. ${p.namePl || p.nameEn || p.partIndex || 'Część'}`);
-        lines.push(`   Urządzenie: ${p.deviceName || drawing.title || ''}${p.deviceIndex ? ` (${p.deviceIndex})` : ''}`.trimEnd());
-        lines.push(`   Indeks części: ${p.partIndex || ''}`);
-        lines.push(`   Pozycja z rysunku: ${p.position || ''}`);
-        if (drawing.title) lines.push(`   Rysunek: ${drawing.title}`);
-        lines.push(`   Ilość: ${p.__qty || 1} szt.`);
-        lines.push('');
-      });
-    } else {
-      const manual = (state.query || els.searchInput.value || '').trim();
-      if (manual) {
-        lines.push(`1. Indeks / opis wpisany w formularzu: ${manual}`);
-      } else {
-        lines.push('1. [wpisz indeksy części / pozycje z rysunku]');
-      }
-      lines.push('');
-    }
-    if (form.serial) {
-      lines.push(`Nr seryjny / data zakupu: ${form.serial}`);
-      lines.push('');
-    }
-    lines.push('DANE KONTAKTOWE:');
-    lines.push(`Imię i nazwisko / firma: ${form.name || ''}`);
-    lines.push(`E-mail: ${form.email || ''}`);
-    lines.push(`Telefon: ${form.phone || ''}`);
-    lines.push(`NIP: ${form.nip || ''}`);
-    lines.push('');
-    lines.push('DANE DO FAKTURY:');
-    lines.push(form.invoice || '');
-    lines.push('');
-    lines.push('ADRES WYSYŁKI:');
-    lines.push(form.shipping || '');
-    lines.push('');
-    lines.push('UWAGI:');
-    lines.push(form.notes || '');
-    lines.push('');
-    lines.push(`Wygenerowano w: PGW Service Hub, ${now}`);
-
-    els.mailText.value = lines.join('\n');
-  }
-
-  function readCustomerForm() {
-    const val = (id) => ($(id)?.value || '').trim();
-    return {
-      name: val('cfName') || val('cfContactName') || val('cfInvoiceName'),
-      email: val('cfEmail'),
-      phone: val('cfPhone'),
-      nip: val('cfNip'),
-      invoice: val('cfInvoice') || [val('cfInvoiceName'), val('cfInvoiceStreet'), val('cfInvoiceCity')].filter(Boolean).join('\n'),
-      shipping: val('cfShipping') || [val('cfShipName'), val('cfShipPhone'), val('cfShipStreet'), val('cfShipCity')].filter(Boolean).join('\n'),
-      notes: val('cfNotes'),
-      device: val('cfDevice'),
-      serial: val('cfSerial')
-    };
-  }
-
-  function inferDeviceFromQuery() {
-    const q = (els.searchInput?.value || state.query || '').toUpperCase();
-    const m = q.match(/\b[A-Z]{1,3}-?\d{3,6}\b/);
-    return m ? m[0].replace(/([A-Z]+)(\d)/, '$1-$2') : '';
-  }
-
-  function autofillDeviceFromSelection() {
-    const deviceInput = $('cfDevice');
-    if (!deviceInput || deviceInput.value.trim()) return;
-    const devices = unique(state.selectedParts.map(p => p.deviceIndex).filter(Boolean));
-    if (devices.length) deviceInput.value = devices.join(', ');
-  }
-
-  function encodePath(path) {
-    if (!path) return '';
-    if (/^https?:\/\//i.test(path)) return path;
-    return path.split('/').map((part) => encodeURIComponent(part)).join('/').replace(/%23/g, '#');
-  }
-
-  function joinUrl(base, path) {
-    const b = String(base || '').replace(/\/+$/, '');
-    const p = String(path || '').replace(/^\/+/, '');
-    return `${b}/${p}`;
-  }
-
-  function norm(value) {
-    return String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
-  }
-  function unique(arr) { return Array.from(new Set(arr.filter(Boolean))); }
-  function fmt(n) { return Number(n || 0).toLocaleString('pl-PL'); }
-  function num(v) { const n = Number(String(v).replace(',','.')); return Number.isFinite(n) ? n.toLocaleString('pl-PL', {minimumFractionDigits:2, maximumFractionDigits:2}) : String(v); }
-  function setStatus(text) { els.loadStatus.textContent = text; }
-  function escapeHtml(value) { return String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[ch])); }
-  function escapeAttr(value) { return escapeHtml(value); }
-  function mark(value) {
-    const text = escapeHtml(value || '');
-    const q = state.query.trim();
-    if (!q || q.length < 2) return text;
-    const safe = q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    return text.replace(new RegExp(`(${safe})`, 'ig'), '<span class="mark">$1</span>');
-  }
-  function debounce(fn, wait) { let t; return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), wait); }; }
-  function toast(text) {
-    const node = document.createElement('div'); node.className = 'toast'; node.textContent = text; document.body.appendChild(node);
-    setTimeout(() => node.remove(), 2200);
+  function arr(x) { return Array.isArray(x) ? x : (x && Array.isArray(x.items) ? x.items : []); }
+  function norm(s) { return String(s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[_\s]+/g,' ').trim(); }
+  function normKey(s) { return norm(String(s || '').replace(/\\/g,'/').split('/').pop()).replace(/\s+/g,'-'); }
+  function stripExt(s) { return String(s || '').replace(/\.(pdf|jpg|jpeg|png|webp|docx?|xlsx?)$/i,''); }
+  function unique(a) { return [...new Set(a.filter(Boolean))]; }
+  function fmt(n) { return new Intl.NumberFormat('pl-PL').format(Number(n) || 0); }
+  function setStatus(text, mode='') { els.loadStatus.textContent = text; els.loadStatus.className = `status-pill ${mode}`.trim(); }
+  function debounce(fn, wait=120) { let t; return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), wait); }; }
+  function escapeHtml(s) { return String(s ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+  function escapeAttr(s) { return escapeHtml(s).replace(/`/g,'&#96;'); }
+  async function copyText(text, ok) {
+    try { await navigator.clipboard.writeText(text); els.copyStatus.textContent = ok; }
+    catch(e) { els.copyStatus.textContent = 'Nie udało się skopiować automatycznie — zaznacz tekst ręcznie.'; }
   }
 })();
