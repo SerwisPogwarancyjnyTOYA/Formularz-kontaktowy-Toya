@@ -1,7 +1,15 @@
-# PGW Service Hub — opis prosty
+# PGW Service Hub — opis v42
 
-Projekt ma prowadzić klienta krok po kroku przez przygotowanie zapytania o części zamienne.
+Celem strony jest uproszczenie zapytań klientów o części zamienne.
 
-Klient nie dostaje od razu wszystkich informacji. Najpierw wybiera urządzenie, potem widzi rysunek PDF, wybiera części, uzupełnia dane i na końcu otrzymuje gotową wiadomość do wysłania do serwisu.
+Klient nie widzi od razu pełnej bazy. Przechodzi przez prosty proces:
 
-Strona nie publikuje cen ani dostępności. Te informacje pozostają po stronie serwisu.
+1. wybiera urządzenie,
+2. widzi odpowiedni rysunek PDF,
+3. wybiera potrzebne części,
+4. uzupełnia dane do faktury i wysyłki,
+5. kopiuje gotowy mail do serwisu.
+
+Strona nie publikuje cen ani stanów magazynowych. Te informacje pozostają po stronie serwisu.
+
+Rysunki techniczne są przechowywane poza repozytorium, w Google Drive. Dzięki temu strona jest lekka i może działać przez GitHub Pages bez wrzucania tysięcy PDF-ów do repo.

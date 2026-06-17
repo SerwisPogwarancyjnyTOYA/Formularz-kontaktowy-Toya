@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex,nofollow" />
-  <title>PGW Service Hub — zapytanie o części</title>
+  <title>PGW Service Hub v42 — zapytanie o części</title>
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="stylesheet" href="app.css" />
 </head>
@@ -14,18 +14,24 @@
       <img src="assets/logos/yato-wordmark-clean.png" alt="YATO" />
       <div>
         <strong>Serwis Pogwarancyjny TOYA</strong>
-        <span>Wyszukiwarka rysunków PDF i generator zapytania</span>
+        <span>Krokowy formularz zapytania o części</span>
       </div>
     </div>
-    <div class="status-pill" id="loadStatus">Ładowanie danych…</div>
+    <div class="top-actions"><span class="mode-pill">PDF z Drive</span><div class="status-pill" id="loadStatus">Ładowanie danych…</div></div>
   </header>
 
   <main class="shell">
     <section class="hero-card">
       <div>
-        <p class="eyebrow">Krokowo, bez chaosu</p>
-        <h1>Znajdź urządzenie, wybierz części z rysunku i skopiuj gotowe zapytanie.</h1>
-        <p class="lead">Najpierw wybierasz model. Dopiero potem pokazujemy rysunek PDF, listę części, dane do faktury/wysyłki i gotowy mail do <strong>service@yato.pl</strong>.</p>
+        <p class="eyebrow">Ścieżka klienta v42</p>
+        <h1>Prosty formularz: model → rysunek PDF → części → dane → gotowy mail.</h1>
+        <p class="lead">Klient nie dostaje wszystkiego naraz. Strona odsłania kolejne informacje dopiero wtedy, kiedy są potrzebne: najpierw urządzenie, potem rysunek i części, na końcu dane oraz mail do <strong>service@yato.pl</strong>.</p>
+        <div class="hero-guide" aria-label="Jak działa formularz">
+          <span>1. Szukasz modelu</span>
+          <span>2. Otwiera się PDF</span>
+          <span>3. Wybierasz części</span>
+          <span>4. Kopiujesz mail</span>
+        </div>
       </div>
       <div class="stats" aria-label="Statystyki bazy">
         <div><strong id="statDevices">—</strong><span>urządzeń</span></div>
@@ -56,6 +62,10 @@
             <span>Indeks lub nazwa urządzenia</span>
             <input id="deviceSearch" type="search" placeholder="np. YT-82200, 82200, polerka" autocomplete="off" />
           </label>
+          <details class="help-box">
+            <summary>Gdzie znaleźć indeks urządzenia?</summary>
+            <p>Najczęściej jest na tabliczce znamionowej albo na etykiecie urządzenia. Wystarczy wpisać sam numer, np. <strong>82200</strong>, bez myślnika też zadziała.</p>
+          </details>
           <div class="quick-actions" id="quickExamples"></div>
           <div class="result-meta" id="deviceMeta"></div>
           <div class="device-results" id="deviceResults"></div>
@@ -74,11 +84,16 @@
             <span>Szukaj części w tym urządzeniu</span>
             <input id="partsSearch" type="search" placeholder="pozycja, indeks, nazwa części" autocomplete="off" />
           </label>
+          <div class="part-meta" id="partMeta"></div>
           <div class="part-table-wrap">
             <table class="parts-table">
               <thead><tr><th>Poz.</th><th>Indeks</th><th>Nazwa</th><th></th></tr></thead>
               <tbody id="partsTable"></tbody>
             </table>
+          </div>
+          <div class="stage-actions">
+            <button id="backDevice" type="button">Wróć do wyboru urządzenia</button>
+            <button class="primary" id="goDataInline" type="button" disabled>Przejdź do danych</button>
           </div>
         </section>
 
@@ -97,6 +112,7 @@
               <label>Imię i nazwisko / firma kontaktowa<input name="contactName" required /></label>
               <label>Email<input name="contactEmail" type="email" required /></label>
               <label>Telefon<input name="contactPhone" required /></label>
+              <label>Numer seryjny urządzenia<input name="serialNumber" placeholder="opcjonalnie" /></label>
             </fieldset>
 
             <fieldset>
@@ -124,9 +140,13 @@
 
             <fieldset class="full-span">
               <legend>Dodatkowa wiadomość</legend>
-              <label>Uwagi<textarea name="notes" rows="4" placeholder="np. numer seryjny urządzenia, pilne, preferowana forma kontaktu"></textarea></label>
+              <label>Uwagi<textarea name="notes" rows="4" placeholder="np. pilne, preferowana forma kontaktu, dodatkowe informacje do serwisu"></textarea></label>
             </fieldset>
           </form>
+          <div class="stage-actions">
+            <button id="backParts" type="button">Wróć do części</button>
+            <button class="primary" id="goMail" type="button" disabled>Generuj gotowy mail</button>
+          </div>
         </section>
 
         <section class="stage" id="stage4">
@@ -144,6 +164,7 @@
             <div class="mail-actions">
               <button class="primary" id="copyMail" type="button">Kopiuj treść maila</button>
               <button id="copySubject" type="button">Kopiuj temat</button>
+              <button id="backData" type="button">Popraw dane</button>
               <button id="startOver" type="button">Zacznij od nowa</button>
             </div>
             <div class="copy-status" id="copyStatus"></div>
@@ -152,6 +173,12 @@
       </aside>
 
       <aside class="panel right-panel">
+        <div class="context-card" id="contextCard">
+          <span class="context-kicker">Aktualny krok</span>
+          <h3 id="contextTitle">Wybierz urządzenie</h3>
+          <p id="contextBody">Zacznij od indeksu modelu. Kolejne informacje pojawią się po wyborze urządzenia.</p>
+        </div>
+
         <div class="progress-card" id="progressCard">
           <h3>Postęp zapytania</h3>
           <ol>
@@ -189,8 +216,8 @@
   </main>
 
   <footer class="footer">
-    <span>PGW Service Hub v41</span>
-    <span>Strona nie pokazuje cen ani stanów magazynowych.</span>
+    <span>PGW Service Hub v42</span>
+    <span>Bez cen i stanów. Podgląd rysunków przez PDF z Google Drive.</span>
   </footer>
 
   <script src="config.js"></script>

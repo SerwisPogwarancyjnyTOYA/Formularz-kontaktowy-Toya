@@ -1,7 +1,16 @@
 {
-  "version": "20260617-v41-functional-flow",
-  "createdAt": "2026-06-17T01:50:44.074821Z",
-  "mode": "Drive PDF client flow",
-  "showPrices": false,
-  "showStock": false
+  "version": "20260617-v42-guided-flow",
+  "description": "Guided client flow: device -> PDF -> parts -> invoice/shipping -> copy email",
+  "counts": {
+    "devices": 34,
+    "drawings": 34,
+    "parts": 2179,
+    "drive-drawings-map": 34
+  },
+  "publicRules": [
+    "Drive PDF only",
+    "No prices",
+    "No stock",
+    "No heavy PDF files in repo"
+  ]
 }
