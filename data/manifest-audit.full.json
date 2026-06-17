@@ -1,0 +1,21 @@
+{
+  "count": 1405,
+  "brandCounts": {
+    "FLO": 2,
+    "LUND": 6,
+    "NIEZNANA": 485,
+    "STHOR": 8,
+    "VOREL": 9,
+    "YATO": 672,
+    "YATO GASTRO": 223
+  },
+  "statusCounts": {
+    "OK": 1403,
+    "DUPLICATE_MODEL": 2
+  },
+  "sourceFile": "drive-drawings-map.full.20260617-063322.json",
+  "notes": [
+    "Manifest wygenerowany przez Apps Script z folderu Rysunki wybuchowe.",
+    "W v52 poprawiono modele numeryczne, aby zachować zera wiodące z nazwy PDF."
+  ]
+}

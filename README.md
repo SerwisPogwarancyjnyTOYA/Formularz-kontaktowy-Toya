@@ -1,32 +1,27 @@
-# PGW Service Hub v49 — visual monitor + multi-brand Drive manifest
+# PGW Service Hub v51 — pełny eksporter Drive
 
-Wersja v49 przygotowuje formularz pod wiele marek oraz pełny manifest Google Drive.
+Wersja v51 przygotowuje stronę pod realną bazę rysunków z Google Drive.
 
 ## Najważniejsze zmiany
 
-- monitor bazy w prawym panelu,
-- filtr marek przy wyszukiwarce urządzeń,
-- automatyczne grupowanie urządzeń według marki,
-- obsługa marek: YATO, YATO GASTRO, STHOR, VOREL, FLO, LUND, FALA oraz INNE,
-- repo nadal nie przechowuje PDF-ów, tylko lekkie JSON-y,
-- generator manifestu Drive eksportuje tylko PDF-y.
+- strona próbuje wczytać `data/drive-drawings-map.full.json`, a potem fallback `data/drive-drawings-map.json`,
+- pełny manifest może zawierać urządzenia, których nie ma jeszcze w `devices.json`,
+- aplikacja tworzy lekkie rekordy urządzeń z samego manifestu Drive,
+- PDF bez listy części działa w trybie opisowym,
+- dodano paginowany Apps Script do skanowania folderu `Rysunki wybuchowe`,
+- dodano audyt manifestu i eksport JSON.
 
 ## Wdrożenie
 
-Wrzuć zawartość paczki do czystego repo i opublikuj przez GitHub Pages.
+1. Wgraj paczkę do czystego repo.
+2. Na razie strona działa na seedzie `data/drive-drawings-map.json`.
+3. Uruchom eksporter z `scripts/google-drive-export-full-manifest.gs` w Google Sheets.
+4. Pobierz wygenerowany JSON i zapisz jako `data/drive-drawings-map.full.json`.
+5. Commit + push.
 
-Test po publikacji:
-
-```
-https://serwispogwarancyjnytoya.github.io/Formularz-kontaktowy-Toya/?v=20260617-v49-brands-manifest
-```
+PDF-y nie trafiają do repo. Repo trzyma tylko JSON.
 
 
-## v50 — Drive seed + marki nie-YATO
+## Aktualizacja v52 — pełny manifest Drive
 
-- dodano seed PDF-only dla LUND/STHOR/FLO oraz lokalne podpowiedzi VOREL,
-- strona potrafi pokazać PDF nawet bez spiętej listy części,
-- klient przechodzi wtedy trybem opisowym,
-- pełny manifest 1400+ PDF generuje `scripts/google-drive-export-full-manifest.gs`.
-
-Szczegóły: `PEŁNY_MANIFEST_DRIVE_V50.md`.
+Paczka zawiera `data/drive-drawings-map.full.json` z **1405 PDF-ami** wygenerowanymi z Google Drive. Strona ładuje pełny manifest jako pierwsze źródło rysunków, a seed `drive-drawings-map.json` zostaje jako fallback.

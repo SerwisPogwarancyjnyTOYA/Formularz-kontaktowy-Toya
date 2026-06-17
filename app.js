@@ -1,7 +1,7 @@
 (() => {
   'use strict';
   const CONFIG = window.PGW_CONFIG || {};
-  const DRAFT_KEY = 'pgw-v49-draft';
+  const DRAFT_KEY = 'pgw-v52-draft';
   const THEME_KEY = 'pgw-theme';
   const PART_ROW_LIMIT = Number(CONFIG.partRowLimit || 80);
   const $ = (id) => document.getElementById(id);
@@ -106,10 +106,40 @@
     const driveKeys = new Set();
     for (const row of state.driveMap) {
       row.fileId = row.fileId || row.driveFileId || row.googleDriveId || row.gdriveId || row.id || '';
+      row.fileName = row.fileName || row.title || row.name || '';
+      row.deviceIndex = normalizeDeviceIndex(row.deviceIndex || row.model || row.normalizedKey || extractDeviceIndex(row.fileName || row.title || row.name || row.path));
       row.viewerUrl = row.viewerUrl || (row.fileId ? `https://drive.google.com/file/d/${encodeURIComponent(row.fileId)}/preview` : '');
       row.openUrl = row.openUrl || (row.fileId ? `https://drive.google.com/file/d/${encodeURIComponent(row.fileId)}/view` : row.url || '');
-      row.__keys = unique([row.deviceIndex, row.fileName, row.title, row.name, ...(row.keys || [])].flat().map(normKey).filter(Boolean));
+      row.__keys = unique([row.deviceIndex, row.model, row.normalizedKey, row.fileName, row.title, row.name, ...(row.keys || [])].flat().map(normKey).filter(Boolean));
       for (const k of row.__keys) driveKeys.add(k);
+    }
+
+    // v51: pełny manifest Drive może zawierać tysiące PDF-ów bez wpisu w devices.json/drawings.json.
+    // Tworzymy lekkie rekordy urządzeń i rysunków z samego manifestu, żeby klient mógł wyszukać PDF
+    // i przejść trybem opisowym, nawet zanim lista części zostanie spięta.
+    const existingDrawingKeys = new Set(state.drawings.flatMap(d => drawingKeys(d)));
+    let syntheticId = 9000000;
+    for (const row of state.driveMap) {
+      const keys = row.__keys || [];
+      const hasDrawing = keys.some(k => existingDrawingKeys.has(k));
+      if (!hasDrawing && row.deviceIndex) {
+        const id = `drive-${row.fileId || normKey(row.deviceIndex) || syntheticId++}`;
+        const drawing = {
+          id,
+          deviceIndex: row.deviceIndex,
+          title: row.title || row.fileName || row.deviceIndex,
+          fileName: row.fileName || row.title || `${row.deviceIndex}.pdf`,
+          brand: canonicalBrand(row.brand || inferBrand(row)),
+          type: 'pdf',
+          source: 'GOOGLE_DRIVE_FULL_MANIFEST',
+          driveFileId: row.fileId,
+          viewerUrl: row.viewerUrl,
+          openUrl: row.openUrl,
+          path: row.path || row.folderPath || ''
+        };
+        state.drawings.push(drawing);
+        drawingKeys(drawing).forEach(k => existingDrawingKeys.add(k));
+      }
     }
 
     state.drawings = state.drawings.filter(d => {
@@ -119,6 +149,21 @@
     const drawingIds = new Set(state.drawings.map(d => String(d.id)));
     state.parts = state.parts.filter(p => drawingIds.has(String(p.drawingId)) && p.partIndex && !looksLikeHeaderPart(p));
     const deviceKeys = new Set(state.drawings.map(d => norm(d.deviceIndex)).filter(Boolean));
+    const existingDeviceKeys = new Set(state.devices.map(d => norm(d.deviceIndex)).filter(Boolean));
+    for (const d of state.drawings) {
+      const key = norm(d.deviceIndex);
+      if (key && !existingDeviceKeys.has(key)) {
+        state.devices.push({
+          deviceIndex: d.deviceIndex,
+          title: d.title || d.fileName || 'Rysunek PDF z Google Drive',
+          brand: canonicalBrand(d.brand || inferBrand(d)),
+          source: 'GOOGLE_DRIVE_FULL_MANIFEST',
+          hasPartsPdf: true,
+          hasPartsList: false
+        });
+        existingDeviceKeys.add(key);
+      }
+    }
     state.devices = state.devices.filter(d => deviceKeys.has(norm(d.deviceIndex)));
     const brandByDevice = new Map();
     for (const d of state.drawings) if (d.brand) brandByDevice.set(norm(d.deviceIndex), d.brand);
@@ -982,6 +1027,24 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
     if (v.includes('LUND')) return 'LUND';
     if (v.includes('FALA')) return 'FALA';
     return String(value || 'INNE').trim().toUpperCase();
+  }
+
+
+  function normalizeDeviceIndex(value) {
+    const raw = String(value || '').trim();
+    if (!raw) return '';
+    const upper = raw.toUpperCase().replace(/_/g, '-').replace(/\s+/g, '-');
+    const yg = upper.match(/\bYG[- ]?(\d{3,8}[A-Z]?)\b/);
+    if (yg) return `YG-${yg[1]}`;
+    const yt = upper.match(/\bYT[- ]?(\d{3,8}[A-Z]?)\b/);
+    if (yt) return `YT-${yt[1]}`;
+    const num = upper.match(/\b\d{3,6}\b/);
+    return num ? num[0] : upper.replace(/\.PDF$/i, '');
+  }
+
+  function extractDeviceIndex(value) {
+    const clean = stripExt(String(value || '').split('/').pop()).replace(/^czesci[_ -]zamienne[_ -]*/i, '');
+    return normalizeDeviceIndex(clean);
   }
 
   function inferBrand(row) {

@@ -1,30 +1,33 @@
-# Marki i pełny manifest Drive — v49
+# Marki i manifest Drive — v51
 
-## Jak ma działać wiele marek
+## Obsługiwane marki
 
-Strona nie powinna mieć osobnej wersji dla YATO, STHOR, VOREL, FLO, LUND itd. Jedna wyszukiwarka obsługuje wszystkie marki. Marka jest tylko filtrem i etykietą przy urządzeniu.
+- YATO
+- YATO GASTRO
+- STHOR
+- VOREL
+- FLO
+- LUND
+- FALA
+- INNE / do weryfikacji
 
-## Minimalny rekord w manifeście Drive
+## Reguły rozpoznawania
 
-```json
-{
-  "brand": "YATO",
-  "deviceIndex": "YT-82200",
-  "fileName": "Czesci_zamienne_YT-82200.pdf",
-  "fileId": "GOOGLE_DRIVE_FILE_ID",
-  "mimeType": "application/pdf",
-  "viewerUrl": "https://drive.google.com/file/d/GOOGLE_DRIVE_FILE_ID/preview",
-  "openUrl": "https://drive.google.com/file/d/GOOGLE_DRIVE_FILE_ID/view",
-  "keys": ["YT-82200", "YT82200", "Czesci_zamienne_YT-82200"]
-}
-```
+1. `YT-...` albo folder/nazwa YATO → YATO.
+2. `YG-...`, `YATO GASTRO`, `GASTRO` → YATO GASTRO.
+3. Folder lub nazwa zawiera STHOR/VOREL/FLO/LUND/FALA → dana marka.
+4. Indeksy numeryczne dostają markę z seedowych wyjątków, jeśli jest znana.
+5. Reszta trafia do `INNE` z niską pewnością.
 
-## Inne marki niż YATO
+## Dlaczego tak
 
-Działają tak samo jak YATO, jeśli mają rekordy w `data/drive-drawings-map.json` oraz powiązane rekordy w `data/devices.json`, `data/drawings.json` i `data/parts.json`.
+W Drive część plików ma nazwy typu `Czesci_zamienne_79098.pdf`, bez marki w nazwie. Wtedy nie zgadujemy na siłę. Lepiej mieć `INNE` i raport do poprawy niż pokazać klientowi błędną markę.
 
-Jeżeli marka nie jest podana, strona próbuje ją wywnioskować z folderu, nazwy pliku albo indeksu. Gdy się nie da, urządzenie wpada do grupy `INNE`.
+## Co potem
 
-## Czego nie trzymamy w repo
+Po pełnym eksporcie trzeba przejrzeć `manifest-audit`, szczególnie:
 
-Nie trzymamy w repo PDF-ów, JPG, PNG, miniatur ani wyciętych elementów. Repo ma trzymać kod i lekkie JSON-y. PDF-y zostają na Google Drive.
+- `unknownBrand`,
+- `missingModel`,
+- duplikaty `fileId`,
+- modele z wieloma PDF-ami.
