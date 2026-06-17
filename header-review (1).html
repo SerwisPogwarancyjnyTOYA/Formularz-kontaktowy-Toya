@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PGW — PDF header review</title>
+  <link rel="stylesheet" href="app.css" />
+  <style>
+    body{padding:24px}.toolbar{display:flex;gap:12px;flex-wrap:wrap;align-items:end;margin:16px 0}.toolbar label{display:grid;gap:4px}.grid{display:grid;grid-template-columns:minmax(320px,520px) 1fr;gap:16px}.list{max-height:75vh;overflow:auto}.row{padding:12px;border:1px solid var(--border);border-radius:12px;margin:8px 0;background:var(--card);cursor:pointer}.row.active{outline:2px solid var(--accent)} iframe{width:100%;height:75vh;border:1px solid var(--border);border-radius:16px;background:white} textarea{width:100%;min-height:180px}.pill{display:inline-block;padding:2px 8px;border-radius:999px;background:var(--muted);margin-left:6px;font-size:12px}.formline{display:grid;grid-template-columns:1fr 180px 120px;gap:8px;margin:8px 0}@media(max-width:900px){.grid{grid-template-columns:1fr}iframe{height:55vh}.formline{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <h1>PGW — rozpoznawanie nazw z nagłówków PDF</h1>
+  <p>To narzędzie jest wewnętrzne. Bierze kolejkę PDF-ów, pokazuje podgląd i pozwala budować <code>pdf-header-overrides.json</code>.</p>
+  <div class="toolbar">
+    <label>Szukaj<input id="q" placeholder="53575, grzechotka, YT…"></label>
+    <label>Status<select id="filter"><option value="all">Wszystkie</option><option value="unknown">Bez nazwy urządzenia</option><option value="brand">Marka do potwierdzenia</option></select></label>
+    <button id="export" class="primary">Eksportuj JSON</button>
+  </div>
+  <div class="grid">
+    <section>
+      <h2>Kolejka <span id="count" class="pill">0</span></h2>
+      <div id="list" class="list"></div>
+    </section>
+    <section>
+      <h2>Podgląd i opis</h2>
+      <div id="details" class="device-card">Wybierz pozycję z listy.</div>
+      <iframe id="pdf" title="Podgląd PDF"></iframe>
+      <h3>Wynik do JSON</h3>
+      <textarea id="out" spellcheck="false"></textarea>
+    </section>
+  </div>
+<script>
+let queue=[], selected=null, overrides={byFileId:{}};
+const $=id=>document.getElementById(id);
+Promise.all([
+  fetch('data/pdf-header-extraction-queue.json').then(r=>r.json()).catch(()=>({items:[]})),
+  fetch('data/pdf-header-overrides.json').then(r=>r.json()).catch(()=>({byFileId:{}}))
+]).then(([q,o])=>{queue=q.items||[]; overrides=o.byFileId?o:{byFileId:o}; render();});
+$('q').addEventListener('input', render); $('filter').addEventListener('change', render); $('export').addEventListener('click', exportJson);
+function norm(s){return String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+function render(){const q=norm($('q').value); const f=$('filter').value; let rows=queue.filter(x=>!q||norm([x.model,x.title,x.brand,x.reason].join(' ')).includes(q)); if(f==='brand')rows=rows.filter(x=>['DO ROZPOZNANIA','NIEZNANA',''].includes(String(x.brand||''))); if(f==='unknown')rows=rows.filter(x=>!overrides.byFileId[x.fileId]); $('count').textContent=rows.length; $('list').innerHTML=rows.slice(0,300).map(x=>`<div class="row ${selected&&selected.fileId===x.fileId?'active':''}" data-id="${x.fileId}"><b>${x.model||''}</b> — ${x.title||''}<br><span class="pill">${x.brand||'?'}</span><span class="pill">${x.reason||''}</span></div>`).join(''); document.querySelectorAll('.row').forEach(el=>el.onclick=()=>select(el.dataset.id));}
+function select(id){selected=queue.find(x=>x.fileId===id); const ov=overrides.byFileId[id]||{}; $('pdf').src=selected.previewUrl||''; $('details').innerHTML=`<div class="formline"><input id="deviceName" placeholder="Nazwa urządzenia z nagłówka" value="${esc(ov.deviceName||'')}"><select id="brand"><option>DO ROZPOZNANIA</option><option>YATO</option><option>YATO GASTRO</option><option>VOREL</option><option>STHOR</option><option>LUND</option><option>FLO</option><option>FALA</option></select><select id="conf"><option>high</option><option>medium</option><option>low</option></select></div><button class="primary" id="save">Zapisz wpis</button><p><b>${selected.model}</b> — ${selected.title}</p>`; $('brand').value=ov.brand||selected.brand||'DO ROZPOZNANIA'; $('conf').value=ov.confidence||'medium'; $('save').onclick=save; updateOut(); render();}
+function save(){if(!selected)return; const name=$('deviceName').value.trim(); const brand=$('brand').value; const conf=$('conf').value; overrides.byFileId[selected.fileId]={fileId:selected.fileId,model:selected.model,deviceName:name,displayTitle:name?`${selected.model} — ${name}`:selected.title,brand,confidence:conf,source:'manual-header-review-v54'}; updateOut(); render();}
+function updateOut(){document.getElementById('out').value=JSON.stringify({generatedAt:new Date().toISOString(),count:Object.keys(overrides.byFileId).length,byFileId:overrides.byFileId},null,2);}
+function exportJson(){updateOut(); navigator.clipboard.writeText($('out').value).then(()=>alert('Skopiowano JSON. Wklej do data/pdf-header-overrides.json'));}
+function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
+</script>
+</body>
+</html>
