@@ -22,3 +22,21 @@ Jeżeli `drive-drawings-map.full.json` nie istnieje, strona automatycznie ładuj
 ## Aktualizacja v52 — pełny manifest Drive
 
 Paczka zawiera `data/drive-drawings-map.full.json` z **1405 PDF-ami** wygenerowanymi z Google Drive. Strona ładuje pełny manifest jako pierwsze źródło rysunków, a seed `drive-drawings-map.json` zostaje jako fallback.
+
+## Rozpoznawanie marek — v53
+
+Po wrzuceniu paczki na GitHub Pages można otworzyć wewnętrznie:
+
+```text
+/brand-review.html
+```
+
+Ten ekran nie zapisuje sam plików w repo. Służy do przeglądania modeli `DO ROZPOZNANIA`, otwierania PDF-ów i generowania JSON-a z potwierdzonymi markami.
+
+Wygenerowany JSON należy wkleić do:
+
+```text
+data/brand-resolution-overrides.json
+```
+
+Potem strona klienta automatycznie zastosuje te nadpisania przy ładowaniu danych.

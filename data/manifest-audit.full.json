@@ -1,21 +1,143 @@
 {
-  "count": 1405,
+  "version": "v53-brand-review-ready",
+  "sourcePdfCount": 1405,
+  "manifestItems": 1418,
   "brandCounts": {
+    "DO ROZPOZNANIA": 479,
     "FLO": 2,
     "LUND": 6,
-    "NIEZNANA": 485,
     "STHOR": 8,
     "VOREL": 9,
-    "YATO": 672,
+    "YATO": 691,
     "YATO GASTRO": 223
   },
-  "statusCounts": {
-    "OK": 1403,
-    "DUPLICATE_MODEL": 2
+  "reviewNeededCount": 479,
+  "reviewBuckets": {
+    "09xxx": 1,
+    "53xxx": 3,
+    "55xxx": 1,
+    "57xxx": 4,
+    "58xxx": 10,
+    "66xxx": 8,
+    "67xxx": 94,
+    "68xxx": 46,
+    "70xxx": 1,
+    "71xxx": 1,
+    "72xxx": 2,
+    "73xxx": 11,
+    "75xxx": 89,
+    "77xxx": 1,
+    "78xxx": 44,
+    "79xxx": 131,
+    "80xxx": 17,
+    "81xxx": 5,
+    "82xxx": 6,
+    "89xxx": 2,
+    "99xxx": 2
   },
-  "sourceFile": "drive-drawings-map.full.20260617-063322.json",
+  "autoFixedFromUnknown": 14,
+  "autoFixedExamples": [
+    {
+      "model": "YT-828075",
+      "title": "Czesci_zamienne_YT-828075_YT-828076.pdf",
+      "from": "NIEZNANA",
+      "to": "YATO",
+      "reason": "automatycznie po prefiksie YT"
+    },
+    {
+      "model": "YT-828076",
+      "title": "Czesci_zamienne_YT-828075_YT-828076.pdf",
+      "from": "NIEZNANA",
+      "to": "YATO",
+      "reason": "automatycznie po prefiksie YT"
+    },
+    {
+      "model": "YT-828118",
+      "title": "Czesci_zamienne_YT-828118_YT-8281185.pdf",
+      "from": "NIEZNANA",
+      "to": "YATO",
+      "reason": "automatycznie po prefiksie YT"
+    },
+    {
+      "model": "YT-8281185",
+      "title": "Czesci_zamienne_YT-828118_YT-8281185.pdf",
+      "from": "NIEZNANA",
+      "to": "YATO",
+      "reason": "automatycznie po prefiksie YT"
+    },
+    {
+      "model": "YT-828135",
+      "title": "Czesci_zamienne_YT-828135_YT-828136.pdf",
+      "from": "NIEZNANA",
+      "to": "YATO",
+      "reason": "automatycznie po prefiksie YT"
+    },
+    {
+      "model": "YT-828136",
+      "title": "Czesci_zamienne_YT-828135_YT-828136.pdf",
+      "from": "NIEZNANA",
+      "to": "YATO",
+      "reason": "automatycznie po prefiksie YT"
+    },
+    {
+      "model": "YT-828137",
+      "title": "Czesci_zamienne_YT-828137_YT-828138.pdf",
+      "from": "NIEZNANA",
+      "to": "YATO",
+      "reason": "automatycznie po prefiksie YT"
+    },
+    {
+      "model": "YT-828138",
+      "title": "Czesci_zamienne_YT-828137_YT-828138.pdf",
+      "from": "NIEZNANA",
+      "to": "YATO",
+      "reason": "automatycznie po prefiksie YT"
+    },
+    {
+      "model": "YT-82824",
+      "title": "Czesci_zamienne_YT-82824_YT-828296.pdf",
+      "from": "NIEZNANA",
+      "to": "YATO",
+      "reason": "automatycznie po prefiksie YT"
+    },
+    {
+      "model": "YT-828296",
+      "title": "Czesci_zamienne_YT-82824_YT-828296.pdf",
+      "from": "NIEZNANA",
+      "to": "YATO",
+      "reason": "automatycznie po prefiksie YT"
+    },
+    {
+      "model": "YT-828293",
+      "title": "Czesci_zamienne_YT-828293_YT-828294_YT-828295_YT-828296.pdf",
+      "from": "NIEZNANA",
+      "to": "YATO",
+      "reason": "automatycznie po prefiksie YT"
+    },
+    {
+      "model": "YT-828294",
+      "title": "Czesci_zamienne_YT-828293_YT-828294_YT-828295_YT-828296.pdf",
+      "from": "NIEZNANA",
+      "to": "YATO",
+      "reason": "automatycznie po prefiksie YT"
+    },
+    {
+      "model": "YT-828295",
+      "title": "Czesci_zamienne_YT-828293_YT-828294_YT-828295_YT-828296.pdf",
+      "from": "NIEZNANA",
+      "to": "YATO",
+      "reason": "automatycznie po prefiksie YT"
+    },
+    {
+      "model": "YT-828296",
+      "title": "Czesci_zamienne_YT-828293_YT-828294_YT-828295_YT-828296.pdf",
+      "from": "NIEZNANA",
+      "to": "YATO",
+      "reason": "automatycznie po prefiksie YT"
+    }
+  ],
   "notes": [
-    "Manifest wygenerowany przez Apps Script z folderu Rysunki wybuchowe.",
-    "W v52 poprawiono modele numeryczne, aby zachować zera wiodące z nazwy PDF."
+    "6 plików z YT w nazwie zostało automatycznie przypisanych do YATO / rozbitych na aliasy modeli.",
+    "Pozostałe pozycje DO ROZPOZNANIA są przygotowane do ręcznej weryfikacji w brand-review.html."
   ]
 }

@@ -1,7 +1,7 @@
 (() => {
   'use strict';
   const CONFIG = window.PGW_CONFIG || {};
-  const DRAFT_KEY = 'pgw-v52-draft';
+  const DRAFT_KEY = 'pgw-v53-draft';
   const THEME_KEY = 'pgw-theme';
   const PART_ROW_LIMIT = Number(CONFIG.partRowLimit || 80);
   const $ = (id) => document.getElementById(id);
@@ -18,7 +18,7 @@
   const progressIds = ['pDevice','pDrawing','pParts','pData','pMail'];
 
   const state = {
-    devices: [], drawings: [], parts: [], driveMap: [],
+    devices: [], drawings: [], parts: [], driveMap: [], brandOverrides: {},
     drawingById: new Map(), partsByDrawing: new Map(), driveByDrawingId: new Map(), driveByKey: new Map(),
     selectedDevice: null, selectedDrawing: null, selectedParts: new Map(), manualMode: false, step: 1, formDirty: false,
     postalCodes: new Map(), partVisibleLimit: PART_ROW_LIMIT, activeBrand: 'all', brandSummary: []
@@ -43,6 +43,7 @@
       state.drawings = await loadFirst(urls.drawings || ['data/drawings.json'], []);
       state.parts = await loadFirst(urls.parts || ['data/parts.json'], []);
       state.driveMap = await loadFirst(urls.driveMap || ['data/drive-drawings-map.json'], []);
+      state.brandOverrides = await loadFirst(urls.brandOverrides || ['data/brand-resolution-overrides.json'], {});
       await loadPostalCodes();
       normalizeData();
       buildIndexes();
@@ -98,10 +99,10 @@
     state.parts = arr(state.parts).filter(Boolean);
     state.driveMap = arr(state.driveMap).filter(row => isPdf(row));
 
-    for (const d of state.devices) d.brand = canonicalBrand(d.brand || inferBrand(d));
-    for (const d of state.drawings) d.brand = canonicalBrand(d.brand || inferBrand(d));
-    for (const p of state.parts) p.brand = canonicalBrand(p.brand || inferBrand(p));
-    for (const row of state.driveMap) row.brand = canonicalBrand(row.brand || inferBrand(row));
+    for (const d of state.devices) d.brand = resolveBrand(d);
+    for (const d of state.drawings) d.brand = resolveBrand(d);
+    for (const p of state.parts) p.brand = resolveBrand(p);
+    for (const row of state.driveMap) row.brand = resolveBrand(row);
 
     const driveKeys = new Set();
     for (const row of state.driveMap) {
@@ -1014,6 +1015,25 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
   function brandMatches(brand) {
     if (state.activeBrand === 'all') return true;
     return canonicalBrand(brand) === state.activeBrand;
+  }
+
+  function resolveBrand(row) {
+    const override = findBrandOverride(row);
+    return canonicalBrand(override || row.brand || inferBrand(row));
+  }
+
+  function findBrandOverride(row) {
+    const overrides = state.brandOverrides || {};
+    const models = overrides.models || overrides || {};
+    const rawKeys = [row.deviceIndex, row.model, row.normalizedModel, row.normalizedKey, row.fileName, row.title, row.name]
+      .filter(Boolean)
+      .flatMap(v => [String(v), normalizeDeviceIndex(v), normKey(v), stripExt(normKey(v))]);
+    for (const key of unique(rawKeys).filter(Boolean)) {
+      if (models[key]) return models[key];
+      const up = String(key).toUpperCase();
+      if (models[up]) return models[up];
+    }
+    return '';
   }
 
   function canonicalBrand(value) {

@@ -25,3 +25,16 @@ PDF-y nie trafiają do repo. Repo trzyma tylko JSON.
 ## Aktualizacja v52 — pełny manifest Drive
 
 Paczka zawiera `data/drive-drawings-map.full.json` z **1405 PDF-ami** wygenerowanymi z Google Drive. Strona ładuje pełny manifest jako pierwsze źródło rysunków, a seed `drive-drawings-map.json` zostaje jako fallback.
+
+## v53 — rozpoznawanie marek
+
+Ta paczka zawiera pełny manifest Drive oraz ekran pomocniczy do rozpoznawania modeli, które nie mają pewnej marki.
+
+- `data/drive-drawings-map.full.json` — pełny manifest PDF z Drive.
+- `data/brand-review-unknown.json` — lista modeli do ręcznego rozpoznania.
+- `data/brand-review-unknown.csv` — ta sama lista w CSV.
+- `data/brand-resolution-overrides.json` — plik do wpisywania potwierdzonych marek.
+- `brand-review.html` — wewnętrzny ekran do pracy nad markami.
+- `scripts/apply-brand-overrides.py` — narzędzie do trwałego nałożenia potwierdzonych marek na manifest.
+
+Niepewne modele nie blokują strony klienta. Są widoczne jako `DO ROZPOZNANIA`, mają PDF i mogą przejść trybem opisowym.

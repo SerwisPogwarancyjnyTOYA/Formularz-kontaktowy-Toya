@@ -1,5 +1,5 @@
 window.PGW_CONFIG = {
-  version: '20260617-v51-full-drive-exporter',
+  version: '20260617-v53-brand-review-ready',
   appName: 'PGW Service Hub',
   recipientEmail: 'service@yato.pl',
   storageMode: 'drive',
@@ -17,6 +17,7 @@ window.PGW_CONFIG = {
     devices: ['data/devices.json'],
     drawings: ['data/drawings.json'],
     parts: ['data/parts.json'],
-    driveMap: ['data/drive-drawings-map.full.json', 'data/drive-drawings-map.json']
+    driveMap: ['data/drive-drawings-map.full.json', 'data/drive-drawings-map.json'],
+    brandOverrides: ['data/brand-resolution-overrides.json']
   }
 };
