@@ -4,8 +4,17 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex,nofollow" />
-  <title>PGW Service Hub v47 — klient i walidacje</title>
+  <title>PGW Service Hub v48 — visual polish + dark mode</title>
   <link rel="manifest" href="manifest.webmanifest" />
+  <script>
+    (() => {
+      try {
+        const saved = localStorage.getItem('pgw-theme');
+        const systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.dataset.theme = saved || (systemDark ? 'dark' : 'light');
+      } catch (e) { document.documentElement.dataset.theme = 'light'; }
+    })();
+  </script>
   <link rel="stylesheet" href="app.css" />
 </head>
 <body>
@@ -17,15 +26,19 @@
         <span>Krokowy formularz zapytania o części</span>
       </div>
     </div>
-    <div class="top-actions"><span class="mode-pill">PDF z Drive</span><div class="status-pill" id="loadStatus">Ładowanie danych…</div></div>
+    <div class="top-actions">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Przełącz tryb jasny lub ciemny"><span id="themeIcon">☾</span><span id="themeLabel">Tryb ciemny</span></button>
+      <span class="mode-pill">PDF z Drive</span>
+      <div class="status-pill" id="loadStatus">Ładowanie danych…</div>
+    </div>
   </header>
 
   <main class="shell">
     <section class="hero-card">
       <div>
-        <p class="eyebrow">Ścieżka klienta v47</p>
-        <h1>Prosty formularz: model, PDF, części, minimum kontaktu i gotowy mail.</h1>
-        <p class="lead">Klient nie dostaje wszystkiego naraz. Najpierw wybiera urządzenie i części, potem podaje minimum kontaktu. Faktura i wysyłka są opcjonalne, a strona pokazuje checklistę przed skopiowaniem maila do <strong>service@yato.pl</strong>.</p>
+        <p class="eyebrow">Ścieżka klienta v48</p>
+        <h1>Prosty, spokojny formularz: najpierw model i PDF, potem wybór części, dane i gotowy mail.</h1>
+        <p class="lead">Klient idzie krok po kroku, bez ściany pól na start. Strona pokazuje tylko to, co jest potrzebne w danym momencie, a tryb ciemny pomaga wygodnie pracować także wieczorem lub na słabszym ekranie.</p>
         <div class="hero-guide" aria-label="Jak działa formularz">
           <span>1. Szukasz modelu</span>
           <span>2. Otwiera się PDF</span>
@@ -111,7 +124,7 @@
             <span class="stage-number">3</span>
             <div>
               <h2>Dane kontaktowe, faktura i wysyłka</h2>
-              <p>Wystarczy imię/nazwa oraz poprawny email albo telefon. Faktura i wysyłka są opcjonalne — możesz je dopisać, jeśli przyspieszy to obsługę.</p>
+              <p>Kontakt jest wymagany, ale faktura i wysyłka są opcjonalne. Klient może dopytać o części bez uzupełniania wszystkich danych.</p>
             </div>
           </div>
 
@@ -192,7 +205,7 @@
             <span class="stage-number">4</span>
             <div>
               <h2>Gotowy mail do skopiowania</h2>
-              <p>Sprawdź krótkie podsumowanie, skopiuj temat i treść, a następnie wyślij wiadomość na <strong>service@yato.pl</strong>.</p>
+              <p>Skopiuj temat i treść, a następnie wyślij wiadomość na <strong>service@yato.pl</strong>.</p>
             </div>
           </div>
           <div class="final-checklist" id="finalChecklist"></div>
@@ -265,8 +278,8 @@
   </div>
 
   <footer class="footer">
-    <span>PGW Service Hub v47</span>
-    <span>Bez cen i stanów. Podgląd rysunków przez PDF z Google Drive.</span>
+    <span>PGW Service Hub v48</span>
+    <span>Bez cen i stanów. PDF-y z Google Drive. Tryb jasny/ciemny zapamiętywany w przeglądarce.</span>
   </footer>
 
   <script src="config.js"></script>

@@ -1,6 +1,6 @@
-# PGW Service Hub v47 — mobile parts flow
+# PGW Service Hub v48 — visual polish + dark mode
 
-Lekka strona GitHub Pages do zapytania o części serwisu pogwarancyjnego TOYA.
+Lekka strona GitHub Pages do zapytań o części serwisu pogwarancyjnego TOYA.
 
 ## Główne zasady
 
@@ -9,16 +9,17 @@ Lekka strona GitHub Pages do zapytania o części serwisu pogwarancyjnego TOYA.
 - Klient nie widzi cen ani stanów magazynowych.
 - Faktura i wysyłka są opcjonalne.
 - Gdy urządzenia nie ma w bazie, działa tryb ręczny.
+- Tryb jasny/ciemny jest zapamiętywany w przeglądarce.
 
-## Co doszło w v47
+## Co doszło w v48
 
-- lepszy widok na telefonie,
-- sticky dolny pasek z liczbą wybranych części,
-- przyciski szybkiego przejścia do PDF/listy części,
-- dawkowanie listy części i przycisk „Pokaż więcej części”,
-- karta części na mobile zamiast ciasnej tabeli,
-- poprawiony podgląd maila roboczego,
-- przygotowanie pod późniejsze mapowanie pozycji na PDF.
+- przełącznik trybu jasnego/ciemnego w górnym pasku,
+- automatyczne dopasowanie startowego motywu do ustawień systemowych,
+- zapamiętywanie wyboru motywu w `localStorage`,
+- spokojniejszy, bardziej firmowy wygląd strony,
+- poprawione kontrasty kart, pól formularza, tabel i koszyka,
+- mniej surowy ekran startowy i lepsze wizualne prowadzenie klienta,
+- przygotowanie UI pod dalszy lifting bez mieszania w logice danych.
 
 ## Wdrożenie
 
@@ -29,13 +30,5 @@ Lekka strona GitHub Pages do zapytania o części serwisu pogwarancyjnego TOYA.
 Test cache-busting:
 
 ```text
-?v=20260617-v47-mobile-parts
+?v=20260617-v48-dark-mode
 ```
-
-
-## v47 — dane klienta i walidacje
-
-- dodany ekran kontroli przed skopiowaniem maila,
-- poprawiona walidacja email/telefon/kod pocztowy/NIP,
-- faktura i wysyłka nadal są opcjonalne,
-- przycisk „Kopiuj komplet” kopiuje adresata, temat i treść razem.

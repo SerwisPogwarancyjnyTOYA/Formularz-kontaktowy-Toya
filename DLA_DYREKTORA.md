@@ -1,23 +1,21 @@
-# PGW Service Hub — wersja v47
+# PGW Service Hub v48 — wersja do pokazania kierunkowo
 
-Wersja v47 skupia się na użyteczności dla klienta.
+v48 dopracowuje wygląd i wygodę formularza bez dokładania ciężkich plików do repozytorium.
 
-Klient przechodzi przez prosty proces:
+## Co klient widzi
 
-1. wybiera urządzenie,
-2. widzi rysunek PDF z Google Drive,
-3. wybiera części z listy,
-4. podaje minimum danych kontaktowych,
-5. kopiuje gotowy mail do serwisu.
+- prostą ścieżkę: urządzenie → PDF → części → dane → gotowy mail,
+- opcjonalne dane do faktury i wysyłki,
+- tryb ręczny, gdy urządzenia nie ma w aktualnej bazie,
+- tryb jasny albo ciemny.
 
-Strona nie pokazuje cen ani stanów magazynowych. Celem jest zebranie kompletnego i czytelnego zapytania dla serwisu, nie sprzedaż online.
+## Co ważne technicznie
 
-Najważniejsza zmiana v47: wygodniejsze użycie na telefonie i łatwiejsze wybieranie części bez zalewania klienta pełną tabelą.
+- repo pozostaje lekkie,
+- PDF-y są nadal w Google Drive,
+- publiczna strona nie pokazuje cen ani stanów,
+- tryb ciemny nie wymaga backendu i zapisuje się lokalnie w przeglądarce.
 
+## Następny etap
 
-## v47 — dane klienta i walidacje
-
-- dodany ekran kontroli przed skopiowaniem maila,
-- poprawiona walidacja email/telefon/kod pocztowy/NIP,
-- faktura i wysyłka nadal są opcjonalne,
-- przycisk „Kopiuj komplet” kopiuje adresata, temat i treść razem.
+v49 powinien skupić się na pełnym manifeście Google Drive dla 1400+ PDF-ów albo na dalszym dopracowaniu UX części i trybu ręcznego.

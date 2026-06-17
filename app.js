@@ -1,7 +1,8 @@
 (() => {
   'use strict';
   const CONFIG = window.PGW_CONFIG || {};
-  const DRAFT_KEY = 'pgw-v47-draft';
+  const DRAFT_KEY = 'pgw-v48-draft';
+  const THEME_KEY = 'pgw-theme';
   const PART_ROW_LIMIT = Number(CONFIG.partRowLimit || 80);
   const $ = (id) => document.getElementById(id);
   const els = {
@@ -12,7 +13,7 @@
     customerForm: $('customerForm'), sameAsInvoice: $('sameAsInvoice'), wantInvoice: $('wantInvoice'), wantShipping: $('wantShipping'), invoiceFieldset: $('invoiceFieldset'), shippingFieldset: $('shippingFieldset'), mailTo: $('mailTo'), mailSubject: $('mailSubject'), mailBody: $('mailBody'),
     copyMail: $('copyMail'), copySubject: $('copySubject'), copyAll: $('copyAll'), copyStatus: $('copyStatus'), startOver: $('startOver'),
     backDevice: $('backDevice'), backParts: $('backParts'), backData: $('backData'), goMail: $('goMail'), contextTitle: $('contextTitle'), contextBody: $('contextBody'),
-    lookupNip: $('lookupNip'), lookupStatus: $('lookupStatus'), zipStatus: $('zipStatus'), shipZipStatus: $('shipZipStatus'), formHint: $('formHint'), manualPartsBox: $('manualPartsBox'), manualPartsFieldset: $('manualPartsFieldset'), goManualData: $('goManualData'), draftMailPreview: $('draftMailPreview'), showMoreParts: $('showMoreParts'), mobileSummaryBar: $('mobileSummaryBar'), mobileSummaryText: $('mobileSummaryText'), mobileGoData: $('mobileGoData'), focusParts: $('focusParts'), focusPdf: $('focusPdf'), contactQuality: $('contactQuality'), invoiceQuality: $('invoiceQuality'), shippingQuality: $('shippingQuality'), finalChecklist: $('finalChecklist')
+    lookupNip: $('lookupNip'), lookupStatus: $('lookupStatus'), zipStatus: $('zipStatus'), shipZipStatus: $('shipZipStatus'), formHint: $('formHint'), manualPartsBox: $('manualPartsBox'), manualPartsFieldset: $('manualPartsFieldset'), goManualData: $('goManualData'), draftMailPreview: $('draftMailPreview'), showMoreParts: $('showMoreParts'), mobileSummaryBar: $('mobileSummaryBar'), mobileSummaryText: $('mobileSummaryText'), mobileGoData: $('mobileGoData'), focusParts: $('focusParts'), focusPdf: $('focusPdf'), contactQuality: $('contactQuality'), invoiceQuality: $('invoiceQuality'), shippingQuality: $('shippingQuality'), finalChecklist: $('finalChecklist'), themeToggle: $('themeToggle'), themeIcon: $('themeIcon'), themeLabel: $('themeLabel')
   };
   const progressIds = ['pDevice','pDrawing','pParts','pData','pMail'];
 
@@ -34,6 +35,7 @@
   document.addEventListener('DOMContentLoaded', init);
 
   async function init() {
+    initTheme();
     try {
       setStatus('Ładowanie katalogu…');
       const urls = CONFIG.dataUrls || {};
@@ -164,6 +166,7 @@
     els.copySubject.addEventListener('click', () => copyText(els.mailSubject.value, 'Skopiowano temat.'));
     if (els.copyAll) els.copyAll.addEventListener('click', () => copyText(`Do: ${els.mailTo.value}\nTemat: ${els.mailSubject.value}\n\n${els.mailBody.value}`, 'Skopiowano komplet: adresat, temat i treść.'));
     els.startOver.addEventListener('click', resetAll);
+    if (els.themeToggle) els.themeToggle.addEventListener('click', toggleTheme);
   }
 
   function renderStats() {
@@ -461,7 +464,6 @@
   }
 
   function updateCanProceed() {
-    renderValidationPanels();
     document.querySelectorAll('.step').forEach(btn => { btn.disabled = !canOpenStep(Number(btn.dataset.step)); });
     const canMail = Boolean(state.selectedDevice && hasSelectionForRequest() && formIsValid());
     if (els.goMail) {
@@ -496,8 +498,8 @@
     const contexts = {
       1: ['Wybierz urządzenie', 'Klient widzi wyszukiwarkę modeli. Gdy modelu nie ma w bazie, może przejść do zapytania ręcznego.'],
       2: ['Wybierz części z rysunku', 'PDF zostaje po prawej, a lista po lewej pokazuje części dla wybranego modelu. W trybie ręcznym klient opisuje część tekstowo.'],
-      3: ['Uzupełnij minimum kontaktu', 'Wystarczy imię/nazwa oraz poprawny email albo telefon. Faktura i wysyłka są opcjonalne, ale strona podpowie, gdy coś wygląda podejrzanie.'],
-      4: ['Sprawdź i skopiuj mail', 'Na końcu klient widzi checklistę, temat i treść wiadomości do service@yato.pl.']
+      3: ['Uzupełnij dane', 'Dane do faktury i wysyłki pojawiają się dopiero po wybraniu części. Nic nie jest wysyłane automatycznie.'],
+      4: ['Skopiuj gotowy mail', 'Na końcu klient dostaje gotowy temat i treść do wysłania na service@yato.pl.']
     };
     const [title, body] = contexts[state.step] || contexts[1];
     els.contextTitle.textContent = title;
@@ -882,6 +884,35 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
     state.selectedDevice = null; state.selectedDrawing = null; state.selectedParts.clear(); state.manualMode = false;
     els.customerForm.reset(); updateOptionalSections(); els.deviceSearch.value = ''; els.partsSearch.value = '';
     renderDeviceResults(''); renderBasket(); renderViewer(false); goStep(1); renderContext();
+  }
+
+
+  function initTheme() {
+    let theme = 'light';
+    try {
+      const saved = localStorage.getItem(THEME_KEY);
+      const systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      theme = saved || (systemDark ? 'dark' : 'light');
+    } catch (e) {}
+    setTheme(theme);
+  }
+
+  function toggleTheme() {
+    const current = document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
+    setTheme(current === 'dark' ? 'light' : 'dark', true);
+  }
+
+  function setTheme(theme, persist=false) {
+    const safe = theme === 'dark' ? 'dark' : 'light';
+    document.documentElement.dataset.theme = safe;
+    if (els.themeToggle) {
+      els.themeToggle.setAttribute('aria-pressed', safe === 'dark' ? 'true' : 'false');
+      if (els.themeIcon) els.themeIcon.textContent = safe === 'dark' ? '☀' : '☾';
+      if (els.themeLabel) els.themeLabel.textContent = safe === 'dark' ? 'Tryb jasny' : 'Tryb ciemny';
+    }
+    if (persist) {
+      try { localStorage.setItem(THEME_KEY, safe); } catch(e) {}
+    }
   }
 
   function resolveDrive(drawing) {

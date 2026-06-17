@@ -1,6 +1,6 @@
 {
-  "version": "20260617-v47-client-validation",
-  "description": "Client validation, final checklist, safer contact rules and improved copy flow",
+  "version": "20260617-v48-dark-mode",
+  "description": "Visual polish, light/dark mode, better contrast and client-facing UI refinement",
   "counts": {
     "devices": 34,
     "drawings": 34,
@@ -14,7 +14,9 @@
     "Manual fallback when device is missing",
     "Mapping-ready: positions now, hotspots later",
     "Client contact validation",
-    "Final checklist before copying email"
+    "Final checklist before copying email",
+    "Light/dark theme saved locally",
+    "Visual polish without heavy assets"
   ],
-  "name": "PGW Service Hub v47 client validation"
+  "name": "PGW Service Hub v48 dark mode"
 }

@@ -1,30 +1,23 @@
-# Wdrożenie v47
+# Wdrożenie v48
 
-## Najbezpieczniej
+## Najbezpieczniejsza ścieżka
 
-1. Zmień nazwę starego katalogu repo, np. `yato-service-hub-repo-STARE`.
-2. Sklonuj repo od nowa w GitHub Desktop.
-3. Usuń zawartość katalogu roboczego, ale nie usuwaj `.git`.
-4. Wklej zawartość paczki v47.
-5. Commit: `Deploy v47 mobile parts flow`.
-6. Push origin.
+1. Otwórz świeże, lekkie repo bez starej historii `.git`.
+2. Usuń starą zawartość katalogu roboczego, ale nie usuwaj `.git`.
+3. Wklej zawartość tej paczki.
+4. Zrób commit, np. `PGW Service Hub v48 dark mode`.
+5. Wypchnij przez GitHub Desktop.
 
-## Po wdrożeniu
+## Po wdrożeniu sprawdź
+
+- czy wyszukiwarka urządzeń działa,
+- czy PDF z Drive pokazuje się po wyborze modelu,
+- czy koszyk części działa na komputerze i telefonie,
+- czy tryb ciemny przełącza się i zostaje po odświeżeniu,
+- czy krok 4 generuje mail do `service@yato.pl`.
 
 Adres testowy:
 
 ```text
-https://serwispogwarancyjnytoya.github.io/Formularz-kontaktowy-Toya/?v=20260617-v47-mobile-parts
+https://serwispogwarancyjnytoya.github.io/Formularz-kontaktowy-Toya/?v=20260617-v48-dark-mode
 ```
-
-## Uwaga o ciężarze repo
-
-Repo nie powinno zawierać 1400+ PDF-ów. PDF-y zostają w Google Drive, a repo trzyma tylko kod i JSON-y.
-
-
-## v47 — dane klienta i walidacje
-
-- dodany ekran kontroli przed skopiowaniem maila,
-- poprawiona walidacja email/telefon/kod pocztowy/NIP,
-- faktura i wysyłka nadal są opcjonalne,
-- przycisk „Kopiuj komplet” kopiuje adresata, temat i treść razem.
