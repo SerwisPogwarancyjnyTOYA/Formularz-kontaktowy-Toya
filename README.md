@@ -1,27 +1,34 @@
-# PGW Service Hub v42 — guided flow
+# PGW Service Hub v41
 
-Lekka strona GitHub Pages do obsługi zapytań o części serwisowe.
+Lekka strona GitHub Pages dla klientów serwisu pogwarancyjnego TOYA.
 
 ## Założenia
 
-- klient idzie krokowo: urządzenie → rysunek PDF → części → dane → gotowy mail,
-- rysunki PDF są podglądane z Google Drive,
-- repo nie trzyma ciężkich PDF-ów,
-- strona nie pokazuje cen ani stanów magazynowych,
-- gotowy mail jest do skopiowania i wysłania na `service@yato.pl`.
+- klient najpierw szuka urządzenia,
+- po wyborze urządzenia pojawia się rysunek PDF z Google Drive,
+- klient wybiera części,
+- potem uzupełnia dane kontaktowe, fakturowe i wysyłkowe,
+- na końcu dostaje gotowy mail do skopiowania i wysłania na `service@yato.pl`.
 
-## Co nowego w v42
+Strona nie pokazuje cen, stanów magazynowych ani dostępności.
+PDF-y nie są trzymane w repozytorium. Repo zawiera tylko kod i lekkie pliki JSON.
 
-- spokojniejszy, bardziej prowadzony flow klienta,
-- kontekstowy panel „Aktualny krok”,
-- pomoc przy szukaniu indeksu urządzenia,
-- limitowane/dawkowane wyświetlanie dużych list części,
-- lepsze przyciski przejścia: wróć / dalej / generuj mail,
-- pole numeru seryjnego urządzenia,
-- link do rysunku PDF dopisywany do generowanego maila, jeśli jest dostępny,
-- odświeżona warstwa wizualna: badge, help boxy, lepsze stany puste i responsywność.
+## Pliki publiczne
 
-## Wdrożenie
+- `index.html` — aplikacja
+- `app.css` — wygląd
+- `app.js` — logika krokowego formularza
+- `config.js` — konfiguracja
+- `data/*.json` — katalog urządzeń, rysunków, części i mapowanie Drive
 
-Najlepiej wkleić zawartość paczki do świeżego repo z czystą historią. Aktualne stare repo ma bardzo ciężki folder `.git`, więc samo kasowanie plików nie odchudzi historii.
+## Uwaga o dużym repo
 
+Jeżeli folder `.git` waży setki MB, to ciężkie pliki są w historii Gita. Najczystsze rozwiązanie to świeże repo / świeża historia i wklejenie tej paczki jako start.
+
+
+## Zmiany v44
+
+- Dane do faktury są opcjonalne i nie blokują przejścia do maila.
+- Dane do wysyłki są opcjonalne i nie blokują przejścia do maila.
+- Do przejścia do maila wystarczy wybrane urządzenie, minimum jedna część oraz kontakt: imię/nazwa + email albo telefon.
+- Jeśli klient nie poda faktury lub wysyłki, mail zawiera informację „do ustalenia z serwisem”.

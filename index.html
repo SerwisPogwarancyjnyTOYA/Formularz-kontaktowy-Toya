@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex,nofollow" />
-  <title>PGW Service Hub v42 — zapytanie o części</title>
+  <title>PGW Service Hub v44 — zapytanie o części</title>
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="stylesheet" href="app.css" />
 </head>
@@ -23,9 +23,9 @@
   <main class="shell">
     <section class="hero-card">
       <div>
-        <p class="eyebrow">Ścieżka klienta v42</p>
-        <h1>Prosty formularz: model → rysunek PDF → części → dane → gotowy mail.</h1>
-        <p class="lead">Klient nie dostaje wszystkiego naraz. Strona odsłania kolejne informacje dopiero wtedy, kiedy są potrzebne: najpierw urządzenie, potem rysunek i części, na końcu dane oraz mail do <strong>service@yato.pl</strong>.</p>
+        <p class="eyebrow">Ścieżka klienta v44</p>
+        <h1>Prosty formularz: model → rysunek PDF → części → tylko potrzebne dane → gotowy mail.</h1>
+        <p class="lead">Klient nie dostaje wszystkiego naraz. Najpierw wybiera urządzenie i części, potem podaje tylko te dane, które są potrzebne: kontakt obowiązkowo, faktura i wysyłka opcjonalnie. Na końcu dostaje mail do <strong>service@yato.pl</strong>.</p>
         <div class="hero-guide" aria-label="Jak działa formularz">
           <span>1. Szukasz modelu</span>
           <span>2. Otwiera się PDF</span>
@@ -102,40 +102,55 @@
             <span class="stage-number">3</span>
             <div>
               <h2>Dane kontaktowe, faktura i wysyłka</h2>
-              <p>Te informacje trafią do gotowego maila. Strona niczego nie wysyła sama.</p>
+              <p>Kontakt jest wymagany, ale faktura i wysyłka są opcjonalne. Klient może dopytać o części bez uzupełniania wszystkich danych.</p>
             </div>
           </div>
 
           <form id="customerForm" class="form-grid">
             <fieldset>
               <legend>Kontakt</legend>
-              <label>Imię i nazwisko / firma kontaktowa<input name="contactName" required /></label>
-              <label>Email<input name="contactEmail" type="email" required /></label>
-              <label>Telefon<input name="contactPhone" required /></label>
+              <label>Imię i nazwisko / firma kontaktowa<input name="contactName" data-required="base" /></label>
+              <label>Email<input name="contactEmail" type="email" placeholder="podaj email lub telefon" /></label>
+              <label>Telefon<input name="contactPhone" placeholder="podaj telefon lub email" /></label>
+              <div class="lookup-status">Wystarczy email albo telefon. Im więcej danych klient poda, tym łatwiej będzie odpowiedzieć.</div>
               <label>Numer seryjny urządzenia<input name="serialNumber" placeholder="opcjonalnie" /></label>
             </fieldset>
 
-            <fieldset>
-              <legend>Dane do faktury</legend>
-              <label>Nazwa firmy / osoba<input name="invoiceName" required /></label>
-              <label>NIP<input name="invoiceNip" placeholder="opcjonalnie" /></label>
-              <label>Ulica i nr<input name="invoiceStreet" required /></label>
-              <div class="two-col">
-                <label>Kod pocztowy<input name="invoiceZip" required /></label>
-                <label>Miasto<input name="invoiceCity" required /></label>
+            <fieldset id="invoiceFieldset" class="optional-section inactive">
+              <legend>Faktura</legend>
+              <label class="check"><input type="checkbox" id="wantInvoice" /> Chcę podać dane do faktury teraz</label>
+              <div class="optional-note">Jeżeli klient nie potrzebuje faktury albo chce ustalić to później, ta sekcja nie blokuje przejścia dalej.</div>
+              <div class="optional-fields">
+                <label>Nazwa firmy / osoba<input name="invoiceName" /></label>
+                <div class="nip-row">
+                  <label>NIP<input name="invoiceNip" placeholder="opcjonalnie" inputmode="numeric" /></label>
+                  <button id="lookupNip" type="button">Pobierz dane z NIP</button>
+                </div>
+                <div class="lookup-status" id="lookupStatus">Po wpisaniu NIP możesz spróbować automatycznie pobrać nazwę i adres firmy.</div>
+                <label>Ulica i nr<input name="invoiceStreet" /></label>
+                <div class="two-col">
+                  <label>Kod pocztowy<input name="invoiceZip" placeholder="np. 31-357" /></label>
+                  <label>Miasto<input name="invoiceCity" /></label>
+                </div>
+                <div class="lookup-status" id="zipStatus">Kod pocztowy może uzupełnić miejscowość, jeśli jest w lokalnej bazie strony.</div>
               </div>
             </fieldset>
 
-            <fieldset>
-              <legend>Dane do wysyłki</legend>
-              <label class="check"><input type="checkbox" id="sameAsInvoice" /> Takie same jak do faktury</label>
-              <label>Odbiorca<input name="shipName" required /></label>
-              <label>Ulica i nr<input name="shipStreet" required /></label>
-              <div class="two-col">
-                <label>Kod pocztowy<input name="shipZip" required /></label>
-                <label>Miasto<input name="shipCity" required /></label>
+            <fieldset id="shippingFieldset" class="optional-section inactive">
+              <legend>Wysyłka</legend>
+              <label class="check"><input type="checkbox" id="wantShipping" /> Chcę podać adres wysyłki teraz</label>
+              <div class="optional-note">Adres wysyłki jest opcjonalny. Jeśli klient go nie poda, w mailu zostanie informacja „do ustalenia”.</div>
+              <div class="optional-fields">
+                <label class="check"><input type="checkbox" id="sameAsInvoice" /> Takie same jak do faktury</label>
+                <label>Odbiorca<input name="shipName" /></label>
+                <label>Ulica i nr<input name="shipStreet" /></label>
+                <div class="two-col">
+                  <label>Kod pocztowy<input name="shipZip" placeholder="np. 31-357" /></label>
+                  <label>Miasto<input name="shipCity" /></label>
+                </div>
+                <div class="lookup-status" id="shipZipStatus">Miejscowość uzupełni się automatycznie, jeśli kod jest w lokalnej bazie.</div>
+                <label>Telefon dla kuriera<input name="shipPhone" /></label>
               </div>
-              <label>Telefon dla kuriera<input name="shipPhone" required /></label>
             </fieldset>
 
             <fieldset class="full-span">
@@ -143,10 +158,11 @@
               <label>Uwagi<textarea name="notes" rows="4" placeholder="np. pilne, preferowana forma kontaktu, dodatkowe informacje do serwisu"></textarea></label>
             </fieldset>
           </form>
-          <div class="stage-actions">
+          <div class="stage-actions sticky-action">
             <button id="backParts" type="button">Wróć do części</button>
-            <button class="primary" id="goMail" type="button" disabled>Generuj gotowy mail</button>
+            <button class="primary" id="goMail" type="button" disabled>Przejdź do gotowego maila</button>
           </div>
+          <div class="form-hint" id="formHint">Podaj kontakt. Faktura i wysyłka są opcjonalne — nie blokują gotowego maila.</div>
         </section>
 
         <section class="stage" id="stage4">
@@ -216,7 +232,7 @@
   </main>
 
   <footer class="footer">
-    <span>PGW Service Hub v42</span>
+    <span>PGW Service Hub v44</span>
     <span>Bez cen i stanów. Podgląd rysunków przez PDF z Google Drive.</span>
   </footer>
 

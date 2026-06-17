@@ -41,3 +41,20 @@ button:disabled{opacity:.45;cursor:not-allowed}.primary{background:var(--red);bo
 .step:not(:disabled){position:relative}.step.done:after{content:'✓';font-weight:900;color:#12b76a;margin-left:2px}
 .form-grid fieldset{background:linear-gradient(180deg,#fff,#fcfcfd)}.form-grid legend{color:#111827}.mail-card{background:linear-gradient(180deg,#fff,#fcfcfd);border:1px solid #e4e7ec;border-radius:16px;padding:14px}.mail-card textarea{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;font-size:13px}
 @media (max-width:680px){.top-actions{width:100%;justify-content:flex-start}.stage-actions{position:sticky;bottom:0;z-index:4;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);margin-left:-18px;margin-right:-18px;padding:12px 18px;border-top:1px solid var(--line)}.stage-actions button{min-width:0;flex:1}.hero-guide{display:grid;grid-template-columns:1fr 1fr}.hero-guide span{justify-content:center;text-align:center}.mode-pill{font-size:11px}}
+
+/* v43 — inteligentniejsze dane i wyraźniejsze przejście do maila */
+.nip-row{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:end}.nip-row label{margin:10px 0 0}.nip-row button{height:43px;white-space:nowrap}.lookup-status,.form-hint{margin-top:8px;border:1px solid #e4e7ec;background:#f8fafc;border-radius:12px;padding:9px 11px;color:#667085;font-size:12px;line-height:1.35}.lookup-status.ok,.form-hint.ok{border-color:#bbf7d0;background:#ecfdf3;color:#067647}.lookup-status.warn{border-color:#fed7aa;background:#fff7ed;color:#b45309}.lookup-status.loading{border-color:#bfdbfe;background:#eff6ff;color:#1d4ed8}.form-hint{font-weight:800;text-align:right}.sticky-action{background:linear-gradient(180deg,rgba(255,255,255,.84),#fff);position:sticky;bottom:0;z-index:5}.stage-actions .primary:not(:disabled){box-shadow:0 10px 22px rgba(215,25,32,.18)}.step[data-step="4"]:not(:disabled){border-color:#12b76a;background:#ecfdf3}.step[data-step="4"]:not(:disabled) b{background:#12b76a;color:white}.mail-card:before{content:'Krok 4 / 4 — wszystko gotowe';display:inline-flex;width:max-content;border-radius:999px;background:#ecfdf3;color:#067647;font-size:12px;font-weight:900;padding:6px 10px;margin-bottom:2px}
+@media (max-width:680px){.nip-row{grid-template-columns:1fr}.nip-row button{width:100%}.form-hint{text-align:left}.sticky-action{margin-left:-18px;margin-right:-18px;padding-left:18px;padding-right:18px}}
+
+
+/* v44 — faktura i wysyłka opcjonalne */
+.optional-section{transition:.18s ease}
+.optional-section.inactive{background:linear-gradient(180deg,#fff,#f8fafc);border-style:dashed}
+.optional-section.inactive .optional-fields{opacity:.45;filter:grayscale(.15)}
+.optional-section.inactive .optional-fields input,.optional-section.inactive .optional-fields textarea,.optional-section.inactive .optional-fields button{pointer-events:none}
+.optional-note{margin:8px 0 10px;border:1px solid #e4e7ec;background:#f8fafc;border-radius:12px;padding:9px 11px;color:#667085;font-size:12px;line-height:1.35}
+.optional-section:not(.inactive){border-color:#fecdd3;box-shadow:0 0 0 3px rgba(215,25,32,.04)}
+.optional-section:not(.inactive) .optional-note{background:#fff1f2;border-color:#fecdd3;color:#9f1116}
+.form-hint.ok{background:#ecfdf3;border-color:#abefc6;color:#067647}
+.form-hint.warn{background:#fff7ed;border-color:#fed7aa;color:#b45309}
+@media (max-width:680px){.optional-section.inactive .optional-fields{display:none}}

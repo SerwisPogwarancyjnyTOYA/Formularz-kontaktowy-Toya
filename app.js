@@ -1,7 +1,7 @@
 (() => {
   'use strict';
   const CONFIG = window.PGW_CONFIG || {};
-  const DRAFT_KEY = 'pgw-v42-draft';
+  const DRAFT_KEY = 'pgw-v44-draft';
   const PART_ROW_LIMIT = Number(CONFIG.partRowLimit || 120);
   const $ = (id) => document.getElementById(id);
   const els = {
@@ -9,17 +9,27 @@
     deviceSearch: $('deviceSearch'), deviceResults: $('deviceResults'), deviceMeta: $('deviceMeta'), quickExamples: $('quickExamples'),
     selectedDeviceBox: $('selectedDeviceBox'), partsSearch: $('partsSearch'), partsTable: $('partsTable'), partMeta: $('partMeta'),
     viewer: $('viewer'), openPdf: $('openPdf'), basketItems: $('basketItems'), basketCount: $('basketCount'), goData: $('goData'), goDataInline: $('goDataInline'), clearBasket: $('clearBasket'),
-    customerForm: $('customerForm'), sameAsInvoice: $('sameAsInvoice'), mailTo: $('mailTo'), mailSubject: $('mailSubject'), mailBody: $('mailBody'),
+    customerForm: $('customerForm'), sameAsInvoice: $('sameAsInvoice'), wantInvoice: $('wantInvoice'), wantShipping: $('wantShipping'), invoiceFieldset: $('invoiceFieldset'), shippingFieldset: $('shippingFieldset'), mailTo: $('mailTo'), mailSubject: $('mailSubject'), mailBody: $('mailBody'),
     copyMail: $('copyMail'), copySubject: $('copySubject'), copyStatus: $('copyStatus'), startOver: $('startOver'),
-    backDevice: $('backDevice'), backParts: $('backParts'), backData: $('backData'), goMail: $('goMail'), contextTitle: $('contextTitle'), contextBody: $('contextBody')
+    backDevice: $('backDevice'), backParts: $('backParts'), backData: $('backData'), goMail: $('goMail'), contextTitle: $('contextTitle'), contextBody: $('contextBody'),
+    lookupNip: $('lookupNip'), lookupStatus: $('lookupStatus'), zipStatus: $('zipStatus'), shipZipStatus: $('shipZipStatus'), formHint: $('formHint')
   };
   const progressIds = ['pDevice','pDrawing','pParts','pData','pMail'];
 
   const state = {
     devices: [], drawings: [], parts: [], driveMap: [],
     drawingById: new Map(), partsByDrawing: new Map(), driveByDrawingId: new Map(), driveByKey: new Map(),
-    selectedDevice: null, selectedDrawing: null, selectedParts: new Map(), step: 1, formDirty: false
+    selectedDevice: null, selectedDrawing: null, selectedParts: new Map(), step: 1, formDirty: false,
+    postalCodes: new Map()
   };
+
+  const POSTAL_FALLBACK = {
+    '00-001': 'Warszawa', '00-002': 'Warszawa', '01-001': 'Warszawa',
+    '30-001': 'Kraków', '31-357': 'Kraków', '50-001': 'Wrocław',
+    '60-001': 'Poznań', '80-001': 'Gdańsk', '90-001': 'Łódź',
+    '40-001': 'Katowice', '43-300': 'Bielsko-Biała', '20-001': 'Lublin'
+  };
+
 
   document.addEventListener('DOMContentLoaded', init);
 
@@ -31,9 +41,11 @@
       state.drawings = await loadFirst(urls.drawings || ['data/drawings.json'], []);
       state.parts = await loadFirst(urls.parts || ['data/parts.json'], []);
       state.driveMap = await loadFirst(urls.driveMap || ['data/drive-drawings-map.json'], []);
+      await loadPostalCodes();
       normalizeData();
       buildIndexes();
       bindEvents();
+      updateOptionalSections();
       renderStats();
       renderExamples();
       renderContext();
@@ -58,6 +70,22 @@
     }
     if (fallback !== undefined) return fallback;
     throw lastError || new Error('Brak danych');
+  }
+
+  async function loadPostalCodes() {
+    const source = CONFIG.postalCodesUrl || 'data/postal-codes.json';
+    let rows = [];
+    try {
+      const res = await fetch(source, {cache:'no-store'});
+      if (res.ok) rows = await res.json();
+    } catch(e) {}
+    const push = (zip, city) => {
+      zip = normalizeZip(zip); city = String(city || '').trim();
+      if (zip && city && !state.postalCodes.has(zip)) state.postalCodes.set(zip, city);
+    };
+    if (Array.isArray(rows)) rows.forEach(r => push(r.zip || r.kod || r.code, r.city || r.miejscowosc || r.miejscowość || r.name));
+    else if (rows && typeof rows === 'object') Object.entries(rows).forEach(([zip, city]) => push(zip, city));
+    Object.entries(POSTAL_FALLBACK).forEach(([zip, city]) => push(zip, city));
   }
 
   function normalizeData() {
@@ -117,7 +145,14 @@
     if (els.goMail) els.goMail.addEventListener('click', () => goStep(4));
     els.clearBasket.addEventListener('click', () => { state.selectedParts.clear(); renderBasket(); saveDraft(); });
     document.querySelectorAll('.step').forEach(btn => btn.addEventListener('click', () => goStep(Number(btn.dataset.step))));
-    els.sameAsInvoice.addEventListener('change', applySameAsInvoice);
+    if (els.sameAsInvoice) els.sameAsInvoice.addEventListener('change', applySameAsInvoice);
+    if (els.wantInvoice) els.wantInvoice.addEventListener('change', () => { updateOptionalSections(); saveDraft(); updateCanProceed(); });
+    if (els.wantShipping) els.wantShipping.addEventListener('change', () => { updateOptionalSections(); saveDraft(); updateCanProceed(); });
+    if (els.lookupNip) els.lookupNip.addEventListener('click', lookupCompanyByNip);
+    const fields = els.customerForm.elements;
+    if (fields.invoiceNip) fields.invoiceNip.addEventListener('input', () => { updateLookupHint(); });
+    if (fields.invoiceZip) fields.invoiceZip.addEventListener('input', debounce(() => autofillCityFromZip('invoiceZip','invoiceCity', els.zipStatus), 120));
+    if (fields.shipZip) fields.shipZip.addEventListener('input', debounce(() => autofillCityFromZip('shipZip','shipCity', els.shipZipStatus), 120));
     els.customerForm.addEventListener('input', () => { state.formDirty = true; saveDraft(); updateCanProceed(); });
     els.customerForm.addEventListener('change', () => { state.formDirty = true; saveDraft(); updateCanProceed(); });
     els.copyMail.addEventListener('click', () => copyText(els.mailBody.value, 'Skopiowano treść maila.'));
@@ -346,7 +381,16 @@
 
   function updateCanProceed() {
     document.querySelectorAll('.step').forEach(btn => { btn.disabled = !canOpenStep(Number(btn.dataset.step)); });
-    if (els.goMail) els.goMail.disabled = !(state.selectedDevice && state.selectedParts.size && formIsValid());
+    const canMail = Boolean(state.selectedDevice && state.selectedParts.size && formIsValid());
+    if (els.goMail) {
+      els.goMail.disabled = !canMail;
+      els.goMail.textContent = canMail ? 'Przejdź do gotowego maila' : 'Podaj kontakt, aby przejść dalej';
+    }
+    if (els.formHint) {
+      els.formHint.textContent = canMail ? 'Wszystko gotowe — możesz przejść do gotowego maila. Faktura i wysyłka są opcjonalne.' : missingRequiredText();
+      els.formHint.classList.toggle('ok', canMail);
+      els.formHint.classList.toggle('warn', !canMail);
+    }
     if (els.goDataInline) els.goDataInline.disabled = !state.selectedParts.size;
     if (state.step === 3 && formIsValid() && state.selectedParts.size) {
       generateMail();
@@ -377,23 +421,76 @@
     els.contextBody.textContent = body;
   }
 
-  function applySameAsInvoice() {
-    const f = new FormData(els.customerForm);
+  function updateOptionalSections() {
     const fields = els.customerForm.elements;
-    if (els.sameAsInvoice.checked) {
-      fields.shipName.value = f.get('invoiceName') || '';
-      fields.shipStreet.value = f.get('invoiceStreet') || '';
-      fields.shipZip.value = f.get('invoiceZip') || '';
-      fields.shipCity.value = f.get('invoiceCity') || '';
-      fields.shipPhone.value = f.get('contactPhone') || '';
+    const invoiceOn = Boolean(els.wantInvoice && els.wantInvoice.checked);
+    const shippingOn = Boolean(els.wantShipping && els.wantShipping.checked);
+    if (els.invoiceFieldset) els.invoiceFieldset.classList.toggle('inactive', !invoiceOn);
+    if (els.shippingFieldset) els.shippingFieldset.classList.toggle('inactive', !shippingOn);
+    setSectionDisabled(els.invoiceFieldset, !invoiceOn, ['wantInvoice']);
+    setSectionDisabled(els.shippingFieldset, !shippingOn, ['wantShipping']);
+    if (els.sameAsInvoice) els.sameAsInvoice.disabled = !shippingOn || !invoiceOn;
+    if (!shippingOn && els.sameAsInvoice) els.sameAsInvoice.checked = false;
+    if (fields.invoiceZip && invoiceOn) autofillCityFromZip('invoiceZip','invoiceCity', els.zipStatus, true);
+    if (fields.shipZip && shippingOn) autofillCityFromZip('shipZip','shipCity', els.shipZipStatus, true);
+  }
+
+  function setSectionDisabled(section, disabled, keepNames=[]) {
+    if (!section) return;
+    section.querySelectorAll('input, textarea, button, select').forEach(el => {
+      if (keepNames.includes(el.id) || keepNames.includes(el.name)) return;
+      el.disabled = disabled;
+    });
+  }
+
+  function applySameAsInvoice() {
+    const fields = els.customerForm.elements;
+    if (els.sameAsInvoice && els.sameAsInvoice.checked) {
+      if (els.wantShipping) els.wantShipping.checked = true;
+      updateOptionalSections();
+      fields.shipName.value = fields.invoiceName?.value || fields.contactName?.value || '';
+      fields.shipStreet.value = fields.invoiceStreet?.value || '';
+      fields.shipZip.value = fields.invoiceZip?.value || '';
+      fields.shipCity.value = fields.invoiceCity?.value || '';
+      fields.shipPhone.value = fields.contactPhone?.value || '';
     }
+    autofillCityFromZip('shipZip','shipCity', els.shipZipStatus, true);
     saveDraft(); updateCanProceed();
+  }
+
+  function missingRequiredText() {
+    if (!state.selectedParts.size) return 'Najpierw dodaj przynajmniej jedną część do zapytania.';
+    const missing = getMissingFields().slice(0, 5);
+    return missing.length ? `Brakuje danych: ${missing.join(', ')}.` : 'Kontakt jest wystarczający. Fakturę i wysyłkę można dopisać teraz albo ustalić później.';
+  }
+
+  function getMissingFields() {
+    const fields = els.customerForm.elements;
+    const missing = [];
+    if (!val(fields.contactName)) missing.push('imię i nazwisko / firma kontaktowa');
+    if (!val(fields.contactEmail) && !val(fields.contactPhone)) missing.push('email albo telefon');
+    if (els.wantInvoice && els.wantInvoice.checked) {
+      if (!val(fields.invoiceName)) missing.push('nazwa do faktury');
+      if (!val(fields.invoiceStreet)) missing.push('adres do faktury');
+      if (!val(fields.invoiceZip)) missing.push('kod pocztowy faktury');
+      if (!val(fields.invoiceCity)) missing.push('miasto faktury');
+    }
+    if (els.wantShipping && els.wantShipping.checked) {
+      if (!val(fields.shipName)) missing.push('odbiorca wysyłki');
+      if (!val(fields.shipStreet)) missing.push('adres wysyłki');
+      if (!val(fields.shipZip)) missing.push('kod pocztowy wysyłki');
+      if (!val(fields.shipCity)) missing.push('miasto wysyłki');
+      if (!val(fields.shipPhone)) missing.push('telefon dla kuriera');
+    }
+    return missing;
   }
 
   function formIsValid() {
     if (!els.customerForm) return false;
-    return [...els.customerForm.querySelectorAll('[required]')].every(el => String(el.value || '').trim());
+    return getMissingFields().length === 0;
   }
+
+  function val(field) { return String(field?.value || '').trim(); }
 
   function generateMail() {
     if (!state.selectedDevice) return;
@@ -417,20 +514,12 @@ Proszę o potwierdzenie możliwości zamówienia, wycenę oraz informację o dal
 
 Dane kontaktowe:
 ${f.contactName || ''}
-Email: ${f.contactEmail || ''}
-Telefon: ${f.contactPhone || ''}
+Email: ${f.contactEmail || '-'}
+Telefon: ${f.contactPhone || '-'}
 
-Dane do faktury:
-${f.invoiceName || ''}
-NIP: ${f.invoiceNip || '-'}
-${f.invoiceStreet || ''}
-${f.invoiceZip || ''} ${f.invoiceCity || ''}
+${invoiceMailBlock(f)}
 
-Dane do wysyłki:
-${f.shipName || ''}
-${f.shipStreet || ''}
-${f.shipZip || ''} ${f.shipCity || ''}
-Telefon dla kuriera: ${f.shipPhone || ''}
+${shippingMailBlock(f)}
 
 Uwagi:
 ${f.notes || '-'}
@@ -439,6 +528,112 @@ Pozdrawiam`;
     els.mailTo.value = CONFIG.recipientEmail || 'service@yato.pl';
     els.mailSubject.value = subject;
     els.mailBody.value = body;
+  }
+
+
+  function invoiceMailBlock(f) {
+    if (!els.wantInvoice || !els.wantInvoice.checked) return 'Faktura: nie podano danych / do ustalenia z serwisem.';
+    return `Dane do faktury:
+${f.invoiceName || ''}
+NIP: ${f.invoiceNip || '-'}
+${f.invoiceStreet || ''}
+${f.invoiceZip || ''} ${f.invoiceCity || ''}`;
+  }
+
+  function shippingMailBlock(f) {
+    if (!els.wantShipping || !els.wantShipping.checked) return 'Dane do wysyłki: nie podano / do ustalenia z serwisem.';
+    return `Dane do wysyłki:
+${f.shipName || ''}
+${f.shipStreet || ''}
+${f.shipZip || ''} ${f.shipCity || ''}
+Telefon dla kuriera: ${f.shipPhone || '-'}`;
+  }
+
+  async function lookupCompanyByNip() {
+    if (!CONFIG.enableVatLookup) return;
+    const fields = els.customerForm.elements;
+    if (els.wantInvoice && !els.wantInvoice.checked) { els.wantInvoice.checked = true; updateOptionalSections(); }
+    const nip = cleanNip(fields.invoiceNip?.value || '');
+    if (!nip || nip.length !== 10) {
+      setLookupStatus('Wpisz poprawny NIP: 10 cyfr.', 'warn');
+      return;
+    }
+    fields.invoiceNip.value = nip;
+    setLookupStatus('Szukam danych firmy w rejestrze MF…', 'loading');
+    try {
+      const date = new Date().toISOString().slice(0,10);
+      const url = `https://wl-api.mf.gov.pl/api/search/nip/${encodeURIComponent(nip)}?date=${date}`;
+      const res = await fetch(url, {headers:{'Accept':'application/json'}});
+      if (!res.ok) throw new Error(`Błąd API: ${res.status}`);
+      const data = await res.json();
+      const subject = data?.result?.subject || (data?.result?.subjects || [])[0];
+      if (!subject) {
+        setLookupStatus('Nie znaleziono firmy dla tego NIP. Dane można wpisać ręcznie.', 'warn');
+        return;
+      }
+      const address = subject.workingAddress || subject.residenceAddress || '';
+      const parsed = parsePolishAddress(address);
+      if (subject.name && !fields.invoiceName.value.trim()) fields.invoiceName.value = subject.name;
+      if (parsed.street && !fields.invoiceStreet.value.trim()) fields.invoiceStreet.value = parsed.street;
+      if (parsed.zip && !fields.invoiceZip.value.trim()) fields.invoiceZip.value = parsed.zip;
+      if (parsed.city && !fields.invoiceCity.value.trim()) fields.invoiceCity.value = parsed.city;
+      if (els.sameAsInvoice.checked) applySameAsInvoice();
+      setLookupStatus(`Pobrano: ${subject.name || 'firma'}${subject.statusVat ? ` • VAT: ${subject.statusVat}` : ''}. Sprawdź dane przed wysłaniem.`, 'ok');
+      saveDraft(); updateCanProceed();
+    } catch (e) {
+      console.warn(e);
+      setLookupStatus('Nie udało się pobrać danych online. Możliwe CORS, chwilowa niedostępność API albo brak internetu. Wpisz dane ręcznie.', 'warn');
+    }
+  }
+
+  function updateLookupHint() {
+    const fields = els.customerForm.elements;
+    if (els.wantInvoice && !els.wantInvoice.checked) { els.wantInvoice.checked = true; updateOptionalSections(); }
+    const nip = cleanNip(fields.invoiceNip?.value || '');
+    if (!els.lookupStatus) return;
+    if (!nip) setLookupStatus('Po wpisaniu NIP możesz spróbować automatycznie pobrać nazwę i adres firmy.', '');
+    else if (nip.length < 10) setLookupStatus(`NIP ma ${nip.length}/10 cyfr.`, '');
+    else setLookupStatus('NIP wygląda poprawnie — możesz pobrać dane firmy.', 'ok');
+  }
+
+  function autofillCityFromZip(zipField, cityField, statusEl, silent=false) {
+    const fields = els.customerForm.elements;
+    const zip = normalizeZip(fields[zipField]?.value || '');
+    if (fields[zipField] && zip && fields[zipField].value !== zip) fields[zipField].value = zip;
+    if (!zip || zip.length < 6) {
+      if (statusEl && !silent) statusEl.textContent = 'Wpisz kod w formacie 00-000.';
+      return;
+    }
+    const city = state.postalCodes.get(zip);
+    if (city) {
+      if (!fields[cityField].value.trim()) fields[cityField].value = city;
+      if (statusEl) { statusEl.textContent = `Uzupełniono miejscowość: ${city}.`; statusEl.className = 'lookup-status ok'; }
+      if (els.sameAsInvoice.checked && zipField === 'invoiceZip') applySameAsInvoice();
+      saveDraft(); updateCanProceed();
+    } else if (statusEl && !silent) {
+      statusEl.textContent = 'Nie mam tego kodu w lokalnej bazie — wpisz miejscowość ręcznie.';
+      statusEl.className = 'lookup-status warn';
+    }
+  }
+
+  function setLookupStatus(text, mode='') {
+    if (!els.lookupStatus) return;
+    els.lookupStatus.textContent = text;
+    els.lookupStatus.className = `lookup-status ${mode}`.trim();
+  }
+
+  function parsePolishAddress(address) {
+    const clean = String(address || '').replace(/\s+/g,' ').trim();
+    const m = clean.match(/^(.*?)(\d{2}-\d{3})\s+(.+)$/);
+    if (!m) return {street: clean, zip:'', city:''};
+    return {street: m[1].trim(), zip: m[2], city: m[3].trim()};
+  }
+
+  function cleanNip(value) { return String(value || '').replace(/\D/g,'').slice(0,10); }
+  function normalizeZip(value) {
+    const digits = String(value || '').replace(/\D/g,'').slice(0,5);
+    if (digits.length <= 2) return digits;
+    return `${digits.slice(0,2)}-${digits.slice(2)}`;
   }
 
   function saveDraft() {
@@ -450,7 +645,9 @@ Pozdrawiam`;
         parts: [...state.selectedParts.entries()].map(([id, item]) => [id, item.qty]),
         step: state.step,
         form: Object.fromEntries(new FormData(els.customerForm).entries()),
-        sameAsInvoice: els.sameAsInvoice.checked
+        sameAsInvoice: els.sameAsInvoice ? els.sameAsInvoice.checked : false,
+        wantInvoice: els.wantInvoice ? els.wantInvoice.checked : false,
+        wantShipping: els.wantShipping ? els.wantShipping.checked : false
       };
       localStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
     } catch(e) {}
@@ -461,7 +658,10 @@ Pozdrawiam`;
       const raw = localStorage.getItem(DRAFT_KEY); if (!raw) return;
       const draft = JSON.parse(raw);
       if (draft.form) for (const [k,v] of Object.entries(draft.form)) if (els.customerForm.elements[k]) els.customerForm.elements[k].value = v;
-      els.sameAsInvoice.checked = Boolean(draft.sameAsInvoice);
+      if (els.wantInvoice) els.wantInvoice.checked = Boolean(draft.wantInvoice);
+      if (els.wantShipping) els.wantShipping.checked = Boolean(draft.wantShipping);
+      if (els.sameAsInvoice) els.sameAsInvoice.checked = Boolean(draft.sameAsInvoice);
+      updateOptionalSections();
       if (draft.deviceIndex) {
         const device = state.devices.find(d => norm(d.deviceIndex) === norm(draft.deviceIndex));
         if (device) {
@@ -473,6 +673,9 @@ Pozdrawiam`;
           }
           els.deviceSearch.value = device.deviceIndex || '';
           renderSelectedDevice(); renderParts(); renderBasket(); renderViewer(false); renderDeviceResults(els.deviceSearch.value);
+          updateLookupHint();
+          autofillCityFromZip('invoiceZip','invoiceCity', els.zipStatus, true);
+          autofillCityFromZip('shipZip','shipCity', els.shipZipStatus, true);
           goStep(Math.min(Math.max(Number(draft.step) || 1, 1), 4));
         }
       }
@@ -483,7 +686,7 @@ Pozdrawiam`;
     if (!confirm('Wyczyścić formularz i zacząć od nowa?')) return;
     localStorage.removeItem(DRAFT_KEY);
     state.selectedDevice = null; state.selectedDrawing = null; state.selectedParts.clear();
-    els.customerForm.reset(); els.deviceSearch.value = ''; els.partsSearch.value = '';
+    els.customerForm.reset(); updateOptionalSections(); els.deviceSearch.value = ''; els.partsSearch.value = '';
     renderDeviceResults(''); renderBasket(); renderViewer(false); goStep(1); renderContext();
   }
 
