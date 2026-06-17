@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex,nofollow" />
-  <title>PGW Service Hub v44 — zapytanie o części</title>
+  <title>PGW Service Hub v46 — mobile flow</title>
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="stylesheet" href="app.css" />
 </head>
@@ -23,8 +23,8 @@
   <main class="shell">
     <section class="hero-card">
       <div>
-        <p class="eyebrow">Ścieżka klienta v44</p>
-        <h1>Prosty formularz: model → rysunek PDF → części → tylko potrzebne dane → gotowy mail.</h1>
+        <p class="eyebrow">Ścieżka klienta v46</p>
+        <h1>Prosty formularz: najpierw model i PDF, potem wygodny wybór części, dane i gotowy mail.</h1>
         <p class="lead">Klient nie dostaje wszystkiego naraz. Najpierw wybiera urządzenie i części, potem podaje tylko te dane, które są potrzebne: kontakt obowiązkowo, faktura i wysyłka opcjonalnie. Na końcu dostaje mail do <strong>service@yato.pl</strong>.</p>
         <div class="hero-guide" aria-label="Jak działa formularz">
           <span>1. Szukasz modelu</span>
@@ -80,6 +80,14 @@
             </div>
           </div>
           <div class="selected-device" id="selectedDeviceBox"></div>
+          <div class="manual-parts-box hidden" id="manualPartsBox">
+            <strong>Urządzenie spoza aktualnej bazy</strong>
+            <p>Nie mamy jeszcze listy części dla tego modelu. Klient może opisać potrzebną część ręcznie, a serwis dopasuje ją po mailu.</p>
+            <button class="primary" type="button" id="goManualData">Przejdź do danych i opisz część</button>
+          </div>
+          <div class="locator-help">
+            <strong>Najprościej:</strong> znajdź numer pozycji na PDF-ie i wpisz go poniżej. Lista części jest dawkowana, żeby klient nie dostał całej tabeli naraz.
+          </div>
           <label class="search-box compact">
             <span>Szukaj części w tym urządzeniu</span>
             <input id="partsSearch" type="search" placeholder="pozycja, indeks, nazwa części" autocomplete="off" />
@@ -91,6 +99,7 @@
               <tbody id="partsTable"></tbody>
             </table>
           </div>
+          <button class="show-more hidden" type="button" id="showMoreParts">Pokaż więcej części</button>
           <div class="stage-actions">
             <button id="backDevice" type="button">Wróć do wyboru urządzenia</button>
             <button class="primary" id="goDataInline" type="button" disabled>Przejdź do danych</button>
@@ -114,6 +123,12 @@
               <label>Telefon<input name="contactPhone" placeholder="podaj telefon lub email" /></label>
               <div class="lookup-status">Wystarczy email albo telefon. Im więcej danych klient poda, tym łatwiej będzie odpowiedzieć.</div>
               <label>Numer seryjny urządzenia<input name="serialNumber" placeholder="opcjonalnie" /></label>
+            </fieldset>
+
+            <fieldset id="manualPartsFieldset" class="manual-fieldset full-span hidden">
+              <legend>Opis części spoza bazy</legend>
+              <div class="optional-note">Używane wtedy, gdy klient nie znalazł urządzenia w bazie. Warto poprosić klienta, żeby do maila dołączył zdjęcie tabliczki znamionowej oraz zdjęcie potrzebnej części.</div>
+              <label>Opis potrzebnej części<textarea name="manualPartsDescription" rows="4" placeholder="np. urządzenie YT-..., potrzebuję elementu z okolicy silnika / osłony / uchwytu; jeśli znam pozycję z rysunku, wpisuję numer pozycji"></textarea></label>
             </fieldset>
 
             <fieldset id="invoiceFieldset" class="optional-section inactive">
@@ -158,6 +173,10 @@
               <label>Uwagi<textarea name="notes" rows="4" placeholder="np. pilne, preferowana forma kontaktu, dodatkowe informacje do serwisu"></textarea></label>
             </fieldset>
           </form>
+          <div class="draft-preview-card" id="draftPreviewCard">
+            <div><strong>Podgląd maila roboczego</strong><span>Treść aktualizuje się w tle. Do finalnego kroku przejdziesz, gdy będzie minimum kontaktu.</span></div>
+            <textarea id="draftMailPreview" rows="8" readonly></textarea>
+          </div>
           <div class="stage-actions sticky-action">
             <button id="backParts" type="button">Wróć do części</button>
             <button class="primary" id="goMail" type="button" disabled>Przejdź do gotowego maila</button>
@@ -221,7 +240,11 @@
         <div class="viewer-card">
           <div class="viewer-head">
             <h3>Rysunek PDF</h3>
-            <a id="openPdf" class="link hidden" href="#" target="_blank" rel="noreferrer">Otwórz w nowej karcie</a>
+            <div class="viewer-actions">
+              <button type="button" id="focusParts">Lista części</button>
+              <button type="button" id="focusPdf">PDF</button>
+              <a id="openPdf" class="link hidden" href="#" target="_blank" rel="noreferrer">Otwórz w nowej karcie</a>
+            </div>
           </div>
           <div id="viewer" class="viewer empty">
             <div>Wybierz urządzenie, a rysunek pojawi się tutaj.</div>
@@ -231,8 +254,13 @@
     </section>
   </main>
 
+  <div class="mobile-summary" id="mobileSummaryBar" aria-live="polite">
+    <div><strong id="mobileSummaryText">Brak wybranych części</strong><span>Wybierz część z listy, potem przejdź dalej.</span></div>
+    <button class="primary" id="mobileGoData" type="button" disabled>Dalej</button>
+  </div>
+
   <footer class="footer">
-    <span>PGW Service Hub v44</span>
+    <span>PGW Service Hub v46</span>
     <span>Bez cen i stanów. Podgląd rysunków przez PDF z Google Drive.</span>
   </footer>
 

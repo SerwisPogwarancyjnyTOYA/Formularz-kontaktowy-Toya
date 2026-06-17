@@ -1,8 +1,8 @@
 (() => {
   'use strict';
   const CONFIG = window.PGW_CONFIG || {};
-  const DRAFT_KEY = 'pgw-v44-draft';
-  const PART_ROW_LIMIT = Number(CONFIG.partRowLimit || 120);
+  const DRAFT_KEY = 'pgw-v46-draft';
+  const PART_ROW_LIMIT = Number(CONFIG.partRowLimit || 80);
   const $ = (id) => document.getElementById(id);
   const els = {
     loadStatus: $('loadStatus'), statDevices: $('statDevices'), statDrawings: $('statDrawings'), statParts: $('statParts'),
@@ -12,15 +12,15 @@
     customerForm: $('customerForm'), sameAsInvoice: $('sameAsInvoice'), wantInvoice: $('wantInvoice'), wantShipping: $('wantShipping'), invoiceFieldset: $('invoiceFieldset'), shippingFieldset: $('shippingFieldset'), mailTo: $('mailTo'), mailSubject: $('mailSubject'), mailBody: $('mailBody'),
     copyMail: $('copyMail'), copySubject: $('copySubject'), copyStatus: $('copyStatus'), startOver: $('startOver'),
     backDevice: $('backDevice'), backParts: $('backParts'), backData: $('backData'), goMail: $('goMail'), contextTitle: $('contextTitle'), contextBody: $('contextBody'),
-    lookupNip: $('lookupNip'), lookupStatus: $('lookupStatus'), zipStatus: $('zipStatus'), shipZipStatus: $('shipZipStatus'), formHint: $('formHint')
+    lookupNip: $('lookupNip'), lookupStatus: $('lookupStatus'), zipStatus: $('zipStatus'), shipZipStatus: $('shipZipStatus'), formHint: $('formHint'), manualPartsBox: $('manualPartsBox'), manualPartsFieldset: $('manualPartsFieldset'), goManualData: $('goManualData'), draftMailPreview: $('draftMailPreview'), showMoreParts: $('showMoreParts'), mobileSummaryBar: $('mobileSummaryBar'), mobileSummaryText: $('mobileSummaryText'), mobileGoData: $('mobileGoData'), focusParts: $('focusParts'), focusPdf: $('focusPdf')
   };
   const progressIds = ['pDevice','pDrawing','pParts','pData','pMail'];
 
   const state = {
     devices: [], drawings: [], parts: [], driveMap: [],
     drawingById: new Map(), partsByDrawing: new Map(), driveByDrawingId: new Map(), driveByKey: new Map(),
-    selectedDevice: null, selectedDrawing: null, selectedParts: new Map(), step: 1, formDirty: false,
-    postalCodes: new Map()
+    selectedDevice: null, selectedDrawing: null, selectedParts: new Map(), manualMode: false, step: 1, formDirty: false,
+    postalCodes: new Map(), partVisibleLimit: PART_ROW_LIMIT
   };
 
   const POSTAL_FALLBACK = {
@@ -136,14 +136,19 @@
 
   function bindEvents() {
     els.deviceSearch.addEventListener('input', debounce(() => renderDeviceResults(els.deviceSearch.value), 90));
-    els.partsSearch.addEventListener('input', debounce(renderParts, 90));
+    els.partsSearch.addEventListener('input', debounce(() => { state.partVisibleLimit = PART_ROW_LIMIT; renderParts(); }, 90));
     els.goData.addEventListener('click', () => goStep(3));
     if (els.goDataInline) els.goDataInline.addEventListener('click', () => goStep(3));
     if (els.backDevice) els.backDevice.addEventListener('click', () => goStep(1));
     if (els.backParts) els.backParts.addEventListener('click', () => goStep(2));
     if (els.backData) els.backData.addEventListener('click', () => goStep(3));
     if (els.goMail) els.goMail.addEventListener('click', () => goStep(4));
+    if (els.goManualData) els.goManualData.addEventListener('click', () => goStep(3));
     els.clearBasket.addEventListener('click', () => { state.selectedParts.clear(); renderBasket(); saveDraft(); });
+    if (els.showMoreParts) els.showMoreParts.addEventListener('click', () => { state.partVisibleLimit += PART_ROW_LIMIT; renderParts(); });
+    if (els.mobileGoData) els.mobileGoData.addEventListener('click', () => goStep(state.step < 3 ? 3 : 4));
+    if (els.focusParts) els.focusParts.addEventListener('click', () => document.querySelector('#stage2')?.scrollIntoView({behavior:'smooth', block:'start'}));
+    if (els.focusPdf) els.focusPdf.addEventListener('click', () => document.querySelector('.viewer-card')?.scrollIntoView({behavior:'smooth', block:'start'}));
     document.querySelectorAll('.step').forEach(btn => btn.addEventListener('click', () => goStep(Number(btn.dataset.step))));
     if (els.sameAsInvoice) els.sameAsInvoice.addEventListener('change', applySameAsInvoice);
     if (els.wantInvoice) els.wantInvoice.addEventListener('change', () => { updateOptionalSections(); saveDraft(); updateCanProceed(); });
@@ -196,7 +201,10 @@
 
     els.deviceMeta.textContent = tokens.length ? `Znaleziono ${fmt(results.length)} pasujących urządzeń.` : 'Najpierw wybierz urządzenie. Poniżej kilka przykładów z aktualnej bazy.';
     if (!results.length) {
-      els.deviceResults.innerHTML = `<div class="empty-state"><strong>Brak wyniku w aktualnej bazie.</strong><p>Spróbuj wpisać sam numer modelu, bez myślnika, albo sprawdź indeks z tabliczki znamionowej. Jeśli urządzenia nie ma w bazie, klient nadal może napisać mail ręcznie do serwisu.</p></div>`;
+      const typed = String(els.deviceSearch.value || '').trim();
+      els.deviceResults.innerHTML = `<div class="empty-state manual-empty"><strong>Brak wyniku w aktualnej bazie.</strong><p>Spróbuj wpisać sam numer modelu, bez myślnika, albo sprawdź indeks z tabliczki znamionowej.</p><p>Jeżeli modelu nadal nie ma, klient może przejść dalej i opisać część ręcznie.</p><button class="primary" type="button" id="startManualRequest">Nie znalazłem urządzenia — napisz zapytanie ręczne</button></div>`;
+      const btn = $('startManualRequest');
+      if (btn) btn.addEventListener('click', () => startManualRequest(typed));
       return;
     }
     els.deviceResults.innerHTML = results.map(({device, drawings, partCount}) => `
@@ -211,11 +219,30 @@
     els.deviceResults.querySelectorAll('button[data-device]').forEach(btn => btn.addEventListener('click', () => selectDevice(btn.dataset.device)));
   }
 
+  function startManualRequest(typed) {
+    const clean = String(typed || '').trim();
+    state.manualMode = true;
+    state.partVisibleLimit = PART_ROW_LIMIT;
+    state.selectedDevice = { deviceIndex: clean || 'nie podano', title: 'urządzenie spoza aktualnej bazy' };
+    state.selectedDrawing = null;
+    state.selectedParts.clear();
+    renderSelectedDevice();
+    renderParts();
+    renderBasket();
+    renderViewer(false);
+    updateOptionalSections();
+    goStep(2);
+    saveDraft();
+  }
+
   function selectDevice(deviceIndex) {
     const device = state.devices.find(d => norm(d.deviceIndex) === norm(deviceIndex));
     if (!device) return;
     const drawings = state.drawings.filter(d => norm(d.deviceIndex) === norm(device.deviceIndex));
     const drawing = drawings.sort((a,b) => (state.partsByDrawing.get(String(b.id)) || []).length - (state.partsByDrawing.get(String(a.id)) || []).length)[0];
+    state.manualMode = false;
+    state.partVisibleLimit = PART_ROW_LIMIT;
+    if (els.partsSearch) els.partsSearch.value = '';
     state.selectedDevice = device;
     state.selectedDrawing = drawing;
     renderDeviceResults(els.deviceSearch.value);
@@ -228,14 +255,29 @@
 
   function renderSelectedDevice() {
     const d = state.selectedDevice, drawing = state.selectedDrawing;
-    if (!d || !drawing) { els.selectedDeviceBox.innerHTML = ''; return; }
+    if (!d) { els.selectedDeviceBox.innerHTML = ''; return; }
+    if (state.manualMode) {
+      els.selectedDeviceBox.innerHTML = `<strong>${escapeHtml(d.deviceIndex || 'Urządzenie spoza bazy')}</strong><span>Tryb ręczny: klient opisuje potrzebną część, a serwis dopasuje ją po mailu.</span>`;
+      return;
+    }
+    if (!drawing) { els.selectedDeviceBox.innerHTML = ''; return; }
     const count = (state.partsByDrawing.get(String(drawing.id)) || []).length;
     els.selectedDeviceBox.innerHTML = `<strong>${escapeHtml(d.deviceIndex)} — ${escapeHtml(d.title || drawing.title || '')}</strong><span>Rysunek: ${escapeHtml(drawing.fileName || drawing.title || '')} • ${fmt(count)} części</span>`;
   }
 
   function renderParts() {
+    if (els.manualPartsBox) els.manualPartsBox.classList.toggle('hidden', !state.manualMode);
+    if (state.manualMode) {
+      if (els.showMoreParts) els.showMoreParts.classList.add('hidden');
+      if (els.partMeta) els.partMeta.innerHTML = '<strong>Tryb ręczny.</strong> Nie pokazujemy listy części, bo urządzenia nie ma jeszcze w bazie. Klient przechodzi dalej i opisuje potrzebną część tekstowo.';
+      if (els.partsTable) els.partsTable.innerHTML = `<tr><td colspan="4">Brak listy części dla urządzenia spoza aktualnej bazy.</td></tr>`;
+      if (els.goDataInline) { els.goDataInline.disabled = false; els.goDataInline.textContent = 'Przejdź do danych i opisz część'; }
+      return;
+    } else if (els.goDataInline) {
+      els.goDataInline.textContent = 'Przejdź do danych';
+    }
     const drawing = state.selectedDrawing;
-    if (!drawing) { els.partsTable.innerHTML = ''; if (els.partMeta) els.partMeta.textContent = ''; return; }
+    if (!drawing) { els.partsTable.innerHTML = ''; if (els.partMeta) els.partMeta.textContent = ''; if (els.showMoreParts) els.showMoreParts.classList.add('hidden'); return; }
     const q = norm(els.partsSearch.value);
     const tokens = q.split(/\s+/).filter(Boolean);
     let parts = (state.partsByDrawing.get(String(drawing.id)) || []).slice();
@@ -243,12 +285,18 @@
     if (tokens.length) parts = parts.filter(p => tokens.every(t => p.__search.includes(t) || norm(String(p.partIndex).replace(/[-\s]/g,'')).includes(t.replace(/[-\s]/g,''))));
     parts.sort((a,b) => Number(a.position || 9999) - Number(b.position || 9999) || String(a.partIndex).localeCompare(String(b.partIndex)));
     const filtered = parts.length;
-    const visible = tokens.length ? parts.slice(0, Math.max(PART_ROW_LIMIT, 200)) : parts.slice(0, PART_ROW_LIMIT);
+    const visibleLimit = tokens.length ? Math.max(state.partVisibleLimit, PART_ROW_LIMIT) : state.partVisibleLimit;
+    const visible = parts.slice(0, visibleLimit);
     if (els.partMeta) {
-      const limitNote = visible.length < filtered ? ` Pokazuję pierwsze ${fmt(visible.length)} — zawęź wyszukiwanie po pozycji, indeksie albo nazwie.` : '';
+      const limitNote = visible.length < filtered ? ` Pokazuję pierwsze ${fmt(visible.length)} — możesz zawęzić wyszukiwanie albo kliknąć „Pokaż więcej części”.` : '';
       els.partMeta.innerHTML = tokens.length
         ? `Znaleziono <strong>${fmt(filtered)}</strong> z ${fmt(total)} części.${limitNote}`
         : `Ten rysunek ma <strong>${fmt(total)}</strong> części. Lista jest dawkowana, żeby klient się nie zakopał.${limitNote}`;
+    }
+    if (els.showMoreParts) {
+      const more = visible.length < filtered;
+      els.showMoreParts.classList.toggle('hidden', !more);
+      els.showMoreParts.textContent = `Pokaż więcej części (${fmt(filtered - visible.length)} pozostało)`;
     }
     if (!visible.length) {
       els.partsTable.innerHTML = `<tr><td colspan="4">Brak części dla wpisanej frazy.</td></tr>`;
@@ -281,10 +329,14 @@
   function renderBasket() {
     const items = [...state.selectedParts.values()];
     els.basketCount.textContent = String(items.reduce((n, x) => n + x.qty, 0));
-    els.goData.disabled = items.length === 0;
-    if (els.goDataInline) els.goDataInline.disabled = items.length === 0;
+    const canData = state.manualMode || items.length > 0;
+    els.goData.disabled = !canData;
+    if (els.goDataInline) els.goDataInline.disabled = !canData;
     els.clearBasket.disabled = items.length === 0;
-    if (!items.length) {
+    if (!items.length && state.manualMode) {
+      els.basketItems.className = 'basket-empty manual-basket';
+      els.basketItems.innerHTML = 'Tryb ręczny: klient opisze potrzebną część w kolejnym kroku.';
+    } else if (!items.length) {
       els.basketItems.className = 'basket-empty';
       els.basketItems.innerHTML = 'Brak wybranych części.';
     } else {
@@ -305,6 +357,22 @@
     }
     updateProgress();
     updateCanProceed();
+    updateMobileSummary();
+  }
+
+  function updateMobileSummary() {
+    if (!els.mobileSummaryBar || !els.mobileSummaryText || !els.mobileGoData) return;
+    const qty = [...state.selectedParts.values()].reduce((n, x) => n + x.qty, 0);
+    if (state.manualMode) {
+      els.mobileSummaryText.textContent = 'Tryb ręczny — opisz część';
+      els.mobileGoData.disabled = !state.selectedDevice;
+      els.mobileGoData.textContent = state.step >= 3 ? 'Mail' : 'Dane';
+      return;
+    }
+    els.mobileSummaryText.textContent = qty ? `Wybrane części: ${qty}` : 'Brak wybranych części';
+    const canGo = state.step >= 3 ? formIsValid() : qty > 0;
+    els.mobileGoData.disabled = !canGo;
+    els.mobileGoData.textContent = state.step >= 3 ? 'Mail' : 'Dane';
   }
 
   function flashBasket() {
@@ -331,6 +399,13 @@
 
   function renderViewer(withLoading=false) {
     const drawing = state.selectedDrawing;
+    if (state.manualMode) {
+      els.openPdf.classList.add('hidden');
+      els.openPdf.href = '#';
+      els.viewer.className = 'viewer empty manual-viewer';
+      els.viewer.innerHTML = '<div><strong>Brak rysunku PDF w aktualnej bazie.</strong><br><span>Klient może opisać część ręcznie i dołączyć zdjęcia do maila.</span></div>';
+      return;
+    }
     const row = drawing ? state.driveByDrawingId.get(String(drawing.id)) : null;
     els.openPdf.classList.add('hidden');
     els.openPdf.href = '#';
@@ -369,19 +444,24 @@
     if (step === 2) renderViewer(false);
     if (step !== 1) document.querySelector('.workspace')?.scrollIntoView({behavior:'smooth', block:'start'});
     saveDraft();
+    updateMobileSummary();
+  }
+
+  function hasSelectionForRequest() {
+    return Boolean(state.manualMode || state.selectedParts.size);
   }
 
   function canOpenStep(n) {
     if (n === 1) return true;
     if (n === 2) return Boolean(state.selectedDevice);
-    if (n === 3) return Boolean(state.selectedDevice && state.selectedParts.size);
-    if (n === 4) return Boolean(state.selectedDevice && state.selectedParts.size && formIsValid());
+    if (n === 3) return Boolean(state.selectedDevice && hasSelectionForRequest());
+    if (n === 4) return Boolean(state.selectedDevice && hasSelectionForRequest() && formIsValid());
     return false;
   }
 
   function updateCanProceed() {
     document.querySelectorAll('.step').forEach(btn => { btn.disabled = !canOpenStep(Number(btn.dataset.step)); });
-    const canMail = Boolean(state.selectedDevice && state.selectedParts.size && formIsValid());
+    const canMail = Boolean(state.selectedDevice && hasSelectionForRequest() && formIsValid());
     if (els.goMail) {
       els.goMail.disabled = !canMail;
       els.goMail.textContent = canMail ? 'Przejdź do gotowego maila' : 'Podaj kontakt, aby przejść dalej';
@@ -391,15 +471,16 @@
       els.formHint.classList.toggle('ok', canMail);
       els.formHint.classList.toggle('warn', !canMail);
     }
-    if (els.goDataInline) els.goDataInline.disabled = !state.selectedParts.size;
-    if (state.step === 3 && formIsValid() && state.selectedParts.size) {
+    if (els.goDataInline) els.goDataInline.disabled = !hasSelectionForRequest();
+    if (state.step >= 3 && state.selectedDevice && hasSelectionForRequest()) {
       generateMail();
     }
+    updateMobileSummary();
   }
 
   function updateProgress() {
     const flags = [
-      Boolean(state.selectedDevice), Boolean(state.selectedDrawing), Boolean(state.selectedParts.size), formIsValid(), canOpenStep(4)
+      Boolean(state.selectedDevice), Boolean(state.selectedDrawing || state.manualMode), hasSelectionForRequest(), formIsValid(), canOpenStep(4)
     ];
     progressIds.forEach((id, i) => {
       const el = $(id); if (!el) return;
@@ -411,8 +492,8 @@
   function renderContext() {
     if (!els.contextTitle || !els.contextBody) return;
     const contexts = {
-      1: ['Wybierz urządzenie', 'Klient widzi tylko wyszukiwarkę modeli. Po wyborze odblokuje się PDF oraz lista części.'],
-      2: ['Wybierz części z rysunku', 'PDF zostaje po prawej, a lista po lewej pokazuje części wyłącznie dla wybranego modelu.'],
+      1: ['Wybierz urządzenie', 'Klient widzi wyszukiwarkę modeli. Gdy modelu nie ma w bazie, może przejść do zapytania ręcznego.'],
+      2: ['Wybierz części z rysunku', 'PDF zostaje po prawej, a lista po lewej pokazuje części dla wybranego modelu. W trybie ręcznym klient opisuje część tekstowo.'],
       3: ['Uzupełnij dane', 'Dane do faktury i wysyłki pojawiają się dopiero po wybraniu części. Nic nie jest wysyłane automatycznie.'],
       4: ['Skopiuj gotowy mail', 'Na końcu klient dostaje gotowy temat i treść do wysłania na service@yato.pl.']
     };
@@ -423,6 +504,7 @@
 
   function updateOptionalSections() {
     const fields = els.customerForm.elements;
+    if (els.manualPartsFieldset) els.manualPartsFieldset.classList.toggle('hidden', !state.manualMode);
     const invoiceOn = Boolean(els.wantInvoice && els.wantInvoice.checked);
     const shippingOn = Boolean(els.wantShipping && els.wantShipping.checked);
     if (els.invoiceFieldset) els.invoiceFieldset.classList.toggle('inactive', !invoiceOn);
@@ -459,7 +541,7 @@
   }
 
   function missingRequiredText() {
-    if (!state.selectedParts.size) return 'Najpierw dodaj przynajmniej jedną część do zapytania.';
+    if (!hasSelectionForRequest()) return 'Najpierw dodaj część do zapytania albo wybierz tryb ręczny.';
     const missing = getMissingFields().slice(0, 5);
     return missing.length ? `Brakuje danych: ${missing.join(', ')}.` : 'Kontakt jest wystarczający. Fakturę i wysyłkę można dopisać teraz albo ustalić później.';
   }
@@ -469,6 +551,7 @@
     const missing = [];
     if (!val(fields.contactName)) missing.push('imię i nazwisko / firma kontaktowa');
     if (!val(fields.contactEmail) && !val(fields.contactPhone)) missing.push('email albo telefon');
+    if (state.manualMode && !val(fields.manualPartsDescription)) missing.push('opis potrzebnej części');
     if (els.wantInvoice && els.wantInvoice.checked) {
       if (!val(fields.invoiceName)) missing.push('nazwa do faktury');
       if (!val(fields.invoiceStreet)) missing.push('adres do faktury');
@@ -498,14 +581,19 @@
     const f = Object.fromEntries(new FormData(els.customerForm).entries());
     const parts = [...state.selectedParts.values()];
     const drive = drawing ? state.driveByDrawingId.get(String(drawing.id)) : null;
-    const subject = `Zapytanie o części zamienne — ${d.deviceIndex || ''}`.trim();
-    const partLines = parts.map((x, i) => `${i + 1}. ${x.part.partIndex || 'brak indeksu'} — poz. ${x.part.position || '-'} — ${x.part.namePl || x.part.nameEn || ''} — ilość: ${x.qty} szt.`).join('\n');
+    const subject = state.manualMode
+      ? `Zapytanie o części zamienne — model spoza bazy ${d.deviceIndex || ''}`.trim()
+      : `Zapytanie o części zamienne — ${d.deviceIndex || ''}`.trim();
+    const partLines = state.manualMode
+      ? `Opis części / urządzenia:\n${f.manualPartsDescription || '[klient powinien opisać potrzebną część i dołączyć zdjęcia do maila]'}`
+      : parts.map((x, i) => `${i + 1}. ${x.part.partIndex || 'brak indeksu'} — poz. ${x.part.position || '-'} — ${x.part.namePl || x.part.nameEn || ''} — ilość: ${x.qty} szt.`).join('\n');
+    const drawingBlock = state.manualMode
+      ? `Rysunek techniczny PDF: nie znaleziono urządzenia w aktualnej bazie strony.\nProszę o pomoc w identyfikacji części. Klient powinien dołączyć zdjęcie tabliczki znamionowej i potrzebnej części.`
+      : `Rysunek techniczny PDF:\n${drawing ? `${drawing.fileName || drawing.title || ''}` : ''}\n${drive && drive.openUrl ? `Link do rysunku: ${drive.openUrl}` : ''}`;
     const body = `Dzień dobry,
 
-Mam urządzenie ${d.deviceIndex || ''}${d.title ? ` — ${d.title}` : ''}.
-${f.serialNumber ? `Numer seryjny urządzenia: ${f.serialNumber}\n` : ''}Potrzebuję części z rysunku technicznego PDF:
-${drawing ? `${drawing.fileName || drawing.title || ''}` : ''}
-${drive && drive.openUrl ? `Link do rysunku: ${drive.openUrl}` : ''}
+Mam urządzenie ${d.deviceIndex || '[brak indeksu]'}${d.title ? ` — ${d.title}` : ''}.
+${f.serialNumber ? `Numer seryjny urządzenia: ${f.serialNumber}\n` : ''}${drawingBlock}
 
 Lista części:
 ${partLines}
@@ -513,7 +601,7 @@ ${partLines}
 Proszę o potwierdzenie możliwości zamówienia, wycenę oraz informację o dalszych krokach.
 
 Dane kontaktowe:
-${f.contactName || ''}
+${f.contactName || '[uzupełnij imię/nazwę kontaktową]'}
 Email: ${f.contactEmail || '-'}
 Telefon: ${f.contactPhone || '-'}
 
@@ -528,6 +616,7 @@ Pozdrawiam`;
     els.mailTo.value = CONFIG.recipientEmail || 'service@yato.pl';
     els.mailSubject.value = subject;
     els.mailBody.value = body;
+    if (els.draftMailPreview) els.draftMailPreview.value = body;
   }
 
 
@@ -647,7 +736,8 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
         form: Object.fromEntries(new FormData(els.customerForm).entries()),
         sameAsInvoice: els.sameAsInvoice ? els.sameAsInvoice.checked : false,
         wantInvoice: els.wantInvoice ? els.wantInvoice.checked : false,
-        wantShipping: els.wantShipping ? els.wantShipping.checked : false
+        wantShipping: els.wantShipping ? els.wantShipping.checked : false,
+        manualMode: state.manualMode
       };
       localStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
     } catch(e) {}
@@ -661,12 +751,13 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
       if (els.wantInvoice) els.wantInvoice.checked = Boolean(draft.wantInvoice);
       if (els.wantShipping) els.wantShipping.checked = Boolean(draft.wantShipping);
       if (els.sameAsInvoice) els.sameAsInvoice.checked = Boolean(draft.sameAsInvoice);
+      state.manualMode = Boolean(draft.manualMode);
       updateOptionalSections();
       if (draft.deviceIndex) {
-        const device = state.devices.find(d => norm(d.deviceIndex) === norm(draft.deviceIndex));
+        const device = state.manualMode ? {deviceIndex: draft.deviceIndex, title: 'urządzenie spoza aktualnej bazy'} : state.devices.find(d => norm(d.deviceIndex) === norm(draft.deviceIndex));
         if (device) {
           state.selectedDevice = device;
-          state.selectedDrawing = state.drawings.find(d => String(d.id) === String(draft.drawingId)) || state.drawings.find(d => norm(d.deviceIndex) === norm(device.deviceIndex));
+          state.selectedDrawing = state.manualMode ? null : (state.drawings.find(d => String(d.id) === String(draft.drawingId)) || state.drawings.find(d => norm(d.deviceIndex) === norm(device.deviceIndex)));
           for (const [id, qty] of draft.parts || []) {
             const part = state.parts.find(p => p.id === id);
             if (part) state.selectedParts.set(id, {part, qty: Number(qty) || 1});
@@ -685,7 +776,7 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
   function resetAll() {
     if (!confirm('Wyczyścić formularz i zacząć od nowa?')) return;
     localStorage.removeItem(DRAFT_KEY);
-    state.selectedDevice = null; state.selectedDrawing = null; state.selectedParts.clear();
+    state.selectedDevice = null; state.selectedDrawing = null; state.selectedParts.clear(); state.manualMode = false;
     els.customerForm.reset(); updateOptionalSections(); els.deviceSearch.value = ''; els.partsSearch.value = '';
     renderDeviceResults(''); renderBasket(); renderViewer(false); goStep(1); renderContext();
   }

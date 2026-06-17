@@ -1,7 +1,15 @@
-# PGW Service Hub — opis prosty
+# PGW Service Hub — wersja v46
 
-Projekt ma prowadzić klienta krok po kroku przez przygotowanie zapytania o części zamienne.
+Wersja v46 skupia się na użyteczności dla klienta.
 
-Klient nie dostaje od razu wszystkich informacji. Najpierw wybiera urządzenie, potem widzi rysunek PDF, wybiera części, uzupełnia dane i na końcu otrzymuje gotową wiadomość do wysłania do serwisu.
+Klient przechodzi przez prosty proces:
 
-Strona nie publikuje cen ani dostępności. Te informacje pozostają po stronie serwisu.
+1. wybiera urządzenie,
+2. widzi rysunek PDF z Google Drive,
+3. wybiera części z listy,
+4. podaje minimum danych kontaktowych,
+5. kopiuje gotowy mail do serwisu.
+
+Strona nie pokazuje cen ani stanów magazynowych. Celem jest zebranie kompletnego i czytelnego zapytania dla serwisu, nie sprzedaż online.
+
+Najważniejsza zmiana v46: wygodniejsze użycie na telefonie i łatwiejsze wybieranie części bez zalewania klienta pełną tabelą.

@@ -1,5 +1,5 @@
 window.PGW_CONFIG = {
-  version: '20260617-v43-smart-data-flow',
+  version: '20260617-v46-mobile-parts',
   appName: 'PGW Service Hub',
   recipientEmail: 'service@yato.pl',
   storageMode: 'drive',
@@ -7,8 +7,10 @@ window.PGW_CONFIG = {
   showPrices: false,
   showStock: false,
   autosave: true,
-  partRowLimit: 120,
+  partRowLimit: 80,
   enableVatLookup: true,
+  enableManualFallback: true,
+  enableMappingTools: true,
   vatLookupProvider: 'mf-wl',
   postalCodesUrl: 'data/postal-codes.json',
   dataUrls: {

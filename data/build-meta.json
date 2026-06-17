@@ -1,6 +1,6 @@
 {
-  "version": "20260617-v42-guided-flow",
-  "description": "Guided client flow: device -> PDF -> parts -> invoice/shipping -> copy email",
+  "version": "20260617-v46-mobile-parts",
+  "description": "Client flow with manual fallback, live draft, PDF position-first selection and mapping groundwork",
   "counts": {
     "devices": 34,
     "drawings": 34,
@@ -11,6 +11,8 @@
     "Drive PDF only",
     "No prices",
     "No stock",
-    "No heavy PDF files in repo"
-  ]
+    "Manual fallback when device is missing",
+    "Mapping-ready: positions now, hotspots later"
+  ],
+  "name": "PGW Service Hub v46 mobile parts flow"
 }

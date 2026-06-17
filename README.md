@@ -1,34 +1,33 @@
-# PGW Service Hub v41
+# PGW Service Hub v46 — mobile parts flow
 
-Lekka strona GitHub Pages dla klientów serwisu pogwarancyjnego TOYA.
+Lekka strona GitHub Pages do zapytania o części serwisu pogwarancyjnego TOYA.
 
-## Założenia
+## Główne zasady
 
-- klient najpierw szuka urządzenia,
-- po wyborze urządzenia pojawia się rysunek PDF z Google Drive,
-- klient wybiera części,
-- potem uzupełnia dane kontaktowe, fakturowe i wysyłkowe,
-- na końcu dostaje gotowy mail do skopiowania i wysłania na `service@yato.pl`.
+- PDF-y nie są trzymane w repo — podgląd idzie z Google Drive.
+- Strona pokazuje tylko części i rysunki z publicznego manifestu.
+- Klient nie widzi cen ani stanów magazynowych.
+- Faktura i wysyłka są opcjonalne.
+- Gdy urządzenia nie ma w bazie, działa tryb ręczny.
 
-Strona nie pokazuje cen, stanów magazynowych ani dostępności.
-PDF-y nie są trzymane w repozytorium. Repo zawiera tylko kod i lekkie pliki JSON.
+## Co doszło w v46
 
-## Pliki publiczne
+- lepszy widok na telefonie,
+- sticky dolny pasek z liczbą wybranych części,
+- przyciski szybkiego przejścia do PDF/listy części,
+- dawkowanie listy części i przycisk „Pokaż więcej części”,
+- karta części na mobile zamiast ciasnej tabeli,
+- poprawiony podgląd maila roboczego,
+- przygotowanie pod późniejsze mapowanie pozycji na PDF.
 
-- `index.html` — aplikacja
-- `app.css` — wygląd
-- `app.js` — logika krokowego formularza
-- `config.js` — konfiguracja
-- `data/*.json` — katalog urządzeń, rysunków, części i mapowanie Drive
+## Wdrożenie
 
-## Uwaga o dużym repo
+1. Wklej zawartość paczki do świeżego repo.
+2. Commit i push na `main`.
+3. GitHub Actions opublikuje stronę.
 
-Jeżeli folder `.git` waży setki MB, to ciężkie pliki są w historii Gita. Najczystsze rozwiązanie to świeże repo / świeża historia i wklejenie tej paczki jako start.
+Test cache-busting:
 
-
-## Zmiany v44
-
-- Dane do faktury są opcjonalne i nie blokują przejścia do maila.
-- Dane do wysyłki są opcjonalne i nie blokują przejścia do maila.
-- Do przejścia do maila wystarczy wybrane urządzenie, minimum jedna część oraz kontakt: imię/nazwa + email albo telefon.
-- Jeśli klient nie poda faktury lub wysyłki, mail zawiera informację „do ustalenia z serwisem”.
+```text
+?v=20260617-v46-mobile-parts
+```
