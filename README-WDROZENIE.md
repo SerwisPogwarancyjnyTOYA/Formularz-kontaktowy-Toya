@@ -1,20 +1,17 @@
-# Wdrożenie produkcyjne
+# Wdrożenie
 
-1. Wypakuj zawartość paczki do katalogu repozytorium GitHub Pages.
-2. Zastąp stare pliki nowymi.
-3. Nie wrzucaj PDF-ów do repozytorium — zostają w Google Drive.
-4. Zrób commit i opublikuj przez GitHub Desktop albo `git push`.
-
-Adres testowy po wdrożeniu:
+1. W repozytorium GitHub Pages usuń stare pliki produkcyjne.
+2. Wgraj zawartość tej paczki do głównego katalogu repozytorium.
+3. Nie dogrywaj tej paczki obok poprzednich wersji — ma zastąpić aktualną stronę.
+4. Po publikacji sprawdź adres z parametrem cache-busting:
 
 ```text
-https://serwispogwarancyjnytoya.github.io/Formularz-kontaktowy-Toya/?v=20260617-production-clean
+https://serwispogwarancyjnytoya.github.io/Formularz-kontaktowy-Toya/?v=20260618-v60-service-polish
 ```
 
-Kontrola po publikacji:
-- na stronie nie ma widocznych numerów roboczych wersji,
-- nie ma monitorów bazy ani ekranów technicznych,
-- ZUN-y nie są pokazywane klientowi jako osobna baza,
-- PDF pokazuje się przy urządzeniu, jeśli rysunek jest dostępny,
-- gdy brak listy części, klient dostaje spokojny opis ręczny,
-- do maila trafiają pomocnicze informacje dla serwisu, jeśli dane pozwalają je dopasować.
+Kontrola po wdrożeniu:
+- brak widocznych oznaczeń testowych i numerów wersji,
+- formularz danych nie świeci białym blokiem,
+- informacja o ZUN w mailu nie podaje źródła danych,
+- PDF otwiera się po wyborze urządzenia,
+- mail zawiera części, ZUN-y i komplety tylko jako informacje pomocnicze dla obsługi.

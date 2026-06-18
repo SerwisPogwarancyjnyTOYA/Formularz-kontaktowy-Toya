@@ -1,9 +1,7 @@
-# Formularz zapytania o części — Serwis Pogwarancyjny TOYA
+# PGW Service Hub — produkcja
 
-Czysta paczka produkcyjna do publikacji na GitHub Pages.
+Czysty formularz zapytania o części dla Serwisu Pogwarancyjnego TOYA.
 
-Strona prowadzi klienta przez prostą ścieżkę: wybór urządzenia, wybór części albo opis ręczny, dane kontaktowe i gotowy mail do `service@yato.pl`.
+Wersja produkcyjna bez technicznych monitorów i bez publicznego opisywania źródeł danych. Klient wybiera urządzenie/część, uzupełnia kontakt i kopiuje gotową treść maila do `service@yato.pl`.
 
-PDF-y rysunków są ładowane z Google Drive. Repo zawiera tylko lekkie pliki aplikacji i dane JSON potrzebne do wyszukiwania. Ceny, stany magazynowe i wewnętrzne narzędzia nie są publikowane na stronie klienta.
-
-Informacje pomocnicze dla serwisu, takie jak ZUN-y i relacje część–komplet, są dopisywane do treści maila automatycznie, bez pokazywania klientowi technicznych baz.
+W tle formularz dopisuje informacje pomocnicze dla obsługi, między innymi części uniwersalne ZUN oraz relacje komplet/składnik, ale nie pokazuje klientowi technicznych źródeł danych.

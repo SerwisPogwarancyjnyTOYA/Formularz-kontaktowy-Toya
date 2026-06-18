@@ -478,7 +478,7 @@
         linkedModel: String(link.linkedModel || '').trim(),
         linkedModelBrand: canonicalBrand(link.linkedModelBrand || (zunSummary.brands && zunSummary.brands[0]) || ''),
         linkedDrawingPreviewUrl: link.linkedDrawingPreviewUrl || '',
-        source: link.source || 'stan na 2026.05.29.xlsm'
+        source: link.source || ''
       };
     }).filter(link => link.zun && link.partKey);
   }
@@ -514,11 +514,11 @@
           dimensionsCm: link.dimensionsCm || zun.dimensionsCm || '',
           linkedModel: link.linkedModel || '',
           linkedModelBrand: link.linkedModelBrand || '',
-          source: link.source || 'stan na 2026.05.29.xlsm'
+          source: link.source || ''
         });
       }
     }
-    // Jeżeli indeks części z rysunku nie istnieje w „stan na…”, próbujemy ostrożnie po nazwie/specyfikacji.
+    // Jeżeli indeks części z rysunku nie ma bezpośredniego powiązania, próbujemy ostrożnie po nazwie/specyfikacji.
     // To nie jest twarde potwierdzenie — w mailu oznaczamy to jako „średnia/niska” pewność.
     if (!out.length) {
       for (const soft of getSoftZunMatchesForPart(part)) {
@@ -562,7 +562,7 @@
           dimensionsCm: z.dimensionsCm || '',
           linkedModel: (z.linkedModels || [])[0] || '',
           linkedModelBrand: (z.brands || [])[0] || '',
-          source: 'stan na 2026.05.29.xlsm / heurystyka nazwy',
+          source: 'heurystyka nazwy',
           matchedTokens: matched
         });
       }
@@ -612,7 +612,7 @@
             name: part.namePl || '',
             spec: part.spec || '',
             sourcePartIndex: part.partIndex || '',
-            source: 'stan na 2026.05.29.xlsm'
+            source: ''
           }]
         });
         continue;
@@ -639,18 +639,18 @@
   function formatZunServiceBlock(hints) {
     if (!hints || !hints.length) return '';
     const lines = [];
-    lines.push('Informacja dla serwisu — ZUN-y dopasowane automatycznie ze „stan na 2026.05.29”:');
+    lines.push('Informacja dla serwisu — dopasowane części uniwersalne ZUN:');
     let n = 1;
     for (const hint of hints) {
       const part = hint.part || {};
       for (const m of hint.matches || []) {
         const details = [m.name, m.spec, m.dimensionsCm].filter(Boolean).join(' / ');
-        const modelInfo = m.linkedModel ? `; model z bazy ZUN: ${m.linkedModel}${m.linkedModelBrand ? ' / ' + m.linkedModelBrand : ''}` : '';
+        const modelInfo = m.linkedModel ? `; powiązany model: ${m.linkedModel}${m.linkedModelBrand ? ' / ' + m.linkedModelBrand : ''}` : '';
         const selectedIndex = part.partIndex || part.zun || 'brak indeksu';
         lines.push(`${n++}. ${m.zun} — dla wybranej części ${selectedIndex}${details ? ` — ${details}` : ''}; pewność: ${m.confidence || 'wysoka'}${modelInfo}`);
       }
     }
-    lines.push('Uwaga: ZUN jest informacją pomocniczą dla obsługi. Proszę finalnie potwierdzić zgodność w SAP/stanach przed wyceną.');
+    lines.push('Uwaga: informacja pomocnicza dla obsługi. Proszę finalnie potwierdzić zgodność przed wyceną.');
     return lines.join('\n');
   }
 
@@ -1404,11 +1404,10 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
 
 
   function initTheme() {
-    let theme = 'light';
+    let theme = 'dark';
     try {
-      const saved = localStorage.getItem(THEME_KEY);
-      const systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-      theme = saved || (systemDark ? 'dark' : 'light');
+      const requested = new URLSearchParams(window.location.search).get('theme');
+      theme = requested === 'light' ? 'light' : 'dark';
     } catch (e) {}
     setTheme(theme);
   }

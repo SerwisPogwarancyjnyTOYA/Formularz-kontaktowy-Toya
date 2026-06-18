@@ -166,3 +166,62 @@ html[data-theme="dark"] .assembly-notice{background:rgba(251,146,60,.10);color:#
   .viewer-card{order:3}.viewer{min-height:360px}.viewer iframe{height:72vh;min-height:420px}.viewer-actions{justify-content:flex-start}.viewer-actions button{display:none}.viewer-actions .link{padding:8px 10px;border:1px solid var(--line);border-radius:10px;text-decoration:none}
   .right-panel{display:grid;gap:14px}.context-card,.progress-card{display:none}.basket-card{display:none}.mobile-summary{font-family:Arial,Helvetica,"Roboto","Segoe UI",sans-serif!important}.mobile-summary strong{font-size:15px}.mobile-summary span{font-size:12px}.mobile-summary button{min-width:130px}
 }
+
+
+/* V60 — production polish: ZUN info stays service-only, data form is no longer a white block */
+#stage3 .form-grid fieldset,
+#stage3 .draft-preview-card,
+#stage3 .form-hint{
+  background:linear-gradient(180deg,#111827 0%,#0f1724 100%)!important;
+  border-color:#293548!important;
+  color:#f2f4f7!important;
+  box-shadow:0 16px 38px rgba(0,0,0,.22);
+}
+#stage3 .form-grid legend,
+#stage3 .form-grid label,
+#stage3 .draft-preview-card strong{
+  color:#f2f4f7!important;
+}
+#stage3 .stage-head p,
+#stage3 .draft-preview-card span{
+  color:#a9b4c2!important;
+}
+#stage3 .form-grid input,
+#stage3 .form-grid textarea,
+#stage3 .draft-preview-card textarea{
+  background:#0b1220!important;
+  border-color:#344158!important;
+  color:#f2f4f7!important;
+}
+#stage3 .form-grid input::placeholder,
+#stage3 .form-grid textarea::placeholder{
+  color:#7f8da3!important;
+}
+#stage3 .optional-section.inactive{
+  background:linear-gradient(180deg,#111827,#101826)!important;
+  border-style:solid!important;
+  opacity:.92;
+}
+#stage3 .optional-section.inactive .optional-fields{
+  opacity:.55;
+  filter:none;
+}
+#stage3 .optional-note,
+#stage3 .lookup-status,
+#stage3 .check{
+  background:rgba(255,255,255,.045)!important;
+  border:1px solid #293548!important;
+  color:#a9b4c2!important;
+}
+#stage3 .optional-section:not(.inactive){
+  background:linear-gradient(180deg,#151f2e,#111827)!important;
+  border-color:rgba(255,77,85,.40)!important;
+}
+#stage3 .optional-section:not(.inactive) .optional-note{
+  background:rgba(255,77,85,.10)!important;
+  color:#ffb3b7!important;
+  border-color:rgba(255,77,85,.28)!important;
+}
+#stage3 .form-hint.ok{background:rgba(50,213,131,.12)!important;color:#32d583!important;border-color:rgba(50,213,131,.30)!important}
+#stage3 .form-hint.warn{background:rgba(253,176,34,.12)!important;color:#fdb022!important;border-color:rgba(253,176,34,.30)!important}
+#mailBody{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;}
