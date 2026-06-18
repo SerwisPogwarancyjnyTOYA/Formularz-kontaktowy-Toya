@@ -1,5 +1,5 @@
 {
-  "version": "v53-template",
-  "note": "Tu wpisuj potwierdzone marki. Przykład: \"67026\": \"LUND\". Niepewne modele zostają jako DO ROZPOZNANIA.",
+  "version": "production-template",
+  "note": "Tu można wpisać ręcznie potwierdzone marki dla modeli, jeśli będą potrzebne. Niepewne marki nie są pokazywane klientowi jako pewne.",
   "models": {}
 }

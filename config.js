@@ -1,5 +1,5 @@
 window.PGW_CONFIG = {
-  version: '20260618-v63-all-drawings-base',
+  version: '20260618-v64-smart-catalog',
   appName: 'Formularz zapytania o części',
   recipientEmail: 'service@yato.pl',
   storageMode: 'drive',

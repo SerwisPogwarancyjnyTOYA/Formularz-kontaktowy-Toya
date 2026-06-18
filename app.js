@@ -182,15 +182,87 @@
     for (const d of state.drawings) if (d.brand) brandByDevice.set(norm(d.deviceIndex), d.brand);
     for (const d of state.devices) if (!d.brand || d.brand === 'INNE') d.brand = brandByDevice.get(norm(d.deviceIndex)) || canonicalBrand(inferBrand(d));
     for (const p of state.parts) if (!p.brand || p.brand === 'INNE') p.brand = brandByDevice.get(norm(p.deviceIndex)) || canonicalBrand(inferBrand(p));
+    enhanceDeviceTitlesFromDrawings();
   }
 
 
+
+  function enhanceDeviceTitlesFromDrawings() {
+    const drawingsByDevice = new Map();
+    for (const drawing of state.drawings) {
+      const key = norm(drawing.deviceIndex);
+      if (!key) continue;
+      if (!drawingsByDevice.has(key)) drawingsByDevice.set(key, []);
+      drawingsByDevice.get(key).push(drawing);
+    }
+    for (const device of state.devices) {
+      const key = norm(device.deviceIndex);
+      const drawings = drawingsByDevice.get(key) || [];
+      if (!drawings.length) continue;
+      const best = drawings.slice().sort((a, b) => drawingTitleScore(b) - drawingTitleScore(a))[0];
+      const title = cleanDeviceTitle(device.deviceIndex, best.displayTitle || best.title || best.deviceName || '');
+      if (title && shouldReplaceDeviceTitle(device, title)) {
+        device.title = title;
+        device.deviceName = device.deviceName || title;
+        device.displayTitle = `${device.deviceIndex || ''} — ${title}`.replace(/^\s*—\s*/, '');
+      }
+      for (const key of ['brandConfidence','reviewStatus','brandReason','headerConfidence','headerSource']) {
+        if (best[key] && !device[key]) device[key] = best[key];
+      }
+    }
+  }
+
+  function drawingTitleScore(drawing) {
+    const title = String(drawing.displayTitle || drawing.title || drawing.deviceName || '');
+    let score = Math.min(title.length, 120);
+    if (drawing.deviceName) score += 80;
+    if (drawing.headerSource || drawing.pdfHeader) score += 60;
+    if (/\s[-–—:]\s/.test(title)) score += 30;
+    if (title && title !== String(drawing.deviceIndex || '')) score += 20;
+    return score;
+  }
+
+  function shouldReplaceDeviceTitle(device, candidate) {
+    const current = String(device.title || '').trim();
+    const idx = String(device.deviceIndex || '').trim();
+    if (!candidate || candidate === idx) return false;
+    if (!current || current === idx) return true;
+    if (/^Czesci[_ -]zamienne/i.test(current) || /\.pdf$/i.test(current)) return true;
+    return candidate.length > current.length + 12 && !current.includes(candidate);
+  }
+
+  function cleanDeviceTitle(deviceIndex, title) {
+    let out = String(title || '').replace(/\.pdf$/i, '').replace(/\s+/g, ' ').trim();
+    const idx = String(deviceIndex || '').trim();
+    if (idx) out = out.replace(new RegExp('^' + escapeRegExp(idx) + '\\s*[-–—:]\\s*', 'i'), '').trim();
+    out = out.replace(/^Czesci[_ -]zamienne[_ -]*/i, '').trim();
+    if (!out || out.toUpperCase() === idx.toUpperCase()) return '';
+    return out;
+  }
+
+  function displayDeviceName(device, drawing) {
+    const idx = String(device?.deviceIndex || drawing?.deviceIndex || '').trim();
+    const title = cleanDeviceTitle(idx, device?.title || device?.deviceName || drawing?.displayTitle || drawing?.title || drawing?.deviceName || '');
+    return title || 'Urządzenie z rysunkiem PDF';
+  }
+
+  function escapeRegExp(value) {
+    return String(value || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
   function applyPdfHeaderOverride(row) {
-    if (!row) return;
-    const overrides = (state.pdfHeaderOverrides && state.pdfHeaderOverrides.byFileId) ? state.pdfHeaderOverrides.byFileId : (state.pdfHeaderOverrides || {});
+    const root = state.pdfHeaderOverrides || {};
+    const overrideSources = [
+      root,
+      root.byFileId || {},
+      root.byModel || {},
+      root.byDeviceIndex || {},
+      root.models || {}
+    ];
     const candidates = [
       row.fileId,
       row.driveFileId,
+      row.sourceFileId,
       row.id,
       row.normalizedModel,
       row.normalizedKey,
@@ -199,15 +271,20 @@
     ].map(x => String(x || '').trim()).filter(Boolean);
     let found = null;
     for (const key of candidates) {
-      if (overrides[key]) { found = overrides[key]; break; }
-      const nk = normKey(key);
-      if (overrides[nk]) { found = overrides[nk]; break; }
+      const variants = unique([key, key.toUpperCase(), normKey(key), normalizeDeviceIndex(key)].filter(Boolean));
+      for (const source of overrideSources) {
+        for (const v of variants) {
+          if (source && source[v]) { found = source[v]; break; }
+        }
+        if (found) break;
+      }
+      if (found) break;
     }
     if (!found) return;
     row.pdfHeader = found.headerText || found.rawHeader || row.pdfHeader || '';
     row.deviceName = found.deviceName || found.extractedDeviceName || row.deviceName || '';
     row.displayTitle = found.displayTitle || (row.deviceName ? `${row.deviceIndex || row.model || ''} — ${row.deviceName}`.replace(/^\s*—\s*/, '') : '') || row.displayTitle || '';
-    if (found.brand && (!row.brand || row.brand === 'NIEZNANA' || row.brand === 'DO ROZPOZNANIA')) row.brand = found.brand;
+    if (found.brand && (!row.brand || row.brand === 'NIEZNANA' || row.brand === 'DO ROZPOZNANIA' || row.brand === 'INNE')) row.brand = found.brand;
     row.headerConfidence = found.confidence || row.headerConfidence || '';
     row.headerSource = found.source || 'pdf-header-overrides';
   }
@@ -254,7 +331,24 @@
       }
     }
     buildPartAssemblyIndexes();
-    for (const d of state.devices) d.__search = norm([d.deviceIndex, d.title, d.name, d.brand, d.deviceName, d.displayTitle].join(' '));
+    const drawingSearchByDevice = new Map();
+    for (const d of state.drawings) {
+      const key = norm(d.deviceIndex);
+      if (!key) continue;
+      const chunk = [d.title, d.displayTitle, d.deviceName, d.fileName, d.searchText, d.pdfHeader, d.brand].join(' ');
+      drawingSearchByDevice.set(key, `${drawingSearchByDevice.get(key) || ''} ${chunk}`);
+    }
+    const partSearchByDevice = new Map();
+    for (const p of state.parts) {
+      const key = norm(p.deviceIndex);
+      if (!key) continue;
+      const chunk = [p.position, p.partIndex, p.namePl, p.nameEn].join(' ');
+      partSearchByDevice.set(key, `${partSearchByDevice.get(key) || ''} ${chunk}`);
+    }
+    for (const d of state.devices) {
+      const key = norm(d.deviceIndex);
+      d.__search = norm([d.deviceIndex, d.title, d.name, d.brand, d.deviceName, d.displayTitle, drawingSearchByDevice.get(key), partSearchByDevice.get(key)].join(' '));
+    }
     for (const p of state.parts) p.__search = norm([p.position, p.partIndex, p.namePl, p.nameEn, p.drawingTitle, p.deviceIndex, p.brand].join(' '));
   }
 
@@ -736,7 +830,7 @@
       <article class="device-card ${state.selectedDevice && norm(state.selectedDevice.deviceIndex) === norm(device.deviceIndex) ? 'selected' : ''}">
         <div>
           <h3>${escapeHtml(device.deviceIndex || 'Bez indeksu')}</h3>
-          <p>${escapeHtml(device.title || device.name || 'Urządzenie z bazą rysunku PDF')}</p>
+          <p>${escapeHtml(displayDeviceName(device, drawings[0]))}</p>
           <div class="badges">${publicBrandBadge(device)}<span class="badge ok">Rysunek PDF</span><span class="badge">${fmt(drawings.length)} rys.</span><span class="badge ${partCount ? '' : 'warn'}">${partCount ? fmt(partCount) + ' części' : 'lista do uzupełnienia'}</span></div>
         </div>
         <button class="primary" type="button" data-device="${escapeAttr(device.deviceIndex)}">Wybierz</button>
@@ -784,7 +878,7 @@
     if (!d) { els.selectedDeviceBox.innerHTML = ''; return; }
     if (state.manualMode) {
       const linkInfo = drawing ? ` • Rysunek: ${escapeHtml(drawing.fileName || drawing.title || '')}` : '';
-      const title = drawing ? (d.title || drawing.title || drawing.fileName || 'Rysunek z Google Drive') : (d.title || 'Zapytanie ręczne');
+      const title = drawing ? displayDeviceName(d, drawing) : (d.title || 'Zapytanie ręczne');
       const meta = drawing
         ? `Rysunek PDF dostępny${linkInfo} • lista części do uzupełnienia — wpisz numer pozycji z PDF albo opisz część w następnym kroku.`
         : 'Opisz urządzenie i potrzebną część w następnym kroku.';
@@ -794,7 +888,7 @@
     }
     if (!drawing) { els.selectedDeviceBox.innerHTML = ''; return; }
     const count = (state.partsByDrawing.get(String(drawing.id)) || []).length;
-    els.selectedDeviceBox.innerHTML = `<strong>${escapeHtml(d.deviceIndex)} — ${escapeHtml(d.title || drawing.title || '')}</strong><span>${publicBrandText(d, drawing)}Rysunek: ${escapeHtml(drawing.fileName || drawing.title || '')} • ${fmt(count)} części</span>`;
+    els.selectedDeviceBox.innerHTML = `<strong>${escapeHtml(d.deviceIndex)} — ${escapeHtml(displayDeviceName(d, drawing))}</strong><span>${publicBrandText(d, drawing)}Rysunek: ${escapeHtml(drawing.fileName || drawing.title || '')} • ${fmt(count)} części</span>`;
   }
 
   function renderParts() {
@@ -1213,7 +1307,7 @@
     const f = Object.fromEntries(new FormData(els.customerForm).entries());
     const parts = [...state.selectedParts.values()];
     const drive = drawing ? state.driveByDrawingId.get(String(drawing.id)) : null;
-    const subject = state.manualMode
+    const subject = (state.manualMode && !drawing)
       ? `Zapytanie o części zamienne — opis ręczny ${d.deviceIndex || ''}`.trim()
       : `Zapytanie o części zamienne — ${d.deviceIndex || ''}`.trim();
     const zunHints = getZunHintsForSelectedParts(parts);
@@ -1225,12 +1319,12 @@
     const partLines = state.manualMode
       ? `${selectedPartLines ? `Wybrane części uniwersalne / ZUN:\n${selectedPartLines}\n\n` : ''}Opis części / urządzenia:\n${f.manualPartsDescription || '[opisz potrzebną część i dołącz zdjęcia do maila]'}${zunServiceBlock ? `\n\n${zunServiceBlock}` : ''}`
       : `${selectedPartLines}${zunServiceBlock ? `\n\n${zunServiceBlock}` : ''}`;
-    const drawingBlock = state.manualMode
-      ? `Rysunek techniczny PDF: nie znaleziono urządzenia w aktualnej bazie strony.\nProszę o pomoc w identyfikacji części. Klient powinien dołączyć zdjęcie tabliczki znamionowej i potrzebnej części.`
-      : `Rysunek techniczny PDF:\n${drawing ? `${drawing.fileName || drawing.title || ''}` : ''}\n${drive && drive.openUrl ? `Link do rysunku: ${drive.openUrl}` : ''}`;
+    const drawingBlock = (state.manualMode && !drawing)
+      ? `Rysunek techniczny PDF: brak dobranego rysunku w formularzu.\nProszę o pomoc w identyfikacji części. Klient powinien dołączyć zdjęcie tabliczki znamionowej i potrzebnej części.`
+      : `Rysunek techniczny PDF:\n${drawing ? `${drawing.fileName || drawing.title || ''}` : ''}\n${drive && drive.openUrl ? `Link do rysunku: ${drive.openUrl}` : ''}${state.manualMode && drawing ? `\nLista części nie jest jeszcze podpięta do formularza — klient opisał potrzebną część ręcznie.` : ''}`;
     const body = `Dzień dobry,
 
-Mam urządzenie ${d.deviceIndex || '[brak indeksu]'}${d.title ? ` — ${d.title}` : ''}.
+Mam urządzenie ${d.deviceIndex || '[brak indeksu]'}${displayDeviceName(d, drawing) ? ` — ${displayDeviceName(d, drawing)}` : ''}.
 ${f.serialNumber ? `Numer seryjny urządzenia: ${f.serialNumber}\n` : ''}${drawingBlock}
 
 Lista części:
@@ -1399,7 +1493,7 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
         const device = state.manualMode ? {deviceIndex: draft.deviceIndex, title: 'opis części do sprawdzenia' } : state.devices.find(d => norm(d.deviceIndex) === norm(draft.deviceIndex));
         if (device) {
           state.selectedDevice = device;
-          state.selectedDrawing = state.manualMode ? null : (state.drawings.find(d => String(d.id) === String(draft.drawingId)) || state.drawings.find(d => norm(d.deviceIndex) === norm(device.deviceIndex)));
+          state.selectedDrawing = state.drawings.find(d => String(d.id) === String(draft.drawingId)) || (!state.manualMode ? state.drawings.find(d => norm(d.deviceIndex) === norm(device.deviceIndex)) : null);
           for (const [id, qty] of draft.parts || []) {
             const part = state.parts.find(p => p.id === id);
             if (part) state.selectedParts.set(id, {part, qty: Number(qty) || 1});
