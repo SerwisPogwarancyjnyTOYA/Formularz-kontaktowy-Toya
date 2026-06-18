@@ -1,1 +1,9 @@
-{"name":"PGW Service Hub v48","short_name":"PGW Hub","start_url":"./","display":"standalone","background_color":"#0b1018","theme_color":"#d71920","icons":[]}
+{
+  "name": "Formularz zapytania o części TOYA",
+  "short_name": "TOYA części",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0b1018",
+  "theme_color": "#d71920",
+  "icons": []
+}

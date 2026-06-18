@@ -23,7 +23,6 @@ button:disabled{opacity:.45;cursor:not-allowed}.primary{background:var(--red);bo
 @media (max-width:1000px){.hero-card,.workspace{grid-template-columns:1fr}.right-panel{position:static;max-height:none}.stats{width:100%;display:grid;grid-template-columns:repeat(3,1fr)}.form-grid{grid-template-columns:1fr}.topbar{align-items:flex-start}.brand span{display:none}}
 @media (max-width:680px){.shell{width:calc(100% - 18px);margin-top:10px}.hero-card{padding:18px}.steps{grid-template-columns:1fr 1fr}.device-card{display:block}.device-card button{margin-top:12px;width:100%}.stats{grid-template-columns:1fr}.viewer{height:420px}.footer{display:block}.topbar{padding:12px}.brand img{height:26px}}
 
-/* v42 — spokojniejszy, krokowy flow klienta */
 .top-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
 .mode-pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;border:1px solid #fecdd3;background:#fff1f2;color:var(--red);font-weight:900;font-size:12px;padding:8px 12px;white-space:nowrap}
 .hero-guide{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
@@ -42,12 +41,10 @@ button:disabled{opacity:.45;cursor:not-allowed}.primary{background:var(--red);bo
 .form-grid fieldset{background:linear-gradient(180deg,#fff,#fcfcfd)}.form-grid legend{color:#111827}.mail-card{background:linear-gradient(180deg,#fff,#fcfcfd);border:1px solid #e4e7ec;border-radius:16px;padding:14px}.mail-card textarea{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;font-size:13px}
 @media (max-width:680px){.top-actions{width:100%;justify-content:flex-start}.stage-actions{position:sticky;bottom:0;z-index:4;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);margin-left:-18px;margin-right:-18px;padding:12px 18px;border-top:1px solid var(--line)}.stage-actions button{min-width:0;flex:1}.hero-guide{display:grid;grid-template-columns:1fr 1fr}.hero-guide span{justify-content:center;text-align:center}.mode-pill{font-size:11px}}
 
-/* v43 — inteligentniejsze dane i wyraźniejsze przejście do maila */
 .nip-row{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:end}.nip-row label{margin:10px 0 0}.nip-row button{height:43px;white-space:nowrap}.lookup-status,.form-hint{margin-top:8px;border:1px solid #e4e7ec;background:#f8fafc;border-radius:12px;padding:9px 11px;color:#667085;font-size:12px;line-height:1.35}.lookup-status.ok,.form-hint.ok{border-color:#bbf7d0;background:#ecfdf3;color:#067647}.lookup-status.warn{border-color:#fed7aa;background:#fff7ed;color:#b45309}.lookup-status.loading{border-color:#bfdbfe;background:#eff6ff;color:#1d4ed8}.form-hint{font-weight:800;text-align:right}.sticky-action{background:linear-gradient(180deg,rgba(255,255,255,.84),#fff);position:sticky;bottom:0;z-index:5}.stage-actions .primary:not(:disabled){box-shadow:0 10px 22px rgba(215,25,32,.18)}.step[data-step="4"]:not(:disabled){border-color:#12b76a;background:#ecfdf3}.step[data-step="4"]:not(:disabled) b{background:#12b76a;color:white}.mail-card:before{content:'Krok 4 / 4 — wszystko gotowe';display:inline-flex;width:max-content;border-radius:999px;background:#ecfdf3;color:#067647;font-size:12px;font-weight:900;padding:6px 10px;margin-bottom:2px}
 @media (max-width:680px){.nip-row{grid-template-columns:1fr}.nip-row button{width:100%}.form-hint{text-align:left}.sticky-action{margin-left:-18px;margin-right:-18px;padding-left:18px;padding-right:18px}}
 
 
-/* v44 — faktura i wysyłka opcjonalne */
 .optional-section{transition:.18s ease}
 .optional-section.inactive{background:linear-gradient(180deg,#fff,#f8fafc);border-style:dashed}
 .optional-section.inactive .optional-fields{opacity:.45;filter:grayscale(.15)}
@@ -59,7 +56,6 @@ button:disabled{opacity:.45;cursor:not-allowed}.primary{background:var(--red);bo
 .form-hint.warn{background:#fff7ed;border-color:#fed7aa;color:#b45309}
 @media (max-width:680px){.optional-section.inactive .optional-fields{display:none}}
 
-/* v45 — tryb ręczny, żywy mail i przygotowanie pod mapowanie PDF */
 .locator-help{margin:10px 0 12px;border:1px solid #e4e7ec;background:#f8fafc;border-radius:12px;padding:10px 12px;color:#475467;font-size:13px;line-height:1.4}.locator-help code{background:#fff;border:1px solid #e4e7ec;border-radius:7px;padding:2px 6px;font-weight:900;color:#344054}
 .manual-parts-box{border:1px solid #fed7aa;background:#fff7ed;border-radius:16px;padding:14px;margin:12px 0;color:#9a3412}.manual-parts-box strong{display:block;color:#7c2d12;margin-bottom:4px}.manual-parts-box p{margin:0 0 12px;line-height:1.45}.manual-empty button{margin-top:14px}.manual-basket{border:1px dashed #fed7aa;background:#fff7ed;border-radius:12px;padding:10px;color:#9a3412}.manual-viewer strong{color:#344054}.manual-viewer span{display:block;margin-top:6px;color:#667085;font-size:13px}.manual-fieldset{border-color:#fed7aa!important;background:#fff7ed!important}.manual-fieldset legend{color:#9a3412!important}
 .draft-preview-card{grid-column:1/-1;margin-top:14px;border:1px solid #e4e7ec;background:linear-gradient(180deg,#fff,#f8fafc);border-radius:16px;padding:14px;display:grid;gap:10px}.draft-preview-card strong{display:block}.draft-preview-card span{display:block;color:#667085;font-size:12px;margin-top:2px}.draft-preview-card textarea{width:100%;border:1px solid #d0d5dd;border-radius:12px;padding:10px;background:#fff;color:#344054;resize:vertical;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;font-size:12px;line-height:1.45}
@@ -67,7 +63,6 @@ button:disabled{opacity:.45;cursor:not-allowed}.primary{background:var(--red);bo
 .basket-card:after{content:'To jest zapytanie o możliwość zakupu części, nie zamówienie.';display:block;margin-top:10px;border-top:1px solid #edf0f4;padding-top:10px;color:#667085;font-size:12px;line-height:1.35}
 @media (max-width:680px){.draft-preview-card textarea{max-height:220px}.mapping-card{display:none}}
 
-/* v46 — mobile-first wybór części i wygodniejszy PDF */
 .show-more{width:100%;margin:12px 0 0;padding:12px 14px;border-style:dashed;background:#fff;color:#344054;font-weight:900}
 .viewer-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end}.viewer-actions button{padding:7px 10px;font-size:12px}.viewer-actions .link{display:inline-flex;align-items:center;padding:7px 0}.draft-preview-card{margin-top:16px;border:1px solid #e4e7ec;border-radius:16px;background:linear-gradient(180deg,#fff,#fcfcfd);padding:14px}.draft-preview-card>div{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:10px}.draft-preview-card strong{display:block}.draft-preview-card span{display:block;color:#667085;font-size:12px;line-height:1.35}.draft-preview-card textarea{width:100%;border:1px solid #cfd6e2;border-radius:12px;padding:11px 12px;background:#fff;resize:vertical;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;font-size:12px;line-height:1.45}.mobile-summary{display:none}.locator-help code{background:#fff;border:1px solid #fed7aa;border-radius:7px;padding:2px 5px}
 .parts-table tr.selected-row td{background:#fff7ed}.parts-table tr.selected-row button{border-color:#fed7aa;background:#fff7ed;color:#9a3412;font-weight:900}.part-table-wrap{scrollbar-width:thin}.viewer-card{order:3}.basket-card{order:2}.progress-card{order:1}.context-card{order:0}
@@ -79,13 +74,11 @@ button:disabled{opacity:.45;cursor:not-allowed}.primary{background:var(--red);bo
 }
 
 
-/* v47 — walidacje klienta i lepszy ekran końcowy */
 .quality-row{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px}.quality{display:inline-flex;align-items:center;border-radius:999px;border:1px solid #e4e7ec;background:#f8fafc;color:#667085;padding:5px 8px;font-size:11px;font-weight:900;line-height:1}.quality.ok{border-color:#abefc6;background:#ecfdf3;color:#067647}.quality.warn{border-color:#fed7aa;background:#fff7ed;color:#b45309}.quality.neutral{border-color:#dbeafe;background:#eff6ff;color:#1d4ed8}
 .final-checklist{border:1px solid #e4e7ec;background:linear-gradient(180deg,#fff,#f8fafc);border-radius:18px;padding:14px;margin-bottom:14px}.final-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.final-item{border:1px solid #edf0f4;border-radius:14px;background:#fff;padding:10px;min-height:76px}.final-item span{display:block;color:#667085;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.05em}.final-item strong{display:block;margin-top:5px;color:#101828;font-size:13px;line-height:1.3}.final-item em{display:inline-flex;margin-top:8px;border-radius:999px;padding:4px 7px;font-style:normal;font-size:10px;font-weight:900;background:#eff6ff;color:#1d4ed8}.final-item em.ok{background:#ecfdf3;color:#067647}.final-item em.warn{background:#fff7ed;color:#b45309}.soft-warnings{margin-top:12px;border:1px solid #fed7aa;background:#fff7ed;color:#9a3412;border-radius:14px;padding:11px 12px;font-size:13px;line-height:1.4}.soft-warnings.ok{border-color:#abefc6;background:#ecfdf3;color:#067647}.soft-warnings ul{margin:6px 0 0;padding-left:18px}.mail-actions #copyAll{border-color:#dbeafe;background:#eff6ff;color:#1d4ed8;font-weight:900}.form-grid input:invalid{box-shadow:none}.lookup-status.warn + .quality-row .quality.warn{animation:pulseWarn .9s ease}@keyframes pulseWarn{0%{transform:scale(1)}50%{transform:scale(1.03)}100%{transform:scale(1)}}
 @media (max-width:900px){.final-grid{grid-template-columns:1fr 1fr}.final-item{min-height:auto}.mail-actions{display:grid;grid-template-columns:1fr 1fr}.mail-actions button{width:100%}}
 @media (max-width:560px){.final-grid{grid-template-columns:1fr}.mail-actions{grid-template-columns:1fr}.quality-row{display:grid;grid-template-columns:1fr}.quality{justify-content:center}.final-checklist{margin-left:-2px;margin-right:-2px}}
 
-/* v48 — visual polish + dark mode */
 :root{
   --surface: #ffffff;
   --surface-2: #f8fafc;
@@ -137,26 +130,16 @@ button{background:var(--surface);border-color:var(--line);color:var(--text)}butt
 @media (max-width:720px){.hero-card:after{display:none}.theme-toggle{padding:8px}.theme-toggle #themeLabel{display:none}.top-actions{gap:7px}.mode-pill{display:none}.hero-card h1{font-size:25px}.lead{font-size:14px}.steps{background:color-mix(in srgb,var(--bg) 88%,transparent)}.parts-table tr{background:var(--surface);border-color:var(--line)}}
 
 
-/* v57 — visual monitor + multi-brand readiness */
-.brand-filter-card{display:grid;grid-template-columns:minmax(180px,260px) 1fr;gap:12px;align-items:center;margin:12px 0 10px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(180deg,var(--surface),var(--surface-2));padding:13px 14px}.brand-filter-card strong{display:block;color:var(--text);font-size:14px}.brand-filter-card span{display:block;color:var(--muted);font-size:12px;line-height:1.35;margin-top:3px}.brand-filter{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}.brand-chip{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:8px 10px;background:var(--surface);border-color:var(--line);font-weight:900;font-size:12px}.brand-chip b{display:grid;place-items:center;min-width:24px;height:22px;padding:0 7px;border-radius:999px;background:var(--surface-3);color:var(--muted);font-size:11px}.brand-chip.active{background:var(--soft-red);border-color:color-mix(in srgb,var(--red) 38%,var(--line));color:var(--red)}.brand-chip.active b{background:var(--red);color:#fff}.badge.brand{background:#111827;color:#fff}html[data-theme="dark"] .badge.brand{background:rgba(255,255,255,.12);color:#fff}.data-monitor-card{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:16px;background:linear-gradient(150deg,var(--surface),var(--surface-2));padding:14px}.data-monitor-card:before{content:'';position:absolute;inset:0 auto 0 0;width:4px;background:linear-gradient(180deg,var(--red),#ff9aa0)}.monitor-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}.monitor-head strong{font-size:15px;color:var(--text)}.monitor-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.monitor-grid div{border:1px solid var(--line);border-radius:14px;background:color-mix(in srgb,var(--surface) 75%,transparent);padding:10px}.monitor-grid span{display:block;font-size:10px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.07em}.monitor-grid b{display:block;margin-top:5px;color:var(--text);font-size:18px}.monitor-brands{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 0}.monitor-brands span{display:inline-flex;gap:5px;align-items:center;border-radius:999px;background:var(--surface-3);color:var(--muted);font-size:11px;font-weight:900;padding:5px 8px}.monitor-brands b{color:var(--text)}.data-monitor-card p{margin:10px 0 0;color:var(--muted);font-size:12px;line-height:1.4}.hero-card:after{content:'v57 • Drive • ZUN • zestawy'}
-@media (max-width:760px){.brand-filter-card{grid-template-columns:1fr}.brand-filter{justify-content:flex-start}.monitor-grid{grid-template-columns:1fr 1fr}.data-monitor-card{order:-1}}
+.brand-filter-card{display:grid;grid-template-columns:minmax(180px,260px) 1fr;gap:12px;align-items:center;margin:12px 0 10px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(180deg,var(--surface),var(--surface-2));padding:13px 14px}.brand-filter-card strong{display:block;color:var(--text);font-size:14px}.brand-filter-card span{display:block;color:var(--muted);font-size:12px;line-height:1.35;margin-top:3px}.brand-filter{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}.brand-chip{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:8px 10px;background:var(--surface);border-color:var(--line);font-weight:900;font-size:12px}.brand-chip b{display:grid;place-items:center;min-width:24px;height:22px;padding:0 7px;border-radius:999px;background:var(--surface-3);color:var(--muted);font-size:11px}.brand-chip.active{background:var(--soft-red);border-color:color-mix(in srgb,var(--red) 38%,var(--line));color:var(--red)}.brand-chip.active b{background:var(--red);color:#fff}.badge.brand{background:#111827;color:#fff}html[data-theme="dark"] .badge.brand{background:rgba(255,255,255,.12);color:#fff}
+@media (max-width:760px){.brand-filter-card{grid-template-columns:1fr}.brand-filter{justify-content:flex-start}}
 @media (max-width:480px){.monitor-grid{grid-template-columns:1fr}.brand-chip{width:100%;justify-content:space-between}.brand-filter{display:grid;grid-template-columns:1fr 1fr}.brand-filter .brand-chip:first-child{grid-column:1/-1}}
 
-/* v55 — ZUN / części uniwersalne */
-.zun-results-block{display:grid;gap:12px;margin:0 0 16px;padding:14px;border:1px solid rgba(250,204,21,.45);border-radius:18px;background:rgba(250,204,21,.08)}
-.zun-results-head{display:flex;justify-content:space-between;gap:12px;align-items:center;color:var(--text)}
-.zun-results-head span{color:var(--muted);font-size:.92rem}
-.zun-card{border-color:rgba(250,204,21,.55)!important;background:linear-gradient(180deg,rgba(250,204,21,.09),rgba(255,255,255,.02))}
 .small-muted{font-size:.86rem;color:var(--muted);margin:.5rem 0 0}
 
-/* v57 — relacje część ↔ komplet/zestaw */
 .assembly-notice{margin-top:6px;border:1px solid rgba(255,77,89,.35);background:rgba(255,77,89,.10);border-radius:10px;padding:7px 9px;color:var(--text);font-size:12px;line-height:1.35}.assembly-notice strong{color:var(--red)}.assembly-notice.assembly-kit{border-color:rgba(34,197,94,.35);background:rgba(34,197,94,.10)}.assembly-notice.assembly-kit strong{color:var(--green)}
 
 
-/* v58 — czysty widok klienta / produkcyjny mobile */
-.internal-only,[hidden]{display:none!important}
-.data-monitor-card{display:none!important}
-.hero-card:after{content:none!important}
+.[hidden]{display:none!important}
 .top-actions .mode-pill{display:none!important}
 .status-pill{white-space:nowrap}
 .selected-device span,.part-meta,.locator-help,.context-card p{line-height:1.45}

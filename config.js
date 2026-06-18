@@ -1,6 +1,6 @@
 window.PGW_CONFIG = {
-  version: '20260617-v58-clean-production',
-  appName: 'PGW Service Hub',
+  version: '20260617-production-clean',
+  appName: 'Formularz zapytania o części',
   recipientEmail: 'service@yato.pl',
   storageMode: 'drive',
   pdfOnly: true,
@@ -17,11 +17,11 @@ window.PGW_CONFIG = {
     devices: ['data/devices.json'],
     drawings: ['data/drawings.json'],
     parts: ['data/parts.json'],
-    driveMap: ['data/drive-drawings-map.full.json', 'data/drive-drawings-map.json'],
+    driveMap: ['data/drive-drawings-map.full.json'],
     brandOverrides: ['data/brand-resolution-overrides.json'],
     pdfHeaderOverrides: ['data/pdf-header-overrides.json'],
     universalParts: ['data/universal-parts-zun.json'],
     universalPartLinks: ['data/universal-parts-zun-links.json'],
-    partAssemblies: ['data/part-assemblies.v57.json']
+    partAssemblies: ['data/part-assemblies.json']
   }
 };

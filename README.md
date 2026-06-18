@@ -1,12 +1,9 @@
-# Serwis Pogwarancyjny TOYA — formularz zapytania o części
+# Formularz zapytania o części — Serwis Pogwarancyjny TOYA
 
-Wersja v58 to czysty widok kliencki do publikacji na GitHub Pages.
+Czysta paczka produkcyjna do publikacji na GitHub Pages.
 
-Najważniejsze:
-- bez widocznych numerów wersji roboczych w interfejsie,
-- bez monitorów technicznych i ekranów rozpoznawania danych dla klienta,
-- PDF-y są ładowane z Google Drive,
-- ZUN-y i zestawy są dopisywane automatycznie do maila jako informacja dla serwisu,
-- klient wybiera urządzenie/część albo opisuje część ręcznie, gdy lista pozycji nie jest jeszcze podpięta.
+Strona prowadzi klienta przez prostą ścieżkę: wybór urządzenia, wybór części albo opis ręczny, dane kontaktowe i gotowy mail do `service@yato.pl`.
 
-Nie umieszczamy cen, stanów magazynowych ani danych prywatnych w repozytorium.
+PDF-y rysunków są ładowane z Google Drive. Repo zawiera tylko lekkie pliki aplikacji i dane JSON potrzebne do wyszukiwania. Ceny, stany magazynowe i wewnętrzne narzędzia nie są publikowane na stronie klienta.
+
+Informacje pomocnicze dla serwisu, takie jak ZUN-y i relacje część–komplet, są dopisywane do treści maila automatycznie, bez pokazywania klientowi technicznych baz.

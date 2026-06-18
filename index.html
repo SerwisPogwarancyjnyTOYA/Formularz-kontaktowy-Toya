@@ -33,11 +33,6 @@
           <span>4. Skopiuj mail</span>
         </div>
       </div>
-      <div class="stats internal-only" aria-label="Statystyki bazy" hidden>
-        <div><strong id="statDevices">—</strong><span>urządzeń</span></div>
-        <div><strong id="statDrawings">—</strong><span>rysunków PDF</span></div>
-        <div><strong id="statParts">—</strong><span>części</span></div>
-      </div>
     </section>
 
     <nav class="steps" aria-label="Etapy formularza">
@@ -65,7 +60,7 @@
           <div class="brand-filter-card">
             <div>
               <strong>Marka urządzenia</strong>
-              <span>Domyślnie szukamy we wszystkich markach. Filtr pomaga, jeśli znasz markę urządzenia.</span>
+              <span>Domyślnie szukamy we wszystkich markach. Filtr pomaga, gdy klient wie, z jakiej marki jest sprzęt.</span>
             </div>
             <div class="brand-filter" id="brandFilter" aria-label="Filtr marek"></div>
           </div>
@@ -93,7 +88,7 @@
             <button class="primary" type="button" id="goManualData">Przejdź dalej i opisz część</button>
           </div>
           <div class="locator-help">
-            <strong>Najprościej:</strong> znajdź numer pozycji na PDF-ie i wpisz go poniżej. Lista części jest skrócona na start — możesz ją zawęzić wyszukiwaniem albo pokazać więcej pozycji.
+            <strong>Najprościej:</strong> znajdź numer pozycji na PDF-ie i wpisz go poniżej. Lista części jest dawkowana, żeby klient nie dostał całej tabeli naraz.
           </div>
           <label class="search-box compact">
             <span>Szukaj części w tym urządzeniu</span>
@@ -118,7 +113,7 @@
             <span class="stage-number">3</span>
             <div>
               <h2>Dane kontaktowe, faktura i wysyłka</h2>
-              <p>Kontakt jest wymagany, ale faktura i wysyłka są opcjonalne. Możesz zapytać o części bez uzupełniania wszystkich danych.</p>
+              <p>Kontakt jest wymagany, ale faktura i wysyłka są opcjonalne. Klient może dopytać o części bez uzupełniania wszystkich danych.</p>
             </div>
           </div>
 
@@ -128,7 +123,7 @@
               <label>Imię i nazwisko / firma kontaktowa<input name="contactName" data-required="base" /></label>
               <label>Email<input name="contactEmail" type="email" placeholder="podaj email lub telefon" /></label>
               <label>Telefon<input name="contactPhone" placeholder="podaj telefon lub email" /></label>
-              <div class="lookup-status">Wystarczy email albo telefon. Im więcej danych podasz, tym łatwiej będzie odpowiedzieć.</div>
+              <div class="lookup-status">Wystarczy email albo telefon. Im więcej danych klient poda, tym łatwiej będzie odpowiedzieć.</div>
               <div class="quality-row" id="contactQuality" aria-live="polite"></div>
               <label>Numer seryjny urządzenia<input name="serialNumber" placeholder="opcjonalnie" /></label>
             </fieldset>
@@ -142,7 +137,7 @@
             <fieldset id="invoiceFieldset" class="optional-section inactive">
               <legend>Faktura</legend>
               <label class="check"><input type="checkbox" id="wantInvoice" /> Chcę podać dane do faktury teraz</label>
-              <div class="optional-note">Jeżeli nie potrzebujesz faktury albo chcesz ustalić to później, ta sekcja nie blokuje przejścia dalej.</div>
+              <div class="optional-note">Jeżeli klient nie potrzebuje faktury albo chce ustalić to później, ta sekcja nie blokuje przejścia dalej.</div>
               <div class="optional-fields">
                 <label>Nazwa firmy / osoba<input name="invoiceName" /></label>
                 <div class="nip-row">
@@ -163,7 +158,7 @@
             <fieldset id="shippingFieldset" class="optional-section inactive">
               <legend>Wysyłka</legend>
               <label class="check"><input type="checkbox" id="wantShipping" /> Chcę podać adres wysyłki teraz</label>
-              <div class="optional-note">Adres wysyłki jest opcjonalny. Jeśli go nie podasz, w mailu zostanie informacja „do ustalenia”.</div>
+              <div class="optional-note">Adres wysyłki jest opcjonalny. Jeśli klient go nie poda, w mailu zostanie informacja „do ustalenia”.</div>
               <div class="optional-fields">
                 <label class="check"><input type="checkbox" id="sameAsInvoice" /> Takie same jak do faktury</label>
                 <label>Odbiorca<input name="shipName" /></label>
@@ -224,21 +219,6 @@
           <span class="context-kicker">Aktualny krok</span>
           <h3 id="contextTitle">Wybierz urządzenie</h3>
           <p id="contextBody">Zacznij od indeksu modelu. Kolejne informacje pojawią się po wyborze urządzenia.</p>
-        </div>
-
-        <div class="data-monitor-card" id="dataMonitor" aria-live="polite">
-          <div class="monitor-head">
-            <span class="context-kicker">Monitor bazy</span>
-            <strong>Drive + wiele marek</strong>
-          </div>
-          <div class="monitor-grid">
-            <div><span>Marki</span><b id="monitorBrands">—</b></div>
-            <div><span>PDF Drive</span><b id="monitorDrive">—</b></div>
-            <div><span>Wybrany filtr</span><b id="monitorFilter">Wszystkie</b></div>
-            <div><span>Źródło</span><b>JSON</b></div>
-          </div>
-          <div class="monitor-brands" id="monitorBrandList"></div>
-          <p>Repo trzyma tylko lekkie dane. Pełne PDF-y siedzą w Google Drive, więc dodanie kolejnej marki nie tuczy GitHuba.</p>
         </div>
 
         <div class="progress-card" id="progressCard">
