@@ -128,7 +128,7 @@
       const keys = row.__keys || [];
       const hasDrawing = keys.some(k => existingDrawingKeys.has(k));
       if (!hasDrawing && row.deviceIndex) {
-        const id = `drive-${row.fileId || normKey(row.deviceIndex) || syntheticId++}`;
+        const id = `drive-${row.fileId || 'nofile'}-${normKey(row.deviceIndex) || syntheticId++}`;
         const drawing = {
           id,
           deviceIndex: row.deviceIndex,
@@ -1553,6 +1553,14 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
   }
 
   function resolveDrive(drawing) {
+    const fid = String(drawing.driveFileId || drawing.fileId || drawing.sourceFileId || '').trim();
+    const idx = norm(drawing.deviceIndex || '');
+    if (fid) {
+      const exact = state.driveMap.find(row => String(row.fileId || row.driveFileId || row.sourceFileId || '').trim() === fid && (!idx || norm(row.deviceIndex || row.model || row.normalizedModel || '') === idx));
+      if (exact) return exact;
+      const byFile = state.driveMap.find(row => String(row.fileId || row.driveFileId || row.sourceFileId || '').trim() === fid);
+      if (byFile) return byFile;
+    }
     const keys = drawingKeys(drawing);
     for (const key of keys) if (state.driveByKey.has(key)) return state.driveByKey.get(key);
     return null;

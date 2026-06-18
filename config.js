@@ -1,5 +1,5 @@
 window.PGW_CONFIG = {
-  version: '20260617-production-clean',
+  version: '20260618-v63-all-drawings-base',
   appName: 'Formularz zapytania o części',
   recipientEmail: 'service@yato.pl',
   storageMode: 'drive',

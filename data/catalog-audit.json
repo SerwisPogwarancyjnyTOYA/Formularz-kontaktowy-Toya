@@ -1,0 +1,21 @@
+{
+  "version": "v63-all-drawings-in-base",
+  "generatedAt": "2026-06-18T18:40:44Z",
+  "sourceManifestItems": 1418,
+  "sourceUniquePdfFiles": 1405,
+  "drawingsInDatabase": 1421,
+  "uniqueDevicesInDatabase": 1410,
+  "devicesWithPartsList": 34,
+  "devicesPdfOnly": 1376,
+  "brandCounts": {
+    "INNE": 9,
+    "VOREL": 19,
+    "LUND": 169,
+    "FALA": 88,
+    "STHOR": 181,
+    "FLO": 24,
+    "YATO": 697,
+    "YATO GASTRO": 223
+  },
+  "note": "Każdy rysunek PDF z pełnego manifestu Drive ma bezpośredni rekord w devices.json i drawings.json. Modele PDF-only są wyszukiwalne i obsługiwane trybem opisu części."
+}
