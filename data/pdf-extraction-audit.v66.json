@@ -1,0 +1,12 @@
+{
+  "version": "v66",
+  "generatedAt": "2026-06-18T20:40:16Z",
+  "drawingsTotal": 1421,
+  "devicesTotal": 1410,
+  "partsTotal": 2179,
+  "existingTextHeadersExtracted": 34,
+  "queueTotal": 1387,
+  "queueNeedsTitle": 1342,
+  "queueNeedsParts": 1387,
+  "strategy": "Run scripts/google-drive-pdf-header-parts-extractor.gs in Apps Script. Import generated JSON back into data/pdf-header-overrides.json and optional parts review file."
+}

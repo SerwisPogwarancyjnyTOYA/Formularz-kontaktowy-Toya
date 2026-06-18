@@ -1,5 +1,5 @@
 window.PGW_CONFIG = {
-  version: '20260618-v64-smart-catalog',
+  version: '20260618-v66-pdf-header-extractor',
   appName: 'Formularz zapytania o części',
   recipientEmail: 'service@yato.pl',
   storageMode: 'drive',

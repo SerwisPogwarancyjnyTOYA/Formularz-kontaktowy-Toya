@@ -1,17 +1,690 @@
 {
-  "generatedAt": "2026-06-17T05:15:00Z",
-  "count": 1,
+  "generatedAt": "2026-06-18T20:40:16Z",
+  "version": "v66-local-seed-and-import-target",
+  "count": 34,
+  "notes": "Seed from existing readable PDF text. Apps Script extractor can extend this file with all Drive PDFs.",
   "byFileId": {
-    "1T_QyAsRP7bnmqgemHscfZSE_yEGQgzag": {
-      "fileId": "1T_QyAsRP7bnmqgemHscfZSE_yEGQgzag",
-      "model": "53575",
-      "deviceName": "GRZECHOTKA POWLEKANA WYGIĘTA 1/4\"",
-      "displayTitle": "53575 — GRZECHOTKA POWLEKANA WYGIĘTA 1/4\"",
-      "brand": "DO ROZPOZNANIA",
+    "1YoiY5vVPMm_sr4V8r6m8V7fUZ11cEc3t": {
+      "model": "00300",
+      "deviceName": "PRZYRZĄD DO CIĘCIA GLAZURY, 600MM, 3 FUNKCJE",
+      "displayTitle": "00300 — PRZYRZĄD DO CIĘCIA GLAZURY, 600MM, 3 FUNKCJE",
+      "headerText": "00300 - PRZYRZĄD DO CIĘCIA GLAZURY, 600MM, 3 FUNKCJE",
       "confidence": "high",
-      "headerText": "53575 - GRZECHOTKA POWLEKANA\nWYGIĘTA 1/4\"\nCZĘŚCI ZAMIENNE\nTOYA S.A.\nAKTUALIZACJA: 1 CZERWCA 2020",
-      "source": "manual-sample-from-pdf-header-v54",
-      "notes": "Przykład potwierdzony przez odczyt tekstu PDF. Marka nadal wymaga reguły lub potwierdzenia."
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_00300.pdf",
+      "drawingId": "045ce389316a9b81"
+    },
+    "1h8ttk_EzTvZgdC0D5NP1C6UZFdpw0nMr": {
+      "model": "00320",
+      "deviceName": "PRZYRZĄD DO CIĘCIA GLAZURY 430 MM, 3 FUNKCJE",
+      "displayTitle": "00320 — PRZYRZĄD DO CIĘCIA GLAZURY 430 MM, 3 FUNKCJE",
+      "headerText": "00320 - PRZYRZĄD DO CIĘCIA GLAZURY 430 MM, 3 FUNKCJE",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_00320.pdf",
+      "drawingId": "ddc0e8dc1a0d72c7"
+    },
+    "1ppGFspXKQvreMV7qIK-1_QymR2gviyOM": {
+      "model": "00500",
+      "deviceName": "PRZYRZĄD DO CIĘCIA GLAZURY 500 MM ŁOŻYSKOWANY",
+      "displayTitle": "00500 — PRZYRZĄD DO CIĘCIA GLAZURY 500 MM ŁOŻYSKOWANY",
+      "headerText": "00500 - PRZYRZĄD DO CIĘCIA GLAZURY 500 MM ŁOŻYSKOWANY",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_00500.pdf",
+      "drawingId": "2ae26b42eac4f5f8"
+    },
+    "1THdZU3y8I5hFyFpO1yHD0T8ddBniJuVI": {
+      "model": "00510",
+      "deviceName": "PRZYRZĄD DO CIĘCIA GLAZURY 500 MM ŁOŻYSKOWANY",
+      "displayTitle": "00510 — PRZYRZĄD DO CIĘCIA GLAZURY 500 MM ŁOŻYSKOWANY",
+      "headerText": "00510 - PRZYRZĄD DO CIĘCIA GLAZURY 500 MM ŁOŻYSKOWANY",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_00510.pdf",
+      "drawingId": "ef4642ee359c60e9"
+    },
+    "1oUOyKCDXrWyOXZibjAE2BLZTlu0gx0lR": {
+      "model": "00600",
+      "deviceName": "PRZYRZĄD DO CIĘCIA GLAZURY 600 MM ŁOŻYSKOWANY",
+      "displayTitle": "00600 — PRZYRZĄD DO CIĘCIA GLAZURY 600 MM ŁOŻYSKOWANY",
+      "headerText": "00600 - PRZYRZĄD DO CIĘCIA GLAZURY 600 MM ŁOŻYSKOWANY",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_00600.pdf",
+      "drawingId": "2aa21b8aebca59a9"
+    },
+    "1JyHUBIgFBdSWSKHZetxVGD_PUCw6yD5M": {
+      "model": "00610",
+      "deviceName": "PRZYRZĄD DO CIĘCIA GLAZURY 600 MM ŁOŻYSKOWANY",
+      "displayTitle": "00610 — PRZYRZĄD DO CIĘCIA GLAZURY 600 MM ŁOŻYSKOWANY",
+      "headerText": "00610 - PRZYRZĄD DO CIĘCIA GLAZURY 600 MM ŁOŻYSKOWANY",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_00610.pdf",
+      "drawingId": "616ca6f1cddfe7a7"
+    },
+    "1Ap4UFF15N5eCAPoluJET8va-xMwClkuO": {
+      "model": "00703",
+      "deviceName": "PRZYRZĄD DO CIĘCIA GLAZURY 500 MM ŁOŻYSKOWANY",
+      "displayTitle": "00703 — PRZYRZĄD DO CIĘCIA GLAZURY 500 MM ŁOŻYSKOWANY",
+      "headerText": "00703 - PRZYRZĄD DO CIĘCIA GLAZURY 500 MM ŁOŻYSKOWANY",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_00703.pdf",
+      "drawingId": "88c9daee1f7c8a0e"
+    },
+    "1besvKvsDzwlUr2ndf9D0qH2bTnTUM2Qp": {
+      "model": "01060",
+      "deviceName": "PRZYRZĄD DO CIĘCIA GLAZURY 600 MM, 2 FUNKCJE",
+      "displayTitle": "01060 — PRZYRZĄD DO CIĘCIA GLAZURY 600 MM, 2 FUNKCJE",
+      "headerText": "01060 - PRZYRZĄD DO CIĘCIA GLAZURY 600 MM, 2 FUNKCJE",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_01060.pdf",
+      "drawingId": "d861302646ba2758"
+    },
+    "1RQeVZdnCkfLRPgRr0pRrtj-MluClXhK1": {
+      "model": "09900",
+      "deviceName": "TYNKOWNICA PNEUMATYCZNA DO ŚCIAN",
+      "displayTitle": "09900 — TYNKOWNICA PNEUMATYCZNA DO ŚCIAN",
+      "headerText": "09900 - TYNKOWNICA PNEUMATYCZNA DO ŚCIAN",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_09900.pdf",
+      "drawingId": "dcfdfca302ddb1d3"
+    },
+    "1sfYXPkWRa0bmXGfgydtgANIH2y6iippL": {
+      "model": "827791",
+      "deviceName": "WIERTARKA UDAROWA BEZSZCZOTKOW 18V 120NM - 2X 4AH",
+      "displayTitle": "827791 — WIERTARKA UDAROWA BEZSZCZOTKOW 18V 120NM - 2X 4AH",
+      "headerText": "YT-8277915 - WIERTARKA UDAROWA BEZSZCZOTKOW 18V 120NM - 2X 4AH",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-8277915.pdf",
+      "drawingId": "4e7ca0c82412596f"
+    },
+    "1AEoY9ge5DH5Fdc5AeUbxiVpUqia8bRRN": {
+      "model": "827793",
+      "deviceName": "KLUCZ UDAROWY 18V 1/2'' 800NM - 2X 4AH",
+      "displayTitle": "827793 — KLUCZ UDAROWY 18V 1/2'' 800NM - 2X 4AH",
+      "headerText": "YT-8277935 - KLUCZ UDAROWY 18V 1/2'' 800NM - 2X 4AH",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-8277935.pdf",
+      "drawingId": "c117142a16ab8fb3"
+    },
+    "16ZKShR7DFvrMhfk8vAWY2vLjYhkO7Kxy": {
+      "model": "YG-03118",
+      "deviceName": "KRAJALNICA AL DO WĘDLIN 250MM",
+      "displayTitle": "YG-03118 — KRAJALNICA AL DO WĘDLIN 250MM",
+      "headerText": "YG-03118 - KRAJALNICA AL DO WĘDLIN 250MM",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YG-03118.pdf",
+      "drawingId": "1fad9be73d60e853"
+    },
+    "1eoy9zSBsdWNUw6fJErMCOBIKqgeQ36Rm": {
+      "model": "YT-17003",
+      "deviceName": "PODNOŚNIK TŁOKOWY HYDRAULICZNY 8T TUV GS/CE",
+      "displayTitle": "YT-17003 — PODNOŚNIK TŁOKOWY HYDRAULICZNY 8T TUV GS/CE",
+      "headerText": "YT-17003 - PODNOŚNIK TŁOKOWY HYDRAULICZNY 8T TUV GS/CE",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-17003.pdf",
+      "drawingId": "17c51e7b6873a6e1"
+    },
+    "1sg7wd4jaFT7nLYyBrJs5xwgeObJjEzcl": {
+      "model": "YT-82003",
+      "deviceName": "MŁOT SDS MAX WYBURZENIOWY 1700W",
+      "displayTitle": "YT-82003 — MŁOT SDS MAX WYBURZENIOWY 1700W",
+      "headerText": "YT-82003 - MŁOT SDS MAX WYBURZENIOWY 1700W",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-82003.pdf",
+      "drawingId": "73a0c41f767042ad"
+    },
+    "1EIgrbkm1P63569i1m2B-23LZt-GiDJDU": {
+      "model": "YT-82200",
+      "deviceName": "POLERKA MIMOŚRODOWA",
+      "displayTitle": "YT-82200 — POLERKA MIMOŚRODOWA",
+      "headerText": "YT-82200 - POLERKA MIMOŚRODOWA",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-82200.pdf",
+      "drawingId": "7809a8b3ed3f39a8"
+    },
+    "1_y2LzQOEaVJ66xUTnHZzuBEGblDFN_kj": {
+      "model": "YT-82355",
+      "deviceName": "SZLIFIERKA DO GŁADZI NA WYSIĘGNIKU 820W Z WBUDOWANYM ODKURZACZEM",
+      "displayTitle": "YT-82355 — SZLIFIERKA DO GŁADZI NA WYSIĘGNIKU 820W Z WBUDOWANYM ODKURZACZEM",
+      "headerText": "YT-82355 - SZLIFIERKA DO GŁADZI NA WYSIĘGNIKU 820W Z WBUDOWANYM ODKURZACZEM",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-82355.pdf",
+      "drawingId": "b26aed40e30a7774"
+    },
+    "18m1QdR5XyAirPAn10mRO3ok2pjA2wAxm": {
+      "model": "YT-827795",
+      "deviceName": "KLUCZ KĄTOWY 1/2'' 270NM 18V (BL; BODY)",
+      "displayTitle": "YT-827795 — KLUCZ KĄTOWY 1/2'' 270NM 18V (BL; BODY)",
+      "headerText": "YT-827795 - KLUCZ KĄTOWY 1/2'' 270NM 18V (BL; BODY)",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-827795.pdf",
+      "drawingId": "c6cfb9d9625ec5df"
+    },
+    "1pzlf4sPtFzXKyzBgMPU6e9sx4oJfuNff": {
+      "model": "YT-828377",
+      "deviceName": "SEKATOR 18V Z AKU I ŁADOWARKĄ",
+      "displayTitle": "YT-828377 — SEKATOR 18V Z AKU I ŁADOWARKĄ",
+      "headerText": "YT-828377 - SEKATOR 18V Z AKU I ŁADOWARKĄ",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-828377.pdf",
+      "drawingId": "476d6a18215b3ddc"
+    },
+    "17GsCcU4c0uZipY5uvgGnB7YLFBuwzabb": {
+      "model": "YT-828390",
+      "deviceName": "OGRODOWE NARZĘDZIE WIELOFUNKCYJNE 18V",
+      "displayTitle": "YT-828390 — OGRODOWE NARZĘDZIE WIELOFUNKCYJNE 18V",
+      "headerText": "YT-828390 - OGRODOWE NARZĘDZIE WIELOFUNKCYJNE 18V",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-828390.pdf",
+      "drawingId": "5a79d5a3a0517813"
+    },
+    "1L9iJLTfYGI1vyQ6eVPFRgSVhbHuYVrXw": {
+      "model": "YT-828391",
+      "deviceName": "OGRODOWE NARZĘDZIE WIELOFUNKCYJNE 18V - BEZ AKUMULATORA",
+      "displayTitle": "YT-828391 — OGRODOWE NARZĘDZIE WIELOFUNKCYJNE 18V - BEZ AKUMULATORA",
+      "headerText": "YT-828391 - OGRODOWE NARZĘDZIE WIELOFUNKCYJNE 18V - BEZ AKUMULATORA",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-828391.pdf",
+      "drawingId": "e44bc36b0b4f81a6"
+    },
+    "1kwpgyZQttlvXyWghWYYoijzKzZHbKZg1": {
+      "model": "YT-829021",
+      "deviceName": "GRZECHOTKA BEZSZCZOTKOWA 12V 80NM 1/2''",
+      "displayTitle": "YT-829021 — GRZECHOTKA BEZSZCZOTKOWA 12V 80NM 1/2''",
+      "headerText": "YT-829021 - GRZECHOTKA BEZSZCZOTKOWA 12V 80NM 1/2''",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-829021.pdf",
+      "drawingId": "e30b14c1ce4a628c"
+    },
+    "18M1dwSfIV-VMg3Ir5Rc7ZN3IDxb0RopE": {
+      "model": "YT-829383",
+      "deviceName": "18V DMUCHAWA 10,4 M3/MIN (BL MOTOR;BODY)",
+      "displayTitle": "YT-829383 — 18V DMUCHAWA 10,4 M3/MIN (BL MOTOR;BODY)",
+      "headerText": "YT-829383 - 18V DMUCHAWA 10,4 M3/MIN (BL MOTOR;BODY)",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-829383.pdf",
+      "drawingId": "96196cd71f8513c7"
+    },
+    "1kD1TubPre2j4vjOSblvq5nx3FmulMozB": {
+      "model": "YT-85003",
+      "deviceName": "KOSA SPALINOWA DZIELONA 1,8 KM",
+      "displayTitle": "YT-85003 — KOSA SPALINOWA DZIELONA 1,8 KM",
+      "headerText": "YT-85003 - KOSA SPALINOWA DZIELONA 1,8 KM",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-85003.pdf",
+      "drawingId": "a44e8e594b6a9b0b"
+    },
+    "1m1v1moGbncsEK48z6Q5e9QZVFYQ87nUh": {
+      "model": "YT-85177",
+      "deviceName": "DMUCHAWA 18V",
+      "displayTitle": "YT-85177 — DMUCHAWA 18V",
+      "headerText": "YT-85177 - DMUCHAWA 18V",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-85177.pdf",
+      "drawingId": "99191804f05ea345"
+    },
+    "1nxaXN1lel1w1J5S8ZzNKwVEsPKsLn1gm": {
+      "model": "YT-851990",
+      "deviceName": "KOSIARKA ELEKTRYCZNA 1300W 330MM",
+      "displayTitle": "YT-851990 — KOSIARKA ELEKTRYCZNA 1300W 330MM",
+      "headerText": "YT-851990 - KOSIARKA ELEKTRYCZNA 1300W 330MM",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-851990.pdf",
+      "drawingId": "5edc8998e9ceb864"
+    },
+    "1qtk-AH9deQS4kE9I8TbE90x_8-u7fdBe": {
+      "model": "YT-851991",
+      "deviceName": "KOSIARKA ELEKTRYCZNA 1500W 360MM",
+      "displayTitle": "YT-851991 — KOSIARKA ELEKTRYCZNA 1500W 360MM",
+      "headerText": "YT-851991 - KOSIARKA ELEKTRYCZNA 1500W 360MM",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-851991.pdf",
+      "drawingId": "a870b44d6f3eb729"
+    },
+    "1pt7cMBI0AZkZsvNbXbmMIVp1bXvNvbTq": {
+      "model": "YT-851992",
+      "deviceName": "KOSIARKA ELEKTRYCZNA 1800W 400MM",
+      "displayTitle": "YT-851992 — KOSIARKA ELEKTRYCZNA 1800W 400MM",
+      "headerText": "YT-851992 - KOSIARKA ELEKTRYCZNA 1800W 400MM",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-851992.pdf",
+      "drawingId": "0cba73a8d702ea32"
+    },
+    "1BEM5IKAFLgRbUg1kLbg6y9CmX9ogrkF6": {
+      "model": "YT-851993",
+      "deviceName": "KOSIARKA ELEKTRYCZNA 2000W 460MM",
+      "displayTitle": "YT-851993 — KOSIARKA ELEKTRYCZNA 2000W 460MM",
+      "headerText": "YT-851993 - KOSIARKA ELEKTRYCZNA 2000W 460MM",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-851993.pdf",
+      "drawingId": "686beea779f43be2"
+    },
+    "1y1wlbcmxAyLHQ2VAyVsocqCoIlrSJp8o": {
+      "model": "YT-852090",
+      "deviceName": "ROBOT KOSZĄCY",
+      "displayTitle": "YT-852090 — ROBOT KOSZĄCY",
+      "headerText": "YT-852090 - ROBOT KOSZĄCY",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-852090.pdf",
+      "drawingId": "53985a31cfa4891c"
+    },
+    "1Reso76H_2qmGrJIbg2MLQzjPAiB1OKVo": {
+      "model": "YT-852091",
+      "deviceName": "ROBOT KOSZĄCY",
+      "displayTitle": "YT-852091 — ROBOT KOSZĄCY",
+      "headerText": "YT-852091 - ROBOT KOSZĄCY",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-852091.pdf",
+      "drawingId": "3122c5e4844acc96"
+    },
+    "1p8PaGB1CNPBlC1X3h7DgdrIYDxIaXPuo": {
+      "model": "YT-852092",
+      "deviceName": "ROBOT KOSZĄCY",
+      "displayTitle": "YT-852092 — ROBOT KOSZĄCY",
+      "headerText": "YT-852092 - ROBOT KOSZĄCY",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-852092.pdf",
+      "drawingId": "853249ae8d8b612f"
+    },
+    "1rLi4gHQMov8hVqky_bUORq6_cVBVZ_JY": {
+      "model": "YT-852093",
+      "deviceName": "ROBOT KOSZĄCY",
+      "displayTitle": "YT-852093 — ROBOT KOSZĄCY",
+      "headerText": "YT-852093 - ROBOT KOSZĄCY",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-852093.pdf",
+      "drawingId": "5a4ee2d46492e9de"
+    },
+    "1-Ys1osnXhyg2sWG1wcPREu9ophIfdLfZ": {
+      "model": "YT-852371",
+      "deviceName": "ROZDRABNIACZ ELEKTRYCZNY 2800W CICHY",
+      "displayTitle": "YT-852371 — ROZDRABNIACZ ELEKTRYCZNY 2800W CICHY",
+      "headerText": "YT-852371 - ROZDRABNIACZ ELEKTRYCZNY 2800W CICHY",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-852371.pdf",
+      "drawingId": "f6a13b167a2bc3e6"
+    },
+    "1vMzaYwMnJHiBaXqLVJUYHWYKI8zWMDBc": {
+      "model": "YT-854837",
+      "deviceName": "AGREGAT PRĄDOTWÓRCZY INWERTOROWY 2000W",
+      "displayTitle": "YT-854837 — AGREGAT PRĄDOTWÓRCZY INWERTOROWY 2000W",
+      "headerText": "YT-854837 - AGREGAT PRĄDOTWÓRCZY INWERTOROWY 2000W",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-854837.pdf",
+      "drawingId": "eae1dac860504f29"
+    }
+  },
+  "byModel": {
+    "00300": {
+      "model": "00300",
+      "deviceName": "PRZYRZĄD DO CIĘCIA GLAZURY, 600MM, 3 FUNKCJE",
+      "displayTitle": "00300 — PRZYRZĄD DO CIĘCIA GLAZURY, 600MM, 3 FUNKCJE",
+      "headerText": "00300 - PRZYRZĄD DO CIĘCIA GLAZURY, 600MM, 3 FUNKCJE",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_00300.pdf",
+      "drawingId": "045ce389316a9b81"
+    },
+    "00320": {
+      "model": "00320",
+      "deviceName": "PRZYRZĄD DO CIĘCIA GLAZURY 430 MM, 3 FUNKCJE",
+      "displayTitle": "00320 — PRZYRZĄD DO CIĘCIA GLAZURY 430 MM, 3 FUNKCJE",
+      "headerText": "00320 - PRZYRZĄD DO CIĘCIA GLAZURY 430 MM, 3 FUNKCJE",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_00320.pdf",
+      "drawingId": "ddc0e8dc1a0d72c7"
+    },
+    "00500": {
+      "model": "00500",
+      "deviceName": "PRZYRZĄD DO CIĘCIA GLAZURY 500 MM ŁOŻYSKOWANY",
+      "displayTitle": "00500 — PRZYRZĄD DO CIĘCIA GLAZURY 500 MM ŁOŻYSKOWANY",
+      "headerText": "00500 - PRZYRZĄD DO CIĘCIA GLAZURY 500 MM ŁOŻYSKOWANY",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_00500.pdf",
+      "drawingId": "2ae26b42eac4f5f8"
+    },
+    "00510": {
+      "model": "00510",
+      "deviceName": "PRZYRZĄD DO CIĘCIA GLAZURY 500 MM ŁOŻYSKOWANY",
+      "displayTitle": "00510 — PRZYRZĄD DO CIĘCIA GLAZURY 500 MM ŁOŻYSKOWANY",
+      "headerText": "00510 - PRZYRZĄD DO CIĘCIA GLAZURY 500 MM ŁOŻYSKOWANY",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_00510.pdf",
+      "drawingId": "ef4642ee359c60e9"
+    },
+    "00600": {
+      "model": "00600",
+      "deviceName": "PRZYRZĄD DO CIĘCIA GLAZURY 600 MM ŁOŻYSKOWANY",
+      "displayTitle": "00600 — PRZYRZĄD DO CIĘCIA GLAZURY 600 MM ŁOŻYSKOWANY",
+      "headerText": "00600 - PRZYRZĄD DO CIĘCIA GLAZURY 600 MM ŁOŻYSKOWANY",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_00600.pdf",
+      "drawingId": "2aa21b8aebca59a9"
+    },
+    "00610": {
+      "model": "00610",
+      "deviceName": "PRZYRZĄD DO CIĘCIA GLAZURY 600 MM ŁOŻYSKOWANY",
+      "displayTitle": "00610 — PRZYRZĄD DO CIĘCIA GLAZURY 600 MM ŁOŻYSKOWANY",
+      "headerText": "00610 - PRZYRZĄD DO CIĘCIA GLAZURY 600 MM ŁOŻYSKOWANY",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_00610.pdf",
+      "drawingId": "616ca6f1cddfe7a7"
+    },
+    "00703": {
+      "model": "00703",
+      "deviceName": "PRZYRZĄD DO CIĘCIA GLAZURY 500 MM ŁOŻYSKOWANY",
+      "displayTitle": "00703 — PRZYRZĄD DO CIĘCIA GLAZURY 500 MM ŁOŻYSKOWANY",
+      "headerText": "00703 - PRZYRZĄD DO CIĘCIA GLAZURY 500 MM ŁOŻYSKOWANY",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_00703.pdf",
+      "drawingId": "88c9daee1f7c8a0e"
+    },
+    "01060": {
+      "model": "01060",
+      "deviceName": "PRZYRZĄD DO CIĘCIA GLAZURY 600 MM, 2 FUNKCJE",
+      "displayTitle": "01060 — PRZYRZĄD DO CIĘCIA GLAZURY 600 MM, 2 FUNKCJE",
+      "headerText": "01060 - PRZYRZĄD DO CIĘCIA GLAZURY 600 MM, 2 FUNKCJE",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_01060.pdf",
+      "drawingId": "d861302646ba2758"
+    },
+    "09900": {
+      "model": "09900",
+      "deviceName": "TYNKOWNICA PNEUMATYCZNA DO ŚCIAN",
+      "displayTitle": "09900 — TYNKOWNICA PNEUMATYCZNA DO ŚCIAN",
+      "headerText": "09900 - TYNKOWNICA PNEUMATYCZNA DO ŚCIAN",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_09900.pdf",
+      "drawingId": "dcfdfca302ddb1d3"
+    },
+    "827791": {
+      "model": "827791",
+      "deviceName": "WIERTARKA UDAROWA BEZSZCZOTKOW 18V 120NM - 2X 4AH",
+      "displayTitle": "827791 — WIERTARKA UDAROWA BEZSZCZOTKOW 18V 120NM - 2X 4AH",
+      "headerText": "YT-8277915 - WIERTARKA UDAROWA BEZSZCZOTKOW 18V 120NM - 2X 4AH",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-8277915.pdf",
+      "drawingId": "4e7ca0c82412596f"
+    },
+    "827793": {
+      "model": "827793",
+      "deviceName": "KLUCZ UDAROWY 18V 1/2'' 800NM - 2X 4AH",
+      "displayTitle": "827793 — KLUCZ UDAROWY 18V 1/2'' 800NM - 2X 4AH",
+      "headerText": "YT-8277935 - KLUCZ UDAROWY 18V 1/2'' 800NM - 2X 4AH",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-8277935.pdf",
+      "drawingId": "c117142a16ab8fb3"
+    },
+    "YG-03118": {
+      "model": "YG-03118",
+      "deviceName": "KRAJALNICA AL DO WĘDLIN 250MM",
+      "displayTitle": "YG-03118 — KRAJALNICA AL DO WĘDLIN 250MM",
+      "headerText": "YG-03118 - KRAJALNICA AL DO WĘDLIN 250MM",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YG-03118.pdf",
+      "drawingId": "1fad9be73d60e853"
+    },
+    "YT-17003": {
+      "model": "YT-17003",
+      "deviceName": "PODNOŚNIK TŁOKOWY HYDRAULICZNY 8T TUV GS/CE",
+      "displayTitle": "YT-17003 — PODNOŚNIK TŁOKOWY HYDRAULICZNY 8T TUV GS/CE",
+      "headerText": "YT-17003 - PODNOŚNIK TŁOKOWY HYDRAULICZNY 8T TUV GS/CE",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-17003.pdf",
+      "drawingId": "17c51e7b6873a6e1"
+    },
+    "YT-82003": {
+      "model": "YT-82003",
+      "deviceName": "MŁOT SDS MAX WYBURZENIOWY 1700W",
+      "displayTitle": "YT-82003 — MŁOT SDS MAX WYBURZENIOWY 1700W",
+      "headerText": "YT-82003 - MŁOT SDS MAX WYBURZENIOWY 1700W",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-82003.pdf",
+      "drawingId": "73a0c41f767042ad"
+    },
+    "YT-82200": {
+      "model": "YT-82200",
+      "deviceName": "POLERKA MIMOŚRODOWA",
+      "displayTitle": "YT-82200 — POLERKA MIMOŚRODOWA",
+      "headerText": "YT-82200 - POLERKA MIMOŚRODOWA",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-82200.pdf",
+      "drawingId": "7809a8b3ed3f39a8"
+    },
+    "YT-82355": {
+      "model": "YT-82355",
+      "deviceName": "SZLIFIERKA DO GŁADZI NA WYSIĘGNIKU 820W Z WBUDOWANYM ODKURZACZEM",
+      "displayTitle": "YT-82355 — SZLIFIERKA DO GŁADZI NA WYSIĘGNIKU 820W Z WBUDOWANYM ODKURZACZEM",
+      "headerText": "YT-82355 - SZLIFIERKA DO GŁADZI NA WYSIĘGNIKU 820W Z WBUDOWANYM ODKURZACZEM",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-82355.pdf",
+      "drawingId": "b26aed40e30a7774"
+    },
+    "YT-827795": {
+      "model": "YT-827795",
+      "deviceName": "KLUCZ KĄTOWY 1/2'' 270NM 18V (BL; BODY)",
+      "displayTitle": "YT-827795 — KLUCZ KĄTOWY 1/2'' 270NM 18V (BL; BODY)",
+      "headerText": "YT-827795 - KLUCZ KĄTOWY 1/2'' 270NM 18V (BL; BODY)",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-827795.pdf",
+      "drawingId": "c6cfb9d9625ec5df"
+    },
+    "YT-828377": {
+      "model": "YT-828377",
+      "deviceName": "SEKATOR 18V Z AKU I ŁADOWARKĄ",
+      "displayTitle": "YT-828377 — SEKATOR 18V Z AKU I ŁADOWARKĄ",
+      "headerText": "YT-828377 - SEKATOR 18V Z AKU I ŁADOWARKĄ",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-828377.pdf",
+      "drawingId": "476d6a18215b3ddc"
+    },
+    "YT-828390": {
+      "model": "YT-828390",
+      "deviceName": "OGRODOWE NARZĘDZIE WIELOFUNKCYJNE 18V",
+      "displayTitle": "YT-828390 — OGRODOWE NARZĘDZIE WIELOFUNKCYJNE 18V",
+      "headerText": "YT-828390 - OGRODOWE NARZĘDZIE WIELOFUNKCYJNE 18V",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-828390.pdf",
+      "drawingId": "5a79d5a3a0517813"
+    },
+    "YT-828391": {
+      "model": "YT-828391",
+      "deviceName": "OGRODOWE NARZĘDZIE WIELOFUNKCYJNE 18V - BEZ AKUMULATORA",
+      "displayTitle": "YT-828391 — OGRODOWE NARZĘDZIE WIELOFUNKCYJNE 18V - BEZ AKUMULATORA",
+      "headerText": "YT-828391 - OGRODOWE NARZĘDZIE WIELOFUNKCYJNE 18V - BEZ AKUMULATORA",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-828391.pdf",
+      "drawingId": "e44bc36b0b4f81a6"
+    },
+    "YT-829021": {
+      "model": "YT-829021",
+      "deviceName": "GRZECHOTKA BEZSZCZOTKOWA 12V 80NM 1/2''",
+      "displayTitle": "YT-829021 — GRZECHOTKA BEZSZCZOTKOWA 12V 80NM 1/2''",
+      "headerText": "YT-829021 - GRZECHOTKA BEZSZCZOTKOWA 12V 80NM 1/2''",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-829021.pdf",
+      "drawingId": "e30b14c1ce4a628c"
+    },
+    "YT-829383": {
+      "model": "YT-829383",
+      "deviceName": "18V DMUCHAWA 10,4 M3/MIN (BL MOTOR;BODY)",
+      "displayTitle": "YT-829383 — 18V DMUCHAWA 10,4 M3/MIN (BL MOTOR;BODY)",
+      "headerText": "YT-829383 - 18V DMUCHAWA 10,4 M3/MIN (BL MOTOR;BODY)",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-829383.pdf",
+      "drawingId": "96196cd71f8513c7"
+    },
+    "YT-85003": {
+      "model": "YT-85003",
+      "deviceName": "KOSA SPALINOWA DZIELONA 1,8 KM",
+      "displayTitle": "YT-85003 — KOSA SPALINOWA DZIELONA 1,8 KM",
+      "headerText": "YT-85003 - KOSA SPALINOWA DZIELONA 1,8 KM",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-85003.pdf",
+      "drawingId": "a44e8e594b6a9b0b"
+    },
+    "YT-85177": {
+      "model": "YT-85177",
+      "deviceName": "DMUCHAWA 18V",
+      "displayTitle": "YT-85177 — DMUCHAWA 18V",
+      "headerText": "YT-85177 - DMUCHAWA 18V",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-85177.pdf",
+      "drawingId": "99191804f05ea345"
+    },
+    "YT-851990": {
+      "model": "YT-851990",
+      "deviceName": "KOSIARKA ELEKTRYCZNA 1300W 330MM",
+      "displayTitle": "YT-851990 — KOSIARKA ELEKTRYCZNA 1300W 330MM",
+      "headerText": "YT-851990 - KOSIARKA ELEKTRYCZNA 1300W 330MM",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-851990.pdf",
+      "drawingId": "5edc8998e9ceb864"
+    },
+    "YT-851991": {
+      "model": "YT-851991",
+      "deviceName": "KOSIARKA ELEKTRYCZNA 1500W 360MM",
+      "displayTitle": "YT-851991 — KOSIARKA ELEKTRYCZNA 1500W 360MM",
+      "headerText": "YT-851991 - KOSIARKA ELEKTRYCZNA 1500W 360MM",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-851991.pdf",
+      "drawingId": "a870b44d6f3eb729"
+    },
+    "YT-851992": {
+      "model": "YT-851992",
+      "deviceName": "KOSIARKA ELEKTRYCZNA 1800W 400MM",
+      "displayTitle": "YT-851992 — KOSIARKA ELEKTRYCZNA 1800W 400MM",
+      "headerText": "YT-851992 - KOSIARKA ELEKTRYCZNA 1800W 400MM",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-851992.pdf",
+      "drawingId": "0cba73a8d702ea32"
+    },
+    "YT-851993": {
+      "model": "YT-851993",
+      "deviceName": "KOSIARKA ELEKTRYCZNA 2000W 460MM",
+      "displayTitle": "YT-851993 — KOSIARKA ELEKTRYCZNA 2000W 460MM",
+      "headerText": "YT-851993 - KOSIARKA ELEKTRYCZNA 2000W 460MM",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-851993.pdf",
+      "drawingId": "686beea779f43be2"
+    },
+    "YT-852090": {
+      "model": "YT-852090",
+      "deviceName": "ROBOT KOSZĄCY",
+      "displayTitle": "YT-852090 — ROBOT KOSZĄCY",
+      "headerText": "YT-852090 - ROBOT KOSZĄCY",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-852090.pdf",
+      "drawingId": "53985a31cfa4891c"
+    },
+    "YT-852091": {
+      "model": "YT-852091",
+      "deviceName": "ROBOT KOSZĄCY",
+      "displayTitle": "YT-852091 — ROBOT KOSZĄCY",
+      "headerText": "YT-852091 - ROBOT KOSZĄCY",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-852091.pdf",
+      "drawingId": "3122c5e4844acc96"
+    },
+    "YT-852092": {
+      "model": "YT-852092",
+      "deviceName": "ROBOT KOSZĄCY",
+      "displayTitle": "YT-852092 — ROBOT KOSZĄCY",
+      "headerText": "YT-852092 - ROBOT KOSZĄCY",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-852092.pdf",
+      "drawingId": "853249ae8d8b612f"
+    },
+    "YT-852093": {
+      "model": "YT-852093",
+      "deviceName": "ROBOT KOSZĄCY",
+      "displayTitle": "YT-852093 — ROBOT KOSZĄCY",
+      "headerText": "YT-852093 - ROBOT KOSZĄCY",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-852093.pdf",
+      "drawingId": "5a4ee2d46492e9de"
+    },
+    "YT-852371": {
+      "model": "YT-852371",
+      "deviceName": "ROZDRABNIACZ ELEKTRYCZNY 2800W CICHY",
+      "displayTitle": "YT-852371 — ROZDRABNIACZ ELEKTRYCZNY 2800W CICHY",
+      "headerText": "YT-852371 - ROZDRABNIACZ ELEKTRYCZNY 2800W CICHY",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-852371.pdf",
+      "drawingId": "f6a13b167a2bc3e6"
+    },
+    "YT-854837": {
+      "model": "YT-854837",
+      "deviceName": "AGREGAT PRĄDOTWÓRCZY INWERTOROWY 2000W",
+      "displayTitle": "YT-854837 — AGREGAT PRĄDOTWÓRCZY INWERTOROWY 2000W",
+      "headerText": "YT-854837 - AGREGAT PRĄDOTWÓRCZY INWERTOROWY 2000W",
+      "confidence": "high",
+      "source": "local-drawing-searchText-v66",
+      "fileName": "Czesci_zamienne_YT-854837.pdf",
+      "drawingId": "eae1dac860504f29"
     }
   }
 }

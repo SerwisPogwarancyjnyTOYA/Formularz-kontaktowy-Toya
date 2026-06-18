@@ -1,31 +1,36 @@
-# Wdrożenie PGW Service Hub v64
+# Wdrożenie v66
 
-Ta paczka zastępuje zawartość repo produkcyjnego. Nie dorzucaj jej obok starych plików — zrób czystą podmianę zawartości repo.
-
-## Test po wdrożeniu
-
-Adres z cache-busterem:
+1. Wrzuć zawartość paczki do repo GitHub Pages.
+2. Testuj z cache-busterem:
 
 ```text
-https://serwispogwarancyjnytoya.github.io/Formularz-kontaktowy-Toya/?v=20260618-v64-smart-catalog
+https://serwispogwarancyjnytoya.github.io/Formularz-kontaktowy-Toya/?v=20260618-v66-pdf-header-extractor
 ```
 
-Sprawdź:
+## Ekstrakcja nagłówków z PDF-ów
 
-- `YT-85003` — model z listą części i ZUN w mailu.
-- `YT-828390` — relacja składnik/komplet przy pompce oleju.
-- `53575` — PDF-only z nazwą z nagłówka: grzechotka powlekana wygięta 1/4.
-- dowolny model PDF-only z pełnego katalogu — rysunek ma się otworzyć, a mail ma zawierać link do PDF.
-- filtr marek po samych logotypach.
+Skrypt Apps Script:
 
-## Zakres bazy
+```text
+scripts/google-drive-pdf-header-parts-extractor.gs
+```
 
-- 1421 rekordów rysunków,
-- 1410 unikalnych modeli/urządzeń,
-- 1405 unikalnych PDF z Drive,
-- 34 modeli z listą części,
-- 1376 modeli PDF-only.
+Kolejność:
 
-## Uwaga
+```text
+pgwPdfExtractSetup
+pgwPdfExtractLoadQueueFromSheet
+pgwPdfExtractContinue
+pgwPdfExtractContinue
+...
+pgwPdfExtractBuildJsonFiles
+pgwPdfExtractAudit
+```
 
-Modele PDF-only nie mają jeszcze tabeli części w formularzu. To nie jest błąd — klient ma dostęp do rysunku i opisuje numer pozycji / część ręcznie.
+Po wygenerowaniu JSON-ów pobierz `pdf-header-overrides.generated.json` i scal lokalnie:
+
+```bash
+python3 scripts/apply-pdf-header-overrides.py --input pdf-header-overrides.generated.json
+```
+
+Potem wrzuć nowe dane do repo.
