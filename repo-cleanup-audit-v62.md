@@ -1,0 +1,184 @@
+# Audyt sprzątania repo — v62
+
+## Wynik
+- Pliki w przesłanym repo: **906**
+- Pliki w czystej paczce: **26**
+- Rozmiar rozpakowanego przesłanego repo: **63.2 MB**
+- Rozmiar czystej paczki po rozpakowaniu: **7.2 MB**
+- Wykryte pliki/ścieżki do sprzątnięcia: **794**
+
+## Zostaje w produkcji
+- `.gitignore`
+- `.nojekyll`
+- `README-WDROZENIE.md`
+- `README.md`
+- `app.css`
+- `app.js`
+- `assets/logos/fala-clean.png`
+- `assets/logos/flo-clean.png`
+- `assets/logos/lund-clean.png`
+- `assets/logos/sthor-clean.png`
+- `assets/logos/vorel-clean.png`
+- `assets/logos/yato-clean.png`
+- `assets/logos/yato-wordmark-clean.png`
+- `config.js`
+- `data/brand-resolution-overrides.json`
+- `data/devices.json`
+- `data/drawings.json`
+- `data/drive-drawings-map.full.json`
+- `data/part-assemblies.json`
+- `data/parts.json`
+- `data/pdf-header-overrides.json`
+- `data/postal-codes.json`
+- `data/universal-parts-zun-links.json`
+- `data/universal-parts-zun.json`
+- `index.html`
+- `manifest.webmanifest`
+
+## Największe śmieci / duplikaty w przesłanym repo
+- `.git/objects/pack/pack-ac2ebf1df37c2b2ae49b20b837ba1e0960082649.pack` — 15611.6 KB
+- `universal-parts-zun-links.json` — 3211.0 KB
+- `universal-parts-zun-links (2).json` — 3211.0 KB
+- `universal-parts-zun-links (1).json` — 3211.0 KB
+- `data/universal-parts-zun-links.json` — 3211.0 KB
+- `drive-drawings-map (1).full.json` — 1897.2 KB
+- `drive-drawings-map.full.json` — 1897.2 KB
+- `drive-drawings-map (2).full.json` — 1897.2 KB
+- `data/drive-drawings-map.full.json` — 1897.2 KB
+- `parts (2).json` — 874.6 KB
+- `parts (6).json` — 874.6 KB
+- `parts (4).json` — 874.6 KB
+- `parts (3).json` — 874.6 KB
+- `parts (1).json` — 874.6 KB
+- `parts (5).json` — 874.6 KB
+- `data/parts.json` — 874.6 KB
+- `universal-parts-zun.json` — 817.4 KB
+- `universal-parts-zun (1).json` — 817.4 KB
+- `universal-parts-zun (2).json` — 817.4 KB
+- `data/universal-parts-zun.json` — 787.5 KB
+
+## Przykładowe rzeczy wyrzucone
+- `sthor-clean (2).png`
+- `audit-repo (3).sh`
+- `brand-review (1).html`
+- `clean-macos-junk (5).sh`
+- `PE鈹济糔Y_MANIFEST_DRIVE_V52.md`
+- `build-part-map-template (4).py`
+- `PE鈹济糔Y_MANIFEST_DRIVE_V53 (2).md`
+- `parts.generated (2).json`
+- `brand-low-confidence-review (1).v54.csv`
+- `convert-drive-manifest-csv (3).py`
+- `ROZPOZNAWANIE_MAREK_V54 (1).md`
+- `brand-index (1).full.json`
+- `convert-drive-manifest-csv (2).py`
+- `devices (2).json`
+- `part-hotspots (2).sample.json`
+- `build-part-map-template (5).py`
+- `clean-macos-junk (4).sh`
+- `part-hotspots (5).sample.json`
+- `build-meta (5).json`
+- `README-MACIEJ-V33.md`
+- `fala-clean (5).png`
+- `audit-repo (2).sh`
+- `yato-wordmark-clean (1).png`
+- `flo-clean (5).png`
+- `build-meta (7).json`
+- `auto-zun-mail-coverage (1).v56.csv`
+- `MAPOWANIE_CZESCI_PDF (5).md`
+- `pdf-header-overrides (1).json`
+- `index (2).html`
+- `PE鈹济糔Y_MANIFEST_DRIVE_V53 (1).md`
+- `ROZPOZNAWANIE_MAREK_V54 (2).md`
+- `convert-drive-manifest-csv (1).py`
+- `ROZPOZNAWANIE_MAREK_V54 (3).md`
+- `brand-resolution-overrides (1).json`
+- `MAPOWANIE_CZESCI_PDF (4).md`
+- `drive-drawings-map (2).json`
+- `parts (2).json`
+- `PE┼üNY_MANIFEST_DRIVE_V53.md`
+- `manifest (3).webmanifest`
+- `brand-guesses (2).v54.json`
+- `audit-repo (1).sh`
+- `manifest (4).webmanifest`
+- `drawings (8).json`
+- `audit-repo (5).sh`
+- `drive-drawings-map (6).json`
+- `PE鈹济糔Y_MANIFEST_DRIVE_V51 (1).md`
+- `parts (6).json`
+- `part-hotspots (4).sample.json`
+- `audit-repo.sh`
+- `part-hotspots (3).sample.json`
+- `PRODUKCYJNE_UI_V58.md`
+- `brand-guesses.v54.json`
+- `PEŁNY_MANIFEST_DRIVE_V51 (1).md`
+- `clean-macos-junk (3).sh`
+- `build-part-map-template (2).py`
+- `README-MACIEJ-V23-LOGO (2).md`
+- `ZUN_UNIVERSAL_PARTS_V55.md`
+- `convert-drive-manifest-csv (4).py`
+- `README-MACIEJ-V27-DRIVE-DEMO.md`
+- `vorel-clean (1).png`
+- `part-assemblies.v57.csv`
+- `MAPOWANIE_CZESCI_PDF (1).md`
+- `build-part-map-template (3).py`
+- `build-meta (3).json`
+- `clean-macos-junk (2).sh`
+- `apply-brand-overrides.py`
+- `PE┼üNY_MANIFEST_DRIVE_V52.md`
+- `index (6).html`
+- `toya24-official-drawings (3).json`
+- `PDF_HEADER_EXTRACTOR_V54 (1).md`
+- `devices (4).json`
+- `manifest-audit.full.json`
+- `brand-low-confidence-review (2).v54.json`
+- `audit-repo (4).sh`
+- `clean-macos-junk.sh`
+- `PDF_HEADER_EXTRACTOR_V54 (3).md`
+- `index (4).html`
+- `Icon`
+- `flo-clean (4).png`
+- `fala-clean (4).png`
+- `devices (6).json`
+- `README-MACIEJ-V22.md`
+- `lund-clean (1).png`
+- `brand-low-confidence-review.v54.csv`
+- `manifest (5).webmanifest`
+- `PE鈹济糔Y_MANIFEST_DRIVE_V53.md`
+- `build-part-map-template (1).py`
+- `brand-low-confidence-review.v54.json`
+- `MAPOWANIE_CZESCI_PDF (3).md`
+- `build-meta (1).json`
+- `manifest (2).webmanifest`
+- `README-MACIEJ-V29-DRIVE-ALL.md`
+- `brand-review-unknown.csv`
+- `MAPOWANIE_CZESCI_PDF (2).md`
+- `clean-macos-junk (1).sh`
+- `parts (4).json`
+- `drive-drawings-map (4).json`
+- `README-MACIEJ-V32.md`
+- `yato-clean (6).png`
+- `sthor-clean (3).png`
+- `PDF_HEADER_EXTRACTOR_V54 (2).md`
+- `index (3).html`
+- `PEŁNY_MANIFEST_DRIVE_V53.md`
+- `build-meta.json`
+- `devices (1).json`
+- `README-MACIEJ-V28-PELNY-MANIFEST-DRIVE.md`
+- `part-assemblies (1).v57.json`
+- `build-meta (6).json`
+- `vorel-clean (6).png`
+- `README (6).md`
+- `universal-parts-zun-links (2).csv`
+- `brand-guesses.v54.csv`
+- `ZUN_UNIVERSAL_PARTS_V55 (1).md`
+- `auto-zun-mail-coverage (2).v56.json`
+- `part-assemblies (1).v57.csv`
+- `brand-review (2).html`
+- `drive-drawings-map (3).json`
+- `parts (3).json`
+- `apply-brand-overrides (1).py`
+- `parts (1).json`
+- ...i jeszcze 674 pozycji
+
+## Zasada wdrożenia
+Nie dorzucać tej paczki na wierzch starego repo. Trzeba usunąć stare pliki i zostawić wyłącznie zawartość czystej paczki.

@@ -1,9 +1,0 @@
-{
-  "version": "20260616-v33-toya24-only",
-  "mode": "toya24-official-only",
-  "parts": 68,
-  "drawings": 1,
-  "devices": 1,
-  "removed": "prices, availability, non-TOYA24 technical drawings",
-  "source": "TOYA24_zalaczniki manifest"
-}
