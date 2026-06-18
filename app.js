@@ -413,11 +413,32 @@
       counts.set(brand, (counts.get(brand) || 0) + 1);
     }
     state.brandSummary = [...counts.entries()].sort((a,b) => b[1] - a[1] || a[0].localeCompare(b[0], 'pl'));
-    const buttons = [['all', 'Wszystkie', state.devices.length], ...state.brandSummary];
+    const buttons = [['all', 'Wszystkie marki', state.devices.length], ...state.brandSummary];
     els.brandFilter.innerHTML = buttons.map(([value, label, count]) => {
       const active = state.activeBrand === value;
-      return `<button type="button" class="brand-chip ${active ? 'active' : ''}" data-brand="${escapeAttr(value)}"><span>${escapeHtml(label)}</span><b>${fmt(count)}</b></button>`;
+      const logo = brandFilterLogo(value, label);
+      const aria = `${label}: ${fmt(count)} urządzeń`;
+      return `<button type="button" class="brand-chip logo-only ${active ? 'active' : ''}" data-brand="${escapeAttr(value)}" title="${escapeAttr(label)}" aria-label="${escapeAttr(aria)}">${logo}</button>`;
     }).join('');
+  }
+
+  function brandFilterLogo(value, label) {
+    const logos = {
+      'YATO': 'assets/logos/yato-clean.png',
+      'YATO GASTRO': 'assets/logos/yato-clean.png',
+      'STHOR': 'assets/logos/sthor-clean.png',
+      'VOREL': 'assets/logos/vorel-clean.png',
+      'LUND': 'assets/logos/lund-clean.png',
+      'FLO': 'assets/logos/flo-clean.png',
+      'FALA': 'assets/logos/fala-clean.png'
+    };
+    if (value === 'all') {
+      return `<span class="brand-all-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span>`;
+    }
+    const src = logos[value];
+    if (src) return `<img src="${escapeAttr(src)}" alt="" loading="lazy" decoding="async">`;
+    const letter = String(label || value || '?').trim().charAt(0) || '?';
+    return `<span class="brand-fallback-icon" aria-hidden="true">${escapeHtml(letter)}</span>`;
   }
 
   function renderExamples() {

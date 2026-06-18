@@ -1,17 +1,13 @@
 # Wdrożenie
 
-1. W repozytorium GitHub Pages usuń stare pliki produkcyjne.
-2. Wgraj zawartość tej paczki do głównego katalogu repozytorium.
-3. Nie dogrywaj tej paczki obok poprzednich wersji — ma zastąpić aktualną stronę.
-4. Po publikacji sprawdź adres z parametrem cache-busting:
+1. Rozpakuj paczkę.
+2. Zastąp zawartość repo plikami z paczki.
+3. Nie dokładaj starych wersji obok nowych plików.
+4. Commit + push do GitHub Pages.
+5. Testuj z cache-busterem:
 
 ```text
-https://serwispogwarancyjnytoya.github.io/Formularz-kontaktowy-Toya/?v=20260618-v60-service-polish
+https://serwispogwarancyjnytoya.github.io/Formularz-kontaktowy-Toya/?v=20260618-v61-brand-logos
 ```
 
-Kontrola po wdrożeniu:
-- brak widocznych oznaczeń testowych i numerów wersji,
-- formularz danych nie świeci białym blokiem,
-- informacja o ZUN w mailu nie podaje źródła danych,
-- PDF otwiera się po wyborze urządzenia,
-- mail zawiera części, ZUN-y i komplety tylko jako informacje pomocnicze dla obsługi.
+Wersja v61 porządkuje filtr marek: klient widzi same logotypy bez liczników i napisów.
