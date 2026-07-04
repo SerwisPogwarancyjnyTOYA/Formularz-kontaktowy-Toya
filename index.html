@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="robots" content="noindex,nofollow" />
+  <meta name="description" content="Formularz serwisu pogwarancyjnego TOYA do wyszukiwania urządzeń, rysunków PDF i generowania zapytań o części." />
+  <meta name="robots" content="index,follow" />
   <title>Formularz zapytania o części — Serwis Pogwarancyjny TOYA</title>
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="stylesheet" href="app.css" />
@@ -17,7 +18,11 @@
         <span>Krokowy formularz zapytania o części</span>
       </div>
     </div>
-    <div class="top-actions"><div class="status-pill" id="loadStatus">Ładowanie formularza…</div></div>
+    <div class="top-actions">
+      <span class="mode-pill">Wersja pokazowa</span>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="true"><span id="themeIcon">☾</span><span id="themeLabel">Tryb jasny</span></button>
+      <div class="status-pill" id="loadStatus">Ładowanie formularza…</div>
+    </div>
   </header>
 
   <main class="shell">
@@ -32,6 +37,11 @@
           <span>3. Dodaj części</span>
           <span>4. Skopiuj mail</span>
         </div>
+      </div>
+      <div class="stats" aria-label="Stan bazy formularza">
+        <div><strong id="statDevices">—</strong><span>urządzeń</span></div>
+        <div><strong id="statDrawings">—</strong><span>rysunków PDF</span></div>
+        <div><strong id="statParts">—</strong><span>części / powiązań</span></div>
       </div>
     </section>
 

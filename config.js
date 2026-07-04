@@ -1,8 +1,8 @@
 window.PGW_CONFIG = {
-  version: '20260618-v66-pdf-header-extractor',
+  version: '20260703-final-presentation-build',
   appName: 'Formularz zapytania o części',
   recipientEmail: 'service@yato.pl',
-  storageMode: 'drive',
+  storageMode: 'github-pages-static',
   pdfOnly: true,
   showPrices: false,
   showStock: false,
