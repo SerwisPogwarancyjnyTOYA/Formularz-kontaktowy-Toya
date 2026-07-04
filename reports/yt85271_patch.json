@@ -1,0 +1,7 @@
+{
+  "model": "YT-85271",
+  "parts_added": 69,
+  "source_docx": "17WYrAvgI5z0DxLp-Dpa7nIrEupAwx2rU",
+  "source_pdf": "1auPSAuiSC_gKsK3MH4eCtbzxz3QUga0_",
+  "issue": "PDF i DOCX były na Drive, ale parts.json nie miał rekordów dla modelu"
+}
