@@ -34,3 +34,10 @@ python3 scripts/apply-pdf-header-overrides.py --input pdf-header-overrides.gener
 ```
 
 Potem wrzuć nowe dane do repo.
+
+
+## v67 — ważne wdrożenie
+
+W tej wersji app.js i app.css obsługują zapytania do wielu urządzeń w jednym mailu. Po synchronizacji Drive → GitHub Desktop sprawdzić zmianę tych dwóch plików i wykonać commit/push.
+
+Test: dodać część z jednego modelu, przejść do drugiego modelu i dodać kolejną część. Mail powinien mieć osobne sekcje „Urządzenie 1” i „Urządzenie 2”.
