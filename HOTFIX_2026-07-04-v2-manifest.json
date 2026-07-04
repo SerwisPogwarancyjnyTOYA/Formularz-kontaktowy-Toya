@@ -1,0 +1,19 @@
+{
+  "hotfix": "2026-07-04-v2-full-data",
+  "addedModels": [
+    "YT-828113",
+    "YT-828114"
+  ],
+  "addedPartsPerModel": 41,
+  "sourceDocx": "Czesci_zamienne_YT-828113 YT-828114.docx",
+  "sourceDocxDriveFileId": "1V8hUizgGRv0Ij2f5wdBH4xe-J47gaTev",
+  "filesMustUpload": [
+    "index.html",
+    "app.js",
+    "app.css",
+    "config.js",
+    "manifest.webmanifest",
+    "data/*",
+    "assets/*"
+  ]
+}

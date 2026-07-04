@@ -527,7 +527,7 @@
       'FALA': 'assets/logos/fala-clean.png'
     };
     if (value === 'all') {
-      return `<span class="brand-all-label" aria-hidden="true">ALL</span>`;
+      return `<span class="brand-all-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span>`;
     }
     const src = logos[value];
     if (src) return `<img src="${escapeAttr(src)}" alt="" loading="lazy" decoding="async">`;
