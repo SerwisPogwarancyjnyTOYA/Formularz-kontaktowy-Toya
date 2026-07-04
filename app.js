@@ -1,7 +1,7 @@
 (() => {
   'use strict';
   const CONFIG = window.PGW_CONFIG || {};
-  const DRAFT_KEY = 'pgw-production-draft';
+  const DRAFT_KEY = 'pgw-production-draft-v67-multi-device';
   const THEME_KEY = 'pgw-theme';
   const PART_ROW_LIMIT = Number(CONFIG.partRowLimit || 80);
   const $ = (id) => document.getElementById(id);
@@ -462,7 +462,7 @@
     if (els.backData) els.backData.addEventListener('click', () => goStep(3));
     if (els.goMail) els.goMail.addEventListener('click', () => goStep(4));
     if (els.goManualData) els.goManualData.addEventListener('click', () => goStep(3));
-    els.clearBasket.addEventListener('click', () => { state.selectedParts.clear(); renderBasket(); saveDraft(); });
+    els.clearBasket.addEventListener('click', clearRequestBasket);
     if (els.showMoreParts) els.showMoreParts.addEventListener('click', () => { state.partVisibleLimit += PART_ROW_LIMIT; renderParts(); });
     if (els.mobileGoData) els.mobileGoData.addEventListener('click', () => goStep(state.step < 3 ? 3 : 4));
     if (els.focusParts) els.focusParts.addEventListener('click', () => document.querySelector('#stage2')?.scrollIntoView({behavior:'smooth', block:'start'}));
@@ -844,7 +844,7 @@
     state.partVisibleLimit = PART_ROW_LIMIT;
     state.selectedDevice = { deviceIndex: clean || 'nie podano', title: 'opis części do sprawdzenia'  };
     state.selectedDrawing = null;
-    state.selectedParts.clear();
+    // Nie czyścimy koszyka — zapytanie może obejmować kilka urządzeń.
     renderSelectedDevice();
     renderParts();
     renderBasket();
@@ -952,30 +952,106 @@
     saveDraft();
   }
 
+
+  function selectedBasketItems() {
+    return [...state.selectedParts.values()].filter(x => x && x.part);
+  }
+
+  function getDeviceForPart(part) {
+    if (!part) return null;
+    return state.devices.find(d => norm(d.deviceIndex) === norm(part.deviceIndex)) || {
+      deviceIndex: part.deviceIndex || '',
+      title: part.deviceName || part.drawingTitle || ''
+    };
+  }
+
+  function getDrawingForPart(part) {
+    if (!part) return null;
+    return state.drawingById.get(String(part.drawingId)) || state.drawings.find(d => norm(d.deviceIndex) === norm(part.deviceIndex)) || null;
+  }
+
+  function groupSelectedParts(items) {
+    const groups = new Map();
+    for (const item of items || []) {
+      const part = item.part || item;
+      const drawing = getDrawingForPart(part);
+      const device = getDeviceForPart(part);
+      const key = String(part.drawingId || (device && device.deviceIndex) || part.deviceIndex || part.id);
+      if (!groups.has(key)) groups.set(key, {key, device, drawing, items: []});
+      groups.get(key).items.push(item);
+    }
+    return [...groups.values()].sort((a, b) => String(a.device?.deviceIndex || '').localeCompare(String(b.device?.deviceIndex || ''), 'pl'));
+  }
+
+  function hasManualRequestOnly(groups) {
+    if (!state.manualMode || !state.selectedDevice) return false;
+    const current = norm(state.selectedDevice.deviceIndex || '');
+    return !groups.some(g => norm(g.device?.deviceIndex || '') === current);
+  }
+
+  function requestDeviceCount(groups) {
+    return (groups || []).length + (hasManualRequestOnly(groups || []) ? 1 : 0);
+  }
+
+  function requestPartsQty(items) {
+    return (items || selectedBasketItems()).reduce((sum, x) => sum + (Number(x.qty) || 0), 0);
+  }
+
+  function clearRequestBasket() {
+    state.selectedParts.clear();
+    if (state.manualMode) {
+      state.manualMode = false;
+      state.selectedDevice = null;
+      state.selectedDrawing = null;
+    }
+    renderDeviceResults(els.deviceSearch ? els.deviceSearch.value : '');
+    renderSelectedDevice();
+    renderParts();
+    renderBasket();
+    renderViewer(false);
+    saveDraft();
+  }
+
   function renderBasket() {
-    const items = [...state.selectedParts.values()];
-    els.basketCount.textContent = String(items.reduce((n, x) => n + x.qty, 0));
-    const canData = state.manualMode || items.length > 0;
+    const items = selectedBasketItems();
+    const groups = groupSelectedParts(items);
+    const totalQty = requestPartsQty(items);
+    els.basketCount.textContent = String(totalQty);
+    const hasManual = state.manualMode && state.selectedDevice;
+    const canData = hasManual || items.length > 0;
     els.goData.disabled = !canData;
     if (els.goDataInline) els.goDataInline.disabled = !canData;
-    els.clearBasket.disabled = items.length === 0;
-    if (!items.length && state.manualMode) {
-      els.basketItems.className = 'basket-empty manual-basket';
-      els.basketItems.innerHTML = 'Opisz potrzebną część w kolejnym kroku.';
-    } else if (!items.length) {
+    els.clearBasket.disabled = !canData;
+
+    const manualHtml = hasManualRequestOnly(groups) ? `<div class="basket-device-group manual-group">
+      <div class="basket-device-title"><strong>Opis ręczny / PDF bez listy części</strong><span>${escapeHtml(state.selectedDevice.deviceIndex || 'Zapytanie ręczne')} — ${escapeHtml(displayDeviceName(state.selectedDevice, state.selectedDrawing) || state.selectedDevice.title || 'do opisania')}</span></div>
+      <div class="basket-item"><div><strong>Pozycja z rysunku lub opis klienta</strong><span>Treść zostanie pobrana z pola „Opis części / urządzenia”.</span></div></div>
+    </div>` : '';
+
+    if (!items.length && !hasManual) {
       els.basketItems.className = 'basket-empty';
       els.basketItems.innerHTML = 'Brak wybranych części.';
     } else {
       els.basketItems.className = '';
-      els.basketItems.innerHTML = items.map(({part, qty}) => `<div class="basket-item">
-        <div><strong>poz. ${escapeHtml(part.position || '-')} • ${escapeHtml(part.partIndex || '')}</strong><span>${escapeHtml(part.namePl || part.nameEn || '')}${escapeHtml(formatAssemblyInline(part))}</span>${assemblyNoticeHtml(part)}</div>
-        <div class="qty">
-          <button type="button" data-dec="${escapeAttr(part.id)}">−</button>
-          <input value="${qty}" inputmode="numeric" data-qty="${escapeAttr(part.id)}" />
-          <button type="button" data-inc="${escapeAttr(part.id)}">+</button>
-          <button class="remove" type="button" data-remove="${escapeAttr(part.id)}">×</button>
-        </div>
-      </div>`).join('');
+      const groupHtml = groups.map(group => {
+        const device = group.device || {};
+        const drawing = group.drawing || {};
+        const title = displayDeviceName(device, drawing) || device.title || drawing.title || '';
+        const rows = group.items.map(({part, qty}) => `<div class="basket-item">
+          <div><strong>poz. ${escapeHtml(part.position || '-')} • ${escapeHtml(part.partIndex || '')}</strong><span>${escapeHtml(part.namePl || part.nameEn || '')}${escapeHtml(formatAssemblyInline(part))}</span>${assemblyNoticeHtml(part)}</div>
+          <div class="qty">
+            <button type="button" data-dec="${escapeAttr(part.id)}">−</button>
+            <input value="${qty}" inputmode="numeric" data-qty="${escapeAttr(part.id)}" />
+            <button type="button" data-inc="${escapeAttr(part.id)}">+</button>
+            <button class="remove" type="button" data-remove="${escapeAttr(part.id)}">×</button>
+          </div>
+        </div>`).join('');
+        return `<div class="basket-device-group">
+          <div class="basket-device-title"><strong>${escapeHtml(device.deviceIndex || 'Bez indeksu')}</strong><span>${escapeHtml(title)}${drawing.fileName ? ` • ${escapeHtml(drawing.fileName)}` : ''}</span></div>
+          ${rows}
+        </div>`;
+      }).join('');
+      els.basketItems.innerHTML = `${groupHtml}${manualHtml}`;
       els.basketItems.querySelectorAll('[data-inc]').forEach(b => b.addEventListener('click', () => changeQty(b.dataset.inc, 1)));
       els.basketItems.querySelectorAll('[data-dec]').forEach(b => b.addEventListener('click', () => changeQty(b.dataset.dec, -1)));
       els.basketItems.querySelectorAll('[data-remove]').forEach(b => b.addEventListener('click', () => removePart(b.dataset.remove)));
@@ -988,15 +1064,18 @@
 
   function updateMobileSummary() {
     if (!els.mobileSummaryBar || !els.mobileSummaryText || !els.mobileGoData) return;
-    const qty = [...state.selectedParts.values()].reduce((n, x) => n + x.qty, 0);
-    if (state.manualMode) {
-      els.mobileSummaryText.textContent = 'Opisz potrzebną część';
+    const items = selectedBasketItems();
+    const groups = groupSelectedParts(items);
+    const devices = requestDeviceCount(groups);
+    const qty = requestPartsQty(items);
+    if (state.manualMode && !qty) {
+      els.mobileSummaryText.textContent = state.selectedDevice ? `Opis ręczny: ${state.selectedDevice.deviceIndex || 'urządzenie'}` : 'Opisz potrzebną część';
       els.mobileGoData.disabled = !state.selectedDevice;
       els.mobileGoData.textContent = state.step >= 3 ? 'Mail' : 'Dane';
       return;
     }
-    els.mobileSummaryText.textContent = qty ? `Wybrane części: ${qty}` : 'Brak wybranych części';
-    const canGo = state.step >= 3 ? formIsValid() : qty > 0;
+    els.mobileSummaryText.textContent = qty ? `Części: ${qty} • urządzeń: ${devices || 1}` : 'Brak wybranych części';
+    const canGo = state.step >= 3 ? formIsValid() : (qty > 0 || state.manualMode);
     els.mobileGoData.disabled = !canGo;
     els.mobileGoData.textContent = state.step >= 3 ? 'Mail' : 'Dane';
   }
@@ -1273,19 +1352,22 @@
   }
 
   function renderFinalChecklist() {
-    if (!els.finalChecklist || !state.selectedDevice) return;
+    if (!els.finalChecklist || (!state.selectedDevice && !state.selectedParts.size)) return;
     const f = Object.fromEntries(new FormData(els.customerForm).entries());
-    const partsCount = [...state.selectedParts.values()].reduce((sum, x) => sum + (Number(x.qty) || 0), 0);
+    const items = selectedBasketItems();
+    const groups = groupSelectedParts(items);
+    const partsCount = requestPartsQty(items);
+    const devicesCount = requestDeviceCount(groups);
     const rows = [
-      ['Urządzenie', state.selectedDevice.deviceIndex || 'model opisany ręcznie', 'ok'],
-      ['Części', state.manualMode ? 'opis ręczny' : `${state.selectedParts.size} pozycji / ${partsCount} szt.`, hasSelectionForRequest() ? 'ok' : 'warn'],
+      ['Urządzenia', devicesCount ? `${devicesCount} w zapytaniu` : (state.selectedDevice?.deviceIndex || 'model opisany ręcznie'), devicesCount || state.selectedDevice ? 'ok' : 'warn'],
+      ['Części', state.manualMode && !partsCount ? 'opis ręczny' : `${items.length} pozycji / ${partsCount} szt.`, hasSelectionForRequest() ? 'ok' : 'warn'],
       ['Kontakt', hasUsableContact(f.contactEmail, f.contactPhone) ? (f.contactEmail || f.contactPhone) : 'brak poprawnego emaila lub telefonu', hasUsableContact(f.contactEmail, f.contactPhone) ? 'ok' : 'warn'],
-      ['Faktura', els.wantInvoice?.checked ? 'podano dane do faktury' : 'do ustalenia z serwisem', 'neutral'],
-      ['Wysyłka', els.wantShipping?.checked ? 'podano adres wysyłki' : 'do ustalenia z serwisem', 'neutral']
+      ['Faktura', els.wantInvoice?.checked ? (f.invoiceName || 'dane wpisane') : 'opcjonalnie pominięta', 'neutral'],
+      ['Wysyłka', els.wantShipping?.checked ? (f.shipName || 'adres wpisany') : 'opcjonalnie pominięta', 'neutral']
     ];
-    const warnings = getSoftWarnings(f);
-    els.finalChecklist.innerHTML = `<div class="final-grid">${rows.map(([a,b,m]) => `<div class="final-item"><span>${escapeHtml(a)}</span><strong>${escapeHtml(b)}</strong><em class="${m}">${m === 'ok' ? 'OK' : m === 'warn' ? 'sprawdź' : 'opcjonalne'}</em></div>`).join('')}</div>${warnings.length ? `<div class="soft-warnings"><strong>Przed wysłaniem warto sprawdzić:</strong><ul>${warnings.map(w => `<li>${escapeHtml(w)}</li>`).join('')}</ul></div>` : '<div class="soft-warnings ok"><strong>Mail wygląda kompletnie.</strong> Klient może skopiować temat i treść.</div>'}`;
+    els.finalChecklist.innerHTML = rows.map(([k,v,t]) => `<div class="check-row ${t}"><span>${escapeHtml(k)}</span><strong>${escapeHtml(v)}</strong></div>`).join('');
   }
+
 
   function getSoftWarnings(f) {
     const out = [];
@@ -1301,50 +1383,61 @@
 
   function val(field) { return String(field?.value || '').trim(); }
 
+  function formatDrawingMailBlock(drawing) {
+    if (!drawing) {
+      return 'Rysunek techniczny PDF: brak dobranego rysunku w formularzu.\nProszę o pomoc w identyfikacji części. Klient powinien dołączyć zdjęcie tabliczki znamionowej i potrzebnej części.';
+    }
+    const drive = state.driveByDrawingId.get(String(drawing.id));
+    return `Rysunek techniczny PDF:\n${drawing.fileName || drawing.title || ''}\n${drive && drive.openUrl ? `Link do rysunku: ${drive.openUrl}` : ''}`;
+  }
+
+  function formatPartLine(item, index) {
+    const part = item.part || item;
+    const qty = item.qty || 1;
+    const matches = part.isUniversalZun ? [{zun: part.zun || part.partIndex}] : getAutoZunMatchesForPart(part);
+    return `${index}. ${part.partIndex || 'brak indeksu'} — poz. ${part.position || '-'} — ${part.namePl || part.nameEn || ''}${formatZunInline(matches)} — ilość: ${qty} szt.`;
+  }
+
+  function formatDeviceMailSection(group, ordinal) {
+    const d = group.device || {};
+    const drawing = group.drawing || null;
+    const title = displayDeviceName(d, drawing) || d.title || '';
+    const partLines = group.items.map((x, i) => formatPartLine(x, i + 1)).join('\n');
+    const assemblyBlock = formatAssemblyServiceBlock(getAssemblyHintsForSelectedParts(group.items));
+    const zunBlock = formatZunServiceBlock(getZunHintsForSelectedParts(group.items));
+    const serviceBlocks = [assemblyBlock, zunBlock].filter(Boolean).join('\n\n');
+    return `Urządzenie ${ordinal}: ${d.deviceIndex || '[brak indeksu]'}${title ? ` — ${title}` : ''}\n${formatDrawingMailBlock(drawing)}\n\nLista części:\n${partLines}${serviceBlocks ? `\n\n${serviceBlocks}` : ''}`;
+  }
+
+  function formatManualMailSection(ordinal, f) {
+    const d = state.selectedDevice || {};
+    const drawing = state.selectedDrawing || null;
+    const title = displayDeviceName(d, drawing) || d.title || '';
+    const drawingNote = drawing ? `${formatDrawingMailBlock(drawing)}\nLista części nie jest jeszcze podpięta do formularza — klient opisał potrzebną część ręcznie.` : formatDrawingMailBlock(null);
+    return `Urządzenie ${ordinal}: ${d.deviceIndex || '[brak indeksu]'}${title ? ` — ${title}` : ''}\n${drawingNote}\n\nLista części / opis ręczny:\n${f.manualPartsDescription || '[opisz potrzebną część i dołącz zdjęcia do maila]'}`;
+  }
+
   function generateMail() {
-    if (!state.selectedDevice) return;
-    const d = state.selectedDevice, drawing = state.selectedDrawing;
+    if (!state.selectedDevice && !state.selectedParts.size) return;
     const f = Object.fromEntries(new FormData(els.customerForm).entries());
-    const parts = [...state.selectedParts.values()];
-    const drive = drawing ? state.driveByDrawingId.get(String(drawing.id)) : null;
-    const subject = (state.manualMode && !drawing)
-      ? `Zapytanie o części zamienne — opis ręczny ${d.deviceIndex || ''}`.trim()
-      : `Zapytanie o części zamienne — ${d.deviceIndex || ''}`.trim();
-    const zunHints = getZunHintsForSelectedParts(parts);
-    const selectedPartLines = parts.map((x, i) => {
-      const matches = x.part.isUniversalZun ? [{zun: x.part.zun || x.part.partIndex}] : getAutoZunMatchesForPart(x.part);
-      return `${i + 1}. ${x.part.partIndex || 'brak indeksu'} — poz. ${x.part.position || '-'} — ${x.part.namePl || x.part.nameEn || ''}${formatZunInline(matches)} — ilość: ${x.qty} szt.`;
-    }).join('\n');
-    const zunServiceBlock = formatZunServiceBlock(zunHints);
-    const partLines = state.manualMode
-      ? `${selectedPartLines ? `Wybrane części uniwersalne / ZUN:\n${selectedPartLines}\n\n` : ''}Opis części / urządzenia:\n${f.manualPartsDescription || '[opisz potrzebną część i dołącz zdjęcia do maila]'}${zunServiceBlock ? `\n\n${zunServiceBlock}` : ''}`
-      : `${selectedPartLines}${zunServiceBlock ? `\n\n${zunServiceBlock}` : ''}`;
-    const drawingBlock = (state.manualMode && !drawing)
-      ? `Rysunek techniczny PDF: brak dobranego rysunku w formularzu.\nProszę o pomoc w identyfikacji części. Klient powinien dołączyć zdjęcie tabliczki znamionowej i potrzebnej części.`
-      : `Rysunek techniczny PDF:\n${drawing ? `${drawing.fileName || drawing.title || ''}` : ''}\n${drive && drive.openUrl ? `Link do rysunku: ${drive.openUrl}` : ''}${state.manualMode && drawing ? `\nLista części nie jest jeszcze podpięta do formularza — klient opisał potrzebną część ręcznie.` : ''}`;
-    const body = `Dzień dobry,
+    const items = selectedBasketItems();
+    const groups = groupSelectedParts(items);
+    const manualOnly = hasManualRequestOnly(groups);
+    const totalDevices = requestDeviceCount(groups);
+    const titleDevice = groups[0]?.device || state.selectedDevice || {};
+    const subject = totalDevices > 1
+      ? `Zapytanie o części zamienne — ${totalDevices} urządzenia`
+      : `Zapytanie o części zamienne — ${titleDevice.deviceIndex || state.selectedDevice?.deviceIndex || 'opis ręczny'}`.trim();
 
-Mam urządzenie ${d.deviceIndex || '[brak indeksu]'}${displayDeviceName(d, drawing) ? ` — ${displayDeviceName(d, drawing)}` : ''}.
-${f.serialNumber ? `Numer seryjny urządzenia: ${f.serialNumber}\n` : ''}${drawingBlock}
+    const sections = groups.map((group, i) => formatDeviceMailSection(group, i + 1));
+    if (manualOnly) sections.push(formatManualMailSection(sections.length + 1, f));
+    const intro = totalDevices > 1
+      ? `Proszę o sprawdzenie części do ${totalDevices} urządzeń.`
+      : 'Proszę o sprawdzenie części do poniższego urządzenia.';
+    const serialLine = f.serialNumber ? `\nNumer seryjny / informacja z formularza: ${f.serialNumber}\n` : '';
+    const warnings = totalDevices > 1 && f.serialNumber ? '\nUwaga: numer seryjny wpisano w formularzu jako informację ogólną. Jeśli dotyczy konkretnego urządzenia, proszę potwierdzić to z klientem.\n' : '';
 
-Lista części:
-${partLines}
-
-Proszę o potwierdzenie możliwości zamówienia, wycenę oraz informację o dalszych krokach.
-
-Dane kontaktowe:
-${f.contactName || '[uzupełnij imię/nazwę kontaktową]'}
-Email: ${f.contactEmail || '-'}
-Telefon: ${f.contactPhone || '-'}
-
-${invoiceMailBlock(f)}
-
-${shippingMailBlock(f)}
-
-Uwagi:
-${f.notes || '-'}
-
-Pozdrawiam`;
+    const body = `Dzień dobry,\n\n${intro}${serialLine}${warnings}\n${sections.join('\n\n---\n\n')}\n\nProszę o potwierdzenie możliwości zamówienia, wycenę oraz informację o dalszych krokach.\n\nDane kontaktowe:\n${f.contactName || '[uzupełnij imię/nazwę kontaktową]'}\nEmail: ${f.contactEmail || '-'}\nTelefon: ${f.contactPhone || '-'}\n\n${invoiceMailBlock(f)}\n\n${shippingMailBlock(f)}\n\nUwagi:\n${f.notes || '-'}\n\nPozdrawiam`;
     els.mailTo.value = CONFIG.recipientEmail || 'service@yato.pl';
     els.mailSubject.value = subject;
     els.mailBody.value = body;

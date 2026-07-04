@@ -140,7 +140,6 @@ button{background:var(--surface);border-color:var(--line);color:var(--text)}butt
 
 
 .[hidden]{display:none!important}
-.top-actions .mode-pill{display:none!important}
 .status-pill{white-space:nowrap}
 .selected-device span,.part-meta,.locator-help,.context-card p{line-height:1.45}
 .manual-parts-box strong{color:var(--text)}
@@ -225,3 +224,28 @@ html[data-theme="dark"] .assembly-notice{background:rgba(251,146,60,.10);color:#
 #stage3 .form-hint.ok{background:rgba(50,213,131,.12)!important;color:#32d583!important;border-color:rgba(50,213,131,.30)!important}
 #stage3 .form-hint.warn{background:rgba(253,176,34,.12)!important;color:#fdb022!important;border-color:rgba(253,176,34,.30)!important}
 #mailBody{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;}
+
+/* v67 — zapytanie do wielu urządzeń */
+.basket-device-group {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 10px;
+  margin: 10px 0;
+  background: rgba(255,255,255,.035);
+}
+.basket-device-title {
+  display: grid;
+  gap: 2px;
+  margin: 0 0 8px;
+}
+.basket-device-title strong {
+  font-size: .95rem;
+}
+.basket-device-title span {
+  color: var(--muted);
+  font-size: .82rem;
+  line-height: 1.35;
+}
+.basket-device-group.manual-group {
+  border-style: dashed;
+}

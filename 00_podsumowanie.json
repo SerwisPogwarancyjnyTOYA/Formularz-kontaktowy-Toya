@@ -1,0 +1,16 @@
+{
+  "devices_total": 1410,
+  "drawings_total": 1421,
+  "parts_total": 2179,
+  "devices_with_pdf": 1410,
+  "devices_with_parts_list": 34,
+  "devices_pdf_without_parts_list": 1376,
+  "drawings_with_parts": 34,
+  "drawings_without_parts": 1387,
+  "drawings_without_text_without_parts": 1371,
+  "drawings_with_text_without_parts": 16,
+  "drive_manifest_rows": 1418,
+  "drive_rows_brand_needs_confirmation": 479,
+  "drive_duplicate_file_ids": 13,
+  "drive_duplicate_model_keys": 9
+}

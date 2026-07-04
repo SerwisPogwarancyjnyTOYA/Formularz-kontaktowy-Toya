@@ -1,29 +1,36 @@
-# PGW Service Hub — v66 PDF header extractor
+# PGW Service Hub — final presentation build
 
-Wersja produkcyjna oparta o v65, z dorzuconą warstwą wyciągania nazw urządzeń i części z PDF-ów.
+Statyczna aplikacja GitHub Pages dla serwisu pogwarancyjnego TOYA/YATO. Projekt pozwala klientowi wyszukać urządzenie, sprawdzić rysunek PDF, wybrać części z listy — jeśli lista jest dostępna — albo opisać część ręcznie i wygenerować gotowy mail do `service@yato.pl`.
 
-## Co jest nowe
+## Co jest gotowe
 
-- Każdy rysunek z Drive nadal jest urządzeniem w bazie.
-- `data/pdf-header-overrides.json` ma seed z PDF-ów, które już miały tekst w bazie.
-- `data/pdf-header-extraction-queue.json` wskazuje PDF-y, które warto przepuścić przez Apps Script/OCR.
-- Nowy skrypt `scripts/google-drive-pdf-header-parts-extractor.gs` tworzy arkusze robocze i eksport JSON:
-  - `pdf_header_extract`
-  - `pdf_parts_extract_preview`
-  - `pdf_extract_errors`
-  - `pdf-header-overrides.generated.json`
-  - `pdf-parts-extracted.generated.json`
-- Nowy skrypt lokalny `scripts/apply-pdf-header-overrides.py` scala wyeksportowany JSON z paczką strony.
+- działa jako statyczna strona: `index.html` + `app.css` + `app.js` + JSON w katalogu `data/`;
+- obsługuje koszyk części z wielu urządzeń;
+- ma tryb awaryjny dla urządzeń bez podpiętej listy części: klient widzi PDF i może opisać część ręcznie;
+- pokazuje podgląd PDF z Google Drive oraz link „otwórz w nowej karcie”;
+- generuje temat i treść maila do serwisu;
+- ma filtr marek, szybkie przykłady, walidację kontaktu oraz opcjonalne sekcje faktury i wysyłki;
+- jest przygotowana pod prezentację: licznik bazy, przełącznik jasny/ciemny i czytelny hero.
 
-## Stan seed v66
+## Stan danych w tej paczce
 
-- Rysunki w bazie: 1421
-- Urządzenia w bazie: 1410
-- Nagłówki wyciągnięte z już dostępnego tekstu: 34
-- Kolejka PDF do ekstrakcji/OCR: 1387
+- urządzenia: **1410**
+- rysunki PDF: **1421**
+- części z list PDF: **2179**
+- pozycje PDF w manifeście Drive: **1418**
+- uniwersalne części ZUN: **710**
+- powiązania ZUN: **4335**
+- zespoły/komplety części: **13**
+- ręcznie/automatycznie poprawione nagłówki PDF: **34**
 
-## Zasada
+## Jak wdrożyć na GitHub Pages
 
-Najpierw poprawiamy nazwy urządzeń z nagłówków PDF. Dopiero potem ostrożnie przepuszczamy listy części z PDF-ów do formularza.
+1. Wgraj całą zawartość tej paczki do repozytorium GitHub.
+2. Upewnij się, że `index.html`, `app.js`, `app.css`, `config.js`, `manifest.webmanifest`, `data/` i `assets/` są w głównym katalogu repo.
+3. W GitHubie przejdź do **Settings → Pages**.
+4. Wybierz branch, np. `main`, oraz folder `/root`.
+5. Po publikacji odśwież stronę i wpisz przykładowy model, np. `00300`.
 
-Klient nie widzi technicznych statusów. Jeśli część nie jest podpięta, nadal ma PDF i opis ręczny.
+## Ważne ograniczenie
+
+To nie jest jeszcze kompletna baza części do każdego urządzenia. Aplikacja jest przygotowana tak, żeby nie ukrywać problemu: tam, gdzie nie ma listy części, użytkownik dostaje PDF i ścieżkę opisową. Dzięki temu projekt nadaje się do pokazania większej grupie, ale baza nadal powinna być rozwijana przez OCR/import list części z kolejnych PDF-ów.
