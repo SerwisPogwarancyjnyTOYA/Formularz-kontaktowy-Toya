@@ -28,3 +28,8 @@ Projekt jest wersją demonstracyjną przygotowaną do prezentacji funkcjonalnoś
 ## Kontakt
 
 Zapytania wygenerowane przez formularz kierowane są na: `service@yato.pl`.
+
+
+## Hotfix 2026-07-04 v2
+
+Ta paczka jest pełna: zawiera `index.html`, `app.js`, `app.css`, `config.js`, `manifest.webmanifest`, katalog `data/` i `assets/`. Wprowadzono model YT-828113/YT-828114 wraz z roboczą listą 40 części z DOCX.
