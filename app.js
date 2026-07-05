@@ -1103,37 +1103,76 @@
   }
   function removePart(id) { state.selectedParts.delete(id); renderBasket(); renderParts(); saveDraft(); }
 
+  function makePdfPreviewUrl(url) {
+    const raw = String(url || '').trim();
+    if (!raw) return '';
+    // Lokalny plik PDF z paczki GitHub Pages — normalny iframe w przeglądarce.
+    if (/^(assets\/|\.\/assets\/|\/assets\/|data\/|\.\/data\/)/i.test(raw) || /\.pdf(\?|#|$)/i.test(raw)) return raw;
+    // Google Drive: /view nie zawsze osadza się w iframe, /preview jest do podglądu.
+    let m = raw.match(/drive\.google\.com\/file\/d\/([^/]+)/i);
+    if (m && m[1]) return `https://drive.google.com/file/d/${encodeURIComponent(m[1])}/preview`;
+    m = raw.match(/[?&]id=([^&]+)/i);
+    if (/drive\.google\.com/i.test(raw) && m && m[1]) return `https://drive.google.com/file/d/${encodeURIComponent(m[1])}/preview`;
+    return raw;
+  }
+
+  function makePdfOpenUrl(url, fallback='') {
+    const raw = String(url || fallback || '').trim();
+    if (!raw) return '';
+    let m = raw.match(/drive\.google\.com\/file\/d\/([^/]+)/i);
+    if (m && m[1]) return `https://drive.google.com/file/d/${encodeURIComponent(m[1])}/view`;
+    m = raw.match(/[?&]id=([^&]+)/i);
+    if (/drive\.google\.com/i.test(raw) && m && m[1]) return `https://drive.google.com/file/d/${encodeURIComponent(m[1])}/view`;
+    return raw;
+  }
+
+  function getPdfSource(drawing) {
+    if (!drawing) return null;
+    const row = state.driveByDrawingId.get(String(drawing.id)) || resolveDrive(drawing) || {};
+    const direct = drawing.viewerUrl || drawing.previewUrl || drawing.path || drawing.openUrl || drawing.url || '';
+    const viewerCandidate = row.viewerUrl || row.previewUrl || direct || row.openUrl || row.url || '';
+    const openCandidate = row.openUrl || row.url || drawing.openUrl || drawing.url || direct || row.viewerUrl || '';
+    const viewerUrl = makePdfPreviewUrl(viewerCandidate);
+    const openUrl = makePdfOpenUrl(openCandidate, viewerCandidate);
+    return viewerUrl || openUrl ? { viewerUrl: viewerUrl || openUrl, openUrl: openUrl || viewerUrl, row } : null;
+  }
+
   function renderViewer(withLoading=false) {
     const drawing = state.selectedDrawing;
+    els.openPdf.classList.add('hidden');
+    els.openPdf.href = '#';
+
     if (state.manualMode && !drawing) {
-      els.openPdf.classList.add('hidden');
-      els.openPdf.href = '#';
       els.viewer.className = 'viewer empty manual-viewer';
       els.viewer.innerHTML = '<div><strong>Brak rysunku PDF dla wybranego opisu.</strong><br><span>Opisz część ręcznie i dołącz zdjęcia do maila.</span></div>';
       return;
     }
-    const row = drawing ? state.driveByDrawingId.get(String(drawing.id)) : null;
-    els.openPdf.classList.add('hidden');
-    els.openPdf.href = '#';
-    if (!drawing || !row || !row.viewerUrl) {
-      const fallbackUrl = drawing && (drawing.openUrl || drawing.viewerUrl || drawing.path || drawing.url);
+
+    if (!drawing) {
       els.viewer.className = 'viewer empty';
-      els.viewer.innerHTML = fallbackUrl
-        ? '<div><strong>Rysunek PDF jest dostępny.</strong><br><span>Podgląd nie załadował się automatycznie — użyj przycisku „Otwórz w nowej karcie”.</span></div>'
-        : '<div>Nie udało się załadować podglądu PDF. Brak linku do rysunku w danych.</div>';
-      if (fallbackUrl) { els.openPdf.href = fallbackUrl; els.openPdf.classList.remove('hidden'); }
+      els.viewer.innerHTML = '<div>Wybierz urządzenie, a rysunek pojawi się tutaj.</div>';
       return;
     }
+
+    const pdf = getPdfSource(drawing);
+    if (!pdf || !pdf.viewerUrl) {
+      els.viewer.className = 'viewer empty';
+      els.viewer.innerHTML = '<div><strong>Nie udało się załadować podglądu PDF.</strong><br><span>Brak linku do rysunku w danych.</span></div>';
+      return;
+    }
+
     if (withLoading) {
       els.viewer.className = 'viewer loading';
       els.viewer.innerHTML = '<div><strong>Wczytuję rysunek PDF…</strong><br><span>Za chwilę pojawi się podgląd rysunku.</span></div>';
-      window.setTimeout(() => renderViewer(false), 450);
+      window.setTimeout(() => renderViewer(false), 250);
       return;
     }
-    els.openPdf.href = row.openUrl || row.viewerUrl;
+
+    els.openPdf.href = pdf.openUrl || pdf.viewerUrl;
     els.openPdf.classList.remove('hidden');
     els.viewer.className = 'viewer';
-    els.viewer.innerHTML = `<iframe src="${escapeAttr(row.viewerUrl)}" title="${escapeAttr(drawing.title || 'Rysunek PDF')}"></iframe>`;
+    const title = drawing.fileName || drawing.title || drawing.deviceName || 'Rysunek PDF';
+    els.viewer.innerHTML = `<iframe src="${escapeAttr(pdf.viewerUrl)}" title="${escapeAttr(title)}" loading="lazy"></iframe>`;
   }
 
   function goStep(step) {
@@ -1391,8 +1430,8 @@
     if (!drawing) {
       return 'Rysunek techniczny PDF: brak dobranego rysunku w formularzu.\nProszę o pomoc w identyfikacji części. Klient powinien dołączyć zdjęcie tabliczki znamionowej i potrzebnej części.';
     }
-    const drive = state.driveByDrawingId.get(String(drawing.id));
-    return `Rysunek techniczny PDF:\n${drawing.fileName || drawing.title || ''}\n${drive && drive.openUrl ? `Link do rysunku: ${drive.openUrl}` : ''}`;
+    const pdf = getPdfSource(drawing);
+    return `Rysunek techniczny PDF:\n${drawing.fileName || drawing.title || ''}\n${pdf && pdf.openUrl ? `Link do rysunku: ${pdf.openUrl}` : ''}`;
   }
 
   function formatPartLine(item, index) {
