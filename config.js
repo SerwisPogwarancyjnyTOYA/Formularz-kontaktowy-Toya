@@ -1,5 +1,5 @@
 window.PGW_CONFIG = {
-  version: '20260704-hotfix2-full-data',
+  version: '20260704-pdf-visible-hotfix',
   appName: 'Formularz zapytania o części',
   recipientEmail: 'service@yato.pl',
   storageMode: 'drive',

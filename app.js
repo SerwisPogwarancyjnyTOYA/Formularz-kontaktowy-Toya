@@ -151,10 +151,11 @@
       }
     }
 
-    state.drawings = state.drawings.filter(d => {
-      const keys = drawingKeys(d);
-      return keys.some(k => driveKeys.has(k));
-    });
+    // Nie wyrzucamy rysunków tylko dlatego, że nie ma ich w osobnym driveMap.
+    // Część importu roboczego trzyma viewerUrl/openUrl bezpośrednio w drawings.json
+    // oraz lokalne assets/robocze-pdf/*.pdf. Poprzedni filtr ucinał takie rysunki
+    // i na stronie zostawał tryb „lista do uzupełnienia”, mimo że PDF był w paczce.
+    state.drawings = state.drawings.filter(d => isPdf(d) && norm(d.deviceIndex));
     const drawingIds = new Set(state.drawings.map(d => String(d.id)));
     state.parts = state.parts.filter(p => drawingIds.has(String(p.drawingId)) && p.partIndex && !looksLikeHeaderPart(p));
     const deviceKeys = new Set(state.drawings.map(d => norm(d.deviceIndex)).filter(Boolean));
@@ -1115,9 +1116,12 @@
     els.openPdf.classList.add('hidden');
     els.openPdf.href = '#';
     if (!drawing || !row || !row.viewerUrl) {
+      const fallbackUrl = drawing && (drawing.openUrl || drawing.viewerUrl || drawing.path || drawing.url);
       els.viewer.className = 'viewer empty';
-      els.viewer.innerHTML = '<div>Nie udało się załadować podglądu PDF. Użyj przycisku „Otwórz w nowej karcie”.</div>';
-      if (drawing) { els.openPdf.href = drawing.openUrl || drawing.viewerUrl || '#'; }
+      els.viewer.innerHTML = fallbackUrl
+        ? '<div><strong>Rysunek PDF jest dostępny.</strong><br><span>Podgląd nie załadował się automatycznie — użyj przycisku „Otwórz w nowej karcie”.</span></div>'
+        : '<div>Nie udało się załadować podglądu PDF. Brak linku do rysunku w danych.</div>';
+      if (fallbackUrl) { els.openPdf.href = fallbackUrl; els.openPdf.classList.remove('hidden'); }
       return;
     }
     if (withLoading) {
@@ -1750,6 +1754,22 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
     }
     const keys = drawingKeys(drawing);
     for (const key of keys) if (state.driveByKey.has(key)) return state.driveByKey.get(key);
+
+    // Fallback: wiele rekordów z importu roboczego ma link do PDF bezpośrednio w drawings.json
+    // albo lokalny plik w assets/robocze-pdf. Taki rysunek też musi być widoczny na stronie.
+    const directViewer = drawing.viewerUrl || drawing.previewUrl || drawing.path || drawing.openUrl || drawing.url;
+    const directOpen = drawing.openUrl || drawing.url || drawing.viewerUrl || drawing.path;
+    if (directViewer || directOpen) {
+      return {
+        fileId: fid,
+        deviceIndex: drawing.deviceIndex || '',
+        fileName: drawing.fileName || drawing.title || '',
+        title: drawing.title || drawing.fileName || '',
+        viewerUrl: directViewer || directOpen,
+        openUrl: directOpen || directViewer,
+        source: drawing.source || 'DRAWING_DIRECT_LINK'
+      };
+    }
     return null;
   }
   function drawingKeys(d) { return unique([d.deviceIndex, d.fileName, d.title, d.name, d.path, d.originalPath].map(normKey).filter(Boolean).flatMap(k => [k, stripExt(k)])); }
