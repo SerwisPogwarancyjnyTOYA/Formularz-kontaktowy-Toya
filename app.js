@@ -1,7 +1,7 @@
 (() => {
   'use strict';
   const CONFIG = window.PGW_CONFIG || {};
-  const DRAFT_KEY = 'pgw-production-draft-v67-multi-device';
+  const DRAFT_KEY = 'pgw-production-draft-v70-admin-pdf-control';
   const THEME_KEY = 'pgw-theme';
   const PART_ROW_LIMIT = Number(CONFIG.partRowLimit || 80);
   const $ = (id) => document.getElementById(id);
@@ -18,10 +18,10 @@
   const progressIds = ['pDevice','pDrawing','pParts','pData','pMail'];
 
   const state = {
-    devices: [], drawings: [], parts: [], driveMap: [], brandOverrides: {}, pdfHeaderOverrides: {}, universalParts: [], universalPartLinks: [], partAssemblies: {},
+    devices: [], drawings: [], parts: [], driveMap: [], brandOverrides: {}, pdfHeaderOverrides: {}, pdfDeviceOverrides: {}, pdfQualityReport: {}, pdfOrphans: [], universalParts: [], universalPartLinks: [], partAssemblies: {},
     drawingById: new Map(), partsByDrawing: new Map(), driveByDrawingId: new Map(), driveByKey: new Map(), zunByPartKey: new Map(), zunByCode: new Map(), partAssemblyComponents: new Map(), partAssemblyChildren: new Map(),
     selectedDevice: null, selectedDrawing: null, selectedParts: new Map(), manualMode: false, step: 1, formDirty: false,
-    postalCodes: new Map(), partVisibleLimit: PART_ROW_LIMIT, activeBrand: 'all', brandSummary: []
+    postalCodes: new Map(), partVisibleLimit: PART_ROW_LIMIT, activeBrand: 'all', brandSummary: [], pdfDiagnostics: {}
   };
 
   const POSTAL_FALLBACK = {
@@ -45,14 +45,20 @@
       state.partAssemblies = await loadFirst(urls.partAssemblies || ['data/part-assemblies.json'], {});
       state.drawings = await loadFirst(urls.drawings || ['data/drawings.json'], []);
       state.parts = await loadFirst(urls.parts || ['data/parts.json'], []);
-      state.driveMap = await loadFirst(urls.driveMap || ['data/drive-drawings-map.json'], []);
+      state.driveMap = await loadAll(urls.driveMap || ['data/drive-drawings-map.full.json', 'data/drive-drawings-map.converted.json', 'data/drive-drawings-map.json'], []);
       state.brandOverrides = await loadFirst(urls.brandOverrides || ['data/brand-resolution-overrides.json'], {});
       state.pdfHeaderOverrides = await loadFirst(urls.pdfHeaderOverrides || ['data/pdf-header-overrides.json'], {});
+      state.pdfDeviceOverrides = await loadFirst(urls.pdfDeviceOverrides || ['data/pdf-device-overrides.json'], {});
+      state.pdfQualityReport = await loadFirst(urls.pdfQualityReport || ['data/pdf-quality-report.json'], {});
+      state.pdfOrphans = await loadFirst(urls.pdfOrphans || ['data/pdf-orphans.json'], []);
       await loadPostalCodes();
       normalizeData();
       buildIndexes();
       bindEvents();
       updateOptionalSections();
+      state.pdfDiagnostics = buildPdfDiagnostics();
+      exposePdfDebugTools();
+      initAdminPanel();
       renderStats();
       renderBrandFilter();
       renderExamples();
@@ -76,6 +82,25 @@
         return await res.json();
       } catch (e) { lastError = e; }
     }
+    if (fallback !== undefined) return fallback;
+    throw lastError || new Error('Brak danych');
+  }
+
+  async function loadAll(urls, fallback) {
+    const list = Array.isArray(urls) ? urls : [urls];
+    const out = [];
+    let loaded = false;
+    let lastError;
+    for (const url of list.filter(Boolean)) {
+      try {
+        const res = await fetch(url, {cache: 'no-store'});
+        if (!res.ok) throw new Error(`${url}: ${res.status}`);
+        const json = await res.json();
+        out.push(...arr(json));
+        loaded = true;
+      } catch (e) { lastError = e; }
+    }
+    if (loaded) return out;
     if (fallback !== undefined) return fallback;
     throw lastError || new Error('Brak danych');
   }
@@ -116,10 +141,13 @@
       row.deviceIndex = normalizeDeviceIndex(row.deviceIndex || row.model || row.normalizedKey || extractDeviceIndex(row.fileName || row.title || row.name || row.path));
       row.openUrl = row.openUrl || row.url || row.viewerUrl || (row.fileId ? `https://drive.google.com/file/d/${encodeURIComponent(row.fileId)}/view` : '');
       row.viewerUrl = row.previewUrl || (row.fileId ? `https://drive.google.com/file/d/${encodeURIComponent(row.fileId)}/preview` : row.viewerUrl || '');
+      applyPdfDeviceOverride(row);
       applyPdfHeaderOverride(row);
       row.__keys = unique([row.deviceIndex, row.model, row.normalizedKey, row.fileName, row.title, row.name, row.deviceName, row.displayTitle, ...(row.keys || [])].flat().map(normKey).filter(Boolean));
       for (const k of row.__keys) driveKeys.add(k);
     }
+    state.driveMap = dedupeDriveMapRows(state.driveMap);
+
     // Tworzymy lekkie rekordy urządzeń i rysunków z samego manifestu, żeby klient mógł wyszukać PDF
     // i przejść trybem opisowym, nawet zanim lista części zostanie spięta.
     const existingDrawingKeys = new Set(state.drawings.flatMap(d => drawingKeys(d)));
@@ -151,11 +179,10 @@
       }
     }
 
-    // Nie wyrzucamy rysunków tylko dlatego, że nie ma ich w osobnym driveMap.
-    // Część importu roboczego trzyma viewerUrl/openUrl bezpośrednio w drawings.json
-    // oraz lokalne assets/robocze-pdf/*.pdf. Poprzedni filtr ucinał takie rysunki
-    // i na stronie zostawał tryb „lista do uzupełnienia”, mimo że PDF był w paczce.
-    state.drawings = state.drawings.filter(d => isPdf(d) && norm(d.deviceIndex));
+    state.drawings = state.drawings.filter(d => {
+      const keys = drawingKeys(d);
+      return keys.some(k => driveKeys.has(k));
+    });
     const drawingIds = new Set(state.drawings.map(d => String(d.id)));
     state.parts = state.parts.filter(p => drawingIds.has(String(p.drawingId)) && p.partIndex && !looksLikeHeaderPart(p));
     const deviceKeys = new Set(state.drawings.map(d => norm(d.deviceIndex)).filter(Boolean));
@@ -251,6 +278,60 @@
     return String(value || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   }
 
+
+  function applyPdfDeviceOverride(row) {
+    const override = findPdfDeviceOverride(row);
+    if (!override) return;
+    const deviceIndexes = Array.isArray(override) ? override : (override.deviceIndexes || override.deviceIndex || override.model || override.models || '');
+    const primary = Array.isArray(deviceIndexes) ? deviceIndexes[0] : deviceIndexes;
+    if (primary) {
+      row.deviceIndex = normalizeDeviceIndex(primary);
+      row.model = row.deviceIndex;
+      row.normalizedModel = row.deviceIndex;
+      row.status = 'OK_OVERRIDE';
+      row.reviewStatus = row.reviewStatus || 'manual_override';
+    }
+    if (!Array.isArray(override) && typeof override === 'object') {
+      if (override.deviceName) row.deviceName = override.deviceName;
+      if (override.displayTitle) row.displayTitle = override.displayTitle;
+      if (override.brand) row.brand = override.brand;
+      if (override.notes) row.notes = [row.notes, override.notes].filter(Boolean).join(' | ');
+    }
+    const extraKeys = arr(deviceIndexes).concat([primary, row.deviceIndex, row.model]).map(normKey).filter(Boolean);
+    row.keys = unique([...(row.keys || []), ...extraKeys]);
+    row.overrideSource = 'pdf-device-overrides';
+  }
+
+  function findPdfDeviceOverride(row) {
+    const root = state.pdfDeviceOverrides || {};
+    const sources = [
+      root.byFileId || {},
+      root.byFileName || {},
+      root.byTitle || {},
+      root.byPath || {},
+      root.byModel || {},
+      root.models || {},
+      root.files || {},
+      root
+    ];
+    const candidates = unique([
+      row.fileId, row.driveFileId, row.googleDriveId, row.id,
+      row.fileName, row.title, row.name, row.path, row.folderPath,
+      row.deviceIndex, row.model, row.normalizedModel, row.normalizedKey,
+      normKey(row.fileName), stripExt(normKey(row.fileName)),
+      normKey(row.title), stripExt(normKey(row.title)),
+      normalizeDeviceIndex(row.fileName), normalizeDeviceIndex(row.title)
+    ].map(x => String(x || '').trim()).filter(Boolean));
+    for (const source of sources) {
+      for (const key of candidates) {
+        if (!source) continue;
+        const variants = unique([key, key.toUpperCase(), key.toLowerCase(), normKey(key), stripExt(normKey(key)), normalizeDeviceIndex(key)].filter(Boolean));
+        for (const v of variants) if (source[v]) return source[v];
+      }
+    }
+    return null;
+  }
+
   function applyPdfHeaderOverride(row) {
     const root = state.pdfHeaderOverrides || {};
     const overrideSources = [
@@ -288,6 +369,35 @@
     if (found.brand && (!row.brand || row.brand === 'NIEZNANA' || row.brand === 'DO ROZPOZNANIA' || row.brand === 'INNE')) row.brand = found.brand;
     row.headerConfidence = found.confidence || row.headerConfidence || '';
     row.headerSource = found.source || 'pdf-header-overrides';
+  }
+
+  function dedupeDriveMapRows(rows) {
+    const byId = new Map();
+    const out = [];
+    for (const row of rows || []) {
+      const id = String(row.fileId || row.driveFileId || row.googleDriveId || row.gdriveId || row.sourceFileId || '').trim();
+      const identity = id || [row.path || row.folderPath || '', row.fileName || row.title || row.name || '', row.deviceIndex || row.model || row.normalizedModel || ''].map(normKey).filter(Boolean).join('|');
+      if (!identity) { out.push(row); continue; }
+      const existingIndex = byId.get(identity);
+      if (existingIndex === undefined) {
+        byId.set(identity, out.length);
+        out.push(row);
+      } else if (driveRowScore(row) >= driveRowScore(out[existingIndex])) {
+        out[existingIndex] = row;
+      }
+    }
+    return out;
+  }
+
+  function driveRowScore(row) {
+    let score = 0;
+    if (row.previewUrl || String(row.viewerUrl || '').includes('/preview')) score += 8;
+    if (row.openUrl || row.url) score += 4;
+    if (row.deviceIndex || row.model || row.normalizedModel) score += 4;
+    if (row.displayTitle || row.deviceName || row.pdfHeader) score += 3;
+    if (row.brand && row.brand !== 'INNE' && row.brand !== 'DO ROZPOZNANIA') score += 2;
+    const ts = Date.parse(row.modifiedTime || row.updatedAt || row.generatedAt || 0) || 0;
+    return score * 10000000000000 + ts;
   }
 
   function buildIndexes() {
@@ -1116,12 +1226,13 @@
     els.openPdf.classList.add('hidden');
     els.openPdf.href = '#';
     if (!drawing || !row || !row.viewerUrl) {
-      const fallbackUrl = drawing && (drawing.openUrl || drawing.viewerUrl || drawing.path || drawing.url);
       els.viewer.className = 'viewer empty';
-      els.viewer.innerHTML = fallbackUrl
-        ? '<div><strong>Rysunek PDF jest dostępny.</strong><br><span>Podgląd nie załadował się automatycznie — użyj przycisku „Otwórz w nowej karcie”.</span></div>'
-        : '<div>Nie udało się załadować podglądu PDF. Brak linku do rysunku w danych.</div>';
-      if (fallbackUrl) { els.openPdf.href = fallbackUrl; els.openPdf.classList.remove('hidden'); }
+      els.viewer.innerHTML = '<div>Nie udało się załadować podglądu PDF. Użyj przycisku „Otwórz w nowej karcie”.</div>';
+      const fallbackUrl = (row && (row.openUrl || row.viewerUrl)) || (drawing && (drawing.openUrl || drawing.viewerUrl)) || '#';
+      if (drawing && fallbackUrl !== '#') {
+        els.openPdf.href = fallbackUrl;
+        els.openPdf.classList.remove('hidden');
+      }
       return;
     }
     if (withLoading) {
@@ -1647,6 +1758,285 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
     return canonicalBrand(brand) === state.activeBrand;
   }
 
+
+  function buildPdfDiagnostics() {
+    const deviceKeys = new Set(state.devices.map(d => norm(d.deviceIndex)).filter(Boolean));
+    const drawingKeysSet = new Set(state.drawings.flatMap(d => drawingKeys(d)));
+    const duplicateFiles = [];
+    const byFileId = new Map();
+    const missingModel = [];
+    const notMatchedToDevice = [];
+    const weakBrand = [];
+    for (const row of state.driveMap || []) {
+      const fid = String(row.fileId || row.driveFileId || row.googleDriveId || '').trim();
+      if (fid) {
+        if (byFileId.has(fid)) duplicateFiles.push({fileId: fid, first: byFileId.get(fid).fileName || byFileId.get(fid).title, duplicate: row.fileName || row.title});
+        else byFileId.set(fid, row);
+      }
+      const dev = norm(row.deviceIndex || row.model || row.normalizedModel || '');
+      if (!dev) missingModel.push(slimPdfRow(row, 'Brak indeksu urządzenia'));
+      else if (!deviceKeys.has(dev) && !(row.__keys || []).some(k => drawingKeysSet.has(k))) notMatchedToDevice.push(slimPdfRow(row, 'Indeks nie występuje w devices/drawings'));
+      if (!brandIsConfirmed(row)) weakBrand.push(slimPdfRow(row, 'Marka do potwierdzenia'));
+    }
+    const externalOrphans = arr(state.pdfOrphans).map(row => ({...row, source: row.source || 'pdf-orphans.json'}));
+    const report = state.pdfQualityReport || {};
+    return {
+      version: CONFIG.version || '',
+      generatedAt: new Date().toISOString(),
+      loadedDriveRows: state.driveMap.length,
+      loadedDrawings: state.drawings.length,
+      loadedDevices: state.devices.length,
+      loadedParts: state.parts.length,
+      reportSummary: report.summary || report,
+      missingModel: missingModel.slice(0, 200),
+      notMatchedToDevice: notMatchedToDevice.slice(0, 200),
+      weakBrand: weakBrand.slice(0, 200),
+      duplicateFiles: duplicateFiles.slice(0, 200),
+      externalOrphans: externalOrphans.slice(0, 200),
+      hints: [
+        'Braki modeli dopisz w data/pdf-device-overrides.json.',
+        'Po konwersji PDF uruchom pgwRefreshPdfManifestAfterConversionV69().',
+        'Jeśli PDF ma dobry link, ale nie widać go w formularzu, sprawdź missingModel oraz notMatchedToDevice.'
+      ]
+    };
+  }
+
+  function slimPdfRow(row, reason) {
+    return {
+      reason,
+      fileId: row.fileId || row.driveFileId || '',
+      fileName: row.fileName || row.title || row.name || '',
+      deviceIndex: row.deviceIndex || row.model || row.normalizedModel || '',
+      brand: row.brand || '',
+      path: row.path || row.folderPath || '',
+      openUrl: row.openUrl || row.url || row.viewerUrl || ''
+    };
+  }
+
+  function exposePdfDebugTools() {
+    window.PGW_DEBUG = window.PGW_DEBUG || {};
+    window.PGW_DEBUG.getPdfDiagnostics = () => state.pdfDiagnostics || buildPdfDiagnostics();
+    window.PGW_DEBUG.refreshPdfDiagnostics = () => (state.pdfDiagnostics = buildPdfDiagnostics());
+    window.PGW_DEBUG.downloadPdfDiagnostics = () => downloadJson('pgw-pdf-diagnostics.json', window.PGW_DEBUG.refreshPdfDiagnostics());
+  }
+
+  function downloadJson(fileName, data) {
+    const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = fileName;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1500);
+  }
+
+
+  function initAdminPanel() {
+    if (CONFIG.enableAdminPanel === false) return;
+    if (document.getElementById('pgwAdminFab')) return;
+    const allowed = isAdminPanelAllowed();
+    window.PGW_DEBUG = window.PGW_DEBUG || {};
+    window.PGW_DEBUG.openAdminPanel = () => showAdminPanel(true);
+    window.PGW_DEBUG.closeAdminPanel = () => showAdminPanel(false);
+    window.PGW_DEBUG.downloadPdfDiagnosticsCsv = () => downloadDiagnosticsCsv();
+    window.PGW_DEBUG.downloadPdfOrphansCsv = () => downloadCsv('pgw-pdf-orphans.csv', diagnosticsRows('externalOrphans'));
+    window.PGW_DEBUG.downloadPdfMissingModelCsv = () => downloadCsv('pgw-pdf-missing-model.csv', diagnosticsRows('missingModel'));
+    window.PGW_DEBUG.downloadPdfWeakBrandCsv = () => downloadCsv('pgw-pdf-weak-brand.csv', diagnosticsRows('weakBrand'));
+    window.PGW_DEBUG.copyPdfOverridesTemplate = () => copyText(JSON.stringify(buildOverridesTemplate(), null, 2));
+    if (!allowed) return;
+    injectAdminPanelStyles();
+    const fab = document.createElement('button');
+    fab.id = 'pgwAdminFab';
+    fab.type = 'button';
+    fab.className = 'pgw-admin-fab';
+    fab.textContent = 'PDF QA';
+    fab.title = 'Panel diagnostyczny PDF';
+    fab.addEventListener('click', () => showAdminPanel(true));
+    document.body.appendChild(fab);
+    const panel = document.createElement('section');
+    panel.id = 'pgwAdminPanel';
+    panel.className = 'pgw-admin-panel';
+    panel.setAttribute('aria-hidden', 'true');
+    panel.innerHTML = adminPanelShellHtml();
+    document.body.appendChild(panel);
+    panel.querySelector('[data-admin-close]')?.addEventListener('click', () => showAdminPanel(false));
+    panel.querySelector('[data-admin-refresh]')?.addEventListener('click', () => renderAdminPanel());
+    panel.querySelector('[data-admin-json]')?.addEventListener('click', () => window.PGW_DEBUG.downloadPdfDiagnostics());
+    panel.querySelector('[data-admin-csv]')?.addEventListener('click', () => downloadDiagnosticsCsv());
+    panel.querySelector('[data-admin-orphans]')?.addEventListener('click', () => downloadCsv('pgw-pdf-orphans.csv', diagnosticsRows('externalOrphans')));
+    panel.querySelector('[data-admin-overrides]')?.addEventListener('click', () => copyText(JSON.stringify(buildOverridesTemplate(), null, 2)));
+    renderAdminPanel();
+  }
+
+  function isAdminPanelAllowed() {
+    if (CONFIG.adminPanelAlwaysVisible === true) return true;
+    try {
+      const params = new URLSearchParams(window.location.search || '');
+      const key = CONFIG.adminPanelParam || 'admin';
+      return params.has(key) || params.get('debug') === '1' || localStorage.getItem('pgw-admin-panel') === '1';
+    } catch (e) { return false; }
+  }
+
+  function adminPanelShellHtml() {
+    return `
+      <div class="pgw-admin-card" role="dialog" aria-label="Panel diagnostyczny PDF">
+        <div class="pgw-admin-head">
+          <div><strong>PDF Quality Control</strong><span>v70 · tylko diagnostyka, klient tego nie widzi</span></div>
+          <button type="button" data-admin-close aria-label="Zamknij">×</button>
+        </div>
+        <div class="pgw-admin-grid" data-admin-stats></div>
+        <div class="pgw-admin-actions">
+          <button type="button" data-admin-refresh>Odśwież</button>
+          <button type="button" data-admin-json>Pobierz JSON</button>
+          <button type="button" data-admin-csv>Pobierz CSV</button>
+          <button type="button" data-admin-orphans>Sieroty CSV</button>
+          <button type="button" data-admin-overrides>Kopiuj szablon override</button>
+        </div>
+        <div class="pgw-admin-section">
+          <h3>Najważniejsze problemy</h3>
+          <div data-admin-problems></div>
+        </div>
+        <div class="pgw-admin-section">
+          <h3>Co zrobić dalej</h3>
+          <ol>
+            <li>Po konwersji PDF uruchom <code>pgwRefreshPdfManifestAfterConversionV70()</code>.</li>
+            <li>PDF-y bez indeksu dopisz do <code>data/pdf-device-overrides.json</code>.</li>
+            <li>Po wrzuceniu zmian testuj stronę z parametrem <code>?admin=1&v=${escapeHtml(CONFIG.version || 'v70')}</code>.</li>
+          </ol>
+        </div>
+      </div>`;
+  }
+
+  function showAdminPanel(open) {
+    const panel = document.getElementById('pgwAdminPanel');
+    if (!panel && open) {
+      try { localStorage.setItem('pgw-admin-panel', '1'); } catch(e) {}
+      initAdminPanel();
+      return showAdminPanel(true);
+    }
+    if (!panel) return;
+    panel.classList.toggle('is-open', !!open);
+    panel.setAttribute('aria-hidden', open ? 'false' : 'true');
+    if (open) renderAdminPanel();
+  }
+
+  function renderAdminPanel() {
+    const panel = document.getElementById('pgwAdminPanel');
+    if (!panel) return;
+    const diag = window.PGW_DEBUG?.refreshPdfDiagnostics ? window.PGW_DEBUG.refreshPdfDiagnostics() : buildPdfDiagnostics();
+    const stats = [
+      ['Manifest PDF', diag.loadedDriveRows],
+      ['Rysunki widoczne', diag.loadedDrawings],
+      ['Urządzenia', diag.loadedDevices],
+      ['Części', diag.loadedParts],
+      ['Brak indeksu', countDiag(diag.missingModel)],
+      ['Nieprzypięte', countDiag(diag.notMatchedToDevice)],
+      ['Słaba marka', countDiag(diag.weakBrand)],
+      ['Duplikaty', countDiag(diag.duplicateFiles)],
+      ['Sieroty z raportu', countDiag(diag.externalOrphans)]
+    ];
+    const statsBox = panel.querySelector('[data-admin-stats]');
+    if (statsBox) statsBox.innerHTML = stats.map(([label, val]) => `<div><b>${escapeHtml(fmt(val || 0))}</b><span>${escapeHtml(label)}</span></div>`).join('');
+    const problemBox = panel.querySelector('[data-admin-problems]');
+    if (problemBox) problemBox.innerHTML = renderAdminProblems(diag);
+  }
+
+  function renderAdminProblems(diag) {
+    const groups = [
+      ['PDF bez indeksu urządzenia', diag.missingModel],
+      ['PDF z indeksem, ale bez dopasowania do urządzenia', diag.notMatchedToDevice],
+      ['Marka do potwierdzenia', diag.weakBrand],
+      ['Duplikaty plików', diag.duplicateFiles],
+      ['Sieroty z manifestu po konwersji', diag.externalOrphans]
+    ];
+    return groups.map(([title, rows]) => {
+      rows = arr(rows);
+      const sample = rows.slice(0, 8).map(row => `<li><code>${escapeHtml(row.deviceIndex || row.fileId || '-')}</code> ${escapeHtml(row.fileName || row.duplicate || row.first || '')}</li>`).join('');
+      return `<details ${rows.length ? 'open' : ''}><summary>${escapeHtml(title)}: ${fmt(rows.length)}</summary>${rows.length ? `<ul>${sample}</ul>` : '<p>Brak — elegancko.</p>'}</details>`;
+    }).join('');
+  }
+
+  function countDiag(rows) { return Array.isArray(rows) ? rows.length : 0; }
+
+  function diagnosticsRows(section) {
+    const diag = window.PGW_DEBUG?.refreshPdfDiagnostics ? window.PGW_DEBUG.refreshPdfDiagnostics() : buildPdfDiagnostics();
+    return arr(diag[section]).map(row => ({section, ...row}));
+  }
+
+  function allDiagnosticsRows() {
+    return ['missingModel','notMatchedToDevice','weakBrand','duplicateFiles','externalOrphans'].flatMap(diagnosticsRows);
+  }
+
+  function downloadDiagnosticsCsv() {
+    downloadCsv('pgw-pdf-diagnostics.csv', allDiagnosticsRows());
+  }
+
+  function buildOverridesTemplate() {
+    const rows = allDiagnosticsRows().filter(row => row.fileName || row.fileId).slice(0, 50);
+    const out = { files: {}, fileIds: {}, notes: 'Uzupełnij właściwy indeks urządzenia, np. YT-82806. Można zostawić kilka indeksów w tablicy.' };
+    for (const row of rows) {
+      const guess = normalizeDeviceIndex(row.deviceIndex || extractDeviceIndex(row.fileName || '')) || 'YT-XXXXX';
+      if (row.fileName) out.files[row.fileName] = [guess];
+      if (row.fileId) out.fileIds[row.fileId] = [guess];
+    }
+    return out;
+  }
+
+  function downloadCsv(fileName, rows) {
+    rows = arr(rows);
+    const keys = unique(rows.flatMap(row => Object.keys(row || {})));
+    const csv = [keys.join(';')].concat(rows.map(row => keys.map(k => csvCell(row[k])).join(';'))).join('\n');
+    const blob = new Blob([csv], {type: 'text/csv;charset=utf-8'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = fileName;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1500);
+  }
+
+  function csvCell(value) {
+    if (value == null) return '';
+    const text = Array.isArray(value) || typeof value === 'object' ? JSON.stringify(value) : String(value);
+    return '"' + text.replace(/"/g, '""').replace(/\r?\n/g, ' ') + '"';
+  }
+
+  async function copyText(text) {
+    try {
+      await navigator.clipboard.writeText(text);
+      return true;
+    } catch (e) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      ta.remove();
+      return true;
+    }
+  }
+
+  function injectAdminPanelStyles() {
+    if (document.getElementById('pgwAdminStyles')) return;
+    const style = document.createElement('style');
+    style.id = 'pgwAdminStyles';
+    style.textContent = `
+      .pgw-admin-fab{position:fixed;right:18px;bottom:18px;z-index:9998;border:0;border-radius:999px;padding:12px 16px;font-weight:800;box-shadow:0 10px 30px rgba(0,0,0,.28);cursor:pointer;background:#facc15;color:#111827}
+      .pgw-admin-panel{position:fixed;inset:0;z-index:9999;display:none;background:rgba(2,6,23,.64);backdrop-filter:blur(3px);padding:18px;overflow:auto}
+      .pgw-admin-panel.is-open{display:block}
+      .pgw-admin-card{max-width:1040px;margin:24px auto;background:var(--card,#111827);color:var(--text,#f8fafc);border:1px solid rgba(148,163,184,.28);border-radius:18px;padding:18px;box-shadow:0 24px 80px rgba(0,0,0,.36)}
+      .pgw-admin-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:16px}.pgw-admin-head strong{font-size:20px}.pgw-admin-head span{display:block;opacity:.72;font-size:13px;margin-top:3px}.pgw-admin-head button{border:0;background:transparent;color:inherit;font-size:30px;cursor:pointer;line-height:1}
+      .pgw-admin-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:12px 0}.pgw-admin-grid div{border:1px solid rgba(148,163,184,.22);border-radius:14px;padding:12px;background:rgba(148,163,184,.08)}.pgw-admin-grid b{display:block;font-size:22px}.pgw-admin-grid span{display:block;font-size:12px;opacity:.75;margin-top:4px}
+      .pgw-admin-actions{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}.pgw-admin-actions button{border:1px solid rgba(148,163,184,.35);border-radius:12px;padding:9px 12px;cursor:pointer;background:rgba(148,163,184,.12);color:inherit}
+      .pgw-admin-section{margin-top:16px}.pgw-admin-section h3{margin:0 0 8px}.pgw-admin-section details{border:1px solid rgba(148,163,184,.22);border-radius:12px;padding:10px 12px;margin:8px 0;background:rgba(148,163,184,.06)}.pgw-admin-section summary{cursor:pointer;font-weight:700}.pgw-admin-section li{margin:5px 0}.pgw-admin-section code{font-size:12px;background:rgba(148,163,184,.16);border-radius:7px;padding:2px 5px}
+    `;
+    document.head.appendChild(style);
+  }
+
   function resolveBrand(row) {
     const override = findBrandOverride(row);
     return canonicalBrand(override || row.brand || inferBrand(row));
@@ -1754,22 +2144,6 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
     }
     const keys = drawingKeys(drawing);
     for (const key of keys) if (state.driveByKey.has(key)) return state.driveByKey.get(key);
-
-    // Fallback: wiele rekordów z importu roboczego ma link do PDF bezpośrednio w drawings.json
-    // albo lokalny plik w assets/robocze-pdf. Taki rysunek też musi być widoczny na stronie.
-    const directViewer = drawing.viewerUrl || drawing.previewUrl || drawing.path || drawing.openUrl || drawing.url;
-    const directOpen = drawing.openUrl || drawing.url || drawing.viewerUrl || drawing.path;
-    if (directViewer || directOpen) {
-      return {
-        fileId: fid,
-        deviceIndex: drawing.deviceIndex || '',
-        fileName: drawing.fileName || drawing.title || '',
-        title: drawing.title || drawing.fileName || '',
-        viewerUrl: directViewer || directOpen,
-        openUrl: directOpen || directViewer,
-        source: drawing.source || 'DRAWING_DIRECT_LINK'
-      };
-    }
     return null;
   }
   function drawingKeys(d) { return unique([d.deviceIndex, d.fileName, d.title, d.name, d.path, d.originalPath].map(normKey).filter(Boolean).flatMap(k => [k, stripExt(k)])); }
