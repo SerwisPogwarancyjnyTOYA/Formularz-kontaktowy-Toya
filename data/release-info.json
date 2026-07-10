@@ -1,0 +1,19 @@
+{
+  "version": "20260709-v71-release-control",
+  "name": "PGW v71 — Release Control",
+  "date": "2026-07-10",
+  "changes": [
+    "Panel admina pokazuje release score i status wdrożenia.",
+    "Dodano kontrolę źródeł JSON ładowanych przez stronę.",
+    "Dodano eksport source-health CSV i release-health JSON.",
+    "Dodano pliki QA rules, deployment-state i override candidates.",
+    "Skrypt Apps Script v71 robi backup wygenerowanych JSON-ów przed nadpisaniem."
+  ],
+  "testPlan": [
+    "Otwórz stronę z ?admin=1&v=20260709-v71-release-control.",
+    "Sprawdź release score w panelu PDF QA.",
+    "Pobierz Release JSON i Źródła CSV.",
+    "Wyszukaj testowo urządzenie z PDF-em z manifestu full oraz converted.",
+    "Sprawdź czy formularz maila działa jak w v70."
+  ]
+}

@@ -1,7 +1,7 @@
 (() => {
   'use strict';
   const CONFIG = window.PGW_CONFIG || {};
-  const DRAFT_KEY = 'pgw-production-draft-v70-admin-pdf-control';
+  const DRAFT_KEY = 'pgw-production-draft-v71-release-control';
   const THEME_KEY = 'pgw-theme';
   const PART_ROW_LIMIT = Number(CONFIG.partRowLimit || 80);
   const $ = (id) => document.getElementById(id);
@@ -21,7 +21,7 @@
     devices: [], drawings: [], parts: [], driveMap: [], brandOverrides: {}, pdfHeaderOverrides: {}, pdfDeviceOverrides: {}, pdfQualityReport: {}, pdfOrphans: [], universalParts: [], universalPartLinks: [], partAssemblies: {},
     drawingById: new Map(), partsByDrawing: new Map(), driveByDrawingId: new Map(), driveByKey: new Map(), zunByPartKey: new Map(), zunByCode: new Map(), partAssemblyComponents: new Map(), partAssemblyChildren: new Map(),
     selectedDevice: null, selectedDrawing: null, selectedParts: new Map(), manualMode: false, step: 1, formDirty: false,
-    postalCodes: new Map(), partVisibleLimit: PART_ROW_LIMIT, activeBrand: 'all', brandSummary: [], pdfDiagnostics: {}
+    postalCodes: new Map(), partVisibleLimit: PART_ROW_LIMIT, activeBrand: 'all', brandSummary: [], pdfDiagnostics: {}, releaseHealth: {}, sourceHealth: [], releaseInfo: {}, deploymentState: {}, pdfQaRules: {}, pdfOverrideCandidates: []
   };
 
   const POSTAL_FALLBACK = {
@@ -45,18 +45,23 @@
       state.partAssemblies = await loadFirst(urls.partAssemblies || ['data/part-assemblies.json'], {});
       state.drawings = await loadFirst(urls.drawings || ['data/drawings.json'], []);
       state.parts = await loadFirst(urls.parts || ['data/parts.json'], []);
-      state.driveMap = await loadAll(urls.driveMap || ['data/drive-drawings-map.full.json', 'data/drive-drawings-map.converted.json', 'data/drive-drawings-map.json'], []);
+      state.driveMap = await loadAll(urls.driveMap || ['data/drive-drawings-map.full.json', 'data/drive-drawings-map.converted.json', 'data/drive-drawings-map.json'], [], 'driveMap');
       state.brandOverrides = await loadFirst(urls.brandOverrides || ['data/brand-resolution-overrides.json'], {});
       state.pdfHeaderOverrides = await loadFirst(urls.pdfHeaderOverrides || ['data/pdf-header-overrides.json'], {});
       state.pdfDeviceOverrides = await loadFirst(urls.pdfDeviceOverrides || ['data/pdf-device-overrides.json'], {});
       state.pdfQualityReport = await loadFirst(urls.pdfQualityReport || ['data/pdf-quality-report.json'], {});
-      state.pdfOrphans = await loadFirst(urls.pdfOrphans || ['data/pdf-orphans.json'], []);
+      state.pdfOrphans = await loadFirst(urls.pdfOrphans || ['data/pdf-orphans.json'], [], 'pdfOrphans');
+      state.pdfQaRules = await loadFirst(urls.pdfQaRules || ['data/pdf-qa-rules.json'], {}, 'pdfQaRules');
+      state.pdfOverrideCandidates = await loadFirst(urls.pdfOverrideCandidates || ['data/pdf-override-candidates.json'], [], 'pdfOverrideCandidates');
+      state.deploymentState = await loadFirst(urls.deploymentState || ['data/deployment-state.json'], {}, 'deploymentState');
+      state.releaseInfo = await loadFirst(urls.releaseInfo || ['data/release-info.json'], {}, 'releaseInfo');
       await loadPostalCodes();
       normalizeData();
       buildIndexes();
       bindEvents();
       updateOptionalSections();
       state.pdfDiagnostics = buildPdfDiagnostics();
+      state.releaseHealth = buildReleaseHealth();
       exposePdfDebugTools();
       initAdminPanel();
       renderStats();
@@ -73,20 +78,26 @@
     }
   }
 
-  async function loadFirst(urls, fallback) {
+  async function loadFirst(urls, fallback, label='') {
     let lastError;
-    for (const url of urls) {
+    const list = Array.isArray(urls) ? urls : [urls];
+    for (const url of list.filter(Boolean)) {
       try {
         const res = await fetch(url, {cache: 'no-store'});
         if (!res.ok) throw new Error(`${url}: ${res.status}`);
-        return await res.json();
-      } catch (e) { lastError = e; }
+        const json = await res.json();
+        recordSourceHealth(label || url, url, true, Array.isArray(json) ? json.length : (json && Array.isArray(json.items) ? json.items.length : 'object'));
+        return json;
+      } catch (e) {
+        lastError = e;
+        recordSourceHealth(label || url, url, false, 0, e.message || String(e));
+      }
     }
     if (fallback !== undefined) return fallback;
     throw lastError || new Error('Brak danych');
   }
 
-  async function loadAll(urls, fallback) {
+  async function loadAll(urls, fallback, label='') {
     const list = Array.isArray(urls) ? urls : [urls];
     const out = [];
     let loaded = false;
@@ -96,13 +107,23 @@
         const res = await fetch(url, {cache: 'no-store'});
         if (!res.ok) throw new Error(`${url}: ${res.status}`);
         const json = await res.json();
-        out.push(...arr(json));
+        const rows = arr(json);
+        out.push(...rows);
         loaded = true;
-      } catch (e) { lastError = e; }
+        recordSourceHealth(label || url, url, true, rows.length);
+      } catch (e) {
+        lastError = e;
+        recordSourceHealth(label || url, url, false, 0, e.message || String(e));
+      }
     }
     if (loaded) return out;
     if (fallback !== undefined) return fallback;
     throw lastError || new Error('Brak danych');
+  }
+
+  function recordSourceHealth(label, url, ok, rows, error='') {
+    state.sourceHealth = state.sourceHealth || [];
+    state.sourceHealth.push({label, url, ok: !!ok, rows, error, checkedAt: new Date().toISOString()});
   }
 
   async function loadPostalCodes() {
@@ -1795,7 +1816,7 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
       externalOrphans: externalOrphans.slice(0, 200),
       hints: [
         'Braki modeli dopisz w data/pdf-device-overrides.json.',
-        'Po konwersji PDF uruchom pgwRefreshPdfManifestAfterConversionV69().',
+        'Po konwersji PDF uruchom pgwRefreshPdfManifestAfterConversionV71().',
         'Jeśli PDF ma dobry link, ale nie widać go w formularzu, sprawdź missingModel oraz notMatchedToDevice.'
       ]
     };
@@ -1818,6 +1839,10 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
     window.PGW_DEBUG.getPdfDiagnostics = () => state.pdfDiagnostics || buildPdfDiagnostics();
     window.PGW_DEBUG.refreshPdfDiagnostics = () => (state.pdfDiagnostics = buildPdfDiagnostics());
     window.PGW_DEBUG.downloadPdfDiagnostics = () => downloadJson('pgw-pdf-diagnostics.json', window.PGW_DEBUG.refreshPdfDiagnostics());
+    window.PGW_DEBUG.getReleaseHealth = () => (state.releaseHealth = buildReleaseHealth());
+    window.PGW_DEBUG.downloadReleaseHealth = () => downloadReleaseHealth();
+    window.PGW_DEBUG.downloadSourceHealthCsv = () => downloadSourceHealthCsv();
+    window.PGW_DEBUG.downloadOverrideCandidatesCsv = () => downloadOverrideCandidatesCsv();
   }
 
   function downloadJson(fileName, data) {
@@ -1832,6 +1857,74 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
     setTimeout(() => URL.revokeObjectURL(url), 1500);
   }
 
+
+  function buildReleaseHealth() {
+    const diag = state.pdfDiagnostics || buildPdfDiagnostics();
+    const rules = state.pdfQaRules || {};
+    const thresholds = rules.thresholds || {};
+    const sourceFailures = arr(state.sourceHealth).filter(s => !s.ok);
+    const warnings = [];
+    if (sourceFailures.length) warnings.push(`Nie załadowano ${sourceFailures.length} źródeł danych.`);
+    if (countDiag(diag.missingModel) > Number(thresholds.maxMissingModel || 0)) warnings.push(`PDF-y bez indeksu: ${countDiag(diag.missingModel)}.`);
+    if (countDiag(diag.notMatchedToDevice) > Number(thresholds.maxNotMatchedToDevice || 0)) warnings.push(`PDF-y nieprzypięte do urządzeń: ${countDiag(diag.notMatchedToDevice)}.`);
+    if (countDiag(diag.duplicateFiles) > Number(thresholds.maxDuplicateFiles || 20)) warnings.push(`Duplikaty PDF: ${countDiag(diag.duplicateFiles)}.`);
+    const score = computeReleaseScore(diag, sourceFailures.length);
+    const deployment = state.deploymentState || {};
+    return {
+      version: CONFIG.version || '',
+      appName: CONFIG.appName || '',
+      generatedAt: new Date().toISOString(),
+      score,
+      status: score >= 90 && !sourceFailures.length ? 'OK' : (score >= 70 ? 'UWAGA' : 'DO_SPRAWDZENIA'),
+      deployment,
+      releaseInfo: state.releaseInfo || {},
+      sourceHealth: arr(state.sourceHealth),
+      pdfSummary: {
+        loadedDriveRows: diag.loadedDriveRows,
+        missingModel: countDiag(diag.missingModel),
+        notMatchedToDevice: countDiag(diag.notMatchedToDevice),
+        weakBrand: countDiag(diag.weakBrand),
+        duplicateFiles: countDiag(diag.duplicateFiles),
+        externalOrphans: countDiag(diag.externalOrphans)
+      },
+      warnings,
+      nextActions: buildNextActions(diag, sourceFailures)
+    };
+  }
+
+  function computeReleaseScore(diag, sourceFailures) {
+    let score = 100;
+    score -= Math.min(30, sourceFailures * 10);
+    score -= Math.min(25, countDiag(diag.missingModel) * 2);
+    score -= Math.min(20, countDiag(diag.notMatchedToDevice));
+    score -= Math.min(10, countDiag(diag.duplicateFiles));
+    score -= Math.min(10, Math.ceil(countDiag(diag.weakBrand) / 10));
+    return Math.max(0, score);
+  }
+
+  function buildNextActions(diag, sourceFailures) {
+    const out = [];
+    if (sourceFailures.length) out.push('Sprawdź brakujące pliki JSON w folderze data albo cache-buster wersji.');
+    if (countDiag(diag.missingModel)) out.push('Uzupełnij data/pdf-device-overrides.json dla PDF-ów bez indeksu.');
+    if (countDiag(diag.notMatchedToDevice)) out.push('Sprawdź indeksy, których nie ma w devices/drawings — możliwe literówki lub stare modele.');
+    if (countDiag(diag.duplicateFiles)) out.push('Przejrzyj duplikaty i zostaw najnowszy/najpełniejszy rysunek.');
+    if (!out.length) out.push('Brak krytycznych problemów — można testować produkcyjnie z cache-busterem.');
+    return out;
+  }
+
+  function downloadReleaseHealth() {
+    state.releaseHealth = buildReleaseHealth();
+    downloadJson('pgw-release-health.json', state.releaseHealth);
+  }
+
+  function downloadSourceHealthCsv() {
+    downloadCsv('pgw-source-health.csv', arr(state.sourceHealth));
+  }
+
+  function downloadOverrideCandidatesCsv() {
+    const candidates = arr(state.pdfOverrideCandidates).length ? arr(state.pdfOverrideCandidates) : allDiagnosticsRows().slice(0, 200);
+    downloadCsv('pgw-pdf-override-candidates.csv', candidates);
+  }
 
   function initAdminPanel() {
     if (CONFIG.enableAdminPanel === false) return;
@@ -1883,7 +1976,7 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
     return `
       <div class="pgw-admin-card" role="dialog" aria-label="Panel diagnostyczny PDF">
         <div class="pgw-admin-head">
-          <div><strong>PDF Quality Control</strong><span>v70 · tylko diagnostyka, klient tego nie widzi</span></div>
+          <div><strong>PDF Quality Control</strong><span>v71 · diagnostyka i release control, klient tego nie widzi</span></div>
           <button type="button" data-admin-close aria-label="Zamknij">×</button>
         </div>
         <div class="pgw-admin-grid" data-admin-stats></div>
@@ -1893,6 +1986,9 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
           <button type="button" data-admin-csv>Pobierz CSV</button>
           <button type="button" data-admin-orphans>Sieroty CSV</button>
           <button type="button" data-admin-overrides>Kopiuj szablon override</button>
+          <button type="button" data-admin-health>Release JSON</button>
+          <button type="button" data-admin-sources>Źródła CSV</button>
+          <button type="button" data-admin-candidates>Kandydaci override CSV</button>
         </div>
         <div class="pgw-admin-section">
           <h3>Najważniejsze problemy</h3>
@@ -1901,9 +1997,9 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
         <div class="pgw-admin-section">
           <h3>Co zrobić dalej</h3>
           <ol>
-            <li>Po konwersji PDF uruchom <code>pgwRefreshPdfManifestAfterConversionV70()</code>.</li>
+            <li>Po konwersji PDF uruchom <code>pgwRefreshPdfManifestAfterConversionV71()</code>.</li>
             <li>PDF-y bez indeksu dopisz do <code>data/pdf-device-overrides.json</code>.</li>
-            <li>Po wrzuceniu zmian testuj stronę z parametrem <code>?admin=1&v=${escapeHtml(CONFIG.version || 'v70')}</code>.</li>
+            <li>Po wrzuceniu zmian testuj stronę z parametrem <code>?admin=1&v=${escapeHtml(CONFIG.version || 'v71')}</code>.</li>
           </ol>
         </div>
       </div>`;
@@ -1926,7 +2022,10 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
     const panel = document.getElementById('pgwAdminPanel');
     if (!panel) return;
     const diag = window.PGW_DEBUG?.refreshPdfDiagnostics ? window.PGW_DEBUG.refreshPdfDiagnostics() : buildPdfDiagnostics();
+    const health = state.releaseHealth = buildReleaseHealth();
     const stats = [
+      ['Release score', health.score + '/100'],
+      ['Status', health.status],
       ['Manifest PDF', diag.loadedDriveRows],
       ['Rysunki widoczne', diag.loadedDrawings],
       ['Urządzenia', diag.loadedDevices],
@@ -1938,7 +2037,7 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
       ['Sieroty z raportu', countDiag(diag.externalOrphans)]
     ];
     const statsBox = panel.querySelector('[data-admin-stats]');
-    if (statsBox) statsBox.innerHTML = stats.map(([label, val]) => `<div><b>${escapeHtml(fmt(val || 0))}</b><span>${escapeHtml(label)}</span></div>`).join('');
+    if (statsBox) statsBox.innerHTML = stats.map(([label, val]) => `<div><b>${escapeHtml(typeof val === 'number' ? fmt(val || 0) : String(val || '0'))}</b><span>${escapeHtml(label)}</span></div>`).join('');
     const problemBox = panel.querySelector('[data-admin-problems]');
     if (problemBox) problemBox.innerHTML = renderAdminProblems(diag);
   }
@@ -1951,7 +2050,9 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
       ['Duplikaty plików', diag.duplicateFiles],
       ['Sieroty z manifestu po konwersji', diag.externalOrphans]
     ];
-    return groups.map(([title, rows]) => {
+    const health = state.releaseHealth = buildReleaseHealth();
+    const healthBox = `<details open><summary>Release control: ${escapeHtml(health.status)} · ${escapeHtml(String(health.score))}/100</summary><ul>${arr(health.nextActions).map(x => `<li>${escapeHtml(x)}</li>`).join('')}</ul></details>`;
+    return healthBox + groups.map(([title, rows]) => {
       rows = arr(rows);
       const sample = rows.slice(0, 8).map(row => `<li><code>${escapeHtml(row.deviceIndex || row.fileId || '-')}</code> ${escapeHtml(row.fileName || row.duplicate || row.first || '')}</li>`).join('');
       return `<details ${rows.length ? 'open' : ''}><summary>${escapeHtml(title)}: ${fmt(rows.length)}</summary>${rows.length ? `<ul>${sample}</ul>` : '<p>Brak — elegancko.</p>'}</details>`;

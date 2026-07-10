@@ -1,5 +1,5 @@
 window.PGW_CONFIG = {
-  version: '20260709-v70-admin-pdf-control',
+  version: '20260709-v71-release-control',
   appName: 'Formularz zapytania o części',
   recipientEmail: 'service@yato.pl',
   storageMode: 'drive',
@@ -23,6 +23,10 @@ window.PGW_CONFIG = {
     pdfDeviceOverrides: ['data/pdf-device-overrides.json'],
     pdfQualityReport: ['data/pdf-quality-report.json'],
     pdfOrphans: ['data/pdf-orphans.json'],
+    pdfQaRules: ['data/pdf-qa-rules.json'],
+    pdfOverrideCandidates: ['data/pdf-override-candidates.json'],
+    deploymentState: ['data/deployment-state.json'],
+    releaseInfo: ['data/release-info.json'],
     brandOverrides: ['data/brand-resolution-overrides.json'],
     pdfHeaderOverrides: ['data/pdf-header-overrides.json'],
     universalParts: ['data/universal-parts-zun.json'],
