@@ -1,0 +1,24 @@
+{
+  "version": "v64-smart-catalog",
+  "generatedAt": "2026-06-18T19:10:00Z",
+  "sourceUniquePdfFiles": 1405,
+  "drawingsInDatabase": 1421,
+  "uniqueDevicesInDatabase": 1410,
+  "devicesWithPartsList": 34,
+  "devicesPdfOnly": 1376,
+  "devicesWithReadableTitle": 79,
+  "devicesStillIndexOnly": 1331,
+  "devicesWithPdfHeaderName": 1,
+  "devicesWithGuessedBrandHiddenFromClient": 478,
+  "brandCountsInternal": {
+    "INNE": 9,
+    "VOREL": 19,
+    "LUND": 169,
+    "FALA": 88,
+    "STHOR": 181,
+    "FLO": 24,
+    "YATO": 697,
+    "YATO GASTRO": 223
+  },
+  "note": "Każdy rysunek PDF jest urządzeniem w bazie. PDF-only ma link w mailu i tryb opisowy. Marki niskiej pewności nie są pokazywane klientowi jako pewne."
+}

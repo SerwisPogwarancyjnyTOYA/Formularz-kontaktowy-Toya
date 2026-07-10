@@ -1,5 +1,5 @@
 {
-  "version": "20260709-v71-release-control",
+  "version": "20260710-v72-publish",
   "thresholds": {
     "maxMissingModel": 0,
     "maxNotMatchedToDevice": 0,

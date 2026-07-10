@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>PGW Service Hub — Healthcheck</title>
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#0b1018;color:#f4f6fb;margin:0;padding:32px}main{max-width:980px;margin:auto}.ok{color:#57d68d}.bad{color:#ff6b6b}.muted{color:#9aa4b2}table{width:100%;border-collapse:collapse;margin-top:20px}td,th{border-bottom:1px solid #283142;padding:10px;text-align:left}code{background:#151c2a;padding:2px 6px;border-radius:6px}</style>
+</head>
+<body>
+<main>
+<h1>PGW Service Hub — healthcheck</h1>
+<p class="muted">Testuje obecność kluczowych plików po publikacji na GitHub Pages.</p>
+<div id="summary">Sprawdzanie…</div>
+<table><thead><tr><th>Plik</th><th>Status</th><th>Rozmiar / błąd</th></tr></thead><tbody id="rows"></tbody></table>
+<p class="muted">Panel admina: <code>?admin=1&v=20260710-v72-publish</code></p>
+</main>
+<script>
+const files=['index.html','app.css','config.js','app.js','manifest.webmanifest','data/devices.json','data/drawings.json','data/parts.json','data/drive-drawings-map.full.json','data/drive-drawings-map.converted.json','data/pdf-device-overrides.json','data/pdf-quality-report.json','data/release-info.json','assets/logos/yato-wordmark-clean.png'];
+const rows=document.getElementById('rows');
+const summary=document.getElementById('summary');
+Promise.all(files.map(async file=>{
+  try{const res=await fetch(file,{cache:'no-store'}); const text=await res.clone().text().catch(()=>null); const size=text?text.length:Number(res.headers.get('content-length')||0); return {file,ok:res.ok,status:res.status,size};}
+  catch(e){return {file,ok:false,status:'ERR',size:e.message};}
+})).then(results=>{
+  let ok=0; rows.innerHTML=results.map(r=>{if(r.ok) ok++; return `<tr><td><code>${r.file}</code></td><td class="${r.ok?'ok':'bad'}">${r.ok?'OK':'BŁĄD'} ${r.status}</td><td>${r.size}</td></tr>`}).join('');
+  summary.innerHTML=`<strong class="${ok===results.length?'ok':'bad'}">${ok}/${results.length} OK</strong>`;
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+[
+  {
+    "path": "app.js",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "path": "config.js",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "path": "scripts/pgw-refresh-pdf-manifest.gs",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "path": "index.html",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "path": "app.css",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "path": "config.js",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "path": "app.js",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "path": "data/devices.json",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "path": "data/drawings.json",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "path": "data/parts.json",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "path": "data/drive-drawings-map.full.json",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "path": "assets/logos/yato-wordmark-clean.png",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "path": "scripts/pgw-refresh-pdf-manifest.gs",
+    "ok": true,
+    "error": ""
+  }
+]
