@@ -3,12 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Formularz serwisu pogwarancyjnego TOYA do wyszukiwania urządzeń, rysunków PDF i generowania zapytań o części." />
-  <meta name="robots" content="index,follow" />
+  <meta name="robots" content="noindex,nofollow" />
   <title>Formularz zapytania o części — Serwis Pogwarancyjny TOYA</title>
-  <meta name="build" content="hotfix-2026-07-04-yt828113" />
   <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="stylesheet" href="app.css?v=20260704-hotfix2" />
+  <link rel="stylesheet" href="app.css" />
 </head>
 <body>
   <header class="topbar">
@@ -19,11 +17,7 @@
         <span>Krokowy formularz zapytania o części</span>
       </div>
     </div>
-    <div class="top-actions">
-      <span class="mode-pill">Wersja pokazowa</span>
-      <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="true"><span id="themeIcon">☾</span><span id="themeLabel">Tryb jasny</span></button>
-      <div class="status-pill" id="loadStatus">Ładowanie formularza…</div>
-    </div>
+    <div class="top-actions"><div class="status-pill" id="loadStatus">Ładowanie formularza…</div></div>
   </header>
 
   <main class="shell">
@@ -38,11 +32,6 @@
           <span>3. Dodaj części</span>
           <span>4. Skopiuj mail</span>
         </div>
-      </div>
-      <div class="stats" aria-label="Najważniejsze możliwości formularza">
-        <div><strong>PDF</strong><span>rysunki techniczne</span></div>
-        <div><strong>Mail</strong><span>gotowe zapytanie</span></div>
-        <div><strong>Koszyk</strong><span>wiele urządzeń</span></div>
       </div>
     </section>
 
@@ -282,7 +271,7 @@
     <span>Formularz zapytania o części. Bez cen i stanów magazynowych.</span>
   </footer>
 
-  <script src="config.js?v=20260704-hotfix2"></script>
-  <script src="app.js?v=20260704-hotfix2"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>

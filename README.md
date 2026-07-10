@@ -1,35 +1,102 @@
-# Formularz zapytania o części — Serwis Pogwarancyjny TOYA/YATO
+# PGW Service Hub — Formularz zapytania o części
 
-Statyczna aplikacja internetowa wspierająca przygotowanie zapytania o części zamienne do serwisu pogwarancyjnego.
+Publikacyjna paczka formularza dla serwisu pogwarancyjnego TOYA. Strona działa jako statyczna aplikacja GitHub Pages: klient wyszukuje urządzenie, widzi rysunek złożeniowy PDF, wybiera lub opisuje część i otrzymuje gotową treść maila do `service@yato.pl`.
 
-Użytkownik może wyszukać urządzenie, sprawdzić dostępny rysunek techniczny, wskazać potrzebne części lub opisać je ręcznie, a następnie wygenerować gotową treść wiadomości do serwisu.
+## Co zawiera release
 
-## Co robi aplikacja
+- wyszukiwarkę urządzeń i rysunków złożeniowych PDF,
+- obsługę wielu źródeł manifestów PDF: baza pełna + manifest po konwersji,
+- koszyk części z grupowaniem per urządzenie,
+- tryb ręcznego opisu części, gdy lista pozycji nie jest jeszcze podpięta,
+- generowanie maila bez cen i bez stanów magazynowych,
+- panel administracyjny pod `?admin=1`,
+- diagnostykę źródeł danych, PDF-ów, sierot i override’ów,
+- skrypt Apps Script do odświeżania manifestu PDF po konwersji.
 
-- pomaga odnaleźć urządzenie po indeksie, numerze lub fragmencie nazwy;
-- pokazuje dostępny rysunek techniczny PDF;
-- pozwala dodać części do zapytania lub opisać brakującą część ręcznie;
-- obsługuje zapytania dotyczące kilku urządzeń naraz;
-- generuje uporządkowany temat i treść maila do serwisu;
-- umożliwia podanie danych kontaktowych, faktury i wysyłki;
-- działa jako statyczna strona GitHub Pages.
+## Najważniejsze pliki
 
-## Jak uruchomić
+```text
+index.html                         główna strona
+app.css                            style
+config.js                          konfiguracja źródeł danych
+app.js                             logika formularza i panelu admina
+data/*.json                        baza urządzeń, części, PDF i raporty QA
+assets/logos/*.png                 logotypy marek
+scripts/pgw-refresh-pdf-manifest.gs skrypt po konwersji PDF
+healthcheck.html                   szybki test publikacji
+```
 
-1. Wgraj zawartość repozytorium na GitHub.
-2. Włącz publikację w **Settings → Pages**.
-3. Wybierz branch, np. `main`, oraz katalog główny repozytorium.
-4. Po publikacji otwórz stronę i wpisz przykładowy indeks urządzenia.
+## Publikacja na GitHub Pages
 
-## Status projektu
+1. Wgraj zawartość tego folderu do głównego katalogu repozytorium GitHub Pages.
+2. W commit message użyj np. `Release 20260710-v72-publish`.
+3. Po publikacji otwórz stronę z cache-busterem:
 
-Projekt jest wersją demonstracyjną przygotowaną do prezentacji funkcjonalności. Baza danych może być dalej rozwijana o kolejne rysunki, opisy i listy części.
+```text
+?v=20260710-v72-publish
+```
 
-## Kontakt
+4. Test administracyjny:
 
-Zapytania wygenerowane przez formularz kierowane są na: `service@yato.pl`.
+```text
+?admin=1&v=20260710-v72-publish
+```
 
+5. Test plików danych:
 
-## Hotfix 2026-07-04 v2
+```text
+healthcheck.html
+```
 
-Ta paczka jest pełna: zawiera `index.html`, `app.js`, `app.css`, `config.js`, `manifest.webmanifest`, katalog `data/` i `assets/`. Wprowadzono model YT-828113/YT-828114 wraz z roboczą listą 40 części z DOCX.
+## Odświeżanie PDF-ów po konwersji
+
+W Apps Script wklej lub zaktualizuj plik:
+
+```text
+scripts/pgw-refresh-pdf-manifest.gs
+```
+
+Po konwersji rysunków do PDF uruchom:
+
+```javascript
+pgwRefreshPdfManifestAfterConversion()
+```
+
+Opcjonalny dzienny automat:
+
+```javascript
+pgwInstallDailyPdfManifestRefresh()
+```
+
+Skrypt aktualizuje między innymi:
+
+```text
+data/drive-drawings-map.converted.json
+data/pdf-orphans.json
+data/pdf-quality-report.json
+data/pdf-override-candidates.json
+data/deployment-state.json
+data/release-info.json
+```
+
+## Panel admina
+
+Panel jest niewidoczny dla zwykłego klienta. Otwiera się dopiero po dodaniu parametru:
+
+```text
+?admin=1
+```
+
+W panelu można pobrać release health, source health, diagnostykę PDF i kandydatów do override’ów.
+
+## Zasady formularza
+
+- Strona nie pokazuje cen.
+- Strona nie pokazuje stanów magazynowych.
+- Jeśli część nie jest podpięta do listy, klient może opisać pozycję z rysunku PDF.
+- Rysunki złożeniowe PDF są traktowane jako kluczowe źródło pomocnicze dla zapytania.
+
+## Status release
+
+Release: `20260710-v72-publish`  
+Status: gotowe do publikacji po standardowym teście `healthcheck.html` i `?admin=1`.

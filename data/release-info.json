@@ -1,19 +1,20 @@
 {
-  "version": "20260709-v71-release-control",
-  "name": "PGW v71 — Release Control",
+  "version": "20260710-v72-publish",
+  "name": "PGW v72 — pełny release publikacyjny",
   "date": "2026-07-10",
   "changes": [
-    "Panel admina pokazuje release score i status wdrożenia.",
-    "Dodano kontrolę źródeł JSON ładowanych przez stronę.",
-    "Dodano eksport source-health CSV i release-health JSON.",
-    "Dodano pliki QA rules, deployment-state i override candidates.",
-    "Skrypt Apps Script v71 robi backup wygenerowanych JSON-ów przed nadpisaniem."
+    "Pełna paczka repozytorium zamiast kolejnego patcha.",
+    "Zachowano widoczne rysunki złożeniowe z manifestu Drive i manifestu po konwersji.",
+    "Dodano panel admina ?admin=1, release health, diagnostykę źródeł i eksporty CSV/JSON.",
+    "Uproszczono README i dokumentację wdrożenia pod publikację GitHub Pages.",
+    "Dodano healthcheck.html, RELEASE.json i repository-manifest.json."
   ],
   "testPlan": [
-    "Otwórz stronę z ?admin=1&v=20260709-v71-release-control.",
-    "Sprawdź release score w panelu PDF QA.",
-    "Pobierz Release JSON i Źródła CSV.",
-    "Wyszukaj testowo urządzenie z PDF-em z manifestu full oraz converted.",
-    "Sprawdź czy formularz maila działa jak w v70."
-  ]
+    "Otwórz index.html lokalnie albo przez GitHub Pages z ?v=20260710-v72-publish.",
+    "Sprawdź wyszukiwanie urządzenia z rysunkiem PDF.",
+    "Otwórz ?admin=1&v=20260710-v72-publish i sprawdź Release score.",
+    "Otwórz healthcheck.html i sprawdź ładowanie plików JSON.",
+    "Wygeneruj mail testowy bez cen i stanów magazynowych."
+  ],
+  "status": "publication-ready"
 }

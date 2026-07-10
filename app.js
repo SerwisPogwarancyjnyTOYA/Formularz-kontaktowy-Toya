@@ -1,7 +1,7 @@
 (() => {
   'use strict';
   const CONFIG = window.PGW_CONFIG || {};
-  const DRAFT_KEY = 'pgw-production-draft-v71-release-control';
+  const DRAFT_KEY = 'pgw-production-draft-v72-publish';
   const THEME_KEY = 'pgw-theme';
   const PART_ROW_LIMIT = Number(CONFIG.partRowLimit || 80);
   const $ = (id) => document.getElementById(id);
@@ -1976,7 +1976,7 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
     return `
       <div class="pgw-admin-card" role="dialog" aria-label="Panel diagnostyczny PDF">
         <div class="pgw-admin-head">
-          <div><strong>PDF Quality Control</strong><span>v71 · diagnostyka i release control, klient tego nie widzi</span></div>
+          <div><strong>PDF Quality Control</strong><span>v72 · release publikacyjny, klient tego nie widzi</span></div>
           <button type="button" data-admin-close aria-label="Zamknij">×</button>
         </div>
         <div class="pgw-admin-grid" data-admin-stats></div>
@@ -1999,7 +1999,7 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
           <ol>
             <li>Po konwersji PDF uruchom <code>pgwRefreshPdfManifestAfterConversionV71()</code>.</li>
             <li>PDF-y bez indeksu dopisz do <code>data/pdf-device-overrides.json</code>.</li>
-            <li>Po wrzuceniu zmian testuj stronę z parametrem <code>?admin=1&v=${escapeHtml(CONFIG.version || 'v71')}</code>.</li>
+            <li>Po wrzuceniu zmian testuj stronę z parametrem <code>?admin=1&v=${escapeHtml(CONFIG.version || 'v72')}</code>.</li>
           </ol>
         </div>
       </div>`;

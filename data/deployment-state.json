@@ -1,12 +1,12 @@
 {
-  "version": "20260709-v71-release-control",
+  "version": "20260710-v72-publish",
   "status": "STAGING_READY",
   "generatedAt": "2026-07-10T00:00:00+02:00",
-  "recommendedTestUrl": "?admin=1&v=20260709-v71-release-control",
+  "recommendedTestUrl": "?admin=1&v=20260710-v72-publish",
   "requiredManualStep": "Po wrzuceniu paczki do repo uruchom pgwRefreshPdfManifestAfterConversionV71() w Apps Script.",
   "rollback": "W razie problemu wróć do paczki v70 lub podmień tylko config.js na poprzednią wersję.",
   "notes": [
-    "v71 nie zmienia procesu klienta — dodaje release control i raporty admina.",
+    "v72 nie zmienia procesu klienta — dodaje release control i raporty admina.",
     "Panel admina jest widoczny tylko z parametrem ?admin=1 albo po ręcznym otwarciu przez PGW_DEBUG."
   ]
 }

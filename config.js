@@ -1,5 +1,5 @@
 window.PGW_CONFIG = {
-  version: '20260709-v71-release-control',
+  version: '20260710-v72-publish',
   appName: 'Formularz zapytania o części',
   recipientEmail: 'service@yato.pl',
   storageMode: 'drive',
