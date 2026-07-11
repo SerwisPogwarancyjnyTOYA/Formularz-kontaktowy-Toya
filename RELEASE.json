@@ -1,39 +1,12 @@
 {
-  "version": "20260711-v76-coverage-pdf-quality",
-  "date": "2026-07-11",
-  "channel": "stable-v76",
-  "name": "Coverage & PDF Quality Audit",
-  "base": "20260711-v75-uniform-pdf-viewer",
-  "summary": {
-    "devicesBeforeSynthetic": 1314,
-    "syntheticDevicesAddedFromDrivePdf": 13,
-    "devicesAfterSynthetic": 1327,
-    "drawingsJsonRows": 1433,
-    "partsRows": 2669,
-    "drivePdfRowsTotal": 1445,
-    "drivePdfModelsUnique": 1325,
-    "modelsWithBestPdf": 1325,
-    "modelsWithParts": 35,
-    "modelsCompletePdfAndParts": 33,
-    "modelsWithPdfNoStructuredParts": 1292,
-    "modelsWithPartsNoDrivePdf": 2,
-    "modelsFromDrivePdfWithoutDeviceRecordBeforeV76": 13,
-    "pdfRowsWithoutPreviewUrl": 0,
-    "modelsWithMultiplePdfCandidates": 50,
-    "preferredMergedPdfModels": 12,
-    "scalonePdfRows": 12
-  },
-  "testUrls": [
-    "?v=20260711-v76-coverage-pdf-quality",
-    "?admin=1&v=20260711-v76-coverage-pdf-quality",
-    "healthcheck.html?v=20260711-v76-coverage-pdf-quality",
-    "smoke-test.html?v=20260711-v76-coverage-pdf-quality"
+  "version": "20260711-v80-drive-master-catalog",
+  "createdAt": "2026-07-11T13:19:29.648616Z",
+  "package": "pgw-service-hub-publish-20260711-v80.zip",
+  "focus": [
+    "Drive master catalog",
+    "parts extraction from PDF rows",
+    "merge plan",
+    "safe organizer copies"
   ],
-  "files": [
-    "data/coverage-audit-v76.json",
-    "data/pdf-quality-audit-v76.json",
-    "data/form-catalog-policy-v76.json",
-    "docs/COVERAGE_AUDIT_V76.md",
-    "docs/FORMULARZ_STANDARD_V76.md"
-  ]
+  "notes": "Drive jest źródłem prawdy dla rysunków, a devices.json nie ma ograniczać widoczności urządzeń."
 }

@@ -1,20 +1,18 @@
 {
-  "version": "20260710-v73-stable-control",
+  "version": "20260711-v77-smart-model-search",
   "status": "publication-ready",
-  "generatedAt": "2026-07-10T00:00:00+02:00",
-  "recommendedTestUrl": "?admin=1&v=20260710-v72-publish",
-  "requiredManualStep": "Po wrzuceniu paczki do repo uruchom pgwRefreshPdfManifestAfterConversionV71() w Apps Script.",
-  "rollback": "W razie problemu wróć do paczki v70 lub podmień tylko config.js na poprzednią wersję.",
-  "notes": [
-    "v72 nie zmienia procesu klienta — dodaje release control i raporty admina.",
-    "Panel admina jest widoczny tylko z parametrem ?admin=1 albo po ręcznym otwarciu przez PGW_DEBUG."
-  ],
-  "channel": "stable",
-  "updatedAt": "2026-07-10T00:00:00+02:00",
+  "generatedAt": "2026-07-11T15:50:00+02:00",
+  "recommendedTestUrl": "?v=20260711-v77-smart-model-search",
+  "channel": "stable-v77",
   "checks": [
     "healthcheck",
     "smoke-test",
     "admin-panel",
-    "npm-run-check"
+    "npm-run-check",
+    "npm-run-search-check"
+  ],
+  "notes": [
+    "v77 naprawia przypadek z ekranu: yt-828113 nie powinien wpadać od razu w brak urządzenia.",
+    "Repo dalej wymaga wrzucenia/commitowania na GitHub Pages, aby live site się zmienił."
   ]
 }

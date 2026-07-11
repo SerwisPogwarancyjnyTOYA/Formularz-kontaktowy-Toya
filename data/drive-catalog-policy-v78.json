@@ -1,0 +1,12 @@
+{
+  "version": "20260711-v78-drive-first-catalog-builder",
+  "rule": "Formularz jest budowany Drive-first: każdy PDF z rysunkiem/listą części na Drive może stworzyć urządzenie, nawet jeśli nie było go wcześniej w devices.json.",
+  "priority": [
+    "__SCALONE.pdf",
+    "PDF z listą części / wygenerowany roboczy PDF",
+    "standardowy Czesci_zamienne_<model>.pdf",
+    "rysunek techniczny bez listy części"
+  ],
+  "manualMode": "Tylko dla urządzeń bez rysunku/listy części na Drive lub nowych pozycji bez dokumentacji.",
+  "multiModelPdf": "Jeden PDF może utworzyć wiele urządzeń, np. YT-828113 i YT-828114."
+}

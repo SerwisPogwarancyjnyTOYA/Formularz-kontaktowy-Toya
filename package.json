@@ -1,10 +1,17 @@
 {
   "name": "pgw-service-hub",
   "private": true,
-  "version": "20260711-v76-coverage-pdf-quality",
+  "version": "20260711-v80-drive-master-catalog",
   "type": "module",
   "scripts": {
     "check": "node scripts/pgw-repo-selfcheck.mjs",
-    "coverage": "node scripts/pgw-v76-coverage-report.mjs"
+    "coverage": "node scripts/pgw-v76-coverage-report.mjs",
+    "search-check": "node scripts/pgw-v77-search-check.mjs",
+    "drive-catalog": "node scripts/pgw-v79-drive-catalog-builder.mjs",
+    "drive-catalog-v78": "node scripts/pgw-v78-drive-first-catalog-builder.mjs",
+    "organizer-plan": "node scripts/pgw-v79-drive-catalog-builder.mjs --organizer-plan",
+    "drive-master": "node scripts/pgw-v80-drive-master-catalog.mjs",
+    "drive-catalog-v79": "node scripts/pgw-v79-drive-catalog-builder.mjs",
+    "merge-plan": "node scripts/pgw-v80-drive-master-catalog.mjs --merge-plan"
   }
 }

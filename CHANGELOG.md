@@ -1,5 +1,43 @@
 # Changelog
 
+## 20260711-v80-drive-master-catalog
+
+- Dodano master katalog Drive v80.
+- Dodano generator `drive-parts.generated-v80.json`.
+- Dodano plan scalania `drive-merge-plan-v80.json`.
+- Dodano bezpieczne akcje porządkowania `drive-organizer-actions-v80.json`.
+- Dodano Apps Script v80 do skanowania Drive, OCR tekstu PDF i tworzenia kopii porządkujących bez kasowania źródeł.
+
+# Changelog
+
+## 20260711-v79-drive-catalog-and-pdf-organizer
+
+- Naprawiono deduplikację PDF-ów po samym `fileId` - jeden PDF może obsługiwać kilka modeli.
+- Dodano `drive-drawings-map.generated-v79.json` jako manifest budowany z Drive.
+- Dodano `drive-catalog-audit-v79.json`, `drive-pdf-merge-queue-v79.json`, `drive-organizer-plan-v79.json`.
+- Dodano Apps Script do skanowania i porządkowania folderów Drive.
+- Dodano dokumentację polityki scalania PDF.
+
+# Changelog
+
+## 20260711-v78-drive-first-catalog-builder
+
+- Dodano Drive-first catalog builder.
+- Dodano obsługę PDF-ów przypisanych do wielu modeli.
+- Dodano generowanie części z manifestu Drive, gdy manifest zawiera tablicę `parts`.
+- Dodano seed dla `YT-828113` / `YT-828114` z PDF-a `yt-828113-yt-828114.pdf`.
+- Dodano skrypt lokalny oraz Apps Script do budowania manifestu z Drive.
+
+
+## v77 — Smart Model Search
+
+- Dodano inteligentne wyszukiwanie modeli po wariantach zapisu.
+- `yt-828113` nie kończy już od razu jako brak urządzenia, tylko powinno pokazać bliskie modele z rysunkiem.
+- Ignorowane są spacje, myślniki i typowe nadmiarowe cyfry w indeksach.
+- Dodano `data/search-normalization-audit-v77.json` oraz `docs/SEARCH_STANDARD_V77.md`.
+
+# Changelog
+
 ## 20260711-v76-coverage-pdf-quality
 
 - Dodano audyt pokrycia formularza: urządzenia / PDF / części.

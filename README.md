@@ -1,6 +1,6 @@
 # PGW Service Hub - formularz zapytania o części
 
-Wersja: **v76 / 20260711-v76-uniform-pdf-viewer**
+Wersja: **20260711-v79-drive-catalog-and-pdf-organizer**
 
 Najważniejsza zasada tej wersji: **każde urządzenie, które ma rysunek PDF na Drive, ma być dostępne w formularzu**. Formularz nie powinien ukrywać urządzenia tylko dlatego, że lista części nie została jeszcze w pełni przetworzona.
 
@@ -14,10 +14,10 @@ Najważniejsza zasada tej wersji: **każde urządzenie, które ma rysunek PDF na
 ## Test po publikacji
 
 ```text
-?v=v76 / 20260711-v76-uniform-pdf-viewer
-?admin=1&v=v76 / 20260711-v76-uniform-pdf-viewer
-healthcheck.html?v=v76 / 20260711-v76-uniform-pdf-viewer
-smoke-test.html?v=v76 / 20260711-v76-uniform-pdf-viewer
+?v=20260711-v79-drive-catalog-and-pdf-organizer
+?admin=1&v=20260711-v79-drive-catalog-and-pdf-organizer
+healthcheck.html?v=20260711-v79-drive-catalog-and-pdf-organizer
+smoke-test.html?v=20260711-v79-drive-catalog-and-pdf-organizer
 ```
 
 ## Raporty
@@ -165,3 +165,30 @@ Szybka kontrola lokalna:
 npm run check
 npm run coverage
 ```
+
+
+## v78 — Drive-first catalog builder
+
+Ta wersja zmienia podejście do katalogu: formularz nie bazuje wyłącznie na ręcznie dodanych urządzeniach. Dodatkowy manifest `data/drive-drawings-map.generated-v78.json` pozwala tworzyć urządzenia bezpośrednio z PDF-ów znalezionych na Google Drive.
+
+Najważniejsze: jeśli rysunek/lista części jest na Drive, urządzenie powinno być dostępne w formularzu.
+
+
+## v79 - Drive catalog + organizer
+
+Ta wersja wzmacnia najważniejszy proces: formularz ma widzieć urządzenia z PDF-ów na Drive, także gdy nie ma ich jeszcze ręcznie w `devices.json`.
+
+Najważniejsze:
+
+- jeden PDF może tworzyć kilka urządzeń,
+- naprawiona deduplikacja po `fileId`,
+- dodany skaner/organizator Drive w Apps Script,
+- dodana kolejka scalania PDF-ów,
+- dodane raporty jakości katalogu Drive.
+
+
+## v80 — Drive Master Catalog
+
+Kolejny krok po v79. Wersja tworzy pełniejszy master katalog z Drive: modele, rysunki, części, plan scalania i bezpieczne akcje porządkowania folderów.
+
+Najważniejsze: jeśli rysunek jest na Drive, ma trafić do formularza nawet wtedy, gdy urządzenia nie było ręcznie w `devices.json`.

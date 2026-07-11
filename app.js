@@ -1,7 +1,7 @@
 (() => {
   'use strict';
   const CONFIG = window.PGW_CONFIG || {};
-  const DRAFT_KEY = 'pgw-production-draft-v73-stable-control';
+  const DRAFT_KEY = 'pgw-production-draft-v80-drive-master-catalog';
   const THEME_KEY = 'pgw-theme';
   const PART_ROW_LIMIT = Number(CONFIG.partRowLimit || 80);
   const $ = (id) => document.getElementById(id);
@@ -21,7 +21,7 @@
     devices: [], drawings: [], parts: [], driveMap: [], brandOverrides: {}, pdfHeaderOverrides: {}, pdfDeviceOverrides: {}, pdfQualityReport: {}, pdfOrphans: [], universalParts: [], universalPartLinks: [], partAssemblies: {},
     drawingById: new Map(), partsByDrawing: new Map(), driveByDrawingId: new Map(), driveByKey: new Map(), zunByPartKey: new Map(), zunByCode: new Map(), partAssemblyComponents: new Map(), partAssemblyChildren: new Map(),
     selectedDevice: null, selectedDrawing: null, selectedParts: new Map(), manualMode: false, step: 1, formDirty: false,
-    postalCodes: new Map(), partVisibleLimit: PART_ROW_LIMIT, activeBrand: 'all', brandSummary: [], pdfDiagnostics: {}, releaseHealth: {}, sourceHealth: [], releaseInfo: {}, deploymentState: {}, pdfQaRules: {}, pdfOverrideCandidates: [], pdfDisplayPolicy: {}, pdfStandardizationAudit: {}
+    postalCodes: new Map(), partVisibleLimit: PART_ROW_LIMIT, activeBrand: 'all', brandSummary: [], pdfDiagnostics: {}, releaseHealth: {}, sourceHealth: [], releaseInfo: {}, deploymentState: {}, pdfQaRules: {}, pdfOverrideCandidates: [], pdfDisplayPolicy: {}, pdfStandardizationAudit: {}, driveFirstCatalogAuditV78: {}, driveCatalogPolicyV78: {}, driveCatalogAuditV79: {}, drivePdfMergeQueueV79: {}, driveOrganizerPlanV79: {}, driveMasterAuditV80: {}, driveMergePlanV80: {}, driveOrganizerActionsV80: {}
   };
 
   const POSTAL_FALLBACK = {
@@ -56,6 +56,14 @@
       state.pdfDisplayPolicy = await loadFirst(urls.pdfDisplayPolicy || ['data/pdf-display-policy.json'], {}, 'pdfDisplayPolicy');
       state.pdfStandardizationAudit = await loadFirst(urls.pdfStandardizationAudit || ['data/pdf-standardization-audit.json'], {}, 'pdfStandardizationAudit');
       state.deploymentState = await loadFirst(urls.deploymentState || ['data/deployment-state.json'], {}, 'deploymentState');
+      state.driveFirstCatalogAuditV78 = await loadFirst(urls.driveFirstCatalogAuditV78 || ['data/drive-first-catalog-audit-v78.json'], {}, 'driveFirstCatalogAuditV78');
+      state.driveCatalogPolicyV78 = await loadFirst(urls.driveCatalogPolicyV78 || ['data/drive-catalog-policy-v78.json'], {}, 'driveCatalogPolicyV78');
+      state.driveCatalogAuditV79 = await loadFirst(urls.driveCatalogAuditV79 || ['data/drive-catalog-audit-v79.json'], {}, 'driveCatalogAuditV79');
+      state.drivePdfMergeQueueV79 = await loadFirst(urls.drivePdfMergeQueueV79 || ['data/drive-pdf-merge-queue-v79.json'], {}, 'drivePdfMergeQueueV79');
+      state.driveOrganizerPlanV79 = await loadFirst(urls.driveOrganizerPlanV79 || ['data/drive-organizer-plan-v79.json'], {}, 'driveOrganizerPlanV79');
+      state.driveMasterAuditV80 = await loadFirst(urls.driveMasterAuditV80 || ['data/drive-master-audit-v80.json'], {}, 'driveMasterAuditV80');
+      state.driveMergePlanV80 = await loadFirst(urls.driveMergePlanV80 || ['data/drive-merge-plan-v80.json'], {}, 'driveMergePlanV80');
+      state.driveOrganizerActionsV80 = await loadFirst(urls.driveOrganizerActionsV80 || ['data/drive-organizer-actions-v80.json'], {}, 'driveOrganizerActionsV80');
       state.releaseInfo = await loadFirst(urls.releaseInfo || ['data/release-info.json'], {}, 'releaseInfo');
       await loadPostalCodes();
       normalizeData();
@@ -144,13 +152,99 @@
     Object.entries(POSTAL_FALLBACK).forEach(([zip, city]) => push(zip, city));
   }
 
+
+  function expandDriveMapModels(rows) {
+    const out = [];
+    for (const row of arr(rows)) {
+      if (!row) continue;
+      const models = extractModelsFromDriveRow(row);
+      if (!models.length) {
+        out.push(row);
+        continue;
+      }
+      for (const model of models) {
+        out.push({
+          ...row,
+          deviceIndex: model,
+          model,
+          normalizedModel: model,
+          primaryModel: row.primaryModel || models[0] || model,
+          modelsInPdf: models,
+          sharedDrawingForModels: models.length > 1,
+          __expandedFromMultiModelPdf: models.length > 1
+        });
+      }
+    }
+    return out;
+  }
+
+  function extractModelsFromDriveRow(row) {
+    const explicit = []
+      .concat(arr(row.deviceIndexes))
+      .concat(arr(row.modelsInPdf))
+      .concat(arr(row.models))
+      .concat(arr(row.keys));
+    if (row.deviceIndex) explicit.push(row.deviceIndex);
+    if (row.model) explicit.push(row.model);
+    const text = [
+      ...explicit,
+      row.fileName, row.title, row.name, row.path, row.folderName, row.deviceName,
+      row.searchText, row.pdfHeader
+    ].join(' ');
+    const found = [];
+    const add = (value) => {
+      const idx = normalizeDeviceIndex(value);
+      if (idx && !found.some(x => norm(x) === norm(idx))) found.push(idx);
+    };
+    String(text || '').replace(/\b(YT|YG)\s*[-_ ]?\s*(\d{4,6})\b/gi, (_, prefix, digits) => {
+      add(`${String(prefix).toUpperCase()}-${digits}`);
+      return _;
+    });
+    String(text || '').replace(/(?:^|[^0-9A-Z])(\d{5})(?:[^0-9A-Z]|$)/gi, (_, digits) => {
+      add(digits);
+      return _;
+    });
+    for (const value of explicit) add(value);
+    return found;
+  }
+
+  function addPartsFromDriveRow(row, drawing) {
+    const rows = arr(row.parts || row.extractedParts || row.partsList);
+    if (!rows.length || !drawing || !drawing.id) return 0;
+    let added = 0;
+    const existing = new Set(state.parts.map(p => `${norm(p.deviceIndex)}|${norm(p.partIndex)}|${norm(p.position)}|${String(p.drawingId)}`));
+    rows.forEach((part, index) => {
+      const partIndex = String(part.partIndex || part.index || part.sap || '').trim().toUpperCase();
+      if (!partIndex || looksLikeHeaderPart({partIndex})) return;
+      const position = String(part.position || part.pos || part.no || index + 1).trim();
+      const key = `${norm(drawing.deviceIndex)}|${norm(partIndex)}|${norm(position)}|${String(drawing.id)}`;
+      if (existing.has(key)) return;
+      existing.add(key);
+      state.parts.push({
+        id: `drive-${String(row.fileId || drawing.id)}|${drawing.deviceIndex}|${partIndex}|${position}`,
+        deviceIndex: drawing.deviceIndex,
+        position,
+        partIndex,
+        namePl: String(part.namePl || part.name || part.description || '').trim(),
+        nameEn: String(part.nameEn || '').trim(),
+        drawingId: drawing.id,
+        drawingPath: drawing.path || row.path || '',
+        drawingTitle: drawing.title || row.title || '',
+        brand: drawing.brand || row.brand || '',
+        source: row.source || 'GOOGLE_DRIVE_GENERATED_V78'
+      });
+      added++;
+    });
+    return added;
+  }
+
   function normalizeData() {
     state.devices = arr(state.devices).filter(Boolean);
     state.drawings = arr(state.drawings).filter(d => isPdf(d));
     state.parts = arr(state.parts).filter(Boolean);
     state.universalParts = normalizeUniversalParts(state.universalParts);
     state.universalPartLinks = normalizeUniversalPartLinks(state.universalPartLinks);
-    state.driveMap = arr(state.driveMap).filter(row => isPdf(row));
+    state.driveMap = expandDriveMapModels(arr(state.driveMap).filter(row => isPdf(row))); // v78: jeden PDF może obsługiwać kilka modeli
 
     for (const d of state.devices) d.brand = resolveBrand(d);
     for (const d of state.drawings) d.brand = resolveBrand(d);
@@ -187,7 +281,7 @@
         const drawing = {
           id,
           deviceIndex: row.deviceIndex,
-          title: row.displayTitle || row.deviceName || row.title || row.fileName || row.deviceIndex,
+          title: bestDriveTitleV80(row) || row.displayTitle || row.deviceName || row.title || row.fileName || row.deviceIndex,
           fileName: row.fileName || row.title || `${row.deviceIndex}.pdf`,
           brand: canonicalBrand(row.brand || inferBrand(row)),
           type: 'pdf',
@@ -208,6 +302,7 @@
           displayMode: row.displayMode || 'standard-service-card'
         };
         state.drawings.push(drawing);
+        addPartsFromDriveRow(row, drawing);
         drawingKeys(drawing).forEach(k => existingDrawingKeys.add(k));
       }
     }
@@ -247,6 +342,12 @@
   }
 
 
+  function bestDriveTitleV80(row) {
+    const models = Array.isArray(row && row.modelsInPdf) ? row.modelsInPdf : [];
+    const base = cleanDeviceTitle(row && row.deviceIndex, row && (row.deviceName || row.displayTitle || row.title || row.fileName || ''));
+    if (models.length > 1 && base && !/wspólny|multi/i.test(base)) return base + ' · wspólny rysunek dla ' + models.join(', ');
+    return base || (row && row.deviceIndex) || '';
+  }
 
   function enhanceDeviceTitlesFromDrawings() {
     const drawingsByDevice = new Map();
@@ -409,7 +510,10 @@
     const out = [];
     for (const row of rows || []) {
       const id = String(row.fileId || row.driveFileId || row.googleDriveId || row.gdriveId || row.sourceFileId || '').trim();
-      const identity = id || [row.path || row.folderPath || '', row.fileName || row.title || row.name || '', row.deviceIndex || row.model || row.normalizedModel || ''].map(normKey).filter(Boolean).join('|');
+      // v79: jeden PDF moze obslugiwac kilka modeli. Nie wolno deduplikowac po samym fileId,
+      // bo wtedy drugi model z pliku yt-828113-yt-828114.pdf znika z katalogu.
+      const modelIdentity = normKey(row.deviceIndex || row.model || row.normalizedModel || row.primaryModel || '');
+      const identity = id ? [id, modelIdentity || 'no-model'].join('|') : [row.path || row.folderPath || '', row.fileName || row.title || row.name || '', row.deviceIndex || row.model || row.normalizedModel || ''].map(normKey).filter(Boolean).join('|');
       if (!identity) { out.push(row); continue; }
       const existingIndex = byId.get(identity);
       if (existingIndex === undefined) {
@@ -952,9 +1056,17 @@
       const idx = norm(device.deviceIndex);
       if (!tokens.length) score = partCount ? 10 : 0;
       for (const t of tokens) {
-        if (idx === t || idx.replace(/-/g,'') === t.replace(/-/g,'')) score += 120;
-        else if (idx.includes(t) || idx.replace(/-/g,'').includes(t.replace(/-/g,''))) score += 80;
+        const tCompact = compactSearchKey(t);
+        const idxCompact = compactSearchKey(device.deviceIndex);
+        const variants = expandDeviceSearchToken(t);
+        if (idx === t || idxCompact === tCompact) score += 140;
+        else if (variants.includes(idxCompact)) score += 130;
+        else if (idx.includes(t) || idxCompact.includes(tCompact)) score += 85;
+        else if (tCompact.length >= 5 && idxCompact.length >= 5 && tCompact.includes(idxCompact)) score += 80;
+        else if (fuzzyDeviceIndexMatch(idxCompact, variants)) score += 65;
         if (device.__search.includes(t)) score += 25;
+        const searchCompact = compactSearchKey(device.__search);
+        if (tCompact.length >= 5 && searchCompact.includes(tCompact)) score += 18;
       }
       return {device, drawings, partCount, score};
     }).filter(x => x.drawings.length > 0 && brandMatches(x.device.brand) && (!tokens.length || x.score > 0));
@@ -2369,6 +2481,74 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
     return text.includes('application/pdf') || /\.pdf(\?|#|$|\s)/i.test(text) || String(x.type || '').toLowerCase() === 'pdf';
   }
   function arr(x) { return Array.isArray(x) ? x : (x && Array.isArray(x.items) ? x.items : []); }
+  function compactSearchKey(value) {
+    return String(value || '')
+      .toUpperCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^A-Z0-9]/g, '');
+  }
+
+  function expandDeviceSearchToken(token) {
+    const compact = compactSearchKey(token);
+    const out = new Set([compact]);
+    const m = compact.match(/^([A-Z]{1,3})(\d{3,9}[A-Z]?)$/);
+    if (m) {
+      const prefix = m[1];
+      const digits = m[2].replace(/[^0-9]/g, '');
+      out.add(prefix + digits);
+      if (digits.length > 5) {
+        out.add(prefix + digits.slice(0, 5));
+        out.add(prefix + digits.slice(0, 6));
+        // Common customer/catalog mismatch: one extra digit in model typed from label or PDF file name.
+        for (let i = 0; i < digits.length; i++) out.add(prefix + digits.slice(0, i) + digits.slice(i + 1));
+      }
+      if (digits.length === 5) {
+        out.add(prefix + digits);
+      }
+    }
+    const numeric = compact.match(/^(\d{3,9})$/);
+    if (numeric) {
+      const digits = numeric[1];
+      out.add(digits);
+      if (digits.length > 5) {
+        out.add(digits.slice(0, 5));
+        out.add(digits.slice(0, 6));
+        for (let i = 0; i < digits.length; i++) out.add(digits.slice(0, i) + digits.slice(i + 1));
+      }
+    }
+    return [...out].filter(Boolean);
+  }
+
+  function fuzzyDeviceIndexMatch(indexCompact, queryVariants) {
+    if (!indexCompact || indexCompact.length < 5) return false;
+    for (const q of queryVariants || []) {
+      if (!q || q.length < 5) continue;
+      if (indexCompact === q || indexCompact.includes(q) || q.includes(indexCompact)) return true;
+      if (Math.abs(indexCompact.length - q.length) <= 1 && boundedEditDistance(indexCompact, q, 1) <= 1) return true;
+    }
+    return false;
+  }
+
+  function boundedEditDistance(a, b, maxDistance) {
+    a = String(a || ''); b = String(b || '');
+    if (Math.abs(a.length - b.length) > maxDistance) return maxDistance + 1;
+    const prev = Array(b.length + 1).fill(0).map((_, i) => i);
+    const curr = Array(b.length + 1).fill(0);
+    for (let i = 1; i <= a.length; i++) {
+      curr[0] = i;
+      let rowMin = curr[0];
+      for (let j = 1; j <= b.length; j++) {
+        const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+        curr[j] = Math.min(prev[j] + 1, curr[j - 1] + 1, prev[j - 1] + cost);
+        if (curr[j] < rowMin) rowMin = curr[j];
+      }
+      if (rowMin > maxDistance) return maxDistance + 1;
+      for (let j = 0; j <= b.length; j++) prev[j] = curr[j];
+    }
+    return prev[b.length];
+  }
+
   function norm(s) { return String(s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[_\s]+/g,' ').trim(); }
   function normKey(s) { return norm(String(s || '').replace(/\\/g,'/').split('/').pop()).replace(/\s+/g,'-'); }
   function stripExt(s) { return String(s || '').replace(/\.(pdf|jpg|jpeg|png|webp|docx?|xlsx?)$/i,''); }
@@ -2382,9 +2562,6 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
     try { await navigator.clipboard.writeText(text); els.copyStatus.textContent = ok; }
     catch(e) { els.copyStatus.textContent = 'Nie udało się skopiować automatycznie — zaznacz tekst ręcznie.'; }
   }
-})();
-
-
   function drawingSelectionScore(drawing) {
     if (!drawing) return 0;
     const partCount = (state.partsByDrawing && state.partsByDrawing.get(String(drawing.id)) || []).length;
@@ -2399,3 +2576,5 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
     if (/(^|[ _-])(p|q)([ _.-]|$)/.test(text) || text.includes(' yeng') || text.includes(' eng')) score -= 100000;
     return score;
   }
+
+})();
