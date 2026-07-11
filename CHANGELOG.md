@@ -1,5 +1,15 @@
 # Changelog
 
+## 20260711-v80-drive-master-catalog
+
+- Dodano master katalog Drive v80.
+- Dodano generator `drive-parts.generated-v80.json`.
+- Dodano plan scalania `drive-merge-plan-v80.json`.
+- Dodano bezpieczne akcje porządkowania `drive-organizer-actions-v80.json`.
+- Dodano Apps Script v80 do skanowania Drive, OCR tekstu PDF i tworzenia kopii porządkujących bez kasowania źródeł.
+
+# Changelog
+
 ## 20260711-v79-drive-catalog-and-pdf-organizer
 
 - Naprawiono deduplikację PDF-ów po samym `fileId` - jeden PDF może obsługiwać kilka modeli.

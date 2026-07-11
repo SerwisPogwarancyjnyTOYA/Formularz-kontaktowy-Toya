@@ -1,7 +1,7 @@
 (() => {
   'use strict';
   const CONFIG = window.PGW_CONFIG || {};
-  const DRAFT_KEY = 'pgw-production-draft-v79-drive-catalog-organizer';
+  const DRAFT_KEY = 'pgw-production-draft-v80-drive-master-catalog';
   const THEME_KEY = 'pgw-theme';
   const PART_ROW_LIMIT = Number(CONFIG.partRowLimit || 80);
   const $ = (id) => document.getElementById(id);
@@ -21,7 +21,7 @@
     devices: [], drawings: [], parts: [], driveMap: [], brandOverrides: {}, pdfHeaderOverrides: {}, pdfDeviceOverrides: {}, pdfQualityReport: {}, pdfOrphans: [], universalParts: [], universalPartLinks: [], partAssemblies: {},
     drawingById: new Map(), partsByDrawing: new Map(), driveByDrawingId: new Map(), driveByKey: new Map(), zunByPartKey: new Map(), zunByCode: new Map(), partAssemblyComponents: new Map(), partAssemblyChildren: new Map(),
     selectedDevice: null, selectedDrawing: null, selectedParts: new Map(), manualMode: false, step: 1, formDirty: false,
-    postalCodes: new Map(), partVisibleLimit: PART_ROW_LIMIT, activeBrand: 'all', brandSummary: [], pdfDiagnostics: {}, releaseHealth: {}, sourceHealth: [], releaseInfo: {}, deploymentState: {}, pdfQaRules: {}, pdfOverrideCandidates: [], pdfDisplayPolicy: {}, pdfStandardizationAudit: {}, driveFirstCatalogAuditV78: {}, driveCatalogPolicyV78: {}, driveCatalogAuditV79: {}, drivePdfMergeQueueV79: {}, driveOrganizerPlanV79: {}
+    postalCodes: new Map(), partVisibleLimit: PART_ROW_LIMIT, activeBrand: 'all', brandSummary: [], pdfDiagnostics: {}, releaseHealth: {}, sourceHealth: [], releaseInfo: {}, deploymentState: {}, pdfQaRules: {}, pdfOverrideCandidates: [], pdfDisplayPolicy: {}, pdfStandardizationAudit: {}, driveFirstCatalogAuditV78: {}, driveCatalogPolicyV78: {}, driveCatalogAuditV79: {}, drivePdfMergeQueueV79: {}, driveOrganizerPlanV79: {}, driveMasterAuditV80: {}, driveMergePlanV80: {}, driveOrganizerActionsV80: {}
   };
 
   const POSTAL_FALLBACK = {
@@ -61,6 +61,9 @@
       state.driveCatalogAuditV79 = await loadFirst(urls.driveCatalogAuditV79 || ['data/drive-catalog-audit-v79.json'], {}, 'driveCatalogAuditV79');
       state.drivePdfMergeQueueV79 = await loadFirst(urls.drivePdfMergeQueueV79 || ['data/drive-pdf-merge-queue-v79.json'], {}, 'drivePdfMergeQueueV79');
       state.driveOrganizerPlanV79 = await loadFirst(urls.driveOrganizerPlanV79 || ['data/drive-organizer-plan-v79.json'], {}, 'driveOrganizerPlanV79');
+      state.driveMasterAuditV80 = await loadFirst(urls.driveMasterAuditV80 || ['data/drive-master-audit-v80.json'], {}, 'driveMasterAuditV80');
+      state.driveMergePlanV80 = await loadFirst(urls.driveMergePlanV80 || ['data/drive-merge-plan-v80.json'], {}, 'driveMergePlanV80');
+      state.driveOrganizerActionsV80 = await loadFirst(urls.driveOrganizerActionsV80 || ['data/drive-organizer-actions-v80.json'], {}, 'driveOrganizerActionsV80');
       state.releaseInfo = await loadFirst(urls.releaseInfo || ['data/release-info.json'], {}, 'releaseInfo');
       await loadPostalCodes();
       normalizeData();
@@ -278,7 +281,7 @@
         const drawing = {
           id,
           deviceIndex: row.deviceIndex,
-          title: row.displayTitle || row.deviceName || row.title || row.fileName || row.deviceIndex,
+          title: bestDriveTitleV80(row) || row.displayTitle || row.deviceName || row.title || row.fileName || row.deviceIndex,
           fileName: row.fileName || row.title || `${row.deviceIndex}.pdf`,
           brand: canonicalBrand(row.brand || inferBrand(row)),
           type: 'pdf',
@@ -339,6 +342,12 @@
   }
 
 
+  function bestDriveTitleV80(row) {
+    const models = Array.isArray(row && row.modelsInPdf) ? row.modelsInPdf : [];
+    const base = cleanDeviceTitle(row && row.deviceIndex, row && (row.deviceName || row.displayTitle || row.title || row.fileName || ''));
+    if (models.length > 1 && base && !/wspólny|multi/i.test(base)) return base + ' · wspólny rysunek dla ' + models.join(', ');
+    return base || (row && row.deviceIndex) || '';
+  }
 
   function enhanceDeviceTitlesFromDrawings() {
     const drawingsByDevice = new Map();
