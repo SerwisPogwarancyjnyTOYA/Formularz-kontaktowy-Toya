@@ -1,20 +1,18 @@
 {
-  "version": "20260710-v73-stable-control",
-  "name": "PGW v73 — stable publication control",
-  "date": "2026-07-10",
+  "version": "20260711-v77-smart-model-search",
+  "name": "PGW v77 — Smart Model Search",
+  "date": "2026-07-11",
+  "status": "publication-ready",
+  "previousVersion": "20260711-v76-coverage-pdf-quality",
   "changes": [
-    "Pełne repo publikacyjne z panelami admin/smoke/healthcheck.",
-    "Naprawione akcje panelu admina.",
-    "Dodany self-check repo i workflow GitHub Actions.",
-    "Zachowane działające rysunki złożeniowe PDF."
+    "Dodane inteligentne wyszukiwanie modeli po myślnikach, spacjach i typowych nadmiarowych cyfrach.",
+    "Wpis yt-828113 ma zwracać bliskie modele z rysunkiem zamiast od razu pokazywać tryb ręczny.",
+    "Zachowany priorytet exact match i PDF __SCALONE."
   ],
   "testPlan": [
-    "Otwórz ?v=20260710-v73-stable-control.",
-    "Otwórz ?admin=1&v=20260710-v73-stable-control.",
-    "Otwórz healthcheck.html?v=20260710-v73-stable-control.",
-    "Otwórz smoke-test.html?v=20260710-v73-stable-control.",
-    "Uruchom npm run check."
-  ],
-  "status": "publication-ready",
-  "previousVersion": "20260710-v72-publish"
+    "Otwórz ?v=20260711-v77-smart-model-search.",
+    "Wyszukaj yt-828113.",
+    "Sprawdź, czy pojawią się YT-82813 / YT-82811 / bliskie warianty z PDF.",
+    "Uruchom npm run check oraz npm run search-check."
+  ]
 }

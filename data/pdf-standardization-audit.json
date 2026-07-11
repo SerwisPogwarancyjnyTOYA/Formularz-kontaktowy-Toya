@@ -1,0 +1,109 @@
+{
+  "schema": "pgw-pdf-standardization-audit-v1",
+  "version": "20260711-v75-uniform-pdf-viewer",
+  "generatedAt": "2026-07-11T00:00:00+03:00",
+  "summary": {
+    "drivePdfRows": 1432,
+    "devicesWithAnyPdf": 1415,
+    "githubPreviewReady": 1432,
+    "openUrlReady": 1432,
+    "preferredMergedPdfs": 12,
+    "technicalSourcePdfsKeptAsBackup": 0,
+    "preferredConvertedDrawingsAdded": 12,
+    "partsRows": 2669,
+    "drawingsRows": 1433,
+    "devicesRows": 1411
+  },
+  "rules": {
+    "customerSees": "one service card per device with a consistent PDF viewer and parts list when available",
+    "preferredPdfOrder": [
+      "__SCALONE / verified preferred with parts",
+      "PDF with extracted parts list",
+      "standard Czesci_zamienne_<index>.pdf",
+      "technical source / roboczy only as backup"
+    ],
+    "manualDescription": "only for new or missing devices without drawing/parts list"
+  },
+  "needsReview": {
+    "missingPreviewUrl": [],
+    "mergedFamiliesWithBackupVersions": [
+      {
+        "deviceIndex": "67570",
+        "files": [
+          "Czesci_zamienne_67570.pdf",
+          "Czesci_zamienne_67570__SCALONE.pdf"
+        ]
+      },
+      {
+        "deviceIndex": "67571",
+        "files": [
+          "Czesci_zamienne_67571.pdf",
+          "Czesci_zamienne_67571__SCALONE.pdf"
+        ]
+      },
+      {
+        "deviceIndex": "67572",
+        "files": [
+          "Czesci_zamienne_67572.pdf",
+          "Czesci_zamienne_67572__SCALONE.pdf"
+        ]
+      },
+      {
+        "deviceIndex": "67573",
+        "files": [
+          "Czesci_zamienne_67573.pdf",
+          "Czesci_zamienne_67573__SCALONE.pdf"
+        ]
+      },
+      {
+        "deviceIndex": "67574",
+        "files": [
+          "Czesci_zamienne_67574.pdf",
+          "Czesci_zamienne_67574__SCALONE.pdf"
+        ]
+      },
+      {
+        "deviceIndex": "67575",
+        "files": [
+          "Czesci_zamienne_67575.pdf",
+          "Czesci_zamienne_67575__SCALONE.pdf"
+        ]
+      },
+      {
+        "deviceIndex": "67576",
+        "files": [
+          "Czesci_zamienne_67576.pdf",
+          "Czesci_zamienne_67576__SCALONE.pdf"
+        ]
+      },
+      {
+        "deviceIndex": "67590",
+        "files": [
+          "Czesci_zamienne_67590.pdf",
+          "Czesci_zamienne_67590__SCALONE.pdf"
+        ]
+      },
+      {
+        "deviceIndex": "YT-82173",
+        "files": [
+          "Czesci_zamienne_YT-82173.pdf",
+          "Czesci_zamienne_YT-82173__SCALONE.pdf"
+        ]
+      },
+      {
+        "deviceIndex": "YT-82174",
+        "files": [
+          "Czesci_zamienne_YT-82174.pdf",
+          "Czesci_zamienne_YT-82174__SCALONE.pdf"
+        ]
+      },
+      {
+        "deviceIndex": "YT-85485",
+        "files": [
+          "Czesci_zamienne_YT-85485.pdf",
+          "Czesci_zamienne_YT-85485__SCALONE.pdf"
+        ]
+      }
+    ]
+  }
+}

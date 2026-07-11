@@ -1,9 +1,12 @@
 {
   "name": "pgw-service-hub",
   "private": true,
-  "version": "20260710-v73-stable-control",
+  "version": "20260711-v78-drive-first-catalog-builder",
   "type": "module",
   "scripts": {
-    "check": "node scripts/pgw-repo-selfcheck.mjs"
+    "check": "node scripts/pgw-repo-selfcheck.mjs",
+    "coverage": "node scripts/pgw-v76-coverage-report.mjs",
+    "search-check": "node scripts/pgw-v77-search-check.mjs",
+    "drive-catalog": "node scripts/pgw-v78-drive-first-catalog-builder.mjs"
   }
 }

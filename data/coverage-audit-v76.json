@@ -1,0 +1,3013 @@
+{
+  "schema": "pgw-coverage-audit-v76",
+  "version": "20260711-v76-coverage-pdf-quality",
+  "generatedAt": "2026-07-11T07:40:00+02:00",
+  "purpose": "Pełność formularza: każde urządzenie z rysunkiem PDF na Drive powinno być wyszukiwalne i mieć podgląd; części powinny być wybieralne, gdy spis istnieje.",
+  "summary": {
+    "devicesBeforeSynthetic": 1314,
+    "syntheticDevicesAddedFromDrivePdf": 13,
+    "devicesAfterSynthetic": 1327,
+    "drawingsJsonRows": 1433,
+    "partsRows": 2669,
+    "drivePdfRowsTotal": 1445,
+    "drivePdfModelsUnique": 1325,
+    "modelsWithBestPdf": 1325,
+    "modelsWithParts": 35,
+    "modelsCompletePdfAndParts": 33,
+    "modelsWithPdfNoStructuredParts": 1292,
+    "modelsWithPartsNoDrivePdf": 2,
+    "modelsFromDrivePdfWithoutDeviceRecordBeforeV76": 13,
+    "pdfRowsWithoutPreviewUrl": 0,
+    "modelsWithMultiplePdfCandidates": 50,
+    "preferredMergedPdfModels": 12,
+    "scalonePdfRows": 12
+  },
+  "policy": {
+    "manualMode": "Tylko awaryjnie: nowe/brakujące urządzenia bez rysunku i bez spisu części.",
+    "deviceVisibility": "Każdy model z PDF na Drive ma być widoczny w wyszukiwarce formularza.",
+    "drawingRequirement": "Urządzenie w formularzu musi mieć przypięty rysunek PDF lub scalony PDF.",
+    "pdfPriority": [
+      "__SCALONE.pdf",
+      "Czesci_zamienne_<model>.pdf z listą części",
+      "rysunek techniczny z Drive",
+      "roboczy/wariant tylko do weryfikacji"
+    ],
+    "partVisibility": "Jeżeli w PDF lub bazie istnieją indeksy części, mają być dostępne jako wybieralne pozycje."
+  },
+  "lists": {
+    "syntheticDevicesAddedFromDrivePdf": [
+      {
+        "deviceIndex": "75580",
+        "brand": "DO ROZPOZNANIA",
+        "title": "Urządzenie z rysunkiem PDF",
+        "source": "V76_SYNTHETIC_FROM_DRIVE_PDF",
+        "drawings": [],
+        "parts": [],
+        "hasPartsPdf": true,
+        "hasPartsList": false,
+        "notes": "Dodane automatycznie w v76, bo PDF istnieje na Drive, a urządzenia nie było w devices.json."
+      },
+      {
+        "deviceIndex": "75582",
+        "brand": "DO ROZPOZNANIA",
+        "title": "Urządzenie z rysunkiem PDF",
+        "source": "V76_SYNTHETIC_FROM_DRIVE_PDF",
+        "drawings": [],
+        "parts": [],
+        "hasPartsPdf": true,
+        "hasPartsList": false,
+        "notes": "Dodane automatycznie w v76, bo PDF istnieje na Drive, a urządzenia nie było w devices.json."
+      },
+      {
+        "deviceIndex": "75583",
+        "brand": "DO ROZPOZNANIA",
+        "title": "Urządzenie z rysunkiem PDF",
+        "source": "V76_SYNTHETIC_FROM_DRIVE_PDF",
+        "drawings": [],
+        "parts": [],
+        "hasPartsPdf": true,
+        "hasPartsList": false,
+        "notes": "Dodane automatycznie w v76, bo PDF istnieje na Drive, a urządzenia nie było w devices.json."
+      },
+      {
+        "deviceIndex": "75586",
+        "brand": "DO ROZPOZNANIA",
+        "title": "Urządzenie z rysunkiem PDF",
+        "source": "V76_SYNTHETIC_FROM_DRIVE_PDF",
+        "drawings": [],
+        "parts": [],
+        "hasPartsPdf": true,
+        "hasPartsList": false,
+        "notes": "Dodane automatycznie w v76, bo PDF istnieje na Drive, a urządzenia nie było w devices.json."
+      },
+      {
+        "deviceIndex": "75587",
+        "brand": "DO ROZPOZNANIA",
+        "title": "Urządzenie z rysunkiem PDF",
+        "source": "V76_SYNTHETIC_FROM_DRIVE_PDF",
+        "drawings": [],
+        "parts": [],
+        "hasPartsPdf": true,
+        "hasPartsList": false,
+        "notes": "Dodane automatycznie w v76, bo PDF istnieje na Drive, a urządzenia nie było w devices.json."
+      },
+      {
+        "deviceIndex": "79027",
+        "brand": "DO ROZPOZNANIA",
+        "title": "Urządzenie z rysunkiem PDF",
+        "source": "V76_SYNTHETIC_FROM_DRIVE_PDF",
+        "drawings": [],
+        "parts": [],
+        "hasPartsPdf": true,
+        "hasPartsList": false,
+        "notes": "Dodane automatycznie w v76, bo PDF istnieje na Drive, a urządzenia nie było w devices.json."
+      },
+      {
+        "deviceIndex": "79231",
+        "brand": "DO ROZPOZNANIA",
+        "title": "Urządzenie z rysunkiem PDF",
+        "source": "V76_SYNTHETIC_FROM_DRIVE_PDF",
+        "drawings": [],
+        "parts": [],
+        "hasPartsPdf": true,
+        "hasPartsList": false,
+        "notes": "Dodane automatycznie w v76, bo PDF istnieje na Drive, a urządzenia nie było w devices.json."
+      },
+      {
+        "deviceIndex": "79343",
+        "brand": "DO ROZPOZNANIA",
+        "title": "Urządzenie z rysunkiem PDF",
+        "source": "V76_SYNTHETIC_FROM_DRIVE_PDF",
+        "drawings": [],
+        "parts": [],
+        "hasPartsPdf": true,
+        "hasPartsList": false,
+        "notes": "Dodane automatycznie w v76, bo PDF istnieje na Drive, a urządzenia nie było w devices.json."
+      },
+      {
+        "deviceIndex": "79347",
+        "brand": "DO ROZPOZNANIA",
+        "title": "Urządzenie z rysunkiem PDF",
+        "source": "V76_SYNTHETIC_FROM_DRIVE_PDF",
+        "drawings": [],
+        "parts": [],
+        "hasPartsPdf": true,
+        "hasPartsList": false,
+        "notes": "Dodane automatycznie w v76, bo PDF istnieje na Drive, a urządzenia nie było w devices.json."
+      },
+      {
+        "deviceIndex": "79970",
+        "brand": "DO ROZPOZNANIA",
+        "title": "Urządzenie z rysunkiem PDF",
+        "source": "V76_SYNTHETIC_FROM_DRIVE_PDF",
+        "drawings": [],
+        "parts": [],
+        "hasPartsPdf": true,
+        "hasPartsList": false,
+        "notes": "Dodane automatycznie w v76, bo PDF istnieje na Drive, a urządzenia nie było w devices.json."
+      },
+      {
+        "deviceIndex": "83012",
+        "brand": "DO ROZPOZNANIA",
+        "title": "Urządzenie z rysunkiem PDF",
+        "source": "V76_SYNTHETIC_FROM_DRIVE_PDF",
+        "drawings": [],
+        "parts": [],
+        "hasPartsPdf": true,
+        "hasPartsList": false,
+        "notes": "Dodane automatycznie w v76, bo PDF istnieje na Drive, a urządzenia nie było w devices.json."
+      },
+      {
+        "deviceIndex": "83013",
+        "brand": "DO ROZPOZNANIA",
+        "title": "Urządzenie z rysunkiem PDF",
+        "source": "V76_SYNTHETIC_FROM_DRIVE_PDF",
+        "drawings": [],
+        "parts": [],
+        "hasPartsPdf": true,
+        "hasPartsList": false,
+        "notes": "Dodane automatycznie w v76, bo PDF istnieje na Drive, a urządzenia nie było w devices.json."
+      },
+      {
+        "deviceIndex": "83015",
+        "brand": "DO ROZPOZNANIA",
+        "title": "Urządzenie z rysunkiem PDF",
+        "source": "V76_SYNTHETIC_FROM_DRIVE_PDF",
+        "drawings": [],
+        "parts": [],
+        "hasPartsPdf": true,
+        "hasPartsList": false,
+        "notes": "Dodane automatycznie w v76, bo PDF istnieje na Drive, a urządzenia nie było w devices.json."
+      }
+    ],
+    "pdfModelsWithoutStructuredParts": [
+      "09903",
+      "53575",
+      "53576",
+      "53577",
+      "55820",
+      "57090",
+      "57091",
+      "57092",
+      "57097",
+      "58539",
+      "58540",
+      "58550",
+      "58643",
+      "58661",
+      "58687",
+      "58689",
+      "58690",
+      "58691",
+      "58700",
+      "66841",
+      "66842",
+      "66930",
+      "66932",
+      "66934",
+      "66936",
+      "66940",
+      "66950",
+      "67026",
+      "67032",
+      "67033",
+      "67034",
+      "67090",
+      "67091",
+      "67092",
+      "67110",
+      "67111",
+      "67112",
+      "67113",
+      "67120",
+      "67121",
+      "67125",
+      "67180",
+      "67200",
+      "67201",
+      "67220",
+      "67221",
+      "67230",
+      "67231",
+      "67292",
+      "67293",
+      "67420",
+      "67422",
+      "67423",
+      "67424",
+      "67450",
+      "67451",
+      "67453",
+      "67455",
+      "67456",
+      "67457",
+      "67458",
+      "67460",
+      "67470",
+      "67480",
+      "67500",
+      "67501",
+      "67520",
+      "67521",
+      "67522",
+      "67523",
+      "67525",
+      "67526",
+      "67527",
+      "67528",
+      "67530",
+      "67580",
+      "67581",
+      "67582",
+      "67584",
+      "67640",
+      "67641",
+      "67642",
+      "67660",
+      "67661",
+      "67700",
+      "67701",
+      "67702",
+      "67703",
+      "67704",
+      "67705",
+      "67707",
+      "67780",
+      "67781",
+      "67790",
+      "67805",
+      "67810",
+      "67811",
+      "67812",
+      "67813",
+      "67814",
+      "67815",
+      "67840",
+      "67841",
+      "67850",
+      "67851",
+      "67853",
+      "67860",
+      "67880",
+      "67882",
+      "67900",
+      "67901",
+      "67950",
+      "67961",
+      "68010",
+      "68011",
+      "68015",
+      "68016",
+      "68032",
+      "68033",
+      "68050",
+      "68051",
+      "68052",
+      "68053",
+      "68090",
+      "68100",
+      "68115",
+      "68116",
+      "68172",
+      "68173",
+      "68174",
+      "68193",
+      "68194",
+      "68195",
+      "68206",
+      "68216",
+      "68217",
+      "68218",
+      "68219",
+      "68250",
+      "68251",
+      "68260",
+      "68270",
+      "68271",
+      "68272",
+      "68273",
+      "68280",
+      "68281",
+      "68477",
+      "68480",
+      "68481",
+      "68501",
+      "68502",
+      "68510",
+      "68650",
+      "68651",
+      "68652",
+      "68791",
+      "68792",
+      "68793",
+      "70280",
+      "71500",
+      "72928",
+      "72930",
+      "73056",
+      "73060",
+      "73200",
+      "73201",
+      "73202",
+      "73203",
+      "73400",
+      "73403",
+      "73410",
+      "73420",
+      "73470",
+      "73473",
+      "75580",
+      "75582",
+      "75583",
+      "75586",
+      "75587",
+      "75662",
+      "75663",
+      "75664",
+      "75665",
+      "75670",
+      "75671",
+      "75672",
+      "75673",
+      "75674",
+      "75685",
+      "75686",
+      "75687",
+      "75688",
+      "75689",
+      "75705",
+      "75716",
+      "75719",
+      "75740",
+      "75742",
+      "75743",
+      "75745",
+      "75747",
+      "75748",
+      "75749",
+      "75760",
+      "75762",
+      "75763",
+      "75764",
+      "75765",
+      "75767",
+      "75768",
+      "75770",
+      "75772",
+      "75773",
+      "75774",
+      "75775",
+      "75804",
+      "75805",
+      "75807",
+      "75808",
+      "75809",
+      "75811",
+      "75812",
+      "75813",
+      "75814",
+      "75815",
+      "75816",
+      "75817",
+      "75818",
+      "75827",
+      "75828",
+      "75829",
+      "75830",
+      "75831",
+      "75832",
+      "75833",
+      "75835",
+      "75836",
+      "75837",
+      "75838",
+      "75880",
+      "75881",
+      "75882",
+      "75883",
+      "75884",
+      "75885",
+      "75886",
+      "75887",
+      "75888",
+      "75889",
+      "75921",
+      "75923",
+      "75924",
+      "75930",
+      "75931",
+      "75932",
+      "75944",
+      "75945",
+      "75951",
+      "75953",
+      "75977",
+      "75978",
+      "75979",
+      "75980",
+      "75981",
+      "75982",
+      "75983",
+      "75984",
+      "77990",
+      "78080",
+      "78081",
+      "78082",
+      "78084",
+      "78085",
+      "78090",
+      "78091",
+      "78107",
+      "78113",
+      "78123",
+      "78124",
+      "78125",
+      "78136",
+      "78137",
+      "78138",
+      "78139",
+      "78143",
+      "78151",
+      "78158",
+      "78180",
+      "78181",
+      "78184",
+      "78185",
+      "78186",
+      "78187",
+      "78190",
+      "78203",
+      "78204",
+      "78210",
+      "78211",
+      "78641",
+      "78854",
+      "78855",
+      "78910",
+      "78911",
+      "78970",
+      "78972",
+      "78974",
+      "78981",
+      "78982",
+      "78983",
+      "78992",
+      "78995",
+      "78997",
+      "79002",
+      "79004",
+      "79005",
+      "79007",
+      "79012",
+      "79013",
+      "79015",
+      "79018",
+      "79023",
+      "79024",
+      "79026",
+      "79027",
+      "79030",
+      "79031",
+      "79032",
+      "79033",
+      "79034",
+      "79036",
+      "79046",
+      "79047",
+      "79048",
+      "79049",
+      "79053",
+      "79054",
+      "79056",
+      "79071",
+      "79076",
+      "79090",
+      "79093",
+      "79094",
+      "79095",
+      "79096",
+      "79098",
+      "79099",
+      "79100",
+      "79101",
+      "79104",
+      "79105",
+      "79106",
+      "79108",
+      "79109",
+      "79113",
+      "79114",
+      "79116",
+      "79118",
+      "79119",
+      "79120",
+      "79123",
+      "79124",
+      "79125",
+      "79129",
+      "79135",
+      "79140",
+      "79141",
+      "79143",
+      "79150",
+      "79151",
+      "79231",
+      "79237",
+      "79238",
+      "79239",
+      "79240",
+      "79248",
+      "79249",
+      "79252",
+      "79253",
+      "79254",
+      "79257",
+      "79275",
+      "79307",
+      "79309",
+      "79314",
+      "79318",
+      "79319",
+      "79320",
+      "79322",
+      "79324",
+      "79325",
+      "79326",
+      "79327",
+      "79328",
+      "79329",
+      "79332",
+      "79334",
+      "79343",
+      "79347",
+      "79350",
+      "79352",
+      "79353",
+      "79354",
+      "79355",
+      "79358",
+      "79363",
+      "79364",
+      "79376",
+      "79379",
+      "79382",
+      "79383",
+      "79385",
+      "79410",
+      "79413",
+      "79415",
+      "79416",
+      "79420",
+      "79442",
+      "79444",
+      "79448",
+      "79456",
+      "79467",
+      "79473",
+      "79474",
+      "79475",
+      "79476",
+      "79477",
+      "79478",
+      "79479",
+      "79481",
+      "79482",
+      "79484",
+      "79487",
+      "79493",
+      "79500",
+      "79725",
+      "79734",
+      "79771",
+      "79772",
+      "79773",
+      "79774",
+      "79775",
+      "79781",
+      "79782",
+      "79783",
+      "79790",
+      "79791",
+      "79792",
+      "79810",
+      "79811",
+      "79812",
+      "79880",
+      "79909",
+      "79926",
+      "79927",
+      "79928",
+      "79929",
+      "79930",
+      "79931",
+      "79932",
+      "79933",
+      "79943",
+      "79944",
+      "79970",
+      "80012",
+      "80022",
+      "80032",
+      "80042",
+      "80052",
+      "80062",
+      "80072",
+      "80082",
+      "80111",
+      "80220",
+      "80330",
+      "80340",
+      "80350",
+      "80412",
+      "80450",
+      "80902",
+      "80970",
+      "81070",
+      "81101",
+      "81110",
+      "81617",
+      "81618",
+      "82541",
+      "82542",
+      "82543",
+      "82544",
+      "82550",
+      "82942",
+      "83012",
+      "83013",
+      "83015",
+      "89610",
+      "89611",
+      "99657",
+      "99658",
+      "YG-03000"
+    ],
+    "partModelsWithoutDrivePdf": [
+      "827791",
+      "827793"
+    ],
+    "deviceModelsWithoutDrivePdf": [
+      "827791",
+      "827793"
+    ],
+    "pdfRowsWithoutPreviewUrl": [],
+    "multiplePdfCandidates": {
+      "67570": [
+        {
+          "model": "67570",
+          "fileName": "Czesci_zamienne_67570__SCALONE.pdf",
+          "fileId": "1snbX4lCFsqvmoUxWBUmk5POMtYl2eC5w",
+          "viewerUrl": "https://drive.google.com/file/d/1snbX4lCFsqvmoUxWBUmk5POMtYl2eC5w/preview",
+          "score": 200,
+          "reasons": [
+            "scalone/preferowane",
+            "części wyciągnięte",
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": true,
+          "status": "verified_preferred_with_parts",
+          "path": "Rysunki wybuchowe/Czesci_zamienne_67570__SCALONE.pdf"
+        },
+        {
+          "model": "67570",
+          "fileName": "Czesci_zamienne_67570.pdf",
+          "fileId": "1-QaRqH4AxnJDNtQ6TFTroC2VOoqQ-WkK",
+          "viewerUrl": "https://drive.google.com/file/d/1-QaRqH4AxnJDNtQ6TFTroC2VOoqQ-WkK/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "67571": [
+        {
+          "model": "67571",
+          "fileName": "Czesci_zamienne_67571__SCALONE.pdf",
+          "fileId": "1lO5lpYmDcRNARkLFBGnLSlZIIgAPs7lI",
+          "viewerUrl": "https://drive.google.com/file/d/1lO5lpYmDcRNARkLFBGnLSlZIIgAPs7lI/preview",
+          "score": 200,
+          "reasons": [
+            "scalone/preferowane",
+            "części wyciągnięte",
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": true,
+          "status": "verified_preferred_with_parts",
+          "path": "Rysunki wybuchowe/Czesci_zamienne_67571__SCALONE.pdf"
+        },
+        {
+          "model": "67571",
+          "fileName": "Czesci_zamienne_67571.pdf",
+          "fileId": "1l82F8lB56jUvSqNKTIauSaP8ujv0BJUC",
+          "viewerUrl": "https://drive.google.com/file/d/1l82F8lB56jUvSqNKTIauSaP8ujv0BJUC/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "67572": [
+        {
+          "model": "67572",
+          "fileName": "Czesci_zamienne_67572__SCALONE.pdf",
+          "fileId": "1ctBq-0Pdcs5eZ9pPwVZkCqVbFu6s3oAr",
+          "viewerUrl": "https://drive.google.com/file/d/1ctBq-0Pdcs5eZ9pPwVZkCqVbFu6s3oAr/preview",
+          "score": 200,
+          "reasons": [
+            "scalone/preferowane",
+            "części wyciągnięte",
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": true,
+          "status": "verified_preferred_with_parts",
+          "path": "Rysunki wybuchowe/Czesci_zamienne_67572__SCALONE.pdf"
+        },
+        {
+          "model": "67572",
+          "fileName": "Czesci_zamienne_67572.pdf",
+          "fileId": "18X_T8GOtbQmYtScy-C2PiP-Q6Y5u5uVu",
+          "viewerUrl": "https://drive.google.com/file/d/18X_T8GOtbQmYtScy-C2PiP-Q6Y5u5uVu/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "67573": [
+        {
+          "model": "67573",
+          "fileName": "Czesci_zamienne_67573__SCALONE.pdf",
+          "fileId": "1WfKnP7Ng-sZCxfMOV4lLJYA0Kbsk9-Ie",
+          "viewerUrl": "https://drive.google.com/file/d/1WfKnP7Ng-sZCxfMOV4lLJYA0Kbsk9-Ie/preview",
+          "score": 200,
+          "reasons": [
+            "scalone/preferowane",
+            "części wyciągnięte",
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": true,
+          "status": "verified_preferred_with_parts",
+          "path": "Rysunki wybuchowe/Czesci_zamienne_67573__SCALONE.pdf"
+        },
+        {
+          "model": "67573",
+          "fileName": "Czesci_zamienne_67573.pdf",
+          "fileId": "1-Blni_kcMGteygyEv4mpkN1ug5Lwseex",
+          "viewerUrl": "https://drive.google.com/file/d/1-Blni_kcMGteygyEv4mpkN1ug5Lwseex/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "67574": [
+        {
+          "model": "67574",
+          "fileName": "Czesci_zamienne_67574__SCALONE.pdf",
+          "fileId": "1pZ1EM2qticjFaw-Mu4kj3Ci8dS1Y-qAF",
+          "viewerUrl": "https://drive.google.com/file/d/1pZ1EM2qticjFaw-Mu4kj3Ci8dS1Y-qAF/preview",
+          "score": 200,
+          "reasons": [
+            "scalone/preferowane",
+            "części wyciągnięte",
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": true,
+          "status": "verified_preferred_with_parts",
+          "path": "Rysunki wybuchowe/Czesci_zamienne_67574__SCALONE.pdf"
+        },
+        {
+          "model": "67574",
+          "fileName": "Czesci_zamienne_67574.pdf",
+          "fileId": "1cUE2ofqAodMCxGymyBtHVqrdiQkrao_w",
+          "viewerUrl": "https://drive.google.com/file/d/1cUE2ofqAodMCxGymyBtHVqrdiQkrao_w/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "67575": [
+        {
+          "model": "67575",
+          "fileName": "Czesci_zamienne_67575__SCALONE.pdf",
+          "fileId": "1UuAdxw81xUJ4pxMuAtyYNB1RPXG_9NoJ",
+          "viewerUrl": "https://drive.google.com/file/d/1UuAdxw81xUJ4pxMuAtyYNB1RPXG_9NoJ/preview",
+          "score": 200,
+          "reasons": [
+            "scalone/preferowane",
+            "części wyciągnięte",
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": true,
+          "status": "verified_preferred_with_parts",
+          "path": "Rysunki wybuchowe/Czesci_zamienne_67575__SCALONE.pdf"
+        },
+        {
+          "model": "67575",
+          "fileName": "Czesci_zamienne_67575.pdf",
+          "fileId": "14biI7mjXpj5X-RCs-K2cqWvXHE2Ym3_q",
+          "viewerUrl": "https://drive.google.com/file/d/14biI7mjXpj5X-RCs-K2cqWvXHE2Ym3_q/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "67576": [
+        {
+          "model": "67576",
+          "fileName": "Czesci_zamienne_67576__SCALONE.pdf",
+          "fileId": "1HuQMhL15ke8Dedceki5DRtj3Fkjfl9s3",
+          "viewerUrl": "https://drive.google.com/file/d/1HuQMhL15ke8Dedceki5DRtj3Fkjfl9s3/preview",
+          "score": 200,
+          "reasons": [
+            "scalone/preferowane",
+            "części wyciągnięte",
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": true,
+          "status": "verified_preferred_with_parts",
+          "path": "Rysunki wybuchowe/Czesci_zamienne_67576__SCALONE.pdf"
+        },
+        {
+          "model": "67576",
+          "fileName": "Czesci_zamienne_67576.pdf",
+          "fileId": "1_cbMX79Ul9snUhrtKcN1_UIJ3MxfZ0SL",
+          "viewerUrl": "https://drive.google.com/file/d/1_cbMX79Ul9snUhrtKcN1_UIJ3MxfZ0SL/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "67590": [
+        {
+          "model": "67590",
+          "fileName": "Czesci_zamienne_67590__SCALONE.pdf",
+          "fileId": "1QhtlI4nNqjrbyvXk4YNoOc1n6bweUz1F",
+          "viewerUrl": "https://drive.google.com/file/d/1QhtlI4nNqjrbyvXk4YNoOc1n6bweUz1F/preview",
+          "score": 200,
+          "reasons": [
+            "scalone/preferowane",
+            "części wyciągnięte",
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": true,
+          "status": "verified_preferred_with_parts",
+          "path": "Rysunki wybuchowe/Czesci_zamienne_67590__SCALONE.pdf"
+        },
+        {
+          "model": "67590",
+          "fileName": "Czesci_zamienne_67590.pdf",
+          "fileId": "1IeanvOoRHlphyBbVaOX2Jtd5B8lyoBP7",
+          "viewerUrl": "https://drive.google.com/file/d/1IeanvOoRHlphyBbVaOX2Jtd5B8lyoBP7/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "75775": [
+        {
+          "model": "75775",
+          "fileName": "Czesci_zamienne_75775-75779.pdf",
+          "fileId": "1ppviAx10hZvaHzKwXYejW3EwQ3L-bAUP",
+          "viewerUrl": "https://drive.google.com/file/d/1ppviAx10hZvaHzKwXYejW3EwQ3L-bAUP/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "75775",
+          "fileName": "Czesci_zamienne_75775_75776_75777_75778_75779.pdf",
+          "fileId": "1aAFxBmhrc-awSq3JuXmuT2x1NGFiC_MM",
+          "viewerUrl": "https://drive.google.com/file/d/1aAFxBmhrc-awSq3JuXmuT2x1NGFiC_MM/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "78180": [
+        {
+          "model": "78180",
+          "fileName": "Czesci_zamienne_78180.pdf",
+          "fileId": "11xqt3MjD0vHJqz4TwpwVQWvyGHLX9s3K",
+          "viewerUrl": "https://drive.google.com/file/d/11xqt3MjD0vHJqz4TwpwVQWvyGHLX9s3K/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "78180",
+          "fileName": "Czesci_zamienne_78180.pdf",
+          "fileId": "1Fhn77B-YbGFFuo-mPN3L881puNwld84r",
+          "viewerUrl": "https://drive.google.com/file/d/1Fhn77B-YbGFFuo-mPN3L881puNwld84r/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "imported_from_converted_folder",
+          "path": "Rysunki wybuchowe/Czesci_zamienne_78180.pdf"
+        }
+      ],
+      "YT-82807": [
+        {
+          "model": "YT-82807",
+          "fileName": "Czesci_zamienne_YT-828075_YT-828076.pdf",
+          "fileId": "1lQT4KXflNdmr1dKTGZTyLcnZx2XQSqHR",
+          "viewerUrl": "https://drive.google.com/file/d/1lQT4KXflNdmr1dKTGZTyLcnZx2XQSqHR/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK_MULTIMODEL",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82807",
+          "fileName": "Czesci_zamienne_YT-828075_YT-828076.pdf",
+          "fileId": "1lQT4KXflNdmr1dKTGZTyLcnZx2XQSqHR",
+          "viewerUrl": "https://drive.google.com/file/d/1lQT4KXflNdmr1dKTGZTyLcnZx2XQSqHR/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "ALIAS_MODEL",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82807",
+          "fileName": "Czesci_zamienne_YT-828071.pdf",
+          "fileId": "14jkq5b6ZNM7nePDpRO4GXVyKziYvEOYQ",
+          "viewerUrl": "https://drive.google.com/file/d/14jkq5b6ZNM7nePDpRO4GXVyKziYvEOYQ/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82807",
+          "fileName": "Czesci_zamienne_YT-828072.pdf",
+          "fileId": "1zL4_2l2ghOqBnVl_SGlVyolL1Eqn0xTv",
+          "viewerUrl": "https://drive.google.com/file/d/1zL4_2l2ghOqBnVl_SGlVyolL1Eqn0xTv/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82807",
+          "fileName": "Czesci_zamienne_YT-828073.pdf",
+          "fileId": "1kno3-xI3bUmld7GQptBracx9wy9I1SsY",
+          "viewerUrl": "https://drive.google.com/file/d/1kno3-xI3bUmld7GQptBracx9wy9I1SsY/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82807",
+          "fileName": "Czesci_zamienne_YT-828074.pdf",
+          "fileId": "1Kb9nQPOPJlJIFLwzBmagzAGxYFxGn0gb",
+          "viewerUrl": "https://drive.google.com/file/d/1Kb9nQPOPJlJIFLwzBmagzAGxYFxGn0gb/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "YT-82811": [
+        {
+          "model": "YT-82811",
+          "fileName": "Czesci_zamienne_YT-828118_YT-8281185.pdf",
+          "fileId": "1xSEkF_PE4oqfw0TYhocqR4-rbYJNTtM4",
+          "viewerUrl": "https://drive.google.com/file/d/1xSEkF_PE4oqfw0TYhocqR4-rbYJNTtM4/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK_MULTIMODEL",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82811",
+          "fileName": "Czesci_zamienne_YT-828118_YT-8281185.pdf",
+          "fileId": "1xSEkF_PE4oqfw0TYhocqR4-rbYJNTtM4",
+          "viewerUrl": "https://drive.google.com/file/d/1xSEkF_PE4oqfw0TYhocqR4-rbYJNTtM4/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "ALIAS_MODEL",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82811",
+          "fileName": "Czesci_zamienne_YT-82811.pdf",
+          "fileId": "1zr4zDwE_ixtrSTpANU_tVWOaUyK3UOV-",
+          "viewerUrl": "https://drive.google.com/file/d/1zr4zDwE_ixtrSTpANU_tVWOaUyK3UOV-/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "YT-82813": [
+        {
+          "model": "YT-82813",
+          "fileName": "Czesci_zamienne_YT-828135_YT-828136.pdf",
+          "fileId": "1ku3ToL7VhNsUZ9hbrNjw1u_lltY9KaeK",
+          "viewerUrl": "https://drive.google.com/file/d/1ku3ToL7VhNsUZ9hbrNjw1u_lltY9KaeK/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK_MULTIMODEL",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82813",
+          "fileName": "Czesci_zamienne_YT-828135_YT-828136.pdf",
+          "fileId": "1ku3ToL7VhNsUZ9hbrNjw1u_lltY9KaeK",
+          "viewerUrl": "https://drive.google.com/file/d/1ku3ToL7VhNsUZ9hbrNjw1u_lltY9KaeK/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "ALIAS_MODEL",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82813",
+          "fileName": "Czesci_zamienne_YT-828137_YT-828138.pdf",
+          "fileId": "1jIkQAdT2TDeC6ztGL9fvMVoSW8DBNND1",
+          "viewerUrl": "https://drive.google.com/file/d/1jIkQAdT2TDeC6ztGL9fvMVoSW8DBNND1/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK_MULTIMODEL",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82813",
+          "fileName": "Czesci_zamienne_YT-828137_YT-828138.pdf",
+          "fileId": "1jIkQAdT2TDeC6ztGL9fvMVoSW8DBNND1",
+          "viewerUrl": "https://drive.google.com/file/d/1jIkQAdT2TDeC6ztGL9fvMVoSW8DBNND1/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "ALIAS_MODEL",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82813",
+          "fileName": "Czesci_zamienne_YT-82813.pdf",
+          "fileId": "1jhRArf6VNtCS9zt9O13YihqQrAwyfz80",
+          "viewerUrl": "https://drive.google.com/file/d/1jhRArf6VNtCS9zt9O13YihqQrAwyfz80/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82813",
+          "fileName": "Czesci_zamienne_YT-828131.pdf",
+          "fileId": "1FibpsbYGBemnqS0iWycTaKaVxDszWOog",
+          "viewerUrl": "https://drive.google.com/file/d/1FibpsbYGBemnqS0iWycTaKaVxDszWOog/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "YT-82824": [
+        {
+          "model": "YT-82824",
+          "fileName": "Czesci_zamienne_YT-82824_YT-828296.pdf",
+          "fileId": "1fM1-tMFS3ChHRNfl19v1PEdhrxi7cNSF",
+          "viewerUrl": "https://drive.google.com/file/d/1fM1-tMFS3ChHRNfl19v1PEdhrxi7cNSF/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK_MULTIMODEL",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82824",
+          "fileName": "Czesci_zamienne_YT-82824.pdf",
+          "fileId": "1PFCKpqO8r03oBGVyCMRbkwjKqBCZKiG9",
+          "viewerUrl": "https://drive.google.com/file/d/1PFCKpqO8r03oBGVyCMRbkwjKqBCZKiG9/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82824",
+          "fileName": "Czesci_zamienne_YT-828247.pdf",
+          "fileId": "19liR7QGORGOvylL1Qholmjq42Uh3GvLU",
+          "viewerUrl": "https://drive.google.com/file/d/19liR7QGORGOvylL1Qholmjq42Uh3GvLU/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "YT-82829": [
+        {
+          "model": "YT-82829",
+          "fileName": "Czesci_zamienne_YT-82824_YT-828296.pdf",
+          "fileId": "1fM1-tMFS3ChHRNfl19v1PEdhrxi7cNSF",
+          "viewerUrl": "https://drive.google.com/file/d/1fM1-tMFS3ChHRNfl19v1PEdhrxi7cNSF/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "ALIAS_MODEL",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82829",
+          "fileName": "Czesci_zamienne_YT-828293_YT-828294_YT-828295_YT-828296.pdf",
+          "fileId": "1O2g4QgSNxl4zB_9DQbmjCtnNwMIX2wqP",
+          "viewerUrl": "https://drive.google.com/file/d/1O2g4QgSNxl4zB_9DQbmjCtnNwMIX2wqP/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK_MULTIMODEL",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82829",
+          "fileName": "Czesci_zamienne_YT-828293_YT-828294_YT-828295_YT-828296.pdf",
+          "fileId": "1O2g4QgSNxl4zB_9DQbmjCtnNwMIX2wqP",
+          "viewerUrl": "https://drive.google.com/file/d/1O2g4QgSNxl4zB_9DQbmjCtnNwMIX2wqP/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "ALIAS_MODEL",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82829",
+          "fileName": "Czesci_zamienne_YT-828293_YT-828294_YT-828295_YT-828296.pdf",
+          "fileId": "1O2g4QgSNxl4zB_9DQbmjCtnNwMIX2wqP",
+          "viewerUrl": "https://drive.google.com/file/d/1O2g4QgSNxl4zB_9DQbmjCtnNwMIX2wqP/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "ALIAS_MODEL",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82829",
+          "fileName": "Czesci_zamienne_YT-828293_YT-828294_YT-828295_YT-828296.pdf",
+          "fileId": "1O2g4QgSNxl4zB_9DQbmjCtnNwMIX2wqP",
+          "viewerUrl": "https://drive.google.com/file/d/1O2g4QgSNxl4zB_9DQbmjCtnNwMIX2wqP/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "ALIAS_MODEL",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82829",
+          "fileName": "Czesci_zamienne_YT-82829.pdf",
+          "fileId": "1BBW6gYdjwnWIIrbhrVStJZLCtJlYyxQ2",
+          "viewerUrl": "https://drive.google.com/file/d/1BBW6gYdjwnWIIrbhrVStJZLCtJlYyxQ2/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "79030": [
+        {
+          "model": "79030",
+          "fileName": "Czesci_zamienne_79030.pdf",
+          "fileId": "1H0FiaXuSgiw4FIkBp5sbkhWJiu7RmMOK",
+          "viewerUrl": "https://drive.google.com/file/d/1H0FiaXuSgiw4FIkBp5sbkhWJiu7RmMOK/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "79030",
+          "fileName": "Czesci_zamienne_79030.pdf",
+          "fileId": "1PITYs2cGbl6FLKOX-zm-7dSahWCuAQnH",
+          "viewerUrl": "https://drive.google.com/file/d/1PITYs2cGbl6FLKOX-zm-7dSahWCuAQnH/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "imported_from_converted_folder",
+          "path": "Rysunki wybuchowe/Czesci_zamienne_79030.pdf"
+        }
+      ],
+      "YT-3618": [
+        {
+          "model": "YT-3618",
+          "fileName": "Czesci_zamienne_YT-3618.pdf",
+          "fileId": "1XipPQprDRhn8_2JJ6LUNHJxqaeMThkJ5",
+          "viewerUrl": "https://drive.google.com/file/d/1XipPQprDRhn8_2JJ6LUNHJxqaeMThkJ5/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "DUPLICATE_MODEL",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-3618",
+          "fileName": "YT-3618.pdf",
+          "fileId": "1qj2j2AO9cn_uO6R_dQnYlff_19bz-5e1",
+          "viewerUrl": "https://drive.google.com/file/d/1qj2j2AO9cn_uO6R_dQnYlff_19bz-5e1/preview",
+          "score": 30,
+          "reasons": [
+            "preview OK"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "YT-37216": [
+        {
+          "model": "YT-37216",
+          "fileName": "Czesci_zamienne_YT-372160.pdf",
+          "fileId": "1G_a9ufJQJ2JwzQUG0lOfhtU7L3TOHdNO",
+          "viewerUrl": "https://drive.google.com/file/d/1G_a9ufJQJ2JwzQUG0lOfhtU7L3TOHdNO/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-37216",
+          "fileName": "Czesci_zamienne_YT-372161.pdf",
+          "fileId": "1DGZMfmSlIfrExUydW1CI_EGRe0YBaHIb",
+          "viewerUrl": "https://drive.google.com/file/d/1DGZMfmSlIfrExUydW1CI_EGRe0YBaHIb/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-37216",
+          "fileName": "Czesci_zamienne_YT-372163.pdf",
+          "fileId": "1YDILx8Zz2f9OxfhZrtiKeLSkMyzlwCc7",
+          "viewerUrl": "https://drive.google.com/file/d/1YDILx8Zz2f9OxfhZrtiKeLSkMyzlwCc7/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-37216",
+          "fileName": "Czesci_zamienne_YT-372164.pdf",
+          "fileId": "1iIWhr6vFbn855EtpSkLYzL0L4dJ7l6tr",
+          "viewerUrl": "https://drive.google.com/file/d/1iIWhr6vFbn855EtpSkLYzL0L4dJ7l6tr/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-37216",
+          "fileName": "Czesci_zamienne_YT-372165.pdf",
+          "fileId": "1zsuUEzVYRX-yOWWq5qEY1qkyQ4PUf0kh",
+          "viewerUrl": "https://drive.google.com/file/d/1zsuUEzVYRX-yOWWq5qEY1qkyQ4PUf0kh/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-37216",
+          "fileName": "Czesci_zamienne_YT-372166.pdf",
+          "fileId": "1FZZuDMWh1xsrrUVXD7aWt9YrHuPsskIN",
+          "viewerUrl": "https://drive.google.com/file/d/1FZZuDMWh1xsrrUVXD7aWt9YrHuPsskIN/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "YT-82050": [
+        {
+          "model": "YT-82050",
+          "fileName": "Czesci_zamienne_YT-82050.pdf",
+          "fileId": "11J4CNONmH8eOHDunJnZFWMxJKLHkGLgQ",
+          "viewerUrl": "https://drive.google.com/file/d/11J4CNONmH8eOHDunJnZFWMxJKLHkGLgQ/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82050",
+          "fileName": "Czesci_zamienne_YT-820500.pdf",
+          "fileId": "1csvhiHLQjFu7cqVzTdbjEAWKD_1z3U91",
+          "viewerUrl": "https://drive.google.com/file/d/1csvhiHLQjFu7cqVzTdbjEAWKD_1z3U91/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82050",
+          "fileName": "Czesci_zamienne_YT-820501.pdf",
+          "fileId": "1eWEvtmeOXQRpd_N9TGLOSwfleKM03oLb",
+          "viewerUrl": "https://drive.google.com/file/d/1eWEvtmeOXQRpd_N9TGLOSwfleKM03oLb/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82050",
+          "fileName": "Czesci_zamienne_YT-820502.pdf",
+          "fileId": "1IGIOghTq77PN0wMF56Z2Ah251Hm6uSmG",
+          "viewerUrl": "https://drive.google.com/file/d/1IGIOghTq77PN0wMF56Z2Ah251Hm6uSmG/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82050",
+          "fileName": "Czesci_zamienne_YT-820507.pdf",
+          "fileId": "1eKEkG8xLOTK4OT2fwnk_hbECnlj4Mgju",
+          "viewerUrl": "https://drive.google.com/file/d/1eKEkG8xLOTK4OT2fwnk_hbECnlj4Mgju/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "YT-82102": [
+        {
+          "model": "YT-82102",
+          "fileName": "Czesci_zamienne_YT-821020.pdf",
+          "fileId": "1_YxjvFBp6Q1RIofvxI-KsKYg9ixUEEvb",
+          "viewerUrl": "https://drive.google.com/file/d/1_YxjvFBp6Q1RIofvxI-KsKYg9ixUEEvb/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82102",
+          "fileName": "Czesci_zamienne_YT-821021.pdf",
+          "fileId": "1E8_teihy3eBnyd0KOos0_dFHdGfN26Oj",
+          "viewerUrl": "https://drive.google.com/file/d/1E8_teihy3eBnyd0KOos0_dFHdGfN26Oj/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82102",
+          "fileName": "Czesci_zamienne_YT-821023.pdf",
+          "fileId": "1YHllUWTCzjOjACgdtYrNkUF9C-VlLOpu",
+          "viewerUrl": "https://drive.google.com/file/d/1YHllUWTCzjOjACgdtYrNkUF9C-VlLOpu/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82102",
+          "fileName": "Czesci_zamienne_YT-821024.pdf",
+          "fileId": "1qHqeV292-sx3ap6oqMlcWqdvIgN0W89-",
+          "viewerUrl": "https://drive.google.com/file/d/1qHqeV292-sx3ap6oqMlcWqdvIgN0W89-/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "YT-82158": [
+        {
+          "model": "YT-82158",
+          "fileName": "Czesci_zamienne_YT-82158.pdf",
+          "fileId": "1lf1jtQ6ZnRlhg0DIj35WMCrMpvNv25jS",
+          "viewerUrl": "https://drive.google.com/file/d/1lf1jtQ6ZnRlhg0DIj35WMCrMpvNv25jS/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82158",
+          "fileName": "Czesci_zamienne_YT-821583.pdf",
+          "fileId": "1VbNa2G9bgudbc7Llcznj5_yjEp0vu0gq",
+          "viewerUrl": "https://drive.google.com/file/d/1VbNa2G9bgudbc7Llcznj5_yjEp0vu0gq/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "YT-82159": [
+        {
+          "model": "YT-82159",
+          "fileName": "Czesci_zamienne_YT-82159.pdf",
+          "fileId": "1iB41eUS8mympnaHgzFbr9tpHShBqnx8k",
+          "viewerUrl": "https://drive.google.com/file/d/1iB41eUS8mympnaHgzFbr9tpHShBqnx8k/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82159",
+          "fileName": "Czesci_zamienne_YT-821591.pdf",
+          "fileId": "1mU4WgVG2Nf5j0pXE0Z3JI_2soIwh_b0E",
+          "viewerUrl": "https://drive.google.com/file/d/1mU4WgVG2Nf5j0pXE0Z3JI_2soIwh_b0E/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82159",
+          "fileName": "Czesci_zamienne_YT-821597.pdf",
+          "fileId": "1rPhbDBTZj4m3603agUXaS7vKTKeCEWUZ",
+          "viewerUrl": "https://drive.google.com/file/d/1rPhbDBTZj4m3603agUXaS7vKTKeCEWUZ/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "YT-82171": [
+        {
+          "model": "YT-82171",
+          "fileName": "Czesci_zamienne_YT-82171.pdf",
+          "fileId": "1Bx3o-mbL0cbWunrFBM2FwRt5wIVrwc4o",
+          "viewerUrl": "https://drive.google.com/file/d/1Bx3o-mbL0cbWunrFBM2FwRt5wIVrwc4o/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82171",
+          "fileName": "Czesci_zamienne_YT-821710.pdf",
+          "fileId": "1CPFg1XL_0MClzgNIKwBZoicblUdcKph7",
+          "viewerUrl": "https://drive.google.com/file/d/1CPFg1XL_0MClzgNIKwBZoicblUdcKph7/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "YT-82172": [
+        {
+          "model": "YT-82172",
+          "fileName": "Czesci_zamienne_YT-82172.pdf",
+          "fileId": "1xfRkuuAnsxWiT_uxcA_0HYUrTeLprDkV",
+          "viewerUrl": "https://drive.google.com/file/d/1xfRkuuAnsxWiT_uxcA_0HYUrTeLprDkV/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82172",
+          "fileName": "Czesci_zamienne_YT-821722.pdf",
+          "fileId": "1Rp6rDPQaGGdkfiDXIIh8anMKM5nhAxg-",
+          "viewerUrl": "https://drive.google.com/file/d/1Rp6rDPQaGGdkfiDXIIh8anMKM5nhAxg-/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "YT-82173": [
+        {
+          "model": "YT-82173",
+          "fileName": "Czesci_zamienne_YT-82173__SCALONE.pdf",
+          "fileId": "1SuRUHVoQjbK0TORNjrpl8vcdzC3rrN3d",
+          "viewerUrl": "https://drive.google.com/file/d/1SuRUHVoQjbK0TORNjrpl8vcdzC3rrN3d/preview",
+          "score": 160,
+          "reasons": [
+            "scalone/preferowane",
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": true,
+          "status": "verified_preferred",
+          "path": "Rysunki wybuchowe/Czesci_zamienne_YT-82173__SCALONE.pdf"
+        },
+        {
+          "model": "YT-82173",
+          "fileName": "Czesci_zamienne_YT-82173.pdf",
+          "fileId": "1A8dcOfeJdtM0djOGCh9Jpn02LImcPHVz",
+          "viewerUrl": "https://drive.google.com/file/d/1A8dcOfeJdtM0djOGCh9Jpn02LImcPHVz/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "YT-82174": [
+        {
+          "model": "YT-82174",
+          "fileName": "Czesci_zamienne_YT-82174__SCALONE.pdf",
+          "fileId": "1eFHWGqr6UveUrerAvEad4zI1mf2x8L2n",
+          "viewerUrl": "https://drive.google.com/file/d/1eFHWGqr6UveUrerAvEad4zI1mf2x8L2n/preview",
+          "score": 160,
+          "reasons": [
+            "scalone/preferowane",
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": true,
+          "status": "verified_preferred",
+          "path": "Rysunki wybuchowe/Czesci_zamienne_YT-82174__SCALONE.pdf"
+        },
+        {
+          "model": "YT-82174",
+          "fileName": "Czesci_zamienne_YT-82174.pdf",
+          "fileId": "1IWvpuBAnqV5w_h53G11Y6uZv6lUi0jWh",
+          "viewerUrl": "https://drive.google.com/file/d/1IWvpuBAnqV5w_h53G11Y6uZv6lUi0jWh/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "YT-82190": [
+        {
+          "model": "YT-82190",
+          "fileName": "Czesci_zamienne_YT-82190.pdf",
+          "fileId": "1mFaztOeqORQ0l_sPwA_h9avFpXY-Tc3J",
+          "viewerUrl": "https://drive.google.com/file/d/1mFaztOeqORQ0l_sPwA_h9avFpXY-Tc3J/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82190",
+          "fileName": "Czesci_zamienne_YT-821901.pdf",
+          "fileId": "1UzqURBNCTPDoqSNZsr5hmC5nT90LaNN6",
+          "viewerUrl": "https://drive.google.com/file/d/1UzqURBNCTPDoqSNZsr5hmC5nT90LaNN6/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82190",
+          "fileName": "Czesci_zamienne_YT-821905.pdf",
+          "fileId": "14DWjkp6tlTajzR3gLcjYShxaQ-rc8OeB",
+          "viewerUrl": "https://drive.google.com/file/d/14DWjkp6tlTajzR3gLcjYShxaQ-rc8OeB/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "YT-82191": [
+        {
+          "model": "YT-82191",
+          "fileName": "Czesci_zamienne_YT-82191.pdf",
+          "fileId": "1PEJCHN0Po1GG6HHs90DYxh55jTc0B8hT",
+          "viewerUrl": "https://drive.google.com/file/d/1PEJCHN0Po1GG6HHs90DYxh55jTc0B8hT/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82191",
+          "fileName": "Czesci_zamienne_YT-821915.pdf",
+          "fileId": "1iSBMnCjEN9sUfbF_s4e_R-kBfZpnHTHV",
+          "viewerUrl": "https://drive.google.com/file/d/1iSBMnCjEN9sUfbF_s4e_R-kBfZpnHTHV/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82191",
+          "fileName": "Czesci_zamienne_YT-821916.pdf",
+          "fileId": "1izMBTQI1gIdaE-1PcL0BdzWDmf70g2fL",
+          "viewerUrl": "https://drive.google.com/file/d/1izMBTQI1gIdaE-1PcL0BdzWDmf70g2fL/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "YT-82210": [
+        {
+          "model": "YT-82210",
+          "fileName": "Czesci_zamienne_YT-822100.pdf",
+          "fileId": "1foSWYj7IJ8QIujQHsIRUhJe7WsiYk4va",
+          "viewerUrl": "https://drive.google.com/file/d/1foSWYj7IJ8QIujQHsIRUhJe7WsiYk4va/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82210",
+          "fileName": "Czesci_zamienne_YT-822103.pdf",
+          "fileId": "1QsTYV0I1Gm2kj23SzIfV5oulrBxZ_-cL",
+          "viewerUrl": "https://drive.google.com/file/d/1QsTYV0I1Gm2kj23SzIfV5oulrBxZ_-cL/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82210",
+          "fileName": "Czesci_zamienne_YT-822107.pdf",
+          "fileId": "18HFdz4L0GO26CSnZzpjfpQIskrADykJt",
+          "viewerUrl": "https://drive.google.com/file/d/18HFdz4L0GO26CSnZzpjfpQIskrADykJt/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "YT-82211": [
+        {
+          "model": "YT-82211",
+          "fileName": "Czesci_zamienne_YT-822110.pdf",
+          "fileId": "14w2xnlOTA9uNSu7_6_DkGsC5H5-3MrN6",
+          "viewerUrl": "https://drive.google.com/file/d/14w2xnlOTA9uNSu7_6_DkGsC5H5-3MrN6/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82211",
+          "fileName": "Czesci_zamienne_YT-822112.pdf",
+          "fileId": "10aiYuebdOKpZ63bEIyAoT5xEiBrMe0O1",
+          "viewerUrl": "https://drive.google.com/file/d/10aiYuebdOKpZ63bEIyAoT5xEiBrMe0O1/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "YT-82448": [
+        {
+          "model": "YT-82448",
+          "fileName": "Czesci_zamienne_YT-824480.pdf",
+          "fileId": "14JmAqKukoe6L4Ru9gKI793_xXEsm_sNc",
+          "viewerUrl": "https://drive.google.com/file/d/14JmAqKukoe6L4Ru9gKI793_xXEsm_sNc/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82448",
+          "fileName": "Czesci_zamienne_YT-824482.pdf",
+          "fileId": "1bBWaXPoWFnES1wZ2GKAtuPAq2rWGZc8_",
+          "viewerUrl": "https://drive.google.com/file/d/1bBWaXPoWFnES1wZ2GKAtuPAq2rWGZc8_/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82448",
+          "fileName": "Czesci_zamienne_YT-824485.pdf",
+          "fileId": "1LR1Ta6cOlTwomNU6jTJQV6x3wmHaBF-A",
+          "viewerUrl": "https://drive.google.com/file/d/1LR1Ta6cOlTwomNU6jTJQV6x3wmHaBF-A/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "YT-82772": [
+        {
+          "model": "YT-82772",
+          "fileName": "Czesci_zamienne_YT-82772.pdf",
+          "fileId": "1P67XFuci8Sqt5SoH5MKt80r0rj7dM1wB",
+          "viewerUrl": "https://drive.google.com/file/d/1P67XFuci8Sqt5SoH5MKt80r0rj7dM1wB/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82772",
+          "fileName": "Czesci_zamienne_YT-827721.pdf",
+          "fileId": "1iBWqA1oSPCEFYIKJemHNRWzZIRobMqAm",
+          "viewerUrl": "https://drive.google.com/file/d/1iBWqA1oSPCEFYIKJemHNRWzZIRobMqAm/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82772",
+          "fileName": "Czesci_zamienne_YT-827722.pdf",
+          "fileId": "10COoep5_WXbz2P3pMv1CzIct09aiypwc",
+          "viewerUrl": "https://drive.google.com/file/d/10COoep5_WXbz2P3pMv1CzIct09aiypwc/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82772",
+          "fileName": "Czesci_zamienne_YT-827723.pdf",
+          "fileId": "1lvts_fclxKHgsgNYYeweDdE8tccpaSWK",
+          "viewerUrl": "https://drive.google.com/file/d/1lvts_fclxKHgsgNYYeweDdE8tccpaSWK/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "YT-82779": [
+        {
+          "model": "YT-82779",
+          "fileName": "Czesci_zamienne_YT-827790.pdf",
+          "fileId": "1VO5rC8-hqBsCNOs_mNZs91YRrhMcRuN0",
+          "viewerUrl": "https://drive.google.com/file/d/1VO5rC8-hqBsCNOs_mNZs91YRrhMcRuN0/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82779",
+          "fileName": "Czesci_zamienne_YT-8277905.pdf",
+          "fileId": "1GHHmBftW1jSgxZF6OVydFL3R0yS5YpRg",
+          "viewerUrl": "https://drive.google.com/file/d/1GHHmBftW1jSgxZF6OVydFL3R0yS5YpRg/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82779",
+          "fileName": "Czesci_zamienne_YT-827791.pdf",
+          "fileId": "1hQHw-XdMFvYDG3LrHFYYD9kk1jEFI7iK",
+          "viewerUrl": "https://drive.google.com/file/d/1hQHw-XdMFvYDG3LrHFYYD9kk1jEFI7iK/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82779",
+          "fileName": "Czesci_zamienne_YT-8277915.pdf",
+          "fileId": "1sfYXPkWRa0bmXGfgydtgANIH2y6iippL",
+          "viewerUrl": "https://drive.google.com/file/d/1sfYXPkWRa0bmXGfgydtgANIH2y6iippL/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82779",
+          "fileName": "Czesci_zamienne_YT-827792.pdf",
+          "fileId": "1Gnoo9ohcE7nflrAEtDcjBL2WJ32w_wtE",
+          "viewerUrl": "https://drive.google.com/file/d/1Gnoo9ohcE7nflrAEtDcjBL2WJ32w_wtE/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82779",
+          "fileName": "Czesci_zamienne_YT-827793.pdf",
+          "fileId": "16a5g-3G0xzpY6c0yJ7RbweT7zImQT7BF",
+          "viewerUrl": "https://drive.google.com/file/d/16a5g-3G0xzpY6c0yJ7RbweT7zImQT7BF/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "YT-82782": [
+        {
+          "model": "YT-82782",
+          "fileName": "Czesci_zamienne_YT-82782.pdf",
+          "fileId": "1SqgCGrlbXwi07yVE8TsSlE5o46cWzxw1",
+          "viewerUrl": "https://drive.google.com/file/d/1SqgCGrlbXwi07yVE8TsSlE5o46cWzxw1/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82782",
+          "fileName": "Czesci_zamienne_YT-827820.pdf",
+          "fileId": "1pRNfaSDxu2739QBywpRQwtenHUbSuzRj",
+          "viewerUrl": "https://drive.google.com/file/d/1pRNfaSDxu2739QBywpRQwtenHUbSuzRj/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82782",
+          "fileName": "Czesci_zamienne_YT-827821.pdf",
+          "fileId": "1IqCR6lVdiA2FpR01AR74Q0UQaOZv5O8i",
+          "viewerUrl": "https://drive.google.com/file/d/1IqCR6lVdiA2FpR01AR74Q0UQaOZv5O8i/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82782",
+          "fileName": "Czesci_zamienne_YT-827822.pdf",
+          "fileId": "1UPFiHlVWBCLRCSeHg5r9eirKJuvedMby",
+          "viewerUrl": "https://drive.google.com/file/d/1UPFiHlVWBCLRCSeHg5r9eirKJuvedMby/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "YT-82803": [
+        {
+          "model": "YT-82803",
+          "fileName": "Czesci_zamienne_YT-828030.pdf",
+          "fileId": "1WZAS0U_vNB0iO2LwV-ChitC0xjGaW2_i",
+          "viewerUrl": "https://drive.google.com/file/d/1WZAS0U_vNB0iO2LwV-ChitC0xjGaW2_i/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82803",
+          "fileName": "Czesci_zamienne_YT-828031.pdf",
+          "fileId": "1DGHZcfwFCBOGXIgkmRB-yjjXIBY01IBK",
+          "viewerUrl": "https://drive.google.com/file/d/1DGHZcfwFCBOGXIgkmRB-yjjXIBY01IBK/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82803",
+          "fileName": "Czesci_zamienne_YT-828033.pdf",
+          "fileId": "1OyXH_PUO1ciGNPkI0LaMYLMTmqtEXhOa",
+          "viewerUrl": "https://drive.google.com/file/d/1OyXH_PUO1ciGNPkI0LaMYLMTmqtEXhOa/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82803",
+          "fileName": "Czesci_zamienne_YT-828035.pdf",
+          "fileId": "1wsnom2o91CAcUSKvDuoTLvnKgiwKVTzW",
+          "viewerUrl": "https://drive.google.com/file/d/1wsnom2o91CAcUSKvDuoTLvnKgiwKVTzW/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "YT-82806": [
+        {
+          "model": "YT-82806",
+          "fileName": "Czesci_zamienne_YT-82806.pdf",
+          "fileId": "1Axwhy_phQDTg_koleDdMPFugFhZEXjr6",
+          "viewerUrl": "https://drive.google.com/file/d/1Axwhy_phQDTg_koleDdMPFugFhZEXjr6/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82806",
+          "fileName": "Czesci_zamienne_YT-828063.pdf",
+          "fileId": "1TA63i3xRyfDxGmHky9vXAj_C1rco8Prv",
+          "viewerUrl": "https://drive.google.com/file/d/1TA63i3xRyfDxGmHky9vXAj_C1rco8Prv/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82806",
+          "fileName": "Czesci_zamienne_YT-828064.pdf",
+          "fileId": "124R0n8t8kNndd1zoTi2XMTwD3uL_20w4",
+          "viewerUrl": "https://drive.google.com/file/d/124R0n8t8kNndd1zoTi2XMTwD3uL_20w4/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82806",
+          "fileName": "Czesci_zamienne_YT-828065.pdf",
+          "fileId": "1XwDmwN1p08iQbcEwr8lj5rWzsFeGR3lw",
+          "viewerUrl": "https://drive.google.com/file/d/1XwDmwN1p08iQbcEwr8lj5rWzsFeGR3lw/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82806",
+          "fileName": "Czesci_zamienne_YT-828066.pdf",
+          "fileId": "1JDZkybXOz07x6e_ABtGNAcCFJ6vp1S3V",
+          "viewerUrl": "https://drive.google.com/file/d/1JDZkybXOz07x6e_ABtGNAcCFJ6vp1S3V/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82806",
+          "fileName": "Czesci_zamienne_YT-828067.pdf",
+          "fileId": "1qeTiT8BT8jdaWAZzpaW8H5U-dMI3srTw",
+          "viewerUrl": "https://drive.google.com/file/d/1qeTiT8BT8jdaWAZzpaW8H5U-dMI3srTw/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "YT-82825": [
+        {
+          "model": "YT-82825",
+          "fileName": "Czesci_zamienne_YT-828254.pdf",
+          "fileId": "13zYspH9uvTLdvaZsGCCq2vGQD9KWhpVg",
+          "viewerUrl": "https://drive.google.com/file/d/13zYspH9uvTLdvaZsGCCq2vGQD9KWhpVg/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82825",
+          "fileName": "Czesci_zamienne_YT-828255.pdf",
+          "fileId": "1hFYtGeQK1c0e51ENx_cfBSDzQWKIJEB5",
+          "viewerUrl": "https://drive.google.com/file/d/1hFYtGeQK1c0e51ENx_cfBSDzQWKIJEB5/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82825",
+          "fileName": "Czesci_zamienne_YT-828256.pdf",
+          "fileId": "1Coy1Qsp7X-G9NAs4govW_M1zCOQw_pGJ",
+          "viewerUrl": "https://drive.google.com/file/d/1Coy1Qsp7X-G9NAs4govW_M1zCOQw_pGJ/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "YT-82833": [
+        {
+          "model": "YT-82833",
+          "fileName": "Czesci_zamienne_YT-82833.pdf",
+          "fileId": "1PeXIRfsOFyHJ93fEWIUHJPOYC96ziWqS",
+          "viewerUrl": "https://drive.google.com/file/d/1PeXIRfsOFyHJ93fEWIUHJPOYC96ziWqS/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82833",
+          "fileName": "Czesci_zamienne_YT-828331.pdf",
+          "fileId": "1kpOy1zu-QSrnfYJlIPLqV88qr3qmrafm",
+          "viewerUrl": "https://drive.google.com/file/d/1kpOy1zu-QSrnfYJlIPLqV88qr3qmrafm/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82833",
+          "fileName": "Czesci_zamienne_YT-828332.pdf",
+          "fileId": "1cnl-rukIl1VQmCS3tyl2hPBz2STUmj-Y",
+          "viewerUrl": "https://drive.google.com/file/d/1cnl-rukIl1VQmCS3tyl2hPBz2STUmj-Y/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82833",
+          "fileName": "Czesci_zamienne_YT-828333.pdf",
+          "fileId": "1HnHgMDh4c1x6vvxcJPfBUPKc_q9I1sCU",
+          "viewerUrl": "https://drive.google.com/file/d/1HnHgMDh4c1x6vvxcJPfBUPKc_q9I1sCU/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82833",
+          "fileName": "Czesci_zamienne_YT-828334.pdf",
+          "fileId": "1ClbqD6cJOfIeevGVeYqgz3-w6_gOz-uE",
+          "viewerUrl": "https://drive.google.com/file/d/1ClbqD6cJOfIeevGVeYqgz3-w6_gOz-uE/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "YT-82835": [
+        {
+          "model": "YT-82835",
+          "fileName": "Czesci_zamienne_YT-82835.pdf",
+          "fileId": "1TRMYA5hYURNdN9Ew1Pyb4-mtCjoS36G-",
+          "viewerUrl": "https://drive.google.com/file/d/1TRMYA5hYURNdN9Ew1Pyb4-mtCjoS36G-/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82835",
+          "fileName": "Czesci_zamienne_YT-828353.pdf",
+          "fileId": "1eFbDmHW2pq_TToLMswfaPfh4O7Pi47g0",
+          "viewerUrl": "https://drive.google.com/file/d/1eFbDmHW2pq_TToLMswfaPfh4O7Pi47g0/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82835",
+          "fileName": "Czesci_zamienne_YT-828355.pdf",
+          "fileId": "147QxRNiQ-_WihhyuCywVj01WLUXCukP5",
+          "viewerUrl": "https://drive.google.com/file/d/147QxRNiQ-_WihhyuCywVj01WLUXCukP5/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82835",
+          "fileName": "Czesci_zamienne_YT-828356.pdf",
+          "fileId": "1hp64RWzAtBdbEH8cfX1GoOdsoGR-Zb65",
+          "viewerUrl": "https://drive.google.com/file/d/1hp64RWzAtBdbEH8cfX1GoOdsoGR-Zb65/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82835",
+          "fileName": "Czesci_zamienne_YT-828357.pdf",
+          "fileId": "1xKhGmWYtiOy_gFlKpk8ePH8IzZzKyZ43",
+          "viewerUrl": "https://drive.google.com/file/d/1xKhGmWYtiOy_gFlKpk8ePH8IzZzKyZ43/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82835",
+          "fileName": "Czesci_zamienne_YT-828358.pdf",
+          "fileId": "1UoZuGcFIAQHS5DgFbdCf1GH0owkKl7Ac",
+          "viewerUrl": "https://drive.google.com/file/d/1UoZuGcFIAQHS5DgFbdCf1GH0owkKl7Ac/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "YT-82837": [
+        {
+          "model": "YT-82837",
+          "fileName": "Czesci_zamienne_YT-828377.pdf",
+          "fileId": "1pzlf4sPtFzXKyzBgMPU6e9sx4oJfuNff",
+          "viewerUrl": "https://drive.google.com/file/d/1pzlf4sPtFzXKyzBgMPU6e9sx4oJfuNff/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82837",
+          "fileName": "Czesci_zamienne_YT-828378.pdf",
+          "fileId": "1XIiGK7N0wmO4vktLjgTPtt2WLycU3iT3",
+          "viewerUrl": "https://drive.google.com/file/d/1XIiGK7N0wmO4vktLjgTPtt2WLycU3iT3/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "YT-82838": [
+        {
+          "model": "YT-82838",
+          "fileName": "Czesci_zamienne_YT-828380.pdf",
+          "fileId": "1QpA2ln77q843-AWlTRnMlaohYfAh6YPR",
+          "viewerUrl": "https://drive.google.com/file/d/1QpA2ln77q843-AWlTRnMlaohYfAh6YPR/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82838",
+          "fileName": "Czesci_zamienne_YT-828381.pdf",
+          "fileId": "1HZ4E3FkoNfcMNeaDebhwanwLM7A9__1n",
+          "viewerUrl": "https://drive.google.com/file/d/1HZ4E3FkoNfcMNeaDebhwanwLM7A9__1n/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82838",
+          "fileName": "Czesci_zamienne_YT-828382.pdf",
+          "fileId": "1Qa_MBiXt2HFJLVWdbT4nA7BmmyemB13A",
+          "viewerUrl": "https://drive.google.com/file/d/1Qa_MBiXt2HFJLVWdbT4nA7BmmyemB13A/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82838",
+          "fileName": "Czesci_zamienne_YT-828383.pdf",
+          "fileId": "1J5yhsahsN5Hl9gLbWX4ncYM0PnTHCTmG",
+          "viewerUrl": "https://drive.google.com/file/d/1J5yhsahsN5Hl9gLbWX4ncYM0PnTHCTmG/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "YT-82839": [
+        {
+          "model": "YT-82839",
+          "fileName": "Czesci_zamienne_YT-828390.pdf",
+          "fileId": "17GsCcU4c0uZipY5uvgGnB7YLFBuwzabb",
+          "viewerUrl": "https://drive.google.com/file/d/17GsCcU4c0uZipY5uvgGnB7YLFBuwzabb/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82839",
+          "fileName": "Czesci_zamienne_YT-828391.pdf",
+          "fileId": "1L9iJLTfYGI1vyQ6eVPFRgSVhbHuYVrXw",
+          "viewerUrl": "https://drive.google.com/file/d/1L9iJLTfYGI1vyQ6eVPFRgSVhbHuYVrXw/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "YT-82902": [
+        {
+          "model": "YT-82902",
+          "fileName": "Czesci_zamienne_YT-82902.pdf",
+          "fileId": "1K5tgXC-ogVju-enXG9xoZ3dr48utMYuN",
+          "viewerUrl": "https://drive.google.com/file/d/1K5tgXC-ogVju-enXG9xoZ3dr48utMYuN/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82902",
+          "fileName": "Czesci_zamienne_YT-829021.pdf",
+          "fileId": "1kwpgyZQttlvXyWghWYYoijzKzZHbKZg1",
+          "viewerUrl": "https://drive.google.com/file/d/1kwpgyZQttlvXyWghWYYoijzKzZHbKZg1/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "YT-82938": [
+        {
+          "model": "YT-82938",
+          "fileName": "Czesci_zamienne_YT-829383.pdf",
+          "fileId": "18M1dwSfIV-VMg3Ir5Rc7ZN3IDxb0RopE",
+          "viewerUrl": "https://drive.google.com/file/d/18M1dwSfIV-VMg3Ir5Rc7ZN3IDxb0RopE/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-82938",
+          "fileName": "Czesci_zamienne_YT-829385.pdf",
+          "fileId": "1VjiTAhKKeoj3LWSmDgfkZ4RC6AlZfqNN",
+          "viewerUrl": "https://drive.google.com/file/d/1VjiTAhKKeoj3LWSmDgfkZ4RC6AlZfqNN/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "YT-85199": [
+        {
+          "model": "YT-85199",
+          "fileName": "Czesci_zamienne_YT-851990.pdf",
+          "fileId": "1nxaXN1lel1w1J5S8ZzNKwVEsPKsLn1gm",
+          "viewerUrl": "https://drive.google.com/file/d/1nxaXN1lel1w1J5S8ZzNKwVEsPKsLn1gm/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-85199",
+          "fileName": "Czesci_zamienne_YT-851991.pdf",
+          "fileId": "1qtk-AH9deQS4kE9I8TbE90x_8-u7fdBe",
+          "viewerUrl": "https://drive.google.com/file/d/1qtk-AH9deQS4kE9I8TbE90x_8-u7fdBe/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-85199",
+          "fileName": "Czesci_zamienne_YT-851992.pdf",
+          "fileId": "1pt7cMBI0AZkZsvNbXbmMIVp1bXvNvbTq",
+          "viewerUrl": "https://drive.google.com/file/d/1pt7cMBI0AZkZsvNbXbmMIVp1bXvNvbTq/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-85199",
+          "fileName": "Czesci_zamienne_YT-851993.pdf",
+          "fileId": "1BEM5IKAFLgRbUg1kLbg6y9CmX9ogrkF6",
+          "viewerUrl": "https://drive.google.com/file/d/1BEM5IKAFLgRbUg1kLbg6y9CmX9ogrkF6/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "YT-85208": [
+        {
+          "model": "YT-85208",
+          "fileName": "Czesci_zamienne_YT-85208.pdf",
+          "fileId": "1Mco0OUhCeARE8WvGzBjoVA_M3n5lKmdY",
+          "viewerUrl": "https://drive.google.com/file/d/1Mco0OUhCeARE8WvGzBjoVA_M3n5lKmdY/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-85208",
+          "fileName": "Czesci_zamienne_YT-852081.pdf",
+          "fileId": "1hM9Dl7OsB7e3JEmS1rGeVmnGJ6iOzat0",
+          "viewerUrl": "https://drive.google.com/file/d/1hM9Dl7OsB7e3JEmS1rGeVmnGJ6iOzat0/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-85208",
+          "fileName": "Czesci_zamienne_YT-852082.pdf",
+          "fileId": "17cMKA2pF8XGDkZ5jPhivVaZTOA8e7yqK",
+          "viewerUrl": "https://drive.google.com/file/d/17cMKA2pF8XGDkZ5jPhivVaZTOA8e7yqK/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "YT-85209": [
+        {
+          "model": "YT-85209",
+          "fileName": "Czesci_zamienne_YT-852090.pdf",
+          "fileId": "1y1wlbcmxAyLHQ2VAyVsocqCoIlrSJp8o",
+          "viewerUrl": "https://drive.google.com/file/d/1y1wlbcmxAyLHQ2VAyVsocqCoIlrSJp8o/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-85209",
+          "fileName": "Czesci_zamienne_YT-852091.pdf",
+          "fileId": "1Reso76H_2qmGrJIbg2MLQzjPAiB1OKVo",
+          "viewerUrl": "https://drive.google.com/file/d/1Reso76H_2qmGrJIbg2MLQzjPAiB1OKVo/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-85209",
+          "fileName": "Czesci_zamienne_YT-852092.pdf",
+          "fileId": "1p8PaGB1CNPBlC1X3h7DgdrIYDxIaXPuo",
+          "viewerUrl": "https://drive.google.com/file/d/1p8PaGB1CNPBlC1X3h7DgdrIYDxIaXPuo/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-85209",
+          "fileName": "Czesci_zamienne_YT-852093.pdf",
+          "fileId": "1rLi4gHQMov8hVqky_bUORq6_cVBVZ_JY",
+          "viewerUrl": "https://drive.google.com/file/d/1rLi4gHQMov8hVqky_bUORq6_cVBVZ_JY/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "YT-85237": [
+        {
+          "model": "YT-85237",
+          "fileName": "Czesci_zamienne_YT-852370.pdf",
+          "fileId": "157GQvBuatJURFLYJOIpPEq9S26TtX1up",
+          "viewerUrl": "https://drive.google.com/file/d/157GQvBuatJURFLYJOIpPEq9S26TtX1up/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-85237",
+          "fileName": "Czesci_zamienne_YT-852371.pdf",
+          "fileId": "1-Ys1osnXhyg2sWG1wcPREu9ophIfdLfZ",
+          "viewerUrl": "https://drive.google.com/file/d/1-Ys1osnXhyg2sWG1wcPREu9ophIfdLfZ/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "YT-85483": [
+        {
+          "model": "YT-85483",
+          "fileName": "Czesci_zamienne_YT-85483.pdf",
+          "fileId": "12_ksqHOeTAnzuLBSatVdxI5X9y6iaJxZ",
+          "viewerUrl": "https://drive.google.com/file/d/12_ksqHOeTAnzuLBSatVdxI5X9y6iaJxZ/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        },
+        {
+          "model": "YT-85483",
+          "fileName": "Czesci_zamienne_YT-854837.pdf",
+          "fileId": "1vMzaYwMnJHiBaXqLVJUYHWYKI8zWMDBc",
+          "viewerUrl": "https://drive.google.com/file/d/1vMzaYwMnJHiBaXqLVJUYHWYKI8zWMDBc/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ],
+      "YT-85485": [
+        {
+          "model": "YT-85485",
+          "fileName": "Czesci_zamienne_YT-85485__SCALONE.pdf",
+          "fileId": "1EdFK5KlKCvBASTW8QX6yOULgD8s5y8xu",
+          "viewerUrl": "https://drive.google.com/file/d/1EdFK5KlKCvBASTW8QX6yOULgD8s5y8xu/preview",
+          "score": 160,
+          "reasons": [
+            "scalone/preferowane",
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": true,
+          "status": "verified_preferred",
+          "path": "Rysunki wybuchowe/Czesci_zamienne_YT-85485__SCALONE.pdf"
+        },
+        {
+          "model": "YT-85485",
+          "fileName": "Czesci_zamienne_YT-85485.pdf",
+          "fileId": "1hoWKr1JIOyc6j1S43w8E8aE9xchxH1iw",
+          "viewerUrl": "https://drive.google.com/file/d/1hoWKr1JIOyc6j1S43w8E8aE9xchxH1iw/preview",
+          "score": 50,
+          "reasons": [
+            "preview OK",
+            "nazwa kanoniczna"
+          ],
+          "preferred": false,
+          "status": "OK",
+          "path": "Rysunki wybuchowe"
+        }
+      ]
+    }
+  }
+}

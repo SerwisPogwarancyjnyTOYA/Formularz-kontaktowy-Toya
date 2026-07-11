@@ -1,5 +1,43 @@
 # Changelog
 
+## 20260711-v78-drive-first-catalog-builder
+
+- Dodano Drive-first catalog builder.
+- Dodano obsługę PDF-ów przypisanych do wielu modeli.
+- Dodano generowanie części z manifestu Drive, gdy manifest zawiera tablicę `parts`.
+- Dodano seed dla `YT-828113` / `YT-828114` z PDF-a `yt-828113-yt-828114.pdf`.
+- Dodano skrypt lokalny oraz Apps Script do budowania manifestu z Drive.
+
+
+## v77 — Smart Model Search
+
+- Dodano inteligentne wyszukiwanie modeli po wariantach zapisu.
+- `yt-828113` nie kończy już od razu jako brak urządzenia, tylko powinno pokazać bliskie modele z rysunkiem.
+- Ignorowane są spacje, myślniki i typowe nadmiarowe cyfry w indeksach.
+- Dodano `data/search-normalization-audit-v77.json` oraz `docs/SEARCH_STANDARD_V77.md`.
+
+# Changelog
+
+## 20260711-v76-coverage-pdf-quality
+
+- Dodano audyt pokrycia formularza: urządzenia / PDF / części.
+- Dodano politykę katalogu: każde urządzenie z PDF na Drive ma być widoczne.
+- Dodano raport jakości PDF i priorytet dla plików `__SCALONE.pdf`.
+- Dodano syntetyczne rekordy urządzeń dla modeli, które mają PDF na Drive, ale nie miały wpisu w `devices.json`.
+- Dodano skrypt `npm run coverage`.
+
+
+## 20260711-v75-uniform-pdf-viewer
+
+- Ujednolicono podgląd PDF w formularzu.
+- Wymuszono linki Google Drive `/preview` do GitHub Pages iframe.
+- Dodano priorytet wyboru scalonych PDF-ów `__SCALONE`.
+- Dodano `data/pdf-display-policy.json` i `data/pdf-standardization-audit.json`.
+- Dodano scalone PDF-y jako osobne rekordy rysunków, żeby części powiązane ze scalonym plikiem nie wypadały z formularza.
+- Zasada klienta: urządzenie -> jeden najlepszy rysunek -> lista części. Tryb ręczny tylko awaryjnie.
+
+# Changelog
+
 ## 20260710-v73-stable-control
 
 - Dodano `admin.html` jako niezależny panel publikacyjny.
