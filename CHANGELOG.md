@@ -1,5 +1,6 @@
 # Changelog
 
+<<<<<<< HEAD
 ## 20260711-v78-drive-first-catalog-builder
 
 - Dodano Drive-first catalog builder.
@@ -18,6 +19,8 @@
 
 # Changelog
 
+=======
+>>>>>>> 6e274248c413b706ad423ea78af3ec7bffc69800
 ## 20260711-v76-coverage-pdf-quality
 
 - Dodano audyt pokrycia formularza: urządzenia / PDF / części.

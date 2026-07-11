@@ -1,9 +1,17 @@
 {
+<<<<<<< HEAD
   "version": "20260711-v78-drive-first-catalog-builder",
   "date": "2026-07-11",
   "channel": "stable-v77",
   "name": "Drive-first catalog builder",
   "base": "20260711-v76-coverage-pdf-quality",
+=======
+  "version": "20260711-v76-coverage-pdf-quality",
+  "date": "2026-07-11",
+  "channel": "stable-v76",
+  "name": "Coverage & PDF Quality Audit",
+  "base": "20260711-v75-uniform-pdf-viewer",
+>>>>>>> 6e274248c413b706ad423ea78af3ec7bffc69800
   "summary": {
     "devicesBeforeSynthetic": 1314,
     "syntheticDevicesAddedFromDrivePdf": 13,
@@ -21,6 +29,7 @@
     "pdfRowsWithoutPreviewUrl": 0,
     "modelsWithMultiplePdfCandidates": 50,
     "preferredMergedPdfModels": 12,
+<<<<<<< HEAD
     "scalonePdfRows": 12,
     "smartSearch": "enabled"
   },
@@ -29,6 +38,15 @@
     "?admin=1&v=20260711-v77-smart-model-search",
     "healthcheck.html?v=20260711-v77-smart-model-search",
     "smoke-test.html?v=20260711-v77-smart-model-search"
+=======
+    "scalonePdfRows": 12
+  },
+  "testUrls": [
+    "?v=20260711-v76-coverage-pdf-quality",
+    "?admin=1&v=20260711-v76-coverage-pdf-quality",
+    "healthcheck.html?v=20260711-v76-coverage-pdf-quality",
+    "smoke-test.html?v=20260711-v76-coverage-pdf-quality"
+>>>>>>> 6e274248c413b706ad423ea78af3ec7bffc69800
   ],
   "files": [
     "data/coverage-audit-v76.json",
@@ -36,7 +54,11 @@
     "data/form-catalog-policy-v76.json",
     "docs/COVERAGE_AUDIT_V76.md",
     "docs/FORMULARZ_STANDARD_V76.md"
+<<<<<<< HEAD
   ],
   "createdAt": "2026-07-11T15:50:00+02:00",
   "notes": "Budowanie katalogu z PDF-ów Drive; multi-model PDFs; seed YT-828113/YT-828114."
+=======
+  ]
+>>>>>>> 6e274248c413b706ad423ea78af3ec7bffc69800
 }

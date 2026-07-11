@@ -165,6 +165,7 @@ Szybka kontrola lokalna:
 npm run check
 npm run coverage
 ```
+<<<<<<< HEAD
 
 
 ## v78 — Drive-first catalog builder
@@ -172,3 +173,5 @@ npm run coverage
 Ta wersja zmienia podejście do katalogu: formularz nie bazuje wyłącznie na ręcznie dodanych urządzeniach. Dodatkowy manifest `data/drive-drawings-map.generated-v78.json` pozwala tworzyć urządzenia bezpośrednio z PDF-ów znalezionych na Google Drive.
 
 Najważniejsze: jeśli rysunek/lista części jest na Drive, urządzenie powinno być dostępne w formularzu.
+=======
+>>>>>>> 6e274248c413b706ad423ea78af3ec7bffc69800
