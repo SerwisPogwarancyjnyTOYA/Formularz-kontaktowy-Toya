@@ -1,7 +1,7 @@
 {
   "name": "pgw-service-hub",
   "private": true,
-  "version": "20260711-v81-drive-search-aliases",
+  "version": "20260711-v82-real-drawing-quality-gate",
   "type": "module",
   "scripts": {
     "check": "node scripts/pgw-repo-selfcheck.mjs",
@@ -10,10 +10,11 @@
     "drive-catalog": "node scripts/pgw-v79-drive-catalog-builder.mjs",
     "drive-catalog-v78": "node scripts/pgw-v78-drive-first-catalog-builder.mjs",
     "organizer-plan": "node scripts/pgw-v79-drive-catalog-builder.mjs --organizer-plan",
-    "drive-master": "node scripts/pgw-v81-drive-master-catalog.mjs",
+    "drive-master": "node scripts/pgw-v82-drive-master-catalog.mjs",
     "drive-catalog-v79": "node scripts/pgw-v79-drive-catalog-builder.mjs",
     "merge-plan": "node scripts/pgw-v80-drive-master-catalog.mjs --merge-plan",
     "drive-master-v80": "node scripts/pgw-v80-drive-master-catalog.mjs",
-    "drive-alias-check": "node scripts/pgw-v81-drive-alias-check.mjs"
+    "drive-alias-check": "node scripts/pgw-v81-drive-alias-check.mjs",
+    "drive-quality-gate": "node scripts/pgw-v82-real-drawing-quality-gate.mjs"
   }
 }

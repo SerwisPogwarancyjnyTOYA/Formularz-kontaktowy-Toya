@@ -1,3 +1,12 @@
+# Changelog
+
+## 20260711-v82-real-drawing-quality-gate
+
+- Włączono twardy filtr PDF klienta: realny rysunek albo zweryfikowany/scalony komplet.
+- Usunięto z katalogu klienta PDF roboczy `yt-828113-yt-828114.pdf`, bo zawierał tabelę/listę części zamiast prawdziwego rysunku.
+- Dodano `pdf-customer-visible-blocklist-v82.json`, `pdf-quarantine-v82.json`, `real-drawing-quality-audit-v82.json`.
+- Dodano test `npm run drive-quality-gate`.
+
 
 ## 20260711-v81-drive-search-aliases
 
