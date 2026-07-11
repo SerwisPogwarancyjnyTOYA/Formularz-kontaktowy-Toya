@@ -1,20 +1,14 @@
 {
   "name": "pgw-service-hub",
   "private": true,
-<<<<<<< HEAD
-  "version": "20260711-v78-drive-first-catalog-builder",
+  "version": "20260711-v79-drive-catalog-and-pdf-organizer",
   "type": "module",
   "scripts": {
     "check": "node scripts/pgw-repo-selfcheck.mjs",
     "coverage": "node scripts/pgw-v76-coverage-report.mjs",
     "search-check": "node scripts/pgw-v77-search-check.mjs",
-    "drive-catalog": "node scripts/pgw-v78-drive-first-catalog-builder.mjs"
-=======
-  "version": "20260711-v76-coverage-pdf-quality",
-  "type": "module",
-  "scripts": {
-    "check": "node scripts/pgw-repo-selfcheck.mjs",
-    "coverage": "node scripts/pgw-v76-coverage-report.mjs"
->>>>>>> 6e274248c413b706ad423ea78af3ec7bffc69800
+    "drive-catalog": "node scripts/pgw-v79-drive-catalog-builder.mjs",
+    "drive-catalog-v78": "node scripts/pgw-v78-drive-first-catalog-builder.mjs",
+    "organizer-plan": "node scripts/pgw-v79-drive-catalog-builder.mjs --organizer-plan"
   }
 }

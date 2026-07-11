@@ -1,7 +1,7 @@
 (() => {
   'use strict';
   const CONFIG = window.PGW_CONFIG || {};
-  const DRAFT_KEY = 'pgw-production-draft-v78-drive-first-catalog';
+  const DRAFT_KEY = 'pgw-production-draft-v79-drive-catalog-organizer';
   const THEME_KEY = 'pgw-theme';
   const PART_ROW_LIMIT = Number(CONFIG.partRowLimit || 80);
   const $ = (id) => document.getElementById(id);
@@ -21,11 +21,7 @@
     devices: [], drawings: [], parts: [], driveMap: [], brandOverrides: {}, pdfHeaderOverrides: {}, pdfDeviceOverrides: {}, pdfQualityReport: {}, pdfOrphans: [], universalParts: [], universalPartLinks: [], partAssemblies: {},
     drawingById: new Map(), partsByDrawing: new Map(), driveByDrawingId: new Map(), driveByKey: new Map(), zunByPartKey: new Map(), zunByCode: new Map(), partAssemblyComponents: new Map(), partAssemblyChildren: new Map(),
     selectedDevice: null, selectedDrawing: null, selectedParts: new Map(), manualMode: false, step: 1, formDirty: false,
-<<<<<<< HEAD
-    postalCodes: new Map(), partVisibleLimit: PART_ROW_LIMIT, activeBrand: 'all', brandSummary: [], pdfDiagnostics: {}, releaseHealth: {}, sourceHealth: [], releaseInfo: {}, deploymentState: {}, pdfQaRules: {}, pdfOverrideCandidates: [], pdfDisplayPolicy: {}, pdfStandardizationAudit: {}, driveFirstCatalogAuditV78: {}, driveCatalogPolicyV78: {}
-=======
-    postalCodes: new Map(), partVisibleLimit: PART_ROW_LIMIT, activeBrand: 'all', brandSummary: [], pdfDiagnostics: {}, releaseHealth: {}, sourceHealth: [], releaseInfo: {}, deploymentState: {}, pdfQaRules: {}, pdfOverrideCandidates: [], pdfDisplayPolicy: {}, pdfStandardizationAudit: {}
->>>>>>> 6e274248c413b706ad423ea78af3ec7bffc69800
+    postalCodes: new Map(), partVisibleLimit: PART_ROW_LIMIT, activeBrand: 'all', brandSummary: [], pdfDiagnostics: {}, releaseHealth: {}, sourceHealth: [], releaseInfo: {}, deploymentState: {}, pdfQaRules: {}, pdfOverrideCandidates: [], pdfDisplayPolicy: {}, pdfStandardizationAudit: {}, driveFirstCatalogAuditV78: {}, driveCatalogPolicyV78: {}, driveCatalogAuditV79: {}, drivePdfMergeQueueV79: {}, driveOrganizerPlanV79: {}
   };
 
   const POSTAL_FALLBACK = {
@@ -62,6 +58,9 @@
       state.deploymentState = await loadFirst(urls.deploymentState || ['data/deployment-state.json'], {}, 'deploymentState');
       state.driveFirstCatalogAuditV78 = await loadFirst(urls.driveFirstCatalogAuditV78 || ['data/drive-first-catalog-audit-v78.json'], {}, 'driveFirstCatalogAuditV78');
       state.driveCatalogPolicyV78 = await loadFirst(urls.driveCatalogPolicyV78 || ['data/drive-catalog-policy-v78.json'], {}, 'driveCatalogPolicyV78');
+      state.driveCatalogAuditV79 = await loadFirst(urls.driveCatalogAuditV79 || ['data/drive-catalog-audit-v79.json'], {}, 'driveCatalogAuditV79');
+      state.drivePdfMergeQueueV79 = await loadFirst(urls.drivePdfMergeQueueV79 || ['data/drive-pdf-merge-queue-v79.json'], {}, 'drivePdfMergeQueueV79');
+      state.driveOrganizerPlanV79 = await loadFirst(urls.driveOrganizerPlanV79 || ['data/drive-organizer-plan-v79.json'], {}, 'driveOrganizerPlanV79');
       state.releaseInfo = await loadFirst(urls.releaseInfo || ['data/release-info.json'], {}, 'releaseInfo');
       await loadPostalCodes();
       normalizeData();
@@ -502,7 +501,10 @@
     const out = [];
     for (const row of rows || []) {
       const id = String(row.fileId || row.driveFileId || row.googleDriveId || row.gdriveId || row.sourceFileId || '').trim();
-      const identity = id || [row.path || row.folderPath || '', row.fileName || row.title || row.name || '', row.deviceIndex || row.model || row.normalizedModel || ''].map(normKey).filter(Boolean).join('|');
+      // v79: jeden PDF moze obslugiwac kilka modeli. Nie wolno deduplikowac po samym fileId,
+      // bo wtedy drugi model z pliku yt-828113-yt-828114.pdf znika z katalogu.
+      const modelIdentity = normKey(row.deviceIndex || row.model || row.normalizedModel || row.primaryModel || '');
+      const identity = id ? [id, modelIdentity || 'no-model'].join('|') : [row.path || row.folderPath || '', row.fileName || row.title || row.name || '', row.deviceIndex || row.model || row.normalizedModel || ''].map(normKey).filter(Boolean).join('|');
       if (!identity) { out.push(row); continue; }
       const existingIndex = byId.get(identity);
       if (existingIndex === undefined) {
@@ -2551,9 +2553,6 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
     try { await navigator.clipboard.writeText(text); els.copyStatus.textContent = ok; }
     catch(e) { els.copyStatus.textContent = 'Nie udało się skopiować automatycznie — zaznacz tekst ręcznie.'; }
   }
-})();
-
-
   function drawingSelectionScore(drawing) {
     if (!drawing) return 0;
     const partCount = (state.partsByDrawing && state.partsByDrawing.get(String(drawing.id)) || []).length;
@@ -2568,3 +2567,5 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
     if (/(^|[ _-])(p|q)([ _.-]|$)/.test(text) || text.includes(' yeng') || text.includes(' eng')) score -= 100000;
     return score;
   }
+
+})();

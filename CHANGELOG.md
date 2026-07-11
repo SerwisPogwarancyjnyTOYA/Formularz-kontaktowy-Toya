@@ -1,6 +1,15 @@
 # Changelog
 
-<<<<<<< HEAD
+## 20260711-v79-drive-catalog-and-pdf-organizer
+
+- Naprawiono deduplikację PDF-ów po samym `fileId` - jeden PDF może obsługiwać kilka modeli.
+- Dodano `drive-drawings-map.generated-v79.json` jako manifest budowany z Drive.
+- Dodano `drive-catalog-audit-v79.json`, `drive-pdf-merge-queue-v79.json`, `drive-organizer-plan-v79.json`.
+- Dodano Apps Script do skanowania i porządkowania folderów Drive.
+- Dodano dokumentację polityki scalania PDF.
+
+# Changelog
+
 ## 20260711-v78-drive-first-catalog-builder
 
 - Dodano Drive-first catalog builder.
@@ -19,8 +28,6 @@
 
 # Changelog
 
-=======
->>>>>>> 6e274248c413b706ad423ea78af3ec7bffc69800
 ## 20260711-v76-coverage-pdf-quality
 
 - Dodano audyt pokrycia formularza: urządzenia / PDF / części.
