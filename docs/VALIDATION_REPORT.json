@@ -1,5 +1,113 @@
 [
   {
+    "path": "RELEASE.json",
+    "ok": true
+  },
+  {
+    "path": "data/brand-resolution-overrides.json",
+    "ok": true
+  },
+  {
+    "path": "data/catalog-audit.json",
+    "ok": true
+  },
+  {
+    "path": "data/catalog-quality-audit.json",
+    "ok": true
+  },
+  {
+    "path": "data/deployment-state.json",
+    "ok": true
+  },
+  {
+    "path": "data/devices.json",
+    "ok": true
+  },
+  {
+    "path": "data/drawings.json",
+    "ok": true
+  },
+  {
+    "path": "data/drive-drawings-map.converted.json",
+    "ok": true
+  },
+  {
+    "path": "data/drive-drawings-map.full.json",
+    "ok": true
+  },
+  {
+    "path": "data/part-assemblies.json",
+    "ok": true
+  },
+  {
+    "path": "data/parts.json",
+    "ok": true
+  },
+  {
+    "path": "data/pdf-admin-notes.json",
+    "ok": true
+  },
+  {
+    "path": "data/pdf-device-overrides.json",
+    "ok": true
+  },
+  {
+    "path": "data/pdf-header-extraction-queue.json",
+    "ok": true
+  },
+  {
+    "path": "data/pdf-header-overrides.json",
+    "ok": true
+  },
+  {
+    "path": "data/pdf-orphans.json",
+    "ok": true
+  },
+  {
+    "path": "data/pdf-override-candidates.json",
+    "ok": true
+  },
+  {
+    "path": "data/pdf-qa-rules.json",
+    "ok": true
+  },
+  {
+    "path": "data/pdf-quality-report.json",
+    "ok": true
+  },
+  {
+    "path": "data/postal-codes.json",
+    "ok": true
+  },
+  {
+    "path": "data/release-checks.json",
+    "ok": true
+  },
+  {
+    "path": "data/release-info.json",
+    "ok": true
+  },
+  {
+    "path": "data/universal-parts-zun-links.json",
+    "ok": true
+  },
+  {
+    "path": "data/universal-parts-zun.json",
+    "ok": true
+  },
+  {
+    "path": "docs/VALIDATION_REPORT.json",
+    "ok": true
+  },
+  {
+    "path": "package.json",
+    "ok": true
+  },
+  {
+    "path": "repository-manifest.json",
+    "ok": true
+  },
+  {
     "path": "app.js",
     "ok": true,
     "error": ""
@@ -10,8 +118,14 @@
     "error": ""
   },
   {
-    "path": "scripts/pgw-refresh-pdf-manifest.gs",
+    "path": "scripts/pgw-repo-selfcheck.mjs",
     "ok": true,
+    "error": ""
+  },
+  {
+    "path": "npm run check equivalent",
+    "ok": true,
+    "stdout": "PGW selfcheck OK — 20260710-v73-stable-control",
     "error": ""
   },
   {
@@ -31,6 +145,21 @@
   },
   {
     "path": "app.js",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "path": "admin.html",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "path": "healthcheck.html",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "path": "smoke-test.html",
     "ok": true,
     "error": ""
   },
@@ -61,6 +190,16 @@
   },
   {
     "path": "scripts/pgw-refresh-pdf-manifest.gs",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "path": "scripts/pgw-repo-selfcheck.mjs",
+    "ok": true,
+    "error": ""
+  },
+  {
+    "path": ".github/workflows/static-check.yml",
     "ok": true,
     "error": ""
   }

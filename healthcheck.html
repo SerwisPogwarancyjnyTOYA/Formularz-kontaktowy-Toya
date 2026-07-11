@@ -14,10 +14,10 @@
 <p class="muted">Testuje obecność kluczowych plików po publikacji na GitHub Pages.</p>
 <div id="summary">Sprawdzanie…</div>
 <table><thead><tr><th>Plik</th><th>Status</th><th>Rozmiar / błąd</th></tr></thead><tbody id="rows"></tbody></table>
-<p class="muted">Panel admina: <code>?admin=1&v=20260710-v72-publish</code></p>
+<p class="muted">Panel admina: <code>?admin=1&v=20260710-v73-stable-control</code></p>
 </main>
 <script>
-const files=['index.html','app.css','config.js','app.js','manifest.webmanifest','data/devices.json','data/drawings.json','data/parts.json','data/drive-drawings-map.full.json','data/drive-drawings-map.converted.json','data/pdf-device-overrides.json','data/pdf-quality-report.json','data/release-info.json','assets/logos/yato-wordmark-clean.png'];
+const files=['index.html','app.css','config.js','app.js','manifest.webmanifest','data/devices.json','data/drawings.json','data/parts.json','data/drive-drawings-map.full.json','data/drive-drawings-map.converted.json','data/pdf-device-overrides.json','data/pdf-quality-report.json','data/release-info.json','admin.html','smoke-test.html','package.json','assets/logos/yato-wordmark-clean.png'];
 const rows=document.getElementById('rows');
 const summary=document.getElementById('summary');
 Promise.all(files.map(async file=>{

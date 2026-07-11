@@ -1,20 +1,20 @@
 {
-  "version": "20260710-v72-publish",
-  "name": "PGW v72 — pełny release publikacyjny",
+  "version": "20260710-v73-stable-control",
+  "name": "PGW v73 — stable publication control",
   "date": "2026-07-10",
   "changes": [
-    "Pełna paczka repozytorium zamiast kolejnego patcha.",
-    "Zachowano widoczne rysunki złożeniowe z manifestu Drive i manifestu po konwersji.",
-    "Dodano panel admina ?admin=1, release health, diagnostykę źródeł i eksporty CSV/JSON.",
-    "Uproszczono README i dokumentację wdrożenia pod publikację GitHub Pages.",
-    "Dodano healthcheck.html, RELEASE.json i repository-manifest.json."
+    "Pełne repo publikacyjne z panelami admin/smoke/healthcheck.",
+    "Naprawione akcje panelu admina.",
+    "Dodany self-check repo i workflow GitHub Actions.",
+    "Zachowane działające rysunki złożeniowe PDF."
   ],
   "testPlan": [
-    "Otwórz index.html lokalnie albo przez GitHub Pages z ?v=20260710-v72-publish.",
-    "Sprawdź wyszukiwanie urządzenia z rysunkiem PDF.",
-    "Otwórz ?admin=1&v=20260710-v72-publish i sprawdź Release score.",
-    "Otwórz healthcheck.html i sprawdź ładowanie plików JSON.",
-    "Wygeneruj mail testowy bez cen i stanów magazynowych."
+    "Otwórz ?v=20260710-v73-stable-control.",
+    "Otwórz ?admin=1&v=20260710-v73-stable-control.",
+    "Otwórz healthcheck.html?v=20260710-v73-stable-control.",
+    "Otwórz smoke-test.html?v=20260710-v73-stable-control.",
+    "Uruchom npm run check."
   ],
-  "status": "publication-ready"
+  "status": "publication-ready",
+  "previousVersion": "20260710-v72-publish"
 }

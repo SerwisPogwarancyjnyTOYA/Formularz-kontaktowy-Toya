@@ -1,0 +1,18 @@
+{
+  "version": "20260710-v73-stable-control",
+  "checks": [
+    "healthcheck.html",
+    "smoke-test.html",
+    "admin.html",
+    "?admin=1",
+    "npm run check"
+  ],
+  "criticalData": [
+    "devices.json",
+    "drawings.json",
+    "parts.json",
+    "drive-drawings-map.full.json"
+  ],
+  "pricesVisible": false,
+  "stockVisible": false
+}
