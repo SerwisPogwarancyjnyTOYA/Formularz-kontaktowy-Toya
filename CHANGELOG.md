@@ -1,5 +1,14 @@
 # Changelog
 
+## 20260711-v76-coverage-pdf-quality
+
+- Dodano audyt pokrycia formularza: urządzenia / PDF / części.
+- Dodano politykę katalogu: każde urządzenie z PDF na Drive ma być widoczne.
+- Dodano raport jakości PDF i priorytet dla plików `__SCALONE.pdf`.
+- Dodano syntetyczne rekordy urządzeń dla modeli, które mają PDF na Drive, ale nie miały wpisu w `devices.json`.
+- Dodano skrypt `npm run coverage`.
+
+
 ## 20260711-v75-uniform-pdf-viewer
 
 - Ujednolicono podgląd PDF w formularzu.

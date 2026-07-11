@@ -1,9 +1,10 @@
 {
   "name": "pgw-service-hub",
   "private": true,
-  "version": "20260710-v73-stable-control",
+  "version": "20260711-v76-coverage-pdf-quality",
   "type": "module",
   "scripts": {
-    "check": "node scripts/pgw-repo-selfcheck.mjs"
+    "check": "node scripts/pgw-repo-selfcheck.mjs",
+    "coverage": "node scripts/pgw-v76-coverage-report.mjs"
   }
 }

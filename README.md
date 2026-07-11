@@ -1,6 +1,6 @@
 # PGW Service Hub - formularz zapytania o części
 
-Wersja: **v75 / 20260711-v75-uniform-pdf-viewer**
+Wersja: **v76 / 20260711-v76-uniform-pdf-viewer**
 
 Najważniejsza zasada tej wersji: **każde urządzenie, które ma rysunek PDF na Drive, ma być dostępne w formularzu**. Formularz nie powinien ukrywać urządzenia tylko dlatego, że lista części nie została jeszcze w pełni przetworzona.
 
@@ -14,15 +14,15 @@ Najważniejsza zasada tej wersji: **każde urządzenie, które ma rysunek PDF na
 ## Test po publikacji
 
 ```text
-?v=v75 / 20260711-v75-uniform-pdf-viewer
-?admin=1&v=v75 / 20260711-v75-uniform-pdf-viewer
-healthcheck.html?v=v75 / 20260711-v75-uniform-pdf-viewer
-smoke-test.html?v=v75 / 20260711-v75-uniform-pdf-viewer
+?v=v76 / 20260711-v76-uniform-pdf-viewer
+?admin=1&v=v76 / 20260711-v76-uniform-pdf-viewer
+healthcheck.html?v=v76 / 20260711-v76-uniform-pdf-viewer
+smoke-test.html?v=v76 / 20260711-v76-uniform-pdf-viewer
 ```
 
 ## Raporty
 
-- `data/catalog-coverage-v75 / 20260711-v75-uniform-pdf-viewer.json` - kontrola pokrycia urządzeń/rysunków/części.
+- `data/catalog-coverage-v76 / 20260711-v76-uniform-pdf-viewer.json` - kontrola pokrycia urządzeń/rysunków/części.
 - `data/parts-generated-report.json` - części wygenerowane z PDF-ów frytkownic.
 - `data/drive-drawings-map.converted.json` - aktualny manifest dopiętych/scalonych PDF-ów.
 
@@ -131,7 +131,7 @@ Nie trzeba instalować zależności — skrypt używa tylko Node.js.
 - Panel admina i pliki testowe są pomocnicze; zwykły klient korzysta tylko z formularza.
 
 
-## v75 - jednolity podgląd rysunków PDF
+## v76 - jednolity podgląd rysunków PDF
 
 Priorytetem formularza jest teraz kompletna karta urządzenia, a nie przypadkowy plik PDF. Klient ma widzieć urządzenie, jednolity podgląd rysunku i listę części, jeśli lista została rozpoznana.
 
@@ -143,3 +143,25 @@ Zasady wyboru PDF:
 4. `Opisz część ręcznie` jest tylko fallbackiem dla nowych urządzeń bez rysunku/spisu.
 
 Każdy link PDF w manifeście jest normalizowany do adresu `/preview`, żeby działał w iframe na GitHub Pages. Przycisk `Otwórz PDF` zostaje jako zapas, gdy przeglądarka zablokuje osadzony podgląd.
+
+
+## v76 — Coverage & PDF Quality Audit
+
+Ta wersja skupia się na pełności katalogu: urządzenia z rysunkami PDF na Drive mają być dostępne w formularzu, a ręczny opis części ma być tylko awaryjny.
+
+Najważniejsze pliki audytu:
+
+```text
+data/coverage-audit-v76.json
+data/pdf-quality-audit-v76.json
+data/form-catalog-policy-v76.json
+docs/COVERAGE_AUDIT_V76.md
+docs/FORMULARZ_STANDARD_V76.md
+```
+
+Szybka kontrola lokalna:
+
+```bash
+npm run check
+npm run coverage
+```

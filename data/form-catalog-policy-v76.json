@@ -1,0 +1,33 @@
+{
+  "schema": "pgw-form-catalog-policy-v76",
+  "version": "20260711-v76-coverage-pdf-quality",
+  "generatedAt": "2026-07-11T07:40:00+02:00",
+  "goal": "Formularz ma być prosty dla klienta, ale pełny: urządzenie, rysunek i części w jednym miejscu.",
+  "rules": [
+    {
+      "id": "R1",
+      "name": "Każdy PDF = kandydat urządzenia",
+      "description": "Jeśli na Drive jest PDF z modelem, formularz musi dać się go wyszukać."
+    },
+    {
+      "id": "R2",
+      "name": "Rysunek obowiązkowy",
+      "description": "Urządzenia bez rysunku nie są normalnym wpisem katalogowym; trafiają do trybu ręcznego/awaryjnego."
+    },
+    {
+      "id": "R3",
+      "name": "Scalone ma pierwszeństwo",
+      "description": "Jeśli istnieje plik __SCALONE, klient widzi go jako podstawowy."
+    },
+    {
+      "id": "R4",
+      "name": "Części wyciągamy do tabeli",
+      "description": "Jeśli PDF zawiera indeksy części Z..., ZY..., ZG..., powinny trafić do części wybieralnych."
+    },
+    {
+      "id": "R5",
+      "name": "Warianty nie dla klienta",
+      "description": "_p, _q, eng/Yeng, V2/V3 i robocze mają iść do weryfikacji lub być niższym priorytetem."
+    }
+  ]
+}

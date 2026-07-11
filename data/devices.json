@@ -26296,5 +26296,148 @@
     "public": true,
     "source": "GOOGLE_DRIVE_CONVERTED_MANIFEST",
     "hasPartsPdf": true
+  },
+  {
+    "deviceIndex": "75580",
+    "brand": "DO ROZPOZNANIA",
+    "title": "Urządzenie z rysunkiem PDF",
+    "source": "V76_SYNTHETIC_FROM_DRIVE_PDF",
+    "drawings": [],
+    "parts": [],
+    "hasPartsPdf": true,
+    "hasPartsList": false,
+    "notes": "Dodane automatycznie w v76, bo PDF istnieje na Drive, a urządzenia nie było w devices.json."
+  },
+  {
+    "deviceIndex": "75582",
+    "brand": "DO ROZPOZNANIA",
+    "title": "Urządzenie z rysunkiem PDF",
+    "source": "V76_SYNTHETIC_FROM_DRIVE_PDF",
+    "drawings": [],
+    "parts": [],
+    "hasPartsPdf": true,
+    "hasPartsList": false,
+    "notes": "Dodane automatycznie w v76, bo PDF istnieje na Drive, a urządzenia nie było w devices.json."
+  },
+  {
+    "deviceIndex": "75583",
+    "brand": "DO ROZPOZNANIA",
+    "title": "Urządzenie z rysunkiem PDF",
+    "source": "V76_SYNTHETIC_FROM_DRIVE_PDF",
+    "drawings": [],
+    "parts": [],
+    "hasPartsPdf": true,
+    "hasPartsList": false,
+    "notes": "Dodane automatycznie w v76, bo PDF istnieje na Drive, a urządzenia nie było w devices.json."
+  },
+  {
+    "deviceIndex": "75586",
+    "brand": "DO ROZPOZNANIA",
+    "title": "Urządzenie z rysunkiem PDF",
+    "source": "V76_SYNTHETIC_FROM_DRIVE_PDF",
+    "drawings": [],
+    "parts": [],
+    "hasPartsPdf": true,
+    "hasPartsList": false,
+    "notes": "Dodane automatycznie w v76, bo PDF istnieje na Drive, a urządzenia nie było w devices.json."
+  },
+  {
+    "deviceIndex": "75587",
+    "brand": "DO ROZPOZNANIA",
+    "title": "Urządzenie z rysunkiem PDF",
+    "source": "V76_SYNTHETIC_FROM_DRIVE_PDF",
+    "drawings": [],
+    "parts": [],
+    "hasPartsPdf": true,
+    "hasPartsList": false,
+    "notes": "Dodane automatycznie w v76, bo PDF istnieje na Drive, a urządzenia nie było w devices.json."
+  },
+  {
+    "deviceIndex": "79027",
+    "brand": "DO ROZPOZNANIA",
+    "title": "Urządzenie z rysunkiem PDF",
+    "source": "V76_SYNTHETIC_FROM_DRIVE_PDF",
+    "drawings": [],
+    "parts": [],
+    "hasPartsPdf": true,
+    "hasPartsList": false,
+    "notes": "Dodane automatycznie w v76, bo PDF istnieje na Drive, a urządzenia nie było w devices.json."
+  },
+  {
+    "deviceIndex": "79231",
+    "brand": "DO ROZPOZNANIA",
+    "title": "Urządzenie z rysunkiem PDF",
+    "source": "V76_SYNTHETIC_FROM_DRIVE_PDF",
+    "drawings": [],
+    "parts": [],
+    "hasPartsPdf": true,
+    "hasPartsList": false,
+    "notes": "Dodane automatycznie w v76, bo PDF istnieje na Drive, a urządzenia nie było w devices.json."
+  },
+  {
+    "deviceIndex": "79343",
+    "brand": "DO ROZPOZNANIA",
+    "title": "Urządzenie z rysunkiem PDF",
+    "source": "V76_SYNTHETIC_FROM_DRIVE_PDF",
+    "drawings": [],
+    "parts": [],
+    "hasPartsPdf": true,
+    "hasPartsList": false,
+    "notes": "Dodane automatycznie w v76, bo PDF istnieje na Drive, a urządzenia nie było w devices.json."
+  },
+  {
+    "deviceIndex": "79347",
+    "brand": "DO ROZPOZNANIA",
+    "title": "Urządzenie z rysunkiem PDF",
+    "source": "V76_SYNTHETIC_FROM_DRIVE_PDF",
+    "drawings": [],
+    "parts": [],
+    "hasPartsPdf": true,
+    "hasPartsList": false,
+    "notes": "Dodane automatycznie w v76, bo PDF istnieje na Drive, a urządzenia nie było w devices.json."
+  },
+  {
+    "deviceIndex": "79970",
+    "brand": "DO ROZPOZNANIA",
+    "title": "Urządzenie z rysunkiem PDF",
+    "source": "V76_SYNTHETIC_FROM_DRIVE_PDF",
+    "drawings": [],
+    "parts": [],
+    "hasPartsPdf": true,
+    "hasPartsList": false,
+    "notes": "Dodane automatycznie w v76, bo PDF istnieje na Drive, a urządzenia nie było w devices.json."
+  },
+  {
+    "deviceIndex": "83012",
+    "brand": "DO ROZPOZNANIA",
+    "title": "Urządzenie z rysunkiem PDF",
+    "source": "V76_SYNTHETIC_FROM_DRIVE_PDF",
+    "drawings": [],
+    "parts": [],
+    "hasPartsPdf": true,
+    "hasPartsList": false,
+    "notes": "Dodane automatycznie w v76, bo PDF istnieje na Drive, a urządzenia nie było w devices.json."
+  },
+  {
+    "deviceIndex": "83013",
+    "brand": "DO ROZPOZNANIA",
+    "title": "Urządzenie z rysunkiem PDF",
+    "source": "V76_SYNTHETIC_FROM_DRIVE_PDF",
+    "drawings": [],
+    "parts": [],
+    "hasPartsPdf": true,
+    "hasPartsList": false,
+    "notes": "Dodane automatycznie w v76, bo PDF istnieje na Drive, a urządzenia nie było w devices.json."
+  },
+  {
+    "deviceIndex": "83015",
+    "brand": "DO ROZPOZNANIA",
+    "title": "Urządzenie z rysunkiem PDF",
+    "source": "V76_SYNTHETIC_FROM_DRIVE_PDF",
+    "drawings": [],
+    "parts": [],
+    "hasPartsPdf": true,
+    "hasPartsList": false,
+    "notes": "Dodane automatycznie w v76, bo PDF istnieje na Drive, a urządzenia nie było w devices.json."
   }
 ]
