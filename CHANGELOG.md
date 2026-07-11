@@ -1,5 +1,6 @@
 # Changelog
 
+<<<<<<< HEAD
 ## 20260711-v80-drive-master-catalog
 
 - Dodano master katalog Drive v80.
@@ -10,6 +11,8 @@
 
 # Changelog
 
+=======
+>>>>>>> 430369623cb40f6169e1a404231d5cd39d752ab3
 ## 20260711-v79-drive-catalog-and-pdf-organizer
 
 - Naprawiono deduplikację PDF-ów po samym `fileId` - jeden PDF może obsługiwać kilka modeli.

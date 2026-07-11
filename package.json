@@ -1,7 +1,11 @@
 {
   "name": "pgw-service-hub",
   "private": true,
+<<<<<<< HEAD
   "version": "20260711-v80-drive-master-catalog",
+=======
+  "version": "20260711-v79-drive-catalog-and-pdf-organizer",
+>>>>>>> 430369623cb40f6169e1a404231d5cd39d752ab3
   "type": "module",
   "scripts": {
     "check": "node scripts/pgw-repo-selfcheck.mjs",
@@ -9,9 +13,13 @@
     "search-check": "node scripts/pgw-v77-search-check.mjs",
     "drive-catalog": "node scripts/pgw-v79-drive-catalog-builder.mjs",
     "drive-catalog-v78": "node scripts/pgw-v78-drive-first-catalog-builder.mjs",
+<<<<<<< HEAD
     "organizer-plan": "node scripts/pgw-v79-drive-catalog-builder.mjs --organizer-plan",
     "drive-master": "node scripts/pgw-v80-drive-master-catalog.mjs",
     "drive-catalog-v79": "node scripts/pgw-v79-drive-catalog-builder.mjs",
     "merge-plan": "node scripts/pgw-v80-drive-master-catalog.mjs --merge-plan"
+=======
+    "organizer-plan": "node scripts/pgw-v79-drive-catalog-builder.mjs --organizer-plan"
+>>>>>>> 430369623cb40f6169e1a404231d5cd39d752ab3
   }
 }
