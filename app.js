@@ -1,7 +1,7 @@
 (() => {
   'use strict';
   const CONFIG = window.PGW_CONFIG || {};
-  const DRAFT_KEY = 'pgw-production-draft-v72-publish';
+  const DRAFT_KEY = 'pgw-production-draft-v73-stable-control';
   const THEME_KEY = 'pgw-theme';
   const PART_ROW_LIMIT = Number(CONFIG.partRowLimit || 80);
   const $ = (id) => document.getElementById(id);
@@ -953,7 +953,7 @@
     const zunHtml = '';
     if (!results.length && !zunResults.length) {
       const typed = String(els.deviceSearch.value || '').trim();
-      els.deviceResults.innerHTML = `<div class="empty-state manual-empty"><strong>Nie znaleziono urządzenia.</strong><p>Spróbuj wpisać sam numer modelu albo fragment nazwy urządzenia.</p><p>Jeśli nadal go nie ma, możesz przejść dalej i opisać potrzebną część ręcznie.</p><button class="primary" type="button" id="startManualRequest">Nie znalazłem urządzenia — opiszę część ręcznie</button></div>`;
+      els.deviceResults.innerHTML = `<div class="empty-state manual-empty"><strong>Nie znaleziono urządzenia.</strong><p>Spróbuj wpisać sam numer modelu albo fragment nazwy urządzenia.</p><p>Jeśli urządzenia nie ma w katalogu i nie ma rysunku, możesz zgłosić je ręcznie.</p><button class="primary" type="button" id="startManualRequest">Nie ma urządzenia/rysunku — opiszę ręcznie</button></div>`;
       const btn = $('startManualRequest');
       if (btn) btn.addEventListener('click', () => startManualRequest(typed));
       return;
@@ -963,7 +963,7 @@
         <div>
           <h3>${escapeHtml(device.deviceIndex || 'Bez indeksu')}</h3>
           <p>${escapeHtml(displayDeviceName(device, drawings[0]))}</p>
-          <div class="badges">${publicBrandBadge(device)}<span class="badge ok">Rysunek PDF</span><span class="badge">${fmt(drawings.length)} rys.</span><span class="badge ${partCount ? '' : 'warn'}">${partCount ? fmt(partCount) + ' części' : 'lista do uzupełnienia'}</span></div>
+          <div class="badges">${publicBrandBadge(device)}<span class="badge ok">Rysunek PDF</span><span class="badge">${fmt(drawings.length)} rys.</span><span class="badge ${partCount ? '' : 'warn'}">${partCount ? fmt(partCount) + ' części' : 'PDF - opisz pozycję z rysunku'}</span></div>
         </div>
         <button class="primary" type="button" data-device="${escapeAttr(device.deviceIndex)}">Wybierz</button>
       </article>`).join('');
@@ -990,7 +990,7 @@
     const device = state.devices.find(d => norm(d.deviceIndex) === norm(deviceIndex));
     if (!device) return;
     const drawings = state.drawings.filter(d => norm(d.deviceIndex) === norm(device.deviceIndex));
-    const drawing = drawings.sort((a,b) => (state.partsByDrawing.get(String(b.id)) || []).length - (state.partsByDrawing.get(String(a.id)) || []).length)[0];
+    const drawing = drawings.sort((a,b) => drawingSelectionScore(b) - drawingSelectionScore(a))[0];
     const candidateParts = drawing ? (state.partsByDrawing.get(String(drawing.id)) || []) : [];
     state.manualMode = candidateParts.length === 0;
     state.partVisibleLimit = PART_ROW_LIMIT;
@@ -1816,7 +1816,7 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
       externalOrphans: externalOrphans.slice(0, 200),
       hints: [
         'Braki modeli dopisz w data/pdf-device-overrides.json.',
-        'Po konwersji PDF uruchom pgwRefreshPdfManifestAfterConversionV71().',
+        'Po konwersji PDF uruchom pgwRefreshPdfManifestAfterConversion().',
         'Jeśli PDF ma dobry link, ale nie widać go w formularzu, sprawdź missingModel oraz notMatchedToDevice.'
       ]
     };
@@ -1843,6 +1843,9 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
     window.PGW_DEBUG.downloadReleaseHealth = () => downloadReleaseHealth();
     window.PGW_DEBUG.downloadSourceHealthCsv = () => downloadSourceHealthCsv();
     window.PGW_DEBUG.downloadOverrideCandidatesCsv = () => downloadOverrideCandidatesCsv();
+    window.PGW_DEBUG.runSmokeTest = () => buildSmokeTest();
+    window.PGW_DEBUG.downloadSmokeTest = () => downloadJson('pgw-smoke-test.json', buildSmokeTest());
+    window.PGW_DEBUG.getSourceHealth = () => arr(state.sourceHealth);
   }
 
   function downloadJson(fileName, data) {
@@ -1926,6 +1929,49 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
     downloadCsv('pgw-pdf-override-candidates.csv', candidates);
   }
 
+
+  function buildSmokeTest() {
+    const searchSamples = ['YT-82806','YT82806','82200','79004','09903'];
+    const sampleResults = searchSamples.map(query => {
+      const q = norm(query).replace(/-/g,'');
+      const matches = state.devices.filter(d => {
+        const idx = norm(String(d.deviceIndex || d.index || d.model || '')).replace(/-/g,'');
+        const title = norm([d.deviceIndex, d.name, d.title, d.model].filter(Boolean).join(' '));
+        return idx.includes(q) || title.includes(norm(query));
+      }).slice(0, 5).map(d => ({deviceIndex: d.deviceIndex || d.index || d.model || '', name: d.name || d.title || ''}));
+      return {query, matches: matches.length, sample: matches};
+    });
+    const diag = state.pdfDiagnostics || buildPdfDiagnostics();
+    const health = buildReleaseHealth();
+    const sourceFailures = arr(state.sourceHealth).filter(x => !x.ok);
+    const hardFailures = [];
+    if (!state.devices.length) hardFailures.push('devices.json empty');
+    if (!state.drawings.length) hardFailures.push('drawings.json empty');
+    if (!state.parts.length) hardFailures.push('parts.json empty');
+    if (!state.driveMap.length) hardFailures.push('drive PDF manifest empty');
+    if (sourceFailures.some(x => /devices|drawings|parts|driveMap/.test(String(x.label)))) hardFailures.push('critical source failed');
+    return {
+      version: CONFIG.version || '',
+      generatedAt: new Date().toISOString(),
+      status: hardFailures.length ? 'fail' : (health.score >= 80 ? 'pass' : 'warning'),
+      releaseScore: health.score,
+      hardFailures,
+      counts: {
+        devices: state.devices.length,
+        drawings: state.drawings.length,
+        parts: state.parts.length,
+        drivePdfRows: state.driveMap.length,
+        sourceFailures: sourceFailures.length,
+        pdfMissingModel: countDiag(diag.missingModel),
+        pdfNotMatchedToDevice: countDiag(diag.notMatchedToDevice),
+        pdfExternalOrphans: countDiag(diag.externalOrphans)
+      },
+      sourceFailures,
+      searchSamples: sampleResults,
+      nextActions: health.nextActions || []
+    };
+  }
+
   function initAdminPanel() {
     if (CONFIG.enableAdminPanel === false) return;
     if (document.getElementById('pgwAdminFab')) return;
@@ -1960,6 +2006,10 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
     panel.querySelector('[data-admin-csv]')?.addEventListener('click', () => downloadDiagnosticsCsv());
     panel.querySelector('[data-admin-orphans]')?.addEventListener('click', () => downloadCsv('pgw-pdf-orphans.csv', diagnosticsRows('externalOrphans')));
     panel.querySelector('[data-admin-overrides]')?.addEventListener('click', () => copyText(JSON.stringify(buildOverridesTemplate(), null, 2)));
+    panel.querySelector('[data-admin-health]')?.addEventListener('click', () => downloadReleaseHealth());
+    panel.querySelector('[data-admin-sources]')?.addEventListener('click', () => downloadSourceHealthCsv());
+    panel.querySelector('[data-admin-candidates]')?.addEventListener('click', () => downloadOverrideCandidatesCsv());
+    panel.querySelector('[data-admin-smoke]')?.addEventListener('click', () => window.PGW_DEBUG.downloadSmokeTest());
     renderAdminPanel();
   }
 
@@ -1976,7 +2026,7 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
     return `
       <div class="pgw-admin-card" role="dialog" aria-label="Panel diagnostyczny PDF">
         <div class="pgw-admin-head">
-          <div><strong>PDF Quality Control</strong><span>v72 · release publikacyjny, klient tego nie widzi</span></div>
+          <div><strong>PDF Quality Control</strong><span>v73 · stable control, klient tego nie widzi</span></div>
           <button type="button" data-admin-close aria-label="Zamknij">×</button>
         </div>
         <div class="pgw-admin-grid" data-admin-stats></div>
@@ -1989,6 +2039,7 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
           <button type="button" data-admin-health>Release JSON</button>
           <button type="button" data-admin-sources>Źródła CSV</button>
           <button type="button" data-admin-candidates>Kandydaci override CSV</button>
+          <button type="button" data-admin-smoke>Smoke test JSON</button>
         </div>
         <div class="pgw-admin-section">
           <h3>Najważniejsze problemy</h3>
@@ -1997,9 +2048,9 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
         <div class="pgw-admin-section">
           <h3>Co zrobić dalej</h3>
           <ol>
-            <li>Po konwersji PDF uruchom <code>pgwRefreshPdfManifestAfterConversionV71()</code>.</li>
+            <li>Po konwersji PDF uruchom <code>pgwRefreshPdfManifestAfterConversion()</code>.</li>
             <li>PDF-y bez indeksu dopisz do <code>data/pdf-device-overrides.json</code>.</li>
-            <li>Po wrzuceniu zmian testuj stronę z parametrem <code>?admin=1&v=${escapeHtml(CONFIG.version || 'v72')}</code>.</li>
+            <li>Po wrzuceniu zmian testuj stronę z parametrem <code>?admin=1&v=${escapeHtml(CONFIG.version || 'v73')}</code>.</li>
           </ol>
         </div>
       </div>`;
@@ -2273,3 +2324,16 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
     catch(e) { els.copyStatus.textContent = 'Nie udało się skopiować automatycznie — zaznacz tekst ręcznie.'; }
   }
 })();
+
+
+  function drawingSelectionScore(drawing) {
+    if (!drawing) return 0;
+    const partCount = (state.partsByDrawing && state.partsByDrawing.get(String(drawing.id)) || []).length;
+    const text = norm([drawing.fileName, drawing.title, drawing.displayTitle, drawing.status, drawing.source, drawing.notes].join(' '));
+    let score = partCount * 100;
+    if (text.includes('scalone')) score += 100000;
+    if (text.includes('verified preferred') || text.includes('verified_preferred')) score += 50000;
+    if (text.includes('rysunek techniczny do polaczenia')) score -= 20000;
+    if (text.includes('do weryfikacji')) score -= 10000;
+    return score;
+  }

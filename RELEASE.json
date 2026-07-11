@@ -1,15 +1,14 @@
 {
-  "version": "20260710-v72-publish",
-  "name": "PGW Service Hub — publication-ready repository",
+  "version": "20260710-v74-toya24-coverage-parts",
+  "previousVersion": "20260710-v72-publish",
+  "name": "v74 Toya24 coverage + parts",
   "date": "2026-07-10",
   "timezone": "Europe/Warsaw",
   "status": "ready-for-publication",
   "entrypoint": "index.html",
-  "adminUrlParam": "?admin=1&v=20260710-v72-publish",
-  "healthcheck": "healthcheck.html",
-  "notes": [
-    "Full repository package, not a patch overlay.",
-    "Prices and stock are not exposed.",
-    "PDF assembly drawings remain visible through full and converted manifests."
-  ]
+  "adminUrlParam": "?admin=1&v=20260710-v73-stable-control",
+  "healthcheck": "healthcheck.html?v=20260710-v73-stable-control",
+  "smokeTest": "smoke-test.html?v=20260710-v73-stable-control",
+  "adminStandalone": "admin.html?v=20260710-v73-stable-control",
+  "notes": "Urządzenia z rysunkami Drive są widoczne w formularzu; dodano scalone frytkownice i 490 części z PDF."
 }

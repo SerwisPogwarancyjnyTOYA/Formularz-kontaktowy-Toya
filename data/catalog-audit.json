@@ -1,11 +1,11 @@
 {
-  "version": "v64-smart-catalog",
-  "generatedAt": "2026-06-18T19:10:00Z",
-  "sourceUniquePdfFiles": 1405,
-  "drawingsInDatabase": 1421,
-  "uniqueDevicesInDatabase": 1410,
-  "devicesWithPartsList": 34,
-  "devicesPdfOnly": 1376,
+  "version": "v74-toya24-coverage-parts",
+  "generatedAt": "2026-07-10T17:15:00Z",
+  "sourceUniquePdfFiles": 1445,
+  "drawingsInDatabase": 1445,
+  "uniqueDevicesInDatabase": 1423,
+  "devicesWithPartsList": 42,
+  "devicesPdfOnly": 1383,
   "devicesWithReadableTitle": 79,
   "devicesStillIndexOnly": 1331,
   "devicesWithPdfHeaderName": 1,
@@ -20,5 +20,5 @@
     "YATO": 697,
     "YATO GASTRO": 223
   },
-  "note": "Każdy rysunek PDF jest urządzeniem w bazie. PDF-only ma link w mailu i tryb opisowy. Marki niskiej pewności nie są pokazywane klientowi jako pewne."
+  "note": "Każde urządzenie z rysunkiem PDF na Drive ma być widoczne w formularzu. Scalony PDF z rysunkiem i listą części ma pierwszeństwo. Opis ręczny tylko dla nowych/brakujących urządzeń."
 }

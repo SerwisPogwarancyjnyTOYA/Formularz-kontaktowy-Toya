@@ -1,0 +1,9 @@
+{
+  "name": "pgw-service-hub",
+  "private": true,
+  "version": "20260710-v73-stable-control",
+  "type": "module",
+  "scripts": {
+    "check": "node scripts/pgw-repo-selfcheck.mjs"
+  }
+}

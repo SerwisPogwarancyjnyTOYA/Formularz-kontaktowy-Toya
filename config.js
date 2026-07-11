@@ -1,8 +1,11 @@
 window.PGW_CONFIG = {
-  version: '20260710-v72-publish',
+  version: '20260710-v74-toya24-coverage-parts',
   appName: 'Formularz zapytania o części',
   recipientEmail: 'service@yato.pl',
   storageMode: 'drive',
+  releaseChannel: 'stable-v74',
+  cachePolicy: 'no-store',
+  enableSmokeTestTools: true,
   pdfOnly: true,
   showPrices: false,
   showStock: false,
