@@ -1,6 +1,6 @@
 {
-  "version": "20260710-v73-stable-control",
-  "generatedAt": "2026-07-10T00:00:00+02:00",
+  "version": "20260711-v75-uniform-pdf-viewer",
+  "generatedAt": "2026-07-11T00:00:00+03:00",
   "files": [
     {
       "path": ".gitattributes",
@@ -29,18 +29,18 @@
     },
     {
       "path": "CHANGELOG.md",
-      "bytes": 753,
-      "sha256": "ebf1166c53c7554978e1fa404b8ccbaed8febeb66735388db22cd583fe87c65a"
+      "bytes": 1283,
+      "sha256": "8fe71c56c827c062f1eaba15db6ee478d8e7288a73f5e6d2c07b240831cad7c1"
     },
     {
       "path": "README.md",
-      "bytes": 2995,
-      "sha256": "e2ca11b159e2abbba7a590212935099c589d8f12e40211ab29017b6df10ae390"
+      "bytes": 4997,
+      "sha256": "5a7fad956b74c815168f705bea8fa4f74fd64344961b2ff8418042c54bde7d62"
     },
     {
       "path": "RELEASE.json",
       "bytes": 815,
-      "sha256": "027e650ff8c3a2b9d7ce96cb48735214bba736c386476c4878323847f759ba73"
+      "sha256": "2eee79aa89b1631ef11fbd1dd468df0ffeda8854219cce0781978380c799186a"
     },
     {
       "path": "admin.html",
@@ -49,13 +49,13 @@
     },
     {
       "path": "app.css",
-      "bytes": 40786,
-      "sha256": "e83eff127f46a97a1917c1f80a288b2225f9d7dc992abbbdbd992cc046c69ad0"
+      "bytes": 41790,
+      "sha256": "73809664e5f63c34bd5ce44004a3525adccb5024926b989bf807209b9643e4f7"
     },
     {
       "path": "app.js",
-      "bytes": 121557,
-      "sha256": "139f81a375d66f9ffa3501d47799c0905a18efb210bc40722e015f891893fc5a"
+      "bytes": 126711,
+      "sha256": "4bb1c8b690e3e24b8328f9da591200da5fa39c3abb4c02b920e80b1825a54456"
     },
     {
       "path": "assets/logos/fala-clean.png",
@@ -94,8 +94,8 @@
     },
     {
       "path": "config.js",
-      "bytes": 1476,
-      "sha256": "d9a3b9795b96fd7fd5e69f51601275a1f691f68eb6b729d3955c89c595bf94fc"
+      "bytes": 1614,
+      "sha256": "1770534f6f363f775c9743c326e134f3d3f58ca01bb1368afe7082a589013530"
     },
     {
       "path": "data/brand-resolution-overrides.json",
@@ -104,13 +104,18 @@
     },
     {
       "path": "data/catalog-audit.json",
-      "bytes": 715,
-      "sha256": "e7eebc7ff2a5c8a0faddc4756ded39657d063e5c502d4ae952f3f01323adad53"
+      "bytes": 762,
+      "sha256": "e6a18e00ea2c145960e111a3355cfdc444ce0b7290c18140823dea7217e342b0"
+    },
+    {
+      "path": "data/catalog-coverage-v74.json",
+      "bytes": 1800,
+      "sha256": "48c19d06d8bb4788eb2f4202d03216194d49383965ddee67129d728849719c37"
     },
     {
       "path": "data/catalog-quality-audit.json",
-      "bytes": 715,
-      "sha256": "e7eebc7ff2a5c8a0faddc4756ded39657d063e5c502d4ae952f3f01323adad53"
+      "bytes": 762,
+      "sha256": "e6a18e00ea2c145960e111a3355cfdc444ce0b7290c18140823dea7217e342b0"
     },
     {
       "path": "data/deployment-state.json",
@@ -119,23 +124,23 @@
     },
     {
       "path": "data/devices.json",
-      "bytes": 781764,
-      "sha256": "d97ce16e78523cbf55b5c8cb8132b2e2e10952c63c14f6a43f28e9160ac940a0"
+      "bytes": 782804,
+      "sha256": "02a80258187a86a5069aa6b79adb5d7981b677aeada2fa9044d2e62cc7c64003"
     },
     {
       "path": "data/drawings.json",
-      "bytes": 1315771,
-      "sha256": "0d6580013bf5567e7e8f2f022f0d240d3555983fca955719f5cfbe2057ed864e"
+      "bytes": 1359345,
+      "sha256": "ba28b35a58b08c52e046cd19a8e62cc19b69a1f6001d76a5b47b0fc927a659eb"
     },
     {
       "path": "data/drive-drawings-map.converted.json",
-      "bytes": 242,
-      "sha256": "ee268d812202ae876ff0f8fce15f0e5686573841cf06686cf82f491e8deb6e9f"
+      "bytes": 30851,
+      "sha256": "029941bb8935d6fc311639625f3737039451b07344698c4c8d8b31808b450ee9"
     },
     {
       "path": "data/drive-drawings-map.full.json",
-      "bytes": 1942700,
-      "sha256": "eb92bcc9be766d3c1ccf793a3b1a3e591a08997f9757013ea4df58ccd52c7634"
+      "bytes": 2264586,
+      "sha256": "b5d5720a585c68a9f66532f54e3192316f85e695bef74de02f4cefdda55f9893"
     },
     {
       "path": "data/part-assemblies.json",
@@ -143,9 +148,14 @@
       "sha256": "3c4cf4ea9e041d6c8307ca53ed0c5b68d1c4ed52a932b7b95c9b9f68f8cd812a"
     },
     {
+      "path": "data/parts-generated-report.json",
+      "bytes": 988,
+      "sha256": "b4a3b534c8e7f808dcc3b4ddcf8e17a1c73b3c35cb629a4ba5e7b9a3d82ae95c"
+    },
+    {
       "path": "data/parts.json",
-      "bytes": 895556,
-      "sha256": "93e1151dbef9e5d066827cc4999d1262e06532a020e9ce581a96e208f0fa30b5"
+      "bytes": 1153663,
+      "sha256": "cc1dbb1d9da5691d7e72e13922da6e4391e9ee2604dffb60f2b78afe51c80f75"
     },
     {
       "path": "data/pdf-admin-notes.json",
@@ -156,6 +166,11 @@
       "path": "data/pdf-device-overrides.json",
       "bytes": 399,
       "sha256": "e81ec9a1f8e122fe5e0fbc2cceb23570625ba9059b8ff5ed9487193f6024f9ba"
+    },
+    {
+      "path": "data/pdf-display-policy.json",
+      "bytes": 1297,
+      "sha256": "b8203a674f23e4eca1af33f59cb7223e7c20a4a69e526999dacc735ee0e2704c"
     },
     {
       "path": "data/pdf-header-extraction-queue.json",
@@ -186,6 +201,11 @@
       "path": "data/pdf-quality-report.json",
       "bytes": 215,
       "sha256": "0101d07ab0c81c02f7ff6860596235ff199e840af9475841d068e14d2adbed91"
+    },
+    {
+      "path": "data/pdf-standardization-audit.json",
+      "bytes": 2833,
+      "sha256": "0f99703311c02839097bd77552b2387d95c63479588f21af354d3826a446a3c0"
     },
     {
       "path": "data/postal-codes.json",
@@ -223,6 +243,11 @@
       "sha256": "69ed675d7f17d64ce30ae7badfea737ad4b8c87ce9198f96b18a9fcdd8271813"
     },
     {
+      "path": "docs/PDF_STANDARD.md",
+      "bytes": 1156,
+      "sha256": "b15a54e7dc658e979f52cd6e2e7526f9dfcf2f9ff04ed15f6e3867882909ac12"
+    },
+    {
       "path": "docs/PUBLISHING_NOTES.md",
       "bytes": 484,
       "sha256": "00cb9401665a216687c9ee4130c2b033ed9f07959df4be6e4d4f6b5a4dbce424"
@@ -239,8 +264,8 @@
     },
     {
       "path": "docs/RELEASE_NOTES.md",
-      "bytes": 853,
-      "sha256": "e82ce022fd6d737f714d90967fa527590c9135b5490f76dc44db6f6561497019"
+      "bytes": 1791,
+      "sha256": "5d7c95a93a6d9fceec000fb606e1ed6bea16e60ce20d6acd249a06edf93f8239"
     },
     {
       "path": "docs/VALIDATION_REPORT.json",
@@ -270,7 +295,7 @@
     {
       "path": "repository-manifest.json",
       "bytes": 9230,
-      "sha256": "968ce1a946e71ade4340a347eeb84486e83d22f217f682ee746d34d880ab25a9"
+      "sha256": "5556ed75ae271619199f7e09a05e6e8a7c58519cff6421a1c00297f795c9f854"
     },
     {
       "path": "robots.txt",

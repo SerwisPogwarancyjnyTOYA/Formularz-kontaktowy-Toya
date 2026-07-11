@@ -1,8 +1,8 @@
 {
-  "version": "20260710-v74-toya24-coverage-parts",
+  "version": "20260711-v75-uniform-pdf-viewer",
   "previousVersion": "20260710-v72-publish",
-  "name": "v74 Toya24 coverage + parts",
-  "date": "2026-07-10",
+  "name": "PGW Service Hub v75 - Uniform PDF Viewer",
+  "date": "2026-07-11",
   "timezone": "Europe/Warsaw",
   "status": "ready-for-publication",
   "entrypoint": "index.html",
@@ -10,5 +10,11 @@
   "healthcheck": "healthcheck.html?v=20260710-v73-stable-control",
   "smokeTest": "smoke-test.html?v=20260710-v73-stable-control",
   "adminStandalone": "admin.html?v=20260710-v73-stable-control",
-  "notes": "Urządzenia z rysunkami Drive są widoczne w formularzu; dodano scalone frytkownice i 490 części z PDF."
+  "notes": "Urządzenia z rysunkami Drive są widoczne w formularzu; dodano scalone frytkownice i 490 części z PDF.",
+  "focus": [
+    "jednolity podgląd PDF",
+    "priorytet scalonych rysunków",
+    "GitHub Pages preview readiness",
+    "pełny katalog urządzeń z rysunkiem"
+  ]
 }

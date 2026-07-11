@@ -1,6 +1,6 @@
 # PGW Service Hub - formularz zapytania o części
 
-Wersja: **20260710-v74-toya24-coverage-parts**
+Wersja: **v75 / 20260711-v75-uniform-pdf-viewer**
 
 Najważniejsza zasada tej wersji: **każde urządzenie, które ma rysunek PDF na Drive, ma być dostępne w formularzu**. Formularz nie powinien ukrywać urządzenia tylko dlatego, że lista części nie została jeszcze w pełni przetworzona.
 
@@ -14,15 +14,15 @@ Najważniejsza zasada tej wersji: **każde urządzenie, które ma rysunek PDF na
 ## Test po publikacji
 
 ```text
-?v=20260710-v74-toya24-coverage-parts
-?admin=1&v=20260710-v74-toya24-coverage-parts
-healthcheck.html?v=20260710-v74-toya24-coverage-parts
-smoke-test.html?v=20260710-v74-toya24-coverage-parts
+?v=v75 / 20260711-v75-uniform-pdf-viewer
+?admin=1&v=v75 / 20260711-v75-uniform-pdf-viewer
+healthcheck.html?v=v75 / 20260711-v75-uniform-pdf-viewer
+smoke-test.html?v=v75 / 20260711-v75-uniform-pdf-viewer
 ```
 
 ## Raporty
 
-- `data/catalog-coverage-v74.json` - kontrola pokrycia urządzeń/rysunków/części.
+- `data/catalog-coverage-v75 / 20260711-v75-uniform-pdf-viewer.json` - kontrola pokrycia urządzeń/rysunków/części.
 - `data/parts-generated-report.json` - części wygenerowane z PDF-ów frytkownic.
 - `data/drive-drawings-map.converted.json` - aktualny manifest dopiętych/scalonych PDF-ów.
 
@@ -129,3 +129,17 @@ Nie trzeba instalować zależności — skrypt używa tylko Node.js.
 - Strona nie pokazuje stanów magazynowych.
 - PDF jest traktowany jako główne źródło pomocnicze, gdy lista części nie jest jeszcze podpięta.
 - Panel admina i pliki testowe są pomocnicze; zwykły klient korzysta tylko z formularza.
+
+
+## v75 - jednolity podgląd rysunków PDF
+
+Priorytetem formularza jest teraz kompletna karta urządzenia, a nie przypadkowy plik PDF. Klient ma widzieć urządzenie, jednolity podgląd rysunku i listę części, jeśli lista została rozpoznana.
+
+Zasady wyboru PDF:
+
+1. Najpierw plik `__SCALONE`, czyli rysunek + lista części w jednym PDF.
+2. Potem standardowy `Czesci_zamienne_<indeks>.pdf` z listą części.
+3. Dopiero na końcu rysunek techniczny lub roboczy wariant.
+4. `Opisz część ręcznie` jest tylko fallbackiem dla nowych urządzeń bez rysunku/spisu.
+
+Każdy link PDF w manifeście jest normalizowany do adresu `/preview`, żeby działał w iframe na GitHub Pages. Przycisk `Otwórz PDF` zostaje jako zapas, gdy przeglądarka zablokuje osadzony podgląd.

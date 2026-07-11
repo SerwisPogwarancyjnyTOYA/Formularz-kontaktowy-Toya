@@ -21,7 +21,7 @@
     devices: [], drawings: [], parts: [], driveMap: [], brandOverrides: {}, pdfHeaderOverrides: {}, pdfDeviceOverrides: {}, pdfQualityReport: {}, pdfOrphans: [], universalParts: [], universalPartLinks: [], partAssemblies: {},
     drawingById: new Map(), partsByDrawing: new Map(), driveByDrawingId: new Map(), driveByKey: new Map(), zunByPartKey: new Map(), zunByCode: new Map(), partAssemblyComponents: new Map(), partAssemblyChildren: new Map(),
     selectedDevice: null, selectedDrawing: null, selectedParts: new Map(), manualMode: false, step: 1, formDirty: false,
-    postalCodes: new Map(), partVisibleLimit: PART_ROW_LIMIT, activeBrand: 'all', brandSummary: [], pdfDiagnostics: {}, releaseHealth: {}, sourceHealth: [], releaseInfo: {}, deploymentState: {}, pdfQaRules: {}, pdfOverrideCandidates: []
+    postalCodes: new Map(), partVisibleLimit: PART_ROW_LIMIT, activeBrand: 'all', brandSummary: [], pdfDiagnostics: {}, releaseHealth: {}, sourceHealth: [], releaseInfo: {}, deploymentState: {}, pdfQaRules: {}, pdfOverrideCandidates: [], pdfDisplayPolicy: {}, pdfStandardizationAudit: {}
   };
 
   const POSTAL_FALLBACK = {
@@ -53,6 +53,8 @@
       state.pdfOrphans = await loadFirst(urls.pdfOrphans || ['data/pdf-orphans.json'], [], 'pdfOrphans');
       state.pdfQaRules = await loadFirst(urls.pdfQaRules || ['data/pdf-qa-rules.json'], {}, 'pdfQaRules');
       state.pdfOverrideCandidates = await loadFirst(urls.pdfOverrideCandidates || ['data/pdf-override-candidates.json'], [], 'pdfOverrideCandidates');
+      state.pdfDisplayPolicy = await loadFirst(urls.pdfDisplayPolicy || ['data/pdf-display-policy.json'], {}, 'pdfDisplayPolicy');
+      state.pdfStandardizationAudit = await loadFirst(urls.pdfStandardizationAudit || ['data/pdf-standardization-audit.json'], {}, 'pdfStandardizationAudit');
       state.deploymentState = await loadFirst(urls.deploymentState || ['data/deployment-state.json'], {}, 'deploymentState');
       state.releaseInfo = await loadFirst(urls.releaseInfo || ['data/release-info.json'], {}, 'releaseInfo');
       await loadPostalCodes();
@@ -160,8 +162,11 @@
       row.fileId = row.fileId || row.driveFileId || row.googleDriveId || row.gdriveId || row.id || '';
       row.fileName = row.fileName || row.title || row.name || '';
       row.deviceIndex = normalizeDeviceIndex(row.deviceIndex || row.model || row.normalizedKey || extractDeviceIndex(row.fileName || row.title || row.name || row.path));
-      row.openUrl = row.openUrl || row.url || row.viewerUrl || (row.fileId ? `https://drive.google.com/file/d/${encodeURIComponent(row.fileId)}/view` : '');
-      row.viewerUrl = row.previewUrl || (row.fileId ? `https://drive.google.com/file/d/${encodeURIComponent(row.fileId)}/preview` : row.viewerUrl || '');
+      row.openUrl = normalizeDriveOpenUrl(row.openUrl || row.url || row.viewerUrl || (row.fileId ? `https://drive.google.com/file/d/${encodeURIComponent(row.fileId)}/view` : ''));
+      row.viewerUrl = normalizeDrivePreviewUrl(row.previewUrl || row.viewerUrl || row.openUrl || (row.fileId ? `https://drive.google.com/file/d/${encodeURIComponent(row.fileId)}/preview` : ''));
+      row.previewUrl = normalizeDrivePreviewUrl(row.previewUrl || row.viewerUrl);
+      row.githubPreviewReady = Boolean(row.viewerUrl && row.viewerUrl.includes('/preview'));
+      row.pdfVariant = classifyPdfVariant(row);
       applyPdfDeviceOverride(row);
       applyPdfHeaderOverride(row);
       row.__keys = unique([row.deviceIndex, row.model, row.normalizedKey, row.fileName, row.title, row.name, row.deviceName, row.displayTitle, ...(row.keys || [])].flat().map(normKey).filter(Boolean));
@@ -176,7 +181,8 @@
     for (const row of state.driveMap) {
       const keys = row.__keys || [];
       const hasDrawing = keys.some(k => existingDrawingKeys.has(k));
-      if (!hasDrawing && row.deviceIndex) {
+      const rowPreferred = isPreferredPdf(row);
+      if ((!hasDrawing || rowPreferred) && row.deviceIndex) {
         const id = `drive-${row.fileId || 'nofile'}-${normKey(row.deviceIndex) || syntheticId++}`;
         const drawing = {
           id,
@@ -193,7 +199,13 @@
           brandConfidence: row.brandConfidence || '',
           reviewStatus: row.reviewStatus || '',
           brandReason: row.brandReason || '',
-          notes: row.notes || ''
+          notes: row.notes || '',
+          preferred: Boolean(rowPreferred || row.preferred),
+          status: row.status || '',
+          pdfVariant: row.pdfVariant || classifyPdfVariant(row),
+          githubPreviewReady: Boolean(row.githubPreviewReady),
+          partsExtracted: Boolean(row.partsExtracted),
+          displayMode: row.displayMode || 'standard-service-card'
         };
         state.drawings.push(drawing);
         drawingKeys(drawing).forEach(k => existingDrawingKeys.add(k));
@@ -1262,10 +1274,13 @@
       window.setTimeout(() => renderViewer(false), 450);
       return;
     }
-    els.openPdf.href = row.openUrl || row.viewerUrl;
+    const previewUrl = normalizeDrivePreviewUrl(row.viewerUrl || row.previewUrl || drawing.viewerUrl || drawing.previewUrl);
+    const openUrl = normalizeDriveOpenUrl(row.openUrl || drawing.openUrl || previewUrl);
+    els.openPdf.href = openUrl || previewUrl;
     els.openPdf.classList.remove('hidden');
-    els.viewer.className = 'viewer';
-    els.viewer.innerHTML = `<iframe src="${escapeAttr(row.viewerUrl)}" title="${escapeAttr(drawing.title || 'Rysunek PDF')}"></iframe>`;
+    els.viewer.className = 'viewer standard-pdf-viewer';
+    const label = standardPdfLabel(drawing, row);
+    els.viewer.innerHTML = `<div class="pdf-standard-shell"><div class="pdf-standard-bar"><strong>${escapeHtml(label.title)}</strong><span>${escapeHtml(label.meta)}</span></div><iframe src="${escapeAttr(previewUrl)}" title="${escapeAttr(drawing.title || 'Rysunek PDF')}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>`;
   }
 
   function goStep(step) {
@@ -2250,6 +2265,50 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
   }
 
 
+
+  function isPreferredPdf(row) {
+    const text = norm([row.fileName, row.title, row.name, row.status, row.source, row.notes, row.pdfVariant].join(' '));
+    return Boolean(row.preferred || row.partsExtracted || text.includes('scalone') || text.includes('verified preferred') || text.includes('verified_preferred'));
+  }
+
+  function classifyPdfVariant(row) {
+    const text = norm([row.fileName, row.title, row.name, row.status, row.source, row.notes].join(' '));
+    if (text.includes('scalone') || text.includes('verified preferred') || text.includes('verified_preferred')) return 'merged_parts_and_drawing';
+    if (text.includes('rysunek techniczny do polaczenia')) return 'technical_source_backup';
+    if (text.includes('do weryfikacji') || /(^|[ _-])(p|q)([ _.-]|$)/.test(text) || text.includes(' yeng') || text.includes(' eng')) return 'review_variant';
+    if (text.includes('czesci zamienne')) return 'standard_parts_pdf';
+    return 'standard_pdf';
+  }
+
+  function normalizeDrivePreviewUrl(url) {
+    let out = String(url || '').trim();
+    if (!out) return '';
+    const m = out.match(/\/file\/d\/([^/]+)/) || out.match(/[?&]id=([^&]+)/);
+    if (m) return `https://drive.google.com/file/d/${encodeURIComponent(decodeURIComponent(m[1]))}/preview`;
+    return out.replace(/\/view(?:\?[^#]*)?/, '/preview').replace('?usp=drivesdk', '');
+  }
+
+  function normalizeDriveOpenUrl(url) {
+    let out = String(url || '').trim();
+    if (!out) return '';
+    const m = out.match(/\/file\/d\/([^/]+)/) || out.match(/[?&]id=([^&]+)/);
+    if (m) return `https://drive.google.com/file/d/${encodeURIComponent(decodeURIComponent(m[1]))}/view`;
+    return out.replace('/preview', '/view').replace('?usp=drivesdk', '');
+  }
+
+  function standardPdfLabel(drawing, row) {
+    const idx = String(drawing?.deviceIndex || row?.deviceIndex || row?.model || '').trim();
+    const variant = classifyPdfVariant(row || drawing || {});
+    const parts = (state.partsByDrawing && state.partsByDrawing.get(String(drawing?.id || '')) || []).length;
+    const base = idx ? `Rysunek serwisowy ${idx}` : 'Rysunek serwisowy';
+    const file = String(drawing?.fileName || row?.fileName || row?.title || '').replace(/\.pdf$/i, '');
+    let meta = 'Podgląd PDF - GitHub Pages / Google Drive Preview';
+    if (variant === 'merged_parts_and_drawing') meta = `Scalony komplet: rysunek + lista części${parts ? ` - ${fmt(parts)} części` : ''}`;
+    else if (parts) meta = `Rysunek z listą części - ${fmt(parts)} części`;
+    else if (variant === 'technical_source_backup') meta = 'Rysunek techniczny - źródło zapasowe';
+    return {title: file || base, meta};
+  }
+
   function normalizeDeviceIndex(value) {
     const raw = String(value || '').trim();
     if (!raw) return '';
@@ -2329,11 +2388,14 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
   function drawingSelectionScore(drawing) {
     if (!drawing) return 0;
     const partCount = (state.partsByDrawing && state.partsByDrawing.get(String(drawing.id)) || []).length;
-    const text = norm([drawing.fileName, drawing.title, drawing.displayTitle, drawing.status, drawing.source, drawing.notes].join(' '));
-    let score = partCount * 100;
-    if (text.includes('scalone')) score += 100000;
-    if (text.includes('verified preferred') || text.includes('verified_preferred')) score += 50000;
-    if (text.includes('rysunek techniczny do polaczenia')) score -= 20000;
-    if (text.includes('do weryfikacji')) score -= 10000;
+    const text = norm([drawing.fileName, drawing.title, drawing.displayTitle, drawing.status, drawing.source, drawing.notes, drawing.pdfVariant].join(' '));
+    let score = partCount * 1000;
+    if (drawing.preferred || text.includes('scalone')) score += 1000000;
+    if (drawing.partsExtracted || text.includes('verified preferred') || text.includes('verified_preferred')) score += 800000;
+    if (text.includes('czesci zamienne')) score += 300000;
+    if (drawing.githubPreviewReady || text.includes('/preview')) score += 50000;
+    if (text.includes('rysunek techniczny do polaczenia')) score -= 250000;
+    if (text.includes('do weryfikacji') || text.includes('wariant') || text.includes('variant')) score -= 150000;
+    if (/(^|[ _-])(p|q)([ _.-]|$)/.test(text) || text.includes(' yeng') || text.includes(' eng')) score -= 100000;
     return score;
   }
