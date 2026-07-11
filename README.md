@@ -187,8 +187,13 @@ Najważniejsze:
 - dodane raporty jakości katalogu Drive.
 
 
-## v81 — Drive Search Aliases
+## v82 — Drive Search Aliases
 
 Kolejny krok po v79. Wersja tworzy pełniejszy master katalog z Drive: modele, rysunki, części, plan scalania i bezpieczne akcje porządkowania folderów.
 
 Najważniejsze: jeśli rysunek jest na Drive, ma trafić do formularza nawet wtedy, gdy urządzenia nie było ręcznie w `devices.json`.
+
+
+## v82 — Real Drawing Quality Gate
+
+Wersja v82 usuwa z katalogu klienta PDF-y robocze i tabelaryczne, które nie są prawdziwym rysunkiem. Każdy widoczny PDF musi być realnym rysunkiem serwisowym albo zweryfikowanym scalonym kompletem.

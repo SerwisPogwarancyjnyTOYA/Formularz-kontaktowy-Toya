@@ -1,0 +1,10 @@
+{
+  "schema": "pgw-drive-parts-v81",
+  "generatedAt": "2026-07-11T18:22:00+02:00",
+  "version": "20260711-v82-real-drawing-quality-gate",
+  "count": 0,
+  "items": [],
+  "qualityGate": {
+    "removedPartsFromBlockedPdf": 82
+  }
+}

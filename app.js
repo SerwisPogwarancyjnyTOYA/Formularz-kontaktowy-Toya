@@ -1,7 +1,7 @@
 (() => {
   'use strict';
   const CONFIG = window.PGW_CONFIG || {};
-  const DRAFT_KEY = 'pgw-production-draft-v81-drive-search-aliases';
+  const DRAFT_KEY = 'pgw-production-draft-v82-real-drawing-quality-gate';
   const THEME_KEY = 'pgw-theme';
   const PART_ROW_LIMIT = Number(CONFIG.partRowLimit || 80);
   const $ = (id) => document.getElementById(id);
@@ -21,7 +21,7 @@
     devices: [], drawings: [], parts: [], driveMap: [], brandOverrides: {}, pdfHeaderOverrides: {}, pdfDeviceOverrides: {}, pdfQualityReport: {}, pdfOrphans: [], universalParts: [], universalPartLinks: [], partAssemblies: {},
     drawingById: new Map(), partsByDrawing: new Map(), driveByDrawingId: new Map(), driveByKey: new Map(), zunByPartKey: new Map(), zunByCode: new Map(), partAssemblyComponents: new Map(), partAssemblyChildren: new Map(),
     selectedDevice: null, selectedDrawing: null, selectedParts: new Map(), manualMode: false, step: 1, formDirty: false,
-    postalCodes: new Map(), partVisibleLimit: PART_ROW_LIMIT, activeBrand: 'all', brandSummary: [], pdfDiagnostics: {}, releaseHealth: {}, sourceHealth: [], releaseInfo: {}, deploymentState: {}, pdfQaRules: {}, pdfOverrideCandidates: [], pdfDisplayPolicy: {}, pdfStandardizationAudit: {}, driveFirstCatalogAuditV78: {}, driveCatalogPolicyV78: {}, driveCatalogAuditV79: {}, drivePdfMergeQueueV79: {}, driveOrganizerPlanV79: {}, driveMasterAuditV80: {}, driveMergePlanV80: {}, driveOrganizerActionsV80: {}
+    postalCodes: new Map(), partVisibleLimit: PART_ROW_LIMIT, activeBrand: 'all', brandSummary: [], pdfDiagnostics: {}, releaseHealth: {}, sourceHealth: [], releaseInfo: {}, deploymentState: {}, pdfQaRules: {}, pdfOverrideCandidates: [], pdfDisplayPolicy: {}, pdfStandardizationAudit: {}, driveFirstCatalogAuditV78: {}, driveCatalogPolicyV78: {}, driveCatalogAuditV79: {}, drivePdfMergeQueueV79: {}, driveOrganizerPlanV79: {}, driveMasterAuditV80: {}, driveMergePlanV80: {}, driveOrganizerActionsV80: {}, drivePartsGeneratedV82: {}, driveModelAliasesV82: {}, pdfCustomerVisibleBlocklistV82: {}, pdfQuarantineV82: {}, realDrawingQualityAuditV82: {}
   };
 
   const POSTAL_FALLBACK = {
@@ -65,6 +65,11 @@
       state.driveMasterAuditV81 = await loadFirst(urls.driveMasterAuditV81 || ['data/drive-master-audit-v81.json'], {}, 'driveMasterAuditV81');
       state.driveModelAliasesV81 = await loadFirst(urls.driveModelAliasesV81 || ['data/drive-model-aliases-v81.json'], {}, 'driveModelAliasesV81');
       state.drivePartsGeneratedV81 = await loadFirst(urls.drivePartsGeneratedV81 || ['data/drive-parts.generated-v81.json'], {}, 'drivePartsGeneratedV81');
+      state.drivePartsGeneratedV82 = await loadFirst(urls.drivePartsGeneratedV82 || ['data/drive-parts.generated-v82.json'], {}, 'drivePartsGeneratedV82');
+      state.driveModelAliasesV82 = await loadFirst(urls.driveModelAliasesV82 || ['data/drive-model-aliases-v82.json'], {}, 'driveModelAliasesV82');
+      state.pdfCustomerVisibleBlocklistV82 = await loadFirst(urls.pdfCustomerVisibleBlocklistV82 || ['data/pdf-customer-visible-blocklist-v82.json'], {}, 'pdfCustomerVisibleBlocklistV82');
+      state.pdfQuarantineV82 = await loadFirst(urls.pdfQuarantineV82 || ['data/pdf-quarantine-v82.json'], {}, 'pdfQuarantineV82');
+      state.realDrawingQualityAuditV82 = await loadFirst(urls.realDrawingQualityAuditV82 || ['data/real-drawing-quality-audit-v82.json'], {}, 'realDrawingQualityAuditV82');
       state.driveMergePlanV80 = await loadFirst(urls.driveMergePlanV80 || ['data/drive-merge-plan-v80.json'], {}, 'driveMergePlanV80');
       state.driveOrganizerActionsV80 = await loadFirst(urls.driveOrganizerActionsV80 || ['data/drive-organizer-actions-v80.json'], {}, 'driveOrganizerActionsV80');
       state.releaseInfo = await loadFirst(urls.releaseInfo || ['data/release-info.json'], {}, 'releaseInfo');
@@ -248,6 +253,7 @@
     state.universalParts = normalizeUniversalParts(state.universalParts);
     state.universalPartLinks = normalizeUniversalPartLinks(state.universalPartLinks);
     state.driveMap = expandDriveMapModels(arr(state.driveMap).filter(row => isPdf(row))); // v78: jeden PDF może obsługiwać kilka modeli
+    state.driveMap = state.driveMap.filter(row => isCustomerVisiblePdfV82(row)); // v82: klient widzi tylko realne rysunki/zweryfikowane komplety
 
     for (const d of state.devices) d.brand = resolveBrand(d);
     for (const d of state.drawings) d.brand = resolveBrand(d);
@@ -542,6 +548,79 @@
     return score * 10000000000000 + ts;
   }
 
+
+
+  function blocklistFileIdsV82() {
+    const root = state.pdfCustomerVisibleBlocklistV82 || {};
+    return new Set(arr(root.blockedFileIds || []).map(x => String(x || '').trim()).filter(Boolean));
+  }
+
+  function isCustomerVisiblePdfV82(row) {
+    const fid = String(row.fileId || row.driveFileId || row.googleDriveId || row.gdriveId || row.sourceFileId || '').trim();
+    if (fid && blocklistFileIdsV82().has(fid)) return false;
+    const text = norm([row.fileName, row.title, row.name, row.path, row.folderName, row.notes, row.source, row.pdfVariant, row.status].join(' '));
+    if (text.includes('pdf roboczy wygenerowany automatycznie')) return false;
+    if (text.includes('zrodla w folderze') && text.includes('pdf 0') && text.includes('obrazy 1')) return false;
+    const isRobocze = text.includes('robocze');
+    const isMerged = text.includes('scalone') || text.includes('verified preferred') || text.includes('verified_preferred');
+    const isCanonicalPartsPdf = text.includes('czesci zamienne') || text.includes('czesci_zamienne');
+    const looksAutogeneratedSlug = /^yt[-_ ]?\d/i.test(String(row.fileName || row.title || '').trim()) && !isCanonicalPartsPdf && !isMerged;
+    if (isRobocze && (looksAutogeneratedSlug || row.pdfVariant === 'parts_list_or_generated_pdf' || row.pdfVariant === 'generated_parts_and_drawing') && !isMerged) return false;
+    if (looksAutogeneratedSlug && row.partsExtracted && !isMerged) return false;
+    return true;
+  }
+
+  function addGeneratedDrivePartsV82() {
+    const root = state.drivePartsGeneratedV82 || {};
+    const rows = arr(root.items || root);
+    if (!rows.length) return 0;
+    const blocked = blocklistFileIdsV82();
+    const drawingByFileModel = new Map();
+    for (const d of state.drawings || []) {
+      const fid = String(d.driveFileId || d.fileId || '').trim();
+      const model = normalizeDeviceIndex(d.deviceIndex);
+      if (fid && model) drawingByFileModel.set(`${fid}|${model}`, d);
+    }
+    const existing = new Set(state.parts.map(p => `${norm(p.deviceIndex)}|${norm(p.partIndex)}|${norm(p.position)}|${String(p.drawingId)}`));
+    let added = 0;
+    for (const row of rows) {
+      const fid = String(row.drawingFileId || row.fileId || '').trim();
+      if (fid && blocked.has(fid)) continue;
+      const model = normalizeDeviceIndex(row.deviceIndex || row.model);
+      const drawing = drawingByFileModel.get(`${fid}|${model}`);
+      if (!drawing) continue;
+      const partIndex = String(row.partIndex || '').trim().toUpperCase();
+      if (!partIndex || looksLikeHeaderPart({partIndex})) continue;
+      const position = String(row.position || '').trim() || String(added + 1);
+      const key = `${norm(model)}|${norm(partIndex)}|${norm(position)}|${String(drawing.id)}`;
+      if (existing.has(key)) continue;
+      existing.add(key);
+      state.parts.push({
+        id: row.id || `drive-v82|${fid}|${model}|${partIndex}|${position}`,
+        deviceIndex: model,
+        position,
+        partIndex,
+        namePl: String(row.namePl || row.name || '').trim(),
+        nameEn: String(row.nameEn || '').trim(),
+        drawingId: drawing.id,
+        drawingPath: drawing.path || '',
+        drawingTitle: drawing.title || drawing.fileName || '',
+        brand: drawing.brand || row.brand || '',
+        source: row.source || 'DRIVE_MASTER_V82'
+      });
+      added++;
+    }
+    return added;
+  }
+
+  function driveAliasesForDeviceV82(deviceIndex) {
+    const model = normalizeDeviceIndex(deviceIndex);
+    const root = state.driveModelAliasesV82 || {};
+    const map = root.aliasesByModel || root.models || {};
+    const aliases = arr(map[model]);
+    if (!aliases.length) return '';
+    return aliases.join(' ');
+  }
 
   function driveAliasesForDeviceV81(deviceIndex) {
     const model = normalizeDeviceIndex(deviceIndex);
