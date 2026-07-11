@@ -1,15 +1,7 @@
 {
   "name": "pgw-service-hub",
   "private": true,
-<<<<<<< HEAD
-  "version": "20260711-v80-drive-master-catalog",
-=======
-<<<<<<< HEAD
-  "version": "20260711-v80-drive-master-catalog",
-=======
-  "version": "20260711-v79-drive-catalog-and-pdf-organizer",
->>>>>>> 430369623cb40f6169e1a404231d5cd39d752ab3
->>>>>>> 6a973abe1bbfb28580e175162f79557b811da734
+  "version": "20260711-v81-drive-search-aliases",
   "type": "module",
   "scripts": {
     "check": "node scripts/pgw-repo-selfcheck.mjs",
@@ -17,19 +9,11 @@
     "search-check": "node scripts/pgw-v77-search-check.mjs",
     "drive-catalog": "node scripts/pgw-v79-drive-catalog-builder.mjs",
     "drive-catalog-v78": "node scripts/pgw-v78-drive-first-catalog-builder.mjs",
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 6a973abe1bbfb28580e175162f79557b811da734
     "organizer-plan": "node scripts/pgw-v79-drive-catalog-builder.mjs --organizer-plan",
-    "drive-master": "node scripts/pgw-v80-drive-master-catalog.mjs",
+    "drive-master": "node scripts/pgw-v81-drive-master-catalog.mjs",
     "drive-catalog-v79": "node scripts/pgw-v79-drive-catalog-builder.mjs",
-    "merge-plan": "node scripts/pgw-v80-drive-master-catalog.mjs --merge-plan"
-<<<<<<< HEAD
-=======
-=======
-    "organizer-plan": "node scripts/pgw-v79-drive-catalog-builder.mjs --organizer-plan"
->>>>>>> 430369623cb40f6169e1a404231d5cd39d752ab3
->>>>>>> 6a973abe1bbfb28580e175162f79557b811da734
+    "merge-plan": "node scripts/pgw-v80-drive-master-catalog.mjs --merge-plan",
+    "drive-master-v80": "node scripts/pgw-v80-drive-master-catalog.mjs",
+    "drive-alias-check": "node scripts/pgw-v81-drive-alias-check.mjs"
   }
 }

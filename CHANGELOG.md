@@ -1,9 +1,14 @@
+
+## 20260711-v81-drive-search-aliases
+
+- Drive-first katalog dostał aliasy wyszukiwania modeli.
+- Dodano `drive-drawings-map.generated-v81.json` jako pierwsze źródło PDF.
+- Dodano audyt `drive-master-audit-v81.json`.
+- Dodano skrypty `drive-master` i `drive-alias-check`.
+- Przypadki multi-model PDF, np. `YT-828113 / YT-828114`, pozostają rozbite na osobne urządzenia z tym samym PDF.
+
 # Changelog
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 6a973abe1bbfb28580e175162f79557b811da734
 ## 20260711-v80-drive-master-catalog
 
 - Dodano master katalog Drive v80.
@@ -14,11 +19,6 @@
 
 # Changelog
 
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 430369623cb40f6169e1a404231d5cd39d752ab3
->>>>>>> 6a973abe1bbfb28580e175162f79557b811da734
 ## 20260711-v79-drive-catalog-and-pdf-organizer
 
 - Naprawiono deduplikację PDF-ów po samym `fileId` - jeden PDF może obsługiwać kilka modeli.

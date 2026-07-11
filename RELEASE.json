@@ -1,35 +1,8 @@
 {
-<<<<<<< HEAD
-  "version": "20260711-v80-drive-master-catalog",
-  "createdAt": "2026-07-11T13:19:29.648616Z",
-  "package": "pgw-service-hub-publish-20260711-v80.zip",
-=======
-<<<<<<< HEAD
-  "version": "20260711-v80-drive-master-catalog",
-  "createdAt": "2026-07-11T13:19:29.648616Z",
-  "package": "pgw-service-hub-publish-20260711-v80.zip",
-  "focus": [
-    "Drive master catalog",
-    "parts extraction from PDF rows",
-    "merge plan",
-    "safe organizer copies"
-  ],
-  "notes": "Drive jest źródłem prawdy dla rysunków, a devices.json nie ma ograniczać widoczności urządzeń."
-=======
-  "version": "20260711-v79-drive-catalog-and-pdf-organizer",
-  "createdAt": "2026-07-11T13:06:15.527801Z",
-  "package": "pgw-service-hub-publish-20260711-v79.zip",
->>>>>>> 6a973abe1bbfb28580e175162f79557b811da734
-  "focus": [
-    "Drive master catalog",
-    "parts extraction from PDF rows",
-    "merge plan",
-    "safe organizer copies"
-  ],
-<<<<<<< HEAD
-  "notes": "Drive jest źródłem prawdy dla rysunków, a devices.json nie ma ograniczać widoczności urządzeń."
-=======
-  "notes": "Formularz ma korzystać z rysunków Drive jako źródła prawdy, nie tylko z devices.json."
->>>>>>> 430369623cb40f6169e1a404231d5cd39d752ab3
->>>>>>> 6a973abe1bbfb28580e175162f79557b811da734
+  "version": "20260711-v81-drive-search-aliases",
+  "createdAt": "2026-07-11T13:34:56.011963+00:00",
+  "package": "pgw-service-hub-publish-20260711-v81-ready.zip",
+  "focus": "Drive search aliases and Drive-first catalog hardening",
+  "notes": "Drive jest źródłem prawdy dla rysunków, a devices.json nie ma ograniczać widoczności urządzeń.",
+  "releaseType": "full-repository"
 }

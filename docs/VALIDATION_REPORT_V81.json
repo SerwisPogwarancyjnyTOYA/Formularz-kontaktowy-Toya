@@ -1,0 +1,18 @@
+{
+  "version": "20260711-v81-drive-search-aliases",
+  "generatedAt": "2026-07-11T13:34:56.012141+00:00",
+  "summary": {
+    "driveRowsV81": 2176,
+    "uniqueModelsV81": 2176,
+    "generatedPartsV81": 82,
+    "multiModelPdfFiles": 752,
+    "previewMissing": 0,
+    "aliasModels": 2176
+  },
+  "mustPass": [
+    "node --check app.js",
+    "npm run check",
+    "npm run drive-master",
+    "npm run drive-alias-check"
+  ]
+}
