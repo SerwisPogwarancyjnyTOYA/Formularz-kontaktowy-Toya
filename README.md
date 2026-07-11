@@ -185,6 +185,10 @@ Najważniejsze:
 - dodany skaner/organizator Drive w Apps Script,
 - dodana kolejka scalania PDF-ów,
 - dodane raporty jakości katalogu Drive.
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 6a973abe1bbfb28580e175162f79557b811da734
 
 
 ## v80 — Drive Master Catalog
@@ -192,3 +196,8 @@ Najważniejsze:
 Kolejny krok po v79. Wersja tworzy pełniejszy master katalog z Drive: modele, rysunki, części, plan scalania i bezpieczne akcje porządkowania folderów.
 
 Najważniejsze: jeśli rysunek jest na Drive, ma trafić do formularza nawet wtedy, gdy urządzenia nie było ręcznie w `devices.json`.
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 430369623cb40f6169e1a404231d5cd39d752ab3
+>>>>>>> 6a973abe1bbfb28580e175162f79557b811da734
