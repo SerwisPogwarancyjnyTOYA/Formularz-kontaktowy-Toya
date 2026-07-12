@@ -1,0 +1,63 @@
+{
+  "version": "v93",
+  "generated_at": "2026-07-12",
+  "batch": [
+    "67574",
+    "67575",
+    "67590"
+  ],
+  "public_ready": [
+    {
+      "model": "67574",
+      "file_name": "Czesci_zamienne_67574.pdf",
+      "drive_file_id": "1cUE2ofqAodMCxGymyBtHVqrdiQkrao_w"
+    },
+    {
+      "model": "67575",
+      "file_name": "Czesci_zamienne_67575.pdf",
+      "drive_file_id": "14biI7mjXpj5X-RCs-K2cqWvXHE2Ym3_q"
+    },
+    {
+      "model": "67590",
+      "file_name": "Czesci_zamienne_67590.pdf",
+      "drive_file_id": "1IeanvOoRHlphyBbVaOX2Jtd5B8lyoBP7"
+    }
+  ],
+  "requires_rework": [],
+  "keep_private": [
+    {
+      "patterns": [
+        "67574.pdf",
+        "Czesci_zamienne_67574__SCALONE.pdf",
+        "Czesci_zamienne_67575__SCALONE.pdf",
+        "67575_332爆炸图(有网有微动）.pdf",
+        "67590.pdf",
+        "Czesci_zamienne_67590__SCALONE.pdf",
+        "*.doc",
+        "*.docx"
+      ],
+      "reason": "Robocze, duplikaty lub surowe materiały fabryczne."
+    }
+  ],
+  "github_map_patch": {
+    "67574": {
+      "driveFileId": "1cUE2ofqAodMCxGymyBtHVqrdiQkrao_w",
+      "fileName": "Czesci_zamienne_67574.pdf",
+      "publicationStatus": "PUBLIC_READY",
+      "qualityGate": "TOYA24_MATCH"
+    },
+    "67575": {
+      "driveFileId": "14biI7mjXpj5X-RCs-K2cqWvXHE2Ym3_q",
+      "fileName": "Czesci_zamienne_67575.pdf",
+      "publicationStatus": "PUBLIC_READY",
+      "qualityGate": "TOYA24_MATCH"
+    },
+    "67590": {
+      "driveFileId": "1IeanvOoRHlphyBbVaOX2Jtd5B8lyoBP7",
+      "fileName": "Czesci_zamienne_67590.pdf",
+      "publicationStatus": "PUBLIC_READY",
+      "qualityGate": "TOYA24_MATCH"
+    }
+  },
+  "regenerated": true
+}

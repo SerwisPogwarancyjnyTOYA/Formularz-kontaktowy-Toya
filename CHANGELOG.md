@@ -1,5 +1,32 @@
 # Changelog
 
+## v95 — Master Publication Update v83–v94
+- Zintegrowano `PGW-updates-v85-v94-REGENERATED-MASTER.zip` z pełnym repo v84.
+- Dodano `drive-drawings-map.generated-v95.json` jako pierwsze publiczne źródło PDF w `config.js`.
+- Dodano zbiorczy patch i raport: `github-map-patch-v85-v94-master.json`, `publication-report-v85-v94-master.json`.
+- Nadpisano wskazane oficjalne źródła PDF zgodnie z raportami v85–v94, m.in. korekty dla `67576`, `67574`, `67575`, `67590`, `79811`, `79943`, `73410`, `73056`, `73060`.
+- Zachowano blokadę roboczych/konwertowanych PDF-ów z v83/v84.
+- Dodano `npm run publication-pipeline` dla walidacji v95.
+
+
+## v84 — Drive Publication Pipeline
+- Wycięto fallback `drive-drawings-map.full/converted` z publicznego configu.
+- Dodano publiczną mapę `drive-drawings-map.generated-v84.json`.
+- Dodano kolejkę `pdf-rewrite-queue-v84.json` z pierwszą partią roboczych PDF-ów znalezionych na Drive.
+- Dodano skrypt `npm run publication-pipeline`.
+- Reguła: oficjalny TOYA24/Golden Sample od razu do publikacji; robocze/konwertowane tylko do przeróbki.
+
+
+## v83 — Public Drawing Source Policy
+
+- Golden Sample (`Czesci_zamienne_67576.pdf`) ustawiony jako wzorzec publikacji.
+- Oficjalne `Czesci_zamienne_<MODEL>.pdf` z rysunków złożeniowych/wybuchowych mają pierwszeństwo publikacji.
+- Robocze/konwertowane PDF-y trafiają do kolejki przeróbki/scalenia.
+- Dodano runtime quality gate w `app.js`.
+- Dodano Apps Script do skanowania Drive i generowania manifestu publicznego + kolejki poprawek.
+
+# Changelog
+
 ## 20260711-v82-real-drawing-quality-gate
 
 - Włączono twardy filtr PDF klienta: realny rysunek albo zweryfikowany/scalony komplet.

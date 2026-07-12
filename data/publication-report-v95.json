@@ -1,0 +1,235 @@
+{
+  "schema": "pgw-publication-report-v95",
+  "version": "20260712-v95-v83-v94-master-publication-update",
+  "generatedAt": "2026-07-12T09:36:18+00:00",
+  "base": "v84 full repo",
+  "integratedPackage": "PGW-updates-v85-v94-REGENERATED-MASTER.zip",
+  "summary": {
+    "publicMapRows": 2174,
+    "v85v94PatchKeys": 26,
+    "v85v94PublicReady": 26,
+    "v85v94RowsOverriddenFromV84": 9,
+    "v85v94RowsCreated": 0,
+    "v85v94RequiresRework": 2,
+    "v85v94KeepPrivateGroups": 11,
+    "v84RewriteQueueBlocked": 11,
+    "strictDriveMapFallback": "generated-v95 first; no full/converted fallback in config"
+  },
+  "overridesApplied": [
+    {
+      "model": "79811",
+      "itemModel": "79811",
+      "oldFileId": "1SJDMOySuYdxbDbLqIsb3KFE5W3-Onh9u",
+      "oldFileName": "Czesci_zamienne_79811.pdf",
+      "newFileId": "1NX22PvapOGdGYKe0tfUKlwEept53GvDY",
+      "newFileName": "Czesci_zamienne_79811.pdf"
+    },
+    {
+      "model": "79943",
+      "itemModel": "79943",
+      "oldFileId": "1_kM_xNTFmQWoJiuDh8kBIVUQtceZBmEy",
+      "oldFileName": "Czesci_zamienne_79943.pdf",
+      "newFileId": "1YgD-ugZ6E9YkvdhGURDITSyluhTxYLml",
+      "newFileName": "Czesci_zamienne_79943.pdf"
+    },
+    {
+      "model": "67576",
+      "itemModel": "67576",
+      "oldFileId": "1HuQMhL15ke8Dedceki5DRtj3Fkjfl9s3",
+      "oldFileName": "Czesci_zamienne_67576__SCALONE.pdf",
+      "newFileId": "1_cbMX79Ul9snUhrtKcN1_UIJ3MxfZ0SL",
+      "newFileName": "Czesci_zamienne_67576.pdf"
+    },
+    {
+      "model": "73410",
+      "itemModel": "73410",
+      "oldFileId": "1hOBE2GdZ33LWxb_IttabsGNWqCns6OIf",
+      "oldFileName": "Czesci_zamienne_73410.pdf",
+      "newFileId": "1I5Xq4yfjFk6HIDawbiyRb3VpeUK2vbKd",
+      "newFileName": "Czesci_zamienne_73410.pdf"
+    },
+    {
+      "model": "73056",
+      "itemModel": "73056",
+      "oldFileId": "1xj3l2AaEtD7nOwO0dSlLxn2_bAs_eo7Q",
+      "oldFileName": "Czesci_zamienne_73056.pdf",
+      "newFileId": "1JkfLvwuJefGJZbTvt583yNODHpO6QK_T",
+      "newFileName": "Czesci_zamienne_73056.pdf"
+    },
+    {
+      "model": "73060",
+      "itemModel": "73060",
+      "oldFileId": "1D636X69gLB38HaCUMzGMqQfYxohWIBQt",
+      "oldFileName": "Czesci_zamienne_73060.pdf",
+      "newFileId": "1S89a6E0coQVKmJGSCgNyxQc_4wxbq1E5",
+      "newFileName": "Czesci_zamienne_73060.pdf"
+    },
+    {
+      "model": "67574",
+      "itemModel": "67574",
+      "oldFileId": "1pZ1EM2qticjFaw-Mu4kj3Ci8dS1Y-qAF",
+      "oldFileName": "Czesci_zamienne_67574__SCALONE.pdf",
+      "newFileId": "1cUE2ofqAodMCxGymyBtHVqrdiQkrao_w",
+      "newFileName": "Czesci_zamienne_67574.pdf"
+    },
+    {
+      "model": "67575",
+      "itemModel": "67575",
+      "oldFileId": "1UuAdxw81xUJ4pxMuAtyYNB1RPXG_9NoJ",
+      "oldFileName": "Czesci_zamienne_67575__SCALONE.pdf",
+      "newFileId": "14biI7mjXpj5X-RCs-K2cqWvXHE2Ym3_q",
+      "newFileName": "Czesci_zamienne_67575.pdf"
+    },
+    {
+      "model": "67590",
+      "itemModel": "67590",
+      "oldFileId": "1QhtlI4nNqjrbyvXk4YNoOc1n6bweUz1F",
+      "oldFileName": "Czesci_zamienne_67590__SCALONE.pdf",
+      "newFileId": "1IeanvOoRHlphyBbVaOX2Jtd5B8lyoBP7",
+      "newFileName": "Czesci_zamienne_67590.pdf"
+    }
+  ],
+  "createdRows": [],
+  "requiresRework": [
+    {
+      "version": "v90",
+      "model": "YT-85271",
+      "item": "mapowanie listy części",
+      "reason": "69 pozycji z DOCX pozostaje do kontroli zgodności z PDF.",
+      "source": "v85-v94-master"
+    },
+    {
+      "version": "v94",
+      "model": "75837",
+      "reason": "Brak osobnego oficjalnego PDF-u; wymaga złożenia na podstawie źródeł.",
+      "source": "v85-v94-master"
+    }
+  ],
+  "keepPrivate": [
+    {
+      "version": "v85",
+      "patterns": [
+        "67700.pdf",
+        "67641.pdf",
+        "67640.pdf"
+      ],
+      "reason": "Automatycznie wygenerowane PDF-y robocze z komunikatami technicznymi."
+    },
+    {
+      "version": "v86",
+      "patterns": [
+        "82541.pdf",
+        "82542.pdf",
+        "82543.pdf",
+        "82544.pdf"
+      ],
+      "reason": "Automatycznie wygenerowane PDF-y robocze z komunikatami technicznymi."
+    },
+    {
+      "version": "v87",
+      "patterns": [
+        "79880.pdf",
+        "79811.pdf",
+        "79943.pdf"
+      ],
+      "reason": "Robocze PDF-y z opisami pipeline'u; 79811 dodatkowo łączy kilka modeli."
+    },
+    {
+      "version": "v88",
+      "patterns": [
+        "Czesci_zamienne_67571__RYSUNEK_TECHNICZNY_DO_POLACZENIA.pdf",
+        "67571_GLA-620.pdf",
+        "67571_spare_parts.docx",
+        "67571_p.docx"
+      ],
+      "reason": "Materiały źródłowe/pomocnicze."
+    },
+    {
+      "version": "v88",
+      "patterns": [
+        "Czesci_zamienne_67572__RYSUNEK_TECHNICZNY_DO_POLACZENIA.pdf",
+        "67572.pdf",
+        "67572.docx"
+      ],
+      "reason": "Materiały źródłowe/pomocnicze."
+    },
+    {
+      "version": "v89",
+      "patterns": [
+        "67576_532爆炸图（有网有微动）.pdf",
+        "Czesci_zamienne_67576.docx",
+        "67576.docx",
+        "Czesci_zamienne_67576__SCALONE.pdf"
+      ],
+      "reason": "Surowe źródła i duplikaty wersji Golden Sample."
+    },
+    {
+      "version": "v90",
+      "patterns": [
+        "yt-85271.pdf",
+        "YT-85271.docx",
+        "PATCH_YT85271.md",
+        "yt-85680.pdf",
+        "YT-85680.docx",
+        "Czesci_zamienne_YT-85680.docx"
+      ],
+      "reason": "Robocze PDF-y i materiały źródłowe."
+    },
+    {
+      "version": "v91",
+      "patterns": [
+        "73410.pdf",
+        "73056.pdf",
+        "73060.pdf",
+        "*.doc",
+        "*.docx",
+        "obrazy źródłowe"
+      ],
+      "reason": "Robocze kopie lub formaty źródłowe."
+    },
+    {
+      "version": "v92",
+      "patterns": [
+        "yt-82810-yt-82811.pdf",
+        "yt-828118-yt-8281185.pdf",
+        "yt-82834-yt-82835.pdf",
+        "YT-82834.pdf",
+        "*.doc",
+        "*.docx",
+        "*.xlsx"
+      ],
+      "reason": "Robocze wspólne listy, surowe PDF-y i źródła."
+    },
+    {
+      "version": "v93",
+      "patterns": [
+        "67574.pdf",
+        "Czesci_zamienne_67574__SCALONE.pdf",
+        "Czesci_zamienne_67575__SCALONE.pdf",
+        "67575_332爆炸图(有网有微动）.pdf",
+        "67590.pdf",
+        "Czesci_zamienne_67590__SCALONE.pdf",
+        "*.doc",
+        "*.docx"
+      ],
+      "reason": "Robocze, duplikaty lub surowe materiały fabryczne."
+    },
+    {
+      "version": "v94",
+      "patterns": [
+        "yt-82147.pdf",
+        "YT-82147.docx",
+        "~WRL3167.tmp",
+        "75812-75837.pdf",
+        "75812_75837.docx",
+        "obrazy źródłowe"
+      ],
+      "reason": "Robocze PDF-y, pliki tymczasowe i źródła wewnętrzne."
+    }
+  ],
+  "rules": [
+    "Official TOYA24-style Czesci_zamienne_<MODEL>.pdf goes public first.",
+    "Robocze/konwertowane PDFs stay private and can only be used as source material.",
+    "A public PDF must look like the Golden Sample/TOYA24 service drawing: device title, rysunek złożeniowy, lista części, no internal notes."
+  ]
+}

@@ -1,10 +1,9 @@
 {
-  "version": "20260711-v82-real-drawing-quality-gate",
-  "createdAt": "2026-07-11T18:22:00+02:00",
-  "package": "pgw-service-hub-publish-20260711-v82-ready.zip",
-  "focus": "Drive search aliases and Drive-first catalog hardening",
-  "notes": "Drive jest źródłem prawdy dla rysunków, a devices.json nie ma ograniczać widoczności urządzeń.",
-  "releaseType": "full-repository",
-  "name": "PGW Service Hub v82 — Real Drawing Quality Gate",
-  "qualityGate": "real-drawing-only"
+  "version": "20260712-v95-v83-v94-master-publication-update",
+  "createdAt": "2026-07-12T09:36:18+00:00",
+  "artifact": "pgw-service-hub-publish-20260712-v95-ready.zip",
+  "base": "pgw-service-hub-publish-20260711-v84-ready.zip",
+  "integrated": "PGW-updates-v85-v94-REGENERATED-MASTER.zip",
+  "policy": "strict public drawing publication pipeline + v85-v94 master patch",
+  "publicMap": "data/drive-drawings-map.generated-v95.json"
 }

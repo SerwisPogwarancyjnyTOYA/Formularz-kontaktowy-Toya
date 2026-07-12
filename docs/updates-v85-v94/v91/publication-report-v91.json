@@ -1,0 +1,61 @@
+{
+  "version": "v91",
+  "generated_at": "2026-07-12",
+  "batch": [
+    "73410",
+    "73056",
+    "73060"
+  ],
+  "public_ready": [
+    {
+      "model": "73410",
+      "file_name": "Czesci_zamienne_73410.pdf",
+      "drive_file_id": "1I5Xq4yfjFk6HIDawbiyRb3VpeUK2vbKd"
+    },
+    {
+      "model": "73056",
+      "file_name": "Czesci_zamienne_73056.pdf",
+      "drive_file_id": "1JkfLvwuJefGJZbTvt583yNODHpO6QK_T"
+    },
+    {
+      "model": "73060",
+      "file_name": "Czesci_zamienne_73060.pdf",
+      "drive_file_id": "1S89a6E0coQVKmJGSCgNyxQc_4wxbq1E5"
+    }
+  ],
+  "requires_rework": [],
+  "keep_private": [
+    {
+      "patterns": [
+        "73410.pdf",
+        "73056.pdf",
+        "73060.pdf",
+        "*.doc",
+        "*.docx",
+        "obrazy źródłowe"
+      ],
+      "reason": "Robocze kopie lub formaty źródłowe."
+    }
+  ],
+  "github_map_patch": {
+    "73410": {
+      "driveFileId": "1I5Xq4yfjFk6HIDawbiyRb3VpeUK2vbKd",
+      "fileName": "Czesci_zamienne_73410.pdf",
+      "publicationStatus": "PUBLIC_READY",
+      "qualityGate": "TOYA24_MATCH"
+    },
+    "73056": {
+      "driveFileId": "1JkfLvwuJefGJZbTvt583yNODHpO6QK_T",
+      "fileName": "Czesci_zamienne_73056.pdf",
+      "publicationStatus": "PUBLIC_READY",
+      "qualityGate": "TOYA24_MATCH"
+    },
+    "73060": {
+      "driveFileId": "1S89a6E0coQVKmJGSCgNyxQc_4wxbq1E5",
+      "fileName": "Czesci_zamienne_73060.pdf",
+      "publicationStatus": "PUBLIC_READY",
+      "qualityGate": "TOYA24_MATCH"
+    }
+  },
+  "regenerated": true
+}

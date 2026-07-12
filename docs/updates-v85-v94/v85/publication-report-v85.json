@@ -1,0 +1,58 @@
+{
+  "version": "v85",
+  "generated_at": "2026-07-12",
+  "batch": [
+    "67700",
+    "67641",
+    "67640"
+  ],
+  "public_ready": [
+    {
+      "model": "67700",
+      "file_name": "Czesci_zamienne_67700.pdf",
+      "drive_file_id": "1QGyt6A63TeXmyNR2wIR2CB2hgSmk-xjZ"
+    },
+    {
+      "model": "67641",
+      "file_name": "Czesci_zamienne_67641.pdf",
+      "drive_file_id": "1yPb-OwPkGilHdRUxdl_7wwSxfLxSN7_G"
+    },
+    {
+      "model": "67640",
+      "file_name": "Czesci_zamienne_67640.pdf",
+      "drive_file_id": "1RXblbtt8ahyF6ZVYn7JTEZ1VoTF_btAN"
+    }
+  ],
+  "requires_rework": [],
+  "keep_private": [
+    {
+      "patterns": [
+        "67700.pdf",
+        "67641.pdf",
+        "67640.pdf"
+      ],
+      "reason": "Automatycznie wygenerowane PDF-y robocze z komunikatami technicznymi."
+    }
+  ],
+  "github_map_patch": {
+    "67700": {
+      "driveFileId": "1QGyt6A63TeXmyNR2wIR2CB2hgSmk-xjZ",
+      "fileName": "Czesci_zamienne_67700.pdf",
+      "publicationStatus": "PUBLIC_READY",
+      "qualityGate": "TOYA24_MATCH"
+    },
+    "67641": {
+      "driveFileId": "1yPb-OwPkGilHdRUxdl_7wwSxfLxSN7_G",
+      "fileName": "Czesci_zamienne_67641.pdf",
+      "publicationStatus": "PUBLIC_READY",
+      "qualityGate": "TOYA24_MATCH"
+    },
+    "67640": {
+      "driveFileId": "1RXblbtt8ahyF6ZVYn7JTEZ1VoTF_btAN",
+      "fileName": "Czesci_zamienne_67640.pdf",
+      "publicationStatus": "PUBLIC_READY",
+      "qualityGate": "TOYA24_MATCH"
+    }
+  },
+  "regenerated": true
+}

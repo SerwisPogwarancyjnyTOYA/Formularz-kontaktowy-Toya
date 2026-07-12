@@ -1,0 +1,58 @@
+{
+  "version": "v87",
+  "generated_at": "2026-07-12",
+  "batch": [
+    "79880",
+    "79811",
+    "79943"
+  ],
+  "public_ready": [
+    {
+      "model": "79880",
+      "file_name": "Czesci_zamienne_79880.pdf",
+      "drive_file_id": "1tqVhbfpEXaDUlnHX7z-vswlXqFX7RSqY"
+    },
+    {
+      "model": "79811",
+      "file_name": "Czesci_zamienne_79811.pdf",
+      "drive_file_id": "1NX22PvapOGdGYKe0tfUKlwEept53GvDY"
+    },
+    {
+      "model": "79943",
+      "file_name": "Czesci_zamienne_79943.pdf",
+      "drive_file_id": "1YgD-ugZ6E9YkvdhGURDITSyluhTxYLml"
+    }
+  ],
+  "requires_rework": [],
+  "keep_private": [
+    {
+      "patterns": [
+        "79880.pdf",
+        "79811.pdf",
+        "79943.pdf"
+      ],
+      "reason": "Robocze PDF-y z opisami pipeline'u; 79811 dodatkowo łączy kilka modeli."
+    }
+  ],
+  "github_map_patch": {
+    "79880": {
+      "driveFileId": "1tqVhbfpEXaDUlnHX7z-vswlXqFX7RSqY",
+      "fileName": "Czesci_zamienne_79880.pdf",
+      "publicationStatus": "PUBLIC_READY",
+      "qualityGate": "TOYA24_MATCH"
+    },
+    "79811": {
+      "driveFileId": "1NX22PvapOGdGYKe0tfUKlwEept53GvDY",
+      "fileName": "Czesci_zamienne_79811.pdf",
+      "publicationStatus": "PUBLIC_READY",
+      "qualityGate": "TOYA24_MATCH"
+    },
+    "79943": {
+      "driveFileId": "1YgD-ugZ6E9YkvdhGURDITSyluhTxYLml",
+      "fileName": "Czesci_zamienne_79943.pdf",
+      "publicationStatus": "PUBLIC_READY",
+      "qualityGate": "TOYA24_MATCH"
+    }
+  },
+  "regenerated": true
+}

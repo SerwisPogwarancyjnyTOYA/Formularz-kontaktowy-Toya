@@ -1,0 +1,473 @@
+{
+  "package": "PGW updates v85-v94 regenerated",
+  "generated_at": "2026-07-12",
+  "public_ready": [
+    {
+      "version": "v85",
+      "model": "67700",
+      "file_name": "Czesci_zamienne_67700.pdf",
+      "drive_file_id": "1QGyt6A63TeXmyNR2wIR2CB2hgSmk-xjZ"
+    },
+    {
+      "version": "v85",
+      "model": "67641",
+      "file_name": "Czesci_zamienne_67641.pdf",
+      "drive_file_id": "1yPb-OwPkGilHdRUxdl_7wwSxfLxSN7_G"
+    },
+    {
+      "version": "v85",
+      "model": "67640",
+      "file_name": "Czesci_zamienne_67640.pdf",
+      "drive_file_id": "1RXblbtt8ahyF6ZVYn7JTEZ1VoTF_btAN"
+    },
+    {
+      "version": "v86",
+      "model": "82541",
+      "file_name": "Czesci_zamienne_82541.pdf",
+      "drive_file_id": "1zfWx0MJ3xCsAuZQQc3I_QwkigdGidDOY"
+    },
+    {
+      "version": "v86",
+      "model": "82542",
+      "file_name": "Czesci_zamienne_82542.pdf",
+      "drive_file_id": "1Y8O7FxXgloQ_1KWT4eyBKX34YlB_CxL6"
+    },
+    {
+      "version": "v86",
+      "model": "82543",
+      "file_name": "Czesci_zamienne_82543.pdf",
+      "drive_file_id": "1kzbRsvmMJfxv9qw4T0plqbl5YcKFyW-v"
+    },
+    {
+      "version": "v86",
+      "model": "82544",
+      "file_name": "Czesci_zamienne_82544.pdf",
+      "drive_file_id": "1pboO_FgVimfUro1pNIDXi42wMEBI24up"
+    },
+    {
+      "version": "v87",
+      "model": "79880",
+      "file_name": "Czesci_zamienne_79880.pdf",
+      "drive_file_id": "1tqVhbfpEXaDUlnHX7z-vswlXqFX7RSqY"
+    },
+    {
+      "version": "v87",
+      "model": "79811",
+      "file_name": "Czesci_zamienne_79811.pdf",
+      "drive_file_id": "1NX22PvapOGdGYKe0tfUKlwEept53GvDY"
+    },
+    {
+      "version": "v87",
+      "model": "79943",
+      "file_name": "Czesci_zamienne_79943.pdf",
+      "drive_file_id": "1YgD-ugZ6E9YkvdhGURDITSyluhTxYLml"
+    },
+    {
+      "version": "v88",
+      "model": "67571",
+      "file_name": "Czesci_zamienne_67571__SCALONE.pdf",
+      "drive_file_id": "1lO5lpYmDcRNARkLFBGnLSlZIIgAPs7lI"
+    },
+    {
+      "version": "v88",
+      "model": "67572",
+      "file_name": "Czesci_zamienne_67572__SCALONE.pdf",
+      "drive_file_id": "1ctBq-0Pdcs5eZ9pPwVZkCqVbFu6s3oAr"
+    },
+    {
+      "version": "v89",
+      "model": "67576",
+      "file_name": "Czesci_zamienne_67576.pdf",
+      "drive_file_id": "1_cbMX79Ul9snUhrtKcN1_UIJ3MxfZ0SL",
+      "quality_gate": "GOLDEN_SAMPLE"
+    },
+    {
+      "version": "v90",
+      "model": "YT-85271",
+      "file_name": "Czesci_zamienne_YT-85271.pdf",
+      "drive_file_id": "1auPSAuiSC_gKsK3MH4eCtbzxz3QUga0_",
+      "data_status": "VERIFY_PARTS_LIST_MAPPING"
+    },
+    {
+      "version": "v90",
+      "model": "YT-85680",
+      "file_name": "Czesci_zamienne_YT-85680.pdf",
+      "drive_file_id": "1MFcbQQgP4Rk8BxDmPHnpaUlr3zwXHMzX",
+      "data_status": "READY"
+    },
+    {
+      "version": "v91",
+      "model": "73410",
+      "file_name": "Czesci_zamienne_73410.pdf",
+      "drive_file_id": "1I5Xq4yfjFk6HIDawbiyRb3VpeUK2vbKd"
+    },
+    {
+      "version": "v91",
+      "model": "73056",
+      "file_name": "Czesci_zamienne_73056.pdf",
+      "drive_file_id": "1JkfLvwuJefGJZbTvt583yNODHpO6QK_T"
+    },
+    {
+      "version": "v91",
+      "model": "73060",
+      "file_name": "Czesci_zamienne_73060.pdf",
+      "drive_file_id": "1S89a6E0coQVKmJGSCgNyxQc_4wxbq1E5"
+    },
+    {
+      "version": "v92",
+      "model": "YT-82811",
+      "file_name": "Czesci_zamienne_YT-82811.pdf",
+      "drive_file_id": "1zr4zDwE_ixtrSTpANU_tVWOaUyK3UOV-"
+    },
+    {
+      "version": "v92",
+      "model": "YT-828118",
+      "aliases": [
+        "YT-8281185"
+      ],
+      "file_name": "Czesci_zamienne_YT-828118_YT-8281185.pdf",
+      "drive_file_id": "1xSEkF_PE4oqfw0TYhocqR4-rbYJNTtM4"
+    },
+    {
+      "version": "v92",
+      "model": "YT-82834",
+      "file_name": "Czesci_zamienne_YT-82834.pdf",
+      "drive_file_id": "1KeYS8LCm5a70nNXroWuJlRMuKySf_12C"
+    },
+    {
+      "version": "v93",
+      "model": "67574",
+      "file_name": "Czesci_zamienne_67574.pdf",
+      "drive_file_id": "1cUE2ofqAodMCxGymyBtHVqrdiQkrao_w"
+    },
+    {
+      "version": "v93",
+      "model": "67575",
+      "file_name": "Czesci_zamienne_67575.pdf",
+      "drive_file_id": "14biI7mjXpj5X-RCs-K2cqWvXHE2Ym3_q"
+    },
+    {
+      "version": "v93",
+      "model": "67590",
+      "file_name": "Czesci_zamienne_67590.pdf",
+      "drive_file_id": "1IeanvOoRHlphyBbVaOX2Jtd5B8lyoBP7"
+    },
+    {
+      "version": "v94",
+      "model": "YT-82147",
+      "file_name": "Czesci_zamienne_YT-82147.pdf",
+      "drive_file_id": "1euW6EALE1loxE2odLTiEjqeKC469Pkeo"
+    },
+    {
+      "version": "v94",
+      "model": "75812",
+      "file_name": "Czesci_zamienne_75812.pdf",
+      "drive_file_id": "1_nV_pyPxAZiKYD8JUTYU8GzdL9qbEK-Z",
+      "note": "Korekta względem pierwszego raportu v94: oficjalny PDF został odnaleziony."
+    }
+  ],
+  "requires_rework": [
+    {
+      "version": "v90",
+      "model": "YT-85271",
+      "item": "mapowanie listy części",
+      "reason": "69 pozycji z DOCX pozostaje do kontroli zgodności z PDF."
+    },
+    {
+      "version": "v94",
+      "model": "75837",
+      "reason": "Brak osobnego oficjalnego PDF-u; wymaga złożenia na podstawie źródeł."
+    }
+  ],
+  "keep_private": [
+    {
+      "version": "v85",
+      "patterns": [
+        "67700.pdf",
+        "67641.pdf",
+        "67640.pdf"
+      ],
+      "reason": "Automatycznie wygenerowane PDF-y robocze z komunikatami technicznymi."
+    },
+    {
+      "version": "v86",
+      "patterns": [
+        "82541.pdf",
+        "82542.pdf",
+        "82543.pdf",
+        "82544.pdf"
+      ],
+      "reason": "Automatycznie wygenerowane PDF-y robocze z komunikatami technicznymi."
+    },
+    {
+      "version": "v87",
+      "patterns": [
+        "79880.pdf",
+        "79811.pdf",
+        "79943.pdf"
+      ],
+      "reason": "Robocze PDF-y z opisami pipeline'u; 79811 dodatkowo łączy kilka modeli."
+    },
+    {
+      "version": "v88",
+      "patterns": [
+        "Czesci_zamienne_67571__RYSUNEK_TECHNICZNY_DO_POLACZENIA.pdf",
+        "67571_GLA-620.pdf",
+        "67571_spare_parts.docx",
+        "67571_p.docx"
+      ],
+      "reason": "Materiały źródłowe/pomocnicze."
+    },
+    {
+      "version": "v88",
+      "patterns": [
+        "Czesci_zamienne_67572__RYSUNEK_TECHNICZNY_DO_POLACZENIA.pdf",
+        "67572.pdf",
+        "67572.docx"
+      ],
+      "reason": "Materiały źródłowe/pomocnicze."
+    },
+    {
+      "version": "v89",
+      "patterns": [
+        "67576_532爆炸图（有网有微动）.pdf",
+        "Czesci_zamienne_67576.docx",
+        "67576.docx",
+        "Czesci_zamienne_67576__SCALONE.pdf"
+      ],
+      "reason": "Surowe źródła i duplikaty wersji Golden Sample."
+    },
+    {
+      "version": "v90",
+      "patterns": [
+        "yt-85271.pdf",
+        "YT-85271.docx",
+        "PATCH_YT85271.md",
+        "yt-85680.pdf",
+        "YT-85680.docx",
+        "Czesci_zamienne_YT-85680.docx"
+      ],
+      "reason": "Robocze PDF-y i materiały źródłowe."
+    },
+    {
+      "version": "v91",
+      "patterns": [
+        "73410.pdf",
+        "73056.pdf",
+        "73060.pdf",
+        "*.doc",
+        "*.docx",
+        "obrazy źródłowe"
+      ],
+      "reason": "Robocze kopie lub formaty źródłowe."
+    },
+    {
+      "version": "v92",
+      "patterns": [
+        "yt-82810-yt-82811.pdf",
+        "yt-828118-yt-8281185.pdf",
+        "yt-82834-yt-82835.pdf",
+        "YT-82834.pdf",
+        "*.doc",
+        "*.docx",
+        "*.xlsx"
+      ],
+      "reason": "Robocze wspólne listy, surowe PDF-y i źródła."
+    },
+    {
+      "version": "v93",
+      "patterns": [
+        "67574.pdf",
+        "Czesci_zamienne_67574__SCALONE.pdf",
+        "Czesci_zamienne_67575__SCALONE.pdf",
+        "67575_332爆炸图(有网有微动）.pdf",
+        "67590.pdf",
+        "Czesci_zamienne_67590__SCALONE.pdf",
+        "*.doc",
+        "*.docx"
+      ],
+      "reason": "Robocze, duplikaty lub surowe materiały fabryczne."
+    },
+    {
+      "version": "v94",
+      "patterns": [
+        "yt-82147.pdf",
+        "YT-82147.docx",
+        "~WRL3167.tmp",
+        "75812-75837.pdf",
+        "75812_75837.docx",
+        "obrazy źródłowe"
+      ],
+      "reason": "Robocze PDF-y, pliki tymczasowe i źródła wewnętrzne."
+    }
+  ],
+  "github_map_patch": {
+    "67700": {
+      "driveFileId": "1QGyt6A63TeXmyNR2wIR2CB2hgSmk-xjZ",
+      "fileName": "Czesci_zamienne_67700.pdf",
+      "publicationStatus": "PUBLIC_READY",
+      "qualityGate": "TOYA24_MATCH"
+    },
+    "67641": {
+      "driveFileId": "1yPb-OwPkGilHdRUxdl_7wwSxfLxSN7_G",
+      "fileName": "Czesci_zamienne_67641.pdf",
+      "publicationStatus": "PUBLIC_READY",
+      "qualityGate": "TOYA24_MATCH"
+    },
+    "67640": {
+      "driveFileId": "1RXblbtt8ahyF6ZVYn7JTEZ1VoTF_btAN",
+      "fileName": "Czesci_zamienne_67640.pdf",
+      "publicationStatus": "PUBLIC_READY",
+      "qualityGate": "TOYA24_MATCH"
+    },
+    "82541": {
+      "driveFileId": "1zfWx0MJ3xCsAuZQQc3I_QwkigdGidDOY",
+      "fileName": "Czesci_zamienne_82541.pdf",
+      "publicationStatus": "PUBLIC_READY",
+      "qualityGate": "TOYA24_MATCH"
+    },
+    "82542": {
+      "driveFileId": "1Y8O7FxXgloQ_1KWT4eyBKX34YlB_CxL6",
+      "fileName": "Czesci_zamienne_82542.pdf",
+      "publicationStatus": "PUBLIC_READY",
+      "qualityGate": "TOYA24_MATCH"
+    },
+    "82543": {
+      "driveFileId": "1kzbRsvmMJfxv9qw4T0plqbl5YcKFyW-v",
+      "fileName": "Czesci_zamienne_82543.pdf",
+      "publicationStatus": "PUBLIC_READY",
+      "qualityGate": "TOYA24_MATCH"
+    },
+    "82544": {
+      "driveFileId": "1pboO_FgVimfUro1pNIDXi42wMEBI24up",
+      "fileName": "Czesci_zamienne_82544.pdf",
+      "publicationStatus": "PUBLIC_READY",
+      "qualityGate": "TOYA24_MATCH"
+    },
+    "79880": {
+      "driveFileId": "1tqVhbfpEXaDUlnHX7z-vswlXqFX7RSqY",
+      "fileName": "Czesci_zamienne_79880.pdf",
+      "publicationStatus": "PUBLIC_READY",
+      "qualityGate": "TOYA24_MATCH"
+    },
+    "79811": {
+      "driveFileId": "1NX22PvapOGdGYKe0tfUKlwEept53GvDY",
+      "fileName": "Czesci_zamienne_79811.pdf",
+      "publicationStatus": "PUBLIC_READY",
+      "qualityGate": "TOYA24_MATCH"
+    },
+    "79943": {
+      "driveFileId": "1YgD-ugZ6E9YkvdhGURDITSyluhTxYLml",
+      "fileName": "Czesci_zamienne_79943.pdf",
+      "publicationStatus": "PUBLIC_READY",
+      "qualityGate": "TOYA24_MATCH"
+    },
+    "67571": {
+      "driveFileId": "1lO5lpYmDcRNARkLFBGnLSlZIIgAPs7lI",
+      "fileName": "Czesci_zamienne_67571__SCALONE.pdf",
+      "publicationStatus": "PUBLIC_READY",
+      "qualityGate": "TOYA24_MATCH"
+    },
+    "67572": {
+      "driveFileId": "1ctBq-0Pdcs5eZ9pPwVZkCqVbFu6s3oAr",
+      "fileName": "Czesci_zamienne_67572__SCALONE.pdf",
+      "publicationStatus": "PUBLIC_READY",
+      "qualityGate": "TOYA24_MATCH"
+    },
+    "67576": {
+      "driveFileId": "1_cbMX79Ul9snUhrtKcN1_UIJ3MxfZ0SL",
+      "fileName": "Czesci_zamienne_67576.pdf",
+      "publicationStatus": "PUBLIC_READY",
+      "qualityGate": "GOLDEN_SAMPLE"
+    },
+    "YT-85271": {
+      "driveFileId": "1auPSAuiSC_gKsK3MH4eCtbzxz3QUga0_",
+      "fileName": "Czesci_zamienne_YT-85271.pdf",
+      "publicationStatus": "PUBLIC_READY",
+      "qualityGate": "TOYA24_MATCH",
+      "dataStatus": "VERIFY_PARTS_LIST_MAPPING"
+    },
+    "YT-85680": {
+      "driveFileId": "1MFcbQQgP4Rk8BxDmPHnpaUlr3zwXHMzX",
+      "fileName": "Czesci_zamienne_YT-85680.pdf",
+      "publicationStatus": "PUBLIC_READY",
+      "qualityGate": "TOYA24_MATCH",
+      "dataStatus": "READY"
+    },
+    "73410": {
+      "driveFileId": "1I5Xq4yfjFk6HIDawbiyRb3VpeUK2vbKd",
+      "fileName": "Czesci_zamienne_73410.pdf",
+      "publicationStatus": "PUBLIC_READY",
+      "qualityGate": "TOYA24_MATCH"
+    },
+    "73056": {
+      "driveFileId": "1JkfLvwuJefGJZbTvt583yNODHpO6QK_T",
+      "fileName": "Czesci_zamienne_73056.pdf",
+      "publicationStatus": "PUBLIC_READY",
+      "qualityGate": "TOYA24_MATCH"
+    },
+    "73060": {
+      "driveFileId": "1S89a6E0coQVKmJGSCgNyxQc_4wxbq1E5",
+      "fileName": "Czesci_zamienne_73060.pdf",
+      "publicationStatus": "PUBLIC_READY",
+      "qualityGate": "TOYA24_MATCH"
+    },
+    "YT-82811": {
+      "driveFileId": "1zr4zDwE_ixtrSTpANU_tVWOaUyK3UOV-",
+      "fileName": "Czesci_zamienne_YT-82811.pdf",
+      "publicationStatus": "PUBLIC_READY",
+      "qualityGate": "TOYA24_MATCH"
+    },
+    "YT-828118": {
+      "driveFileId": "1xSEkF_PE4oqfw0TYhocqR4-rbYJNTtM4",
+      "fileName": "Czesci_zamienne_YT-828118_YT-8281185.pdf",
+      "publicationStatus": "PUBLIC_READY",
+      "qualityGate": "TOYA24_MATCH",
+      "aliases": [
+        "YT-8281185"
+      ]
+    },
+    "YT-82834": {
+      "driveFileId": "1KeYS8LCm5a70nNXroWuJlRMuKySf_12C",
+      "fileName": "Czesci_zamienne_YT-82834.pdf",
+      "publicationStatus": "PUBLIC_READY",
+      "qualityGate": "TOYA24_MATCH"
+    },
+    "67574": {
+      "driveFileId": "1cUE2ofqAodMCxGymyBtHVqrdiQkrao_w",
+      "fileName": "Czesci_zamienne_67574.pdf",
+      "publicationStatus": "PUBLIC_READY",
+      "qualityGate": "TOYA24_MATCH"
+    },
+    "67575": {
+      "driveFileId": "14biI7mjXpj5X-RCs-K2cqWvXHE2Ym3_q",
+      "fileName": "Czesci_zamienne_67575.pdf",
+      "publicationStatus": "PUBLIC_READY",
+      "qualityGate": "TOYA24_MATCH"
+    },
+    "67590": {
+      "driveFileId": "1IeanvOoRHlphyBbVaOX2Jtd5B8lyoBP7",
+      "fileName": "Czesci_zamienne_67590.pdf",
+      "publicationStatus": "PUBLIC_READY",
+      "qualityGate": "TOYA24_MATCH"
+    },
+    "YT-82147": {
+      "driveFileId": "1euW6EALE1loxE2odLTiEjqeKC469Pkeo",
+      "fileName": "Czesci_zamienne_YT-82147.pdf",
+      "publicationStatus": "PUBLIC_READY",
+      "qualityGate": "TOYA24_MATCH"
+    },
+    "75812": {
+      "driveFileId": "1_nV_pyPxAZiKYD8JUTYU8GzdL9qbEK-Z",
+      "fileName": "Czesci_zamienne_75812.pdf",
+      "publicationStatus": "PUBLIC_READY",
+      "qualityGate": "TOYA24_MATCH",
+      "note": "Korekta względem pierwszego raportu v94: oficjalny PDF został odnaleziony."
+    }
+  },
+  "notes": [
+    "Pakiet odtworzony z zapisanych raportów i ponownie zweryfikowanych identyfikatorów Drive.",
+    "v94 zawiera korektę: model 75812 ma oficjalny plik Czesci_zamienne_75812.pdf; do odbudowy pozostaje 75837.",
+    "Pakiet zawiera raporty i patche mapowania, nie kopie źródłowych PDF-ów z Drive."
+  ]
+}

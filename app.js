@@ -1,7 +1,8 @@
 (() => {
   'use strict';
+  // PGW v95 strict publication gate with v85-v94 master patch: public driveMap excludes full/converted fallback sources.
   const CONFIG = window.PGW_CONFIG || {};
-  const DRAFT_KEY = 'pgw-production-draft-v82-real-drawing-quality-gate';
+  const DRAFT_KEY = 'pgw-production-draft-v95-v83-v94-master-publication-update';
   const THEME_KEY = 'pgw-theme';
   const PART_ROW_LIMIT = Number(CONFIG.partRowLimit || 80);
   const $ = (id) => document.getElementById(id);
@@ -70,6 +71,8 @@
       state.pdfCustomerVisibleBlocklistV82 = await loadFirst(urls.pdfCustomerVisibleBlocklistV82 || ['data/pdf-customer-visible-blocklist-v82.json'], {}, 'pdfCustomerVisibleBlocklistV82');
       state.pdfQuarantineV82 = await loadFirst(urls.pdfQuarantineV82 || ['data/pdf-quarantine-v82.json'], {}, 'pdfQuarantineV82');
       state.realDrawingQualityAuditV82 = await loadFirst(urls.realDrawingQualityAuditV82 || ['data/real-drawing-quality-audit-v82.json'], {}, 'realDrawingQualityAuditV82');
+      state.publicDrawingPolicyV83 = await loadFirst(urls.publicDrawingPolicyV83 || ['data/public-drawing-policy-v83.json'], {}, 'publicDrawingPolicyV83');
+      state.publicDrawingAuditV83 = await loadFirst(urls.publicDrawingAuditV83 || ['data/public-drawing-audit-v83.json'], {}, 'publicDrawingAuditV83');
       state.driveMergePlanV80 = await loadFirst(urls.driveMergePlanV80 || ['data/drive-merge-plan-v80.json'], {}, 'driveMergePlanV80');
       state.driveOrganizerActionsV80 = await loadFirst(urls.driveOrganizerActionsV80 || ['data/drive-organizer-actions-v80.json'], {}, 'driveOrganizerActionsV80');
       state.releaseInfo = await loadFirst(urls.releaseInfo || ['data/release-info.json'], {}, 'releaseInfo');
@@ -253,7 +256,7 @@
     state.universalParts = normalizeUniversalParts(state.universalParts);
     state.universalPartLinks = normalizeUniversalPartLinks(state.universalPartLinks);
     state.driveMap = expandDriveMapModels(arr(state.driveMap).filter(row => isPdf(row))); // v78: jeden PDF może obsługiwać kilka modeli
-    state.driveMap = state.driveMap.filter(row => isCustomerVisiblePdfV82(row)); // v82: klient widzi tylko realne rysunki/zweryfikowane komplety
+    state.driveMap = state.driveMap.filter(row => isCustomerVisiblePdfV83(row)); // v83: publiczne tylko Golden Sample / realny rysunek; robocze do kwarantanny
 
     for (const d of state.devices) d.brand = resolveBrand(d);
     for (const d of state.drawings) d.brand = resolveBrand(d);
@@ -553,6 +556,56 @@
   function blocklistFileIdsV82() {
     const root = state.pdfCustomerVisibleBlocklistV82 || {};
     return new Set(arr(root.blockedFileIds || []).map(x => String(x || '').trim()).filter(Boolean));
+  }
+
+
+  function isCustomerVisiblePdfV83(row) {
+    const decision = classifyPublicDrawingV83(row);
+    row.publicDrawingDecisionV83 = decision.status;
+    row.publicDrawingReasonV83 = decision.reason;
+    row.publicDrawingClassV83 = decision.className;
+    row.displayPriority = Number(row.displayPriority || 9999) + Number(decision.priorityBoost || 0);
+    return decision.public === true;
+  }
+
+  function classifyPublicDrawingV83(row) {
+    const fields = [row.fileName, row.title, row.name, row.path, row.folderName, row.notes, row.source, row.pdfVariant, row.status, row.displayMode, row.searchText, row.content].map(x => String(x || ''));
+    const raw = fields.join(' ');
+    const text = norm(raw);
+    const name = String(row.fileName || row.title || row.name || '').trim();
+    const normalizedName = norm(name);
+    const path = norm([row.path, row.folderName].join(' '));
+    const isGoldenName = /(^|[\/\\])?czesci[_\s-]*zamienne[_\s-]*/i.test(name) || /__SCALONE/i.test(name);
+    const isOfficialFolder = path.includes('rysunki wybuchowe') || path.includes('rysunki zlozeniowe') || path.includes('rysunki złożeniowe');
+    const isRoboczyFolder = path.includes('robocze') || path.includes('do weryfikacji') || path.includes('kwarantanna') || path.includes('converted') || path.includes('konwersj');
+    const hasPublicCatalogSignals = text.includes('toya s a') || text.includes('aktualizacja') || text.includes('lista czesci zamiennych') || text.includes('lista części zamiennych') || text.includes('rysunek zlozeniowy') || text.includes('rysunek złożeniowy');
+    const hardBad = [
+      'pdf roboczy wygenerowany automatycznie',
+      'zrodla w folderze',
+      'źrodla w folderze',
+      'źródla w folderze',
+      'źródła w folderze',
+      'oryginalne pliki robocze',
+      'material roboczy',
+      'materiał roboczy',
+      'lista czesci nie zostala automatycznie odczytana',
+      'lista części nie została automatycznie odczytana',
+      'wymaga recznej weryfikacji',
+      'wymaga ręcznej weryfikacji',
+      'ocr'
+    ].some(marker => text.includes(marker));
+    const looksSlugGenerated = /^(yt|yg|dz)[-_ ]?\d{4,6}([_-](yt|yg|dz)?[-_ ]?\d{4,6})*\.pdf$/i.test(name) && !isGoldenName;
+    const onlyPartsTable = text.includes('poz indeks sap') || text.includes('no nr sap part name nazwa');
+    const fid = String(row.fileId || row.driveFileId || row.googleDriveId || row.gdriveId || row.sourceFileId || '').trim();
+    if (fid && blocklistFileIdsV82().has(fid)) return {public:false, status:'blocked', className:'BLOCKLIST_V82', reason:'fileId is in customer-visible blocklist', priorityBoost:900000};
+    if (hardBad) return {public:false, status:'blocked', className:'ROBOCZY_PDF', reason:'contains internal/auto-generated PDF markers', priorityBoost:900000};
+    if (isRoboczyFolder && !/__SCALONE|ZWERYFIKOWANE|VERIFIED/i.test(raw)) return {public:false, status:'rewrite_required', className:'ROBOCZE_SOURCE', reason:'source is robocze/converted and not verified/scalone', priorityBoost:800000};
+    if (looksSlugGenerated && onlyPartsTable && !/__SCALONE|ZWERYFIKOWANE|VERIFIED/i.test(raw)) return {public:false, status:'rewrite_required', className:'SLUG_TABLE_ONLY', reason:'model slug PDF looks like generated table/list, not public drawing', priorityBoost:800000};
+    if (isGoldenName && isOfficialFolder) return {public:true, status:'public', className:'GOLDEN_OFFICIAL', reason:'canonical Czesci_zamienne/scalone PDF in official drawing folder', priorityBoost:-3000};
+    if (isGoldenName && hasPublicCatalogSignals) return {public:true, status:'public', className:'GOLDEN_FORMAT', reason:'canonical PDF with public catalog signals', priorityBoost:-2500};
+    if (isOfficialFolder && hasPublicCatalogSignals && !onlyPartsTable) return {public:true, status:'public', className:'PUBLIC_DRAWING_LIKELY', reason:'official folder with drawing/catalog signals', priorityBoost:-1000};
+    if (isOfficialFolder && isGoldenName) return {public:true, status:'public_reviewed_name', className:'OFFICIAL_CANONICAL_NAME', reason:'official folder and canonical file name', priorityBoost:-500};
+    return {public:false, status:'needs_review', className:'UNKNOWN_SOURCE', reason:'not enough public drawing evidence', priorityBoost:700000};
   }
 
   function isCustomerVisiblePdfV82(row) {
