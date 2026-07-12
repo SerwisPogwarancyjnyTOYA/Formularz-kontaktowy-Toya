@@ -1,0 +1,146 @@
+{
+  "schema": "pgw-pdf-rewrite-queue-v97",
+  "version": "0.4.0.v97",
+  "generatedAt": "2026-07-12T00:00:00+00:00",
+  "baseQueue": "pdf-rewrite-queue-v96.json",
+  "resolvedFromQueue": [
+    {
+      "model": "75837",
+      "resolvedBy": "Czesci_zamienne_75837.pdf",
+      "driveFileId": "1yPUxNabt1H7E661BzB8CbXwPSM4HXXVI",
+      "reason": "Official TOYA24-style PDF found on Drive; no manual rebuild needed."
+    }
+  ],
+  "items": [
+    {
+      "version": "v90",
+      "model": "YT-85271",
+      "item": "mapowanie listy części",
+      "reason": "69 pozycji z DOCX pozostaje do kontroli zgodności z PDF.",
+      "source": "v85-v94-master"
+    }
+  ],
+  "keepPrivate": [
+    {
+      "version": "v85",
+      "patterns": [
+        "67700.pdf",
+        "67641.pdf",
+        "67640.pdf"
+      ],
+      "reason": "Automatycznie wygenerowane PDF-y robocze z komunikatami technicznymi."
+    },
+    {
+      "version": "v86",
+      "patterns": [
+        "82541.pdf",
+        "82542.pdf",
+        "82543.pdf",
+        "82544.pdf"
+      ],
+      "reason": "Automatycznie wygenerowane PDF-y robocze z komunikatami technicznymi."
+    },
+    {
+      "version": "v87",
+      "patterns": [
+        "79880.pdf",
+        "79811.pdf",
+        "79943.pdf"
+      ],
+      "reason": "Robocze PDF-y z opisami pipeline'u; 79811 dodatkowo łączy kilka modeli."
+    },
+    {
+      "version": "v88",
+      "patterns": [
+        "Czesci_zamienne_67571__RYSUNEK_TECHNICZNY_DO_POLACZENIA.pdf",
+        "67571_GLA-620.pdf",
+        "67571_spare_parts.docx",
+        "67571_p.docx"
+      ],
+      "reason": "Materiały źródłowe/pomocnicze."
+    },
+    {
+      "version": "v88",
+      "patterns": [
+        "Czesci_zamienne_67572__RYSUNEK_TECHNICZNY_DO_POLACZENIA.pdf",
+        "67572.pdf",
+        "67572.docx"
+      ],
+      "reason": "Materiały źródłowe/pomocnicze."
+    },
+    {
+      "version": "v89",
+      "patterns": [
+        "67576_532爆炸图（有网有微动）.pdf",
+        "Czesci_zamienne_67576.docx",
+        "67576.docx",
+        "Czesci_zamienne_67576__SCALONE.pdf"
+      ],
+      "reason": "Surowe źródła i duplikaty wersji Golden Sample."
+    },
+    {
+      "version": "v90",
+      "patterns": [
+        "yt-85271.pdf",
+        "YT-85271.docx",
+        "PATCH_YT85271.md",
+        "yt-85680.pdf",
+        "YT-85680.docx",
+        "Czesci_zamienne_YT-85680.docx"
+      ],
+      "reason": "Robocze PDF-y i materiały źródłowe."
+    },
+    {
+      "version": "v91",
+      "patterns": [
+        "73410.pdf",
+        "73056.pdf",
+        "73060.pdf",
+        "*.doc",
+        "*.docx",
+        "obrazy źródłowe"
+      ],
+      "reason": "Robocze kopie lub formaty źródłowe."
+    },
+    {
+      "version": "v92",
+      "patterns": [
+        "yt-82810-yt-82811.pdf",
+        "yt-828118-yt-8281185.pdf",
+        "yt-82834-yt-82835.pdf",
+        "YT-82834.pdf",
+        "*.doc",
+        "*.docx",
+        "*.xlsx"
+      ],
+      "reason": "Robocze wspólne listy, surowe PDF-y i źródła."
+    },
+    {
+      "version": "v93",
+      "patterns": [
+        "67574.pdf",
+        "Czesci_zamienne_67574__SCALONE.pdf",
+        "Czesci_zamienne_67575__SCALONE.pdf",
+        "67575_332爆炸图(有网有微动）.pdf",
+        "67590.pdf",
+        "Czesci_zamienne_67590__SCALONE.pdf",
+        "*.doc",
+        "*.docx"
+      ],
+      "reason": "Robocze, duplikaty lub surowe materiały fabryczne."
+    },
+    {
+      "version": "v94",
+      "patterns": [
+        "yt-82147.pdf",
+        "YT-82147.docx",
+        "~WRL3167.tmp",
+        "75812-75837.pdf",
+        "75812_75837.docx",
+        "obrazy źródłowe"
+      ],
+      "reason": "Robocze PDF-y, pliki tymczasowe i źródła wewnętrzne."
+    }
+  ],
+  "note": "v97 retains historical private source rules and promotes only verified READY documents."
+}

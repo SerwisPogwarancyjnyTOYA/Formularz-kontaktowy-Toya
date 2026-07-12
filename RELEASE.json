@@ -1,14 +1,14 @@
 {
-  "version": "20260712-v96-drawing-queue-cleanup",
-  "createdAt": "2026-07-12T09:36:18+00:00",
-  "artifact": "pgw-service-hub-publish-20260712-v95-ready.zip",
-  "base": "pgw-service-hub-publish-20260711-v84-ready.zip",
-  "integrated": "PGW-updates-v85-v94-REGENERATED-MASTER.zip",
-  "policy": "strict public drawing publication pipeline + v85-v94 master patch",
-  "publicMap": "data/drive-drawings-map.generated-v95.json",
-  "generatedAt": "2026-07-12T10:00:13+00:00",
-  "releaseChannel": "stable-v96",
+  "version": "0.4.0.v97",
+  "build": "20260712-v97-foundation-for-v05",
+  "createdAt": "2026-07-12T00:00:00+00:00",
+  "releaseChannel": "candidate-v97",
+  "previousVersion": "0.4.0.v96",
+  "publicMap": "data/drive-drawings-map.generated-v97.json",
+  "policy": "strict TOYA24 publication gate + repository health/doctor + v0.5 migration foundation",
   "notes": [
-    "v96 resolves 75837 official PDF and cleans rewrite queue"
+    "Public data remains derived from verified v96 map until v97 regeneration completes.",
+    "YT-85271 remains MANUAL_REQUIRED until source mapping is verified.",
+    "Historical audit files are retained as evidence; runtime uses only canonical v97 pointers."
   ]
 }

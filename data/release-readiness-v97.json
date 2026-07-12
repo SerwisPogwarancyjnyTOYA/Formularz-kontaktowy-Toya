@@ -1,0 +1,26 @@
+{
+  "schema": "pgw-release-readiness-v97",
+  "version": "0.4.0.v97",
+  "target": "0.5.0",
+  "status": "CANDIDATE",
+  "score": 88,
+  "ready": [
+    "public map integrity",
+    "preview links",
+    "robocze block",
+    "search normalization",
+    "coverage and quality gates"
+  ],
+  "needsWork": [
+    "YT-85271 manual mapping",
+    "regenerate repository manifest after all v97 file writes",
+    "final public-content review before push"
+  ],
+  "v05Foundations": [
+    "canonical release metadata",
+    "single health command",
+    "doctor diagnostics",
+    "release gate",
+    "historical audit retention with canonical pointers"
+  ]
+}

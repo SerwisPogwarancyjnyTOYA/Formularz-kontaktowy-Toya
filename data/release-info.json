@@ -1,18 +1,27 @@
 {
-  "version": "20260711-v77-smart-model-search",
-  "name": "PGW v77 — Smart Model Search",
-  "date": "2026-07-11",
-  "status": "publication-ready",
-  "previousVersion": "20260711-v76-coverage-pdf-quality",
-  "changes": [
-    "Dodane inteligentne wyszukiwanie modeli po myślnikach, spacjach i typowych nadmiarowych cyfrach.",
-    "Wpis yt-828113 ma zwracać bliskie modele z rysunkiem zamiast od razu pokazywać tryb ręczny.",
-    "Zachowany priorytet exact match i PDF __SCALONE."
+  "version": "0.4.0.v97",
+  "build": "20260712-v97-foundation-for-v05",
+  "name": "PGW 0.4.0.v97 — Foundation for 0.5",
+  "date": "2026-07-12",
+  "status": "release-candidate",
+  "previousVersion": "0.4.0.v96",
+  "goals": [
+    "Unify release metadata and canonical data pointers.",
+    "Preserve and modernize audit mechanisms from v76-v96.",
+    "Add repository health, doctor and production release checks.",
+    "Prepare a stable schema and migration path for 0.5.0."
+  ],
+  "knownLimitations": [
+    "YT-85271 requires manual verification of 69 parts against source PDF/DOCX."
   ],
   "testPlan": [
-    "Otwórz ?v=20260711-v77-smart-model-search.",
-    "Wyszukaj yt-828113.",
-    "Sprawdź, czy pojawią się YT-82813 / YT-82811 / bliskie warianty z PDF.",
-    "Uruchom npm run check oraz npm run search-check."
+    "npm run check",
+    "npm run health",
+    "npm run doctor",
+    "npm run release-v97-check",
+    "npm run search-check",
+    "npm run coverage",
+    "npm run drive-quality-gate",
+    "npm run public-drawing-gate"
   ]
 }
