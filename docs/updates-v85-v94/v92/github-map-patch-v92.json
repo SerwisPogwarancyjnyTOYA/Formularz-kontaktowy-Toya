@@ -1,0 +1,23 @@
+{
+  "YT-82811": {
+    "driveFileId": "1zr4zDwE_ixtrSTpANU_tVWOaUyK3UOV-",
+    "fileName": "Czesci_zamienne_YT-82811.pdf",
+    "publicationStatus": "PUBLIC_READY",
+    "qualityGate": "TOYA24_MATCH"
+  },
+  "YT-828118": {
+    "driveFileId": "1xSEkF_PE4oqfw0TYhocqR4-rbYJNTtM4",
+    "fileName": "Czesci_zamienne_YT-828118_YT-8281185.pdf",
+    "publicationStatus": "PUBLIC_READY",
+    "qualityGate": "TOYA24_MATCH",
+    "aliases": [
+      "YT-8281185"
+    ]
+  },
+  "YT-82834": {
+    "driveFileId": "1KeYS8LCm5a70nNXroWuJlRMuKySf_12C",
+    "fileName": "Czesci_zamienne_YT-82834.pdf",
+    "publicationStatus": "PUBLIC_READY",
+    "qualityGate": "TOYA24_MATCH"
+  }
+}

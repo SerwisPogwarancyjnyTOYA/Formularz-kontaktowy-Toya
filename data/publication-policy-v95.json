@@ -1,0 +1,40 @@
+{
+  "schema": "pgw-publication-policy-v95",
+  "version": "20260712-v95-v83-v94-master-publication-update",
+  "generatedAt": "2026-07-12T09:36:18+00:00",
+  "hardRules": [
+    {
+      "rule": "official_public_goes_first",
+      "description": "Plik z Rysunki złożeniowe/wybuchowe, wyglądający jak TOYA24/Golden Sample, trafia do publikacji bez dodatkowego ręcznego dopisywania."
+    },
+    {
+      "rule": "roboczy_never_public",
+      "description": "Pliki robocze/konwertowane/generowane automatycznie nie mogą być podglądem klienta."
+    },
+    {
+      "rule": "rewrite_then_publish",
+      "description": "Robocze materiały można wykorzystać tylko jako źródło do odtworzenia poprawnego PDF: rysunek + lista + brak notatek technicznych."
+    }
+  ],
+  "blockedMarkers": [
+    "PDF roboczy wygenerowany automatycznie",
+    "Zrodla w folderze",
+    "Źródła w folderze",
+    "oryginalne pliki robocze",
+    "materiał roboczy",
+    "Lista części nie została automatycznie odczytana",
+    "OCR",
+    "ręczna weryfikacja"
+  ],
+  "acceptedNamePatterns": [
+    "Czesci_zamienne_<MODEL>.pdf",
+    "Czesci_zamienne_<MODEL>__SCALONE.pdf",
+    "non-canonical official file only after TOYA24-style visual/text verification"
+  ],
+  "masterPatchPolicy": {
+    "acceptedPatchSource": "PGW-updates-v85-v94-REGENERATED-MASTER.zip",
+    "githubMapPatch": "data/github-map-patch-v85-v94-master.json",
+    "publicationReport": "data/publication-report-v85-v94-master.json",
+    "rule": "v95 applies v85-v94 official public-ready mappings on top of the v84 strict public gate."
+  }
+}

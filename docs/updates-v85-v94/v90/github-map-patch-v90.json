@@ -1,0 +1,16 @@
+{
+  "YT-85271": {
+    "driveFileId": "1auPSAuiSC_gKsK3MH4eCtbzxz3QUga0_",
+    "fileName": "Czesci_zamienne_YT-85271.pdf",
+    "publicationStatus": "PUBLIC_READY",
+    "qualityGate": "TOYA24_MATCH",
+    "dataStatus": "VERIFY_PARTS_LIST_MAPPING"
+  },
+  "YT-85680": {
+    "driveFileId": "1MFcbQQgP4Rk8BxDmPHnpaUlr3zwXHMzX",
+    "fileName": "Czesci_zamienne_YT-85680.pdf",
+    "publicationStatus": "PUBLIC_READY",
+    "qualityGate": "TOYA24_MATCH",
+    "dataStatus": "READY"
+  }
+}

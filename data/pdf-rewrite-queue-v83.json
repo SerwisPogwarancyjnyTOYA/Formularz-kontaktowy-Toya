@@ -1,0 +1,30 @@
+{
+  "schema": "pgw-pdf-rewrite-queue-v83",
+  "version": "20260711-v83-public-drawing-source-policy",
+  "generatedAt": "2026-07-11T18:12:23.352619+00:00",
+  "count": 2,
+  "items": [
+    {
+      "fileId": "13gPbzV4uNzkQURRCrRkkreJdtNZFfm5_",
+      "fileName": "yt-828113-yt-828114.pdf",
+      "models": [
+        "YT-828113",
+        "YT-828114"
+      ],
+      "path": "PGW - Rysunki / robocze / YT-828113 YT-828114",
+      "reason": "known internal/generated/roboczy PDF",
+      "action": "do_not_publish_find_source_and_generate_golden_pdf"
+    },
+    {
+      "fileId": "13gPbzV4uNzkQURRCrRkkreJdtNZFfm5_",
+      "fileName": "yt-828113-yt-828114.pdf",
+      "models": [
+        "YT-828113",
+        "YT-828114"
+      ],
+      "path": "PGW - Rysunki / robocze / YT-828113 YT-828114",
+      "reason": "known internal/generated/roboczy PDF",
+      "action": "do_not_publish_find_source_and_generate_golden_pdf"
+    }
+  ]
+}

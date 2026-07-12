@@ -1,0 +1,17 @@
+{
+  "schema": "pgw-pdf-golden-samples-v83",
+  "version": "20260711-v83-public-drawing-source-policy",
+  "generatedAt": "2026-07-11T18:12:23.352619+00:00",
+  "items": [
+    {
+      "fileId": "1_cbMX79Ul9snUhrtKcN1_UIJ3MxfZ0SL",
+      "fileName": "Czesci_zamienne_67576.pdf",
+      "model": "67576",
+      "reason": "public Toya24-like service drawing with title, TOYA S.A., update date, drawing section and parts table"
+    },
+    {
+      "fileName": "Czesci_zamienne_<MODEL>.pdf",
+      "reason": "canonical target output for generated/merged PDFs"
+    }
+  ]
+}
