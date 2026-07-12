@@ -1,4 +1,4 @@
-# PGW Service Hub — v95 Master Publication Update
+# PGW Service Hub — v96 Drawing Recovery Cleanup
 
 Ta paczka jest pełnym repo bazującym na v84 oraz zawiera zbiorczy pakiet poprawek v85–v94.
 
@@ -17,3 +17,10 @@ Oficjalne rysunki w stylu TOYA24 / Golden Sample idą publicznie. Robocze PDF-y,
 npm run publication-pipeline
 npm run check
 ```
+
+
+## v96 — Drawing Recovery Cleanup
+
+- 75837 odzyskany jako oficjalny `Czesci_zamienne_75837.pdf`.
+- Kolejka przeróbki oczyszczona z pozycji, które mają już publiczny PDF.
+- `config.js` wskazuje wyłącznie `drive-drawings-map.generated-v96.json`.

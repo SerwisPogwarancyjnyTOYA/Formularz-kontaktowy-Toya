@@ -1,9 +1,14 @@
 {
-  "version": "20260712-v95-v83-v94-master-publication-update",
+  "version": "20260712-v96-drawing-queue-cleanup",
   "createdAt": "2026-07-12T09:36:18+00:00",
   "artifact": "pgw-service-hub-publish-20260712-v95-ready.zip",
   "base": "pgw-service-hub-publish-20260711-v84-ready.zip",
   "integrated": "PGW-updates-v85-v94-REGENERATED-MASTER.zip",
   "policy": "strict public drawing publication pipeline + v85-v94 master patch",
-  "publicMap": "data/drive-drawings-map.generated-v95.json"
+  "publicMap": "data/drive-drawings-map.generated-v95.json",
+  "generatedAt": "2026-07-12T10:00:13+00:00",
+  "releaseChannel": "stable-v96",
+  "notes": [
+    "v96 resolves 75837 official PDF and cleans rewrite queue"
+  ]
 }

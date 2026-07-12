@@ -1,7 +1,7 @@
 {
   "name": "pgw-service-hub",
   "private": true,
-  "version": "20260712-v95",
+  "version": "20260712-v96",
   "type": "module",
   "scripts": {
     "check": "node scripts/pgw-repo-selfcheck.mjs",
@@ -17,8 +17,9 @@
     "drive-alias-check": "node scripts/pgw-v81-drive-alias-check.mjs",
     "drive-quality-gate": "node scripts/pgw-v82-real-drawing-quality-gate.mjs",
     "public-drawing-gate": "node scripts/pgw-v83-public-drawing-gate.mjs",
-    "publication-pipeline": "node scripts/pgw-v95-integrated-release-check.mjs",
+    "publication-pipeline": "node scripts/pgw-v96-drawing-recovery-check.mjs",
     "publication-pipeline-v84": "node scripts/pgw-v84-publication-pipeline.mjs",
-    "publication-pipeline-v95": "node scripts/pgw-v95-integrated-release-check.mjs"
+    "publication-pipeline-v95": "node scripts/pgw-v95-integrated-release-check.mjs",
+    "publication-pipeline-v96": "node scripts/pgw-v96-drawing-recovery-check.mjs"
   }
 }

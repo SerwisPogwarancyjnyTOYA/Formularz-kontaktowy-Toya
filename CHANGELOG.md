@@ -1,5 +1,11 @@
 # Changelog
 
+## v96 — Drawing Recovery Cleanup
+- 75837 zdjęty z kolejki przeróbki po znalezieniu oficjalnego `Czesci_zamienne_75837.pdf`.
+- Dodano `publication-consistency-audit-v96.json`.
+- `config.js` ustawiony na strict v96 map only.
+- Dodano test `pgw-v96-drawing-recovery-check.mjs`.
+
 ## v95 — Master Publication Update v83–v94
 - Zintegrowano `PGW-updates-v85-v94-REGENERATED-MASTER.zip` z pełnym repo v84.
 - Dodano `drive-drawings-map.generated-v95.json` jako pierwsze publiczne źródło PDF w `config.js`.

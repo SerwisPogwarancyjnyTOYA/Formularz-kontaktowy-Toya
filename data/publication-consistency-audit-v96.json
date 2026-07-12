@@ -1,0 +1,30 @@
+{
+  "schema": "pgw-publication-consistency-audit-v96",
+  "version": "20260712-v96-drawing-queue-cleanup",
+  "generatedAt": "2026-07-12T10:00:13+00:00",
+  "checks": {
+    "mapRows": 2174,
+    "publicReadyRows": 2174,
+    "missingPreviewLinks": [],
+    "publicRowsWithRoboczyNameSignals": [],
+    "duplicatePublicModelGroupsCount": 2,
+    "remainingRewriteItems": [
+      {
+        "version": "v90",
+        "model": "YT-85271",
+        "item": "mapowanie listy części",
+        "reason": "69 pozycji z DOCX pozostaje do kontroli zgodności z PDF.",
+        "source": "v85-v94-master"
+      }
+    ],
+    "resolvedRewriteItems": [
+      {
+        "version": "v94",
+        "model": "75837",
+        "reason": "Brak osobnego oficjalnego PDF-u; wymaga złożenia na podstawie źródeł.",
+        "source": "v85-v94-master"
+      }
+    ]
+  },
+  "status": "PASS"
+}

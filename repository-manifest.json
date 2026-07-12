@@ -1,6 +1,6 @@
 {
-  "version": "20260712-v95-v83-v94-master-publication-update",
-  "generatedAt": "2026-07-12T09:36:18+00:00",
+  "version": "20260712-v96-drawing-queue-cleanup",
+  "generatedAt": "2026-07-12T10:00:13+00:00",
   "files": [
     {
       "path": ".gitattributes",
@@ -843,5 +843,9 @@
       "sha256": "f74c96b9ebf50d3112ce237a93f3630ad861b63d5ffc429087e331401495dc38"
     }
   ],
-  "fileCount": 168
+  "fileCount": 168,
+  "releaseChannel": "stable-v96",
+  "notes": [
+    "v96 resolves 75837 official PDF and cleans rewrite queue"
+  ]
 }
