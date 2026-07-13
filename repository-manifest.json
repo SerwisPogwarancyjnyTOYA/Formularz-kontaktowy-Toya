@@ -1,6 +1,6 @@
 {
-  "version": "20260712-v96-drawing-queue-cleanup",
-  "generatedAt": "2026-07-12T10:00:13+00:00",
+  "version": "20260713-v98-incremental-verified-ux",
+  "generatedAt": "2026-07-13T08:20:53+00:00",
   "files": [
     {
       "path": ".gitattributes",
@@ -29,23 +29,23 @@
     },
     {
       "path": "CHANGELOG.md",
-      "bytes": 5708,
-      "sha256": "e8644ab1574d76f9de9c162317e06af8c80a843c40365bdd7ab60074c501f76e"
+      "bytes": 7623,
+      "sha256": "07f799db29997e308746f3da32ed90f1eecc91106070b367a01514c8e471376a"
     },
     {
       "path": "README.md",
-      "bytes": 871,
-      "sha256": "731f62927e4f69179f9bd263e70e6826c0ba7757d57fd23303aef0f47d2f7f7a"
+      "bytes": 1425,
+      "sha256": "f0ccba49216e1fb90f52fd4c2b6e212a0b024198eeb4edb4ddf07cbccd3ce1a5"
     },
     {
       "path": "RELEASE.json",
-      "bytes": 438,
-      "sha256": "2face93b57890ab0f73faac1aca19f119c24a2fabdddd69df7f1f9f02511be39"
+      "bytes": 1028,
+      "sha256": "1185d6064cee1b9fb2a606200d8cd7cab042bb6836e46bb9f4f1899d05d492d2"
     },
     {
       "path": "admin.html",
-      "bytes": 4321,
-      "sha256": "0e7c5ee6a2e5d50b0c663e3eb640096d7ec0a65ecdc392f45887b4a0fed13f3b"
+      "bytes": 6435,
+      "sha256": "d8ee070811c58421457cbede245a646d2c1bfcf454515334855f0c463ca8f527"
     },
     {
       "path": "app.css",
@@ -54,8 +54,8 @@
     },
     {
       "path": "app.js",
-      "bytes": 147454,
-      "sha256": "71ed1c0a10f893fd6e892a9cad86f571c5b1b23e949889df64600c4909809f29"
+      "bytes": 148718,
+      "sha256": "baee1b6774fec5124a8a97c8b63d3ecc56f8da2b9d5dd64d78c2bd5de46e171b"
     },
     {
       "path": "assets/logos/fala-clean.png",
@@ -94,8 +94,8 @@
     },
     {
       "path": "config.js",
-      "bytes": 3603,
-      "sha256": "83f739e22a8a92462ff009961fecf8f89508b6557ef9ccb56e6348bf7cf1abcc"
+      "bytes": 4295,
+      "sha256": "b274eec3fcfdfa9a316d4e2d02fed39a6155592e83922e7bb56d7b61af423e01"
     },
     {
       "path": "data/brand-resolution-overrides.json",
@@ -116,6 +116,11 @@
       "path": "data/catalog-quality-audit.json",
       "bytes": 762,
       "sha256": "e6a18e00ea2c145960e111a3355cfdc444ce0b7290c18140823dea7217e342b0"
+    },
+    {
+      "path": "data/catalog-readiness-v98.json",
+      "bytes": 1590,
+      "sha256": "006e03ca59e58701a8436a666643dbc4043e75215d7ffabbfd68a8d36a773104"
     },
     {
       "path": "data/coverage-audit-v76.json",
@@ -196,6 +201,11 @@
       "path": "data/drive-drawings-map.generated-v95.json",
       "bytes": 5106462,
       "sha256": "f2c40c6d91deebf21f22c4619493ba49a19c01e0c6f914bb669621e8011612d5"
+    },
+    {
+      "path": "data/drive-drawings-patch-v98.json",
+      "bytes": 49850,
+      "sha256": "94195406b46c5ed17c3d23c2b570326ab8dc6d660d0395bf45e021fc518282e7"
     },
     {
       "path": "data/drive-first-catalog-audit-v78.json",
@@ -383,6 +393,11 @@
       "sha256": "11305fe8320f9d5b3235ce2eac803663b0205f6ea06b02ff6fe721bb96b02d5d"
     },
     {
+      "path": "data/publication-consistency-audit-v98.json",
+      "bytes": 679,
+      "sha256": "ebf6240d9c5c20cbe1ec4b6132a44203dfd52cbf5d540aa2ca1f8223b4a95464"
+    },
+    {
       "path": "data/publication-policy-v84.json",
       "bytes": 1238,
       "sha256": "33a65bca722a4c3dd41f5d90280a77c37c147e8f1bfbf2fd3542a3ca94a12666"
@@ -408,6 +423,11 @@
       "sha256": "e5964cada52f7dcfa52e7562b879a7d6ade7a89e870fd3faf8f7c546e33c7ac6"
     },
     {
+      "path": "data/publication-report-v98.json",
+      "bytes": 1498,
+      "sha256": "3c9d9b7a7a3bc9368d402079c3e1257708b05f0c7219e5ce6a3e5f96dad4a558"
+    },
+    {
       "path": "data/real-drawing-quality-audit-v82.json",
       "bytes": 650,
       "sha256": "d5c9c73e4be1eea082a6f15925c3534309bac20e2ff28658bea4f8eb147dab15"
@@ -421,6 +441,11 @@
       "path": "data/release-info.json",
       "bytes": 726,
       "sha256": "8c138331d8d4793f4c7bba293442cc1a682a6a22901831cd144413f659340681"
+    },
+    {
+      "path": "data/release-readiness-v98.json",
+      "bytes": 1152,
+      "sha256": "080401f5530e7e0d80430b2384255c4aee28f266ba739cd420edebf27f34c63a"
     },
     {
       "path": "data/search-normalization-audit-v77.json",
@@ -704,8 +729,8 @@
     },
     {
       "path": "healthcheck.html",
-      "bytes": 2250,
-      "sha256": "326026598b7bc012e7dc304d8e3887d8f5c486f3fe0bf65b9c2d56a2ce9c0ead"
+      "bytes": 3351,
+      "sha256": "d1cbe63bb4cb7bd1c81edee398d54aabd5ee95b9ca569ed55f267eb06158af39"
     },
     {
       "path": "index.html",
@@ -719,8 +744,8 @@
     },
     {
       "path": "package.json",
-      "bytes": 1303,
-      "sha256": "68532f39c883cc8fb00db708ae930c52313be28e236a05b0405c27da081460a8"
+      "bytes": 1796,
+      "sha256": "e93e5e0d7cc701e50084a0c32d6ae8b35d883850780d1547cc9ca9220a52e4cf"
     },
     {
       "path": "repository-manifest.json",
@@ -838,14 +863,20 @@
       "sha256": "639998a0e71b858deff222e50ed9ed302bca036f91653e15d17963ba64e58de6"
     },
     {
+      "path": "scripts/pgw-v98-incremental-check.mjs",
+      "bytes": 3175,
+      "sha256": "2853371370855a1dc73877d5df6929304155a4af988e3e9b1ca22ef98004d015"
+    },
+    {
       "path": "smoke-test.html",
-      "bytes": 2979,
-      "sha256": "f74c96b9ebf50d3112ce237a93f3630ad861b63d5ffc429087e331401495dc38"
+      "bytes": 1850,
+      "sha256": "da0048d32e9487571958167a51facc06b6abf197511c67889297dd2a839a8db7"
     }
   ],
-  "fileCount": 168,
-  "releaseChannel": "stable-v96",
+  "fileCount": 174,
+  "releaseChannel": "candidate-v98",
   "notes": [
-    "v96 resolves 75837 official PDF and cleans rewrite queue"
+    "v98 candidate manifest; stable v97 map plus incremental v98 patch",
+    "Changed and added files recalculated; historical unchanged hashes retained"
   ]
 }
