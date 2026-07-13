@@ -1,26 +1,32 @@
-# PGW Service Hub — v96 Drawing Recovery Cleanup
+# PGW Service Hub - 0.4.0.v97
 
-Ta paczka jest pełnym repo bazującym na v84 oraz zawiera zbiorczy pakiet poprawek v85–v94.
+Wersja przejściowa z linii 0.4 do 0.5. Runtime formularza korzysta wyłącznie z `data/drive-drawings-map.generated-v97.json`.
 
-## Najważniejsze
-- `data/drive-drawings-map.generated-v95.json` — główna publiczna mapa rysunków PDF.
-- `data/github-map-patch-v85-v94-master.json` — zbiorczy patch modeli gotowych do publikacji.
-- `data/publication-report-v85-v94-master.json` — pełny raport z regenerowanej paczki v85–v94.
-- `data/publication-report-v95.json` — raport zastosowania patcha do pełnego repo.
-- `data/pdf-rewrite-queue-v95.json` — lista rzeczy do przeróbki/scalenia przed publikacją.
+## Co daje v97
 
-## Zasada
-Oficjalne rysunki w stylu TOYA24 / Golden Sample idą publicznie. Robocze PDF-y, DOCX-y, pliki tymczasowe i źródła obrazów zostają poza formularzem klienta.
+- odzyskane i sprawdzone strona po stronie oficjalne PDF-y dla `YT-8277905`, `YT-8277915` i `YT-8277935`;
+- potwierdzony alias `YT-8281185` dla wspólnego PDF-u `YT-828118 / YT-8281185`;
+- osobne metryki gotowości rysunków i kompletności danych części;
+- `health`, `doctor`, release gate oraz osobny gate gotowości do 0.5;
+- twardą blokadę surowych XLS/XLSM/XLSX/DOCX/ZIP, stanów magazynowych i danych klientów przed publikacją.
+- naprawione 21 logicznych niespójności `hasPartsPdf` / `hasPartsList` w `devices.json`;
 
-## Test
+## Polecenia przed commitem
+
 ```bash
-npm run publication-pipeline
 npm run check
+npm run health
+npm run doctor
+npm run release-v97-check
+npm run build-manifest
 ```
 
+`npm run v05-readiness` ma obecnie zakończyć się błędem - pełne dane SAP/PL/EN są realnie podpięte dla 34 z 1424 urządzeń (42 urządzenia mają flagę listy, ale 8 z nich nie ma rekordów części). To miernik drogi do 0.5, a nie błąd działania formularza.
 
-## v96 — Drawing Recovery Cleanup
+## Status
 
-- 75837 odzyskany jako oficjalny `Czesci_zamienne_75837.pdf`.
-- Kolejka przeróbki oczyszczona z pozycji, które mają już publiczny PDF.
-- `config.js` wskazuje wyłącznie `drive-drawings-map.generated-v96.json`.
+- publiczny katalog rysunków: `READY_WITH_ACKNOWLEDGED_DATA_DEBT`;
+- pełny katalog TOYA24 z listami SAP/PL/EN: `NOT_READY`;
+- `YT-85271`: PDF public-ready, mapowanie 69 pozycji części nadal `MANUAL_REQUIRED`.
+
+Szczegóły: `data/catalog-readiness-v97.json`, `data/release-readiness-v97.json` oraz `docs/V97_TO_V05_MIGRATION.md`.

@@ -1,0 +1,24 @@
+{
+  "schema": "pgw-private-source-coverage-summary-v97",
+  "version": "0.4.0.v97",
+  "generatedAt": "2026-07-12T21:02:08+00:00",
+  "publicSafeAggregateOnly": true,
+  "sourceType": "internal parts master workbook",
+  "rawSourcePolicy": "NEVER_COMMIT_OR_PUBLISH",
+  "summary": {
+    "rows": 36357,
+    "uniqueIndices": 36330,
+    "duplicateGroups": 23,
+    "nameConflicts": 9,
+    "missingNames": 21,
+    "stockNonemptyRows": 19328,
+    "repoPartsMatched": 537,
+    "repoPartsUnmatched": 2132,
+    "nameDiffs": 61
+  },
+  "interpretation": [
+    "The workbook can validate SAP indices and Polish names, but must not be copied into the public repository.",
+    "Conflicting duplicate indices require manual review before any automated overwrite.",
+    "Stock columns are operational data and are excluded from public artifacts."
+  ]
+}

@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.4.0.v97 - Foundation for 0.5
+
+- Dodano trzy zweryfikowane strona po stronie oficjalne PDF-y: `YT-8277905`, `YT-8277915`, `YT-8277935`.
+- Potwierdzono alias `YT-8281185` we wspólnym dokumencie `YT-828118 / YT-8281185`.
+- Publiczna mapa wzrosła z 2174 do 2177 rekordów bez dokładnych duplikatów modeli i bez brakujących linków `/preview`.
+- Rozdzielono gotowość publicznego rysunku od kompletności danych SAP/PL/EN; pełne mapowanie ma obecnie 34 z 1424 urządzeń (2.39%).
+- Dodano `catalog-readiness-v97.json`, poprawiony raport publikacyjny, audyt spójności i jawną kolejkę `MANUAL_REQUIRED` dla `YT-85271`.
+- Dodano `npm run health`, `doctor`, `release-v97-check`, `v05-readiness` oraz generator `repository-manifest.json`.
+- Zmodernizowano `npm run check`, który wcześniej był na sztywno przywiązany do v96.
+- Dodano politykę prywatnych źródeł: surowe Office/ZIP, stany magazynowe i dane klientów są ignorowane przez Git i blokowane przez preflight.
+- Przeanalizowano prywatny master części: 36 330 unikalnych indeksów; dane służą wyłącznie do walidacji i nie są publikowane.
+- Naprawiono 21 logicznych niespójności flag `hasPartsPdf` / `hasPartsList` względem faktycznych referencji.
+
 ## v96 — Drawing Recovery Cleanup
 - 75837 zdjęty z kolejki przeróbki po znalezieniu oficjalnego `Czesci_zamienne_75837.pdf`.
 - Dodano `publication-consistency-audit-v96.json`.
@@ -31,7 +44,6 @@
 - Dodano runtime quality gate w `app.js`.
 - Dodano Apps Script do skanowania Drive i generowania manifestu publicznego + kolejki poprawek.
 
-# Changelog
 
 ## 20260711-v82-real-drawing-quality-gate
 
@@ -49,7 +61,6 @@
 - Dodano skrypty `drive-master` i `drive-alias-check`.
 - Przypadki multi-model PDF, np. `YT-828113 / YT-828114`, pozostają rozbite na osobne urządzenia z tym samym PDF.
 
-# Changelog
 
 ## 20260711-v80-drive-master-catalog
 
@@ -59,7 +70,6 @@
 - Dodano bezpieczne akcje porządkowania `drive-organizer-actions-v80.json`.
 - Dodano Apps Script v80 do skanowania Drive, OCR tekstu PDF i tworzenia kopii porządkujących bez kasowania źródeł.
 
-# Changelog
 
 ## 20260711-v79-drive-catalog-and-pdf-organizer
 
@@ -69,7 +79,6 @@
 - Dodano Apps Script do skanowania i porządkowania folderów Drive.
 - Dodano dokumentację polityki scalania PDF.
 
-# Changelog
 
 ## 20260711-v78-drive-first-catalog-builder
 
@@ -87,7 +96,6 @@
 - Ignorowane są spacje, myślniki i typowe nadmiarowe cyfry w indeksach.
 - Dodano `data/search-normalization-audit-v77.json` oraz `docs/SEARCH_STANDARD_V77.md`.
 
-# Changelog
 
 ## 20260711-v76-coverage-pdf-quality
 
@@ -107,7 +115,6 @@
 - Dodano scalone PDF-y jako osobne rekordy rysunków, żeby części powiązane ze scalonym plikiem nie wypadały z formularza.
 - Zasada klienta: urządzenie -> jeden najlepszy rysunek -> lista części. Tryb ręczny tylko awaryjnie.
 
-# Changelog
 
 ## 20260710-v73-stable-control
 

@@ -1,32 +1,16 @@
 <!doctype html>
-<html lang="pl">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="robots" content="noindex,nofollow" />
-  <title>PGW Service Hub — Healthcheck</title>
-  <style>
-    body{font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#0b1018;color:#f4f6fb;margin:0;padding:32px}main{max-width:980px;margin:auto}.ok{color:#57d68d}.bad{color:#ff6b6b}.muted{color:#9aa4b2}table{width:100%;border-collapse:collapse;margin-top:20px}td,th{border-bottom:1px solid #283142;padding:10px;text-align:left}code{background:#151c2a;padding:2px 6px;border-radius:6px}</style>
-</head>
-<body>
-<main>
-<h1>PGW Service Hub — healthcheck</h1>
-<p class="muted">Testuje obecność kluczowych plików po publikacji na GitHub Pages.</p>
-<div id="summary">Sprawdzanie…</div>
-<table><thead><tr><th>Plik</th><th>Status</th><th>Rozmiar / błąd</th></tr></thead><tbody id="rows"></tbody></table>
-<p class="muted">Panel admina: <code>?admin=1&v=20260710-v73-stable-control</code></p>
-</main>
+<html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>PGW Service Hub — v97 Healthcheck</title>
+<style>body{font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#0b1018;color:#f4f6fb;margin:0;padding:32px}main{max-width:1080px;margin:auto}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.card{background:#121a29;border:1px solid #283142;border-radius:16px;padding:16px}.ok{color:#57d68d}.warn{color:#ffcf5a}.bad{color:#ff6b6b}.muted{color:#9aa4b2}table{width:100%;border-collapse:collapse;margin-top:20px}td,th{border-bottom:1px solid #283142;padding:10px;text-align:left}code{background:#151c2a;padding:2px 6px;border-radius:6px}</style></head>
+<body><main><h1>PGW Service Hub — healthcheck 0.4.0.v97</h1><p class="muted">Kontrola plików krytycznych po synchronizacji i po publikacji. Runtime ma używać wyłącznie mapy v97.</p><div class="grid" id="cards"></div><table><thead><tr><th>Plik</th><th>Status</th><th>Rozmiar / błąd</th></tr></thead><tbody id="rows"></tbody></table><p class="muted">Panel admina: <code>admin.html?v=20260712-v97-foundation-for-v05</code></p></main>
 <script>
-const files=['index.html','app.css','config.js','app.js','manifest.webmanifest','data/devices.json','data/drawings.json','data/parts.json','data/drive-drawings-map.full.json','data/drive-drawings-map.converted.json','data/pdf-device-overrides.json','data/pdf-quality-report.json','data/release-info.json','admin.html','smoke-test.html','package.json','assets/logos/yato-wordmark-clean.png'];
-const rows=document.getElementById('rows');
-const summary=document.getElementById('summary');
-Promise.all(files.map(async file=>{
-  try{const res=await fetch(file,{cache:'no-store'}); const text=await res.clone().text().catch(()=>null); const size=text?text.length:Number(res.headers.get('content-length')||0); return {file,ok:res.ok,status:res.status,size};}
-  catch(e){return {file,ok:false,status:'ERR',size:e.message};}
-})).then(results=>{
-  let ok=0; rows.innerHTML=results.map(r=>{if(r.ok) ok++; return `<tr><td><code>${r.file}</code></td><td class="${r.ok?'ok':'bad'}">${r.ok?'OK':'BŁĄD'} ${r.status}</td><td>${r.size}</td></tr>`}).join('');
-  summary.innerHTML=`<strong class="${ok===results.length?'ok':'bad'}">${ok}/${results.length} OK</strong>`;
+const VERSION='20260712-v97-foundation-for-v05';
+const files=['index.html','app.css','config.js','app.js','manifest.webmanifest','package.json','RELEASE.json','repository-manifest.json','data/devices.json','data/drawings.json','data/parts.json','data/drive-drawings-map.generated-v97.json','data/publication-report-v97.json','data/publication-consistency-audit-v97.json','data/catalog-readiness-v97.json','data/release-readiness-v97.json','data/pdf-rewrite-queue-v97.json','admin.html','smoke-test.html','assets/logos/yato-wordmark-clean.png'];
+const rows=document.getElementById('rows'),cards=document.getElementById('cards');
+const esc=x=>String(x??'').replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]));
+Promise.all(files.map(async file=>{try{const res=await fetch(file+'?v='+Date.now(),{cache:'no-store'});const text=await res.clone().text().catch(()=>null);return {file,ok:res.ok,status:res.status,size:text?text.length:Number(res.headers.get('content-length')||0),json:text&&file.endsWith('.json')?JSON.parse(text):null};}catch(e){return {file,ok:false,status:'ERR',size:e.message};}})).then(results=>{
+ const okCount=results.filter(r=>r.ok).length;const release=results.find(r=>r.file==='RELEASE.json')?.json;const map=results.find(r=>r.file==='data/drive-drawings-map.generated-v97.json')?.json;const catalog=results.find(r=>r.file==='data/catalog-readiness-v97.json')?.json;
+ const strict=release?.publicMap==='data/drive-drawings-map.generated-v97.json';const count=Array.isArray(map?.items)?map.items.length:0;const allOk=okCount===results.length&&strict&&count>=2177;
+ cards.innerHTML=[['Status',allOk?'PASS':'FAIL',allOk?'ok':'bad'],['Pliki',okCount+'/'+results.length,okCount===results.length?'ok':'bad'],['Mapa publiczna',count,strict?'ok':'bad'],['Rysunki',catalog?.releaseContract?.publicDrawingCatalog||'brak','warn'],['Pełne dane',catalog?.releaseContract?.fullTOYA24Catalog||'brak','warn']].map(([a,b,c])=>`<div class="card"><span class="muted">${esc(a)}</span><br><strong class="${c}">${esc(b)}</strong></div>`).join('');
+ rows.innerHTML=results.map(r=>`<tr><td><code>${esc(r.file)}</code></td><td class="${r.ok?'ok':'bad'}">${r.ok?'OK':'BŁĄD'} ${esc(r.status)}</td><td>${esc(r.size)}</td></tr>`).join('');
 });
-</script>
-</body>
-</html>
+</script></body></html>

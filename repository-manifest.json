@@ -1,6 +1,8 @@
 {
-  "version": "20260712-v96-drawing-queue-cleanup",
-  "generatedAt": "2026-07-12T10:00:13+00:00",
+  "version": "20260712-v97-foundation-for-v05",
+  "generatedAt": "2026-07-12T21:27:44.483336+00:00",
+  "selfExcluded": true,
+  "fileCount": 178,
   "files": [
     {
       "path": ".gitattributes",
@@ -14,8 +16,8 @@
     },
     {
       "path": ".gitignore",
-      "bytes": 60,
-      "sha256": "4b90efcaa4e6de1c20d82e3c624245d961b023127236639db1fcd09f9ec6eaa8"
+      "bytes": 426,
+      "sha256": "491840c0e3e659a21a505b32ec76d14fd7391db96f50d9d926ab836e8fb0d491"
     },
     {
       "path": ".nojekyll",
@@ -29,23 +31,23 @@
     },
     {
       "path": "CHANGELOG.md",
-      "bytes": 5708,
-      "sha256": "e8644ab1574d76f9de9c162317e06af8c80a843c40365bdd7ab60074c501f76e"
+      "bytes": 7146,
+      "sha256": "caa30af3062d1adceb2537d8d8d81adccd9af77b1f75d14c9f92888e79a97464"
     },
     {
       "path": "README.md",
-      "bytes": 871,
-      "sha256": "731f62927e4f69179f9bd263e70e6826c0ba7757d57fd23303aef0f47d2f7f7a"
+      "bytes": 1458,
+      "sha256": "1afbe6a6e27d79d0f9b2f032dd9c7a65ddd92e238807cc99dc5323ad383809b0"
     },
     {
       "path": "RELEASE.json",
-      "bytes": 438,
-      "sha256": "2face93b57890ab0f73faac1aca19f119c24a2fabdddd69df7f1f9f02511be39"
+      "bytes": 929,
+      "sha256": "455949c6e066a972b95aff01de9dbb664e2b1080adb31cbd924ffd9f6d6229ee"
     },
     {
       "path": "admin.html",
-      "bytes": 4321,
-      "sha256": "0e7c5ee6a2e5d50b0c663e3eb640096d7ec0a65ecdc392f45887b4a0fed13f3b"
+      "bytes": 5277,
+      "sha256": "94de3e81947cf9aef459d2360bea2bc0e7eb4063d2b4c75bb0fb403abdff5ad4"
     },
     {
       "path": "app.css",
@@ -94,8 +96,8 @@
     },
     {
       "path": "config.js",
-      "bytes": 3603,
-      "sha256": "83f739e22a8a92462ff009961fecf8f89508b6557ef9ccb56e6348bf7cf1abcc"
+      "bytes": 4039,
+      "sha256": "30bd39d3a667f974cd39594999f43567ee8e08771d3ff61bfa918334f743c77e"
     },
     {
       "path": "data/brand-resolution-overrides.json",
@@ -118,6 +120,11 @@
       "sha256": "e6a18e00ea2c145960e111a3355cfdc444ce0b7290c18140823dea7217e342b0"
     },
     {
+      "path": "data/catalog-readiness-v97.json",
+      "bytes": 3061,
+      "sha256": "cf8057fe6175105fbbd858eaad698e9dc6fd3f2531d8bc25c6357bf35a63a068"
+    },
+    {
       "path": "data/coverage-audit-v76.json",
       "bytes": 92119,
       "sha256": "1576b7b210cb2bb180f8070507b3d1280162064d71b621b025714786ef7c9660"
@@ -129,8 +136,8 @@
     },
     {
       "path": "data/devices.json",
-      "bytes": 787432,
-      "sha256": "f1d1507ad5b1f3bb85fa034750d07bee0637de2a910ff469b477b0ba71324915"
+      "bytes": 787454,
+      "sha256": "a132b714aa2b5c988813367178c56f0d75ad03e631ceb8dd85bbfa45eccd99c5"
     },
     {
       "path": "data/drawings.json",
@@ -196,6 +203,11 @@
       "path": "data/drive-drawings-map.generated-v95.json",
       "bytes": 5106462,
       "sha256": "f2c40c6d91deebf21f22c4619493ba49a19c01e0c6f914bb669621e8011612d5"
+    },
+    {
+      "path": "data/drive-drawings-map.generated-v97.json",
+      "bytes": 5115962,
+      "sha256": "34274822c6125ae0f032a0fa26ae98582b68fcb346fe3f377fddfe72fb691498"
     },
     {
       "path": "data/drive-first-catalog-audit-v78.json",
@@ -363,6 +375,11 @@
       "sha256": "a4a8730a442d5660d62c52d0473ed16de36dfad117cde7516cff196e42035dde"
     },
     {
+      "path": "data/pdf-rewrite-queue-v97.json",
+      "bytes": 3980,
+      "sha256": "fec3a148fabe9c678b8f48b499c4eabe5a82ce8b69d17ff6562fc21ad4e619b7"
+    },
+    {
       "path": "data/pdf-standardization-audit.json",
       "bytes": 2833,
       "sha256": "0f99703311c02839097bd77552b2387d95c63479588f21af354d3826a446a3c0"
@@ -381,6 +398,11 @@
       "path": "data/public-drawing-policy-v83.json",
       "bytes": 1460,
       "sha256": "11305fe8320f9d5b3235ce2eac803663b0205f6ea06b02ff6fe721bb96b02d5d"
+    },
+    {
+      "path": "data/publication-consistency-audit-v97.json",
+      "bytes": 1241,
+      "sha256": "85860f4d298832d0961b511466ca0cec0b23d5b10b05eb6545e041500b81448b"
     },
     {
       "path": "data/publication-policy-v84.json",
@@ -408,19 +430,29 @@
       "sha256": "e5964cada52f7dcfa52e7562b879a7d6ade7a89e870fd3faf8f7c546e33c7ac6"
     },
     {
+      "path": "data/publication-report-v97.json",
+      "bytes": 2316,
+      "sha256": "f39c5b8b691160cf9be12b3614ac73d9168dbb1036d3d1f9b5da0dfd4454052e"
+    },
+    {
       "path": "data/real-drawing-quality-audit-v82.json",
       "bytes": 650,
       "sha256": "d5c9c73e4be1eea082a6f15925c3534309bac20e2ff28658bea4f8eb147dab15"
     },
     {
       "path": "data/release-checks.json",
-      "bytes": 336,
-      "sha256": "72bd4b9d1141563858233fad051ffe3afa2ecb07dc5187b0045af55fba86f11a"
+      "bytes": 1117,
+      "sha256": "a0202dce062a339c06f28667f8051324f161443b57187c6832e765372eb05487"
     },
     {
       "path": "data/release-info.json",
-      "bytes": 726,
-      "sha256": "8c138331d8d4793f4c7bba293442cc1a682a6a22901831cd144413f659340681"
+      "bytes": 1054,
+      "sha256": "3e6cfed6cab0e8e74a4ffd5d495723eea7c7a72b564d400c9ab4d6a1351f7aa7"
+    },
+    {
+      "path": "data/release-readiness-v97.json",
+      "bytes": 1349,
+      "sha256": "378e64f71f0e1b415ff07ee6b616a2a67e0b3e846ef73a098d8b33bc81012b9d"
     },
     {
       "path": "data/search-normalization-audit-v77.json",
@@ -446,6 +478,11 @@
       "path": "docs/COVERAGE_AUDIT_V76.md",
       "bytes": 1857,
       "sha256": "468d8f7cb5b5206ea5b273d0c6e3d6d90f4a9dc661e1ef8e7156c53fcc6aaa03"
+    },
+    {
+      "path": "docs/DATA_PRIVACY_AND_PUBLICATION_V97.md",
+      "bytes": 815,
+      "sha256": "dd7da858fe2d63cdd0017ba735d8363e51487048c970f0635d3e10deb868b835"
     },
     {
       "path": "docs/DATA_SOURCES.md",
@@ -541,6 +578,11 @@
       "path": "docs/SHA256SUMS-v85-v94.txt",
       "bytes": 4474,
       "sha256": "69a54843f3285a0c186c341e1013c28faa628ee96685a60dd70ff360c56f7fcb"
+    },
+    {
+      "path": "docs/V97_TO_V05_MIGRATION.md",
+      "bytes": 1379,
+      "sha256": "d1e6a6fd7525d8725db3b9147f9ecdfde1a161f563b72753b7a01a54a7630e88"
     },
     {
       "path": "docs/VALIDATION_REPORT.json",
@@ -704,8 +746,8 @@
     },
     {
       "path": "healthcheck.html",
-      "bytes": 2250,
-      "sha256": "326026598b7bc012e7dc304d8e3887d8f5c486f3fe0bf65b9c2d56a2ce9c0ead"
+      "bytes": 3545,
+      "sha256": "4c07b8d065f45c7fb4ee551b180e3fe2ade5dca50a66b9eb07162fcb20a32bc9"
     },
     {
       "path": "index.html",
@@ -719,13 +761,13 @@
     },
     {
       "path": "package.json",
-      "bytes": 1303,
-      "sha256": "68532f39c883cc8fb00db708ae930c52313be28e236a05b0405c27da081460a8"
+      "bytes": 1822,
+      "sha256": "25e74c05b9dcddfbd7288c79849f294955054411ab2568f21f6d128cc695b6c8"
     },
     {
-      "path": "repository-manifest.json",
-      "bytes": 28286,
-      "sha256": "55e9fb6be18236f3ffc98575eaf7166b23622cbcad48ffe9f05e494c64f1d260"
+      "path": "reports/source-coverage-v97.json",
+      "bytes": 831,
+      "sha256": "8a7b7f72b0dbaf1f2ddde07faf5754dc605d5ee8c4fca0a241f4717770451394"
     },
     {
       "path": "robots.txt",
@@ -739,8 +781,8 @@
     },
     {
       "path": "scripts/pgw-repo-selfcheck.mjs",
-      "bytes": 3541,
-      "sha256": "b601aed8917c7176ac1988bd1aec03c457cd7db0fd7a5c3c9549aa56c0989dc3"
+      "bytes": 1704,
+      "sha256": "e87fac5780c3be1d71139540fb858e0f6798b17445be3cc54883c4811bf1f0bb"
     },
     {
       "path": "scripts/pgw-v76-coverage-report.mjs",
@@ -838,14 +880,20 @@
       "sha256": "639998a0e71b858deff222e50ed9ed302bca036f91653e15d17963ba64e58de6"
     },
     {
+      "path": "scripts/pgw-v97-build-manifest.mjs",
+      "bytes": 1540,
+      "sha256": "5d26c368373c640485211746194c1aacb23523b17c995a6a3e4936fce338a7da"
+    },
+    {
+      "path": "scripts/pgw-v97-repository-health.mjs",
+      "bytes": 10479,
+      "sha256": "129450b6096ba9d7b11b158b06218c521d14fec48aff68ac9b75a43ed0c8c83f"
+    },
+    {
       "path": "smoke-test.html",
-      "bytes": 2979,
-      "sha256": "f74c96b9ebf50d3112ce237a93f3630ad861b63d5ffc429087e331401495dc38"
+      "bytes": 3381,
+      "sha256": "2b335d2fcb7dff8c1d85a4d8bfd8a5ebcb6a95590609e3ca6ddd2ac63050744e"
     }
   ],
-  "fileCount": 168,
-  "releaseChannel": "stable-v96",
-  "notes": [
-    "v96 resolves 75837 official PDF and cleans rewrite queue"
-  ]
+  "privateWorkbenchExcluded": true
 }

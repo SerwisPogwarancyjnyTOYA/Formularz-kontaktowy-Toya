@@ -1,24 +1,28 @@
 {
   "version": "0.4.0.v97",
+  "packageVersion": "0.4.0-v97",
   "build": "20260712-v97-foundation-for-v05",
-  "name": "PGW 0.4.0.v97 — Foundation for 0.5",
+  "name": "PGW 0.4.0.v97 - Foundation for 0.5",
   "date": "2026-07-12",
   "status": "release-candidate",
   "previousVersion": "0.4.0.v96",
   "goals": [
     "Unify release metadata and canonical data pointers.",
-    "Preserve and modernize audit mechanisms from v76-v96.",
-    "Add repository health, doctor and production release checks.",
-    "Prepare a stable schema and migration path for 0.5.0."
+    "Recover verified official PDFs missing from the public map.",
+    "Separate drawing-publication readiness from complete parts-data readiness.",
+    "Use internal master data only for validation, never for public stock/price publication.",
+    "Add health, doctor, release and v0.5 readiness gates."
   ],
   "knownLimitations": [
-    "YT-85271 requires manual verification of 69 parts against source PDF/DOCX."
+    "YT-85271 requires manual verification of 69 parts.",
+    "Only 42 of 1424 device records currently have mapped parts data."
   ],
   "testPlan": [
     "npm run check",
     "npm run health",
     "npm run doctor",
     "npm run release-v97-check",
+    "npm run v05-readiness",
     "npm run search-check",
     "npm run coverage",
     "npm run drive-quality-gate",

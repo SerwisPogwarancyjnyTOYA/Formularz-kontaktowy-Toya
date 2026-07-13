@@ -1,50 +1,72 @@
 {
   "schema": "pgw-publication-report-v97",
   "version": "0.4.0.v97",
-  "generatedAt": "2026-07-12T00:00:00+00:00",
+  "build": "20260712-v97-foundation-for-v05",
+  "generatedAt": "2026-07-12T21:02:08+00:00",
   "base": "v96 verified public map",
   "summary": {
-    "publicMapRows": 2174,
-    "publicReadyRows": 2174,
+    "publicMapRows": 2177,
+    "publicReadyRows": 2177,
+    "addedPublicModels": 3,
+    "addedModels": [
+      "YT-8277905",
+      "YT-8277915",
+      "YT-8277935"
+    ],
     "resolvedRewriteItems": 1,
-    "remainingRewriteItems": 1,
+    "remainingManualItems": 1,
     "missingPreviewLinks": 0,
     "publicRowsWithRoboczyNameSignals": 0,
-    "strictDriveMapFallback": "generated-v96 only in config.js",
-    "migrationFoundation": "v0.5-ready metadata and QA layer"
+    "exactPublicModelDuplicates": 0,
+    "sharedPdfFileGroups": 751,
+    "canonicalRuntimeMap": "data/drive-drawings-map.generated-v97.json",
+    "fixedDeviceFlagInconsistencies": 21,
+    "remainingDeviceFlagInconsistencies": 0
   },
+  "recovered": [
+    {
+      "model": "YT-8277905",
+      "fileId": "1GHHmBftW1jSgxZF6OVydFL3R0yS5YpRg",
+      "fileName": "Czesci_zamienne_YT-8277905.pdf",
+      "serviceModel": "YT-827788",
+      "qa": "PAGE_BY_PAGE_TOYA24_PASS"
+    },
+    {
+      "model": "YT-8277915",
+      "fileId": "1sfYXPkWRa0bmXGfgydtgANIH2y6iippL",
+      "fileName": "Czesci_zamienne_YT-8277915.pdf",
+      "serviceModel": "YT-827791",
+      "qa": "PAGE_BY_PAGE_TOYA24_PASS"
+    },
+    {
+      "model": "YT-8277935",
+      "fileId": "1AEoY9ge5DH5Fdc5AeUbxiVpUqia8bRRN",
+      "fileName": "Czesci_zamienne_YT-8277935.pdf",
+      "serviceModel": "YT-827793",
+      "qa": "PAGE_BY_PAGE_TOYA24_PASS"
+    }
+  ],
   "resolved": [
     {
       "model": "75837",
-      "before": {
-        "fileId": "1yPUxNabt1H7E661BzB8CbXwPSM4HXXVI",
-        "fileName": "Czesci_zamienne_75837.pdf",
-        "publicationStatus": "PUBLIC_READY",
-        "publicationClass": "GOLDEN_SAMPLE_MATCH"
-      },
-      "after": {
-        "fileId": "1yPUxNabt1H7E661BzB8CbXwPSM4HXXVI",
-        "fileName": "Czesci_zamienne_75837.pdf",
-        "publicationStatus": "PUBLIC_READY",
-        "publicationClass": "OFFICIAL_TOYA24_STYLE_VERIFIED",
-        "publicationReason": "v96: official Czesci_zamienne_75837.pdf found on Drive; removed from rewrite queue"
-      }
+      "fileId": "1yPUxNabt1H7E661BzB8CbXwPSM4HXXVI",
+      "fileName": "Czesci_zamienne_75837.pdf",
+      "resolution": "official TOYA24-style PDF retained from v96 recovery"
     }
   ],
-  "remainingRewriteItems": [
+  "remainingManualItems": [
     {
-      "version": "v90",
       "model": "YT-85271",
-      "item": "mapowanie listy części",
-      "reason": "69 pozycji z DOCX pozostaje do kontroli zgodności z PDF.",
-      "source": "v85-v94-master"
+      "scope": "parts mapping",
+      "reason": "69 DOCX positions require verification against the official PDF before parts.json can be populated.",
+      "drawingPublicationStatus": "PUBLIC_READY",
+      "fullDocumentationStatus": "MANUAL_REQUIRED"
     }
   ],
   "rules": [
-    "Official Czesci_zamienne_<MODEL>.pdf that matches TOYA24/golden sample goes public immediately.",
-    "Robocze/converted PDFs stay private and can only be source material.",
-    "Public catalog must use /preview links and generated v96 map only.",
-    "If public map already has official PDF, remove the model from rewrite queue.",
-    "Historical audit artifacts remain archival evidence; canonical runtime pointers must target v97 files only."
+    "Runtime uses only data/drive-drawings-map.generated-v97.json.",
+    "Official Czesci_zamienne_<MODEL>.pdf is public only after page-by-page TOYA24 verification.",
+    "Robocze/converted/source Office files remain private.",
+    "A public-ready drawing does not imply complete parts-data readiness."
   ]
 }

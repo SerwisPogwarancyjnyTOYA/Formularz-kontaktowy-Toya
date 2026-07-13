@@ -11,6 +11,7 @@
     "npm run health",
     "npm run doctor",
     "npm run release-v97-check",
+    "npm run v05-readiness",
     "npm run search-check",
     "npm run coverage",
     "npm run drive-quality-gate",
@@ -23,14 +24,16 @@
     "drive-drawings-map.generated-v97.json",
     "publication-report-v97.json",
     "publication-consistency-audit-v97.json",
+    "catalog-readiness-v97.json",
     "release-readiness-v97.json"
   ],
   "publicSafety": [
-    "no secrets or tokens",
-    "no temporary/source Office files",
+    "no secrets, tokens, private keys or environment files",
+    "no raw Office/ZIP/source archives",
+    "no customer IDs, issue lists or stock snapshots",
     "no robocze/converted PDFs in public map",
     "all public PDFs use /preview",
-    "only READY records may be published"
+    "drawing READY and full-documentation READY are separate statuses"
   ],
   "pricesVisible": false,
   "stockVisible": false

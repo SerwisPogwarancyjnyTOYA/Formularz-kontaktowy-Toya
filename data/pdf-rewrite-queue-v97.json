@@ -1,7 +1,7 @@
 {
   "schema": "pgw-pdf-rewrite-queue-v97",
   "version": "0.4.0.v97",
-  "generatedAt": "2026-07-12T00:00:00+00:00",
+  "generatedAt": "2026-07-12T21:02:08+00:00",
   "baseQueue": "pdf-rewrite-queue-v96.json",
   "resolvedFromQueue": [
     {
@@ -13,10 +13,13 @@
   ],
   "items": [
     {
-      "version": "v90",
+      "version": "v97",
       "model": "YT-85271",
       "item": "mapowanie listy części",
+      "scope": "parts.json",
       "reason": "69 pozycji z DOCX pozostaje do kontroli zgodności z PDF.",
+      "drawingPublicationStatus": "PUBLIC_READY",
+      "fullDocumentationStatus": "MANUAL_REQUIRED",
       "source": "v85-v94-master"
     }
   ],
@@ -142,5 +145,5 @@
       "reason": "Robocze PDF-y, pliki tymczasowe i źródła wewnętrzne."
     }
   ],
-  "note": "v97 retains historical private source rules and promotes only verified READY documents."
+  "note": "Drawing publication and complete parts-data readiness are separate. YT-85271 PDF remains public, while parts mapping stays manual."
 }

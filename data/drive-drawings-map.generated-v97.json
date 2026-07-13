@@ -1,9 +1,10 @@
 {
-  "schema": "pgw-drive-drawings-map-v96",
-  "version": "20260712-v96-drawing-queue-cleanup",
-  "generatedAt": "2026-07-12T10:00:13+00:00",
-  "source": "v95 + v96 Drive official recovery pass",
-  "count": 2174,
+  "schema": "pgw-drive-drawings-map-v97",
+  "version": "20260712-v97-foundation-for-v05",
+  "productVersion": "0.4.0.v97",
+  "generatedAt": "2026-07-12T21:02:08+00:00",
+  "source": "v96 verified map + v97 page-by-page recovery from drawings.json",
+  "count": 2177,
   "items": [
     {
       "fileId": "1YoiY5vVPMm_sr4V8r6m8V7fUZ11cEc3t",
@@ -111238,6 +111239,82 @@
       "publicationReason": "official/canonical drawing source accepted for GitHub public catalog"
     },
     {
+      "fileId": "1GHHmBftW1jSgxZF6OVydFL3R0yS5YpRg",
+      "deviceIndex": "YT-8277905",
+      "model": "YT-8277905",
+      "deviceIndexes": [
+        "YT-8277905"
+      ],
+      "modelsInPdf": [
+        "YT-8277905"
+      ],
+      "title": "Czesci_zamienne_YT-8277905.pdf",
+      "fileName": "Czesci_zamienne_YT-8277905.pdf",
+      "canonicalFileName": "Czesci_zamienne_YT-8277905.pdf",
+      "brand": "YATO",
+      "mimeType": "application/pdf",
+      "viewerUrl": "https://drive.google.com/file/d/1GHHmBftW1jSgxZF6OVydFL3R0yS5YpRg/preview",
+      "previewUrl": "https://drive.google.com/file/d/1GHHmBftW1jSgxZF6OVydFL3R0yS5YpRg/preview",
+      "openUrl": "https://drive.google.com/file/d/1GHHmBftW1jSgxZF6OVydFL3R0yS5YpRg/view",
+      "downloadUrl": "https://drive.google.com/uc?export=download&id=1GHHmBftW1jSgxZF6OVydFL3R0yS5YpRg",
+      "path": "Rysunki wybuchowe",
+      "folderName": "Rysunki wybuchowe",
+      "source": "V97_DRAWINGS_JSON_RECOVERY",
+      "status": "public-official-recovered",
+      "preferred": true,
+      "githubPreviewReady": true,
+      "hasPartsList": true,
+      "partsExtracted": false,
+      "pdfVariant": "official_czesci_zamienne",
+      "displayMode": "standard-service-card",
+      "displayPriority": 11780,
+      "qualityFlags": [
+        "TOYA24_MATCH",
+        "V97_PAGE_BY_PAGE_VERIFIED",
+        "RETAIL_KIT_MODEL"
+      ],
+      "keys": [
+        "YT-8277905",
+        "yt-8277905",
+        "YT8277905",
+        "YT 8277905",
+        "8277905",
+        "Czesci_zamienne_YT-8277905",
+        "CZESCI_ZAMIENNE_YT-8277905",
+        "czesci_zamienne_yt-8277905",
+        "YT-827788",
+        "YT827788",
+        "YT 827788"
+      ],
+      "parts": [],
+      "catalogVersion": "20260712-v97-foundation-for-v05",
+      "searchAliases": [
+        "YT-8277905",
+        "yt-8277905",
+        "YT8277905",
+        "YT 8277905",
+        "8277905",
+        "Czesci_zamienne_YT-8277905",
+        "CZESCI_ZAMIENNE_YT-8277905",
+        "czesci_zamienne_yt-8277905",
+        "YT-827788",
+        "YT827788",
+        "YT 827788"
+      ],
+      "modelSearchText": "YT-8277905 yt-8277905 YT8277905 YT 8277905 8277905 Czesci_zamienne_YT-8277905 CZESCI_ZAMIENNE_YT-8277905 czesci_zamienne_yt-8277905 YT-827788 YT827788 YT 827788 Czesci_zamienne_YT-8277905.pdf YT-8277905 - WKRĘTARKA BEZSZCZOTKOWA 18V 45NM 2X 2AH Rysunki wybuchowe",
+      "publicStatus": "public",
+      "publicClass": "GOLDEN_OFFICIAL",
+      "publicationStatus": "PUBLIC_READY",
+      "publicationClass": "OFFICIAL_TOYA24_STYLE_VERIFIED",
+      "publicationReason": "v97: verified page by page; title, product image, exploded drawing and PL/EN parts table present",
+      "qualityGate": "TOYA24_MATCH",
+      "canonicalServiceModel": "YT-827788",
+      "retailKitModel": "YT-8277905",
+      "partsIndexPrefix": "ZY827788",
+      "verifiedPartRows": 20,
+      "v97Recovery": true
+    },
+    {
       "fileId": "1hQHw-XdMFvYDG3LrHFYYD9kk1jEFI7iK",
       "deviceIndex": "YT-827791",
       "model": "YT-827791",
@@ -111294,6 +111371,82 @@
       "publicationStatus": "PUBLIC_READY",
       "publicationClass": "GOLDEN_SAMPLE_MATCH",
       "publicationReason": "official/canonical drawing source accepted for GitHub public catalog"
+    },
+    {
+      "fileId": "1sfYXPkWRa0bmXGfgydtgANIH2y6iippL",
+      "deviceIndex": "YT-8277915",
+      "model": "YT-8277915",
+      "deviceIndexes": [
+        "YT-8277915"
+      ],
+      "modelsInPdf": [
+        "YT-8277915"
+      ],
+      "title": "Czesci_zamienne_YT-8277915.pdf",
+      "fileName": "Czesci_zamienne_YT-8277915.pdf",
+      "canonicalFileName": "Czesci_zamienne_YT-8277915.pdf",
+      "brand": "YATO",
+      "mimeType": "application/pdf",
+      "viewerUrl": "https://drive.google.com/file/d/1sfYXPkWRa0bmXGfgydtgANIH2y6iippL/preview",
+      "previewUrl": "https://drive.google.com/file/d/1sfYXPkWRa0bmXGfgydtgANIH2y6iippL/preview",
+      "openUrl": "https://drive.google.com/file/d/1sfYXPkWRa0bmXGfgydtgANIH2y6iippL/view",
+      "downloadUrl": "https://drive.google.com/uc?export=download&id=1sfYXPkWRa0bmXGfgydtgANIH2y6iippL",
+      "path": "Rysunki wybuchowe",
+      "folderName": "Rysunki wybuchowe",
+      "source": "V97_DRAWINGS_JSON_RECOVERY",
+      "status": "public-official-recovered",
+      "preferred": true,
+      "githubPreviewReady": true,
+      "hasPartsList": true,
+      "partsExtracted": false,
+      "pdfVariant": "official_czesci_zamienne",
+      "displayMode": "standard-service-card",
+      "displayPriority": 11780,
+      "qualityFlags": [
+        "TOYA24_MATCH",
+        "V97_PAGE_BY_PAGE_VERIFIED",
+        "RETAIL_KIT_MODEL"
+      ],
+      "keys": [
+        "YT-8277915",
+        "yt-8277915",
+        "YT8277915",
+        "YT 8277915",
+        "8277915",
+        "Czesci_zamienne_YT-8277915",
+        "CZESCI_ZAMIENNE_YT-8277915",
+        "czesci_zamienne_yt-8277915",
+        "YT-827791",
+        "YT827791",
+        "YT 827791"
+      ],
+      "parts": [],
+      "catalogVersion": "20260712-v97-foundation-for-v05",
+      "searchAliases": [
+        "YT-8277915",
+        "yt-8277915",
+        "YT8277915",
+        "YT 8277915",
+        "8277915",
+        "Czesci_zamienne_YT-8277915",
+        "CZESCI_ZAMIENNE_YT-8277915",
+        "czesci_zamienne_yt-8277915",
+        "YT-827791",
+        "YT827791",
+        "YT 827791"
+      ],
+      "modelSearchText": "YT-8277915 yt-8277915 YT8277915 YT 8277915 8277915 Czesci_zamienne_YT-8277915 CZESCI_ZAMIENNE_YT-8277915 czesci_zamienne_yt-8277915 YT-827791 YT827791 YT 827791 Czesci_zamienne_YT-8277915.pdf YT-8277915 - WIERTARKA UDAROWA BEZSZCZOTKOWA 18V 120NM - 2X 4AH Rysunki wybuchowe",
+      "publicStatus": "public",
+      "publicClass": "GOLDEN_OFFICIAL",
+      "publicationStatus": "PUBLIC_READY",
+      "publicationClass": "OFFICIAL_TOYA24_STYLE_VERIFIED",
+      "publicationReason": "v97: verified page by page; title, product image, exploded drawing and PL/EN parts table present",
+      "qualityGate": "TOYA24_MATCH",
+      "canonicalServiceModel": "YT-827791",
+      "retailKitModel": "YT-8277915",
+      "partsIndexPrefix": "ZY827791",
+      "verifiedPartRows": 22,
+      "v97Recovery": true
     },
     {
       "fileId": "1Gnoo9ohcE7nflrAEtDcjBL2WJ32w_wtE",
@@ -111410,6 +111563,82 @@
       "publicationStatus": "PUBLIC_READY",
       "publicationClass": "GOLDEN_SAMPLE_MATCH",
       "publicationReason": "official/canonical drawing source accepted for GitHub public catalog"
+    },
+    {
+      "fileId": "1AEoY9ge5DH5Fdc5AeUbxiVpUqia8bRRN",
+      "deviceIndex": "YT-8277935",
+      "model": "YT-8277935",
+      "deviceIndexes": [
+        "YT-8277935"
+      ],
+      "modelsInPdf": [
+        "YT-8277935"
+      ],
+      "title": "Czesci_zamienne_YT-8277935.pdf",
+      "fileName": "Czesci_zamienne_YT-8277935.pdf",
+      "canonicalFileName": "Czesci_zamienne_YT-8277935.pdf",
+      "brand": "YATO",
+      "mimeType": "application/pdf",
+      "viewerUrl": "https://drive.google.com/file/d/1AEoY9ge5DH5Fdc5AeUbxiVpUqia8bRRN/preview",
+      "previewUrl": "https://drive.google.com/file/d/1AEoY9ge5DH5Fdc5AeUbxiVpUqia8bRRN/preview",
+      "openUrl": "https://drive.google.com/file/d/1AEoY9ge5DH5Fdc5AeUbxiVpUqia8bRRN/view",
+      "downloadUrl": "https://drive.google.com/uc?export=download&id=1AEoY9ge5DH5Fdc5AeUbxiVpUqia8bRRN",
+      "path": "Rysunki wybuchowe",
+      "folderName": "Rysunki wybuchowe",
+      "source": "V97_DRAWINGS_JSON_RECOVERY",
+      "status": "public-official-recovered",
+      "preferred": true,
+      "githubPreviewReady": true,
+      "hasPartsList": true,
+      "partsExtracted": false,
+      "pdfVariant": "official_czesci_zamienne",
+      "displayMode": "standard-service-card",
+      "displayPriority": 11780,
+      "qualityFlags": [
+        "TOYA24_MATCH",
+        "V97_PAGE_BY_PAGE_VERIFIED",
+        "RETAIL_KIT_MODEL"
+      ],
+      "keys": [
+        "YT-8277935",
+        "yt-8277935",
+        "YT8277935",
+        "YT 8277935",
+        "8277935",
+        "Czesci_zamienne_YT-8277935",
+        "CZESCI_ZAMIENNE_YT-8277935",
+        "czesci_zamienne_yt-8277935",
+        "YT-827793",
+        "YT827793",
+        "YT 827793"
+      ],
+      "parts": [],
+      "catalogVersion": "20260712-v97-foundation-for-v05",
+      "searchAliases": [
+        "YT-8277935",
+        "yt-8277935",
+        "YT8277935",
+        "YT 8277935",
+        "8277935",
+        "Czesci_zamienne_YT-8277935",
+        "CZESCI_ZAMIENNE_YT-8277935",
+        "czesci_zamienne_yt-8277935",
+        "YT-827793",
+        "YT827793",
+        "YT 827793"
+      ],
+      "modelSearchText": "YT-8277935 yt-8277935 YT8277935 YT 8277935 8277935 Czesci_zamienne_YT-8277935 CZESCI_ZAMIENNE_YT-8277935 czesci_zamienne_yt-8277935 YT-827793 YT827793 YT 827793 Czesci_zamienne_YT-8277935.pdf YT-8277935 - KLUCZ UDAROWY 18V 1/2'' 800NM - 2X 4AH Rysunki wybuchowe",
+      "publicStatus": "public",
+      "publicClass": "GOLDEN_OFFICIAL",
+      "publicationStatus": "PUBLIC_READY",
+      "publicationClass": "OFFICIAL_TOYA24_STYLE_VERIFIED",
+      "publicationReason": "v97: verified page by page; title, product image, exploded drawing and PL/EN parts table present",
+      "qualityGate": "TOYA24_MATCH",
+      "canonicalServiceModel": "YT-827793",
+      "retailKitModel": "YT-8277935",
+      "partsIndexPrefix": "ZY827793",
+      "verifiedPartRows": 35,
+      "v97Recovery": true
     },
     {
       "fileId": "18m1QdR5XyAirPAn10mRO3ok2pjA2wAxm",
@@ -114189,10 +114418,12 @@
       "deviceIndex": "YT-828118",
       "model": "YT-828118",
       "deviceIndexes": [
-        "YT-828118"
+        "YT-828118",
+        "YT-8281185"
       ],
       "modelsInPdf": [
-        "YT-828118"
+        "YT-828118",
+        "YT-8281185"
       ],
       "title": "Czesci_zamienne_YT-828118_YT-8281185.pdf",
       "fileName": "Czesci_zamienne_YT-828118_YT-8281185.pdf",
@@ -114216,7 +114447,8 @@
       "displayPriority": 1780,
       "qualityFlags": [
         "V95_MASTER_PATCH",
-        "TOYA24_MATCH"
+        "TOYA24_MATCH",
+        "V97_ALIAS_CONFIRMED"
       ],
       "keys": [
         "YT-828118",
@@ -114248,14 +114480,17 @@
         "czesci_zamienne_yt-828118",
         "Czesci_zamienne_YT828118",
         "CZESCI_ZAMIENNE_YT 828118",
-        "YT-8281185"
+        "YT-8281185",
+        "YT8281185",
+        "YT 8281185",
+        "8281185"
       ],
       "modelSearchText": "YT-828118 yt-828118 YT828118 YT 828118 yt828118 Czesci_zamienne_YT-828118_YT-8281185 CZESCI_ZAMIENNE_YT-828118_YT-8281185 czesci_zamienne_yt-828118_yt-8281185 Czesci_zamienne_YT828118_YT8281185 CZESCI_ZAMIENNE_YT 828118_YT 8281185 Czesci_zamienne_YT-828118 CZESCI_ZAMIENNE_YT-828118 czesci_zamienne_yt-828118 Czesci_zamienne_YT828118 Czesci_zamienne_YT-828118_YT-8281185.pdf Rysunki wybuchowe YT 828118 CZESCI_ZAMIENNE_YT 828118_YT 8281185 CZESCI_ZAMIENNE_YT 828118 YT-8281185 Rysunki wybuchowe",
       "publicStatus": "public",
       "publicClass": "GOLDEN_OFFICIAL",
       "publicationStatus": "PUBLIC_READY",
       "publicationClass": "OFFICIAL_TOYA24_STYLE_VERIFIED",
-      "publicationReason": "official public drawing accepted/overridden from v85-v94 master patch",
+      "publicationReason": "v97: combined official PDF verified page by page for YT-828118 and alias YT-8281185",
       "qualityGate": "TOYA24_MATCH",
       "v95PatchSource": "PGW-updates-v85-v94-REGENERATED-MASTER.zip"
     },
@@ -131709,5 +131944,17 @@
       "75837"
     ],
     "rule": "PUBLIC_READY official Czesci_zamienne PDF replaces rewrite queue ambiguity"
+  },
+  "v97Recovery": {
+    "addedModels": [
+      "YT-8277905",
+      "YT-8277915",
+      "YT-8277935"
+    ],
+    "updatedAliases": [
+      "YT-8281185"
+    ],
+    "verifiedPdfCount": 4,
+    "method": "all pages rendered and visually checked; TOYA title page + product image + exploded drawing + numbered PL/EN parts table required"
   }
 }
