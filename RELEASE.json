@@ -1,20 +1,19 @@
 {
-  "version": "0.4.0.v97",
-  "packageVersion": "0.4.0-v97",
-  "build": "20260712-v97-foundation-for-v05",
-  "createdAt": "2026-07-12T21:02:08+00:00",
-  "releaseChannel": "candidate-v97",
-  "previousVersion": "0.4.0.v96",
-  "publicMap": "data/drive-drawings-map.generated-v97.json",
-  "releaseContract": {
-    "publicDrawingCatalog": "READY_WITH_ACKNOWLEDGED_DATA_DEBT",
-    "fullTOYA24Catalog": "NOT_READY"
+  "version": "0.4.0.v98",
+  "build": "20260713-v98-verified-drawings-and-ux",
+  "createdAt": "2026-07-13T08:11:58+00:00",
+  "releaseChannel": "candidate-v98",
+  "previousVersion": "0.4.0.v97",
+  "publicMap": {
+    "base": "data/drive-drawings-map.generated-v97.json",
+    "patch": "data/drive-drawings-patch-v98.json",
+    "effectiveVersion": "0.4.0.v98"
   },
-  "policy": "strict TOYA24 drawing publication gate + separate full-documentation readiness + repository health/doctor + v0.5 migration foundation",
+  "policy": "strict TOYA24 publication gate + incremental verified map patch + operational QA UX + repository health",
   "notes": [
-    "Three verified retail-kit models recovered into the v97 map.",
-    "YT-85271 drawing is public-ready; parts mapping remains MANUAL_REQUIRED.",
-    "Raw XLS/XLSM/XLSX/DOCX/ZIP and stock/customer data are private and blocked from public release.",
-    "21 legacy hasPartsPdf/hasPartsList inconsistencies were normalized from actual references."
+    "Introduces incremental map patches, so future releases do not need to replace the five-megabyte canonical map for a small verified batch.",
+    "Restores three official models referenced by v97 documentation but absent from the active canonical map.",
+    "Upgrades twelve verified mower drawings with TOYA24_FULL_MATCH and previewPage metadata.",
+    "Refreshes stale admin, healthcheck and smoke-test files to the canonical v98 data set."
   ]
 }

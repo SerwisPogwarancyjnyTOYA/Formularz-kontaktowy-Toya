@@ -1,8 +1,8 @@
 (() => {
   'use strict';
-  // PGW v95 strict publication gate with v85-v94 master patch: public driveMap excludes full/converted fallback sources.
+  // PGW v98 incremental publication: canonical v97 map plus a small verified patch, merged by the existing score-dedupe pipeline.
   const CONFIG = window.PGW_CONFIG || {};
-  const DRAFT_KEY = 'pgw-production-draft-v95-v83-v94-master-publication-update';
+  const DRAFT_KEY = 'pgw-production-draft-v98-verified-drawings-and-ux';
   const THEME_KEY = 'pgw-theme';
   const PART_ROW_LIMIT = Number(CONFIG.partRowLimit || 80);
   const $ = (id) => document.getElementById(id);
@@ -310,6 +310,11 @@
           status: row.status || '',
           pdfVariant: row.pdfVariant || classifyPdfVariant(row),
           githubPreviewReady: Boolean(row.githubPreviewReady),
+          publicationStatus: row.publicationStatus || row.qaStatus || row.status || '',
+          qualityGate: row.qualityGate || '',
+          previewPage: Number(row.previewPage || 0) || null,
+          pages: Number(row.pages || 0) || null,
+          verifiedAt: row.verifiedAt || '',
           partsExtracted: Boolean(row.partsExtracted),
           displayMode: row.displayMode || 'standard-service-card'
         };
@@ -1270,15 +1275,19 @@
       if (btn) btn.addEventListener('click', () => startManualRequest(typed));
       return;
     }
-    const deviceHtml = results.map(({device, drawings, partCount}) => `
+    const deviceHtml = results.map(({device, drawings, partCount}) => {
+      const verified = drawings.some(d => isVerifiedToy24Drawing(d));
+      const previewPage = drawings.map(d => Number(d.previewPage || 0)).find(Boolean) || 0;
+      return `
       <article class="device-card ${state.selectedDevice && norm(state.selectedDevice.deviceIndex) === norm(device.deviceIndex) ? 'selected' : ''}">
         <div>
           <h3>${escapeHtml(device.deviceIndex || 'Bez indeksu')}</h3>
           <p>${escapeHtml(displayDeviceName(device, drawings[0]))}</p>
-          <div class="badges">${publicBrandBadge(device)}<span class="badge ok">Rysunek PDF</span><span class="badge">${fmt(drawings.length)} rys.</span><span class="badge ${partCount ? '' : 'warn'}">${partCount ? fmt(partCount) + ' części' : 'PDF - opisz pozycję z rysunku'}</span></div>
+          <div class="badges">${publicBrandBadge(device)}<span class="badge ok">Rysunek PDF</span>${verified ? '<span class="badge ok">Zweryfikowany TOYA24</span>' : ''}${previewPage ? `<span class="badge">Rysunek: str. ${previewPage}</span>` : ''}<span class="badge">${fmt(drawings.length)} rys.</span><span class="badge ${partCount ? '' : 'warn'}">${partCount ? fmt(partCount) + ' części' : 'PDF - opisz pozycję z rysunku'}</span></div>
         </div>
         <button class="primary" type="button" data-device="${escapeAttr(device.deviceIndex)}">Wybierz</button>
-      </article>`).join('');
+      </article>`;
+    }).join('');
     els.deviceResults.innerHTML = `${zunHtml}${deviceHtml}`;
     els.deviceResults.querySelectorAll('button[data-device]').forEach(btn => btn.addEventListener('click', () => selectDevice(btn.dataset.device)));
   }
@@ -2566,6 +2575,12 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
 
 
 
+  function isVerifiedToy24Drawing(row) {
+    const quality = String(row?.qualityGate || '').toUpperCase();
+    const qa = String(row?.qaStatus || row?.publicationStatus || row?.status || '').toUpperCase();
+    return quality === 'TOYA24_FULL_MATCH' || quality === 'TOYA24_MATCH' || qa === 'READY' || qa === 'PUBLIC_READY';
+  }
+
   function isPreferredPdf(row) {
     const text = norm([row.fileName, row.title, row.name, row.status, row.source, row.notes, row.pdfVariant].join(' '));
     return Boolean(row.preferred || row.partsExtracted || text.includes('scalone') || text.includes('verified preferred') || text.includes('verified_preferred'));
@@ -2603,7 +2618,10 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
     const base = idx ? `Rysunek serwisowy ${idx}` : 'Rysunek serwisowy';
     const file = String(drawing?.fileName || row?.fileName || row?.title || '').replace(/\.pdf$/i, '');
     let meta = 'Podgląd PDF - GitHub Pages / Google Drive Preview';
-    if (variant === 'merged_parts_and_drawing') meta = `Scalony komplet: rysunek + lista części${parts ? ` - ${fmt(parts)} części` : ''}`;
+    const verified = isVerifiedToy24Drawing(row || drawing || {});
+    const previewPage = Number(row?.previewPage || drawing?.previewPage || 0);
+    if (verified) meta = `Zweryfikowany TOYA24${previewPage ? ` • rysunek wybuchowy: strona ${previewPage}` : ''}${parts ? ` • ${fmt(parts)} części` : ''}`;
+    else if (variant === 'merged_parts_and_drawing') meta = `Scalony komplet: rysunek + lista części${parts ? ` - ${fmt(parts)} części` : ''}`;
     else if (parts) meta = `Rysunek z listą części - ${fmt(parts)} części`;
     else if (variant === 'technical_source_backup') meta = 'Rysunek techniczny - źródło zapasowe';
     return {title: file || base, meta};
