@@ -1,0 +1,16 @@
+{
+  "schema": "pgw-github-map-patch-v107",
+  "version": "0.4.0.v107",
+  "generatedAt": "2026-07-13T14:04:33Z",
+  "status": "NO_PUBLIC_CHANGES",
+  "repository": "Formularz-kontaktowy-Toya",
+  "records": [],
+  "blocked": [
+    {"model": "75583", "status": "REBUILD"},
+    {"model": "79030", "status": "REBUILD"},
+    {"model": "79970", "status": "REBUILD"},
+    {"model": "79347", "status": "REBUILD"},
+    {"model": "75582", "status": "ARCHIVE_ONLY"}
+  ],
+  "reason": "Żaden plik z partii nie spełnia kompletnego wzorca TOYA24; nie wolno dodawać rekordów do formularza klienta."
+}

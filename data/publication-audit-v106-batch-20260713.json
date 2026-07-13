@@ -1,0 +1,61 @@
+{
+  "release": "v106-staging",
+  "audit_date": "2026-07-13",
+  "source_folder": {
+    "name": "Rysunki wybuchowe",
+    "drive_id": "1wYvMsfwtz8jPvAaKW4W13au77lUAu3Gu"
+  },
+  "repository": {
+    "name": "Formularz-kontaktowy-Toya",
+    "drive_id": "1oBC8f5FYk4n1YMaoQPv--4L7PC4tC3rv",
+    "data_folder_id": "10GSWtVSUsgXv_uYkeZ80DIv5q3byumqx"
+  },
+  "summary": {
+    "audited": 5,
+    "ready": 0,
+    "rebuild_or_merge": 1,
+    "exclude_public": 4
+  },
+  "files": [
+    {
+      "model": "79343",
+      "file": "Czesci_zamienne_79343.pdf",
+      "status": "REBUILD",
+      "public": false,
+      "reason": "Czytelny rysunek wybuchowy i tabela części na 2 stronach, ale brak okładki, zdjęcia produktu i warstwy publikacyjnej TOYA24. Kandydat do osadzenia w oficjalnym szablonie."
+    },
+    {
+      "model": "75586",
+      "file": "Czesci_zamienne_75586.pdf",
+      "status": "MANUAL_REQUIRED",
+      "public": false,
+      "reason": "Dwie strony samej tabeli bez rysunku wybuchowego, bez indeksów SAP i bez oprawy TOYA24; liczne puste pozycje."
+    },
+    {
+      "model": "75587",
+      "file": "Czesci_zamienne_75587.pdf",
+      "status": "ARCHIVE_ONLY",
+      "public": false,
+      "reason": "Uszkodzony/nieczytelny PDF po konwersji: tabela została złożona w jeden ciąg tekstu, brak rysunku i struktury kolumn."
+    },
+    {
+      "model": "83012",
+      "file": "Czesci_zamienne_83012.pdf",
+      "status": "MANUAL_REQUIRED",
+      "public": false,
+      "reason": "Cztery strony samej tabeli; brak eksplozji i okładki. Pozycje od 198 wzwyż są w dużej części puste, a część wierszy jest sklejona."
+    },
+    {
+      "model": "83013",
+      "file": "Czesci_zamienne_83013.pdf",
+      "status": "MANUAL_REQUIRED",
+      "public": false,
+      "reason": "Cztery strony samej tabeli; brak eksplozji i okładki. Końcowa część listy zawiera wiele pustych pozycji i wymaga ręcznej weryfikacji."
+    }
+  ],
+  "github_action": {
+    "map_patch": "NO_PUBLIC_CHANGES",
+    "reason": "Brak dokumentu spełniającego pełny standard TOYA24; nie dodano nowych rekordów do publicznej mapy.",
+    "recommended_next_step": "Przebudować 79343 w oficjalnym szablonie; pozostałe modele utrzymać poza formularzem do pozyskania rysunków wybuchowych i pełnych danych."
+  }
+}
