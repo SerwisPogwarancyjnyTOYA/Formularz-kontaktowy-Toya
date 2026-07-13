@@ -1,0 +1,44 @@
+{
+  "schema": "pgw-pdf-customer-visible-blocklist-v99i",
+  "version": "0.4.0.v99i",
+  "generatedAt": "2026-07-13T17:30:00Z",
+  "add": [
+    {
+      "fileId": "1ebSZxB3t5yLtvQv8W6Q326AiWXhYStdr",
+      "model": "YT-85205",
+      "classification": "ARCHIVE_ONLY",
+      "trigger": "generated working PDF with technical banner or duplicate generated artifact"
+    },
+    {
+      "fileId": "17tesTQSKyMeCu4Q8l8oBGSUkq-_WvDXm",
+      "model": "YT-85205",
+      "classification": "ARCHIVE_ONLY",
+      "trigger": "generated working PDF with technical banner or duplicate generated artifact"
+    },
+    {
+      "fileId": "1JLTxSXplHDrYlXM3pc-1B5NjVvGNPNL5",
+      "model": "YT-85205",
+      "classification": "ARCHIVE_ONLY",
+      "trigger": "generated working PDF with technical banner or duplicate generated artifact"
+    },
+    {
+      "fileId": "19Yq4hay62_XmYbe5m0MifhIrfEAHTQxb",
+      "model": "YT-85208",
+      "classification": "ARCHIVE_ONLY",
+      "trigger": "generated working PDF with technical banner or duplicate generated artifact"
+    },
+    {
+      "fileId": "1cUvJ8oTp2JIKMls0vo9B8uYXCBa7BDPy",
+      "model": "YT-85208",
+      "classification": "ARCHIVE_ONLY",
+      "trigger": "generated working PDF with technical banner or duplicate generated artifact"
+    },
+    {
+      "fileId": "16SgpYKR6vCZk9_H3keuRd5ojehGIZOve",
+      "model": "YT-85208",
+      "classification": "ARCHIVE_ONLY",
+      "trigger": "generated working PDF with technical banner or duplicate generated artifact"
+    }
+  ],
+  "status": "READY_FOR_REPO_WRITER"
+}

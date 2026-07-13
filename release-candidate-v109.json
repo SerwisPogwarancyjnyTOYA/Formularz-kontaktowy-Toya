@@ -1,0 +1,18 @@
+{
+  "version": "0.5.0-rc1",
+  "build": "20260713-v109-quality-operations-center",
+  "createdAt": "2026-07-13T15:20:00Z",
+  "releaseChannel": "candidate",
+  "previousRuntime": "0.4.0.v98",
+  "status": "REPO_FILES_UPDATED_NOT_COMMITTED",
+  "features": [
+    "centrum jakości TOYA24 vs Drive vs repo",
+    "priorytetyzowana kolejka 30 modeli",
+    "generator kart roboczych do uzupełnienia",
+    "eksport JSON i CSV",
+    "release gate READY/REBUILD/MANUAL_REQUIRED/ARCHIVE_ONLY",
+    "walidator npm quality-center-check"
+  ],
+  "publicMapChanged": false,
+  "commitOrPushClaimed": false
+}
