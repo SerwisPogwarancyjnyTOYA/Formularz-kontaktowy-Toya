@@ -1,0 +1,167 @@
+{
+  "schema": "pgw-release-manifest-v050-v1",
+  "version": "0.5.0.v1",
+  "generatedAt": "2026-07-13T19:08:00Z",
+  "fileCount": 31,
+  "validator": {
+    "releaseV110Check": "PASS",
+    "releaseV050V1Check": "PASS"
+  },
+  "files": [
+    {
+      "path": "CHANGELOG.md",
+      "bytes": 7373,
+      "sha256": "d104186993ab8c17d21bb7d95d291ca747c9902394083a501de5ff04943301ac"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1247,
+      "sha256": "fd055659044420f40a39dc9899d35c72957ddce1ecf16d7bf3e33279bb69698d"
+    },
+    {
+      "path": "RELEASE.json",
+      "bytes": 1001,
+      "sha256": "3a10763068df786d50263f2ff230a6339d520063266dedb2a6c07ba998715b61"
+    },
+    {
+      "path": "admin.html",
+      "bytes": 2604,
+      "sha256": "10bc61de3b0c77729cb5c0d24d7a2cd80f82fcf35d2b57433b7d147f47f4522d"
+    },
+    {
+      "path": "app.js",
+      "bytes": 148718,
+      "sha256": "baee1b6774fec5124a8a97c8b63d3ecc56f8da2b9d5dd64d78c2bd5de46e171b"
+    },
+    {
+      "path": "client-suite.css",
+      "bytes": 3022,
+      "sha256": "71aca75035f051e3578f047e062517df36810dff0873e35fb54b272d2fa86177"
+    },
+    {
+      "path": "client-suite.js",
+      "bytes": 32587,
+      "sha256": "2b3fc9291c82d25f1a9945bfbb5c077159c3df59bcbdff6e1eeea4d4be7bddff"
+    },
+    {
+      "path": "config.js",
+      "bytes": 4314,
+      "sha256": "88384116860192283009d5dcceda71c51e1cf282c11d40445d5f97a7d0c4b440"
+    },
+    {
+      "path": "data/audit-run-v050v1.json",
+      "bytes": 1101,
+      "sha256": "55e0d2cce3a9c0eade9fcd7da493e1b24a7a9d33f3912216b851155c2fda9983"
+    },
+    {
+      "path": "data/client-capabilities-v050-v1.json",
+      "bytes": 728,
+      "sha256": "423b62720051ff42e1a9ead1e4cd1635df8b130d543b957fa77b7a1bcf101c38"
+    },
+    {
+      "path": "data/drive-drawings-patch-v050v1.json",
+      "bytes": 7034,
+      "sha256": "7a3e631eb23112c6b947e227ba6fcd77ad693ef0a70caac5388a61a89e8a395e"
+    },
+    {
+      "path": "data/i18n-v050-v1.json",
+      "bytes": 1048,
+      "sha256": "c187f09f75d2d7d13bfd42ff2c68f7c5fc31c243042e29db1384e7fb1b8806b4"
+    },
+    {
+      "path": "data/photo-acquisition-queue-v050v1.json",
+      "bytes": 2082,
+      "sha256": "354e234066aced54d11a97c94b73823a097be2697a8310b03bbef7e526db75a2"
+    },
+    {
+      "path": "data/publication-policy-v110.json",
+      "bytes": 1143,
+      "sha256": "a8fdb05daf94aed8ccccecc11ddcbd69d0f93657a32494abe5e51842114c049f"
+    },
+    {
+      "path": "data/quality-center-v110.json",
+      "bytes": 45205,
+      "sha256": "adcc76461f9b18a90fcda940ede2aaf7c26a74b1a8a67e93064f7d01cc5bc869"
+    },
+    {
+      "path": "data/rebuild-work-orders-v110.json",
+      "bytes": 42261,
+      "sha256": "64eb30ce677f1b6a786f8b8bf520006118f155ee6cfcf3f03ae81f8c6a43d0d1"
+    },
+    {
+      "path": "data/release-readiness-v110.json",
+      "bytes": 1213,
+      "sha256": "ec6005bc0985f6c7fa0420c27a73aecca55c3499098f2be4253417cd5621bb59"
+    },
+    {
+      "path": "data/toya24-gap-register-v110.json",
+      "bytes": 16163,
+      "sha256": "798b63ba4ab0fd36c1648c67356ee5b2fed0e6b6f2c5103f6d153bb8578d8f70"
+    },
+    {
+      "path": "docs/GLOBAL_SERVICE_PASSPORT_V050_V1.md",
+      "bytes": 699,
+      "sha256": "0a728b67beb5cf594d5496ed7cf5fd2a92a256e7ccaf6630dae0a8f2d0855027"
+    },
+    {
+      "path": "gap-register.html",
+      "bytes": 2828,
+      "sha256": "9b35686160ee465f6dd8fa923b893763131052a192661dd584fcb634b84e4659"
+    },
+    {
+      "path": "healthcheck.html",
+      "bytes": 2630,
+      "sha256": "327fe48d0cc45c3070ae2229f82ac15be009f058bbca9ba436557891d29863a7"
+    },
+    {
+      "path": "index.html",
+      "bytes": 14882,
+      "sha256": "fc10532c550ce1870bdd9873f1846b788263e1b3f0d8107aa0825fd90ba2642a"
+    },
+    {
+      "path": "manifest.webmanifest",
+      "bytes": 646,
+      "sha256": "1325c1f40fea7eb619d56a596ac2afcad64562c18f2bd5be8d5e874d6601f36f"
+    },
+    {
+      "path": "package.json",
+      "bytes": 2385,
+      "sha256": "b5d842d0cf17b3fa436ebf64cf6a23952e9a2f9551f89e3421f7deeeefe87b5a"
+    },
+    {
+      "path": "quality-center.html",
+      "bytes": 6370,
+      "sha256": "b84005e988c09aef7a2784fbcaa68a905d73a4346c96cd561809502586879156"
+    },
+    {
+      "path": "rebuild-studio.html",
+      "bytes": 5442,
+      "sha256": "b5008090989d50541c7b33291864c279c28ce0ee59f1221335c08a8ba7af6048"
+    },
+    {
+      "path": "release-candidate-v050-v1.json",
+      "bytes": 1287,
+      "sha256": "f57e4a89d1c36cab42649a6accf02150c40251b5788c6319a58a3963be395631"
+    },
+    {
+      "path": "release-candidate-v110.json",
+      "bytes": 480,
+      "sha256": "e8f69feb2942a33de8a180d6afb9ab82fa48095faa7f56b9cc72bae8adf62310"
+    },
+    {
+      "path": "scripts/pgw-v050-v1-check.mjs",
+      "bytes": 1859,
+      "sha256": "48b7cf4039eecb0122bf0fd613785406c98e925f98493677d1826147dc60938c"
+    },
+    {
+      "path": "scripts/pgw-v110-release-check.mjs",
+      "bytes": 2318,
+      "sha256": "56c564a0ba9c7dd935fee384363d6f175b25e2987b5a5fdbf6c26c179f31d308"
+    },
+    {
+      "path": "sw-v050-v1.js",
+      "bytes": 2038,
+      "sha256": "3975cf013896069fa0140b69e8736c46820c1125e0471e225e6f97b02077343d"
+    }
+  ]
+}

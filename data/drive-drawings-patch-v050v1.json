@@ -1,0 +1,200 @@
+{
+  "schema": "pgw-drive-drawings-patch-v050v1",
+  "version": "0.5.0.v1",
+  "generatedAt": "2026-07-13T18:45:00Z",
+  "baseMap": "data/drive-drawings-map.generated-v97.json",
+  "previousPatch": "data/drive-drawings-patch-v98.json",
+  "strategy": "consolidated READY-only patch; normalized model override",
+  "count": 4,
+  "items": [
+    {
+      "fileId": "1_LMAXYt1gBdoj1VoTBqpRGfKvOnZM8tS",
+      "deviceIndex": "YT-85851",
+      "model": "YT-85851",
+      "normalizedModel": "YT85851",
+      "deviceIndexes": [
+        "YT-85851",
+        "85851"
+      ],
+      "modelsInPdf": [
+        "YT-85851"
+      ],
+      "title": "YT-85851 - CIĄGNIK JEDNOOSIOWY",
+      "fileName": "Czesci_zamienne_YT-85851.pdf",
+      "canonicalFileName": "Czesci_zamienne_YT-85851.pdf",
+      "brand": "YATO",
+      "mimeType": "application/pdf",
+      "viewerUrl": "https://drive.google.com/file/d/1_LMAXYt1gBdoj1VoTBqpRGfKvOnZM8tS/preview",
+      "previewUrl": "https://drive.google.com/file/d/1_LMAXYt1gBdoj1VoTBqpRGfKvOnZM8tS/preview",
+      "openUrl": "https://drive.google.com/file/d/1_LMAXYt1gBdoj1VoTBqpRGfKvOnZM8tS/view",
+      "downloadUrl": "https://drive.google.com/uc?export=download&id=1_LMAXYt1gBdoj1VoTBqpRGfKvOnZM8tS",
+      "previewPage": 2,
+      "pages": 18,
+      "hasDevicePhoto": true,
+      "hasExplodedDrawing": true,
+      "hasPartsList": true,
+      "partsExtracted": true,
+      "searchAliases": [
+        "YT-85851",
+        "YT85851",
+        "YT 85851",
+        "85851"
+      ],
+      "qualityGate": "TOYA24_FULL_MATCH",
+      "qaStatus": "READY",
+      "publicationStatus": "PUBLIC_READY",
+      "preferred": true,
+      "visualVerification": "PAGE_BY_PAGE",
+      "verifiedAt": "2026-07-13T12:30:00Z",
+      "releaseBundle": "0.5.0.v1"
+    },
+    {
+      "fileId": "1C4RIM9IrUNv8mg7vgzOiar7by2ncrtqO",
+      "deviceIndex": "YT-85200",
+      "model": "YT-85200",
+      "normalizedModel": "YT85200",
+      "deviceIndexes": [
+        "YT-85200",
+        "85200"
+      ],
+      "modelsInPdf": [
+        "YT-85200"
+      ],
+      "title": "Czesci_zamienne_YT-85200.pdf",
+      "fileName": "Czesci_zamienne_YT-85200.pdf",
+      "canonicalFileName": "Czesci_zamienne_YT-85200.pdf",
+      "brand": "YATO",
+      "mimeType": "application/pdf",
+      "viewerUrl": "https://drive.google.com/file/d/1C4RIM9IrUNv8mg7vgzOiar7by2ncrtqO/preview",
+      "previewUrl": "https://drive.google.com/file/d/1C4RIM9IrUNv8mg7vgzOiar7by2ncrtqO/preview",
+      "openUrl": "https://drive.google.com/file/d/1C4RIM9IrUNv8mg7vgzOiar7by2ncrtqO/view",
+      "downloadUrl": "https://drive.google.com/uc?export=download&id=1C4RIM9IrUNv8mg7vgzOiar7by2ncrtqO",
+      "previewPage": 2,
+      "hasDevicePhoto": true,
+      "hasExplodedDrawing": true,
+      "hasPartsList": true,
+      "partsExtracted": true,
+      "partsCount": 69,
+      "searchAliases": [
+        "YT-85200",
+        "YT85200",
+        "YT 85200",
+        "85200"
+      ],
+      "qualityGate": "TOYA24_FULL_MATCH",
+      "qaStatus": "READY",
+      "publicationStatus": "PUBLIC_READY",
+      "publicationClass": "PUBLIC_MISMATCH_FIXED",
+      "publicationReason": "Four-page canonical PDF passed visual page-by-page QA; metadata corrected and duplicate model normalization removed.",
+      "preferred": true,
+      "thumbnail": "assets/YT-85200-podglad.webp",
+      "drawingThumbnail": "assets/YT-85200-rysunek.webp",
+      "releaseBundle": "0.5.0.v1"
+    },
+    {
+      "fileId": "1o3LtJUD3h3akSnz0wGOY6FGCNRbgpcIn",
+      "deviceIndex": "YT-85205",
+      "model": "YT-85205",
+      "normalizedModel": "YT85205",
+      "deviceIndexes": [
+        "YT-85205",
+        "85205"
+      ],
+      "modelsInPdf": [
+        "YT-85205"
+      ],
+      "title": "Czesci_zamienne_YT-85205.pdf",
+      "fileName": "Czesci_zamienne_YT-85205.pdf",
+      "canonicalFileName": "Czesci_zamienne_YT-85205.pdf",
+      "brand": "YATO",
+      "mimeType": "application/pdf",
+      "viewerUrl": "https://drive.google.com/file/d/1o3LtJUD3h3akSnz0wGOY6FGCNRbgpcIn/preview",
+      "previewUrl": "https://drive.google.com/file/d/1o3LtJUD3h3akSnz0wGOY6FGCNRbgpcIn/preview",
+      "openUrl": "https://drive.google.com/file/d/1o3LtJUD3h3akSnz0wGOY6FGCNRbgpcIn/view",
+      "downloadUrl": "https://drive.google.com/uc?export=download&id=1o3LtJUD3h3akSnz0wGOY6FGCNRbgpcIn",
+      "previewPage": 2,
+      "pages": 4,
+      "hasDevicePhoto": true,
+      "hasExplodedDrawing": true,
+      "hasPartsList": true,
+      "partsExtracted": true,
+      "numberedPartsCount": 92,
+      "assemblyRowsCount": 4,
+      "partsCount": 96,
+      "searchAliases": [
+        "YT-85205",
+        "YT85205",
+        "YT 85205",
+        "85205"
+      ],
+      "qualityGate": "TOYA24_FULL_MATCH",
+      "qaStatus": "READY",
+      "publicationStatus": "PUBLIC_READY",
+      "publicationClass": "PUBLIC_MISMATCH_FIXED",
+      "preferred": true,
+      "thumbnail": "assets/YT-85205-podglad.webp",
+      "drawingThumbnail": "assets/YT-85205-rysunek.webp",
+      "visualVerification": "PAGE_BY_PAGE",
+      "tableIntegrityCheck": "VISUAL_ROWS_OVERRIDE_TEXT_EXTRACTION_JOINS",
+      "verifiedAt": "2026-07-13T17:30:00Z",
+      "releaseBundle": "0.5.0.v1"
+    },
+    {
+      "fileId": "1Mco0OUhCeARE8WvGzBjoVA_M3n5lKmdY",
+      "deviceIndex": "YT-85208",
+      "model": "YT-85208",
+      "normalizedModel": "YT85208",
+      "deviceIndexes": [
+        "YT-85208",
+        "85208"
+      ],
+      "modelsInPdf": [
+        "YT-85208"
+      ],
+      "title": "Czesci_zamienne_YT-85208.pdf",
+      "fileName": "Czesci_zamienne_YT-85208.pdf",
+      "canonicalFileName": "Czesci_zamienne_YT-85208.pdf",
+      "brand": "YATO",
+      "mimeType": "application/pdf",
+      "viewerUrl": "https://drive.google.com/file/d/1Mco0OUhCeARE8WvGzBjoVA_M3n5lKmdY/preview",
+      "previewUrl": "https://drive.google.com/file/d/1Mco0OUhCeARE8WvGzBjoVA_M3n5lKmdY/preview",
+      "openUrl": "https://drive.google.com/file/d/1Mco0OUhCeARE8WvGzBjoVA_M3n5lKmdY/view",
+      "downloadUrl": "https://drive.google.com/uc?export=download&id=1Mco0OUhCeARE8WvGzBjoVA_M3n5lKmdY",
+      "previewPage": 2,
+      "pages": 4,
+      "hasDevicePhoto": true,
+      "hasExplodedDrawing": true,
+      "hasPartsList": true,
+      "partsExtracted": true,
+      "numberedPartsCount": 104,
+      "assemblyRowsCount": 5,
+      "partsCount": 109,
+      "searchAliases": [
+        "YT-85208",
+        "YT85208",
+        "YT 85208",
+        "85208"
+      ],
+      "qualityGate": "TOYA24_FULL_MATCH",
+      "qaStatus": "READY",
+      "publicationStatus": "PUBLIC_READY",
+      "publicationClass": "PUBLIC_MISMATCH_FIXED",
+      "preferred": true,
+      "thumbnail": "assets/YT-85208-podglad.webp",
+      "drawingThumbnail": "assets/YT-85208-rysunek.webp",
+      "visualVerification": "PAGE_BY_PAGE",
+      "tableIntegrityCheck": "VISUAL_ROWS_OVERRIDE_TEXT_EXTRACTION_JOINS",
+      "verifiedAt": "2026-07-13T17:30:00Z",
+      "releaseBundle": "0.5.0.v1"
+    }
+  ],
+  "summary": {
+    "readyModels": [
+      "YT-85851",
+      "YT-85200",
+      "YT-85205",
+      "YT-85208"
+    ],
+    "nonReadyIncluded": 0
+  }
+}

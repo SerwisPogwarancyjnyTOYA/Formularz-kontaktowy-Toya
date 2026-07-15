@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.5.0.v1 - TOYA Global Service Passport
+- Naprawiono niewykonalny łańcuch `release-v110-check`: v110 nie wymusza już historycznego `RELEASE.json` v98.
+- Potwierdzono osobno PASS workflow v110 i PASS funkcji klienta 0.5.0.v1.
+- Dodano 6 wersji językowych oraz automatyczne zapamiętywanie języka.
+- Dodano Paszport Serwisowy: kod sprawy, bezpieczny link, druk/PDF, mailto i czyszczenie danych kontaktowych.
+- Dodano deep link modelu oraz odtwarzanie wybranych części z linku bez danych osobowych.
+- Dodano service worker i powłokę PWA offline.
+- Dodano tryby dostępności.
+- Połączono rozpoczęte audyty z publiczną aplikacją przez READY-only patch dla YT-85851, YT-85200, YT-85205 i YT-85208.
+- Ponownie sprawdzono trzy najwyższe work ordery YT-828254/255/256; wszystkie pozostają REBUILD z powodu braku oficjalnego zdjęcia dokładnego wariantu.
+- Nie użyto zdjęć podobnych modeli, ofert zewnętrznych ani grafiki generowanej.
+
+# Changelog
+
 ## 0.5.0-rc2 - Workflow Engine v110
 - Rozszerzono rejestr do 33 modeli, w tym trzy nowe READY: YT-85200, YT-85205 i YT-85208.
 - Dodano 29 wykonywalnych work orderów z checklistami i kryteriami odbioru.

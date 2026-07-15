@@ -33,6 +33,18 @@
     "YT-828256"
   ],
   "auditDecision": "3x REBUILD_CONFIRMED - exact official photo missing",
-  "status": "FILES_READY_FOR_REPO_SYNC",
-  "commitOrPushClaimed": false
+  "status": "FILES_WRITTEN_TO_ACTIVE_DRIVE_REPO_VALIDATOR_PASS",
+  "commitOrPushClaimed": false,
+  "validation": {
+    "releaseV110Check": "PASS",
+    "releaseV050V1Check": "PASS",
+    "models": 33,
+    "ready": 4,
+    "workOrders": 29,
+    "languages": 6,
+    "publicReadyPatch": 4,
+    "audited": 3,
+    "privacyShare": true,
+    "offlineShell": true
+  }
 }

@@ -1,0 +1,18 @@
+{
+  "version": "0.5.0-rc2",
+  "build": "20260713-v110-workflow-engine",
+  "createdAt": "2026-07-13T18:20:00Z",
+  "releaseChannel": "candidate",
+  "previousVersion": "0.5.0-rc1",
+  "status": "REPO_FILES_UPDATED_NOT_COMMITTED",
+  "publicMapChanged": false,
+  "features": [
+    "audit ingestion engine",
+    "rebuild studio",
+    "TOYA24 gap register",
+    "33-model quality registry",
+    "29 executable work orders",
+    "strict release gate"
+  ],
+  "commitOrPushClaimed": false
+}
