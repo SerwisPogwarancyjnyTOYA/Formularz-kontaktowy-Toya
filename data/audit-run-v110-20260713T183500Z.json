@@ -1,0 +1,53 @@
+{
+  "schema": "pgw-audit-run-v110",
+  "generatedAt": "2026-07-13T18:35:00Z",
+  "previousRun": {
+    "id": "v99i",
+    "scope": [
+      "YT-85205",
+      "YT-85208"
+    ],
+    "nonRepeated": true
+  },
+  "scope": [
+    "YT-828380"
+  ],
+  "completedWorkOrders": [],
+  "statusAdvances": [],
+  "rebuiltPdfs": [],
+  "newReady": [],
+  "filesPrepared": [
+    "data/quality-center-v110.json",
+    "data/rebuild-work-orders-v110.json",
+    "data/toya24-gap-register-v110.json",
+    "data/release-readiness-v110.json",
+    "data/qa/YT-828380.json"
+  ],
+  "qa": {
+    "model": "YT-828380",
+    "pages": 3,
+    "result": "BLOCKED_OFFICIAL_PHOTO",
+    "drawingPositions": "1-46",
+    "partsRows": "1-46"
+  },
+  "gate": {
+    "qualityCenter": "PASS",
+    "releaseV110Full": "NOT_EXECUTED_LOCAL_REPO_INCOMPLETE",
+    "publicMapChanged": false
+  },
+  "blockers": [
+    "No exact official TOYA24/YATO product image confirmed for YT-828380."
+  ],
+  "next10": [
+    "YT-828381",
+    "YT-829385",
+    "YT-852090",
+    "YT-852091",
+    "YT-852092",
+    "YT-852093",
+    "YT-852371",
+    "79970",
+    "79343",
+    "YT-828254"
+  ]
+}

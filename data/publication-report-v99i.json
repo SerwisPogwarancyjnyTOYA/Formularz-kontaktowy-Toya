@@ -1,0 +1,76 @@
+{
+  "schema": "pgw-publication-report-v99i",
+  "version": "0.4.0.v99i",
+  "generatedAt": "2026-07-13T17:30:00Z",
+  "status": "READY_FOR_REPO_WRITER",
+  "scope": [
+    "YT-85205",
+    "YT-85208"
+  ],
+  "comparison": {
+    "toya24": "exact current product/download pages not confirmed",
+    "drive": "two canonical four-page PDFs complete and visually verified",
+    "repo": "both models already public, but duplicated by numeric/YT keys and falsely marked without parts"
+  },
+  "statusChanges": {
+    "YT-85205": "PUBLIC_MISMATCH -> FIXED/PUBLIC_READY",
+    "YT-85208": "PUBLIC_MISMATCH -> FIXED/PUBLIC_READY"
+  },
+  "newOfficialDrawings": [],
+  "metadataFixes": {
+    "YT-85205": {
+      "previewPage": 2,
+      "hasDevicePhoto": true,
+      "hasExplodedDrawing": true,
+      "hasPartsList": true,
+      "partsExtracted": true,
+      "numberedPartsCount": 92,
+      "assemblyRowsCount": 4,
+      "canonicalAliases": true
+    },
+    "YT-85208": {
+      "previewPage": 2,
+      "hasDevicePhoto": true,
+      "hasExplodedDrawing": true,
+      "hasPartsList": true,
+      "partsExtracted": true,
+      "numberedPartsCount": 104,
+      "assemblyRowsCount": 5,
+      "canonicalAliases": true
+    }
+  },
+  "qualityImprovement": [
+    "visual table-integrity gate prevents PDF text-extraction row joins from corrupting verified data",
+    "numbered positions and assembly rows are counted separately",
+    "canonical YT aliases and thumbnails are supplied for both models"
+  ],
+  "tests": {
+    "renderedPages": 8,
+    "numberedPartsChecked": 196,
+    "assemblyRowsChecked": 9,
+    "tableRowsChecked": 205,
+    "photoChecksPassed": 2,
+    "drawingChecksPassed": 2,
+    "previewPageChecksPassed": 2,
+    "unverifiedPublicCandidates": 0,
+    "generatedArtifactsBlocked": 6
+  },
+  "blockers": [
+    "Exact TOYA24 download-tab state remains unconfirmed for both models."
+  ],
+  "repoFiles": [
+    "data/toya24-drive-audit-v99i.json",
+    "data/drive-drawings-patch-v99i.json",
+    "data/pdf-customer-visible-blocklist-v99i.json",
+    "data/publication-report-v99i.json",
+    "assets/YT-85205-podglad.webp",
+    "assets/YT-85205-rysunek.webp",
+    "assets/YT-85208-podglad.webp",
+    "assets/YT-85208-rysunek.webp"
+  ],
+  "nextQueue": [
+    "YT-852081",
+    "YT-852082"
+  ],
+  "commitPushClaimed": false
+}

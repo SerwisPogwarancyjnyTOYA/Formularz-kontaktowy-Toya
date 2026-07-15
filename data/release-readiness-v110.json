@@ -1,0 +1,52 @@
+{
+  "schema": "pgw-release-readiness-v110",
+  "version": "0.5.0.v1",
+  "generatedAt": "2026-07-13T19:00:00Z",
+  "status": "PASS_FILES_READY_FOR_REPO_SYNC",
+  "gates": {
+    "dataUnique": true,
+    "readyRecordsComplete": true,
+    "workOrdersCoverNonReady": true,
+    "gapRegisterComplete": true,
+    "pagesLinked": true,
+    "publicMapChanged": false,
+    "multilingualClient": true,
+    "privacySafeShare": true,
+    "offlineShell": true,
+    "readyOnlyPatch": true,
+    "auditRunRecorded": true
+  },
+  "metrics": {
+    "models": 33,
+    "ready": 4,
+    "rebuild": 19,
+    "manualRequired": 8,
+    "archiveOnly": 2,
+    "fastWins": 13,
+    "workOrders": 29,
+    "confirmedPagesChecked": 61,
+    "knownTechnicalArtifactsBlocked": 18,
+    "latestReady": [
+      "YT-85200",
+      "YT-85205",
+      "YT-85208"
+    ],
+    "publicReadyPatch": 4,
+    "languages": 6,
+    "lastAuditReviewed": 3
+  },
+  "commitOrPushClaimed": false,
+  "lastRun": {
+    "scope": [
+      "YT-828254",
+      "YT-828255",
+      "YT-828256"
+    ],
+    "completedWorkOrders": [],
+    "statusAdvances": [],
+    "newReady": [],
+    "publicMapChanged": false,
+    "gate": "PASS_WORKFLOW_ONLY",
+    "blocker": "EXACT_OFFICIAL_PRODUCT_PHOTO"
+  }
+}

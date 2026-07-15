@@ -1,0 +1,65 @@
+{
+  "schema": "pgw-photo-acquisition-queue-v050v1",
+  "version": "0.5.0.v1",
+  "generatedAt": "2026-07-13T18:45:00Z",
+  "policy": "EXACT_MODEL_OFFICIAL_SOURCE_ONLY",
+  "items": [
+    {
+      "model": "YT-828254",
+      "priority": 100,
+      "status": "BLOCKED",
+      "sourcePdfFileId": "1thrJFLVKMyVqhzi9r-UFom8j7sIW--nz",
+      "requiredAsset": "OFFICIAL_PRODUCT_PHOTO_EXACT_SALES_VARIANT",
+      "rejectedSubstitutes": [
+        "similar YATO grinder",
+        "third-party listing image",
+        "AI-generated product image",
+        "exploded drawing"
+      ],
+      "knownGood": [
+        "3-page canonical PDF",
+        "exploded drawing page 2",
+        "47/47 SAP/PL/EN page 3"
+      ],
+      "nextAction": "Check TOYA24 product CMS/export, DAM, marketing image archive or factory sales pack."
+    },
+    {
+      "model": "YT-828255",
+      "priority": 100,
+      "status": "BLOCKED",
+      "sourcePdfFileId": "1cLQh_joZXadb_s_9DH_UthzEczcABGIr",
+      "requiredAsset": "OFFICIAL_PRODUCT_PHOTO_EXACT_SALES_VARIANT",
+      "rejectedSubstitutes": [
+        "similar YATO grinder",
+        "third-party listing image",
+        "AI-generated product image",
+        "exploded drawing"
+      ],
+      "knownGood": [
+        "3-page canonical PDF",
+        "exploded drawing page 2",
+        "47/47 SAP/PL/EN page 3"
+      ],
+      "nextAction": "Check TOYA24 product CMS/export, DAM, marketing image archive or factory sales pack."
+    },
+    {
+      "model": "YT-828256",
+      "priority": 100,
+      "status": "BLOCKED",
+      "sourcePdfFileId": "1OS8OQoTRSRl9YURsa1SoRMcNfuy-rfzY",
+      "requiredAsset": "OFFICIAL_PRODUCT_PHOTO_EXACT_SALES_VARIANT",
+      "rejectedSubstitutes": [
+        "similar YATO grinder",
+        "third-party listing image",
+        "AI-generated product image",
+        "exploded drawing"
+      ],
+      "knownGood": [
+        "3-page canonical PDF",
+        "exploded drawing page 2",
+        "47/47 SAP/PL/EN page 3"
+      ],
+      "nextAction": "Check TOYA24 product CMS/export, DAM, marketing image archive or factory sales pack."
+    }
+  ]
+}

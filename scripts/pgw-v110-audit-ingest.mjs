@@ -1,0 +1,10 @@
+import fs from 'node:fs';import path from 'node:path';
+const dir='data', norm=v=>String(v||'').toUpperCase().replace(/[^A-Z0-9]/g,'');
+const read=f=>{try{return JSON.parse(fs.readFileSync(path.join(dir,f),'utf8'))}catch{return null}};
+const files=fs.readdirSync(dir).filter(f=>/^(toya24-drive-audit|publication-audit|pdf-rebuild-queue)-.*\.json$/i.test(f));
+const baseline=read('quality-center-v109.json');if(!baseline?.items)throw new Error('quality-center-v109.json missing');
+const map=new Map(baseline.items.map(x=>[norm(x.model),{...x,auditTrail:[...(x.auditTrail||[])]}]));
+const rank={ARCHIVE_ONLY:4,MANUAL_REQUIRED:3,REBUILD:2,READY:1};
+const statusOf=x=>{const q=String(x.qaStatus||x.status||'').toUpperCase();if(['READY','FIXED','PUBLIC_READY'].includes(q))return 'READY';if(q==='ARCHIVE_ONLY'||x.classification==='ARCHIVE_ONLY')return 'ARCHIVE_ONLY';if(q==='MANUAL_REQUIRED')return 'MANUAL_REQUIRED';return 'REBUILD'};
+for(const f of files){const j=read(f);for(const x of j?.items||[]){if(!x.model)continue;const k=norm(x.model),old=map.get(k)||{model:x.model};const s=statusOf(x);const merged={...old,model:x.model,name:x.title||old.name||'',pages:x.pages??old.pages,previewPage:x.previewPage??old.previewPage,hasPhoto:x.hasDevicePhoto??old.hasPhoto??false,hasDrawing:x.hasExplodedDrawing??old.hasDrawing??false,hasParts:x.hasPartsList??old.hasParts??false,sourceFileId:x.driveFileId||x.sourceFileId||old.sourceFileId,sourceFile:x.driveFile||old.sourceFile,classification:x.classification||old.classification,toya24State:x.toya24Verification?.result||j.toya24Verification?.result||old.toya24State,status:(rank[s]>=rank[old.status]||!old.status)?s:old.status,auditTrail:[...(old.auditTrail||[]),{source:f,generatedAt:j.generatedAt}]};map.set(k,merged)}}
+const items=[...map.values()];fs.writeFileSync(path.join(dir,'quality-center-v110.generated.json'),JSON.stringify({schema:'pgw-quality-center-v110-generated',generatedAt:new Date().toISOString(),sourceFiles:files,count:items.length,items},null,2));console.log(`generated ${items.length} models from ${files.length} audit files`);

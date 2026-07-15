@@ -1,0 +1,107 @@
+{
+  "schema": "pgw-drive-drawings-patch-v99i",
+  "version": "0.4.0.v99i",
+  "generatedAt": "2026-07-13T17:30:00Z",
+  "baseMap": "data/drive-drawings-map.generated-v97.json",
+  "previousPatches": [
+    "data/drive-drawings-patch-v98.json",
+    "data/drive-drawings-patch-v99h.json"
+  ],
+  "strategy": "incremental override; canonical YT model wins after normalized model dedupe",
+  "items": [
+    {
+      "fileId": "1o3LtJUD3h3akSnz0wGOY6FGCNRbgpcIn",
+      "deviceIndex": "YT-85205",
+      "model": "YT-85205",
+      "normalizedModel": "YT85205",
+      "deviceIndexes": [
+        "YT-85205",
+        "85205"
+      ],
+      "modelsInPdf": [
+        "YT-85205"
+      ],
+      "title": "Czesci_zamienne_YT-85205.pdf",
+      "fileName": "Czesci_zamienne_YT-85205.pdf",
+      "canonicalFileName": "Czesci_zamienne_YT-85205.pdf",
+      "brand": "YATO",
+      "mimeType": "application/pdf",
+      "viewerUrl": "https://drive.google.com/file/d/1o3LtJUD3h3akSnz0wGOY6FGCNRbgpcIn/preview",
+      "previewUrl": "https://drive.google.com/file/d/1o3LtJUD3h3akSnz0wGOY6FGCNRbgpcIn/preview",
+      "openUrl": "https://drive.google.com/file/d/1o3LtJUD3h3akSnz0wGOY6FGCNRbgpcIn/view",
+      "downloadUrl": "https://drive.google.com/uc?export=download&id=1o3LtJUD3h3akSnz0wGOY6FGCNRbgpcIn",
+      "previewPage": 2,
+      "pages": 4,
+      "hasDevicePhoto": true,
+      "hasExplodedDrawing": true,
+      "hasPartsList": true,
+      "partsExtracted": true,
+      "numberedPartsCount": 92,
+      "assemblyRowsCount": 4,
+      "partsCount": 96,
+      "searchAliases": [
+        "YT-85205",
+        "YT85205",
+        "YT 85205",
+        "85205"
+      ],
+      "qualityGate": "TOYA24_FULL_MATCH",
+      "qaStatus": "FIXED",
+      "publicationStatus": "PUBLIC_READY",
+      "publicationClass": "PUBLIC_MISMATCH_FIXED",
+      "preferred": true,
+      "thumbnail": "assets/YT-85205-podglad.webp",
+      "drawingThumbnail": "assets/YT-85205-rysunek.webp",
+      "visualVerification": "PAGE_BY_PAGE",
+      "tableIntegrityCheck": "VISUAL_ROWS_OVERRIDE_TEXT_EXTRACTION_JOINS",
+      "verifiedAt": "2026-07-13T17:30:00Z"
+    },
+    {
+      "fileId": "1Mco0OUhCeARE8WvGzBjoVA_M3n5lKmdY",
+      "deviceIndex": "YT-85208",
+      "model": "YT-85208",
+      "normalizedModel": "YT85208",
+      "deviceIndexes": [
+        "YT-85208",
+        "85208"
+      ],
+      "modelsInPdf": [
+        "YT-85208"
+      ],
+      "title": "Czesci_zamienne_YT-85208.pdf",
+      "fileName": "Czesci_zamienne_YT-85208.pdf",
+      "canonicalFileName": "Czesci_zamienne_YT-85208.pdf",
+      "brand": "YATO",
+      "mimeType": "application/pdf",
+      "viewerUrl": "https://drive.google.com/file/d/1Mco0OUhCeARE8WvGzBjoVA_M3n5lKmdY/preview",
+      "previewUrl": "https://drive.google.com/file/d/1Mco0OUhCeARE8WvGzBjoVA_M3n5lKmdY/preview",
+      "openUrl": "https://drive.google.com/file/d/1Mco0OUhCeARE8WvGzBjoVA_M3n5lKmdY/view",
+      "downloadUrl": "https://drive.google.com/uc?export=download&id=1Mco0OUhCeARE8WvGzBjoVA_M3n5lKmdY",
+      "previewPage": 2,
+      "pages": 4,
+      "hasDevicePhoto": true,
+      "hasExplodedDrawing": true,
+      "hasPartsList": true,
+      "partsExtracted": true,
+      "numberedPartsCount": 104,
+      "assemblyRowsCount": 5,
+      "partsCount": 109,
+      "searchAliases": [
+        "YT-85208",
+        "YT85208",
+        "YT 85208",
+        "85208"
+      ],
+      "qualityGate": "TOYA24_FULL_MATCH",
+      "qaStatus": "FIXED",
+      "publicationStatus": "PUBLIC_READY",
+      "publicationClass": "PUBLIC_MISMATCH_FIXED",
+      "preferred": true,
+      "thumbnail": "assets/YT-85208-podglad.webp",
+      "drawingThumbnail": "assets/YT-85208-rysunek.webp",
+      "visualVerification": "PAGE_BY_PAGE",
+      "tableIntegrityCheck": "VISUAL_ROWS_OVERRIDE_TEXT_EXTRACTION_JOINS",
+      "verifiedAt": "2026-07-13T17:30:00Z"
+    }
+  ]
+}

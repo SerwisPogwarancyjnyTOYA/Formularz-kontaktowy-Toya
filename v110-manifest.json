@@ -1,0 +1,99 @@
+{
+  "version": "0.5.0-rc2",
+  "build": "20260713-v110-workflow-engine",
+  "generatedAt": "2026-07-13T18:20:00Z",
+  "deployedFiles": 18,
+  "files": [
+    {
+      "path": "admin.html",
+      "bytes": 4165,
+      "sha256": "4ab0287c9db42f7a3cdaf268b2a741abfe8a1be9a77d2933b2e891f25a3e63a5"
+    },
+    {
+      "path": "healthcheck.html",
+      "bytes": 2902,
+      "sha256": "bf3a7ebcc14bc8caa808670837d303107898dcf0ba3245308438f5c5e3778759"
+    },
+    {
+      "path": "quality-center.html",
+      "bytes": 6370,
+      "sha256": "b84005e988c09aef7a2784fbcaa68a905d73a4346c96cd561809502586879156"
+    },
+    {
+      "path": "rebuild-studio.html",
+      "bytes": 5442,
+      "sha256": "b5008090989d50541c7b33291864c279c28ce0ee59f1221335c08a8ba7af6048"
+    },
+    {
+      "path": "gap-register.html",
+      "bytes": 2828,
+      "sha256": "9b35686160ee465f6dd8fa923b893763131052a192661dd584fcb634b84e4659"
+    },
+    {
+      "path": "package.json",
+      "bytes": 2235,
+      "sha256": "a89c5139fea70161a4625acaf8412fdf99c47804a16dfdde74cf188bee66d6af"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1770,
+      "sha256": "3919953ad3888bf2897a24b8fb022126d26ca438e2692abc49f2077d38dca53e"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "bytes": 6597,
+      "sha256": "0cee53bccca14d68fe01ebeeb51a7738eb08f4f6b80973d714d00b9f6e3e9726"
+    },
+    {
+      "path": "RELEASE.json",
+      "bytes": 823,
+      "sha256": "c0f7e59cf947adfcfdc7552657206429b057201e4e2f4750fc8cf1dfeb845497"
+    },
+    {
+      "path": "release-candidate-v110.json",
+      "bytes": 480,
+      "sha256": "e8f69feb2942a33de8a180d6afb9ab82fa48095faa7f56b9cc72bae8adf62310"
+    },
+    {
+      "path": "data/quality-center-v110.json",
+      "bytes": 42095,
+      "sha256": "b7352ec2eb27d013eaff6f62433ce3ab14ebf0ba07d1eeac1a3c0b25958abfd5"
+    },
+    {
+      "path": "data/rebuild-work-orders-v110.json",
+      "bytes": 39749,
+      "sha256": "c97a703897d4b66449f250142c0b49b3db763b43c8f314e7268c1c574ad4002d"
+    },
+    {
+      "path": "data/toya24-gap-register-v110.json",
+      "bytes": 15488,
+      "sha256": "62bdfcabe93a17831c09579c9fe25b533110e25af9e135548bdff64131f6480b"
+    },
+    {
+      "path": "data/publication-policy-v110.json",
+      "bytes": 866,
+      "sha256": "02ffadaafa849bd7a664432b65cf61597690e48bbafc27ae76ef47ea12c712ed"
+    },
+    {
+      "path": "data/release-readiness-v110.json",
+      "bytes": 716,
+      "sha256": "9f056e53e0f6901d6f71fa9de8d3a23e9da5a341687e795ac84ddb22fe0f18f0"
+    },
+    {
+      "path": "scripts/pgw-v110-audit-ingest.mjs",
+      "bytes": 2094,
+      "sha256": "622ac3b5df426964b262d237d719fc3df497e4e0268de6ae32c8d43b4c5ce3f7"
+    },
+    {
+      "path": "scripts/pgw-v110-release-check.mjs",
+      "bytes": 2318,
+      "sha256": "56c564a0ba9c7dd935fee384363d6f175b25e2987b5a5fdbf6c26c179f31d308"
+    },
+    {
+      "path": "docs/QUALITY_WORKFLOW_V110.md",
+      "bytes": 807,
+      "sha256": "e0661f32b339cf196910eac88f706430a0a80ae8b2889b476a1fe9a4310660f0"
+    }
+  ],
+  "commitOrPushClaimed": false
+}

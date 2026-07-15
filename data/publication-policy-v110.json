@@ -1,0 +1,57 @@
+{
+  "schema": "pgw-publication-policy-v110",
+  "version": "0.5.0.v1",
+  "generatedAt": "2026-07-13T19:00:00Z",
+  "readyGate": {
+    "required": [
+      "hasPhoto",
+      "hasDrawing",
+      "hasParts",
+      "SAP",
+      "PL",
+      "EN",
+      "PAGE_BY_PAGE",
+      "noTechnicalBanner"
+    ],
+    "forbidden": [
+      "fabricated data",
+      "generated-working banner",
+      "unverified alias",
+      "TOYA24 absence inference from search failure"
+    ]
+  },
+  "statusPrecedence": [
+    "ARCHIVE_ONLY",
+    "MANUAL_REQUIRED",
+    "REBUILD",
+    "READY"
+  ],
+  "automation": {
+    "safeAutofix": [
+      "official photo insertion",
+      "layout rebuild",
+      "previewPage",
+      "aliases",
+      "metadata"
+    ],
+    "manualOnly": [
+      "missing SAP",
+      "missing part names",
+      "ambiguous numbering",
+      "unconfirmed model relation"
+    ]
+  },
+  "clientSafety": {
+    "privacySafeShare": true,
+    "shareExcludedFields": [
+      "contactName",
+      "contactEmail",
+      "contactPhone",
+      "invoice",
+      "shipping",
+      "notes"
+    ],
+    "publicPatchReadyOnly": true,
+    "exactModelOfficialPhotoOnly": true
+  }
+}

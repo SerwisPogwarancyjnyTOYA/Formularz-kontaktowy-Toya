@@ -1,22 +1,29 @@
 # Changelog
 
-## 0.4.0.v98 — Incremental verified drawings and customer UX
+## 0.5.0.v1 - TOYA Global Service Passport
+- Naprawiono niewykonalny łańcuch `release-v110-check`: v110 nie wymusza już historycznego `RELEASE.json` v98.
+- Potwierdzono osobno PASS workflow v110 i PASS funkcji klienta 0.5.0.v1.
+- Dodano 6 wersji językowych oraz automatyczne zapamiętywanie języka.
+- Dodano Paszport Serwisowy: kod sprawy, bezpieczny link, druk/PDF, mailto i czyszczenie danych kontaktowych.
+- Dodano deep link modelu oraz odtwarzanie wybranych części z linku bez danych osobowych.
+- Dodano service worker i powłokę PWA offline.
+- Dodano tryby dostępności.
+- Połączono rozpoczęte audyty z publiczną aplikacją przez READY-only patch dla YT-85851, YT-85200, YT-85205 i YT-85208.
+- Ponownie sprawdzono trzy najwyższe work ordery YT-828254/255/256; wszystkie pozostają REBUILD z powodu braku oficjalnego zdjęcia dokładnego wariantu.
+- Nie użyto zdjęć podobnych modeli, ofert zewnętrznych ani grafiki generowanej.
 
-- Wprowadzono przyrostowy mechanizm publikacji: stabilna mapa v97 + mały patch v98.
-- Przywrócono oficjalne modele `YT-8277905`, `YT-8277915`, `YT-8277935`, które były opisane w dokumentacji v97, ale brakowało ich w aktywnej mapie.
-- Rozwinięto alias `YT-8281185` we wspólnym PDF-ie `YT-828118 / YT-8281185`.
-- Dodano `TOYA24_FULL_MATCH`, `previewPage`, liczbę stron i dane QA dla 12 zweryfikowanych modeli ogrodowych.
-- Odświeżono panel admina, healthcheck i smoke-test do aktualnego zestawu danych.
-- Dodano `data/drive-drawings-patch-v98.json`, raporty v98 i `scripts/pgw-v98-incremental-check.mjs`.
-- Release gate: baza 2174, patch 16 rekordów, fizycznie 2177 PDF, 1430 modeli po runtime deduplikacji i rozwinięciu aliasu.
+# Changelog
 
-## 0.4.0.v98 — Verified Drawings & Operational QA
-- Naprawiono niespójność v97: dokumentacja deklarowała 2177 rekordów, ale aktywna mapa miała 2174. Przywrócono `YT-8277905`, `YT-8277915`, `YT-8277935`.
-- Potwierdzono alias `YT-8281185` w `modelsInPdf` wspólnego dokumentu `YT-828118 / YT-8281185`.
-- Dodano pełne metadane TOYA24 i `previewPage` dla 12 zweryfikowanych modeli ogrodowych.
-- Przygotowano metadane jakości do wykorzystania przez formularz i panel administracyjny w kolejnych iteracjach.
-- Odświeżono `admin.html`, `healthcheck.html` i `smoke-test.html`; usunięto stare odwołania do v73/full/converted.
-- Dodano `catalog-readiness-v98.json`, raport publikacyjny, audyt spójności i skrypt `npm run release-v98-check`.
+## 0.5.0-rc2 - Workflow Engine v110
+- Rozszerzono rejestr do 33 modeli, w tym trzy nowe READY: YT-85200, YT-85205 i YT-85208.
+- Dodano 29 wykonywalnych work orderów z checklistami i kryteriami odbioru.
+- Dodano Rebuild Studio z lokalnym śledzeniem postępu, notatkami, drukiem i eksportem.
+- Dodano TOYA24 Gap Register z zasadą: brak wyniku wyszukiwania nie jest dowodem braku produktu.
+- Dodano automatyczny ingester kolejnych audytów oraz twardy release check.
+- Dodano batch selection i eksport paczek roboczych z Quality Center.
+- Publiczna mapa PDF pozostaje bezpiecznie niezmieniona.
+
+# Changelog
 
 ## v96 — Drawing Recovery Cleanup
 - 75837 zdjęty z kolejki przeróbki po znalezieniu oficjalnego `Czesci_zamienne_75837.pdf`.

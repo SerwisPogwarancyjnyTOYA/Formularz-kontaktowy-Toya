@@ -1,32 +1,28 @@
-# PGW Service Hub — 0.4.0.v98
+# TOYA Global Service Hub - 0.5.0.v1
 
-Wersja v98 rozwija produkcyjną linię `0.4.0.v97` bez wymiany całej pięciomegabajtowej mapy przy każdej małej partii.
+To wydanie zmienia formularz w wielojęzyczne narzędzie klienta i serwisu.
 
-## Najważniejsze zmiany
+## Najmocniejsze funkcje
+- 6 języków: PL, EN, DE, CS, SK, UA,
+- Paszport Serwisowy z kodem sprawy, drukiem/PDF i przyciskiem e-mail,
+- bezpieczne linki udostępniania bez danych osobowych,
+- deep link do modelu i odtworzenie wybranych części,
+- PWA i tryb offline dla wcześniej pobranego katalogu,
+- duży tekst, wysoki kontrast i redukcja animacji,
+- skonsolidowany patch publiczny zawierający tylko cztery rekordy READY.
 
-- publiczna mapa jest składana z:
-  - `data/drive-drawings-map.generated-v97.json` — stabilna baza,
-  - `data/drive-drawings-patch-v98.json` — mały patch przyrostowy;
-- odzyskano brakujące w aktywnej mapie oficjalne modele `YT-8277905`, `YT-8277915`, `YT-8277935`;
-- rozszerzono alias `YT-8281185` do wspólnego PDF-u `YT-828118 / YT-8281185`;
-- 12 wcześniej sprawdzonych modeli ogrodowych otrzymało metadane `TOYA24_FULL_MATCH`, `previewPage`, liczbę stron i datę weryfikacji;
-- odświeżono `admin.html`, `healthcheck.html` i `smoke-test.html`;
-- dodano kontrolę `npm run release-v98-check`.
+## Audyt bieżący
+Sprawdzono YT-828254, YT-828255 i YT-828256. Dokumentacja techniczna jest kompletna (3 strony i 47/47 SAP/PL/EN na model), ale współdzielony JPG jest rysunkiem wybuchowym, nie zdjęciem produktu. Modele pozostają REBUILD.
 
-## Liczniki
-
-- stabilna baza: 2174 rekordy PDF,
-- nowe oficjalne modele: +3,
-- fizyczne rekordy PDF po wydaniu: 2177,
-- modele wyszukiwalne po runtime deduplikacji i rozwinięciu aliasu: 1430,
-- pełna weryfikacja TOYA24 w tej partii: 15 modeli.
-
-## Walidacja
-
+## Test
 ```bash
-npm run release-v98-check
-npm run publication-pipeline
-npm run check
+npm run release-v050-v1-check
 ```
 
-Do formularza klienta trafiają wyłącznie oficjalne lub jednoznacznie zweryfikowane PDF-y. Pliki robocze, konwersyjne i zawierające komunikaty techniczne pozostają poza publikacją.
+Commit i push nie są deklarowane bez potwierdzenia.
+
+## Potwierdzone testy
+- `npm run release-v110-check` → PASS (`models=33 ready=4 workOrders=29 gaps=33 fastWins=13`)
+- `npm run release-v050-v1-check` → PASS (`languages=6 publicReady=4 audited=3 privacyShare=true offlineShell=true`)
+
+Naprawiono wcześniejszy błędny łańcuch testów, który próbował wymuszać wersję v98 na wydaniu 0.5.0.v1.

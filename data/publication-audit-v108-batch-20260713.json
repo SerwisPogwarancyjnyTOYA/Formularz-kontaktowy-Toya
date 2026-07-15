@@ -1,0 +1,59 @@
+{
+  "release": "v108-staging",
+  "audit_date": "2026-07-13",
+  "source_folder": {
+    "name": "Rysunki wybuchowe",
+    "drive_id": "1wYvMsfwtz8jPvAaKW4W13au77lUAu3Gu"
+  },
+  "repository": {
+    "name": "Formularz-kontaktowy-Toya",
+    "data_folder_id": "10GSWtVSUsgXv_uYkeZ80DIv5q3byumqx"
+  },
+  "summary": {
+    "audited": 5,
+    "ready": 0,
+    "rework_or_merge": 2,
+    "exclude_public": 3
+  },
+  "files": [
+    {
+      "model": "78180",
+      "file": "Czesci_zamienne_78180.pdf",
+      "status": "SOURCE_MISMATCH_REVIEW",
+      "public": false,
+      "reason": "Układ TOYA24 jest kompletny, ale tabela używa indeksów Z78181-* mimo tytułu 78180; przed publikacją trzeba potwierdzić zgodność modeli i brakujące pozycje 4, 39 i 64."
+    },
+    {
+      "model": "79027",
+      "file": "Czesci_zamienne_79027.pdf",
+      "status": "REBUILD",
+      "public": false,
+      "reason": "Czytelny rysunek wybuchowy i tabela 1-59, ale brak okładki i warstwy TOYA24; wymaga osadzenia w oficjalnym szablonie i kontroli sklejenia pozycji 26-27."
+    },
+    {
+      "model": "75580",
+      "file": "Czesci_zamienne_75580.pdf",
+      "status": "MANUAL_REQUIRED",
+      "public": false,
+      "reason": "Dwie strony samej tabeli bez eksplozji i okładki; liczne puste pozycje oraz sklejenie 55-56."
+    },
+    {
+      "model": "79231",
+      "file": "Czesci_zamienne_79231.pdf",
+      "status": "MANUAL_REQUIRED",
+      "public": false,
+      "reason": "Dwie strony tabeli bez eksplozji i okładki; wiele pustych rekordów, pozycje 65-69 bez danych oraz sklejenie 55-56."
+    },
+    {
+      "model": "83015",
+      "file": "Czesci_zamienne_83015.pdf",
+      "status": "MANUAL_REQUIRED",
+      "public": false,
+      "reason": "Cztery strony samej tabeli, brak rysunku i okładki TOYA24; liczne literówki i sklejone wiersze wymagają kontroli."
+    }
+  ],
+  "github_action": {
+    "status": "NO_PUBLIC_CHANGES",
+    "reason": "Brak plików przechodzących pełny release gate TOYA24."
+  }
+}
