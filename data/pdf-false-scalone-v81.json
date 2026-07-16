@@ -1,0 +1,35 @@
+{
+  "schema": "pgw.pdf.false-scalone-and-empty-auto",
+  "version": "20260714-v81-false-scalone-repair",
+  "generatedAt": "2026-07-14T13:35:00+02:00",
+  "summary": {
+    "demotedCount": 3,
+    "reason": "robocze automaty / fałszywie dobre pliki nie powinny być głównym PDF-em klienta"
+  },
+  "items": [
+    {
+      "deviceIndex": "YT-85004",
+      "badFileId": "1GWV2mJuja48ApaiJ8MZ9ZFXqitKYpQrD",
+      "replacementFileId": "1snbW4JluhkENK5dU5Q4mdDohB0elhxWk",
+      "replacementLocalPath": "assets/pdfs/Czesci_zamienne_YT-85004__SCALONE.pdf",
+      "decision": "demote_bad_auto_promote_official_pdf",
+      "reason": "roboczy __SCALONE był tabelą z błędnie uciętymi indeksami; oficjalny PDF ma okładkę, rysunki urządzenia/silnika i pełną listę części"
+    },
+    {
+      "deviceIndex": "YT-82200",
+      "badFileId": "16Sea3JPwZ_3bXYTtDk7ulEKJcc9ZVrHD",
+      "replacementFileId": "1EIgrbkm1P63569i1m2B-23LZt-GiDJDU",
+      "replacementLocalPath": "assets/pdfs/Czesci_zamienne_YT-82200__SCALONE.pdf",
+      "decision": "demote_bad_auto_promote_official_pdf",
+      "reason": "roboczy PDF był pustą kartą z komunikatem, że lista części nie została odczytana; oficjalny PDF ma okładkę, rysunek złożeniowy i listę części"
+    },
+    {
+      "deviceIndex": "YG-09230",
+      "badFileId": "1AgCUq6jJnBGZu0kFWo0WO2CtGsG97rtC",
+      "replacementFileId": "1kzrz3wkKcvk_Z3buSsM6Yudk3TKcW3iJ",
+      "replacementLocalPath": "assets/pdfs/Czesci_zamienne_YG-09230__SCALONE.pdf",
+      "decision": "demote_bad_auto_promote_official_pdf",
+      "reason": "roboczy PDF był pustą kartą z komunikatem, a oficjalny PDF ma okładkę i obrazkowy rysunek części; części wymagają ręcznego dopisania/OCR, ale rysunek publikacyjny jest poprawny"
+    }
+  ]
+}

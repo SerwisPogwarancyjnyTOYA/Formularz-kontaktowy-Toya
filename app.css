@@ -260,3 +260,21 @@ html[data-theme="dark"] .assembly-notice{background:rgba(251,146,60,.10);color:#
 .pdf-standard-bar span{text-align:right;line-height:1.25}
 .pdf-standard-shell iframe{display:block;width:100%;height:100%;min-height:0;border:0;background:#fff}
 @media (max-width:680px){.pdf-standard-bar{display:block}.pdf-standard-bar strong{max-width:100%;margin-bottom:3px}.pdf-standard-bar span{text-align:left;display:block}}
+
+
+/* v76 — jednolity viewer PDF + widoczna awaryjka dla zablokowanych podglądów */
+.pdf-standard-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.pdf-standard-bar>div:first-child{display:flex;flex-direction:column;gap:3px;min-width:220px}
+.pdf-standard-actions{display:flex;gap:8px;flex-wrap:wrap}
+.pdf-standard-actions a{border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:7px 10px;text-decoration:none;font-size:12px;color:inherit;background:rgba(255,255,255,.06)}
+.pdf-standard-badge{font-style:normal;border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:6px 10px;font-size:11px;letter-spacing:.04em;text-transform:uppercase;opacity:.9}
+.pdf-standard-help{font-size:12px;line-height:1.45;color:var(--muted,#94a3b8);padding:8px 10px;border-top:1px solid rgba(255,255,255,.08)}
+
+
+/* v82 UI language switcher */
+.top-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+.language-select{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:6px 8px 6px 12px;color:var(--muted);font-size:12px;line-height:1}
+.language-select span{white-space:nowrap;font-weight:700;letter-spacing:.02em}
+.language-select select{appearance:none;border:0;border-radius:999px;padding:7px 30px 7px 12px;background:rgba(255,255,255,.92);color:#101828;font-weight:800;min-width:132px;cursor:pointer;background-image:linear-gradient(45deg,transparent 50%,#111 50%),linear-gradient(135deg,#111 50%,transparent 50%);background-position:calc(100% - 16px) 50%,calc(100% - 11px) 50%;background-size:5px 5px,5px 5px;background-repeat:no-repeat}
+.language-select select:focus{outline:2px solid var(--accent);outline-offset:2px}
+@media (max-width:720px){.top-actions{justify-content:flex-start}.language-select{width:100%;justify-content:space-between}.language-select select{min-width:150px}}

@@ -1,8 +1,7 @@
 (() => {
   'use strict';
-  // PGW v98 incremental publication: canonical v97 map plus a small verified patch, merged by the existing score-dedupe pipeline.
   const CONFIG = window.PGW_CONFIG || {};
-  const DRAFT_KEY = 'pgw-production-draft-v98-verified-drawings-and-ux';
+  const DRAFT_KEY = 'pgw-production-draft-v77-publication-quarantine-repair';
   const THEME_KEY = 'pgw-theme';
   const PART_ROW_LIMIT = Number(CONFIG.partRowLimit || 80);
   const $ = (id) => document.getElementById(id);
@@ -22,7 +21,7 @@
     devices: [], drawings: [], parts: [], driveMap: [], brandOverrides: {}, pdfHeaderOverrides: {}, pdfDeviceOverrides: {}, pdfQualityReport: {}, pdfOrphans: [], universalParts: [], universalPartLinks: [], partAssemblies: {},
     drawingById: new Map(), partsByDrawing: new Map(), driveByDrawingId: new Map(), driveByKey: new Map(), zunByPartKey: new Map(), zunByCode: new Map(), partAssemblyComponents: new Map(), partAssemblyChildren: new Map(),
     selectedDevice: null, selectedDrawing: null, selectedParts: new Map(), manualMode: false, step: 1, formDirty: false,
-    postalCodes: new Map(), partVisibleLimit: PART_ROW_LIMIT, activeBrand: 'all', brandSummary: [], pdfDiagnostics: {}, releaseHealth: {}, sourceHealth: [], releaseInfo: {}, deploymentState: {}, pdfQaRules: {}, pdfOverrideCandidates: [], pdfDisplayPolicy: {}, pdfStandardizationAudit: {}, driveFirstCatalogAuditV78: {}, driveCatalogPolicyV78: {}, driveCatalogAuditV79: {}, drivePdfMergeQueueV79: {}, driveOrganizerPlanV79: {}, driveMasterAuditV80: {}, driveMergePlanV80: {}, driveOrganizerActionsV80: {}, drivePartsGeneratedV82: {}, driveModelAliasesV82: {}, pdfCustomerVisibleBlocklistV82: {}, pdfQuarantineV82: {}, realDrawingQualityAuditV82: {}
+    postalCodes: new Map(), partVisibleLimit: PART_ROW_LIMIT, activeBrand: 'all', brandSummary: [], pdfDiagnostics: {}, releaseHealth: {}, sourceHealth: [], releaseInfo: {}, deploymentState: {}, pdfQaRules: {}, pdfOverrideCandidates: [], pdfDisplayPolicy: {}, pdfStandardizationAudit: {}, pdfRepairCandidates: [], pdfViewerFallbacks: {}, modelAliases: {}, pdfPublicationQuarantine: {}, pdfPublicationRepairPlan: {}, pdfPublicationReadiness: {}, __pdfQuarantineByFileId: new Map(), __pdfQuarantineByName: new Map()
   };
 
   const POSTAL_FALLBACK = {
@@ -56,25 +55,13 @@
       state.pdfOverrideCandidates = await loadFirst(urls.pdfOverrideCandidates || ['data/pdf-override-candidates.json'], [], 'pdfOverrideCandidates');
       state.pdfDisplayPolicy = await loadFirst(urls.pdfDisplayPolicy || ['data/pdf-display-policy.json'], {}, 'pdfDisplayPolicy');
       state.pdfStandardizationAudit = await loadFirst(urls.pdfStandardizationAudit || ['data/pdf-standardization-audit.json'], {}, 'pdfStandardizationAudit');
+      state.pdfRepairCandidates = await loadFirst(urls.pdfRepairCandidates || ['data/pdf-repair-candidates.json'], [], 'pdfRepairCandidates');
+      state.pdfViewerFallbacks = await loadFirst(urls.pdfViewerFallbacks || ['data/pdf-viewer-fallbacks.json'], {}, 'pdfViewerFallbacks');
+      state.modelAliases = await loadFirst(urls.modelAliases || ['data/model-aliases.json'], {}, 'modelAliases');
+      state.pdfPublicationQuarantine = await loadFirst(urls.pdfPublicationQuarantine || ['data/pdf-publication-quarantine.json'], {}, 'pdfPublicationQuarantine');
+      state.pdfPublicationRepairPlan = await loadFirst(urls.pdfPublicationRepairPlan || ['data/pdf-publication-repair-plan.json'], {}, 'pdfPublicationRepairPlan');
+      state.pdfPublicationReadiness = await loadFirst(urls.pdfPublicationReadiness || ['data/pdf-publication-readiness.json'], {}, 'pdfPublicationReadiness');
       state.deploymentState = await loadFirst(urls.deploymentState || ['data/deployment-state.json'], {}, 'deploymentState');
-      state.driveFirstCatalogAuditV78 = await loadFirst(urls.driveFirstCatalogAuditV78 || ['data/drive-first-catalog-audit-v78.json'], {}, 'driveFirstCatalogAuditV78');
-      state.driveCatalogPolicyV78 = await loadFirst(urls.driveCatalogPolicyV78 || ['data/drive-catalog-policy-v78.json'], {}, 'driveCatalogPolicyV78');
-      state.driveCatalogAuditV79 = await loadFirst(urls.driveCatalogAuditV79 || ['data/drive-catalog-audit-v79.json'], {}, 'driveCatalogAuditV79');
-      state.drivePdfMergeQueueV79 = await loadFirst(urls.drivePdfMergeQueueV79 || ['data/drive-pdf-merge-queue-v79.json'], {}, 'drivePdfMergeQueueV79');
-      state.driveOrganizerPlanV79 = await loadFirst(urls.driveOrganizerPlanV79 || ['data/drive-organizer-plan-v79.json'], {}, 'driveOrganizerPlanV79');
-      state.driveMasterAuditV80 = await loadFirst(urls.driveMasterAuditV80 || ['data/drive-master-audit-v80.json'], {}, 'driveMasterAuditV80');
-      state.driveMasterAuditV81 = await loadFirst(urls.driveMasterAuditV81 || ['data/drive-master-audit-v81.json'], {}, 'driveMasterAuditV81');
-      state.driveModelAliasesV81 = await loadFirst(urls.driveModelAliasesV81 || ['data/drive-model-aliases-v81.json'], {}, 'driveModelAliasesV81');
-      state.drivePartsGeneratedV81 = await loadFirst(urls.drivePartsGeneratedV81 || ['data/drive-parts.generated-v81.json'], {}, 'drivePartsGeneratedV81');
-      state.drivePartsGeneratedV82 = await loadFirst(urls.drivePartsGeneratedV82 || ['data/drive-parts.generated-v82.json'], {}, 'drivePartsGeneratedV82');
-      state.driveModelAliasesV82 = await loadFirst(urls.driveModelAliasesV82 || ['data/drive-model-aliases-v82.json'], {}, 'driveModelAliasesV82');
-      state.pdfCustomerVisibleBlocklistV82 = await loadFirst(urls.pdfCustomerVisibleBlocklistV82 || ['data/pdf-customer-visible-blocklist-v82.json'], {}, 'pdfCustomerVisibleBlocklistV82');
-      state.pdfQuarantineV82 = await loadFirst(urls.pdfQuarantineV82 || ['data/pdf-quarantine-v82.json'], {}, 'pdfQuarantineV82');
-      state.realDrawingQualityAuditV82 = await loadFirst(urls.realDrawingQualityAuditV82 || ['data/real-drawing-quality-audit-v82.json'], {}, 'realDrawingQualityAuditV82');
-      state.publicDrawingPolicyV83 = await loadFirst(urls.publicDrawingPolicyV83 || ['data/public-drawing-policy-v83.json'], {}, 'publicDrawingPolicyV83');
-      state.publicDrawingAuditV83 = await loadFirst(urls.publicDrawingAuditV83 || ['data/public-drawing-audit-v83.json'], {}, 'publicDrawingAuditV83');
-      state.driveMergePlanV80 = await loadFirst(urls.driveMergePlanV80 || ['data/drive-merge-plan-v80.json'], {}, 'driveMergePlanV80');
-      state.driveOrganizerActionsV80 = await loadFirst(urls.driveOrganizerActionsV80 || ['data/drive-organizer-actions-v80.json'], {}, 'driveOrganizerActionsV80');
       state.releaseInfo = await loadFirst(urls.releaseInfo || ['data/release-info.json'], {}, 'releaseInfo');
       await loadPostalCodes();
       normalizeData();
@@ -163,102 +150,16 @@
     Object.entries(POSTAL_FALLBACK).forEach(([zip, city]) => push(zip, city));
   }
 
-
-  function expandDriveMapModels(rows) {
-    const out = [];
-    for (const row of arr(rows)) {
-      if (!row) continue;
-      const models = extractModelsFromDriveRow(row);
-      if (!models.length) {
-        out.push(row);
-        continue;
-      }
-      for (const model of models) {
-        out.push({
-          ...row,
-          deviceIndex: model,
-          model,
-          normalizedModel: model,
-          primaryModel: row.primaryModel || models[0] || model,
-          modelsInPdf: models,
-          sharedDrawingForModels: models.length > 1,
-          __expandedFromMultiModelPdf: models.length > 1
-        });
-      }
-    }
-    return out;
-  }
-
-  function extractModelsFromDriveRow(row) {
-    const explicit = []
-      .concat(arr(row.deviceIndexes))
-      .concat(arr(row.modelsInPdf))
-      .concat(arr(row.models))
-      .concat(arr(row.keys));
-    if (row.deviceIndex) explicit.push(row.deviceIndex);
-    if (row.model) explicit.push(row.model);
-    const text = [
-      ...explicit,
-      row.fileName, row.title, row.name, row.path, row.folderName, row.deviceName,
-      row.searchText, row.pdfHeader
-    ].join(' ');
-    const found = [];
-    const add = (value) => {
-      const idx = normalizeDeviceIndex(value);
-      if (idx && !found.some(x => norm(x) === norm(idx))) found.push(idx);
-    };
-    String(text || '').replace(/\b(YT|YG)\s*[-_ ]?\s*(\d{4,6})\b/gi, (_, prefix, digits) => {
-      add(`${String(prefix).toUpperCase()}-${digits}`);
-      return _;
-    });
-    String(text || '').replace(/(?:^|[^0-9A-Z])(\d{5})(?:[^0-9A-Z]|$)/gi, (_, digits) => {
-      add(digits);
-      return _;
-    });
-    for (const value of explicit) add(value);
-    return found;
-  }
-
-  function addPartsFromDriveRow(row, drawing) {
-    const rows = arr(row.parts || row.extractedParts || row.partsList);
-    if (!rows.length || !drawing || !drawing.id) return 0;
-    let added = 0;
-    const existing = new Set(state.parts.map(p => `${norm(p.deviceIndex)}|${norm(p.partIndex)}|${norm(p.position)}|${String(p.drawingId)}`));
-    rows.forEach((part, index) => {
-      const partIndex = String(part.partIndex || part.index || part.sap || '').trim().toUpperCase();
-      if (!partIndex || looksLikeHeaderPart({partIndex})) return;
-      const position = String(part.position || part.pos || part.no || index + 1).trim();
-      const key = `${norm(drawing.deviceIndex)}|${norm(partIndex)}|${norm(position)}|${String(drawing.id)}`;
-      if (existing.has(key)) return;
-      existing.add(key);
-      state.parts.push({
-        id: `drive-${String(row.fileId || drawing.id)}|${drawing.deviceIndex}|${partIndex}|${position}`,
-        deviceIndex: drawing.deviceIndex,
-        position,
-        partIndex,
-        namePl: String(part.namePl || part.name || part.description || '').trim(),
-        nameEn: String(part.nameEn || '').trim(),
-        drawingId: drawing.id,
-        drawingPath: drawing.path || row.path || '',
-        drawingTitle: drawing.title || row.title || '',
-        brand: drawing.brand || row.brand || '',
-        source: row.source || 'GOOGLE_DRIVE_GENERATED_V78'
-      });
-      added++;
-    });
-    return added;
-  }
-
   function normalizeData() {
     state.devices = arr(state.devices).filter(Boolean);
     state.drawings = arr(state.drawings).filter(d => isPdf(d));
     state.parts = arr(state.parts).filter(Boolean);
     state.universalParts = normalizeUniversalParts(state.universalParts);
     state.universalPartLinks = normalizeUniversalPartLinks(state.universalPartLinks);
-    state.driveMap = expandDriveMapModels(arr(state.driveMap).filter(row => isPdf(row))); // v78: jeden PDF może obsługiwać kilka modeli
-    state.driveMap = state.driveMap.filter(row => isCustomerVisiblePdfV83(row)); // v83: publiczne tylko Golden Sample / realny rysunek; robocze do kwarantanny
+    state.driveMap = arr(state.driveMap).filter(row => isPdf(row));
+    preparePdfPublicationQuarantineIndex();
 
-    for (const d of state.devices) d.brand = resolveBrand(d);
+    for (const d of state.devices) { d.brand = resolveBrand(d); d.__modelAliases = modelAliasesFor(d.deviceIndex); }
     for (const d of state.drawings) d.brand = resolveBrand(d);
     for (const p of state.parts) p.brand = resolveBrand(p);
     for (const row of state.driveMap) row.brand = resolveBrand(row);
@@ -273,9 +174,10 @@
       row.previewUrl = normalizeDrivePreviewUrl(row.previewUrl || row.viewerUrl);
       row.githubPreviewReady = Boolean(row.viewerUrl && row.viewerUrl.includes('/preview'));
       row.pdfVariant = classifyPdfVariant(row);
+      applyPdfPublicationQuarantine(row);
       applyPdfDeviceOverride(row);
       applyPdfHeaderOverride(row);
-      row.__keys = unique([row.deviceIndex, row.model, row.normalizedKey, row.fileName, row.title, row.name, row.deviceName, row.displayTitle, ...(row.keys || [])].flat().map(normKey).filter(Boolean));
+      row.__keys = unique([row.deviceIndex, row.model, row.normalizedKey, row.fileName, row.title, row.name, row.deviceName, row.displayTitle, ...(row.keys || []), ...modelAliasesFor(row.deviceIndex || row.model || row.normalizedKey)].flat().map(normKey).filter(Boolean));
       for (const k of row.__keys) driveKeys.add(k);
     }
     state.driveMap = dedupeDriveMapRows(state.driveMap);
@@ -293,7 +195,7 @@
         const drawing = {
           id,
           deviceIndex: row.deviceIndex,
-          title: bestDriveTitleV80(row) || row.displayTitle || row.deviceName || row.title || row.fileName || row.deviceIndex,
+          title: row.displayTitle || row.deviceName || row.title || row.fileName || row.deviceIndex,
           fileName: row.fileName || row.title || `${row.deviceIndex}.pdf`,
           brand: canonicalBrand(row.brand || inferBrand(row)),
           type: 'pdf',
@@ -310,21 +212,13 @@
           status: row.status || '',
           pdfVariant: row.pdfVariant || classifyPdfVariant(row),
           githubPreviewReady: Boolean(row.githubPreviewReady),
-          publicationStatus: row.publicationStatus || row.qaStatus || row.status || '',
-          qualityGate: row.qualityGate || '',
-          previewPage: Number(row.previewPage || 0) || null,
-          pages: Number(row.pages || 0) || null,
-          verifiedAt: row.verifiedAt || '',
           partsExtracted: Boolean(row.partsExtracted),
           displayMode: row.displayMode || 'standard-service-card'
         };
         state.drawings.push(drawing);
-        addPartsFromDriveRow(row, drawing);
         drawingKeys(drawing).forEach(k => existingDrawingKeys.add(k));
       }
     }
-
-    addGeneratedDrivePartsV81();
 
     state.drawings = state.drawings.filter(d => {
       const keys = drawingKeys(d);
@@ -361,12 +255,6 @@
   }
 
 
-  function bestDriveTitleV80(row) {
-    const models = Array.isArray(row && row.modelsInPdf) ? row.modelsInPdf : [];
-    const base = cleanDeviceTitle(row && row.deviceIndex, row && (row.deviceName || row.displayTitle || row.title || row.fileName || ''));
-    if (models.length > 1 && base && !/wspólny|multi/i.test(base)) return base + ' · wspólny rysunek dla ' + models.join(', ');
-    return base || (row && row.deviceIndex) || '';
-  }
 
   function enhanceDeviceTitlesFromDrawings() {
     const drawingsByDevice = new Map();
@@ -529,10 +417,7 @@
     const out = [];
     for (const row of rows || []) {
       const id = String(row.fileId || row.driveFileId || row.googleDriveId || row.gdriveId || row.sourceFileId || '').trim();
-      // v79: jeden PDF moze obslugiwac kilka modeli. Nie wolno deduplikowac po samym fileId,
-      // bo wtedy drugi model z pliku yt-828113-yt-828114.pdf znika z katalogu.
-      const modelIdentity = normKey(row.deviceIndex || row.model || row.normalizedModel || row.primaryModel || '');
-      const identity = id ? [id, modelIdentity || 'no-model'].join('|') : [row.path || row.folderPath || '', row.fileName || row.title || row.name || '', row.deviceIndex || row.model || row.normalizedModel || ''].map(normKey).filter(Boolean).join('|');
+      const identity = id || [row.path || row.folderPath || '', row.fileName || row.title || row.name || '', row.deviceIndex || row.model || row.normalizedModel || ''].map(normKey).filter(Boolean).join('|');
       if (!identity) { out.push(row); continue; }
       const existingIndex = byId.get(identity);
       if (existingIndex === undefined) {
@@ -547,187 +432,28 @@
 
   function driveRowScore(row) {
     let score = 0;
+    const variant = classifyPdfVariant(row || {});
+    const text = norm([row.fileName, row.title, row.name, row.status, row.source, row.notes, row.pdfVariant].join(' '));
     if (row.previewUrl || String(row.viewerUrl || '').includes('/preview')) score += 8;
-    if (row.openUrl || row.url) score += 4;
+    if (row.openUrl || row.url || row.fileId) score += 4;
     if (row.deviceIndex || row.model || row.normalizedModel) score += 4;
     if (row.displayTitle || row.deviceName || row.pdfHeader) score += 3;
     if (row.brand && row.brand !== 'INNE' && row.brand !== 'DO ROZPOZNANIA') score += 2;
-    const ts = Date.parse(row.modifiedTime || row.updatedAt || row.generatedAt || 0) || 0;
+    if (isPreferredPdf(row)) score += 80;
+    if (variant === 'merged_parts_and_drawing') score += 60;
+    if (variant === 'standard_parts_pdf') score += 25;
+    if (variant === 'standard_pdf') score += 10;
+    if (row.publicationDecision === 'use_replacement') score -= 200000;
+    if (row.publicationDecision === 'backup_only') score -= 150000;
+    if (row.publicationDecision === 'quarantine_review') score -= 180000;
+    if (row.publicationDecision === 'repair_required') score -= 120000;
+    if (row.publicationDecision === 'blocked_until_fixed') score -= 250000;
+    if (row.doNotUseAsPrimary) score -= 100000;
+    if (variant === 'technical_source_backup') score -= 25;
+    if (variant === 'review_variant') score -= 60;
+    if (text.includes('blocked') || text.includes('poblokowane')) score -= 100;
+    const ts = Date.parse(row.modifiedTime || row.updatedAt || row.createdAt || row.generatedAt || 0) || 0;
     return score * 10000000000000 + ts;
-  }
-
-
-
-  function blocklistFileIdsV82() {
-    const root = state.pdfCustomerVisibleBlocklistV82 || {};
-    return new Set(arr(root.blockedFileIds || []).map(x => String(x || '').trim()).filter(Boolean));
-  }
-
-
-  function isCustomerVisiblePdfV83(row) {
-    const decision = classifyPublicDrawingV83(row);
-    row.publicDrawingDecisionV83 = decision.status;
-    row.publicDrawingReasonV83 = decision.reason;
-    row.publicDrawingClassV83 = decision.className;
-    row.displayPriority = Number(row.displayPriority || 9999) + Number(decision.priorityBoost || 0);
-    return decision.public === true;
-  }
-
-  function classifyPublicDrawingV83(row) {
-    const fields = [row.fileName, row.title, row.name, row.path, row.folderName, row.notes, row.source, row.pdfVariant, row.status, row.displayMode, row.searchText, row.content].map(x => String(x || ''));
-    const raw = fields.join(' ');
-    const text = norm(raw);
-    const name = String(row.fileName || row.title || row.name || '').trim();
-    const normalizedName = norm(name);
-    const path = norm([row.path, row.folderName].join(' '));
-    const isGoldenName = /(^|[\/\\])?czesci[_\s-]*zamienne[_\s-]*/i.test(name) || /__SCALONE/i.test(name);
-    const isOfficialFolder = path.includes('rysunki wybuchowe') || path.includes('rysunki zlozeniowe') || path.includes('rysunki złożeniowe');
-    const isRoboczyFolder = path.includes('robocze') || path.includes('do weryfikacji') || path.includes('kwarantanna') || path.includes('converted') || path.includes('konwersj');
-    const hasPublicCatalogSignals = text.includes('toya s a') || text.includes('aktualizacja') || text.includes('lista czesci zamiennych') || text.includes('lista części zamiennych') || text.includes('rysunek zlozeniowy') || text.includes('rysunek złożeniowy');
-    const hardBad = [
-      'pdf roboczy wygenerowany automatycznie',
-      'zrodla w folderze',
-      'źrodla w folderze',
-      'źródla w folderze',
-      'źródła w folderze',
-      'oryginalne pliki robocze',
-      'material roboczy',
-      'materiał roboczy',
-      'lista czesci nie zostala automatycznie odczytana',
-      'lista części nie została automatycznie odczytana',
-      'wymaga recznej weryfikacji',
-      'wymaga ręcznej weryfikacji',
-      'ocr'
-    ].some(marker => text.includes(marker));
-    const looksSlugGenerated = /^(yt|yg|dz)[-_ ]?\d{4,6}([_-](yt|yg|dz)?[-_ ]?\d{4,6})*\.pdf$/i.test(name) && !isGoldenName;
-    const onlyPartsTable = text.includes('poz indeks sap') || text.includes('no nr sap part name nazwa');
-    const fid = String(row.fileId || row.driveFileId || row.googleDriveId || row.gdriveId || row.sourceFileId || '').trim();
-    if (fid && blocklistFileIdsV82().has(fid)) return {public:false, status:'blocked', className:'BLOCKLIST_V82', reason:'fileId is in customer-visible blocklist', priorityBoost:900000};
-    if (hardBad) return {public:false, status:'blocked', className:'ROBOCZY_PDF', reason:'contains internal/auto-generated PDF markers', priorityBoost:900000};
-    if (isRoboczyFolder && !/__SCALONE|ZWERYFIKOWANE|VERIFIED/i.test(raw)) return {public:false, status:'rewrite_required', className:'ROBOCZE_SOURCE', reason:'source is robocze/converted and not verified/scalone', priorityBoost:800000};
-    if (looksSlugGenerated && onlyPartsTable && !/__SCALONE|ZWERYFIKOWANE|VERIFIED/i.test(raw)) return {public:false, status:'rewrite_required', className:'SLUG_TABLE_ONLY', reason:'model slug PDF looks like generated table/list, not public drawing', priorityBoost:800000};
-    if (isGoldenName && isOfficialFolder) return {public:true, status:'public', className:'GOLDEN_OFFICIAL', reason:'canonical Czesci_zamienne/scalone PDF in official drawing folder', priorityBoost:-3000};
-    if (isGoldenName && hasPublicCatalogSignals) return {public:true, status:'public', className:'GOLDEN_FORMAT', reason:'canonical PDF with public catalog signals', priorityBoost:-2500};
-    if (isOfficialFolder && hasPublicCatalogSignals && !onlyPartsTable) return {public:true, status:'public', className:'PUBLIC_DRAWING_LIKELY', reason:'official folder with drawing/catalog signals', priorityBoost:-1000};
-    if (isOfficialFolder && isGoldenName) return {public:true, status:'public_reviewed_name', className:'OFFICIAL_CANONICAL_NAME', reason:'official folder and canonical file name', priorityBoost:-500};
-    return {public:false, status:'needs_review', className:'UNKNOWN_SOURCE', reason:'not enough public drawing evidence', priorityBoost:700000};
-  }
-
-  function isCustomerVisiblePdfV82(row) {
-    const fid = String(row.fileId || row.driveFileId || row.googleDriveId || row.gdriveId || row.sourceFileId || '').trim();
-    if (fid && blocklistFileIdsV82().has(fid)) return false;
-    const text = norm([row.fileName, row.title, row.name, row.path, row.folderName, row.notes, row.source, row.pdfVariant, row.status].join(' '));
-    if (text.includes('pdf roboczy wygenerowany automatycznie')) return false;
-    if (text.includes('zrodla w folderze') && text.includes('pdf 0') && text.includes('obrazy 1')) return false;
-    const isRobocze = text.includes('robocze');
-    const isMerged = text.includes('scalone') || text.includes('verified preferred') || text.includes('verified_preferred');
-    const isCanonicalPartsPdf = text.includes('czesci zamienne') || text.includes('czesci_zamienne');
-    const looksAutogeneratedSlug = /^yt[-_ ]?\d/i.test(String(row.fileName || row.title || '').trim()) && !isCanonicalPartsPdf && !isMerged;
-    if (isRobocze && (looksAutogeneratedSlug || row.pdfVariant === 'parts_list_or_generated_pdf' || row.pdfVariant === 'generated_parts_and_drawing') && !isMerged) return false;
-    if (looksAutogeneratedSlug && row.partsExtracted && !isMerged) return false;
-    return true;
-  }
-
-  function addGeneratedDrivePartsV82() {
-    const root = state.drivePartsGeneratedV82 || {};
-    const rows = arr(root.items || root);
-    if (!rows.length) return 0;
-    const blocked = blocklistFileIdsV82();
-    const drawingByFileModel = new Map();
-    for (const d of state.drawings || []) {
-      const fid = String(d.driveFileId || d.fileId || '').trim();
-      const model = normalizeDeviceIndex(d.deviceIndex);
-      if (fid && model) drawingByFileModel.set(`${fid}|${model}`, d);
-    }
-    const existing = new Set(state.parts.map(p => `${norm(p.deviceIndex)}|${norm(p.partIndex)}|${norm(p.position)}|${String(p.drawingId)}`));
-    let added = 0;
-    for (const row of rows) {
-      const fid = String(row.drawingFileId || row.fileId || '').trim();
-      if (fid && blocked.has(fid)) continue;
-      const model = normalizeDeviceIndex(row.deviceIndex || row.model);
-      const drawing = drawingByFileModel.get(`${fid}|${model}`);
-      if (!drawing) continue;
-      const partIndex = String(row.partIndex || '').trim().toUpperCase();
-      if (!partIndex || looksLikeHeaderPart({partIndex})) continue;
-      const position = String(row.position || '').trim() || String(added + 1);
-      const key = `${norm(model)}|${norm(partIndex)}|${norm(position)}|${String(drawing.id)}`;
-      if (existing.has(key)) continue;
-      existing.add(key);
-      state.parts.push({
-        id: row.id || `drive-v82|${fid}|${model}|${partIndex}|${position}`,
-        deviceIndex: model,
-        position,
-        partIndex,
-        namePl: String(row.namePl || row.name || '').trim(),
-        nameEn: String(row.nameEn || '').trim(),
-        drawingId: drawing.id,
-        drawingPath: drawing.path || '',
-        drawingTitle: drawing.title || drawing.fileName || '',
-        brand: drawing.brand || row.brand || '',
-        source: row.source || 'DRIVE_MASTER_V82'
-      });
-      added++;
-    }
-    return added;
-  }
-
-  function driveAliasesForDeviceV82(deviceIndex) {
-    const model = normalizeDeviceIndex(deviceIndex);
-    const root = state.driveModelAliasesV82 || {};
-    const map = root.aliasesByModel || root.models || {};
-    const aliases = arr(map[model]);
-    if (!aliases.length) return '';
-    return aliases.join(' ');
-  }
-
-  function driveAliasesForDeviceV81(deviceIndex) {
-    const model = normalizeDeviceIndex(deviceIndex);
-    const root = state.driveModelAliasesV81 || {};
-    const map = root.aliasesByModel || root.models || {};
-    const aliases = arr(map[model]);
-    if (!aliases.length) return '';
-    return aliases.join(' ');
-  }
-
-  function addGeneratedDrivePartsV81() {
-    const root = state.drivePartsGeneratedV81 || {};
-    const rows = arr(root.items || root);
-    if (!rows.length) return 0;
-    const drawingByFileModel = new Map();
-    for (const d of state.drawings || []) {
-      const fid = String(d.driveFileId || d.fileId || '').trim();
-      const model = normalizeDeviceIndex(d.deviceIndex);
-      if (fid && model) drawingByFileModel.set(`${fid}|${model}`, d);
-    }
-    const existing = new Set(state.parts.map(p => `${norm(p.deviceIndex)}|${norm(p.partIndex)}|${norm(p.position)}|${String(p.drawingId)}`));
-    let added = 0;
-    for (const row of rows) {
-      const model = normalizeDeviceIndex(row.deviceIndex || row.model);
-      const fid = String(row.drawingFileId || row.fileId || '').trim();
-      const drawing = drawingByFileModel.get(`${fid}|${model}`);
-      if (!drawing) continue;
-      const partIndex = String(row.partIndex || '').trim().toUpperCase();
-      if (!partIndex || looksLikeHeaderPart({partIndex})) continue;
-      const position = String(row.position || '').trim() || String(added + 1);
-      const key = `${norm(model)}|${norm(partIndex)}|${norm(position)}|${String(drawing.id)}`;
-      if (existing.has(key)) continue;
-      existing.add(key);
-      state.parts.push({
-        id: row.id || `drive-v81|${fid}|${model}|${partIndex}|${position}`,
-        deviceIndex: model,
-        position,
-        partIndex,
-        namePl: String(row.namePl || row.name || '').trim(),
-        nameEn: String(row.nameEn || '').trim(),
-        drawingId: drawing.id,
-        drawingPath: drawing.path || '',
-        drawingTitle: drawing.title || drawing.fileName || '',
-        brand: drawing.brand || row.brand || '',
-        source: row.source || 'DRIVE_MASTER_V81'
-      });
-      added++;
-    }
-    return added;
   }
 
   function buildIndexes() {
@@ -740,7 +466,10 @@
     }
     state.driveByKey = new Map();
     for (const row of state.driveMap) {
-      for (const key of row.__keys || []) if (!state.driveByKey.has(key)) state.driveByKey.set(key, row);
+      for (const key of row.__keys || []) {
+        const existing = state.driveByKey.get(key);
+        if (!existing || driveRowScore(row) > driveRowScore(existing)) state.driveByKey.set(key, row);
+      }
     }
     state.driveByDrawingId = new Map();
     for (const d of state.drawings) {
@@ -788,7 +517,7 @@
     }
     for (const d of state.devices) {
       const key = norm(d.deviceIndex);
-      d.__search = norm([d.deviceIndex, d.title, d.name, d.brand, d.deviceName, d.displayTitle, driveAliasesForDeviceV81(d.deviceIndex), drawingSearchByDevice.get(key), partSearchByDevice.get(key)].join(' '));
+      d.__search = norm([d.deviceIndex, d.title, d.name, d.brand, d.deviceName, d.displayTitle, drawingSearchByDevice.get(key), partSearchByDevice.get(key)].join(' '));
     }
     for (const p of state.parts) p.__search = norm([p.position, p.partIndex, p.namePl, p.nameEn, p.drawingTitle, p.deviceIndex, p.brand].join(' '));
   }
@@ -1249,17 +978,10 @@
       const idx = norm(device.deviceIndex);
       if (!tokens.length) score = partCount ? 10 : 0;
       for (const t of tokens) {
-        const tCompact = compactSearchKey(t);
-        const idxCompact = compactSearchKey(device.deviceIndex);
-        const variants = expandDeviceSearchToken(t);
-        if (idx === t || idxCompact === tCompact) score += 140;
-        else if (variants.includes(idxCompact)) score += 130;
-        else if (idx.includes(t) || idxCompact.includes(tCompact)) score += 85;
-        else if (tCompact.length >= 5 && idxCompact.length >= 5 && tCompact.includes(idxCompact)) score += 80;
-        else if (fuzzyDeviceIndexMatch(idxCompact, variants)) score += 65;
+        if (idx === t || idx.replace(/-/g,'') === t.replace(/-/g,'')) score += 140;
+        else if (idx.includes(t) || idx.replace(/-/g,'').includes(t.replace(/-/g,''))) score += 85;
+        score += modelTokenScore(device, t, query);
         if (device.__search.includes(t)) score += 25;
-        const searchCompact = compactSearchKey(device.__search);
-        if (tCompact.length >= 5 && searchCompact.includes(tCompact)) score += 18;
       }
       return {device, drawings, partCount, score};
     }).filter(x => x.drawings.length > 0 && brandMatches(x.device.brand) && (!tokens.length || x.score > 0));
@@ -1270,24 +992,20 @@
     const zunHtml = '';
     if (!results.length && !zunResults.length) {
       const typed = String(els.deviceSearch.value || '').trim();
-      els.deviceResults.innerHTML = `<div class="empty-state manual-empty"><strong>Nie znaleziono urządzenia.</strong><p>Spróbuj wpisać sam numer modelu albo fragment nazwy urządzenia.</p><p>Jeśli urządzenia nie ma w katalogu i nie ma rysunku, możesz zgłosić je ręcznie.</p><button class="primary" type="button" id="startManualRequest">Nie ma urządzenia/rysunku — opiszę ręcznie</button></div>`;
+      els.deviceResults.innerHTML = `<div class="empty-state manual-empty"><strong>Nie znaleziono urządzenia z rysunkiem.</strong><p>Spróbuj skrócić indeks, np. z <code>YT-828113</code> do <code>YT-82811</code>, albo wpisać sam numer bez prefiksu.</p><p>Tryb ręczny jest tylko awaryjny — dla urządzeń bez rysunku lub bez spisu części.</p><button class="primary" type="button" id="startManualRequest">Nie ma urządzenia/rysunku — opiszę ręcznie</button></div>`;
       const btn = $('startManualRequest');
       if (btn) btn.addEventListener('click', () => startManualRequest(typed));
       return;
     }
-    const deviceHtml = results.map(({device, drawings, partCount}) => {
-      const verified = drawings.some(d => isVerifiedToy24Drawing(d));
-      const previewPage = drawings.map(d => Number(d.previewPage || 0)).find(Boolean) || 0;
-      return `
+    const deviceHtml = results.map(({device, drawings, partCount}) => `
       <article class="device-card ${state.selectedDevice && norm(state.selectedDevice.deviceIndex) === norm(device.deviceIndex) ? 'selected' : ''}">
         <div>
           <h3>${escapeHtml(device.deviceIndex || 'Bez indeksu')}</h3>
           <p>${escapeHtml(displayDeviceName(device, drawings[0]))}</p>
-          <div class="badges">${publicBrandBadge(device)}<span class="badge ok">Rysunek PDF</span>${verified ? '<span class="badge ok">Zweryfikowany TOYA24</span>' : ''}${previewPage ? `<span class="badge">Rysunek: str. ${previewPage}</span>` : ''}<span class="badge">${fmt(drawings.length)} rys.</span><span class="badge ${partCount ? '' : 'warn'}">${partCount ? fmt(partCount) + ' części' : 'PDF - opisz pozycję z rysunku'}</span></div>
+          <div class="badges">${publicBrandBadge(device)}<span class="badge ok">Rysunek PDF</span><span class="badge">${fmt(drawings.length)} rys.</span><span class="badge ${partCount ? '' : 'warn'}">${partCount ? fmt(partCount) + ' części' : 'PDF - opisz pozycję z rysunku'}</span></div>
         </div>
         <button class="primary" type="button" data-device="${escapeAttr(device.deviceIndex)}">Wybierz</button>
-      </article>`;
-    }).join('');
+      </article>`).join('');
     els.deviceResults.innerHTML = `${zunHtml}${deviceHtml}`;
     els.deviceResults.querySelectorAll('button[data-device]').forEach(btn => btn.addEventListener('click', () => selectDevice(btn.dataset.device)));
   }
@@ -1555,6 +1273,24 @@
   }
   function removePart(id) { state.selectedParts.delete(id); renderBasket(); renderParts(); saveDraft(); }
 
+
+  function pdfRepairInfo(drawing, row) {
+    const variant = classifyPdfVariant(row || drawing || {});
+    const fileId = String(row?.fileId || row?.driveFileId || drawing?.driveFileId || drawing?.fileId || '').trim();
+    const fileName = String(row?.fileName || drawing?.fileName || row?.title || drawing?.title || '');
+    const candidates = Array.isArray(state.pdfRepairCandidates) ? state.pdfRepairCandidates : [];
+    const hit = candidates.find(x => String(x.fileId || '') === fileId || norm(x.fileName || '') === norm(fileName));
+    const quarantine = findPdfPublicationQuarantine(row || drawing || {});
+    if (quarantine && quarantine.publicationDecision === 'use_replacement') return {badge: 'ZAMIENNIK', note: 'oryginał w kwarantannie — formularz używa wersji scalonej'};
+    if (quarantine && quarantine.publicationDecision === 'backup_only') return {badge: 'ZAPAS', note: 'plik źródłowy, nie główny PDF klienta'};
+    if (quarantine && quarantine.publicationDecision) return {badge: 'DO POPRAWY', note: 'plik w kolejce napraw/oceny publikacyjnej'};
+    if (hit && hit.status === 'repaired') return {badge: 'PDF OK', note: 'wersja po standaryzacji'};
+    if (variant === 'merged_parts_and_drawing') return {badge: 'SCALONE', note: 'najlepsza wersja do publikacji'};
+    if (variant === 'technical_source_backup') return {badge: 'ŹRÓDŁO', note: 'plik techniczny — używany tylko gdy brak wersji kompletnej'};
+    if (variant === 'review_variant') return {badge: 'DO WERYFIKACJI', note: 'wariant roboczy lub językowy'};
+    return {badge: 'PDF', note: 'standardowy podgląd'};
+  }
+
   function renderViewer(withLoading=false) {
     const drawing = state.selectedDrawing;
     if (state.manualMode && !drawing) {
@@ -1589,7 +1325,9 @@
     els.openPdf.classList.remove('hidden');
     els.viewer.className = 'viewer standard-pdf-viewer';
     const label = standardPdfLabel(drawing, row);
-    els.viewer.innerHTML = `<div class="pdf-standard-shell"><div class="pdf-standard-bar"><strong>${escapeHtml(label.title)}</strong><span>${escapeHtml(label.meta)}</span></div><iframe src="${escapeAttr(previewUrl)}" title="${escapeAttr(drawing.title || 'Rysunek PDF')}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>`;
+    const repair = pdfRepairInfo(drawing, row);
+    const badge = repair.badge ? `<em class="pdf-standard-badge">${escapeHtml(repair.badge)}</em>` : '';
+    els.viewer.innerHTML = `<div class="pdf-standard-shell"><div class="pdf-standard-bar"><div><strong>${escapeHtml(label.title)}</strong><span>${escapeHtml(label.meta)}${repair.note ? ' • ' + escapeHtml(repair.note) : ''}</span></div>${badge}<div class="pdf-standard-actions"><a href="${escapeAttr(previewUrl)}" target="_blank" rel="noopener">Podgląd</a><a href="${escapeAttr(openUrl || previewUrl)}" target="_blank" rel="noopener">Otwórz PDF</a></div></div><iframe src="${escapeAttr(previewUrl)}" title="${escapeAttr(drawing.title || 'Rysunek PDF')}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe><div class="pdf-standard-help">Jeśli podgląd się nie załaduje, użyj przycisku <strong>Otwórz PDF</strong>. Dla plików po naprawie formularz wybiera wersję scaloną albo standardową automatycznie.</div></div>`;
   }
 
   function goStep(step) {
@@ -2575,15 +2313,45 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
 
 
 
-  function isVerifiedToy24Drawing(row) {
-    const quality = String(row?.qualityGate || '').toUpperCase();
-    const qa = String(row?.qaStatus || row?.publicationStatus || row?.status || '').toUpperCase();
-    return quality === 'TOYA24_FULL_MATCH' || quality === 'TOYA24_MATCH' || qa === 'READY' || qa === 'PUBLIC_READY';
-  }
-
   function isPreferredPdf(row) {
     const text = norm([row.fileName, row.title, row.name, row.status, row.source, row.notes, row.pdfVariant].join(' '));
     return Boolean(row.preferred || row.partsExtracted || text.includes('scalone') || text.includes('verified preferred') || text.includes('verified_preferred'));
+  }
+
+
+  function preparePdfPublicationQuarantineIndex() {
+    state.__pdfQuarantineByFileId = new Map();
+    state.__pdfQuarantineByName = new Map();
+    const items = arr(state.pdfPublicationQuarantine && state.pdfPublicationQuarantine.items ? state.pdfPublicationQuarantine.items : state.pdfPublicationQuarantine);
+    for (const item of items) {
+      const fid = String(item.fileId || '').trim();
+      const name = norm(item.fileName || item.title || '');
+      if (fid) state.__pdfQuarantineByFileId.set(fid, item);
+      if (name) state.__pdfQuarantineByName.set(name, item);
+    }
+  }
+
+  function findPdfPublicationQuarantine(row) {
+    if (!row) return null;
+    const fid = String(row.fileId || row.driveFileId || row.sourceFileId || row.id || '').trim();
+    const name = norm(row.fileName || row.title || row.name || '');
+    return (fid && state.__pdfQuarantineByFileId && state.__pdfQuarantineByFileId.get(fid)) ||
+      (name && state.__pdfQuarantineByName && state.__pdfQuarantineByName.get(name)) || null;
+  }
+
+  function applyPdfPublicationQuarantine(row) {
+    const q = findPdfPublicationQuarantine(row);
+    if (!q) { row.publicationDecision = row.publicationDecision || 'candidate_publishable'; return; }
+    row.publicationDecision = q.publicationDecision || 'needs_repair';
+    row.recommendedAction = q.recommendedAction || '';
+    row.doNotUseAsPrimary = true;
+    row.publicationFlags = q.flags || [];
+    if (q.replacementFileId && q.replacementPreviewUrl) {
+      row.replacementFileId = q.replacementFileId;
+      row.replacementFileName = q.replacementFileName;
+      row.replacementPreviewUrl = q.replacementPreviewUrl;
+      row.replacementOpenUrl = q.replacementOpenUrl;
+    }
   }
 
   function classifyPdfVariant(row) {
@@ -2618,13 +2386,61 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
     const base = idx ? `Rysunek serwisowy ${idx}` : 'Rysunek serwisowy';
     const file = String(drawing?.fileName || row?.fileName || row?.title || '').replace(/\.pdf$/i, '');
     let meta = 'Podgląd PDF - GitHub Pages / Google Drive Preview';
-    const verified = isVerifiedToy24Drawing(row || drawing || {});
-    const previewPage = Number(row?.previewPage || drawing?.previewPage || 0);
-    if (verified) meta = `Zweryfikowany TOYA24${previewPage ? ` • rysunek wybuchowy: strona ${previewPage}` : ''}${parts ? ` • ${fmt(parts)} części` : ''}`;
-    else if (variant === 'merged_parts_and_drawing') meta = `Scalony komplet: rysunek + lista części${parts ? ` - ${fmt(parts)} części` : ''}`;
+    if (variant === 'merged_parts_and_drawing') meta = `Scalony komplet: rysunek + lista części${parts ? ` - ${fmt(parts)} części` : ''}`;
     else if (parts) meta = `Rysunek z listą części - ${fmt(parts)} części`;
     else if (variant === 'technical_source_backup') meta = 'Rysunek techniczny - źródło zapasowe';
     return {title: file || base, meta};
+  }
+
+
+  function compactModel(value) {
+    return String(value || '').toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^A-Z0-9]/g, '');
+  }
+
+  function canonicalModelFromCompact(compact) {
+    const c = compactModel(compact);
+    const m = c.match(/^([A-Z]{1,3})(\d{3,8}[A-Z]?)$/);
+    if (!m) return '';
+    return `${m[1]}-${m[2]}`;
+  }
+
+  function modelAliasesFor(value) {
+    const raw = String(value || '').trim();
+    const compact = compactModel(raw);
+    const aliases = new Set([raw, normalizeDeviceIndex(raw), compact, canonicalModelFromCompact(compact)].filter(Boolean));
+    const aliasMap = state && state.modelAliases ? state.modelAliases : {};
+    const normalized = normalizeDeviceIndex(raw);
+    for (const key of [raw, normalized, compact]) {
+      const found = aliasMap[key] || aliasMap[String(key || '').toUpperCase()] || aliasMap[String(key || '').toLowerCase()];
+      if (Array.isArray(found)) found.forEach(x => aliases.add(x));
+      else if (found && Array.isArray(found.aliases)) found.aliases.forEach(x => aliases.add(x));
+    }
+    const m = compact.match(/^([A-Z]{1,3})(\d{5,8})([A-Z]?)$/);
+    if (m) {
+      const prefix = m[1], digits = m[2], suffix = m[3] || '';
+      // Część plików ma dopiski wariantów w szóstej/siódmej cyfrze. Szukaj też bazy 5-cyfrowej.
+      if (digits.length > 5) aliases.add(`${prefix}-${digits.slice(0,5)}${suffix}`);
+      if (digits.length > 6) aliases.add(`${prefix}-${digits.slice(0,6)}${suffix}`);
+      aliases.add(`${prefix}${digits}${suffix}`);
+    }
+    return [...aliases].filter(Boolean);
+  }
+
+  function modelTokenScore(device, token, fullQuery) {
+    const compactToken = compactModel(token);
+    const compactQuery = compactModel(fullQuery || token);
+    const aliases = unique([device.deviceIndex, ...(device.__modelAliases || []), ...modelAliasesFor(device.deviceIndex)].filter(Boolean));
+    let best = 0;
+    for (const alias of aliases) {
+      const a = compactModel(alias);
+      if (!a || !compactToken) continue;
+      if (a === compactToken || a === compactQuery) best = Math.max(best, 160);
+      else if (a.includes(compactToken) || compactToken.includes(a)) best = Math.max(best, compactToken.length >= 5 ? 95 : 45);
+      const qm = compactQuery.match(/^([A-Z]{1,3})(\d{6,8})/);
+      const am = a.match(/^([A-Z]{1,3})(\d{5,8})/);
+      if (qm && am && qm[1] === am[1] && qm[2].slice(0,5) === am[2].slice(0,5)) best = Math.max(best, 88);
+    }
+    return best;
   }
 
   function normalizeDeviceIndex(value) {
@@ -2687,74 +2503,6 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
     return text.includes('application/pdf') || /\.pdf(\?|#|$|\s)/i.test(text) || String(x.type || '').toLowerCase() === 'pdf';
   }
   function arr(x) { return Array.isArray(x) ? x : (x && Array.isArray(x.items) ? x.items : []); }
-  function compactSearchKey(value) {
-    return String(value || '')
-      .toUpperCase()
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .replace(/[^A-Z0-9]/g, '');
-  }
-
-  function expandDeviceSearchToken(token) {
-    const compact = compactSearchKey(token);
-    const out = new Set([compact]);
-    const m = compact.match(/^([A-Z]{1,3})(\d{3,9}[A-Z]?)$/);
-    if (m) {
-      const prefix = m[1];
-      const digits = m[2].replace(/[^0-9]/g, '');
-      out.add(prefix + digits);
-      if (digits.length > 5) {
-        out.add(prefix + digits.slice(0, 5));
-        out.add(prefix + digits.slice(0, 6));
-        // Common customer/catalog mismatch: one extra digit in model typed from label or PDF file name.
-        for (let i = 0; i < digits.length; i++) out.add(prefix + digits.slice(0, i) + digits.slice(i + 1));
-      }
-      if (digits.length === 5) {
-        out.add(prefix + digits);
-      }
-    }
-    const numeric = compact.match(/^(\d{3,9})$/);
-    if (numeric) {
-      const digits = numeric[1];
-      out.add(digits);
-      if (digits.length > 5) {
-        out.add(digits.slice(0, 5));
-        out.add(digits.slice(0, 6));
-        for (let i = 0; i < digits.length; i++) out.add(digits.slice(0, i) + digits.slice(i + 1));
-      }
-    }
-    return [...out].filter(Boolean);
-  }
-
-  function fuzzyDeviceIndexMatch(indexCompact, queryVariants) {
-    if (!indexCompact || indexCompact.length < 5) return false;
-    for (const q of queryVariants || []) {
-      if (!q || q.length < 5) continue;
-      if (indexCompact === q || indexCompact.includes(q) || q.includes(indexCompact)) return true;
-      if (Math.abs(indexCompact.length - q.length) <= 1 && boundedEditDistance(indexCompact, q, 1) <= 1) return true;
-    }
-    return false;
-  }
-
-  function boundedEditDistance(a, b, maxDistance) {
-    a = String(a || ''); b = String(b || '');
-    if (Math.abs(a.length - b.length) > maxDistance) return maxDistance + 1;
-    const prev = Array(b.length + 1).fill(0).map((_, i) => i);
-    const curr = Array(b.length + 1).fill(0);
-    for (let i = 1; i <= a.length; i++) {
-      curr[0] = i;
-      let rowMin = curr[0];
-      for (let j = 1; j <= b.length; j++) {
-        const cost = a[i - 1] === b[j - 1] ? 0 : 1;
-        curr[j] = Math.min(prev[j] + 1, curr[j - 1] + 1, prev[j - 1] + cost);
-        if (curr[j] < rowMin) rowMin = curr[j];
-      }
-      if (rowMin > maxDistance) return maxDistance + 1;
-      for (let j = 0; j <= b.length; j++) prev[j] = curr[j];
-    }
-    return prev[b.length];
-  }
-
   function norm(s) { return String(s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[_\s]+/g,' ').trim(); }
   function normKey(s) { return norm(String(s || '').replace(/\\/g,'/').split('/').pop()).replace(/\s+/g,'-'); }
   function stripExt(s) { return String(s || '').replace(/\.(pdf|jpg|jpeg|png|webp|docx?|xlsx?)$/i,''); }
@@ -2768,6 +2516,9 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
     try { await navigator.clipboard.writeText(text); els.copyStatus.textContent = ok; }
     catch(e) { els.copyStatus.textContent = 'Nie udało się skopiować automatycznie — zaznacz tekst ręcznie.'; }
   }
+})();
+
+
   function drawingSelectionScore(drawing) {
     if (!drawing) return 0;
     const partCount = (state.partsByDrawing && state.partsByDrawing.get(String(drawing.id)) || []).length;
@@ -2782,5 +2533,3 @@ Telefon dla kuriera: ${f.shipPhone || '-'}`;
     if (/(^|[ _-])(p|q)([ _.-]|$)/.test(text) || text.includes(' yeng') || text.includes(' eng')) score -= 100000;
     return score;
   }
-
-})();

@@ -1,0 +1,15 @@
+{
+  "version": "20260714-v82-ui-i18n-foundation",
+  "baseVersion": "v81",
+  "generatedAt": "2026-07-14T13:40:00+02:00",
+  "summary": {
+    "uiLanguages": [
+      "pl",
+      "en"
+    ],
+    "scope": "UI only; parts/devices/PDFs unchanged",
+    "dictionary": "data/i18n-ui-v82.json"
+  },
+  "channel": "stable-v82",
+  "notes": "Professional UI translation foundation; no machine-translated parts."
+}

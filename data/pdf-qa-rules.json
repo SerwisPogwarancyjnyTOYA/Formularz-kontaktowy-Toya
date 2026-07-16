@@ -1,0 +1,31 @@
+{
+  "version": "20260710-v72-publish",
+  "thresholds": {
+    "maxMissingModel": 0,
+    "maxNotMatchedToDevice": 0,
+    "maxDuplicateFiles": 20,
+    "maxWeakBrand": 250
+  },
+  "rules": [
+    {
+      "id": "MODEL_REQUIRED",
+      "level": "warn",
+      "description": "PDF powinien mieć rozpoznany indeks urządzenia albo ręczny override."
+    },
+    {
+      "id": "DEVICE_MATCH_REQUIRED",
+      "level": "warn",
+      "description": "Indeks PDF powinien istnieć w devices/drawings lub mieć świadomy override."
+    },
+    {
+      "id": "DUPLICATE_REVIEW",
+      "level": "info",
+      "description": "Duplikaty z tym samym fileId lub podobnym modelem warto przejrzeć przed releasem."
+    },
+    {
+      "id": "BRAND_CONFIRMATION",
+      "level": "info",
+      "description": "Marka wyliczona zgadywaniem nie blokuje działania, ale trafia do QA."
+    }
+  ]
+}

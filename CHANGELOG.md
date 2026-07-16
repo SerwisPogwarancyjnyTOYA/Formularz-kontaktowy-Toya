@@ -1,127 +1,43 @@
-# Changelog
 
-## 0.5.0.v1 - TOYA Global Service Passport
-- Naprawiono niewykonalny łańcuch `release-v110-check`: v110 nie wymusza już historycznego `RELEASE.json` v98.
-- Potwierdzono osobno PASS workflow v110 i PASS funkcji klienta 0.5.0.v1.
-- Dodano 6 wersji językowych oraz automatyczne zapamiętywanie języka.
-- Dodano Paszport Serwisowy: kod sprawy, bezpieczny link, druk/PDF, mailto i czyszczenie danych kontaktowych.
-- Dodano deep link modelu oraz odtwarzanie wybranych części z linku bez danych osobowych.
-- Dodano service worker i powłokę PWA offline.
-- Dodano tryby dostępności.
-- Połączono rozpoczęte audyty z publiczną aplikacją przez READY-only patch dla YT-85851, YT-85200, YT-85205 i YT-85208.
-- Ponownie sprawdzono trzy najwyższe work ordery YT-828254/255/256; wszystkie pozostają REBUILD z powodu braku oficjalnego zdjęcia dokładnego wariantu.
-- Nie użyto zdjęć podobnych modeli, ofert zewnętrznych ani grafiki generowanej.
-
-# Changelog
-
-## 0.5.0-rc2 - Workflow Engine v110
-- Rozszerzono rejestr do 33 modeli, w tym trzy nowe READY: YT-85200, YT-85205 i YT-85208.
-- Dodano 29 wykonywalnych work orderów z checklistami i kryteriami odbioru.
-- Dodano Rebuild Studio z lokalnym śledzeniem postępu, notatkami, drukiem i eksportem.
-- Dodano TOYA24 Gap Register z zasadą: brak wyniku wyszukiwania nie jest dowodem braku produktu.
-- Dodano automatyczny ingester kolejnych audytów oraz twardy release check.
-- Dodano batch selection i eksport paczek roboczych z Quality Center.
-- Publiczna mapa PDF pozostaje bezpiecznie niezmieniona.
-
-# Changelog
-
-## v96 — Drawing Recovery Cleanup
-- 75837 zdjęty z kolejki przeróbki po znalezieniu oficjalnego `Czesci_zamienne_75837.pdf`.
-- Dodano `publication-consistency-audit-v96.json`.
-- `config.js` ustawiony na strict v96 map only.
-- Dodano test `pgw-v96-drawing-recovery-check.mjs`.
-
-## v95 — Master Publication Update v83–v94
-- Zintegrowano `PGW-updates-v85-v94-REGENERATED-MASTER.zip` z pełnym repo v84.
-- Dodano `drive-drawings-map.generated-v95.json` jako pierwsze publiczne źródło PDF w `config.js`.
-- Dodano zbiorczy patch i raport: `github-map-patch-v85-v94-master.json`, `publication-report-v85-v94-master.json`.
-- Nadpisano wskazane oficjalne źródła PDF zgodnie z raportami v85–v94, m.in. korekty dla `67576`, `67574`, `67575`, `67590`, `79811`, `79943`, `73410`, `73056`, `73060`.
-- Zachowano blokadę roboczych/konwertowanych PDF-ów z v83/v84.
-- Dodano `npm run publication-pipeline` dla walidacji v95.
+## 20260714-v83-repo-sync-ui-i18n-pdf-fixes
+- Aktualizacja przygotowana do bezpośredniego wrzucenia w repozytorium Google Drive.
+- Zachowano poprawione PDF-y publikacyjne z v78-v81.
+- Dodano/utrzymano warstwę tłumaczeń UI PL/EN.
+- Ustalono zasadę: PDF-y zostają w oryginale, części i urządzenia tłumaczone będą później osobnym słownikiem technicznym.
+- Bez masowego tłumaczenia nazw części automatem.
 
 
-## v84 — Drive Publication Pipeline
-- Wycięto fallback `drive-drawings-map.full/converted` z publicznego configu.
-- Dodano publiczną mapę `drive-drawings-map.generated-v84.json`.
-- Dodano kolejkę `pdf-rewrite-queue-v84.json` z pierwszą partią roboczych PDF-ów znalezionych na Drive.
-- Dodano skrypt `npm run publication-pipeline`.
-- Reguła: oficjalny TOYA24/Golden Sample od razu do publikacji; robocze/konwertowane tylko do przeróbki.
+## v82 — UI i18n foundation
+- Dodano przełącznik języka strony PL/EN.
+- Przetłumaczono interfejs formularza bez ruszania nazw części, urządzeń i PDF-ów.
+- Dodano słownik `data/i18n-ui-v82.json` i dokumentację `docs/UI_TRANSLATION_V82.md`.
+- Wygenerowany mail do serwisu pozostaje po polsku.
+
+## 20260714-v80-official-pdf-repair-batch
+
+- Naprawiono 3 pliki drugiego poziomu: `__SCALONE` było tylko tabelą, więc podstawiono oficjalne PDF-y z okładką, rysunkiem i listą części.
+- Dodano 517 pozycji części dla YT-82173, YT-82174, YT-85485.
+
+# Changelog — 20260711-v77-publication-quarantine-repair
+
+## v77
+
+- Dodano kwarantannę publikacyjną PDF.
+- Dodano kolejkę napraw dla plików do scalenia, konwersji lub porównania wzrokowego.
+- Frontend nie wybiera już podejrzanych PDF-ów jako primary, jeśli istnieje lepszy plik/scalony zamiennik.
+- Dodano jeden preferowany PDF na model w `pdf-publication-readiness.json`.
 
 
-## v83 — Public Drawing Source Policy
+## 20260711-v77-publication-quarantine-repair
 
-- Golden Sample (`Czesci_zamienne_67576.pdf`) ustawiony jako wzorzec publikacji.
-- Oficjalne `Czesci_zamienne_<MODEL>.pdf` z rysunków złożeniowych/wybuchowych mają pierwszeństwo publikacji.
-- Robocze/konwertowane PDF-y trafiają do kolejki przeróbki/scalenia.
-- Dodano runtime quality gate w `app.js`.
-- Dodano Apps Script do skanowania Drive i generowania manifestu publicznego + kolejki poprawek.
+- dodano `data/pdf-repair-candidates.json`,
+- dodano `data/pdf-viewer-fallbacks.json`,
+- dodano `data/model-aliases.json`,
+- viewer PDF pokazuje jawne linki awaryjne dla podglądu zablokowanego przez Drive/GitHub,
+- wybór PDF-a po modelu faworyzuje wersje `__SCALONE.pdf`,
+- wyszukiwarka lepiej obsługuje wariantowe indeksy modeli i brak myślnika.
 
 # Changelog
-
-## 20260711-v82-real-drawing-quality-gate
-
-- Włączono twardy filtr PDF klienta: realny rysunek albo zweryfikowany/scalony komplet.
-- Usunięto z katalogu klienta PDF roboczy `yt-828113-yt-828114.pdf`, bo zawierał tabelę/listę części zamiast prawdziwego rysunku.
-- Dodano `pdf-customer-visible-blocklist-v82.json`, `pdf-quarantine-v82.json`, `real-drawing-quality-audit-v82.json`.
-- Dodano test `npm run drive-quality-gate`.
-
-
-## 20260711-v81-drive-search-aliases
-
-- Drive-first katalog dostał aliasy wyszukiwania modeli.
-- Dodano `drive-drawings-map.generated-v81.json` jako pierwsze źródło PDF.
-- Dodano audyt `drive-master-audit-v81.json`.
-- Dodano skrypty `drive-master` i `drive-alias-check`.
-- Przypadki multi-model PDF, np. `YT-828113 / YT-828114`, pozostają rozbite na osobne urządzenia z tym samym PDF.
-
-# Changelog
-
-## 20260711-v80-drive-master-catalog
-
-- Dodano master katalog Drive v80.
-- Dodano generator `drive-parts.generated-v80.json`.
-- Dodano plan scalania `drive-merge-plan-v80.json`.
-- Dodano bezpieczne akcje porządkowania `drive-organizer-actions-v80.json`.
-- Dodano Apps Script v80 do skanowania Drive, OCR tekstu PDF i tworzenia kopii porządkujących bez kasowania źródeł.
-
-# Changelog
-
-## 20260711-v79-drive-catalog-and-pdf-organizer
-
-- Naprawiono deduplikację PDF-ów po samym `fileId` - jeden PDF może obsługiwać kilka modeli.
-- Dodano `drive-drawings-map.generated-v79.json` jako manifest budowany z Drive.
-- Dodano `drive-catalog-audit-v79.json`, `drive-pdf-merge-queue-v79.json`, `drive-organizer-plan-v79.json`.
-- Dodano Apps Script do skanowania i porządkowania folderów Drive.
-- Dodano dokumentację polityki scalania PDF.
-
-# Changelog
-
-## 20260711-v78-drive-first-catalog-builder
-
-- Dodano Drive-first catalog builder.
-- Dodano obsługę PDF-ów przypisanych do wielu modeli.
-- Dodano generowanie części z manifestu Drive, gdy manifest zawiera tablicę `parts`.
-- Dodano seed dla `YT-828113` / `YT-828114` z PDF-a `yt-828113-yt-828114.pdf`.
-- Dodano skrypt lokalny oraz Apps Script do budowania manifestu z Drive.
-
-
-## v77 — Smart Model Search
-
-- Dodano inteligentne wyszukiwanie modeli po wariantach zapisu.
-- `yt-828113` nie kończy już od razu jako brak urządzenia, tylko powinno pokazać bliskie modele z rysunkiem.
-- Ignorowane są spacje, myślniki i typowe nadmiarowe cyfry w indeksach.
-- Dodano `data/search-normalization-audit-v77.json` oraz `docs/SEARCH_STANDARD_V77.md`.
-
-# Changelog
-
-## 20260711-v76-coverage-pdf-quality
-
-- Dodano audyt pokrycia formularza: urządzenia / PDF / części.
-- Dodano politykę katalogu: każde urządzenie z PDF na Drive ma być widoczne.
-- Dodano raport jakości PDF i priorytet dla plików `__SCALONE.pdf`.
-- Dodano syntetyczne rekordy urządzeń dla modeli, które mają PDF na Drive, ale nie miały wpisu w `devices.json`.
-- Dodano skrypt `npm run coverage`.
-
 
 ## 20260711-v75-uniform-pdf-viewer
 
@@ -148,3 +64,22 @@
 ## 20260710-v72-publish
 
 - Pełne repo publikacyjne na bazie wcześniejszych patchy PDF QA i release control.
+
+
+## 20260711-v78-fixed-bad-pdfs-pass1
+
+- Fixed YT-55557 by merging V2/V3 sources into `assets/pdfs/Czesci_zamienne_YT-55557__SCALONE.pdf`.
+- Updated drawings and publication readiness to prefer the fixed local PDF.
+
+
+## v79 - bad PDF fixes YT-828
+
+- Ustandaryzowano 11 plików PDF jako lokalne `__SCALONE` gotowe do publikacji.
+- Dodano 580 pozycji części z naprawionych PDF-ów.
+- Dla YT-828296 scalono dwa źródła: szlifierka prosta + szlifierka kątowa.
+
+
+## 20260714-v81-false-scalone-repair
+- Naprawiono fałszywie dobre / puste PDF-y: YT-85004, YT-82200, YG-09230.
+- Oficjalne PDF-y promowane lokalnie jako `__SCALONE`.
+- Dodano raporty `pdf-fixed-good-v81.json` i `pdf-false-scalone-v81.json`.

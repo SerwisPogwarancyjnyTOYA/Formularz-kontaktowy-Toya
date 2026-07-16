@@ -1,0 +1,134 @@
+{
+  "schema": "pgw.pdf.repairPlan",
+  "version": "v79",
+  "generatedAt": "2026-07-14T00:00:00Z",
+  "summary": {
+    "fixedInV78": 1,
+    "fixedInV79": 11,
+    "partsAddedInV79": 580,
+    "remainingHighConfidenceManualQueue": "to_continue_next_batch"
+  },
+  "items": [
+    {
+      "priority": 1,
+      "deviceIndex": "YT-828118",
+      "replacementFileName": "Czesci_zamienne_YT-828118__SCALONE.pdf",
+      "replacementPreviewUrl": "assets/pdfs/Czesci_zamienne_YT-828118__SCALONE.pdf",
+      "recommendedAction": "fixed_in_v79",
+      "nextStep": "Publikować wariant __SCALONE; źródłowy wielomodelowy PDF zostaje jako archiwum/backup.",
+      "repairStatus": "fixed_v79",
+      "partCount": 56,
+      "fixReason": "normalizacja zbiorczego PDF-a YT-828118/YT-8281185; ten sam rysunek dla wariantu bazowego i zestawu"
+    },
+    {
+      "priority": 2,
+      "deviceIndex": "YT-8281185",
+      "replacementFileName": "Czesci_zamienne_YT-8281185__SCALONE.pdf",
+      "replacementPreviewUrl": "assets/pdfs/Czesci_zamienne_YT-8281185__SCALONE.pdf",
+      "recommendedAction": "fixed_in_v79",
+      "nextStep": "Publikować wariant __SCALONE; źródłowy wielomodelowy PDF zostaje jako archiwum/backup.",
+      "repairStatus": "fixed_v79",
+      "partCount": 56,
+      "fixReason": "normalizacja zbiorczego PDF-a YT-828118/YT-8281185; ten sam rysunek dla wariantu bazowego i zestawu"
+    },
+    {
+      "priority": 3,
+      "deviceIndex": "YT-828135",
+      "replacementFileName": "Czesci_zamienne_YT-828135__SCALONE.pdf",
+      "replacementPreviewUrl": "assets/pdfs/Czesci_zamienne_YT-828135__SCALONE.pdf",
+      "recommendedAction": "fixed_in_v79",
+      "nextStep": "Publikować wariant __SCALONE; źródłowy wielomodelowy PDF zostaje jako archiwum/backup.",
+      "repairStatus": "fixed_v79",
+      "partCount": 40,
+      "fixReason": "normalizacja zbiorczego PDF-a YT-828135/YT-828136; warianty handlowe tego samego urządzenia"
+    },
+    {
+      "priority": 4,
+      "deviceIndex": "YT-828136",
+      "replacementFileName": "Czesci_zamienne_YT-828136__SCALONE.pdf",
+      "replacementPreviewUrl": "assets/pdfs/Czesci_zamienne_YT-828136__SCALONE.pdf",
+      "recommendedAction": "fixed_in_v79",
+      "nextStep": "Publikować wariant __SCALONE; źródłowy wielomodelowy PDF zostaje jako archiwum/backup.",
+      "repairStatus": "fixed_v79",
+      "partCount": 40,
+      "fixReason": "normalizacja zbiorczego PDF-a YT-828135/YT-828136; warianty handlowe tego samego urządzenia"
+    },
+    {
+      "priority": 5,
+      "deviceIndex": "YT-828137",
+      "replacementFileName": "Czesci_zamienne_YT-828137__SCALONE.pdf",
+      "replacementPreviewUrl": "assets/pdfs/Czesci_zamienne_YT-828137__SCALONE.pdf",
+      "recommendedAction": "fixed_in_v79",
+      "nextStep": "Publikować wariant __SCALONE; źródłowy wielomodelowy PDF zostaje jako archiwum/backup.",
+      "repairStatus": "fixed_v79",
+      "partCount": 73,
+      "fixReason": "normalizacja zbiorczego PDF-a YT-828137/YT-828138; warianty handlowe tego samego urządzenia"
+    },
+    {
+      "priority": 6,
+      "deviceIndex": "YT-828138",
+      "replacementFileName": "Czesci_zamienne_YT-828138__SCALONE.pdf",
+      "replacementPreviewUrl": "assets/pdfs/Czesci_zamienne_YT-828138__SCALONE.pdf",
+      "recommendedAction": "fixed_in_v79",
+      "nextStep": "Publikować wariant __SCALONE; źródłowy wielomodelowy PDF zostaje jako archiwum/backup.",
+      "repairStatus": "fixed_v79",
+      "partCount": 73,
+      "fixReason": "normalizacja zbiorczego PDF-a YT-828137/YT-828138; warianty handlowe tego samego urządzenia"
+    },
+    {
+      "priority": 7,
+      "deviceIndex": "YT-82824",
+      "replacementFileName": "Czesci_zamienne_YT-82824__SCALONE.pdf",
+      "replacementPreviewUrl": "assets/pdfs/Czesci_zamienne_YT-82824__SCALONE.pdf",
+      "recommendedAction": "fixed_in_v79",
+      "nextStep": "Publikować wariant __SCALONE; źródłowy wielomodelowy PDF zostaje jako archiwum/backup.",
+      "repairStatus": "fixed_v79",
+      "partCount": 39,
+      "fixReason": "normalizacja PDF-a dla szlifierki prostej; źródło zawiera również zestaw YT-828296"
+    },
+    {
+      "priority": 8,
+      "deviceIndex": "YT-828293",
+      "replacementFileName": "Czesci_zamienne_YT-828293__SCALONE.pdf",
+      "replacementPreviewUrl": "assets/pdfs/Czesci_zamienne_YT-828293__SCALONE.pdf",
+      "recommendedAction": "fixed_in_v79",
+      "nextStep": "Publikować wariant __SCALONE; źródłowy wielomodelowy PDF zostaje jako archiwum/backup.",
+      "repairStatus": "fixed_v79",
+      "partCount": 41,
+      "fixReason": "normalizacja PDF-a dla wariantu szlifierki kątowej; źródło zbiorcze obsługuje kilka wariantów"
+    },
+    {
+      "priority": 9,
+      "deviceIndex": "YT-828294",
+      "replacementFileName": "Czesci_zamienne_YT-828294__SCALONE.pdf",
+      "replacementPreviewUrl": "assets/pdfs/Czesci_zamienne_YT-828294__SCALONE.pdf",
+      "recommendedAction": "fixed_in_v79",
+      "nextStep": "Publikować wariant __SCALONE; źródłowy wielomodelowy PDF zostaje jako archiwum/backup.",
+      "repairStatus": "fixed_v79",
+      "partCount": 41,
+      "fixReason": "normalizacja PDF-a dla wariantu szlifierki kątowej; źródło zbiorcze obsługuje kilka wariantów"
+    },
+    {
+      "priority": 10,
+      "deviceIndex": "YT-828295",
+      "replacementFileName": "Czesci_zamienne_YT-828295__SCALONE.pdf",
+      "replacementPreviewUrl": "assets/pdfs/Czesci_zamienne_YT-828295__SCALONE.pdf",
+      "recommendedAction": "fixed_in_v79",
+      "nextStep": "Publikować wariant __SCALONE; źródłowy wielomodelowy PDF zostaje jako archiwum/backup.",
+      "repairStatus": "fixed_v79",
+      "partCount": 41,
+      "fixReason": "normalizacja PDF-a dla wariantu szlifierki kątowej; źródło zbiorcze obsługuje kilka wariantów"
+    },
+    {
+      "priority": 11,
+      "deviceIndex": "YT-828296",
+      "replacementFileName": "Czesci_zamienne_YT-828296__SCALONE.pdf",
+      "replacementPreviewUrl": "assets/pdfs/Czesci_zamienne_YT-828296__SCALONE.pdf",
+      "recommendedAction": "fixed_in_v79",
+      "nextStep": "Publikować wariant __SCALONE; źródłowy wielomodelowy PDF zostaje jako archiwum/backup.",
+      "repairStatus": "fixed_v79",
+      "partCount": 80,
+      "fixReason": "scalenie dwóch źródeł dla zestawu: prosta + kątowa"
+    }
+  ]
+}

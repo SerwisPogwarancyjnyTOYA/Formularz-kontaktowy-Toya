@@ -1,0 +1,59 @@
+{
+  "schema": "pgw.pdf.fixed.good",
+  "version": "20260714-v81-false-scalone-repair",
+  "generatedAt": "2026-07-14T13:35:00+02:00",
+  "summary": {
+    "fixedCount": 3,
+    "newPartsAdded": 189,
+    "totalParts": 3887,
+    "totalDrawings": 1450,
+    "policy": "false-scalone / empty-auto-pdf replaced with official public PDF"
+  },
+  "items": [
+    {
+      "deviceIndex": "YT-85004",
+      "brand": "YATO",
+      "fileName": "Czesci_zamienne_YT-85004__SCALONE.pdf",
+      "path": "assets/pdfs/Czesci_zamienne_YT-85004__SCALONE.pdf",
+      "pageCount": 4,
+      "size": 561908,
+      "sha256": "e60b3f277d4490601ce92c29c46732aaa6ed029b8f01ef143457d32fe99d2b12",
+      "partCount": 121,
+      "textLength": 5854,
+      "badPreviousFileId": "1GWV2mJuja48ApaiJ8MZ9ZFXqitKYpQrD",
+      "officialSourceFileId": "1snbW4JluhkENK5dU5Q4mdDohB0elhxWk",
+      "fixReason": "roboczy __SCALONE był tabelą z błędnie uciętymi indeksami; oficjalny PDF ma okładkę, rysunki urządzenia/silnika i pełną listę części",
+      "status": "publishable_fixed_v81_official_pdf"
+    },
+    {
+      "deviceIndex": "YT-82200",
+      "brand": "YATO",
+      "fileName": "Czesci_zamienne_YT-82200__SCALONE.pdf",
+      "path": "assets/pdfs/Czesci_zamienne_YT-82200__SCALONE.pdf",
+      "pageCount": 3,
+      "size": 1274699,
+      "sha256": "96d00a3eab607f58a7c098e80ccc2b46fe214f016c5649005d0b7adabff33611",
+      "partCount": 68,
+      "textLength": 3483,
+      "badPreviousFileId": "16Sea3JPwZ_3bXYTtDk7ulEKJcc9ZVrHD",
+      "officialSourceFileId": "1EIgrbkm1P63569i1m2B-23LZt-GiDJDU",
+      "fixReason": "roboczy PDF był pustą kartą z komunikatem, że lista części nie została odczytana; oficjalny PDF ma okładkę, rysunek złożeniowy i listę części",
+      "status": "publishable_fixed_v81_official_pdf"
+    },
+    {
+      "deviceIndex": "YG-09230",
+      "brand": "YATO GASTRO",
+      "fileName": "Czesci_zamienne_YG-09230__SCALONE.pdf",
+      "path": "assets/pdfs/Czesci_zamienne_YG-09230__SCALONE.pdf",
+      "pageCount": 2,
+      "size": 299184,
+      "sha256": "9fb114c006e9b3d8f648e81dd996605f817e66d667f33df6ae78c25ece3d3e0b",
+      "partCount": 0,
+      "textLength": 380,
+      "badPreviousFileId": "1AgCUq6jJnBGZu0kFWo0WO2CtGsG97rtC",
+      "officialSourceFileId": "1kzrz3wkKcvk_Z3buSsM6Yudk3TKcW3iJ",
+      "fixReason": "roboczy PDF był pustą kartą z komunikatem, a oficjalny PDF ma okładkę i obrazkowy rysunek części; części wymagają ręcznego dopisania/OCR, ale rysunek publikacyjny jest poprawny",
+      "status": "publishable_fixed_v81_official_pdf"
+    }
+  ]
+}

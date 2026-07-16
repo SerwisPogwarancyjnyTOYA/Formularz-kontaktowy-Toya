@@ -1,0 +1,13 @@
+import fs from 'node:fs';
+import path from 'node:path';
+const root = process.cwd();
+const mustExist = ['index.html','app.css','config.js','app.js','healthcheck.html','admin.html','smoke-test.html','data/devices.json','data/drawings.json','data/parts.json','data/drive-drawings-map.full.json','assets/logos/yato-wordmark-clean.png'];
+const errors = [];
+for (const rel of mustExist) { if (!fs.existsSync(path.join(root, rel))) errors.push(`missing: ${rel}`); }
+for (const rel of fs.readdirSync(path.join(root, 'data')).filter(x => x.endsWith('.json')).map(x => 'data/' + x)) { try { JSON.parse(fs.readFileSync(path.join(root, rel), 'utf8')); } catch (e) { errors.push(`bad json: ${rel} ${e.message}`); } }
+const config = fs.readFileSync(path.join(root, 'config.js'), 'utf8');
+if (!config.includes('20260714-v82-ui-i18n-foundation')) errors.push('config.js version mismatch');
+const app = fs.readFileSync(path.join(root, 'app.js'), 'utf8');
+if (!app.includes('buildSmokeTest')) errors.push('app.js smoke test helpers missing');
+if (errors.length) { console.error(errors.join('\n')); process.exit(1); }
+console.log('PGW selfcheck OK — 20260714-v82-ui-i18n-foundation');

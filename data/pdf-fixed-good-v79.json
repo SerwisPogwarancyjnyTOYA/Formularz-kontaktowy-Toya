@@ -1,0 +1,134 @@
+{
+  "schema": "pgw.pdf.fixedGood",
+  "version": "v79",
+  "generatedAt": "2026-07-14T00:00:00Z",
+  "summary": {
+    "fixedPdfCount": 11,
+    "modelsFixed": 11,
+    "partsAdded": 580,
+    "renderCheckedBatch": "yt828_contact_sheet + final renders"
+  },
+  "items": [
+    {
+      "deviceIndex": "YT-828118",
+      "fileName": "Czesci_zamienne_YT-828118__SCALONE.pdf",
+      "path": "assets/pdfs/Czesci_zamienne_YT-828118__SCALONE.pdf",
+      "pageCount": 3,
+      "size": 415509,
+      "sha256": "93d1ad3ba8b22c00535d374aa03b8e474c6187379a0f147fcc978ef41d1c3468",
+      "partCount": 56,
+      "fixReason": "normalizacja zbiorczego PDF-a YT-828118/YT-8281185; ten sam rysunek dla wariantu bazowego i zestawu",
+      "status": "publishable_fixed_v79"
+    },
+    {
+      "deviceIndex": "YT-8281185",
+      "fileName": "Czesci_zamienne_YT-8281185__SCALONE.pdf",
+      "path": "assets/pdfs/Czesci_zamienne_YT-8281185__SCALONE.pdf",
+      "pageCount": 3,
+      "size": 415509,
+      "sha256": "93d1ad3ba8b22c00535d374aa03b8e474c6187379a0f147fcc978ef41d1c3468",
+      "partCount": 56,
+      "fixReason": "normalizacja zbiorczego PDF-a YT-828118/YT-8281185; ten sam rysunek dla wariantu bazowego i zestawu",
+      "status": "publishable_fixed_v79"
+    },
+    {
+      "deviceIndex": "YT-828135",
+      "fileName": "Czesci_zamienne_YT-828135__SCALONE.pdf",
+      "path": "assets/pdfs/Czesci_zamienne_YT-828135__SCALONE.pdf",
+      "pageCount": 3,
+      "size": 586767,
+      "sha256": "ea0165884407c5b9912576fd5deea2398a441fc8658eee7a687f718a14fe0085",
+      "partCount": 40,
+      "fixReason": "normalizacja zbiorczego PDF-a YT-828135/YT-828136; warianty handlowe tego samego urządzenia",
+      "status": "publishable_fixed_v79"
+    },
+    {
+      "deviceIndex": "YT-828136",
+      "fileName": "Czesci_zamienne_YT-828136__SCALONE.pdf",
+      "path": "assets/pdfs/Czesci_zamienne_YT-828136__SCALONE.pdf",
+      "pageCount": 3,
+      "size": 586767,
+      "sha256": "ea0165884407c5b9912576fd5deea2398a441fc8658eee7a687f718a14fe0085",
+      "partCount": 40,
+      "fixReason": "normalizacja zbiorczego PDF-a YT-828135/YT-828136; warianty handlowe tego samego urządzenia",
+      "status": "publishable_fixed_v79"
+    },
+    {
+      "deviceIndex": "YT-828137",
+      "fileName": "Czesci_zamienne_YT-828137__SCALONE.pdf",
+      "path": "assets/pdfs/Czesci_zamienne_YT-828137__SCALONE.pdf",
+      "pageCount": 4,
+      "size": 557787,
+      "sha256": "04aa835ad2c757a0ff467a5dd7edeafb5e554722d00a2240e1e22d775c224559",
+      "partCount": 73,
+      "fixReason": "normalizacja zbiorczego PDF-a YT-828137/YT-828138; warianty handlowe tego samego urządzenia",
+      "status": "publishable_fixed_v79"
+    },
+    {
+      "deviceIndex": "YT-828138",
+      "fileName": "Czesci_zamienne_YT-828138__SCALONE.pdf",
+      "path": "assets/pdfs/Czesci_zamienne_YT-828138__SCALONE.pdf",
+      "pageCount": 4,
+      "size": 557787,
+      "sha256": "04aa835ad2c757a0ff467a5dd7edeafb5e554722d00a2240e1e22d775c224559",
+      "partCount": 73,
+      "fixReason": "normalizacja zbiorczego PDF-a YT-828137/YT-828138; warianty handlowe tego samego urządzenia",
+      "status": "publishable_fixed_v79"
+    },
+    {
+      "deviceIndex": "YT-82824",
+      "fileName": "Czesci_zamienne_YT-82824__SCALONE.pdf",
+      "path": "assets/pdfs/Czesci_zamienne_YT-82824__SCALONE.pdf",
+      "pageCount": 3,
+      "size": 355687,
+      "sha256": "392ccfda4a411ceeae612cfc464e087409afc55e71b5ad416c8e8f115677726f",
+      "partCount": 39,
+      "fixReason": "normalizacja PDF-a dla szlifierki prostej; źródło zawiera również zestaw YT-828296",
+      "status": "publishable_fixed_v79"
+    },
+    {
+      "deviceIndex": "YT-828293",
+      "fileName": "Czesci_zamienne_YT-828293__SCALONE.pdf",
+      "path": "assets/pdfs/Czesci_zamienne_YT-828293__SCALONE.pdf",
+      "pageCount": 3,
+      "size": 397331,
+      "sha256": "4276005564916e1d448a2882f65feaf25777ee7a026a32afb65b7d066789ef49",
+      "partCount": 41,
+      "fixReason": "normalizacja PDF-a dla wariantu szlifierki kątowej; źródło zbiorcze obsługuje kilka wariantów",
+      "status": "publishable_fixed_v79"
+    },
+    {
+      "deviceIndex": "YT-828294",
+      "fileName": "Czesci_zamienne_YT-828294__SCALONE.pdf",
+      "path": "assets/pdfs/Czesci_zamienne_YT-828294__SCALONE.pdf",
+      "pageCount": 3,
+      "size": 397331,
+      "sha256": "4276005564916e1d448a2882f65feaf25777ee7a026a32afb65b7d066789ef49",
+      "partCount": 41,
+      "fixReason": "normalizacja PDF-a dla wariantu szlifierki kątowej; źródło zbiorcze obsługuje kilka wariantów",
+      "status": "publishable_fixed_v79"
+    },
+    {
+      "deviceIndex": "YT-828295",
+      "fileName": "Czesci_zamienne_YT-828295__SCALONE.pdf",
+      "path": "assets/pdfs/Czesci_zamienne_YT-828295__SCALONE.pdf",
+      "pageCount": 3,
+      "size": 397331,
+      "sha256": "4276005564916e1d448a2882f65feaf25777ee7a026a32afb65b7d066789ef49",
+      "partCount": 41,
+      "fixReason": "normalizacja PDF-a dla wariantu szlifierki kątowej; źródło zbiorcze obsługuje kilka wariantów",
+      "status": "publishable_fixed_v79"
+    },
+    {
+      "deviceIndex": "YT-828296",
+      "fileName": "Czesci_zamienne_YT-828296__SCALONE.pdf",
+      "path": "assets/pdfs/Czesci_zamienne_YT-828296__SCALONE.pdf",
+      "pageCount": 9,
+      "size": 719560,
+      "sha256": "92438e7845d8028909d274dde00e8fed2dd0dd4ea59bbfbc56909415000f6a70",
+      "partCount": 80,
+      "fixReason": "scalenie dwóch źródeł dla zestawu: prosta + kątowa",
+      "status": "publishable_fixed_v79"
+    }
+  ]
+}

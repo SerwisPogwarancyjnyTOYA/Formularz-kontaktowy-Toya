@@ -1,0 +1,7 @@
+{
+  "version": "v70",
+  "notes": [
+    "Panel admina uruchom przez ?admin=1 lub window.PGW_DEBUG.openAdminPanel().",
+    "Override'y PDF trzymaj w data/pdf-device-overrides.json."
+  ]
+}
