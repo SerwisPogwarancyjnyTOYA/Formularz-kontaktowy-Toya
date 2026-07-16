@@ -1,0 +1,196 @@
+{
+  "schema": "pgw-pdf-repair-candidates-v1",
+  "version": "20260711-v77-publication-quarantine-repair",
+  "generatedAt": "2026-07-12T05:23:04.218096+00:00",
+  "summary": {
+    "totalPdfRows": 1445,
+    "candidateCount": 12,
+    "withReplacement": 11,
+    "noPreviewUrl": 0,
+    "nonStandardName": 1,
+    "notPublicFirstChoice": 0
+  },
+  "notes": "Pliki z replacementFileId mają być traktowane jako zapas/źródło. Frontend preferuje PDF scalony lub standardowy.",
+  "items": [
+    {
+      "fileId": "1-QaRqH4AxnJDNtQ6TFTroC2VOoqQ-WkK",
+      "fileName": "Czesci_zamienne_67570.pdf",
+      "deviceIndex": "67570",
+      "variant": "standard_parts_pdf",
+      "flags": [
+        "HAS_MERGED_REPLACEMENT"
+      ],
+      "status": "use_replacement",
+      "replacementFileId": "1snbX4lCFsqvmoUxWBUmk5POMtYl2eC5w",
+      "replacementFileName": "Czesci_zamienne_67570__SCALONE.pdf",
+      "previewUrl": "https://drive.google.com/file/d/1snbX4lCFsqvmoUxWBUmk5POMtYl2eC5w/preview",
+      "openUrl": "https://drive.google.com/file/d/1snbX4lCFsqvmoUxWBUmk5POMtYl2eC5w/view",
+      "sourceManifest": "full"
+    },
+    {
+      "fileId": "1l82F8lB56jUvSqNKTIauSaP8ujv0BJUC",
+      "fileName": "Czesci_zamienne_67571.pdf",
+      "deviceIndex": "67571",
+      "variant": "standard_parts_pdf",
+      "flags": [
+        "HAS_MERGED_REPLACEMENT"
+      ],
+      "status": "use_replacement",
+      "replacementFileId": "1lO5lpYmDcRNARkLFBGnLSlZIIgAPs7lI",
+      "replacementFileName": "Czesci_zamienne_67571__SCALONE.pdf",
+      "previewUrl": "https://drive.google.com/file/d/1lO5lpYmDcRNARkLFBGnLSlZIIgAPs7lI/preview",
+      "openUrl": "https://drive.google.com/file/d/1lO5lpYmDcRNARkLFBGnLSlZIIgAPs7lI/view",
+      "sourceManifest": "full"
+    },
+    {
+      "fileId": "18X_T8GOtbQmYtScy-C2PiP-Q6Y5u5uVu",
+      "fileName": "Czesci_zamienne_67572.pdf",
+      "deviceIndex": "67572",
+      "variant": "standard_parts_pdf",
+      "flags": [
+        "HAS_MERGED_REPLACEMENT"
+      ],
+      "status": "use_replacement",
+      "replacementFileId": "1ctBq-0Pdcs5eZ9pPwVZkCqVbFu6s3oAr",
+      "replacementFileName": "Czesci_zamienne_67572__SCALONE.pdf",
+      "previewUrl": "https://drive.google.com/file/d/1ctBq-0Pdcs5eZ9pPwVZkCqVbFu6s3oAr/preview",
+      "openUrl": "https://drive.google.com/file/d/1ctBq-0Pdcs5eZ9pPwVZkCqVbFu6s3oAr/view",
+      "sourceManifest": "full"
+    },
+    {
+      "fileId": "1-Blni_kcMGteygyEv4mpkN1ug5Lwseex",
+      "fileName": "Czesci_zamienne_67573.pdf",
+      "deviceIndex": "67573",
+      "variant": "standard_parts_pdf",
+      "flags": [
+        "HAS_MERGED_REPLACEMENT"
+      ],
+      "status": "use_replacement",
+      "replacementFileId": "1WfKnP7Ng-sZCxfMOV4lLJYA0Kbsk9-Ie",
+      "replacementFileName": "Czesci_zamienne_67573__SCALONE.pdf",
+      "previewUrl": "https://drive.google.com/file/d/1WfKnP7Ng-sZCxfMOV4lLJYA0Kbsk9-Ie/preview",
+      "openUrl": "https://drive.google.com/file/d/1WfKnP7Ng-sZCxfMOV4lLJYA0Kbsk9-Ie/view",
+      "sourceManifest": "full"
+    },
+    {
+      "fileId": "1cUE2ofqAodMCxGymyBtHVqrdiQkrao_w",
+      "fileName": "Czesci_zamienne_67574.pdf",
+      "deviceIndex": "67574",
+      "variant": "standard_parts_pdf",
+      "flags": [
+        "HAS_MERGED_REPLACEMENT"
+      ],
+      "status": "use_replacement",
+      "replacementFileId": "1pZ1EM2qticjFaw-Mu4kj3Ci8dS1Y-qAF",
+      "replacementFileName": "Czesci_zamienne_67574__SCALONE.pdf",
+      "previewUrl": "https://drive.google.com/file/d/1pZ1EM2qticjFaw-Mu4kj3Ci8dS1Y-qAF/preview",
+      "openUrl": "https://drive.google.com/file/d/1pZ1EM2qticjFaw-Mu4kj3Ci8dS1Y-qAF/view",
+      "sourceManifest": "full"
+    },
+    {
+      "fileId": "14biI7mjXpj5X-RCs-K2cqWvXHE2Ym3_q",
+      "fileName": "Czesci_zamienne_67575.pdf",
+      "deviceIndex": "67575",
+      "variant": "standard_parts_pdf",
+      "flags": [
+        "HAS_MERGED_REPLACEMENT"
+      ],
+      "status": "use_replacement",
+      "replacementFileId": "1UuAdxw81xUJ4pxMuAtyYNB1RPXG_9NoJ",
+      "replacementFileName": "Czesci_zamienne_67575__SCALONE.pdf",
+      "previewUrl": "https://drive.google.com/file/d/1UuAdxw81xUJ4pxMuAtyYNB1RPXG_9NoJ/preview",
+      "openUrl": "https://drive.google.com/file/d/1UuAdxw81xUJ4pxMuAtyYNB1RPXG_9NoJ/view",
+      "sourceManifest": "full"
+    },
+    {
+      "fileId": "1_cbMX79Ul9snUhrtKcN1_UIJ3MxfZ0SL",
+      "fileName": "Czesci_zamienne_67576.pdf",
+      "deviceIndex": "67576",
+      "variant": "standard_parts_pdf",
+      "flags": [
+        "HAS_MERGED_REPLACEMENT"
+      ],
+      "status": "use_replacement",
+      "replacementFileId": "1HuQMhL15ke8Dedceki5DRtj3Fkjfl9s3",
+      "replacementFileName": "Czesci_zamienne_67576__SCALONE.pdf",
+      "previewUrl": "https://drive.google.com/file/d/1HuQMhL15ke8Dedceki5DRtj3Fkjfl9s3/preview",
+      "openUrl": "https://drive.google.com/file/d/1HuQMhL15ke8Dedceki5DRtj3Fkjfl9s3/view",
+      "sourceManifest": "full"
+    },
+    {
+      "fileId": "1IeanvOoRHlphyBbVaOX2Jtd5B8lyoBP7",
+      "fileName": "Czesci_zamienne_67590.pdf",
+      "deviceIndex": "67590",
+      "variant": "standard_parts_pdf",
+      "flags": [
+        "HAS_MERGED_REPLACEMENT"
+      ],
+      "status": "use_replacement",
+      "replacementFileId": "1QhtlI4nNqjrbyvXk4YNoOc1n6bweUz1F",
+      "replacementFileName": "Czesci_zamienne_67590__SCALONE.pdf",
+      "previewUrl": "https://drive.google.com/file/d/1QhtlI4nNqjrbyvXk4YNoOc1n6bweUz1F/preview",
+      "openUrl": "https://drive.google.com/file/d/1QhtlI4nNqjrbyvXk4YNoOc1n6bweUz1F/view",
+      "sourceManifest": "full"
+    },
+    {
+      "fileId": "1qj2j2AO9cn_uO6R_dQnYlff_19bz-5e1",
+      "fileName": "YT-3618.pdf",
+      "deviceIndex": "YT-3618",
+      "variant": "standard_pdf",
+      "flags": [
+        "NON_STANDARD_NAME"
+      ],
+      "status": "needs_review",
+      "replacementFileId": "",
+      "replacementFileName": "",
+      "previewUrl": "https://drive.google.com/file/d/1qj2j2AO9cn_uO6R_dQnYlff_19bz-5e1/preview",
+      "openUrl": "https://drive.google.com/file/d/1qj2j2AO9cn_uO6R_dQnYlff_19bz-5e1/view",
+      "sourceManifest": "full"
+    },
+    {
+      "fileId": "1A8dcOfeJdtM0djOGCh9Jpn02LImcPHVz",
+      "fileName": "Czesci_zamienne_YT-82173.pdf",
+      "deviceIndex": "YT-82173",
+      "variant": "standard_parts_pdf",
+      "flags": [
+        "HAS_MERGED_REPLACEMENT"
+      ],
+      "status": "use_replacement",
+      "replacementFileId": "1SuRUHVoQjbK0TORNjrpl8vcdzC3rrN3d",
+      "replacementFileName": "Czesci_zamienne_YT-82173__SCALONE.pdf",
+      "previewUrl": "https://drive.google.com/file/d/1SuRUHVoQjbK0TORNjrpl8vcdzC3rrN3d/preview",
+      "openUrl": "https://drive.google.com/file/d/1SuRUHVoQjbK0TORNjrpl8vcdzC3rrN3d/view",
+      "sourceManifest": "full"
+    },
+    {
+      "fileId": "1IWvpuBAnqV5w_h53G11Y6uZv6lUi0jWh",
+      "fileName": "Czesci_zamienne_YT-82174.pdf",
+      "deviceIndex": "YT-82174",
+      "variant": "standard_parts_pdf",
+      "flags": [
+        "HAS_MERGED_REPLACEMENT"
+      ],
+      "status": "use_replacement",
+      "replacementFileId": "1eFHWGqr6UveUrerAvEad4zI1mf2x8L2n",
+      "replacementFileName": "Czesci_zamienne_YT-82174__SCALONE.pdf",
+      "previewUrl": "https://drive.google.com/file/d/1eFHWGqr6UveUrerAvEad4zI1mf2x8L2n/preview",
+      "openUrl": "https://drive.google.com/file/d/1eFHWGqr6UveUrerAvEad4zI1mf2x8L2n/view",
+      "sourceManifest": "full"
+    },
+    {
+      "fileId": "1hoWKr1JIOyc6j1S43w8E8aE9xchxH1iw",
+      "fileName": "Czesci_zamienne_YT-85485.pdf",
+      "deviceIndex": "YT-85485",
+      "variant": "standard_parts_pdf",
+      "flags": [
+        "HAS_MERGED_REPLACEMENT"
+      ],
+      "status": "use_replacement",
+      "replacementFileId": "1EdFK5KlKCvBASTW8QX6yOULgD8s5y8xu",
+      "replacementFileName": "Czesci_zamienne_YT-85485__SCALONE.pdf",
+      "previewUrl": "https://drive.google.com/file/d/1EdFK5KlKCvBASTW8QX6yOULgD8s5y8xu/preview",
+      "openUrl": "https://drive.google.com/file/d/1EdFK5KlKCvBASTW8QX6yOULgD8s5y8xu/view",
+      "sourceManifest": "full"
+    }
+  ]
+}

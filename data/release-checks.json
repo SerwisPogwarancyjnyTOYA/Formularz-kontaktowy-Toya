@@ -1,0 +1,11 @@
+{
+  "version": "20260714-v82-ui-i18n-foundation",
+  "checks": [
+    "app.js syntax",
+    "config.js syntax",
+    "i18n.js syntax",
+    "all JSON valid",
+    "PGW selfcheck OK"
+  ],
+  "status": "PASS"
+}

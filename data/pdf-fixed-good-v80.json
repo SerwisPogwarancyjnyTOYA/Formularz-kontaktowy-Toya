@@ -1,0 +1,55 @@
+{
+  "schema": "pgw.pdf_fixed_good.v1",
+  "version": "20260714-v80-official-pdf-repair-batch",
+  "generatedAt": "2026-07-14T06:19:23+00:00",
+  "summary": {
+    "fixedPdfCount": 3,
+    "modelsFixed": 3,
+    "partsAdded": 517,
+    "repairType": "demote_table_only_scalone_restore_official_pdf"
+  },
+  "items": [
+    {
+      "deviceIndex": "YT-82173",
+      "fileName": "Czesci_zamienne_YT-82173__SCALONE.pdf",
+      "path": "assets/pdfs/Czesci_zamienne_YT-82173__SCALONE.pdf",
+      "pageCount": 5,
+      "size": 1500020,
+      "sha256": "75a492d9467d062a971627019e1fae87c7c4d725b35b8234e0139dcb86c208e6",
+      "partCount": 150,
+      "textLength": 6797,
+      "badPreviousFileId": "1SuRUHVoQjbK0TORNjrpl8vcdzC3rrN3d",
+      "officialSourceFileId": "1A8dcOfeJdtM0djOGCh9Jpn02LImcPHVz",
+      "fixReason": "poprzedni __SCALONE był roboczą tabelą bez normalnego rysunku; podstawiono oficjalny PDF z okładką, rysunkiem złożeniowym i listą części",
+      "status": "publishable_fixed_v80_official_pdf"
+    },
+    {
+      "deviceIndex": "YT-82174",
+      "fileName": "Czesci_zamienne_YT-82174__SCALONE.pdf",
+      "path": "assets/pdfs/Czesci_zamienne_YT-82174__SCALONE.pdf",
+      "pageCount": 5,
+      "size": 1492398,
+      "sha256": "991f3de121c45b1a4384b2a75ccf8161416c81a484484d7105bcab10dbc14bbf",
+      "partCount": 152,
+      "textLength": 6804,
+      "badPreviousFileId": "1eFHWGqr6UveUrerAvEad4zI1mf2x8L2n",
+      "officialSourceFileId": "1IWvpuBAnqV5w_h53G11Y6uZv6lUi0jWh",
+      "fixReason": "poprzedni __SCALONE był roboczą tabelą bez normalnego rysunku; podstawiono oficjalny PDF z okładką, rysunkiem złożeniowym i listą części",
+      "status": "publishable_fixed_v80_official_pdf"
+    },
+    {
+      "deviceIndex": "YT-85485",
+      "fileName": "Czesci_zamienne_YT-85485__SCALONE.pdf",
+      "path": "assets/pdfs/Czesci_zamienne_YT-85485__SCALONE.pdf",
+      "pageCount": 7,
+      "size": 752130,
+      "sha256": "343650dfdc2e02030c8195ea9d5bb2648381d1beb03730c27a45b89055702047",
+      "partCount": 215,
+      "textLength": 11277,
+      "badPreviousFileId": "1EdFK5KlKCvBASTW8QX6yOULgD8s5y8xu",
+      "officialSourceFileId": "1hoWKr1JIOyc6j1S43w8E8aE9xchxH1iw",
+      "fixReason": "poprzedni __SCALONE był roboczą tabelą bez normalnego rysunku; podstawiono oficjalny PDF z okładką, rysunkami złożeniowymi i listą części",
+      "status": "publishable_fixed_v80_official_pdf"
+    }
+  ]
+}

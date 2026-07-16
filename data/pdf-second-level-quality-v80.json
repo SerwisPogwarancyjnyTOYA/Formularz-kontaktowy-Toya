@@ -1,0 +1,32 @@
+{
+  "schema": "pgw.pdf_second_level_quality.v1",
+  "version": "20260714-v80-official-pdf-repair-batch",
+  "generatedAt": "2026-07-14T06:19:23+00:00",
+  "summary": {
+    "tableOnlyScaloneDetected": 3,
+    "promotedOfficialPdfAsPublication": 3
+  },
+  "items": [
+    {
+      "deviceIndex": "YT-82173",
+      "badScaloneFileId": "1SuRUHVoQjbK0TORNjrpl8vcdzC3rrN3d",
+      "officialFileId": "1A8dcOfeJdtM0djOGCh9Jpn02LImcPHVz",
+      "decision": "old table-only __SCALONE demoted; official PDF promoted as local __SCALONE",
+      "reason": "poprzedni __SCALONE był roboczą tabelą bez normalnego rysunku; podstawiono oficjalny PDF z okładką, rysunkiem złożeniowym i listą części"
+    },
+    {
+      "deviceIndex": "YT-82174",
+      "badScaloneFileId": "1eFHWGqr6UveUrerAvEad4zI1mf2x8L2n",
+      "officialFileId": "1IWvpuBAnqV5w_h53G11Y6uZv6lUi0jWh",
+      "decision": "old table-only __SCALONE demoted; official PDF promoted as local __SCALONE",
+      "reason": "poprzedni __SCALONE był roboczą tabelą bez normalnego rysunku; podstawiono oficjalny PDF z okładką, rysunkiem złożeniowym i listą części"
+    },
+    {
+      "deviceIndex": "YT-85485",
+      "badScaloneFileId": "1EdFK5KlKCvBASTW8QX6yOULgD8s5y8xu",
+      "officialFileId": "1hoWKr1JIOyc6j1S43w8E8aE9xchxH1iw",
+      "decision": "old table-only __SCALONE demoted; official PDF promoted as local __SCALONE",
+      "reason": "poprzedni __SCALONE był roboczą tabelą bez normalnego rysunku; podstawiono oficjalny PDF z okładką, rysunkami złożeniowymi i listą części"
+    }
+  ]
+}

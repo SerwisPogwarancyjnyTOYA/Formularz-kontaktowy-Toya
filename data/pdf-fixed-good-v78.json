@@ -1,0 +1,25 @@
+{
+  "schema": "pgw-bad-pdf-fix-pass-v1",
+  "version": "20260711-v78-fixed-bad-pdfs-pass1",
+  "generatedAt": "2026-07-14T00:32:14Z",
+  "summary": {
+    "fixed": 1,
+    "uploadedToRepoAssets": 1,
+    "driveRawUpload": "not_available_via_connector_in_this_run"
+  },
+  "items": [
+    {
+      "deviceIndex": "YT-55557",
+      "badFiles": [
+        "Czesci_zamienne_YT-55557 V2.pdf",
+        "DO_WERYFIKACJI__Czesci_zamienne_YT-55557__V3.pdf",
+        "YT-55557.pdf"
+      ],
+      "fix": "Merged into one publishable repo PDF with V2 and V3 sections.",
+      "output": "assets/pdfs/Czesci_zamienne_YT-55557__SCALONE.pdf",
+      "pages": 7,
+      "sha256": "0760524a05bc7089fd4ed357d3c2132ae13cb89bc0deef3d262bc121204a4b07",
+      "visualVerification": "rendered all 7 pages with pdfium at 120 dpi; no black pages or obvious clipping"
+    }
+  ]
+}

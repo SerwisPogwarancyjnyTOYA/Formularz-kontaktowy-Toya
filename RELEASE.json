@@ -1,38 +1,12 @@
 {
-  "version": "0.5.0.v1",
-  "build": "20260713-v050v1-global-service-passport",
-  "createdAt": "2026-07-13T18:45:00Z",
-  "releaseChannel": "candidate-global-service",
-  "previousVersion": "0.5.0-rc2",
-  "publicMap": {
-    "base": "data/drive-drawings-map.generated-v97.json",
-    "patches": [
-      "data/drive-drawings-patch-v98.json",
-      "data/drive-drawings-patch-v050v1.json"
-    ],
-    "readyModels": [
-      "YT-85851",
-      "YT-85200",
-      "YT-85205",
-      "YT-85208"
-    ]
-  },
-  "headline": "TOYA Global Service Passport",
-  "features": [
-    "6 languages",
-    "privacy-safe share links",
-    "deep links to models",
-    "offline PWA shell",
-    "accessibility controls",
-    "print/PDF and mailto service ticket",
-    "consolidated READY-only public patch"
-  ],
-  "auditScope": [
-    "YT-828254",
-    "YT-828255",
-    "YT-828256"
-  ],
-  "auditDecision": "3x REBUILD_CONFIRMED - exact official photo missing",
-  "status": "FILES_READY_FOR_REPO_SYNC",
-  "commitOrPushClaimed": false
+  "version": "20260714-v83-repo-sync-ui-i18n-pdf-fixes",
+  "date": "2026-07-14",
+  "channel": "drive-repo-sync",
+  "base": "v82 + v81 PDF publication fixes",
+  "notes": [
+    "PL/EN translation layer for the website UI only.",
+    "Parts, devices and PDFs remain in source language/original data until a controlled technical glossary is prepared.",
+    "False __SCALONE PDF fixes from v78-v81 remain included in assets/pdfs and manifests.",
+    "This package is prepared for Google Drive repository sync."
+  ]
 }

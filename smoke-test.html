@@ -1,3 +1,23 @@
-<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>PGW Service Hub — v98 Smoke test</title><style>body{font-family:system-ui;background:#0b1018;color:#f4f6fb;padding:30px}main{max-width:1000px;margin:auto}.ok{color:#57d68d}.bad{color:#ff6b6b}li{margin:8px 0}</style></head><body><main><h1>Smoke test — 0.4.0.v98</h1><p>Sprawdza bazę v97, przyrostowy patch v98, odzyskane modele, alias i metadane TOYA24.</p><ul id="out"></ul><script>
-const required=["YT-85525","YT-85528","YT-85532","YT-85533","YT-85537","YT-85545","YT-85570","YT-85580","YT-85590","YT-85591","YT-85592","YT-85600","YT-8277905","YT-8277915","YT-8277935"];const norm=v=>String(v||'').toUpperCase().replace(/[^A-Z0-9]/g,'');const arr=x=>Array.isArray(x)?x:(x?.items||[]);Promise.all(['data/drive-drawings-map.generated-v97.json','data/drive-drawings-patch-v98.json'].map(x=>fetch(x+'?v='+Date.now(),{cache:'no-store'}).then(r=>r.json()))).then(([base,patch])=>{const rows=[...arr(base),...arr(patch)];const out=[];for(const model of required){const candidates=rows.filter(r=>norm(r.deviceIndex||r.model)===norm(model));const row=candidates[candidates.length-1];out.push({name:model,ok:!!row&&row.qualityGate==='TOYA24_FULL_MATCH'&&Number(row.previewPage)>0})}const alias=arr(patch).find(r=>norm(r.deviceIndex||r.model)===norm('YT-828118'));out.push({name:'alias YT-8281185',ok:!!alias&&(alias.modelsInPdf||[]).includes('YT-8281185')});out.push({name:'patch size 16',ok:arr(patch).length===16});document.getElementById('out').innerHTML=out.map(x=>`<li class="${x.ok?'ok':'bad'}">${x.ok?'PASS':'FAIL'} — ${x.name}</li>`).join('')}).catch(e=>document.getElementById('out').innerHTML='<li class="bad">'+e.message+'</li>');
-</script></main></body></html>
+<!doctype html>
+<html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>PGW Service Hub — Smoke test</title>
+<style>body{font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#0b1018;color:#f4f6fb;margin:0;padding:32px}main{max-width:1060px;margin:auto}pre{white-space:pre-wrap;background:#111a2b;border:1px solid #2a354b;border-radius:16px;padding:18px}.ok{color:#57d68d}.warn{color:#ffcf5a}.bad{color:#ff6b6b}button,a{margin-right:8px;color:#fff}</style></head><body><main><h1>Smoke test — 20260710-v73-stable-control</h1><p>Ten plik robi szybki test danych bez klikania formularza.</p><p><a href="./?admin=1&v=20260710-v73-stable-control">Formularz admin</a> · <a href="admin.html?v=20260710-v73-stable-control">Admin standalone</a> · <a href="healthcheck.html?v=20260710-v73-stable-control">Healthcheck</a></p><div id="summary">Start…</div><pre id="out"></pre></main>
+<script>
+const VERSION='20260710-v73-stable-control';
+const files={devices:'data/devices.json',drawings:'data/drawings.json',parts:'data/parts.json',drive:'data/drive-drawings-map.full.json',converted:'data/drive-drawings-map.converted.json',release:'data/release-info.json'};
+const norm=s=>String(s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[-_\s]+/g,'');
+async function json(path){const res=await fetch(path+'?v='+Date.now(),{cache:'no-store'}); if(!res.ok) throw new Error(path+' '+res.status); return res.json();}
+(async()=>{const report={version:VERSION,generatedAt:new Date().toISOString(),checks:[]}; try{
+ const [devices,drawings,parts,drive,converted,release]=await Promise.all(Object.values(files).map(json));
+ const arr=x=>Array.isArray(x)?x:(x&&Array.isArray(x.items)?x.items:[]);
+ const D=arr(devices), R=arr(drawings), P=arr(parts), M=arr(drive).concat(arr(converted));
+ report.counts={devices:D.length,drawings:R.length,parts:P.length,pdfManifestRows:M.length};
+ for(const [name,count,min] of [['devices',D.length,100],['drawings',R.length,100],['parts',P.length,100],['pdfManifestRows',M.length,100]]) report.checks.push({name,ok:count>=min,count,min});
+ const samples=['YT-82806','YT82806','82200','79004','09903'];
+ report.search=samples.map(q=>{const nq=norm(q); const hits=D.filter(d=>norm([d.deviceIndex,d.index,d.model,d.name,d.title].filter(Boolean).join(' ')).includes(nq)).slice(0,5); return {query:q,hits:hits.length,sample:hits.map(d=>d.deviceIndex||d.index||d.model||d.name).filter(Boolean)}});
+ report.release=release;
+ report.status=report.checks.every(c=>c.ok)?'pass':'warning';
+ }catch(e){report.status='fail'; report.error=e.message;}
+ document.getElementById('summary').innerHTML='<strong class="'+(report.status==='pass'?'ok':report.status==='warning'?'warn':'bad')+'">'+report.status.toUpperCase()+'</strong>';
+ document.getElementById('out').textContent=JSON.stringify(report,null,2);
+})();
+</script></body></html>

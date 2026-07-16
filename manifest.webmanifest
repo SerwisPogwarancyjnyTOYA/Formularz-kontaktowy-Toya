@@ -1,28 +1,9 @@
 {
-  "name": "TOYA Global Service Hub - części zamienne",
-  "short_name": "TOYA Service",
-  "description": "Wielojęzyczny formularz zapytań o części z paszportem serwisowym i trybem offline.",
-  "id": "./?app=pgw-050-v1",
-  "start_url": "./?source=pwa",
-  "scope": "./",
+  "name": "Formularz zapytania o części TOYA",
+  "short_name": "TOYA części",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#0b1018",
   "theme_color": "#d71920",
-  "lang": "pl",
-  "dir": "ltr",
-  "categories": [
-    "business",
-    "utilities"
-  ],
-  "icons": [],
-  "shortcuts": [
-    {
-      "name": "Znajdź urządzenie",
-      "url": "./?focus=device"
-    },
-    {
-      "name": "Paszport serwisowy",
-      "url": "./?passport=1"
-    }
-  ]
+  "icons": []
 }

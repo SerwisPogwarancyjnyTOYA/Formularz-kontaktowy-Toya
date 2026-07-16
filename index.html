@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pl" data-theme="dark">
+<html lang="pl" data-theme="dark" data-ui-i18n="v82">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -7,8 +7,6 @@
   <title>Formularz zapytania o części — Serwis Pogwarancyjny TOYA</title>
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="stylesheet" href="app.css" />
-  <link rel="stylesheet" href="client-suite.css" />
-  <meta name="theme-color" content="#d71920" />
 </head>
 <body>
   <header class="topbar">
@@ -19,7 +17,13 @@
         <span>Krokowy formularz zapytania o części</span>
       </div>
     </div>
-    <div class="top-actions"><div class="status-pill" id="loadStatus">Ładowanie formularza…</div></div>
+    <div class="top-actions">
+      <label class="language-select" for="languageSelect"><span>Język strony</span><select id="languageSelect" aria-label="Język strony">
+        <option value="pl">PL — Polski</option>
+        <option value="en">EN — English</option>
+      </select></label>
+      <div class="status-pill" id="loadStatus">Ładowanie formularza…</div>
+    </div>
   </header>
 
   <main class="shell">
@@ -275,6 +279,6 @@
 
   <script src="config.js"></script>
   <script src="app.js"></script>
-  <script src="client-suite.js"></script>
+  <script src="i18n.js"></script>
 </body>
 </html>

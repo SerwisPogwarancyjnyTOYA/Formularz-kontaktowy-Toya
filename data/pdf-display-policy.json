@@ -1,0 +1,52 @@
+{
+  "schema": "pgw-pdf-display-policy-v1",
+  "version": "20260711-v77-publication-quarantine-repair",
+  "goals": [
+    "all drawings use one customer-facing viewer",
+    "all PDFs use /preview URL on GitHub Pages",
+    "merged PDFs are preferred when drawing and parts were separate",
+    "manual description is fallback only"
+  ],
+  "viewer": {
+    "embed": "Google Drive /preview iframe",
+    "fallback": "openUrl in new tab",
+    "standardFrame": "fixed white card, A4-like aspect, no customer-facing raw file chaos",
+    "mobile": "viewer above parts table, 62-68vh height"
+  },
+  "selectionPriority": [
+    {
+      "match": "__SCALONE or preferred=true",
+      "score": 1000000,
+      "meaning": "full service PDF: drawing + parts"
+    },
+    {
+      "match": "partsExtracted=true or status includes verified_preferred",
+      "score": 800000,
+      "meaning": "parts are available in form"
+    },
+    {
+      "match": "Czesci_zamienne_<index>.pdf",
+      "score": 500000,
+      "meaning": "standard PDF"
+    },
+    {
+      "match": "RYSUNEK_TECHNICZNY_DO_POLACZENIA",
+      "score": -200000,
+      "meaning": "source backup, not preferred for customer"
+    },
+    {
+      "match": "DO_WERYFIKACJI / _p / _q / eng / yeng",
+      "score": -100000,
+      "meaning": "internal review / variant"
+    }
+  ],
+  "blockedPreviewPolicy": {
+    "goal": "Podgląd ma być dostępny nawet gdy iframe/Drive preview blokuje render.",
+    "rules": [
+      "Preferuj __SCALONE.pdf.",
+      "Każdy viewer pokazuje przyciski Podgląd i Otwórz PDF.",
+      "Pliki techniczne/robocze są zapasem, nie pierwszym wyborem.",
+      "Jeżeli istnieje replacementFileId w pdf-repair-candidates.json, używaj wersji replacement jako preferowanej."
+    ]
+  }
+}

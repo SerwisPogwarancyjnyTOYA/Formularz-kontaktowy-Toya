@@ -1,0 +1,1605 @@
+{
+  "schema": "pgw-pdf-publication-quarantine-v1",
+  "version": "20260714-v80-official-pdf-repair-batch",
+  "generatedAt": "2026-07-14T06:19:23+00:00",
+  "policy": {
+    "goal": "Nie pokazuj klientowi jako głównego PDF-a plików, które są duplikatem, wariantem, źródłem technicznym, samą listą, plikiem roboczym lub mają lepszy scalony zamiennik.",
+    "frontEndRule": "Jeśli rekord ma publicationDecision inne niż publishable, nie wybieraj go jako primary, jeśli istnieje replacement/better file dla modelu. Jeśli nie ma zamiennika, pokazuj tylko jako fallback z jasnym komunikatem."
+  },
+  "summary": {
+    "totalPdfRowsScanned": 1445,
+    "modelsWithPdf": 1422,
+    "notSuitableAsPrimaryNow": 79,
+    "withImmediateReplacement": 23,
+    "repairRequiredNoSafeReplacementYet": 0,
+    "mergedPreferredRows": 12,
+    "generatedAt": "2026-07-13T10:42:22Z",
+    "fixedInV78": 1,
+    "fixedInV79": 11,
+    "fixedInV80": 3
+  },
+  "items": [
+    {
+      "fileId": "1-QaRqH4AxnJDNtQ6TFTroC2VOoqQ-WkK",
+      "fileName": "Czesci_zamienne_67570.pdf",
+      "title": "Czesci_zamienne_67570.pdf",
+      "deviceIndex": "67570",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "HAS_MERGED_REPLACEMENT",
+        "NOT_BEST_FOR_MODEL"
+      ],
+      "publicationDecision": "use_replacement",
+      "recommendedAction": "replace_with_merged_pdf",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1-QaRqH4AxnJDNtQ6TFTroC2VOoqQ-WkK/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1-QaRqH4AxnJDNtQ6TFTroC2VOoqQ-WkK/view",
+      "replacementFileId": "1snbX4lCFsqvmoUxWBUmk5POMtYl2eC5w",
+      "replacementFileName": "Czesci_zamienne_67570__SCALONE.pdf",
+      "replacementPreviewUrl": "https://drive.google.com/file/d/1snbX4lCFsqvmoUxWBUmk5POMtYl2eC5w/preview",
+      "replacementOpenUrl": "https://drive.google.com/file/d/1snbX4lCFsqvmoUxWBUmk5POMtYl2eC5w/view"
+    },
+    {
+      "fileId": "1l82F8lB56jUvSqNKTIauSaP8ujv0BJUC",
+      "fileName": "Czesci_zamienne_67571.pdf",
+      "title": "Czesci_zamienne_67571.pdf",
+      "deviceIndex": "67571",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "HAS_MERGED_REPLACEMENT",
+        "NOT_BEST_FOR_MODEL"
+      ],
+      "publicationDecision": "use_replacement",
+      "recommendedAction": "replace_with_merged_pdf",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1l82F8lB56jUvSqNKTIauSaP8ujv0BJUC/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1l82F8lB56jUvSqNKTIauSaP8ujv0BJUC/view",
+      "replacementFileId": "1lO5lpYmDcRNARkLFBGnLSlZIIgAPs7lI",
+      "replacementFileName": "Czesci_zamienne_67571__SCALONE.pdf",
+      "replacementPreviewUrl": "https://drive.google.com/file/d/1lO5lpYmDcRNARkLFBGnLSlZIIgAPs7lI/preview",
+      "replacementOpenUrl": "https://drive.google.com/file/d/1lO5lpYmDcRNARkLFBGnLSlZIIgAPs7lI/view"
+    },
+    {
+      "fileId": "18X_T8GOtbQmYtScy-C2PiP-Q6Y5u5uVu",
+      "fileName": "Czesci_zamienne_67572.pdf",
+      "title": "Czesci_zamienne_67572.pdf",
+      "deviceIndex": "67572",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "HAS_MERGED_REPLACEMENT",
+        "NOT_BEST_FOR_MODEL"
+      ],
+      "publicationDecision": "use_replacement",
+      "recommendedAction": "replace_with_merged_pdf",
+      "currentPreviewUrl": "https://drive.google.com/file/d/18X_T8GOtbQmYtScy-C2PiP-Q6Y5u5uVu/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/18X_T8GOtbQmYtScy-C2PiP-Q6Y5u5uVu/view",
+      "replacementFileId": "1ctBq-0Pdcs5eZ9pPwVZkCqVbFu6s3oAr",
+      "replacementFileName": "Czesci_zamienne_67572__SCALONE.pdf",
+      "replacementPreviewUrl": "https://drive.google.com/file/d/1ctBq-0Pdcs5eZ9pPwVZkCqVbFu6s3oAr/preview",
+      "replacementOpenUrl": "https://drive.google.com/file/d/1ctBq-0Pdcs5eZ9pPwVZkCqVbFu6s3oAr/view"
+    },
+    {
+      "fileId": "1-Blni_kcMGteygyEv4mpkN1ug5Lwseex",
+      "fileName": "Czesci_zamienne_67573.pdf",
+      "title": "Czesci_zamienne_67573.pdf",
+      "deviceIndex": "67573",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "HAS_MERGED_REPLACEMENT",
+        "NOT_BEST_FOR_MODEL"
+      ],
+      "publicationDecision": "use_replacement",
+      "recommendedAction": "replace_with_merged_pdf",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1-Blni_kcMGteygyEv4mpkN1ug5Lwseex/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1-Blni_kcMGteygyEv4mpkN1ug5Lwseex/view",
+      "replacementFileId": "1WfKnP7Ng-sZCxfMOV4lLJYA0Kbsk9-Ie",
+      "replacementFileName": "Czesci_zamienne_67573__SCALONE.pdf",
+      "replacementPreviewUrl": "https://drive.google.com/file/d/1WfKnP7Ng-sZCxfMOV4lLJYA0Kbsk9-Ie/preview",
+      "replacementOpenUrl": "https://drive.google.com/file/d/1WfKnP7Ng-sZCxfMOV4lLJYA0Kbsk9-Ie/view"
+    },
+    {
+      "fileId": "1cUE2ofqAodMCxGymyBtHVqrdiQkrao_w",
+      "fileName": "Czesci_zamienne_67574.pdf",
+      "title": "Czesci_zamienne_67574.pdf",
+      "deviceIndex": "67574",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "HAS_MERGED_REPLACEMENT",
+        "NOT_BEST_FOR_MODEL"
+      ],
+      "publicationDecision": "use_replacement",
+      "recommendedAction": "replace_with_merged_pdf",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1cUE2ofqAodMCxGymyBtHVqrdiQkrao_w/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1cUE2ofqAodMCxGymyBtHVqrdiQkrao_w/view",
+      "replacementFileId": "1pZ1EM2qticjFaw-Mu4kj3Ci8dS1Y-qAF",
+      "replacementFileName": "Czesci_zamienne_67574__SCALONE.pdf",
+      "replacementPreviewUrl": "https://drive.google.com/file/d/1pZ1EM2qticjFaw-Mu4kj3Ci8dS1Y-qAF/preview",
+      "replacementOpenUrl": "https://drive.google.com/file/d/1pZ1EM2qticjFaw-Mu4kj3Ci8dS1Y-qAF/view"
+    },
+    {
+      "fileId": "14biI7mjXpj5X-RCs-K2cqWvXHE2Ym3_q",
+      "fileName": "Czesci_zamienne_67575.pdf",
+      "title": "Czesci_zamienne_67575.pdf",
+      "deviceIndex": "67575",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "HAS_MERGED_REPLACEMENT",
+        "NOT_BEST_FOR_MODEL"
+      ],
+      "publicationDecision": "use_replacement",
+      "recommendedAction": "replace_with_merged_pdf",
+      "currentPreviewUrl": "https://drive.google.com/file/d/14biI7mjXpj5X-RCs-K2cqWvXHE2Ym3_q/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/14biI7mjXpj5X-RCs-K2cqWvXHE2Ym3_q/view",
+      "replacementFileId": "1UuAdxw81xUJ4pxMuAtyYNB1RPXG_9NoJ",
+      "replacementFileName": "Czesci_zamienne_67575__SCALONE.pdf",
+      "replacementPreviewUrl": "https://drive.google.com/file/d/1UuAdxw81xUJ4pxMuAtyYNB1RPXG_9NoJ/preview",
+      "replacementOpenUrl": "https://drive.google.com/file/d/1UuAdxw81xUJ4pxMuAtyYNB1RPXG_9NoJ/view"
+    },
+    {
+      "fileId": "1_cbMX79Ul9snUhrtKcN1_UIJ3MxfZ0SL",
+      "fileName": "Czesci_zamienne_67576.pdf",
+      "title": "Czesci_zamienne_67576.pdf",
+      "deviceIndex": "67576",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "HAS_MERGED_REPLACEMENT",
+        "NOT_BEST_FOR_MODEL"
+      ],
+      "publicationDecision": "use_replacement",
+      "recommendedAction": "replace_with_merged_pdf",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1_cbMX79Ul9snUhrtKcN1_UIJ3MxfZ0SL/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1_cbMX79Ul9snUhrtKcN1_UIJ3MxfZ0SL/view",
+      "replacementFileId": "1HuQMhL15ke8Dedceki5DRtj3Fkjfl9s3",
+      "replacementFileName": "Czesci_zamienne_67576__SCALONE.pdf",
+      "replacementPreviewUrl": "https://drive.google.com/file/d/1HuQMhL15ke8Dedceki5DRtj3Fkjfl9s3/preview",
+      "replacementOpenUrl": "https://drive.google.com/file/d/1HuQMhL15ke8Dedceki5DRtj3Fkjfl9s3/view"
+    },
+    {
+      "fileId": "1IeanvOoRHlphyBbVaOX2Jtd5B8lyoBP7",
+      "fileName": "Czesci_zamienne_67590.pdf",
+      "title": "Czesci_zamienne_67590.pdf",
+      "deviceIndex": "67590",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "HAS_MERGED_REPLACEMENT",
+        "NOT_BEST_FOR_MODEL"
+      ],
+      "publicationDecision": "use_replacement",
+      "recommendedAction": "replace_with_merged_pdf",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1IeanvOoRHlphyBbVaOX2Jtd5B8lyoBP7/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1IeanvOoRHlphyBbVaOX2Jtd5B8lyoBP7/view",
+      "replacementFileId": "1QhtlI4nNqjrbyvXk4YNoOc1n6bweUz1F",
+      "replacementFileName": "Czesci_zamienne_67590__SCALONE.pdf",
+      "replacementPreviewUrl": "https://drive.google.com/file/d/1QhtlI4nNqjrbyvXk4YNoOc1n6bweUz1F/preview",
+      "replacementOpenUrl": "https://drive.google.com/file/d/1QhtlI4nNqjrbyvXk4YNoOc1n6bweUz1F/view"
+    },
+    {
+      "fileId": "1aAFxBmhrc-awSq3JuXmuT2x1NGFiC_MM",
+      "fileName": "Czesci_zamienne_75775_75776_75777_75778_75779.pdf",
+      "title": "Czesci_zamienne_75775_75776_75777_75778_75779.pdf",
+      "deviceIndex": "75775",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "NOT_BEST_FOR_MODEL"
+      ],
+      "publicationDecision": "backup_only",
+      "recommendedAction": "keep_as_source_backup_use_best_model_pdf",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1aAFxBmhrc-awSq3JuXmuT2x1NGFiC_MM/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1aAFxBmhrc-awSq3JuXmuT2x1NGFiC_MM/view",
+      "replacementFileId": "1ppviAx10hZvaHzKwXYejW3EwQ3L-bAUP",
+      "replacementFileName": "Czesci_zamienne_75775-75779.pdf",
+      "replacementPreviewUrl": "https://drive.google.com/file/d/1ppviAx10hZvaHzKwXYejW3EwQ3L-bAUP/preview",
+      "replacementOpenUrl": "https://drive.google.com/file/d/1ppviAx10hZvaHzKwXYejW3EwQ3L-bAUP/view"
+    },
+    {
+      "fileId": "1xSEkF_PE4oqfw0TYhocqR4-rbYJNTtM4",
+      "fileName": "Czesci_zamienne_YT-828118_YT-8281185.pdf",
+      "title": "Czesci_zamienne_YT-828118_YT-8281185.pdf",
+      "deviceIndex": "YT-828118",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "FIXED_IN_V79",
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "use_replacement",
+      "recommendedAction": "replace_with_v79_fixed_pdf",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1xSEkF_PE4oqfw0TYhocqR4-rbYJNTtM4/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1xSEkF_PE4oqfw0TYhocqR4-rbYJNTtM4/view",
+      "replacementFileId": "local-v79-YT-828118-SCALONE",
+      "replacementFileName": "Czesci_zamienne_YT-828118__SCALONE.pdf",
+      "replacementPreviewUrl": "assets/pdfs/Czesci_zamienne_YT-828118__SCALONE.pdf",
+      "replacementOpenUrl": "assets/pdfs/Czesci_zamienne_YT-828118__SCALONE.pdf"
+    },
+    {
+      "fileId": "1xSEkF_PE4oqfw0TYhocqR4-rbYJNTtM4",
+      "fileName": "Czesci_zamienne_YT-828118_YT-8281185.pdf",
+      "title": "Czesci_zamienne_YT-828118_YT-8281185.pdf",
+      "deviceIndex": "YT-8281185",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "FIXED_IN_V79",
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "use_replacement",
+      "recommendedAction": "replace_with_v79_fixed_pdf",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1xSEkF_PE4oqfw0TYhocqR4-rbYJNTtM4/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1xSEkF_PE4oqfw0TYhocqR4-rbYJNTtM4/view",
+      "replacementFileId": "local-v79-YT-8281185-SCALONE",
+      "replacementFileName": "Czesci_zamienne_YT-8281185__SCALONE.pdf",
+      "replacementPreviewUrl": "assets/pdfs/Czesci_zamienne_YT-8281185__SCALONE.pdf",
+      "replacementOpenUrl": "assets/pdfs/Czesci_zamienne_YT-8281185__SCALONE.pdf"
+    },
+    {
+      "fileId": "1ku3ToL7VhNsUZ9hbrNjw1u_lltY9KaeK",
+      "fileName": "Czesci_zamienne_YT-828135_YT-828136.pdf",
+      "title": "Czesci_zamienne_YT-828135_YT-828136.pdf",
+      "deviceIndex": "YT-828135",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "FIXED_IN_V79",
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "use_replacement",
+      "recommendedAction": "replace_with_v79_fixed_pdf",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1ku3ToL7VhNsUZ9hbrNjw1u_lltY9KaeK/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1ku3ToL7VhNsUZ9hbrNjw1u_lltY9KaeK/view",
+      "replacementFileId": "local-v79-YT-828135-SCALONE",
+      "replacementFileName": "Czesci_zamienne_YT-828135__SCALONE.pdf",
+      "replacementPreviewUrl": "assets/pdfs/Czesci_zamienne_YT-828135__SCALONE.pdf",
+      "replacementOpenUrl": "assets/pdfs/Czesci_zamienne_YT-828135__SCALONE.pdf"
+    },
+    {
+      "fileId": "1ku3ToL7VhNsUZ9hbrNjw1u_lltY9KaeK",
+      "fileName": "Czesci_zamienne_YT-828135_YT-828136.pdf",
+      "title": "Czesci_zamienne_YT-828135_YT-828136.pdf",
+      "deviceIndex": "YT-828136",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "FIXED_IN_V79",
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "use_replacement",
+      "recommendedAction": "replace_with_v79_fixed_pdf",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1ku3ToL7VhNsUZ9hbrNjw1u_lltY9KaeK/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1ku3ToL7VhNsUZ9hbrNjw1u_lltY9KaeK/view",
+      "replacementFileId": "local-v79-YT-828136-SCALONE",
+      "replacementFileName": "Czesci_zamienne_YT-828136__SCALONE.pdf",
+      "replacementPreviewUrl": "assets/pdfs/Czesci_zamienne_YT-828136__SCALONE.pdf",
+      "replacementOpenUrl": "assets/pdfs/Czesci_zamienne_YT-828136__SCALONE.pdf"
+    },
+    {
+      "fileId": "1jIkQAdT2TDeC6ztGL9fvMVoSW8DBNND1",
+      "fileName": "Czesci_zamienne_YT-828137_YT-828138.pdf",
+      "title": "Czesci_zamienne_YT-828137_YT-828138.pdf",
+      "deviceIndex": "YT-828137",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "FIXED_IN_V79",
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "use_replacement",
+      "recommendedAction": "replace_with_v79_fixed_pdf",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1jIkQAdT2TDeC6ztGL9fvMVoSW8DBNND1/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1jIkQAdT2TDeC6ztGL9fvMVoSW8DBNND1/view",
+      "replacementFileId": "local-v79-YT-828137-SCALONE",
+      "replacementFileName": "Czesci_zamienne_YT-828137__SCALONE.pdf",
+      "replacementPreviewUrl": "assets/pdfs/Czesci_zamienne_YT-828137__SCALONE.pdf",
+      "replacementOpenUrl": "assets/pdfs/Czesci_zamienne_YT-828137__SCALONE.pdf"
+    },
+    {
+      "fileId": "1jIkQAdT2TDeC6ztGL9fvMVoSW8DBNND1",
+      "fileName": "Czesci_zamienne_YT-828137_YT-828138.pdf",
+      "title": "Czesci_zamienne_YT-828137_YT-828138.pdf",
+      "deviceIndex": "YT-828138",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "FIXED_IN_V79",
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "use_replacement",
+      "recommendedAction": "replace_with_v79_fixed_pdf",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1jIkQAdT2TDeC6ztGL9fvMVoSW8DBNND1/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1jIkQAdT2TDeC6ztGL9fvMVoSW8DBNND1/view",
+      "replacementFileId": "local-v79-YT-828138-SCALONE",
+      "replacementFileName": "Czesci_zamienne_YT-828138__SCALONE.pdf",
+      "replacementPreviewUrl": "assets/pdfs/Czesci_zamienne_YT-828138__SCALONE.pdf",
+      "replacementOpenUrl": "assets/pdfs/Czesci_zamienne_YT-828138__SCALONE.pdf"
+    },
+    {
+      "fileId": "1fM1-tMFS3ChHRNfl19v1PEdhrxi7cNSF",
+      "fileName": "Czesci_zamienne_YT-82824_YT-828296.pdf",
+      "title": "Czesci_zamienne_YT-82824_YT-828296.pdf",
+      "deviceIndex": "YT-82824",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "DUPLICATE_NAME",
+        "FIXED_IN_V79"
+      ],
+      "publicationDecision": "use_replacement",
+      "recommendedAction": "replace_with_v79_fixed_pdf",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1fM1-tMFS3ChHRNfl19v1PEdhrxi7cNSF/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1fM1-tMFS3ChHRNfl19v1PEdhrxi7cNSF/view",
+      "replacementFileId": "local-v79-YT-82824-SCALONE",
+      "replacementFileName": "Czesci_zamienne_YT-82824__SCALONE.pdf",
+      "replacementPreviewUrl": "assets/pdfs/Czesci_zamienne_YT-82824__SCALONE.pdf",
+      "replacementOpenUrl": "assets/pdfs/Czesci_zamienne_YT-82824__SCALONE.pdf"
+    },
+    {
+      "fileId": "1fM1-tMFS3ChHRNfl19v1PEdhrxi7cNSF",
+      "fileName": "Czesci_zamienne_YT-82824_YT-828296.pdf",
+      "title": "Czesci_zamienne_YT-82824_YT-828296.pdf",
+      "deviceIndex": "YT-828296",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "DUPLICATE_NAME",
+        "FIXED_IN_V79",
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "use_replacement",
+      "recommendedAction": "replace_with_v79_fixed_pdf",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1fM1-tMFS3ChHRNfl19v1PEdhrxi7cNSF/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1fM1-tMFS3ChHRNfl19v1PEdhrxi7cNSF/view",
+      "replacementFileId": "local-v79-YT-828296-SCALONE",
+      "replacementFileName": "Czesci_zamienne_YT-828296__SCALONE.pdf",
+      "replacementPreviewUrl": "assets/pdfs/Czesci_zamienne_YT-828296__SCALONE.pdf",
+      "replacementOpenUrl": "assets/pdfs/Czesci_zamienne_YT-828296__SCALONE.pdf"
+    },
+    {
+      "fileId": "1O2g4QgSNxl4zB_9DQbmjCtnNwMIX2wqP",
+      "fileName": "Czesci_zamienne_YT-828293_YT-828294_YT-828295_YT-828296.pdf",
+      "title": "Czesci_zamienne_YT-828293_YT-828294_YT-828295_YT-828296.pdf",
+      "deviceIndex": "YT-828293",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "FIXED_IN_V79",
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "use_replacement",
+      "recommendedAction": "replace_with_v79_fixed_pdf",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1O2g4QgSNxl4zB_9DQbmjCtnNwMIX2wqP/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1O2g4QgSNxl4zB_9DQbmjCtnNwMIX2wqP/view",
+      "replacementFileId": "local-v79-YT-828293-SCALONE",
+      "replacementFileName": "Czesci_zamienne_YT-828293__SCALONE.pdf",
+      "replacementPreviewUrl": "assets/pdfs/Czesci_zamienne_YT-828293__SCALONE.pdf",
+      "replacementOpenUrl": "assets/pdfs/Czesci_zamienne_YT-828293__SCALONE.pdf"
+    },
+    {
+      "fileId": "1O2g4QgSNxl4zB_9DQbmjCtnNwMIX2wqP",
+      "fileName": "Czesci_zamienne_YT-828293_YT-828294_YT-828295_YT-828296.pdf",
+      "title": "Czesci_zamienne_YT-828293_YT-828294_YT-828295_YT-828296.pdf",
+      "deviceIndex": "YT-828294",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "FIXED_IN_V79",
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "use_replacement",
+      "recommendedAction": "replace_with_v79_fixed_pdf",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1O2g4QgSNxl4zB_9DQbmjCtnNwMIX2wqP/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1O2g4QgSNxl4zB_9DQbmjCtnNwMIX2wqP/view",
+      "replacementFileId": "local-v79-YT-828294-SCALONE",
+      "replacementFileName": "Czesci_zamienne_YT-828294__SCALONE.pdf",
+      "replacementPreviewUrl": "assets/pdfs/Czesci_zamienne_YT-828294__SCALONE.pdf",
+      "replacementOpenUrl": "assets/pdfs/Czesci_zamienne_YT-828294__SCALONE.pdf"
+    },
+    {
+      "fileId": "1O2g4QgSNxl4zB_9DQbmjCtnNwMIX2wqP",
+      "fileName": "Czesci_zamienne_YT-828293_YT-828294_YT-828295_YT-828296.pdf",
+      "title": "Czesci_zamienne_YT-828293_YT-828294_YT-828295_YT-828296.pdf",
+      "deviceIndex": "YT-828295",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "FIXED_IN_V79",
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "use_replacement",
+      "recommendedAction": "replace_with_v79_fixed_pdf",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1O2g4QgSNxl4zB_9DQbmjCtnNwMIX2wqP/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1O2g4QgSNxl4zB_9DQbmjCtnNwMIX2wqP/view",
+      "replacementFileId": "local-v79-YT-828295-SCALONE",
+      "replacementFileName": "Czesci_zamienne_YT-828295__SCALONE.pdf",
+      "replacementPreviewUrl": "assets/pdfs/Czesci_zamienne_YT-828295__SCALONE.pdf",
+      "replacementOpenUrl": "assets/pdfs/Czesci_zamienne_YT-828295__SCALONE.pdf"
+    },
+    {
+      "fileId": "1O2g4QgSNxl4zB_9DQbmjCtnNwMIX2wqP",
+      "fileName": "Czesci_zamienne_YT-828293_YT-828294_YT-828295_YT-828296.pdf",
+      "title": "Czesci_zamienne_YT-828293_YT-828294_YT-828295_YT-828296.pdf",
+      "deviceIndex": "YT-828296",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "FIXED_IN_V79",
+        "NOT_BEST_FOR_MODEL",
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "use_replacement",
+      "recommendedAction": "replace_with_v79_fixed_pdf",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1O2g4QgSNxl4zB_9DQbmjCtnNwMIX2wqP/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1O2g4QgSNxl4zB_9DQbmjCtnNwMIX2wqP/view",
+      "replacementFileId": "local-v79-YT-828296-SCALONE",
+      "replacementFileName": "Czesci_zamienne_YT-828296__SCALONE.pdf",
+      "replacementPreviewUrl": "assets/pdfs/Czesci_zamienne_YT-828296__SCALONE.pdf",
+      "replacementOpenUrl": "assets/pdfs/Czesci_zamienne_YT-828296__SCALONE.pdf"
+    },
+    {
+      "fileId": "1XipPQprDRhn8_2JJ6LUNHJxqaeMThkJ5",
+      "fileName": "Czesci_zamienne_YT-3618.pdf",
+      "title": "Czesci_zamienne_YT-3618.pdf",
+      "deviceIndex": "YT-3618",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "DUPLICATE_NAME"
+      ],
+      "publicationDecision": "needs_repair",
+      "recommendedAction": "manual_visual_review",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1XipPQprDRhn8_2JJ6LUNHJxqaeMThkJ5/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1XipPQprDRhn8_2JJ6LUNHJxqaeMThkJ5/view",
+      "replacementFileId": "",
+      "replacementFileName": "",
+      "replacementPreviewUrl": "",
+      "replacementOpenUrl": ""
+    },
+    {
+      "fileId": "1qj2j2AO9cn_uO6R_dQnYlff_19bz-5e1",
+      "fileName": "YT-3618.pdf",
+      "title": "YT-3618.pdf",
+      "deviceIndex": "YT-3618",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "NOT_BEST_FOR_MODEL"
+      ],
+      "publicationDecision": "backup_only",
+      "recommendedAction": "keep_as_source_backup_use_best_model_pdf",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1qj2j2AO9cn_uO6R_dQnYlff_19bz-5e1/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1qj2j2AO9cn_uO6R_dQnYlff_19bz-5e1/view",
+      "replacementFileId": "1XipPQprDRhn8_2JJ6LUNHJxqaeMThkJ5",
+      "replacementFileName": "Czesci_zamienne_YT-3618.pdf",
+      "replacementPreviewUrl": "https://drive.google.com/file/d/1XipPQprDRhn8_2JJ6LUNHJxqaeMThkJ5/preview",
+      "replacementOpenUrl": "https://drive.google.com/file/d/1XipPQprDRhn8_2JJ6LUNHJxqaeMThkJ5/view"
+    },
+    {
+      "fileId": "1JqkVmj9yrEkGuwaiUYO6StoF7Prc1-P5",
+      "fileName": "Czesci_zamienne_YT-55557 V2.pdf",
+      "title": "Czesci_zamienne_YT-55557 V2.pdf",
+      "deviceIndex": "YT-55557",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "VERSION_VARIANT"
+      ],
+      "publicationDecision": "use_fixed_replacement",
+      "recommendedAction": "replace_with_v78_merged_local_pdf",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1JqkVmj9yrEkGuwaiUYO6StoF7Prc1-P5/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1JqkVmj9yrEkGuwaiUYO6StoF7Prc1-P5/view",
+      "replacementFileId": "local-YT-55557-SCALONE-v78",
+      "replacementFileName": "Czesci_zamienne_YT-55557__SCALONE.pdf",
+      "replacementPreviewUrl": "assets/pdfs/Czesci_zamienne_YT-55557__SCALONE.pdf",
+      "replacementOpenUrl": "",
+      "repairStatus": "fixed_v78"
+    },
+    {
+      "fileId": "1csvhiHLQjFu7cqVzTdbjEAWKD_1z3U91",
+      "fileName": "Czesci_zamienne_YT-820500.pdf",
+      "title": "Czesci_zamienne_YT-820500.pdf",
+      "deviceIndex": "YT-820500",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "needs_repair",
+      "recommendedAction": "manual_visual_review",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1csvhiHLQjFu7cqVzTdbjEAWKD_1z3U91/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1csvhiHLQjFu7cqVzTdbjEAWKD_1z3U91/view",
+      "replacementFileId": "",
+      "replacementFileName": "",
+      "replacementPreviewUrl": "",
+      "replacementOpenUrl": ""
+    },
+    {
+      "fileId": "1eWEvtmeOXQRpd_N9TGLOSwfleKM03oLb",
+      "fileName": "Czesci_zamienne_YT-820501.pdf",
+      "title": "Czesci_zamienne_YT-820501.pdf",
+      "deviceIndex": "YT-820501",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "needs_repair",
+      "recommendedAction": "manual_visual_review",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1eWEvtmeOXQRpd_N9TGLOSwfleKM03oLb/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1eWEvtmeOXQRpd_N9TGLOSwfleKM03oLb/view",
+      "replacementFileId": "",
+      "replacementFileName": "",
+      "replacementPreviewUrl": "",
+      "replacementOpenUrl": ""
+    },
+    {
+      "fileId": "1IGIOghTq77PN0wMF56Z2Ah251Hm6uSmG",
+      "fileName": "Czesci_zamienne_YT-820502.pdf",
+      "title": "Czesci_zamienne_YT-820502.pdf",
+      "deviceIndex": "YT-820502",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "needs_repair",
+      "recommendedAction": "manual_visual_review",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1IGIOghTq77PN0wMF56Z2Ah251Hm6uSmG/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1IGIOghTq77PN0wMF56Z2Ah251Hm6uSmG/view",
+      "replacementFileId": "",
+      "replacementFileName": "",
+      "replacementPreviewUrl": "",
+      "replacementOpenUrl": ""
+    },
+    {
+      "fileId": "1eKEkG8xLOTK4OT2fwnk_hbECnlj4Mgju",
+      "fileName": "Czesci_zamienne_YT-820507.pdf",
+      "title": "Czesci_zamienne_YT-820507.pdf",
+      "deviceIndex": "YT-820507",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "needs_repair",
+      "recommendedAction": "manual_visual_review",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1eKEkG8xLOTK4OT2fwnk_hbECnlj4Mgju/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1eKEkG8xLOTK4OT2fwnk_hbECnlj4Mgju/view",
+      "replacementFileId": "",
+      "replacementFileName": "",
+      "replacementPreviewUrl": "",
+      "replacementOpenUrl": ""
+    },
+    {
+      "fileId": "1VbNa2G9bgudbc7Llcznj5_yjEp0vu0gq",
+      "fileName": "Czesci_zamienne_YT-821583.pdf",
+      "title": "Czesci_zamienne_YT-821583.pdf",
+      "deviceIndex": "YT-821583",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "needs_repair",
+      "recommendedAction": "manual_visual_review",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1VbNa2G9bgudbc7Llcznj5_yjEp0vu0gq/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1VbNa2G9bgudbc7Llcznj5_yjEp0vu0gq/view",
+      "replacementFileId": "",
+      "replacementFileName": "",
+      "replacementPreviewUrl": "",
+      "replacementOpenUrl": ""
+    },
+    {
+      "fileId": "1mU4WgVG2Nf5j0pXE0Z3JI_2soIwh_b0E",
+      "fileName": "Czesci_zamienne_YT-821591.pdf",
+      "title": "Czesci_zamienne_YT-821591.pdf",
+      "deviceIndex": "YT-821591",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "needs_repair",
+      "recommendedAction": "manual_visual_review",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1mU4WgVG2Nf5j0pXE0Z3JI_2soIwh_b0E/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1mU4WgVG2Nf5j0pXE0Z3JI_2soIwh_b0E/view",
+      "replacementFileId": "",
+      "replacementFileName": "",
+      "replacementPreviewUrl": "",
+      "replacementOpenUrl": ""
+    },
+    {
+      "fileId": "1rPhbDBTZj4m3603agUXaS7vKTKeCEWUZ",
+      "fileName": "Czesci_zamienne_YT-821597.pdf",
+      "title": "Czesci_zamienne_YT-821597.pdf",
+      "deviceIndex": "YT-821597",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "needs_repair",
+      "recommendedAction": "manual_visual_review",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1rPhbDBTZj4m3603agUXaS7vKTKeCEWUZ/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1rPhbDBTZj4m3603agUXaS7vKTKeCEWUZ/view",
+      "replacementFileId": "",
+      "replacementFileName": "",
+      "replacementPreviewUrl": "",
+      "replacementOpenUrl": ""
+    },
+    {
+      "fileId": "1CPFg1XL_0MClzgNIKwBZoicblUdcKph7",
+      "fileName": "Czesci_zamienne_YT-821710.pdf",
+      "title": "Czesci_zamienne_YT-821710.pdf",
+      "deviceIndex": "YT-821710",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "needs_repair",
+      "recommendedAction": "manual_visual_review",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1CPFg1XL_0MClzgNIKwBZoicblUdcKph7/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1CPFg1XL_0MClzgNIKwBZoicblUdcKph7/view",
+      "replacementFileId": "",
+      "replacementFileName": "",
+      "replacementPreviewUrl": "",
+      "replacementOpenUrl": ""
+    },
+    {
+      "fileId": "1Rp6rDPQaGGdkfiDXIIh8anMKM5nhAxg-",
+      "fileName": "Czesci_zamienne_YT-821722.pdf",
+      "title": "Czesci_zamienne_YT-821722.pdf",
+      "deviceIndex": "YT-821722",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "needs_repair",
+      "recommendedAction": "manual_visual_review",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1Rp6rDPQaGGdkfiDXIIh8anMKM5nhAxg-/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1Rp6rDPQaGGdkfiDXIIh8anMKM5nhAxg-/view",
+      "replacementFileId": "",
+      "replacementFileName": "",
+      "replacementPreviewUrl": "",
+      "replacementOpenUrl": ""
+    },
+    {
+      "fileId": "1A8dcOfeJdtM0djOGCh9Jpn02LImcPHVz",
+      "fileName": "Czesci_zamienne_YT-82173.pdf",
+      "title": "Czesci_zamienne_YT-82173.pdf",
+      "deviceIndex": "YT-82173",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "HAS_MERGED_REPLACEMENT",
+        "NOT_BEST_FOR_MODEL"
+      ],
+      "publicationDecision": "use_replacement",
+      "recommendedAction": "replace_with_merged_pdf",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1A8dcOfeJdtM0djOGCh9Jpn02LImcPHVz/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1A8dcOfeJdtM0djOGCh9Jpn02LImcPHVz/view",
+      "replacementFileId": "1SuRUHVoQjbK0TORNjrpl8vcdzC3rrN3d",
+      "replacementFileName": "Czesci_zamienne_YT-82173__SCALONE.pdf",
+      "replacementPreviewUrl": "https://drive.google.com/file/d/1SuRUHVoQjbK0TORNjrpl8vcdzC3rrN3d/preview",
+      "replacementOpenUrl": "https://drive.google.com/file/d/1SuRUHVoQjbK0TORNjrpl8vcdzC3rrN3d/view"
+    },
+    {
+      "fileId": "1IWvpuBAnqV5w_h53G11Y6uZv6lUi0jWh",
+      "fileName": "Czesci_zamienne_YT-82174.pdf",
+      "title": "Czesci_zamienne_YT-82174.pdf",
+      "deviceIndex": "YT-82174",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "HAS_MERGED_REPLACEMENT",
+        "NOT_BEST_FOR_MODEL"
+      ],
+      "publicationDecision": "use_replacement",
+      "recommendedAction": "replace_with_merged_pdf",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1IWvpuBAnqV5w_h53G11Y6uZv6lUi0jWh/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1IWvpuBAnqV5w_h53G11Y6uZv6lUi0jWh/view",
+      "replacementFileId": "1eFHWGqr6UveUrerAvEad4zI1mf2x8L2n",
+      "replacementFileName": "Czesci_zamienne_YT-82174__SCALONE.pdf",
+      "replacementPreviewUrl": "https://drive.google.com/file/d/1eFHWGqr6UveUrerAvEad4zI1mf2x8L2n/preview",
+      "replacementOpenUrl": "https://drive.google.com/file/d/1eFHWGqr6UveUrerAvEad4zI1mf2x8L2n/view"
+    },
+    {
+      "fileId": "1UzqURBNCTPDoqSNZsr5hmC5nT90LaNN6",
+      "fileName": "Czesci_zamienne_YT-821901.pdf",
+      "title": "Czesci_zamienne_YT-821901.pdf",
+      "deviceIndex": "YT-821901",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "needs_repair",
+      "recommendedAction": "manual_visual_review",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1UzqURBNCTPDoqSNZsr5hmC5nT90LaNN6/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1UzqURBNCTPDoqSNZsr5hmC5nT90LaNN6/view",
+      "replacementFileId": "",
+      "replacementFileName": "",
+      "replacementPreviewUrl": "",
+      "replacementOpenUrl": ""
+    },
+    {
+      "fileId": "14DWjkp6tlTajzR3gLcjYShxaQ-rc8OeB",
+      "fileName": "Czesci_zamienne_YT-821905.pdf",
+      "title": "Czesci_zamienne_YT-821905.pdf",
+      "deviceIndex": "YT-821905",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "needs_repair",
+      "recommendedAction": "manual_visual_review",
+      "currentPreviewUrl": "https://drive.google.com/file/d/14DWjkp6tlTajzR3gLcjYShxaQ-rc8OeB/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/14DWjkp6tlTajzR3gLcjYShxaQ-rc8OeB/view",
+      "replacementFileId": "",
+      "replacementFileName": "",
+      "replacementPreviewUrl": "",
+      "replacementOpenUrl": ""
+    },
+    {
+      "fileId": "1iSBMnCjEN9sUfbF_s4e_R-kBfZpnHTHV",
+      "fileName": "Czesci_zamienne_YT-821915.pdf",
+      "title": "Czesci_zamienne_YT-821915.pdf",
+      "deviceIndex": "YT-821915",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "needs_repair",
+      "recommendedAction": "manual_visual_review",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1iSBMnCjEN9sUfbF_s4e_R-kBfZpnHTHV/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1iSBMnCjEN9sUfbF_s4e_R-kBfZpnHTHV/view",
+      "replacementFileId": "",
+      "replacementFileName": "",
+      "replacementPreviewUrl": "",
+      "replacementOpenUrl": ""
+    },
+    {
+      "fileId": "1izMBTQI1gIdaE-1PcL0BdzWDmf70g2fL",
+      "fileName": "Czesci_zamienne_YT-821916.pdf",
+      "title": "Czesci_zamienne_YT-821916.pdf",
+      "deviceIndex": "YT-821916",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "needs_repair",
+      "recommendedAction": "manual_visual_review",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1izMBTQI1gIdaE-1PcL0BdzWDmf70g2fL/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1izMBTQI1gIdaE-1PcL0BdzWDmf70g2fL/view",
+      "replacementFileId": "",
+      "replacementFileName": "",
+      "replacementPreviewUrl": "",
+      "replacementOpenUrl": ""
+    },
+    {
+      "fileId": "1iBWqA1oSPCEFYIKJemHNRWzZIRobMqAm",
+      "fileName": "Czesci_zamienne_YT-827721.pdf",
+      "title": "Czesci_zamienne_YT-827721.pdf",
+      "deviceIndex": "YT-827721",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "needs_repair",
+      "recommendedAction": "manual_visual_review",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1iBWqA1oSPCEFYIKJemHNRWzZIRobMqAm/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1iBWqA1oSPCEFYIKJemHNRWzZIRobMqAm/view",
+      "replacementFileId": "",
+      "replacementFileName": "",
+      "replacementPreviewUrl": "",
+      "replacementOpenUrl": ""
+    },
+    {
+      "fileId": "10COoep5_WXbz2P3pMv1CzIct09aiypwc",
+      "fileName": "Czesci_zamienne_YT-827722.pdf",
+      "title": "Czesci_zamienne_YT-827722.pdf",
+      "deviceIndex": "YT-827722",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "needs_repair",
+      "recommendedAction": "manual_visual_review",
+      "currentPreviewUrl": "https://drive.google.com/file/d/10COoep5_WXbz2P3pMv1CzIct09aiypwc/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/10COoep5_WXbz2P3pMv1CzIct09aiypwc/view",
+      "replacementFileId": "",
+      "replacementFileName": "",
+      "replacementPreviewUrl": "",
+      "replacementOpenUrl": ""
+    },
+    {
+      "fileId": "1lvts_fclxKHgsgNYYeweDdE8tccpaSWK",
+      "fileName": "Czesci_zamienne_YT-827723.pdf",
+      "title": "Czesci_zamienne_YT-827723.pdf",
+      "deviceIndex": "YT-827723",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "needs_repair",
+      "recommendedAction": "manual_visual_review",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1lvts_fclxKHgsgNYYeweDdE8tccpaSWK/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1lvts_fclxKHgsgNYYeweDdE8tccpaSWK/view",
+      "replacementFileId": "",
+      "replacementFileName": "",
+      "replacementPreviewUrl": "",
+      "replacementOpenUrl": ""
+    },
+    {
+      "fileId": "1pRNfaSDxu2739QBywpRQwtenHUbSuzRj",
+      "fileName": "Czesci_zamienne_YT-827820.pdf",
+      "title": "Czesci_zamienne_YT-827820.pdf",
+      "deviceIndex": "YT-827820",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "needs_repair",
+      "recommendedAction": "manual_visual_review",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1pRNfaSDxu2739QBywpRQwtenHUbSuzRj/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1pRNfaSDxu2739QBywpRQwtenHUbSuzRj/view",
+      "replacementFileId": "",
+      "replacementFileName": "",
+      "replacementPreviewUrl": "",
+      "replacementOpenUrl": ""
+    },
+    {
+      "fileId": "1IqCR6lVdiA2FpR01AR74Q0UQaOZv5O8i",
+      "fileName": "Czesci_zamienne_YT-827821.pdf",
+      "title": "Czesci_zamienne_YT-827821.pdf",
+      "deviceIndex": "YT-827821",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "needs_repair",
+      "recommendedAction": "manual_visual_review",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1IqCR6lVdiA2FpR01AR74Q0UQaOZv5O8i/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1IqCR6lVdiA2FpR01AR74Q0UQaOZv5O8i/view",
+      "replacementFileId": "",
+      "replacementFileName": "",
+      "replacementPreviewUrl": "",
+      "replacementOpenUrl": ""
+    },
+    {
+      "fileId": "1UPFiHlVWBCLRCSeHg5r9eirKJuvedMby",
+      "fileName": "Czesci_zamienne_YT-827822.pdf",
+      "title": "Czesci_zamienne_YT-827822.pdf",
+      "deviceIndex": "YT-827822",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "needs_repair",
+      "recommendedAction": "manual_visual_review",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1UPFiHlVWBCLRCSeHg5r9eirKJuvedMby/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1UPFiHlVWBCLRCSeHg5r9eirKJuvedMby/view",
+      "replacementFileId": "",
+      "replacementFileName": "",
+      "replacementPreviewUrl": "",
+      "replacementOpenUrl": ""
+    },
+    {
+      "fileId": "1TA63i3xRyfDxGmHky9vXAj_C1rco8Prv",
+      "fileName": "Czesci_zamienne_YT-828063.pdf",
+      "title": "Czesci_zamienne_YT-828063.pdf",
+      "deviceIndex": "YT-828063",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "needs_repair",
+      "recommendedAction": "manual_visual_review",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1TA63i3xRyfDxGmHky9vXAj_C1rco8Prv/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1TA63i3xRyfDxGmHky9vXAj_C1rco8Prv/view",
+      "replacementFileId": "",
+      "replacementFileName": "",
+      "replacementPreviewUrl": "",
+      "replacementOpenUrl": ""
+    },
+    {
+      "fileId": "124R0n8t8kNndd1zoTi2XMTwD3uL_20w4",
+      "fileName": "Czesci_zamienne_YT-828064.pdf",
+      "title": "Czesci_zamienne_YT-828064.pdf",
+      "deviceIndex": "YT-828064",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "needs_repair",
+      "recommendedAction": "manual_visual_review",
+      "currentPreviewUrl": "https://drive.google.com/file/d/124R0n8t8kNndd1zoTi2XMTwD3uL_20w4/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/124R0n8t8kNndd1zoTi2XMTwD3uL_20w4/view",
+      "replacementFileId": "",
+      "replacementFileName": "",
+      "replacementPreviewUrl": "",
+      "replacementOpenUrl": ""
+    },
+    {
+      "fileId": "1XwDmwN1p08iQbcEwr8lj5rWzsFeGR3lw",
+      "fileName": "Czesci_zamienne_YT-828065.pdf",
+      "title": "Czesci_zamienne_YT-828065.pdf",
+      "deviceIndex": "YT-828065",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "needs_repair",
+      "recommendedAction": "manual_visual_review",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1XwDmwN1p08iQbcEwr8lj5rWzsFeGR3lw/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1XwDmwN1p08iQbcEwr8lj5rWzsFeGR3lw/view",
+      "replacementFileId": "",
+      "replacementFileName": "",
+      "replacementPreviewUrl": "",
+      "replacementOpenUrl": ""
+    },
+    {
+      "fileId": "1JDZkybXOz07x6e_ABtGNAcCFJ6vp1S3V",
+      "fileName": "Czesci_zamienne_YT-828066.pdf",
+      "title": "Czesci_zamienne_YT-828066.pdf",
+      "deviceIndex": "YT-828066",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "needs_repair",
+      "recommendedAction": "manual_visual_review",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1JDZkybXOz07x6e_ABtGNAcCFJ6vp1S3V/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1JDZkybXOz07x6e_ABtGNAcCFJ6vp1S3V/view",
+      "replacementFileId": "",
+      "replacementFileName": "",
+      "replacementPreviewUrl": "",
+      "replacementOpenUrl": ""
+    },
+    {
+      "fileId": "1qeTiT8BT8jdaWAZzpaW8H5U-dMI3srTw",
+      "fileName": "Czesci_zamienne_YT-828067.pdf",
+      "title": "Czesci_zamienne_YT-828067.pdf",
+      "deviceIndex": "YT-828067",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "needs_repair",
+      "recommendedAction": "manual_visual_review",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1qeTiT8BT8jdaWAZzpaW8H5U-dMI3srTw/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1qeTiT8BT8jdaWAZzpaW8H5U-dMI3srTw/view",
+      "replacementFileId": "",
+      "replacementFileName": "",
+      "replacementPreviewUrl": "",
+      "replacementOpenUrl": ""
+    },
+    {
+      "fileId": "1SUWfQ_fsupP1B69O9FmI0EtCv3a4Ym8l",
+      "fileName": "Czesci_zamienne_YT-828068.pdf",
+      "title": "Czesci_zamienne_YT-828068.pdf",
+      "deviceIndex": "YT-828068",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "needs_repair",
+      "recommendedAction": "manual_visual_review",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1SUWfQ_fsupP1B69O9FmI0EtCv3a4Ym8l/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1SUWfQ_fsupP1B69O9FmI0EtCv3a4Ym8l/view",
+      "replacementFileId": "",
+      "replacementFileName": "",
+      "replacementPreviewUrl": "",
+      "replacementOpenUrl": ""
+    },
+    {
+      "fileId": "1FibpsbYGBemnqS0iWycTaKaVxDszWOog",
+      "fileName": "Czesci_zamienne_YT-828131.pdf",
+      "title": "Czesci_zamienne_YT-828131.pdf",
+      "deviceIndex": "YT-828131",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "needs_repair",
+      "recommendedAction": "manual_visual_review",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1FibpsbYGBemnqS0iWycTaKaVxDszWOog/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1FibpsbYGBemnqS0iWycTaKaVxDszWOog/view",
+      "replacementFileId": "",
+      "replacementFileName": "",
+      "replacementPreviewUrl": "",
+      "replacementOpenUrl": ""
+    },
+    {
+      "fileId": "1fKpHrpxkKPqcgrygYSn7S389OKqnGE64",
+      "fileName": "Czesci_zamienne_YT-828132.pdf",
+      "title": "Czesci_zamienne_YT-828132.pdf",
+      "deviceIndex": "YT-828132",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "needs_repair",
+      "recommendedAction": "manual_visual_review",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1fKpHrpxkKPqcgrygYSn7S389OKqnGE64/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1fKpHrpxkKPqcgrygYSn7S389OKqnGE64/view",
+      "replacementFileId": "",
+      "replacementFileName": "",
+      "replacementPreviewUrl": "",
+      "replacementOpenUrl": ""
+    },
+    {
+      "fileId": "1kBOU87O_on8RSsDkQZIPLR_sWHbd414p",
+      "fileName": "Czesci_zamienne_YT-828133.pdf",
+      "title": "Czesci_zamienne_YT-828133.pdf",
+      "deviceIndex": "YT-828133",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "needs_repair",
+      "recommendedAction": "manual_visual_review",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1kBOU87O_on8RSsDkQZIPLR_sWHbd414p/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1kBOU87O_on8RSsDkQZIPLR_sWHbd414p/view",
+      "replacementFileId": "",
+      "replacementFileName": "",
+      "replacementPreviewUrl": "",
+      "replacementOpenUrl": ""
+    },
+    {
+      "fileId": "1lKa_nhpwX5MZs58eykEJNuSNiRabSg-h",
+      "fileName": "Czesci_zamienne_YT-828134.pdf",
+      "title": "Czesci_zamienne_YT-828134.pdf",
+      "deviceIndex": "YT-828134",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "needs_repair",
+      "recommendedAction": "manual_visual_review",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1lKa_nhpwX5MZs58eykEJNuSNiRabSg-h/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1lKa_nhpwX5MZs58eykEJNuSNiRabSg-h/view",
+      "replacementFileId": "",
+      "replacementFileName": "",
+      "replacementPreviewUrl": "",
+      "replacementOpenUrl": ""
+    },
+    {
+      "fileId": "1kEiG1Zr0hawFJPTaJ50QQQxsU-ldUpHp",
+      "fileName": "Czesci_zamienne_YT-828137.pdf",
+      "title": "Czesci_zamienne_YT-828137.pdf",
+      "deviceIndex": "YT-828137",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "FIXED_IN_V79",
+        "NOT_BEST_FOR_MODEL",
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "use_replacement",
+      "recommendedAction": "replace_with_v79_fixed_pdf",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1kEiG1Zr0hawFJPTaJ50QQQxsU-ldUpHp/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1kEiG1Zr0hawFJPTaJ50QQQxsU-ldUpHp/view",
+      "replacementFileId": "local-v79-YT-828137-SCALONE",
+      "replacementFileName": "Czesci_zamienne_YT-828137__SCALONE.pdf",
+      "replacementPreviewUrl": "assets/pdfs/Czesci_zamienne_YT-828137__SCALONE.pdf",
+      "replacementOpenUrl": "assets/pdfs/Czesci_zamienne_YT-828137__SCALONE.pdf"
+    },
+    {
+      "fileId": "1ZO5Arl28ua3xle8wr_WZR5CQU1BEd_3Y",
+      "fileName": "Czesci_zamienne_YT-828138.pdf",
+      "title": "Czesci_zamienne_YT-828138.pdf",
+      "deviceIndex": "YT-828138",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "FIXED_IN_V79",
+        "NOT_BEST_FOR_MODEL",
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "use_replacement",
+      "recommendedAction": "replace_with_v79_fixed_pdf",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1ZO5Arl28ua3xle8wr_WZR5CQU1BEd_3Y/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1ZO5Arl28ua3xle8wr_WZR5CQU1BEd_3Y/view",
+      "replacementFileId": "local-v79-YT-828138-SCALONE",
+      "replacementFileName": "Czesci_zamienne_YT-828138__SCALONE.pdf",
+      "replacementPreviewUrl": "assets/pdfs/Czesci_zamienne_YT-828138__SCALONE.pdf",
+      "replacementOpenUrl": "assets/pdfs/Czesci_zamienne_YT-828138__SCALONE.pdf"
+    },
+    {
+      "fileId": "1PFCKpqO8r03oBGVyCMRbkwjKqBCZKiG9",
+      "fileName": "Czesci_zamienne_YT-82824.pdf",
+      "title": "Czesci_zamienne_YT-82824.pdf",
+      "deviceIndex": "YT-82824",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "FIXED_IN_V79",
+        "NOT_BEST_FOR_MODEL"
+      ],
+      "publicationDecision": "use_replacement",
+      "recommendedAction": "replace_with_v79_fixed_pdf",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1PFCKpqO8r03oBGVyCMRbkwjKqBCZKiG9/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1PFCKpqO8r03oBGVyCMRbkwjKqBCZKiG9/view",
+      "replacementFileId": "local-v79-YT-82824-SCALONE",
+      "replacementFileName": "Czesci_zamienne_YT-82824__SCALONE.pdf",
+      "replacementPreviewUrl": "assets/pdfs/Czesci_zamienne_YT-82824__SCALONE.pdf",
+      "replacementOpenUrl": "assets/pdfs/Czesci_zamienne_YT-82824__SCALONE.pdf"
+    },
+    {
+      "fileId": "19liR7QGORGOvylL1Qholmjq42Uh3GvLU",
+      "fileName": "Czesci_zamienne_YT-828247.pdf",
+      "title": "Czesci_zamienne_YT-828247.pdf",
+      "deviceIndex": "YT-828247",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "needs_repair",
+      "recommendedAction": "manual_visual_review",
+      "currentPreviewUrl": "https://drive.google.com/file/d/19liR7QGORGOvylL1Qholmjq42Uh3GvLU/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/19liR7QGORGOvylL1Qholmjq42Uh3GvLU/view",
+      "replacementFileId": "",
+      "replacementFileName": "",
+      "replacementPreviewUrl": "",
+      "replacementOpenUrl": ""
+    },
+    {
+      "fileId": "1TUMNdyjqqQpCE6OuupUI8gLa4DUMAAiK",
+      "fileName": "Czesci_zamienne_YT-828293.pdf",
+      "title": "Czesci_zamienne_YT-828293.pdf",
+      "deviceIndex": "YT-828293",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "FIXED_IN_V79",
+        "NOT_BEST_FOR_MODEL",
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "use_replacement",
+      "recommendedAction": "replace_with_v79_fixed_pdf",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1TUMNdyjqqQpCE6OuupUI8gLa4DUMAAiK/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1TUMNdyjqqQpCE6OuupUI8gLa4DUMAAiK/view",
+      "replacementFileId": "local-v79-YT-828293-SCALONE",
+      "replacementFileName": "Czesci_zamienne_YT-828293__SCALONE.pdf",
+      "replacementPreviewUrl": "assets/pdfs/Czesci_zamienne_YT-828293__SCALONE.pdf",
+      "replacementOpenUrl": "assets/pdfs/Czesci_zamienne_YT-828293__SCALONE.pdf"
+    },
+    {
+      "fileId": "11JLURzZhbymPk9kKw_D0LkX42mbTflUh",
+      "fileName": "Czesci_zamienne_YT-828294.pdf",
+      "title": "Czesci_zamienne_YT-828294.pdf",
+      "deviceIndex": "YT-828294",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "FIXED_IN_V79",
+        "NOT_BEST_FOR_MODEL",
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "use_replacement",
+      "recommendedAction": "replace_with_v79_fixed_pdf",
+      "currentPreviewUrl": "https://drive.google.com/file/d/11JLURzZhbymPk9kKw_D0LkX42mbTflUh/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/11JLURzZhbymPk9kKw_D0LkX42mbTflUh/view",
+      "replacementFileId": "local-v79-YT-828294-SCALONE",
+      "replacementFileName": "Czesci_zamienne_YT-828294__SCALONE.pdf",
+      "replacementPreviewUrl": "assets/pdfs/Czesci_zamienne_YT-828294__SCALONE.pdf",
+      "replacementOpenUrl": "assets/pdfs/Czesci_zamienne_YT-828294__SCALONE.pdf"
+    },
+    {
+      "fileId": "1KQ3Tg7rAtl3FGu2qZzft49_VdeY2oOyP",
+      "fileName": "Czesci_zamienne_YT-828295.pdf",
+      "title": "Czesci_zamienne_YT-828295.pdf",
+      "deviceIndex": "YT-828295",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "FIXED_IN_V79",
+        "NOT_BEST_FOR_MODEL",
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "use_replacement",
+      "recommendedAction": "replace_with_v79_fixed_pdf",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1KQ3Tg7rAtl3FGu2qZzft49_VdeY2oOyP/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1KQ3Tg7rAtl3FGu2qZzft49_VdeY2oOyP/view",
+      "replacementFileId": "local-v79-YT-828295-SCALONE",
+      "replacementFileName": "Czesci_zamienne_YT-828295__SCALONE.pdf",
+      "replacementPreviewUrl": "assets/pdfs/Czesci_zamienne_YT-828295__SCALONE.pdf",
+      "replacementOpenUrl": "assets/pdfs/Czesci_zamienne_YT-828295__SCALONE.pdf"
+    },
+    {
+      "fileId": "1PStd9O7-7qFC_pW56v_yRO99Xahw5TLz",
+      "fileName": "Czesci_zamienne_YT-828296.pdf",
+      "title": "Czesci_zamienne_YT-828296.pdf",
+      "deviceIndex": "YT-828296",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "FIXED_IN_V79",
+        "NOT_BEST_FOR_MODEL",
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "use_replacement",
+      "recommendedAction": "replace_with_v79_fixed_pdf",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1PStd9O7-7qFC_pW56v_yRO99Xahw5TLz/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1PStd9O7-7qFC_pW56v_yRO99Xahw5TLz/view",
+      "replacementFileId": "local-v79-YT-828296-SCALONE",
+      "replacementFileName": "Czesci_zamienne_YT-828296__SCALONE.pdf",
+      "replacementPreviewUrl": "assets/pdfs/Czesci_zamienne_YT-828296__SCALONE.pdf",
+      "replacementOpenUrl": "assets/pdfs/Czesci_zamienne_YT-828296__SCALONE.pdf"
+    },
+    {
+      "fileId": "1kpOy1zu-QSrnfYJlIPLqV88qr3qmrafm",
+      "fileName": "Czesci_zamienne_YT-828331.pdf",
+      "title": "Czesci_zamienne_YT-828331.pdf",
+      "deviceIndex": "YT-828331",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "needs_repair",
+      "recommendedAction": "manual_visual_review",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1kpOy1zu-QSrnfYJlIPLqV88qr3qmrafm/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1kpOy1zu-QSrnfYJlIPLqV88qr3qmrafm/view",
+      "replacementFileId": "",
+      "replacementFileName": "",
+      "replacementPreviewUrl": "",
+      "replacementOpenUrl": ""
+    },
+    {
+      "fileId": "1cnl-rukIl1VQmCS3tyl2hPBz2STUmj-Y",
+      "fileName": "Czesci_zamienne_YT-828332.pdf",
+      "title": "Czesci_zamienne_YT-828332.pdf",
+      "deviceIndex": "YT-828332",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "needs_repair",
+      "recommendedAction": "manual_visual_review",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1cnl-rukIl1VQmCS3tyl2hPBz2STUmj-Y/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1cnl-rukIl1VQmCS3tyl2hPBz2STUmj-Y/view",
+      "replacementFileId": "",
+      "replacementFileName": "",
+      "replacementPreviewUrl": "",
+      "replacementOpenUrl": ""
+    },
+    {
+      "fileId": "1HnHgMDh4c1x6vvxcJPfBUPKc_q9I1sCU",
+      "fileName": "Czesci_zamienne_YT-828333.pdf",
+      "title": "Czesci_zamienne_YT-828333.pdf",
+      "deviceIndex": "YT-828333",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "needs_repair",
+      "recommendedAction": "manual_visual_review",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1HnHgMDh4c1x6vvxcJPfBUPKc_q9I1sCU/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1HnHgMDh4c1x6vvxcJPfBUPKc_q9I1sCU/view",
+      "replacementFileId": "",
+      "replacementFileName": "",
+      "replacementPreviewUrl": "",
+      "replacementOpenUrl": ""
+    },
+    {
+      "fileId": "1ClbqD6cJOfIeevGVeYqgz3-w6_gOz-uE",
+      "fileName": "Czesci_zamienne_YT-828334.pdf",
+      "title": "Czesci_zamienne_YT-828334.pdf",
+      "deviceIndex": "YT-828334",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "needs_repair",
+      "recommendedAction": "manual_visual_review",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1ClbqD6cJOfIeevGVeYqgz3-w6_gOz-uE/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1ClbqD6cJOfIeevGVeYqgz3-w6_gOz-uE/view",
+      "replacementFileId": "",
+      "replacementFileName": "",
+      "replacementPreviewUrl": "",
+      "replacementOpenUrl": ""
+    },
+    {
+      "fileId": "1eFbDmHW2pq_TToLMswfaPfh4O7Pi47g0",
+      "fileName": "Czesci_zamienne_YT-828353.pdf",
+      "title": "Czesci_zamienne_YT-828353.pdf",
+      "deviceIndex": "YT-828353",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "needs_repair",
+      "recommendedAction": "manual_visual_review",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1eFbDmHW2pq_TToLMswfaPfh4O7Pi47g0/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1eFbDmHW2pq_TToLMswfaPfh4O7Pi47g0/view",
+      "replacementFileId": "",
+      "replacementFileName": "",
+      "replacementPreviewUrl": "",
+      "replacementOpenUrl": ""
+    },
+    {
+      "fileId": "147QxRNiQ-_WihhyuCywVj01WLUXCukP5",
+      "fileName": "Czesci_zamienne_YT-828355.pdf",
+      "title": "Czesci_zamienne_YT-828355.pdf",
+      "deviceIndex": "YT-828355",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "needs_repair",
+      "recommendedAction": "manual_visual_review",
+      "currentPreviewUrl": "https://drive.google.com/file/d/147QxRNiQ-_WihhyuCywVj01WLUXCukP5/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/147QxRNiQ-_WihhyuCywVj01WLUXCukP5/view",
+      "replacementFileId": "",
+      "replacementFileName": "",
+      "replacementPreviewUrl": "",
+      "replacementOpenUrl": ""
+    },
+    {
+      "fileId": "1hp64RWzAtBdbEH8cfX1GoOdsoGR-Zb65",
+      "fileName": "Czesci_zamienne_YT-828356.pdf",
+      "title": "Czesci_zamienne_YT-828356.pdf",
+      "deviceIndex": "YT-828356",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "needs_repair",
+      "recommendedAction": "manual_visual_review",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1hp64RWzAtBdbEH8cfX1GoOdsoGR-Zb65/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1hp64RWzAtBdbEH8cfX1GoOdsoGR-Zb65/view",
+      "replacementFileId": "",
+      "replacementFileName": "",
+      "replacementPreviewUrl": "",
+      "replacementOpenUrl": ""
+    },
+    {
+      "fileId": "1xKhGmWYtiOy_gFlKpk8ePH8IzZzKyZ43",
+      "fileName": "Czesci_zamienne_YT-828357.pdf",
+      "title": "Czesci_zamienne_YT-828357.pdf",
+      "deviceIndex": "YT-828357",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "needs_repair",
+      "recommendedAction": "manual_visual_review",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1xKhGmWYtiOy_gFlKpk8ePH8IzZzKyZ43/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1xKhGmWYtiOy_gFlKpk8ePH8IzZzKyZ43/view",
+      "replacementFileId": "",
+      "replacementFileName": "",
+      "replacementPreviewUrl": "",
+      "replacementOpenUrl": ""
+    },
+    {
+      "fileId": "1UoZuGcFIAQHS5DgFbdCf1GH0owkKl7Ac",
+      "fileName": "Czesci_zamienne_YT-828358.pdf",
+      "title": "Czesci_zamienne_YT-828358.pdf",
+      "deviceIndex": "YT-828358",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "needs_repair",
+      "recommendedAction": "manual_visual_review",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1UoZuGcFIAQHS5DgFbdCf1GH0owkKl7Ac/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1UoZuGcFIAQHS5DgFbdCf1GH0owkKl7Ac/view",
+      "replacementFileId": "",
+      "replacementFileName": "",
+      "replacementPreviewUrl": "",
+      "replacementOpenUrl": ""
+    },
+    {
+      "fileId": "1kwpgyZQttlvXyWghWYYoijzKzZHbKZg1",
+      "fileName": "Czesci_zamienne_YT-829021.pdf",
+      "title": "Czesci_zamienne_YT-829021.pdf",
+      "deviceIndex": "YT-829021",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "needs_repair",
+      "recommendedAction": "manual_visual_review",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1kwpgyZQttlvXyWghWYYoijzKzZHbKZg1/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1kwpgyZQttlvXyWghWYYoijzKzZHbKZg1/view",
+      "replacementFileId": "",
+      "replacementFileName": "",
+      "replacementPreviewUrl": "",
+      "replacementOpenUrl": ""
+    },
+    {
+      "fileId": "1hM9Dl7OsB7e3JEmS1rGeVmnGJ6iOzat0",
+      "fileName": "Czesci_zamienne_YT-852081.pdf",
+      "title": "Czesci_zamienne_YT-852081.pdf",
+      "deviceIndex": "YT-852081",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "needs_repair",
+      "recommendedAction": "manual_visual_review",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1hM9Dl7OsB7e3JEmS1rGeVmnGJ6iOzat0/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1hM9Dl7OsB7e3JEmS1rGeVmnGJ6iOzat0/view",
+      "replacementFileId": "",
+      "replacementFileName": "",
+      "replacementPreviewUrl": "",
+      "replacementOpenUrl": ""
+    },
+    {
+      "fileId": "17cMKA2pF8XGDkZ5jPhivVaZTOA8e7yqK",
+      "fileName": "Czesci_zamienne_YT-852082.pdf",
+      "title": "Czesci_zamienne_YT-852082.pdf",
+      "deviceIndex": "YT-852082",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "needs_repair",
+      "recommendedAction": "manual_visual_review",
+      "currentPreviewUrl": "https://drive.google.com/file/d/17cMKA2pF8XGDkZ5jPhivVaZTOA8e7yqK/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/17cMKA2pF8XGDkZ5jPhivVaZTOA8e7yqK/view",
+      "replacementFileId": "",
+      "replacementFileName": "",
+      "replacementPreviewUrl": "",
+      "replacementOpenUrl": ""
+    },
+    {
+      "fileId": "1vMzaYwMnJHiBaXqLVJUYHWYKI8zWMDBc",
+      "fileName": "Czesci_zamienne_YT-854837.pdf",
+      "title": "Czesci_zamienne_YT-854837.pdf",
+      "deviceIndex": "YT-854837",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "SUSPECT_VARIANT_INDEX_HAS_BASE_MODEL"
+      ],
+      "publicationDecision": "needs_repair",
+      "recommendedAction": "manual_visual_review",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1vMzaYwMnJHiBaXqLVJUYHWYKI8zWMDBc/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1vMzaYwMnJHiBaXqLVJUYHWYKI8zWMDBc/view",
+      "replacementFileId": "",
+      "replacementFileName": "",
+      "replacementPreviewUrl": "",
+      "replacementOpenUrl": ""
+    },
+    {
+      "fileId": "1hoWKr1JIOyc6j1S43w8E8aE9xchxH1iw",
+      "fileName": "Czesci_zamienne_YT-85485.pdf",
+      "title": "Czesci_zamienne_YT-85485.pdf",
+      "deviceIndex": "YT-85485",
+      "sourceManifest": "drive-drawings-map.full.json",
+      "sourceFolder": "Rysunki wybuchowe",
+      "flags": [
+        "HAS_MERGED_REPLACEMENT",
+        "NOT_BEST_FOR_MODEL"
+      ],
+      "publicationDecision": "use_replacement",
+      "recommendedAction": "replace_with_merged_pdf",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1hoWKr1JIOyc6j1S43w8E8aE9xchxH1iw/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1hoWKr1JIOyc6j1S43w8E8aE9xchxH1iw/view",
+      "replacementFileId": "1EdFK5KlKCvBASTW8QX6yOULgD8s5y8xu",
+      "replacementFileName": "Czesci_zamienne_YT-85485__SCALONE.pdf",
+      "replacementPreviewUrl": "https://drive.google.com/file/d/1EdFK5KlKCvBASTW8QX6yOULgD8s5y8xu/preview",
+      "replacementOpenUrl": "https://drive.google.com/file/d/1EdFK5KlKCvBASTW8QX6yOULgD8s5y8xu/view"
+    },
+    {
+      "fileId": "1Fhn77B-YbGFFuo-mPN3L881puNwld84r",
+      "fileName": "Czesci_zamienne_78180.pdf",
+      "title": "Czesci_zamienne_78180",
+      "deviceIndex": "78180",
+      "sourceManifest": "drive-drawings-map.converted.json",
+      "sourceFolder": "Rysunki wybuchowe/Czesci_zamienne_78180.pdf",
+      "flags": [
+        "NOT_BEST_FOR_MODEL"
+      ],
+      "publicationDecision": "backup_only",
+      "recommendedAction": "keep_as_source_backup_use_best_model_pdf",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1Fhn77B-YbGFFuo-mPN3L881puNwld84r/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1Fhn77B-YbGFFuo-mPN3L881puNwld84r/view",
+      "replacementFileId": "11xqt3MjD0vHJqz4TwpwVQWvyGHLX9s3K",
+      "replacementFileName": "Czesci_zamienne_78180.pdf",
+      "replacementPreviewUrl": "https://drive.google.com/file/d/11xqt3MjD0vHJqz4TwpwVQWvyGHLX9s3K/preview",
+      "replacementOpenUrl": "https://drive.google.com/file/d/11xqt3MjD0vHJqz4TwpwVQWvyGHLX9s3K/view"
+    },
+    {
+      "fileId": "1PITYs2cGbl6FLKOX-zm-7dSahWCuAQnH",
+      "fileName": "Czesci_zamienne_79030.pdf",
+      "title": "Czesci_zamienne_79030",
+      "deviceIndex": "79030",
+      "sourceManifest": "drive-drawings-map.converted.json",
+      "sourceFolder": "Rysunki wybuchowe/Czesci_zamienne_79030.pdf",
+      "flags": [
+        "NOT_BEST_FOR_MODEL"
+      ],
+      "publicationDecision": "backup_only",
+      "recommendedAction": "keep_as_source_backup_use_best_model_pdf",
+      "currentPreviewUrl": "https://drive.google.com/file/d/1PITYs2cGbl6FLKOX-zm-7dSahWCuAQnH/preview",
+      "currentOpenUrl": "https://drive.google.com/file/d/1PITYs2cGbl6FLKOX-zm-7dSahWCuAQnH/view",
+      "replacementFileId": "1H0FiaXuSgiw4FIkBp5sbkhWJiu7RmMOK",
+      "replacementFileName": "Czesci_zamienne_79030.pdf",
+      "replacementPreviewUrl": "https://drive.google.com/file/d/1H0FiaXuSgiw4FIkBp5sbkhWJiu7RmMOK/preview",
+      "replacementOpenUrl": "https://drive.google.com/file/d/1H0FiaXuSgiw4FIkBp5sbkhWJiu7RmMOK/view"
+    },
+    {
+      "fileId": "1SuRUHVoQjbK0TORNjrpl8vcdzC3rrN3d",
+      "fileName": "Czesci_zamienne_YT-82173__SCALONE.pdf",
+      "deviceIndex": "YT-82173",
+      "flags": [
+        "TABLE_ONLY_SCALONE_DEMOTED",
+        "FIXED_IN_V80"
+      ],
+      "publicationDecision": "use_v80_official_replacement",
+      "recommendedAction": "replace_with_v80_official_pdf",
+      "replacementFileId": "local-v80-YT-82173-OFFICIAL-SCALONE",
+      "replacementFileName": "Czesci_zamienne_YT-82173__SCALONE.pdf",
+      "replacementPreviewUrl": "assets/pdfs/Czesci_zamienne_YT-82173__SCALONE.pdf"
+    },
+    {
+      "fileId": "1eFHWGqr6UveUrerAvEad4zI1mf2x8L2n",
+      "fileName": "Czesci_zamienne_YT-82174__SCALONE.pdf",
+      "deviceIndex": "YT-82174",
+      "flags": [
+        "TABLE_ONLY_SCALONE_DEMOTED",
+        "FIXED_IN_V80"
+      ],
+      "publicationDecision": "use_v80_official_replacement",
+      "recommendedAction": "replace_with_v80_official_pdf",
+      "replacementFileId": "local-v80-YT-82174-OFFICIAL-SCALONE",
+      "replacementFileName": "Czesci_zamienne_YT-82174__SCALONE.pdf",
+      "replacementPreviewUrl": "assets/pdfs/Czesci_zamienne_YT-82174__SCALONE.pdf"
+    },
+    {
+      "fileId": "1EdFK5KlKCvBASTW8QX6yOULgD8s5y8xu",
+      "fileName": "Czesci_zamienne_YT-85485__SCALONE.pdf",
+      "deviceIndex": "YT-85485",
+      "flags": [
+        "TABLE_ONLY_SCALONE_DEMOTED",
+        "FIXED_IN_V80"
+      ],
+      "publicationDecision": "use_v80_official_replacement",
+      "recommendedAction": "replace_with_v80_official_pdf",
+      "replacementFileId": "local-v80-YT-85485-OFFICIAL-SCALONE",
+      "replacementFileName": "Czesci_zamienne_YT-85485__SCALONE.pdf",
+      "replacementPreviewUrl": "assets/pdfs/Czesci_zamienne_YT-85485__SCALONE.pdf"
+    }
+  ]
+}
